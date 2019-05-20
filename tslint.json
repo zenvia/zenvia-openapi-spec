@@ -1,0 +1,18 @@
+{
+  "ignoreDefinitionFiles": true,
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-console": false,
+    "no-arg": true,
+    "no-unused-expression": true,
+    "no-unused-variable": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "object-shorthand-properties-first": false,
+  }
+}
