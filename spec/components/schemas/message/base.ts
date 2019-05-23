@@ -29,6 +29,12 @@ const base: SchemaObject = {
       enum: ['IN', 'OUT'],
       readOnly: true,
     },
+    channel: {
+      title: 'Channel',
+      description: 'Message channel',
+      type: 'string',
+      readOnly: true,
+    },
     contents: {
       title: 'Message Contents',
       description: 'A list of content to be sent',
