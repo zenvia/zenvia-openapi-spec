@@ -22,6 +22,13 @@ const base: SchemaObject = {
       description: 'The recipient is the identifier of a contact in this channel.',
       type: 'string',
     },
+    direction: {
+      title: 'Message direction',
+      description: 'Indicate if message is received from channel (IN) or is sent to channel (OUT)',
+      type: 'string',
+      enum: ['IN', 'OUT'],
+      readOnly: true,
+    },
     contents: {
       title: 'Message Contents',
       description: 'A list of content to be sent',
