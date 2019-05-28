@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject, CallbackObject } from "openapi3-ts";
+import { PathItemObject, OperationObject, CallbackObject } from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/message';
 import { ref as sentMessageSchemaRef } from '../../components/schemas/message/whatsapp/sent';
 
@@ -8,7 +8,7 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Created subscription',
-    }
+    },
   },
   requestBody: {
     content: {
@@ -28,19 +28,19 @@ const post: OperationObject = {
               'application/json': {
                 schema: {
                   $ref: sentMessageSchemaRef,
-                }
-              }
-            }
+                },
+              },
+            },
           },
           responses: {
-            '200': {
+            200: {
               description: 'webhook successfully processed and no retries will be performed',
-            }
-          }
-        }
+            },
+          },
+        },
       } as PathItemObject,
     } as CallbackObject,
-  }
+  },
 };
 
 const path: PathItemObject = {

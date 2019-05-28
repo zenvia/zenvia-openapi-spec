@@ -1,4 +1,4 @@
-import { TagGroupObject } from "openapi3-ts";
+import { TagGroupObject } from 'openapi3-ts';
 
 const groups: TagGroupObject[] = [{
   name: 'Chatbots',
@@ -27,7 +27,7 @@ const groups: TagGroupObject[] = [{
 }, {
   name: 'Subscriptions',
   tags: [
-    'Subscriptions'
+    'Subscriptions',
   ],
 }];
 

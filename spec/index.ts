@@ -1,3 +1,4 @@
+// tslint:disable:import-name
 import { OpenAPIObject } from 'openapi3-ts';
 import info from './info';
 import { components } from './components';

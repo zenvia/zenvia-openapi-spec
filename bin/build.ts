@@ -9,5 +9,5 @@ writeFileSync('web_deploy/openapi.json', generateJSON());
 writeFileSync('web_deploy/openapi.yaml', generateYAML());
 writeFileSync('web_deploy/index.html', generateReDocPage());
 fileSearch('assets/**/*')
-  .map(file => ([file,file.replace('assets/', 'web_deploy/')]))
+  .map(file => ([file, file.replace('assets/', 'web_deploy/')]))
   .forEach((args: [string, string]) => copyFileSync(...args));

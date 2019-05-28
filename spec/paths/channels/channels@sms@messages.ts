@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject } from "openapi3-ts";
+import { PathItemObject, OperationObject } from 'openapi3-ts';
 
 const post: OperationObject = {
   description: 'Send a SMS message',
@@ -6,8 +6,8 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Message created',
-    }
-  }
+    },
+  },
 };
 
 const path: PathItemObject = {

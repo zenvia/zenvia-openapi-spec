@@ -1,5 +1,5 @@
-import { SchemaObject } from "openapi3-ts";
-import { createComponentRef } from "../../../../utils/ref";
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../utils/ref';
 
 const subscriptionBase: SchemaObject = {
   type: 'object',
@@ -7,7 +7,7 @@ const subscriptionBase: SchemaObject = {
     eventType: {
       title: 'Event type to subscribe',
       type: 'string',
-      enum: ['MESSAGE']
+      enum: ['MESSAGE'],
     },
     webhook: {
       type: 'object',
@@ -20,12 +20,12 @@ const subscriptionBase: SchemaObject = {
         headers: {
           title: 'Request headers',
           type: 'object',
-        }
+        },
       },
-      required: ['url']
+      required: ['url'],
     },
   },
-  required: [ 'eventType', 'webhook' ],
+  required: ['eventType', 'webhook'],
 };
 
 export const ref = createComponentRef(__filename);

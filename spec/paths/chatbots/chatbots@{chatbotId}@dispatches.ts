@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject } from "openapi3-ts";
+import { PathItemObject, OperationObject } from 'openapi3-ts';
 import { ref as chatbotId } from '../../components/parameters/chatbotId';
 
 const post: OperationObject = {
@@ -7,13 +7,13 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Created chatbot dispatch',
-    }
-  }
+    },
+  },
 };
 
 const path: PathItemObject = {
   parameters: [{
-    $ref: chatbotId
+    $ref: chatbotId,
   }],
   post,
 };

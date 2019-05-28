@@ -1,13 +1,13 @@
-import { PathItemObject, OperationObject } from "openapi3-ts";
+import { PathItemObject, OperationObject } from 'openapi3-ts';
 
 const post: OperationObject = {
   description: 'Send a Facebook message',
   tags: ['Facebook'],
   responses: {
     200: {
-        description: 'Message created',
-    }
-  }
+      description: 'Message created',
+    },
+  },
 };
 
 const path: PathItemObject = {

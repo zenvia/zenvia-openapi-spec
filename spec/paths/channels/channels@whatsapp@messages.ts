@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject, ResponseObject } from "openapi3-ts";
+import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as sentMessageRef } from '../../components/schemas/message/whatsapp/sent';
 
 const post: OperationObject = {
@@ -16,17 +16,17 @@ const post: OperationObject = {
     },
   },
   responses: {
-    '200': {
+    200: {
       description: 'Created message',
       content: {
         'application/json': {
           schema: {
             $ref: sentMessageRef,
-          }
-        }
+          },
+        },
       },
     } as ResponseObject,
-  }
+  },
 };
 
 const path: PathItemObject = {

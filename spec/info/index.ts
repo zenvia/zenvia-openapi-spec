@@ -1,8 +1,7 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import { InfoObject } from 'openapi3-ts';
+import { rawLoad } from '../../utils/raw-load';
 
-const description = readFileSync(join(__dirname, './description.md'), 'utf-8');
+const description = rawLoad(__dirname, './description.md');
 
 const info: InfoObject = {
   version: '1.0.0',
@@ -19,8 +18,8 @@ const info: InfoObject = {
     url:  'https://api.github.com/licenses/mit',
   },
   'x-logo': {
-    url: 'https://hmagarotto.github.io/zenvia-api-docs/zenvia-logo-developers.png'
-  }
+    url: 'https://hmagarotto.github.io/zenvia-api-docs/zenvia-logo-developers.png',
+  },
 };
 
 export default info;

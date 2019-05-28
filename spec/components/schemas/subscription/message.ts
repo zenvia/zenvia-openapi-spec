@@ -1,6 +1,7 @@
-import { SchemaObject } from "openapi3-ts";
+// tslint:disable:max-line-length
+import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { createComponentRef } from "../../../../utils/ref";
+import { createComponentRef } from '../../../../utils/ref';
 
 const text: SchemaObject = {
   type: 'object',
@@ -21,13 +22,13 @@ const text: SchemaObject = {
             description: 'Direction of message to subscribe. When the direction is not defined all directions will be selected',
             type: 'string',
             enum: ['IN', 'OUT'],
-          }
+          },
         },
         required: ['channel'],
-      }
+      },
     },
-    required: [ 'criteria' ],
-  }]
+    required: ['criteria'],
+  }],
 };
 
 export const ref = createComponentRef(__filename);

@@ -1,6 +1,6 @@
-import { SchemaObject } from "openapi3-ts";
+import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from '../base';
-import { createComponentRef } from "../../../../../utils/ref";
+import { createComponentRef } from '../../../../../utils/ref';
 
 const template: SchemaObject = {
   title: 'The template data',
@@ -20,7 +20,7 @@ const template: SchemaObject = {
       type: 'string',
     },
   },
-  required: [ 'namespace' , 'name', 'locale' ],
+  required: ['namespace' , 'name', 'locale'],
 };
 
 const params: SchemaObject = {
@@ -40,10 +40,8 @@ const params: SchemaObject = {
       },
     },
   },
-  required: [ 'data' , 'order' ],
+  required: ['data' , 'order'],
 };
-
-
 
 const hsm: SchemaObject = {
   type: 'object',
@@ -55,9 +53,7 @@ const hsm: SchemaObject = {
       template,
       params,
     },
-    required: [
-      'template', 'params'
-    ],
+    required: ['template', 'params'],
   }],
 };
 

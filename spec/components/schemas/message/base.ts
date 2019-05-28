@@ -1,5 +1,6 @@
-import { SchemaObject } from "openapi3-ts";
-import { createComponentRef } from "../../../../utils/ref";
+// tslint:disable:max-line-length
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Object',
@@ -46,7 +47,7 @@ const base: SchemaObject = {
     },
   },
   required: [
-    'id', 'from', 'to', 'contents'
+    'id', 'from', 'to', 'contents',
   ],
 };
 

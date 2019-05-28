@@ -36,7 +36,7 @@ const watchFile = (file: string) => {
 
 const watchFilesByPattern = (... patterns: string[]) => {
   patterns.forEach(p => fileSearch(p).forEach(f => watchFile(f)));
-}
+};
 
 async function main() {
   const app = express();

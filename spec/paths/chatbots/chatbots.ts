@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject } from "openapi3-ts";
+import { PathItemObject, OperationObject } from 'openapi3-ts';
 
 const get: OperationObject = {
   description: 'List all chatbots',
@@ -6,8 +6,8 @@ const get: OperationObject = {
   responses: {
     200: {
       description: 'Return chatbot list',
-    }
-  }
+    },
+  },
 };
 
 const post: OperationObject = {
@@ -16,8 +16,8 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Chatbot created',
-    }
-  }
+    },
+  },
 };
 
 const path: PathItemObject = {

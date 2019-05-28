@@ -13,6 +13,6 @@
     "no-unused-variable": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "object-shorthand-properties-first": false,
+    "object-shorthand-properties-first": false
   }
 }

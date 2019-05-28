@@ -1,6 +1,6 @@
-import { SchemaObject } from "openapi3-ts";
+import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { createComponentRef } from "../../../../utils/ref";
+import { createComponentRef } from '../../../../utils/ref';
 
 const file: SchemaObject = {
   type: 'object',
@@ -17,7 +17,7 @@ const file: SchemaObject = {
       'fileUrl',
       'fileMimeType',
     ],
-  }]
+  }],
 };
 
 export const ref = createComponentRef(__filename);

@@ -1,5 +1,5 @@
-import { SchemaObject } from "openapi3-ts";
-import { createComponentRef } from "../../../../utils/ref";
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../utils/ref';
 
 const contentBase: SchemaObject = {
   type: 'object',
@@ -7,7 +7,7 @@ const contentBase: SchemaObject = {
     type: {
       title: 'Content type',
       type: 'string',
-    }
+    },
   },
   required: [
     'type',
