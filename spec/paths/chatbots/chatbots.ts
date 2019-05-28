@@ -5,6 +5,7 @@ const get: OperationObject = {
   tags: ['Chatbots'],
   responses: {
     200: {
+      description: 'Return chatbot list',
     }
   }
 };
@@ -14,6 +15,7 @@ const post: OperationObject = {
   tags: ['Chatbots'],
   responses: {
     200: {
+      description: 'Chatbot created',
     }
   }
 };

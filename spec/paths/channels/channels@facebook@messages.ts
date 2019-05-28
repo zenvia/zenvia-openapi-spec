@@ -5,6 +5,7 @@ const post: OperationObject = {
   tags: ['Facebook'],
   responses: {
     200: {
+        description: 'Message created',
     }
   }
 };

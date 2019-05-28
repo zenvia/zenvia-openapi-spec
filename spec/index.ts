@@ -6,7 +6,7 @@ import tags from './tags';
 import tagGroups from './tags/groups';
 
 const api: OpenAPIObject = {
-  openapi: '3',
+  openapi: '3.0.2',
   info,
   servers: [{
     url: 'http://api.zenvia.com/api/v1',

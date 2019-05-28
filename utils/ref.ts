@@ -5,5 +5,8 @@ export function createComponentRef(path: string) {
   const parts = componentPath.split(/\//);
   const type = parts.splice(0,1)[0];
   const fileName = basename(parts.pop(), '.ts');
-  return `#/components/${type}/${parts.join('.')}.${fileName}`;
+  let name = parts.join('.')
+  if (name.length) name += '.';
+  name += fileName;
+  return `#/components/${type}/${name}`;
 }

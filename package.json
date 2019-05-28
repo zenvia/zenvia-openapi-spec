@@ -5,9 +5,9 @@
   "main": "spec/index.js",
   "scripts": {
     "start": "ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
-    "nodemon": "nodemon",
     "lint": "tslint --project tsconfig.json --config tslint.json --exclude 'spec/**/*.d.ts' 'spec/**/*.ts' 'bin/**/*.ts'",
-    "build": "ts-node --files ./bin/build.ts"
+    "build": "ts-node --files ./bin/build.ts",
+    "test": "ts-node --files ./bin/validate.ts"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "filewatcher": "^3.0.1",
     "glob": "^7.1.4",
     "js-yaml": "^3.13.1",
+    "oas-validator": "^3.3.0",
     "openapi3-ts": "^1.2.0",
     "reload": "^3.0.1",
     "ts-node": "^8.1.0",

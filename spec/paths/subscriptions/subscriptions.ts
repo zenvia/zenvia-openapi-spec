@@ -7,6 +7,7 @@ const post: OperationObject = {
   tags: ['Subscriptions'],
   responses: {
     200: {
+      description: 'Created subscription',
     }
   },
   requestBody: {
