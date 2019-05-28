@@ -15,6 +15,7 @@ const all: SchemaObject = {
         items: {
           $ref: allContentsRef,
         },
+        minItems: 1,
       },
     },
   }],

@@ -21,12 +21,11 @@ const subscriptionBase: SchemaObject = {
           title: 'Request headers',
           type: 'object',
         }
-      }
+      },
+      required: ['url']
     },
   },
-  required: [
-    'type',
-  ],
+  required: [ 'eventType', 'webhook' ],
 };
 
 export const ref = createComponentRef(__filename);

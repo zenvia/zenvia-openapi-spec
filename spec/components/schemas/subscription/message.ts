@@ -17,17 +17,16 @@ const text: SchemaObject = {
             type: 'string',
           },
           direction: {
-            title: 'Direction of message to subscribe',
+            title: 'Message direction',
+            description: 'Direction of message to subscribe. When the direction is not defined all directions will be selected',
             type: 'string',
             enum: ['IN', 'OUT'],
           }
         },
-        required: ['channel', 'direction'],
+        required: ['channel'],
       }
     },
-    required: [
-      'text',
-    ],
+    required: [ 'criteria' ],
   }]
 };
 

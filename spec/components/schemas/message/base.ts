@@ -42,6 +42,7 @@ const base: SchemaObject = {
       items: {
         type: 'object',
       },
+      minItems: 1,
     },
   },
   required: [

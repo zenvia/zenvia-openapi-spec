@@ -3,6 +3,7 @@ import { ref as sentMessageRef } from '../../components/schemas/message/whatsapp
 
 const post: OperationObject = {
   description: 'Send a WhatsApp message',
+  operationId: 'messageCreate',
   tags: ['WhatsApp'],
   requestBody: {
     required: true,
