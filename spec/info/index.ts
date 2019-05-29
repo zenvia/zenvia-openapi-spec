@@ -14,11 +14,11 @@ const info: InfoObject = {
     url: 'https://developer.zenvia.com',
   },
   license: {
-    name: 'MIT License',
-    url:  'https://api.github.com/licenses/mit',
+    name: 'MIT',
+    url:  'https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE',
   },
   'x-logo': {
-    url: 'https://hmagarotto.github.io/zenvia-api-docs/zenvia-logo-developers.png',
+    url: 'https://zenvia.github.io/zenvia-openapi-spec/zenvia-logo-developers.png',
   },
 };
 

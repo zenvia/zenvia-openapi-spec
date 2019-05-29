@@ -1,15 +1,15 @@
 # Zenvia API OpenAPI Specification
 
-[![License](https://img.shields.io/github/license/hmagarotto/zenvia-api-docs.svg)](LICENSE)
-[![Build Status](https://travis-ci.com/hmagarotto/zenvia-api-docs.svg?branch=master)](https://travis-ci.com/hmagarotto/zenvia-api-docs)
-[![Dependencies](https://img.shields.io/david/hmagarotto/zenvia-api-docs.svg)](https://david-dm.org/hmagarotto/zenvia-api-docs)
+[![License](https://img.shields.io/github/license/zenvia/zenvia-openapi-spec.svg)](LICENSE)
+[![Build Status](https://travis-ci.com/zenvia/zenvia-openapi-spec.svg?branch=master)](https://travis-ci.com/zenvia/zenvia-openapi-spec)
+[![Dependencies](https://img.shields.io/david/zenvia/zenvia-openapi-spec.svg)](https://david-dm.org/zenvia/zenvia-openapi-spec)
 
 
 
 ## Links
 
-- [Reference Documentation (ReDoc)](https://hmagarotto.github.io/zenvia-api-docs/)
-- OpenAPI Raw Files: [JSON](https://hmagarotto.github.io/zenvia-api-docs/openapi.json) [YAML](https://hmagarotto.github.io/zenvia-api-docs/openapi.yaml)
+- [Reference Documentation (ReDoc)](https://zenvia.github.io/zenvia-openapi-spec/)
+- OpenAPI Raw Files: [JSON](https://zenvia.github.io/zenvia-openapi-spec/openapi.json) [YAML](https://zenvia.github.io/zenvia-openapi-spec/openapi.yaml)
 
 **Warning:** All above links are updated only after Travis CI finishes deployment
 
