@@ -1,7 +1,36 @@
-This is an **example** API to demonstrate features of OpenAPI specification
+# Overview
 
-# Introduction
+This specification is intended to to be a good starting point for describing Zenvia API in [OpenAPI format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
 
-This specification is intended to to be a good starting point for describing
-Zenvia API in 
-[OpenAPI format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+# REST
+
+Our API follows the REST convention.
+
+With REST we expose an hierarchical entity models called resources
+that you can interact with using REST operations
+like create a new resource item, delete one resource item, list all resource items, etc...
+
+All our resources is represented using the JSON format and the content type 'application/json'.
+
+## Resources Tree
+
+## HTTP Methods
+
+## Pagination
+
+## Error Handling
+
+## Restrictions
+
+### Rate Limit
+
+## Deviations from REST
+
+# Authentication
+
+To use this API you need to send the JWT token in all requests.
+
+The JWT token needs to be sent in HTTP header 'Authorization' with a 'bearer token'.
+
+Example:
+```Authorization: Bearer eyJhbGciOiJSUzI1NiJ9..```
