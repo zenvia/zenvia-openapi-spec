@@ -1,5 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as sentMessageRef } from '../../components/schemas/message/whatsapp/sent';
+import { ref as errorRef } from '../../components/schemas/error/base';
 
 const post: OperationObject = {
   description: 'Send a WhatsApp message',
@@ -22,6 +23,16 @@ const post: OperationObject = {
         'application/json': {
           schema: {
             $ref: sentMessageRef,
+          },
+        },
+      },
+    } as ResponseObject,
+    404: {
+      description: 'Not found',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: errorRef,
           },
         },
       },
