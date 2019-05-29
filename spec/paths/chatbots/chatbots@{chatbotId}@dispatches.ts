@@ -1,5 +1,6 @@
 import { PathItemObject, OperationObject } from 'openapi3-ts';
 import { ref as chatbotId } from '../../components/parameters/chatbotId';
+import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
   description: 'Create a bulk or single dispatch',
@@ -7,6 +8,9 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Created chatbot dispatch',
+    },
+    default: {
+      $ref: errorResponseRef,
     },
   },
 };

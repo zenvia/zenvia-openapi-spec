@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, CallbackObject } from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/message';
 import { ref as sentMessageSchemaRef } from '../../components/schemas/message/whatsapp/sent';
+import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
   description: 'Create a new callback subscription',
@@ -8,6 +9,9 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Created subscription',
+    },
+    default: {
+      $ref: errorResponseRef,
     },
   },
   requestBody: {

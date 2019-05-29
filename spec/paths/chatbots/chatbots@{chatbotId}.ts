@@ -1,5 +1,6 @@
 import { PathItemObject, OperationObject } from 'openapi3-ts';
 import { ref as chatbotId } from '../../components/parameters/chatbotId';
+import { ref as errorResponseRef } from '../../components/responses/error';
 
 const get: OperationObject = {
   description: 'Get specific chatbot',
@@ -7,6 +8,9 @@ const get: OperationObject = {
   responses: {
     200: {
       description: 'Return chatbot by id',
+    },
+    default: {
+      $ref: errorResponseRef,
     },
   },
 };
