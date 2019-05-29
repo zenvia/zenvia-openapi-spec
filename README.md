@@ -1,5 +1,10 @@
 # Zenvia API OpenAPI Specification
+
+[![License](https://img.shields.io/github/license/hmagarotto/zenvia-api-docs.svg)](LICENSE)
 [![Build Status](https://travis-ci.com/hmagarotto/zenvia-api-docs.svg?branch=master)](https://travis-ci.com/hmagarotto/zenvia-api-docs)
+[![Dependencies](https://img.shields.io/david/hmagarotto/zenvia-api-docs.svg)](https://david-dm.org/hmagarotto/zenvia-api-docs)
+
+
 
 ## Links
 
@@ -8,19 +13,39 @@
 
 **Warning:** All above links are updated only after Travis CI finishes deployment
 
+
+
 ## Working on specification
+
 ### Install
 
-1. Install [Node JS](https://nodejs.org/)
-2. Clone repo and run `npm install` in the repo root
+**1.** Install [Node JS](https://nodejs.org/)
+**2.** Clone repo and run `npm install` in the repo root
+
+
 
 ### Usage
 
-#### `npm start`
-Starts the development server.
+**1.** Starts the development server.
 
-#### `npm run build`
-Bundles the spec and prepares web_deploy folder with static assets.
+```shell
+npm start
+```
 
-#### `npm test`
-Validates the spec.
+**2.** Bundles the spec and prepares web_deploy folder with static assets.
+
+```shell
+npm run build
+```
+
+**3.** Validates the spec.
+
+```shell
+npm test
+```
+
+
+
+## License
+
+[MIT](LICENSE)
