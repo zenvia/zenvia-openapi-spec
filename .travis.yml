@@ -5,3 +5,10 @@ script:
   - npm run lint
   - npm test
   - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: web_deploy
+  on:
+    branch: master
