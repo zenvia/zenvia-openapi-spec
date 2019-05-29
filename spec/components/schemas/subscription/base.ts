@@ -7,7 +7,9 @@ const subscriptionBase: SchemaObject = {
     eventType: {
       title: 'Event type to subscribe',
       type: 'string',
-      enum: ['MESSAGE'],
+      enum: [
+        'MESSAGE',
+      ],
     },
     webhook: {
       type: 'object',
@@ -22,10 +24,15 @@ const subscriptionBase: SchemaObject = {
           type: 'object',
         },
       },
-      required: ['url'],
+      required: [
+        'url',
+      ],
     },
   },
-  required: ['eventType', 'webhook'],
+  required: [
+    'eventType',
+    'webhook',
+  ],
 };
 
 export const ref = createComponentRef(__filename);
