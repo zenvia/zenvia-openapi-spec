@@ -12,6 +12,12 @@ const error: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
+    path: {
+      title: 'Path',
+      description: 'Error path.',
+      type: 'string',
+      readOnly: true,
+    },
     message: {
       title: 'Message',
       description: 'Error message.',
