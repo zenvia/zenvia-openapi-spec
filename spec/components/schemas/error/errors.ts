@@ -1,16 +1,14 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as errorsRef } from './errors';
 
-const base: SchemaObject = {
-  title: 'Error Object',
-  description: 'This is a Error object model.',
+const error: SchemaObject = {
+  title: 'Error object',
+  description: 'This is a Error object schema.',
   type: 'object',
   properties: {
     code: {
       title: 'Code',
-      description: 'Error code.',
+      description: 'Code error.',
       type: 'string',
       readOnly: true,
     },
@@ -20,15 +18,6 @@ const base: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
-    details: {
-      title: 'Details',
-      description: 'Error details.',
-      type: 'array',
-      readOnly: true,
-      items: {
-        $ref: errorsRef,
-      },
-    },
   },
   required: [
     'code',
@@ -37,4 +26,4 @@ const base: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default base;
+export default error;

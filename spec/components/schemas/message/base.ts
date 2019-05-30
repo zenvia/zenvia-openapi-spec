@@ -27,7 +27,10 @@ const base: SchemaObject = {
       title: 'Message direction',
       description: 'Indicate if message is received from channel (IN) or is sent to channel (OUT)',
       type: 'string',
-      enum: ['IN', 'OUT'],
+      enum: [
+        'IN',
+        'OUT',
+      ],
       readOnly: true,
     },
     channel: {
@@ -47,7 +50,10 @@ const base: SchemaObject = {
     },
   },
   required: [
-    'id', 'from', 'to', 'contents',
+    'id',
+    'from',
+    'to',
+    'contents',
   ],
 };
 
