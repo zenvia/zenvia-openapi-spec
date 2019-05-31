@@ -1,4 +1,11 @@
-import { PathItemObject, OperationObject, CallbackObject, SchemaObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
+import {
+  PathItemObject,
+  OperationObject,
+  CallbackObject,
+  SchemaObject,
+  ResponseObject,
+  ResponsesObject,
+} from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
 import { ref as sentMessageSchemaRef } from '../../components/schemas/message/whatsapp/sent';
 import { ref as errorResponseRef } from '../../components/responses/error';
