@@ -4,6 +4,11 @@ import { createComponentRef } from '../../../../utils/ref';
 const subscriptionBase: SchemaObject = {
   type: 'object',
   properties: {
+    id: {
+      title: 'Subscription Id',
+      type: 'string',
+      readOnly: true,
+    },
     eventType: {
       title: 'Event type to subscribe',
       type: 'string',
