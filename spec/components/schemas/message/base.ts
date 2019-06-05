@@ -50,7 +50,6 @@ const base: SchemaObject = {
     },
   },
   required: [
-    'id',
     'from',
     'to',
     'contents',

@@ -10,7 +10,7 @@ const api: OpenAPIObject = {
   openapi: '3.0.2',
   info,
   servers: [{
-    url: 'http://api.zenvia.com/api/{version}',
+    url: 'http://api.zenvia.com/{version}',
     variables: {
       version: {
         default: 'v1',
