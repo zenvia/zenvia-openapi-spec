@@ -1,8 +1,5 @@
 import { TagObject } from 'openapi3-ts';
 
-const tags: TagObject[] = [{
-  name: 'Chatbots',
-  description: 'Chatbots Resources',
-}];
+const tags: TagObject[] = [];
 
 export default tags;
