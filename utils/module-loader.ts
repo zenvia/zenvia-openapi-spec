@@ -4,9 +4,9 @@ import { PathsObject, ComponentsObject } from 'openapi3-ts';
 
 export function loadPathsObject(pathBase: string): PathsObject {
   const paths: PathsObject = {};
-  fileSearch(`${pathBase}/*/**/*.ts`, {nosort: true})
-  .forEach(file => {
-    const path = basename(file, '.ts').replace(/\@/g,'/');
+  fileSearch(`${pathBase}/*/**/*.ts`, { nosort: true })
+  .forEach((file) => {
+    const path = basename(file, '.ts').replace(/\@/g, '/');
     const pathModule = require(file).default;
     paths[`/${path}`] = pathModule;
   });
@@ -15,11 +15,11 @@ export function loadPathsObject(pathBase: string): PathsObject {
 
 function loadComponentTypeObject(pathBase: string, type: string): any {
   const items = {};
-  fileSearch(`${pathBase}/${type}/**/*.ts`, {nosort: true})
-  .forEach(file => {
+  fileSearch(`${pathBase}/${type}/**/*.ts`, { nosort: true })
+  .forEach((file) => {
     const relativeToBase = relative(`${pathBase}/${type}`, file);
     const parsedPath = parse(relativeToBase);
-    let name = parsedPath.dir.replace('/','.');
+    let name = parsedPath.dir.replace('/', '.');
     if (name.length) name += '.';
     name += parsedPath.name;
     const pathModule = require(file).default;
