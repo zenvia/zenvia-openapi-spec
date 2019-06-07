@@ -1,13 +1,12 @@
 import {
   PathItemObject,
   OperationObject,
-  CallbackObject,
   SchemaObject,
   ResponseObject,
   ResponsesObject,
 } from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
-import { ref as sentMessageSchemaRef } from '../../components/schemas/message/whatsapp/sent';
+import { ref as notificationCallbackRef } from '../../components/callbacks/subscription-event';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
@@ -31,26 +30,9 @@ const post: OperationObject = {
     },
   },
   callbacks: {
-    onMessage: {
-      '/webhook': {
-        post: {
-          requestBody: {
-            content: {
-              'application/json': {
-                schema: {
-                  $ref: sentMessageSchemaRef,
-                },
-              },
-            },
-          },
-          responses: {
-            200: {
-              description: 'webhook successfully processed and no retries will be performed',
-            },
-          },
-        },
-      } as PathItemObject,
-    } as CallbackObject,
+    onEvent: {
+      $ref: notificationCallbackRef,
+    },
   },
 };
 
