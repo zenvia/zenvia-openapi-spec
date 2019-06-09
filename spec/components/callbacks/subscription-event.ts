@@ -1,15 +1,15 @@
 import { CallbackObject, PathItemObject } from 'openapi3-ts';
-import { ref as sentMessageSchemaRef } from '../schemas/message/whatsapp/sent';
+import { ref as eventsRef } from '../schemas/events/all';
 import { createComponentRef } from '../../../utils/ref';
 
 const callback: CallbackObject = {
-  '/webhook': {
+  '{$request.body#/webhok/url}': {
     post: {
       requestBody: {
         content: {
           'application/json': {
             schema: {
-              $ref: sentMessageSchemaRef,
+              $ref: eventsRef,
             },
           },
         },

@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { createComponentRef } from '../../../../utils/ref';
 
-const text: SchemaObject = {
+const subscription: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
@@ -32,4 +32,4 @@ const text: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default text;
+export default subscription;
