@@ -21,10 +21,10 @@ The available events are:
 
 Before use this API you need the following prerequisites:
 
-* Zenvia Account: create one on [Zenvia platform site](https://app.zenvia.com/)
-* Integrations: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
-* API Token: the API token is required to send API requests
-* Webhook (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
+* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)
+* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
+* **API Token**: the API token is required to make requests for API
+* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
 
 
 # Resources Tree
@@ -35,11 +35,11 @@ All our resources is represented using the JSON format and the content type 'app
 
 There are the resources of this API:
 
-* Channels: Conversational channels where you can send or receive messages for/from some contact.
+* Channels: Conversational channels where you can send or receive messages from/to some contact.
 
   * Messages: A collection of messages for one channel
 
-* Subscriptions: Controls the events to be sent for webhook endpoint.
+* Subscriptions: Control the events to be sent for webhook endpoint.
 
 # API Design
 
