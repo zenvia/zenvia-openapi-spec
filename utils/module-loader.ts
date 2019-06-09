@@ -8,7 +8,6 @@ const operations = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'];
 
 function loadCodeSamples(pathBase: string): ICodeSamplesByPath {
   const samples: ICodeSamplesByPath = {};
-  console.log(pathBase);
   fileSearch(`${pathBase}/*/**/index.ts`, { nosort: true })
   .forEach((file) => {
     const pathSample = require(file).default as ICodeSamples;
