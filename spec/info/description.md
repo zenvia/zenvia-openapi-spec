@@ -76,7 +76,7 @@ Methods used with collection endpoints:
 | Http Method      | Operation                | Success HTTP status |
 |:-----------------|:-------------------------|:--------------------|
 | GET              | List collection items    | 200 - Ok            |
-| POST             | Create a new item        | 201 - Created       |
+| POST             | Create a new item        | 200 - Ok            |
 
 Methods used with item endpoints:
 
