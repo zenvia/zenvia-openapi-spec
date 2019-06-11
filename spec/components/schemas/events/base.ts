@@ -1,17 +1,20 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as webhookSchemaRef } from './webhook';
+import { ref as webhookSchemaRef } from '../subscription/webhook';
 
-const subscriptionBase: SchemaObject = {
+const eventBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Subscription Id',
+      title: 'Event Id',
       type: 'string',
-      readOnly: true,
     },
-    eventType: {
-      title: 'Event type to subscribe',
+    timestamp: {
+      title: 'Event Timestamp',
+      type: 'string',
+    },
+    type: {
+      title: 'Event type',
       type: 'string',
       enum: [
         'MESSAGE',
@@ -21,12 +24,12 @@ const subscriptionBase: SchemaObject = {
     webhook: {
       $ref: webhookSchemaRef,
     },
+    subscriptionId: {
+      title: 'Subscription Id',
+      type: 'string',
+    },
   },
-  required: [
-    'eventType',
-    'webhook',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
-export default subscriptionBase;
+export default eventBase;

@@ -1,3 +1,3 @@
 import { loadComponentsObject } from '../../utils/module-loader';
 
-export const components = loadComponentsObject(__dirname);
+export default loadComponentsObject(__dirname);

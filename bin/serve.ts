@@ -51,7 +51,13 @@ async function main() {
   const port = process.env.PORT || 8080;
   app.listen(port);
 
-  watchFilesByPattern('spec/**/*.md', 'assets/**/*');
+  watchFilesByPattern(
+    'spec/**/*.md',
+    'spec/code_sample/**/*.js',
+    'spec/code_sample/**/*.java',
+    'spec/code_sample/**/*.sh',
+    'assets/**/*',
+);
 
   const baseUrl = `http://localhost:${port}`;
 

@@ -5,7 +5,7 @@
   "main": "spec/index.js",
   "scripts": {
     "start": "ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
-    "lint": "tslint --project tsconfig.json --config tslint.json --exclude 'spec/**/*.d.ts' 'spec/**/*.ts' 'bin/**/*.ts'",
+    "lint": "tslint --project tsconfig.json --config tslint.json 'spec/**/*.ts' 'bin/**/*.ts' 'utils/**/*.ts'",
     "test": "ts-node --files ./bin/validate.ts",
     "build": "ts-node --files ./bin/build.ts"
   },

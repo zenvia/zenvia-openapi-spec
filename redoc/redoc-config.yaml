@@ -3,3 +3,4 @@ theme:
     primary:
       main: '#32329f'
 pathInMiddlePanel: false
+noAutoAuth: true
