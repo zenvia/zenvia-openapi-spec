@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
