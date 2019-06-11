@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from './text';
 import { ref as fileRef } from './file';
 import { ref as templateRef } from './template';
-import { ref as hsmRef } from './whatsapp/hsm';
+import { ref as jsonRef } from './json';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -13,7 +13,7 @@ const all: SchemaObject = {
   }, {
     $ref: templateRef,
   }, {
-    $ref: hsmRef,
+    $ref: jsonRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -21,7 +21,7 @@ const all: SchemaObject = {
       text: textRef,
       file: fileRef,
       template: templateRef,
-      'whatsapp.hsm': hsmRef,
+      json: jsonRef,
     },
   },
 };
