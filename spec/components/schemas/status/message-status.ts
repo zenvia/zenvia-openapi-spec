@@ -7,6 +7,7 @@ const webhook: SchemaObject = {
     timestamp: {
       title: 'Status timestamp',
       type: 'string',
+      format: 'date-time',
     },
     code: {
       title: 'Status code',
