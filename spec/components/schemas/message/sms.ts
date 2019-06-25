@@ -4,9 +4,11 @@ import { ref as allContentsRef } from '../content/sms/all';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
+  type: 'object',
   allOf: [{
     $ref: baseRef,
   }, {
+    type: 'object',
     properties: {
       contents: {
         title: 'Message Contents',
