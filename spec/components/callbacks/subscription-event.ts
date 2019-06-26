@@ -3,7 +3,7 @@ import { ref as eventsRef } from '../schemas/events/all';
 import { createComponentRef } from '../../../utils/ref';
 
 const callback: CallbackObject = {
-  '{$request.body#/webhok/url}': {
+  '{$request.body#/webhook/url}': {
     post: {
       requestBody: {
         content: {
