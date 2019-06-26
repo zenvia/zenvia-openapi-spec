@@ -8,7 +8,6 @@ const all: SchemaObject = {
     $ref: messageEventRef,
   }, {
     $ref: messageStatusEventRef,
-  }, {
   }],
   discriminator: {
     propertyName: 'type',

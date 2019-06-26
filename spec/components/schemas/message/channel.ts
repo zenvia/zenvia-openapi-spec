@@ -5,7 +5,6 @@ const base: SchemaObject = {
   type: 'string',
   title: 'Channel',
   description: 'Message channel',
-  readOnly: true,
 };
 
 export const ref = createComponentRef(__filename);
