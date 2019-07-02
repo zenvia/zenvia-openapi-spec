@@ -19,7 +19,12 @@ const subscriptionBase: SchemaObject = {
       ],
     },
     webhook: {
+      allOf: [{
       $ref: webhookSchemaRef,
+      }, {
+        type: 'object',
+        required: ['url'],
+      }],
     },
   },
   required: [

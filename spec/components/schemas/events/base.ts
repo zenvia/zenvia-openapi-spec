@@ -23,7 +23,12 @@ const eventBase: SchemaObject = {
       ],
     },
     webhook: {
-      $ref: webhookSchemaRef,
+      allOf: [{
+        $ref: webhookSchemaRef,
+      }, {
+        type: 'object',
+        required: ['url'],
+      }],
     },
     subscriptionId: {
       title: 'Subscription Id',

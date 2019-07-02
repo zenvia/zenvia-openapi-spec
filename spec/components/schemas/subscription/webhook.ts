@@ -14,9 +14,6 @@ const webhook: SchemaObject = {
       type: 'object',
     },
   },
-  required: [
-    'url',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
