@@ -15,6 +15,13 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Created subscription',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: subscriptionSchemaRef,
+          },
+        },
+      },
     },
     default: {
       $ref: errorResponseRef,
