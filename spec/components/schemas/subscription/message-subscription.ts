@@ -1,6 +1,7 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
+import { ref as channelRef } from '../message/channel';
 import { createComponentRef } from '../../../../utils/ref';
 
 const subscription: SchemaObject = {
@@ -14,14 +15,16 @@ const subscription: SchemaObject = {
         type: 'object',
         properties: {
           channel: {
-            title: 'Message channel',
-            type: 'string',
+            $ref: channelRef,
           },
           direction: {
             title: 'Message direction',
-            description: 'Direction of message to subscribe. When the direction is not defined all directions will be selected',
+            description: 'Indicate if message is received from channel (IN) or is sent to channel (OUT)',
             type: 'string',
-            enum: ['IN', 'OUT'],
+            enum: [
+              'IN',
+              'OUT',
+            ],
           },
         },
         required: ['channel'],

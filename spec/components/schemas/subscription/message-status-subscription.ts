@@ -1,6 +1,7 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
+import { ref as channelRef } from '../message/channel';
 import { createComponentRef } from '../../../../utils/ref';
 
 const subscription: SchemaObject = {
@@ -14,8 +15,7 @@ const subscription: SchemaObject = {
         type: 'object',
         properties: {
           channel: {
-            title: 'Message channel',
-            type: 'string',
+            $ref: channelRef,
           },
         },
         required: ['channel'],
