@@ -2,6 +2,7 @@ import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
 import { ref as partialSubscriptionSchemaRef } from '../../components/schemas/subscription/partial-subscription';
 import { ref as subscriptionIdRef } from '../../components/parameters/subscriptionId';
+import { ref as errorResponseRef } from '../../components/responses/error';
 
 const getOperation: OperationObject = {
   description: 'Retrieve one subscription by id',
@@ -17,6 +18,9 @@ const getOperation: OperationObject = {
         },
       },
     } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
   } as ResponsesObject,
 };
 
@@ -43,6 +47,9 @@ const updateOperation: OperationObject = {
         },
       },
     } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
   } as ResponsesObject,
 };
 
@@ -53,6 +60,9 @@ const deleteOperation: OperationObject = {
     204: {
       description: 'Subscription Object',
     } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
   } as ResponsesObject,
 };
 

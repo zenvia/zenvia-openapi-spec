@@ -55,11 +55,14 @@ const get: OperationObject = {
             type: 'array',
             items: {
               $ref: subscriptionSchemaRef,
-            }
-,          } as SchemaObject,
+            },
+          } as SchemaObject,
         },
       },
     } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
   } as ResponsesObject,
 };
 
