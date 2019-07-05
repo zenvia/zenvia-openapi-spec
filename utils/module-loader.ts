@@ -27,7 +27,7 @@ function loadCodeSamples(pathBase: string): ICodeSamplesByPath {
 function injectSamples(path: PathItemObject, samples: ICodeSamples) {
   if (samples) {
     operations.forEach((operation) => {
-      if (path[operation]) {
+      if (path[operation] && samples.operations[operation]) {
         path[operation]['x-code-samples'] = samples.operations[operation];
       }
     });

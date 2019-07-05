@@ -7,7 +7,7 @@ export function generateJSON(): string {
 }
 
 export function generateYAML(): string {
-  return safeDump(spec, { indent: 2, lineWidth: -1, noRefs: true });
+  return safeDump(spec, { indent: 2, lineWidth: -1, noRefs: true, skipInvalid: true });
 }
 
 export function generateReDocPage(): string {
