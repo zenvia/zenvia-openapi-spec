@@ -5,7 +5,7 @@ const webhook: SchemaObject = {
   type: 'object',
   properties: {
     contentIndex: {
-      title: 'Message Index',
+      title: 'Index of content that is receiving the status update',
       type: 'number',
     },
     timestamp: {
