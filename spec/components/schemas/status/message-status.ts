@@ -4,6 +4,10 @@ import { createComponentRef } from '../../../../utils/ref';
 const webhook: SchemaObject = {
   type: 'object',
   properties: {
+    contentIndex: {
+      title: 'Message Index',
+      type: 'number',
+    },
     timestamp: {
       title: 'Status timestamp',
       type: 'string',
