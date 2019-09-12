@@ -12,6 +12,11 @@ const groups: TagGroupObject[] = [{
   tags: [
     'Subscriptions',
   ],
+}, {
+  name: 'Usage',
+  tags: [
+    'Usage',
+  ],
 }];
 
 export default groups;
