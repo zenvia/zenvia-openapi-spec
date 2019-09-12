@@ -23,7 +23,7 @@ Before use this API you need the following prerequisites:
 
 * **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)
 * **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
-* **API Token**: the API token is required to make requests for API
+* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
 * **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
 
 
