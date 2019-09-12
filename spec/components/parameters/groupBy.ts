@@ -1,18 +1,18 @@
-import { ParameterObject } from "openapi3-ts";
-import { createComponentRef } from "../../../utils/ref";
+import { ParameterObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../utils/ref';
 
 const groupBy: ParameterObject = {
-  name: "groupBy",
-  in: "query",
+  name: 'groupBy',
+  in: 'query',
   required: false,
-  description: "Grouping options for usage entries.",
+  description: 'Grouping options for usage entries.',
   schema: {
-    type: "array",
+    type: 'array',
     items: {
-      type: "string",
-      enum: ['channel', 'productAlias', 'productId', 'productType', 'ticketType']
-    }
-  }
+      type: 'string',
+      enum: ['channel', 'productAlias', 'productId', 'productType', 'ticketType'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);
