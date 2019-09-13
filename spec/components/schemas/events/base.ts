@@ -1,6 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as webhookSchemaRef } from '../subscription/webhook';
 
 const eventBase: SchemaObject = {
   type: 'object',
@@ -21,14 +20,6 @@ const eventBase: SchemaObject = {
         'MESSAGE',
         'MESSAGE_STATUS',
       ],
-    },
-    webhook: {
-      allOf: [{
-        $ref: webhookSchemaRef,
-      }, {
-        type: 'object',
-        required: ['url'],
-      }],
     },
     subscriptionId: {
       title: 'Subscription Id',
