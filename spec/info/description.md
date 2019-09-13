@@ -23,7 +23,7 @@ Before use this API you need the following prerequisites:
 
 * **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)
 * **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
-* **API Token**: the API token is required to make requests for API
+* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
 * **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
 
 
@@ -107,13 +107,19 @@ Responses error codes are detailed below.
 | 404              | NOT_FOUND            | Not found                        | No            |
 | 500              | INTERNAL_ERROR       | Internal error                   | Yes           |
 
-## Authentication
+# Authentication
 
-To use this API you need to send the JWT token in all requests.
+## TOKEN
+To use this API you need to send the API token in all requests.
 
-The JWT token needs to be sent in HTTP header 'Authorization' with a 'bearer token'.
+This TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.
 
 Example:
-```Authorization: Bearer eyJhbGciOiJSUzI1NiJ9..```
+```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
 
-You can generate your token on Zenvia platform website.
+You can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.
+
+## JWT
+The JWT token is primarily used by front-end applications for user interactions.
+
+For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.

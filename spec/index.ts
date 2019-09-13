@@ -16,6 +16,8 @@ const api: OpenAPIObject = {
   components,
   security: [{
     JWT: [],
+  }, {
+    TOKEN: [],
   }],
   tags,
   'x-tagGroups': tagGroups,
