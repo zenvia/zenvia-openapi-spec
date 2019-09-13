@@ -46,8 +46,8 @@ If you are subscribed in this type of event, your webhook will receive a request
   "subscriptionId": "string",
   "channel": "string",
   "messageId": "string",
+  "contentIndex": "number",
   "messageStatus": {
-    "contentIndex": "number",
     "timestamp": "string",
     "code": "string",
     "description": "string",
