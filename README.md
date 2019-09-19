@@ -1,6 +1,6 @@
 # Zenvia API OpenAPI Specification
 
-[![License](https://img.shields.io/github/license/zenvia/zenvia-openapi-spec.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/zenvia/zenvia-openapi-spec.svg)](LICENSE.md)
 [![Build Status](https://travis-ci.com/zenvia/zenvia-openapi-spec.svg?branch=master)](https://travis-ci.com/zenvia/zenvia-openapi-spec)
 [![Dependencies](https://img.shields.io/david/zenvia/zenvia-openapi-spec.svg)](https://david-dm.org/zenvia/zenvia-openapi-spec)
 
@@ -49,4 +49,4 @@ npm test
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE.md)
