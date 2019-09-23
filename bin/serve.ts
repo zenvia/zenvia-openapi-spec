@@ -45,7 +45,7 @@ async function main() {
   app.get('/', sendIndex);
   app.get('/openapi.json', sendJsonSpec);
   app.get('/openapi.yaml', sendYamlSpec);
-  app.use(express.static('web'));
+  app.use(express.static('assets'));
   app.use(sendNotFoundStatus);
   app.use(sendInternalError);
   const port = process.env.PORT || 8080;
