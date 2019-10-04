@@ -7,3 +7,5 @@ theme:
     medium: '800px'
 pathInMiddlePanel: false
 noAutoAuth: true
+jsonSampleExpandLevel: all
+expandResponses: '200'
