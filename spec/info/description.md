@@ -31,7 +31,7 @@ Before use this API you need the following prerequisites:
 
 This API is oriented by resources and sub-resources. Resources are collections of some kind of object and can be manipulated using HTTP methods.
 
-All our resources is represented using the JSON format and the content type 'application/json'.
+All our resources is represented using the JSON format and the content type `application/json`.
 
 There are the resources of this API:
 
@@ -40,6 +40,8 @@ There are the resources of this API:
   * Messages: A collection of messages for one channel
 
 * Subscriptions: Control the events to be sent for webhook endpoint.
+
+* Templates: Message templates for sending notifications to customers.
 
 # API Design
 
