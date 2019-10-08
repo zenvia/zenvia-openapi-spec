@@ -4,6 +4,7 @@ import { rawLoad } from '../../utils/raw-load';
 const whatsappDescription = rawLoad(__dirname, './whatsapp.md');
 const facebookDescription = rawLoad(__dirname, './facebook.md');
 const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
+const templatesDescription = rawLoad(__dirname, './templates.md');
 
 const tags: TagObject[] = [{
   name: 'WhatsApp',
@@ -14,6 +15,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Subscriptions',
   description: subscriptionsDescription,
+}, {
+  name: 'Templates',
+  description: templatesDescription,
 }];
 
 export default tags;

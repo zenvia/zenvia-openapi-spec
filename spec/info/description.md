@@ -105,6 +105,7 @@ Responses error codes are detailed below.
 | 400              | VALIDATION_ERROR     | Validation error                 | No            |
 | 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |
 | 404              | NOT_FOUND            | Not found                        | No            |
+| 409              | DUPLICATED           | Entity already exists            | No            |
 | 500              | INTERNAL_ERROR       | Internal error                   | Yes           |
 
 # Authentication
