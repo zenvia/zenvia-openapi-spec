@@ -15,7 +15,6 @@ const file: SchemaObject = {
     },
     required: [
       'fileUrl',
-      'fileMimeType',
     ],
   }],
 };
