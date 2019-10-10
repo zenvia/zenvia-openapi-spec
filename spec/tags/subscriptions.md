@@ -51,7 +51,13 @@ If you are subscribed in this type of event, your webhook will receive a request
     "timestamp": "string",
     "code": "string",
     "description": "string",
-    "cause": "string"
+    "causes": [
+      {
+        "channelErrorCode": "number or string",
+        "reason": "string",
+        "details": "string"
+      }
+    ],
   }
 }
 ```
