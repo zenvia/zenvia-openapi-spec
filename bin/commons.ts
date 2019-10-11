@@ -28,7 +28,13 @@ export function generateReDocPage(): string {
       ${redocExport}.init(
         './openapi.json',
         ${JSON.stringify(redocConfig)},
-        document.getElementById("redoc_container")
+        document.getElementById("redoc_container"),
+        function () {
+          var els = document.querySelectorAll('td');
+          for (el of els) {
+            el.click();
+          }
+        }
       );
     </script>`);
   return pageContents;

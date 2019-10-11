@@ -13,9 +13,14 @@ const groups: TagGroupObject[] = [{
     'Subscriptions',
   ],
 }, {
-  name: 'Usage',
+  name: 'Reports',
   tags: [
     'Usage',
+  ],
+}, {
+  name: 'Templates',
+  tags: [
+    'Templates',
   ],
 }];
 

@@ -2,5 +2,10 @@ theme:
   colors:
     primary:
       main: '#32329f'
+  breakpoints:
+    small: '600px'
+    medium: '800px'
 pathInMiddlePanel: false
 noAutoAuth: true
+jsonSampleExpandLevel: all
+expandResponses: '200'

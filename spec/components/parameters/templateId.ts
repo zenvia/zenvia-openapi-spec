@@ -1,15 +1,15 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../utils/ref';
 
-const startDate: ParameterObject = {
-  name: 'startDate',
-  in: 'query',
+const templateId: ParameterObject = {
+  name: 'templateId',
+  in: 'path',
   required: true,
-  description: 'The start date for the query period.',
+  description: 'the template identifier',
   schema: {
     type: 'string',
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default startDate;
+export default templateId;

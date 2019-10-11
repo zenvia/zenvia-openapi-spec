@@ -1,15 +1,15 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../utils/ref';
 
-const endDate: ParameterObject = {
-  name: 'endDate',
+const startAt: ParameterObject = {
+  name: 'startAt',
   in: 'query',
-  required: false,
-  description: 'The end date for the query period.',
+  required: true,
+  description: 'The start date for the query period.',
   schema: {
     type: 'string',
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default endDate;
+export default startAt;
