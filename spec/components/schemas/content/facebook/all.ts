@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
-import { ref as fileRef } from '../file';
+import { ref as fileRef } from './file';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
