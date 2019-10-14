@@ -4,6 +4,8 @@ import { ref as startAtRef } from '../../components/parameters/startAt';
 import { ref as groupByRef } from '../../components/parameters/groupBy';
 import { ref as ticketTypesRef } from '../../components/parameters/ticketTypes';
 import { ref as channelsRef } from '../../components/parameters/channels';
+import { ref as productId } from '../../components/parameters/productId';
+import { ref as dispatchId } from '../../components/parameters/dispatchId';
 import { ref as usageResponseRef } from '../../components/schemas/reports/usage';
 
 const get: OperationObject = {
@@ -106,6 +108,12 @@ const path: PathItemObject = {
     },
     {
       $ref: ticketTypesRef,
+    },
+    {
+      $ref: productId,
+    },
+    { 
+      $ref: dispatchId,
     },
   ],
 };
