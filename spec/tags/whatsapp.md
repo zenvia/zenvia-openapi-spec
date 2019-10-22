@@ -26,11 +26,11 @@ Supported content types and sizes:
 When you send some message for one contact using WhatsApp channel:
 
 * Recipient: is the phone number of contact
-* Sender: is the WhatsApp integration id configured on Zenvia platform
+* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
 When you receive a message from one contact, the sender and recipient is inverted:
 
-* Recipient: is the WhatsApp integration id configured on Zenvia platform
+* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 * Sender: is the phone number of contact
 
 In API the sender is the field `from` and the receiver is the field `to` of message object.
