@@ -34,3 +34,26 @@ When you receive a message from one contact, the sender and recipient is inverte
 * Sender: is the phone number of contact
 
 In API the sender is the field `from` and the receiver is the field `to` of message object.
+
+
+## Type of Messages
+
+* **Template Message**
+
+**What's the template message?**
+
+Message templates are common reusable message formats that may be sent by a company. Companies should use message templates to send notifications to customers.
+
+This allows a company to send only the template identifier along with the appropriate parameters, rather than all of the message content.
+
+
+**How can purchase a new template of whatsapp?**
+
+If you already have a whatsapp business account just send email to: *whatsapp@zenvia.com*
+
+* **Session Message**
+
+**What's session message and how it works?**
+
+WhatsApp Session messages are any messages sent and received in response to a user-initiated message to your application. A messaging session starts when a user sends your application a message and lasts for 24 hours from the most recently received message. You can wait for users to message your app, or you can send a Template Message to invite the user to respond. 
+Billing is for messages trafficked (sent and received).

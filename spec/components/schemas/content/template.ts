@@ -9,8 +9,20 @@ const template: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      templateId: { type: 'string' },
-      fields: { type: 'object' },
+      templateId: {
+        type: 'string',
+        description: 'the template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.',
+      },
+      fields: {
+        type: 'object',
+        description: 'The available fields to be used in this template.',
+        properties: {
+          field: {
+            type: 'string',
+            description: 'Message that will be replaced on field',
+          },
+        },
+      },
     },
     required: [
       'templateId',
