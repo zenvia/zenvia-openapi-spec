@@ -42,18 +42,17 @@ In API the sender is the field `from` and the receiver is the field `to` of mess
 
 **What's the template message?**
 
-Message templates are common reusable message formats that may be sent by a company. Companies should use message templates to send notifications to customers.
+Message Templates are message formats for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.
 
-This allows a company to send only the template identifier along with the appropriate parameters, rather than all of the message content.
+This allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.
 
 
-**How can purchase a new template of whatsapp?**
+**How can I purchase a new template of WhatsApp?**
 
-If you already have a whatsapp business account just send email to: *whatsapp@zenvia.com*
+If you already have a WhatsApp business account just send email to *whatsapp@zenvia.com*
 
 * **Session Message**
 
 **What's session message and how it works?**
 
-WhatsApp Session messages are any messages sent and received in response to a user-initiated message to your application. A messaging session starts when a user sends your application a message and lasts for 24 hours from the most recently received message. You can wait for users to message your app, or you can send a Template Message to invite the user to respond. 
-Billing is for messages trafficked (sent and received).
+WhatsApp Session messages are any messages sent and received in response to a user-initiated message to your application. A messaging session starts when a user sends your application a message and lasts for 24 hours from the most recently received message. You can wait for users to message your app, or you can send a Template Message to invite the user to respond. Only messages trafficked (sent and received) will be billed.
