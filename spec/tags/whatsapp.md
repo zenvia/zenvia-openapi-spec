@@ -46,6 +46,7 @@ Message Templates are message formats for common reusable messages a business ma
 
 This allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.
 
+Fonte: <a href="https://developers.facebook.com/docs/whatsapp/message-templates/">WhatsApp</a>
 
 **How can I purchase a new template of WhatsApp?**
 
@@ -55,4 +56,4 @@ If you already have a WhatsApp business account just send email to *whatsapp@zen
 
 **What's session message and how it works?**
 
-WhatsApp Session messages are any messages sent and received in response to a user-initiated message to your application. A messaging session starts when a user sends your application a message and lasts for 24 hours from the most recently received message. You can wait for users to message your app, or you can send a Template Message to invite the user to respond. Only messages trafficked (sent and received) will be billed.
+Whenever the end user responds a 24 hour session window is opened within whatsapp, any message trafficked within this period is considered a session message, so any kind of message (text, photo, video) are considered session message within the window. The 24-hour window only opens when the end user contacts you. Only messages trafficked (sent and received) will be billed.
