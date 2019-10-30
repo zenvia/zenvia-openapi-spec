@@ -46,7 +46,7 @@ Message Templates are message formats for common reusable messages a business ma
 
 This allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.
 
-Fonte: <a href="https://developers.facebook.com/docs/whatsapp/message-templates/">WhatsApp</a>
+Font: <a href="https://developers.facebook.com/docs/whatsapp/message-templates/">WhatsApp</a>
 
 **How can I purchase a new template of WhatsApp?**
 
