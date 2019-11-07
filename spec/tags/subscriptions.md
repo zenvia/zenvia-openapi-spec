@@ -61,5 +61,21 @@ If you are subscribed in this type of event, your webhook will receive a request
   }
 }
 ```
+<br>
 
-The <code>code</code> field may assume the following values: REJECTED, SENT, DELIVERED, NOT_DELIVERED or READ, being the last one dependant of channel and user device configuration.
+### Code field
+The <code>code</code> field may assume the following values:
+* **SENT**: The message sent by your business was received by the provider's server.
+* **REJECTED**: The message sent by your business failed to be sent to the provider's server.
+* **DELIVERED**: The message sent by your business was delivered to the user's device.
+* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
+* **READ**: The message sent by your business was read by the user. This status might not be sent, since it is dependant on the channel and on the user's device configuration.
+<br><br>
+
+### Description field
+The <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:
+* *SENT: "**The message has been forwarded to the provider**".*
+* *DELIVERED: "**The message has been delivered by the provider**".*
+* *READ: "**The message has been read by the recipient**".*
+* *REJECTED: "**The message was rejected by the provider**".*
+* *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
