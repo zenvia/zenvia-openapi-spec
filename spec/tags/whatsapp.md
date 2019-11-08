@@ -47,7 +47,7 @@ This kind of message content may only be sent as a reply to a message sent by th
 This ype of content is the most used type of content, and its composed of a plain text.
 
 #### File content
-This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are for types of presentation:
+This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
 * Image
 * Video
 * Audio
