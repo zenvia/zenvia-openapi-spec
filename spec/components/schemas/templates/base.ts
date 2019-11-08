@@ -46,7 +46,6 @@ const base: SchemaObject = {
           senderId: {
             title: 'Sender ID',
             type: 'string',
-            nullable: true,
           },
           status: {
             $ref: statusRef,
