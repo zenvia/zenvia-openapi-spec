@@ -15,7 +15,7 @@ Supported content types and sizes:
 
 | Media | Content Type | Size |
 |---|---|---|
-| document | Any valid MIME type. | 100 MB |
+| document | Any valid MIME type. | 100&nbsp;MB |
 | image | image/jpeg<br>image/png | 5 MB |
 | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |
 | video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |
