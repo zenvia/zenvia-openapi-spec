@@ -69,7 +69,7 @@ The <code>code</code> field may assume the following values:
 * **REJECTED**: The message sent by your business failed to be sent to the provider's server.
 * **DELIVERED**: The message sent by your business was delivered to the user's device.
 * **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
-* **READ**: The message sent by your business was read by the user. This status might not be sent, since it is dependant on the channel and on the user's device configuration.
+* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.
 <br><br>
 
 ### Description field
