@@ -9,13 +9,13 @@ To activate WhatsApp you a need a registered number on WhatsApp Business API and
 
 The WhatsApp API has some limitations:
 
-* To start a conversation with someone you need a special type of message (a template message) and an approval before being used.
+* To start a conversation with someone you need a special type of message ([a template message](#notification-contents)), which needs an approval before being used.
 
 Supported content types and sizes:
 
 | Media | Content Type | Size |
 |---|---|---|
-| document | Any valid MIME type. | 100 MB |
+| document | Any valid MIME type. | 100&nbsp;MB |
 | image | image/jpeg<br>image/png | 5 MB |
 | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |
 | video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |
@@ -36,24 +36,31 @@ When you receive a message from one contact, the sender and recipient is inverte
 In API the sender is the field `from` and the receiver is the field `to` of message object.
 
 
-## Type of Messages
+## Message content types
+WhatsApp support a few types of contents, which we categorize into to groups: standard contents, and notification contents.
+<br><br>
 
-* **Template Message**
+### Standard contents
+This kind of message content may only be sent as a reply to a message sent by the user. So these kind of message content cannot be sent to start a interaction with an user. And even as a reply, these kind of message contents can only be sent if the last message from the user was sent less than 24 hours ago.
 
-**What's the template message?**
+#### Text content
+This ype of content is the most used type of content, and its composed of a plain text.
 
-Message Templates are message formats for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.
+#### File content
+This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
+* Image
+* Video
+* Audio
+* Document
+<br><br>
 
-This allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.
+### Notification contents
+These types of contents are special, because they are allowed to be sent without any user interaction and also even if the last user message was sent more than 24 hours ago.
 
-References: <a href="https://developers.facebook.com/docs/whatsapp/message-templates/" target="_blank">WhatsApp Business API</a>
+However, it is not allowed to send these these types of contents without some kind of opt-in from the user. This is a business restriction, not a technical one.
 
-**How can I purchase a new template of WhatsApp?**
+#### Template content
+Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
 
-If you already have a WhatsApp business account just send email to *whatsapp@zenvia.com*
-
-* **Session Message**
-
-**What's session message and how it works?**
-
-Whenever the end user responds a 24 hour session window is opened within whatsapp, any message trafficked within this period is considered a session message, so any kind of message (text, photo, video) are considered session message within the window. The 24-hour window only opens when the end user contacts you. Only messages trafficked (sent and received) will be billed.
+##### Submitting a template content for approval
+If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
