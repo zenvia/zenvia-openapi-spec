@@ -7,6 +7,7 @@ const status: SchemaObject = {
   type: 'string',
   enum: [
     'ACTIVE',
+    'DEGRADED',
     'INACTIVE',
   ],
 };
