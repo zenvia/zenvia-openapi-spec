@@ -2,6 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/whatsapp/all';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as visitorSchemaRef } from './visitor';
 
 const all: SchemaObject = {
   type: 'object',
@@ -10,6 +11,9 @@ const all: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      visitor: {
+        $ref: visitorSchemaRef,
+      },
       contents: {
         title: 'Message Contents',
         description: 'A list of content to be sent',

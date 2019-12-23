@@ -20,6 +20,11 @@ When you are subscribed in this type of event, your webhook will receive a reque
     "to": "string",
     "direction": "string",
     "channel": "string",
+    "visitor": {
+      "name": "string",
+      "firstName": "string",
+      "lastName": "string"
+    },
     "contents": [
       {
         "type": "string",
