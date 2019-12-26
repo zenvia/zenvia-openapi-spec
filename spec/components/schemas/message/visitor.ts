@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const visitor: SchemaObject = {
   title: 'Visitor Object',
-  description: 'Indicate the name of the visitor who sent the message',
+  description: 'It indicates the name of the visitor who sent the message',
   type: 'object',
   properties: {
     name: {
