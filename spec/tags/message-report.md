@@ -1,0 +1,1 @@
+Report to show all messages sent and received in a period.
