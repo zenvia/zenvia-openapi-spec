@@ -55,7 +55,7 @@ function loadComponentTypeObject(pathBase: string, type: string): any {
   .forEach((file) => {
     const relativeToBase = relative(`${pathBase}/${type}`, file);
     const parsedPath = parse(relativeToBase);
-    let name = parsedPath.dir.replace('/', '.');
+    let name = parsedPath.dir.replace(/\//g, '.');
     if (name.length) name += '.';
     name += parsedPath.name;
     const pathModule = require(file).default;
