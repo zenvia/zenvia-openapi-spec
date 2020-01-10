@@ -7,7 +7,7 @@ import { ref as channelRef } from '../../components/parameters/reports/message/c
 import { ref as type } from '../../components/parameters/reports/message/type';
 
 const getOperation: OperationObject = {
-  description: 'Retrieve all entries of message report applying the given filters',
+  description: 'Retrieve all entries applying the given filters',
   tags: ['Message Report'],
   responses: {
     200: {

@@ -2,7 +2,7 @@ import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const endDate: ParameterObject = {
-  name: 'startDate',
+  name: 'endDate',
   in: 'query',
   required: true,
   description: 'The end of period to looking for entries',
