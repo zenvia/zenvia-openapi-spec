@@ -2,6 +2,7 @@
 
 This is the reference documentation for the Zenvia *REST-like* API.
 
+
 ## What you can do with this API
 
 You can send messages for the following channels:
@@ -43,9 +44,11 @@ There are the resources of this API:
 
 * Templates: Message templates for sending notifications to customers.
 
+
 # API Design
 
 This API is based on resources witch are represented by JSON format and are manipulated using HTTP protocol.
+
 
 ## Resources path
 
@@ -66,6 +69,7 @@ To access a sub-resource use the sub-resource name after the some resource item.
 The generic formula is:
 
 `/v1/collection/itemId/collection/itemId/.....`
+
 
 ## HTTP Methods
 
@@ -90,6 +94,7 @@ Methods used with item endpoints:
 
 When one operation is executed successfully, the API will respond with 2xx status code.
 
+
 ## Error Handling
 
 When one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.
@@ -110,7 +115,9 @@ Responses error codes are detailed below.
 | 409              | DUPLICATED           | Entity already exists            | No            |
 | 500              | INTERNAL_ERROR       | Internal error                   | Yes           |
 
+
 # Authentication
+
 
 ## TOKEN
 To use this API you need to send the API token in all requests.
@@ -122,7 +129,16 @@ Example:
 
 You can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.
 
+
 ## JWT
+
 The JWT token is primarily used by front-end applications for user interactions.
 
 For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.
+
+
+# SDKs
+
+SDKs make it easy to use our APIs using a programming language including in your software.
+
+These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).

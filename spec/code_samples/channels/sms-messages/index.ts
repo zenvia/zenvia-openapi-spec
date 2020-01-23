@@ -1,7 +1,7 @@
 import { ICodeSamples } from '../../../../utils/code-samples';
 
 const samples: ICodeSamples = {
-  path: '/channels/whatsapp/messages',
+  path: '/channels/sms/messages',
   operations: {
     post: [
       { lang: 'Shell', label: 'Bash', source: 'sample.sh' },
