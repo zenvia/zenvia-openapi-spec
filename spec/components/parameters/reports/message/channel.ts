@@ -5,7 +5,7 @@ const channel: ParameterObject = {
   name: 'channel',
   in: 'query',
   required: false,
-  description: 'the channel identifier',
+  description: 'The channel identifier.',
   schema: {
     type: 'string',
   },

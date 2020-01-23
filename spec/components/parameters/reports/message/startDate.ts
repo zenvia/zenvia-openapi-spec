@@ -5,7 +5,7 @@ const startDate: ParameterObject = {
   name: 'startDate',
   in: 'query',
   required: true,
-  description: 'The start of period to looking for entries',
+  description: 'The start of the period to query entries.',
   schema: {
     type: 'string',
     format: 'Parseable date',

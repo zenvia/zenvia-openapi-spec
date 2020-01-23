@@ -5,7 +5,7 @@ const endDate: ParameterObject = {
   name: 'endDate',
   in: 'query',
   required: true,
-  description: 'The end of period to looking for entries',
+  description: 'The end of the period to query entries.',
   schema: {
     type: 'string',
     format: 'Parseable date',
