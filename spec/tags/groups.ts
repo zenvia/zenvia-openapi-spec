@@ -21,6 +21,7 @@ const groups: TagGroupObject[] = [{
   name: 'Reports',
   tags: [
     'Message Report',
+    'Flow Report',
   ],
 }];
 

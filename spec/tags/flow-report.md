@@ -1,0 +1,1 @@
+Report to show datas about sessions in a period, it can be filtered by flow, dispatch and session.
