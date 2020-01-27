@@ -139,6 +139,6 @@ For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) au
 
 # SDKs
 
-SDKs make it easy to use our APIs using a programming language including in your software.
+SDKs make it easy to use our APIs just by including them in your software.
 
 These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).
