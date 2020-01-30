@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
+import { PathItemObject, OperationObject, ResponsesObject, ResponseObject, SchemaObject } from 'openapi3-ts';
 import { ref as messageReportEntryRef } from '../../components/schemas/reports/message/entry/base';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as startDate } from '../../components/parameters/reports/message/startDate';
@@ -15,8 +15,11 @@ const getOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: messageReportEntryRef,
-          },
+            type: 'array',
+            items: {
+              $ref: messageReportEntryRef,
+            },
+          } as SchemaObject,
         },
       },
     } as ResponseObject,

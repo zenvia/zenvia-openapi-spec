@@ -33,7 +33,7 @@ const base: SchemaObject = {
     total: {
       title: 'The total of messages',
       description: 'The total of messages including IN and OUT directions.',
-      type: 'string',
+      type: 'number',
       readOnly: true,
     },
   },
