@@ -35,6 +35,7 @@ const base: SchemaObject = {
     variables: {
       title: 'Objects of varibles',
       description: 'Object where is saved all the variables of flow.',
+      type: 'object',
     },
   },
 };
