@@ -1,15 +1,15 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
-const channel: ParameterObject = {
-  name: 'channel',
+const channels: ParameterObject = {
+  name: 'channels',
   in: 'query',
   required: false,
-  description: 'The channel identifier.',
+  description: 'A comma-separated list of channels identifier.',
   schema: {
     type: 'string',
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default channel;
+export default channels;
