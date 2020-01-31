@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../../utils/ref';
 const endDate: ParameterObject = {
   name: 'endDate',
   in: 'query',
-  required: true,
+  required: false,
   description: 'The end of the period to query entries.',
   schema: {
     type: 'string',
