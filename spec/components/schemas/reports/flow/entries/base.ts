@@ -3,8 +3,8 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
 
 const base: SchemaObject = {
-  title: 'Entry object for Message Report',
-  description: 'The entry object model for Message Report.',
+  title: 'Entry object for Flow Report',
+  description: 'The entry object model for Flow Report.',
   type: 'object',
   properties: {
     flowId: {
