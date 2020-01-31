@@ -8,7 +8,7 @@ const endDate: ParameterObject = {
   description: 'The end of the period to query entries.',
   schema: {
     type: 'string',
-    format: 'Parseable date',
+    format: 'date',
   },
 };
 

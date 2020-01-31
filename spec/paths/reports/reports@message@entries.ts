@@ -1,9 +1,9 @@
-import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
+import { PathItemObject, OperationObject, ResponsesObject, ResponseObject, SchemaObject } from 'openapi3-ts';
 import { ref as messageReportEntryRef } from '../../components/schemas/reports/message/entry/base';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as startDate } from '../../components/parameters/reports/message/startDate';
 import { ref as endDate } from '../../components/parameters/reports/message/endDate';
-import { ref as channelRef } from '../../components/parameters/reports/message/channel';
+import { ref as channelsRef } from '../../components/parameters/reports/message/channels';
 import { ref as type } from '../../components/parameters/reports/message/type';
 
 const getOperation: OperationObject = {
@@ -15,8 +15,11 @@ const getOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: messageReportEntryRef,
-          },
+            type: 'array',
+            items: {
+              $ref: messageReportEntryRef,
+            },
+          } as SchemaObject,
         },
       },
     } as ResponseObject,
@@ -36,7 +39,7 @@ const path: PathItemObject = {
       $ref: endDate,
     },
     {
-      $ref: channelRef,
+      $ref: channelsRef,
     },
     {
       $ref: type,
