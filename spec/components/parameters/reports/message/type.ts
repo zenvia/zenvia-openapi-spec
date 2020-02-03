@@ -5,7 +5,7 @@ const type: ParameterObject = {
   name: 'type',
   in: 'query',
   required: false,
-  description: 'The type of messages.',
+  description: 'The type of the messages.',
   schema: {
     type: 'string',
     enum: [

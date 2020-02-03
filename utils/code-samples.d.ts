@@ -1,6 +1,6 @@
 export interface IOperationSample {
   lang: 'JavaScript' | 'Shell' | 'Java' | 'Python' | 'Go';
-  label: 'Node.js' | 'Bash' | 'Java' | 'Python' | 'Go';
+  label: 'Node.js' | 'Node.js SDK' | 'Bash' | 'Java' | 'Java SDK' | 'Python' | 'Go';
   source: string;
 }
 export interface ICodeSamples {
