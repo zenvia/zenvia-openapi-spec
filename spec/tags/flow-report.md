@@ -1,1 +1,1 @@
-Report to show datas about sessions in a period, it can be filtered by flow, dispatch and session.
+Report to provide current state of sessions (executions) of flows in a period. These states contain session variables and their current value. The report can be filtered by flow, dispatch or session.
