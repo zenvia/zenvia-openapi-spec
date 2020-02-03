@@ -6,6 +6,7 @@ const facebookDescription = rawLoad(__dirname, './facebook.md');
 const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
 const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
+const flowReportDescription = rawLoad(__dirname, './flow-report.md');
 
 const tags: TagObject[] = [{
   name: 'WhatsApp',
@@ -22,6 +23,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Message Report',
   description: messageReportDescription,
+}, {
+  name: 'Flow Report',
+  description: flowReportDescription,
 }];
 
 export default tags;
