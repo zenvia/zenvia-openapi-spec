@@ -5,7 +5,7 @@ const sessionId: ParameterObject = {
   name: 'sessionId',
   in: 'query',
   required: false,
-  description: 'This is the ID between the flow and the client.',
+  description: 'This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.',
   schema: {
     title: 'Session ID',
     type: 'string',

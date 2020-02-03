@@ -19,7 +19,7 @@ const base: SchemaObject = {
     },
     sessionId: {
       title: 'Session ID',
-      description: 'The session identifier.',
+      description: 'This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.',
       type: 'string',
     },
     firstEventTimestamp: {
@@ -34,7 +34,7 @@ const base: SchemaObject = {
     },
     variables: {
       title: 'Objects of varibles',
-      description: 'Object where is saved all the variables of flow.',
+      description: 'Object where session variables are saved.',
       type: 'object',
     },
   },
