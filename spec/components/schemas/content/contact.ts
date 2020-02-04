@@ -16,7 +16,7 @@ const contact: SchemaObject = {
           type: 'object',
           properties: {
             addresses: {
-              description: 'A list of contact address',
+              description: 'A list of contact addresses',
               type: 'array',
               items: {
                 type: 'object',
@@ -62,17 +62,17 @@ const contact: SchemaObject = {
               type: 'string',
             },
             emails: {
-              description: 'A list of email',
+              description: 'A list of e-mails',
               type: 'array',
               items: {
                 type: 'object',
                 properties: {
                   email: {
-                    description: 'Email address',
+                    description: 'E-mail address',
                     type: 'string',
                   },
                   type: {
-                    description: 'The type of email',
+                    description: 'The type of e-mail',
                     type: 'string',
                     enum: [
                       'HOME',
@@ -137,7 +137,7 @@ const contact: SchemaObject = {
               },
             },
             phones: {
-              description: 'A list of contact phone number',
+              description: 'A list of contact phone numbers',
               type: 'array',
               items: {
                 type: 'object',
@@ -162,7 +162,7 @@ const contact: SchemaObject = {
               minItems: 0,
             },
             urls: {
-              description: 'A list of contact URL',
+              description: 'A list of contact URLs',
               type: 'array',
               items: {
                 type: 'object',
