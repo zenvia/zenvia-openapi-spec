@@ -44,7 +44,7 @@ WhatsApp support a few types of contents, which we categorize into to groups: st
 This kind of message content may only be sent as a reply to a message sent by the user. So these kind of message content cannot be sent to start a interaction with an user. And even as a reply, these kind of message contents can only be sent if the last message from the user was sent less than 24 hours ago.
 
 #### Text content
-This ype of content is the most used type of content, and its composed of a plain text.
+This type of content is the most used type of content, and its composed of a plain text.
 
 #### File content
 This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
