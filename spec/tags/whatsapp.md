@@ -54,6 +54,12 @@ This is used to send a file to the user. The file will be presented to the user 
 * Document
 <br><br>
 
+#### Contact content
+Use this type of content to send contacts information to the user.
+
+#### Location content
+This content is used to send location messages representing a point on the map to the user.
+
 ### Notification contents
 These types of contents are special, because they are allowed to be sent without any user interaction and also even if the last user message was sent more than 24 hours ago.
 
