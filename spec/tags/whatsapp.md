@@ -54,7 +54,7 @@ This is used to send a file to the user. The file will be presented to the user 
 * Document
 <br><br>
 
-#### Contact content
+#### Contacts content
 Use this type of content to send contacts information to the user.
 
 #### Location content

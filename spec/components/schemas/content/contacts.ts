@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { createComponentRef } from '../../../../utils/ref';
 
-const contact: SchemaObject = {
+const contacts: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
@@ -195,4 +195,4 @@ const contact: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default contact;
+export default contacts;

@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
 import { ref as fileRef } from './file';
 import { ref as templateRef } from '../template';
-import { ref as contactRef } from '../contact';
+import { ref as contactsRef } from '../contacts';
 import { ref as locationRef } from '../location';
 import { createComponentRef } from '../../../../../utils/ref';
 
@@ -14,7 +14,7 @@ const all: SchemaObject = {
   }, {
     $ref: templateRef,
   }, {
-    $ref: contactRef,
+    $ref: contactsRef,
   }, {
     $ref: locationRef,
   }],
@@ -24,7 +24,7 @@ const all: SchemaObject = {
       text: textRef,
       file: fileRef,
       template: templateRef,
-      contact: contactRef,
+      contacts: contactsRef,
       location: locationRef,
     },
   },
