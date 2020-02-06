@@ -41,7 +41,7 @@ const contacts: SchemaObject = {
                     description: 'Full country name',
                     type: 'string',
                   },
-                  country_code: {
+                  countryCode: {
                     description: 'Two-letter country abbreviation',
                     type: 'string',
                   },
@@ -61,6 +61,10 @@ const contacts: SchemaObject = {
               description: 'The birthday of the contact',
               type: 'string',
             },
+            contactImage: {
+              description: 'Base64-encoded image',
+              type: 'string',
+            },
             emails: {
               description: 'A list of e-mails',
               type: 'array',
@@ -78,6 +82,24 @@ const contacts: SchemaObject = {
                       'HOME',
                       'WORK',
                     ],
+                  },
+                },
+              },
+              minItems: 0,
+            },
+            ims: {
+              description: 'A list of messaging contact information',
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  service: {
+                    description: 'Instant messaging service name',
+                    type: 'string',
+                  },
+                  userId: {
+                    description: 'User identifier in this instant messaging service',
+                    type: 'string',
                   },
                 },
               },
@@ -156,6 +178,10 @@ const contacts: SchemaObject = {
                       'HOME',
                       'WORK',
                     ],
+                  },
+                  waId: {
+                    description: 'WhatsApp ID _(supported channels: WhatsApp)_',
+                    type: 'string',
                   },
                 },
               },
