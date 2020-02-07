@@ -55,7 +55,7 @@ const contacts: SchemaObject = {
                   },
                 },
               },
-              minItems: 1,
+              minItems: 0,
             },
             birthday: {
               description: 'The birthday of the contact',
@@ -210,6 +210,9 @@ const contacts: SchemaObject = {
               minItems: 0,
             },
           },
+          required: [
+            'name',
+          ],
         },
         minItems: 1,
       },
