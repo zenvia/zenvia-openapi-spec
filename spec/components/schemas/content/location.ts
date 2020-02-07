@@ -25,6 +25,10 @@ const location: SchemaObject = {
         type: 'string',
         description: 'Address of the location. Only displayed if name is present.',
       },
+      url: {
+        type: 'string',
+        description: 'URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_',
+      },
     },
     required: [
       'longitude',
