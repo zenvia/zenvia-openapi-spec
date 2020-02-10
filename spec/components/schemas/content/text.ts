@@ -10,7 +10,7 @@ const text: SchemaObject = {
     type: 'object',
     properties: {
       text: {
-        title: 'Text to be sent',
+        description: 'Text to be sent',
         type: 'string',
       },
     },

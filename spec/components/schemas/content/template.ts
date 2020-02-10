@@ -11,7 +11,7 @@ const template: SchemaObject = {
     properties: {
       templateId: {
         type: 'string',
-        description: 'the template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.',
+        description: 'The template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.',
       },
       fields: {
         type: 'object',
