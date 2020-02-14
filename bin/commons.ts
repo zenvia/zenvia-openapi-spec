@@ -15,7 +15,7 @@ export function generateReDocPage(): string {
   const redocConfig = safeLoad(readFileSync('redoc/redoc-config.yaml', 'utf-8'));
 
   const redocURL =
-    redocConfig.redocURL || 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.18/bundles/redoc.standalone.js';
+    redocConfig.redocURL || 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.23/bundles/redoc.standalone.js';
   const redocExport = redocConfig.redocExport || 'Redoc';
   const pageContents =
     pageTemplate
