@@ -10,19 +10,21 @@ const base: SchemaObject = {
   properties: {
     code: {
       title: 'Code',
-      description: 'Error code.',
+      description: 'An error code to identify the error programmatically.',
       type: 'string',
       readOnly: true,
+      example: 'VALIDATION_ERROR',
     },
     message: {
       title: 'Message',
-      description: 'Error message.',
+      description: 'A human readable text to help on error troubleshoot.',
       type: 'string',
       readOnly: true,
+      example: 'Validation error',
     },
     details: {
       title: 'Details',
-      description: 'Error details.',
+      description: 'Error details to help identify the problem source.',
       type: 'array',
       readOnly: true,
       items: {

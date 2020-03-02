@@ -2,6 +2,7 @@
 
 This is the reference documentation for the Zenvia *REST-like* API.
 
+This API is based on resources witch are represented by JSON format and are manipulated using HTTP protocol.
 
 ## What you can do with this API
 
@@ -17,7 +18,6 @@ The available events are:
 * Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.
 * Messages status: You can receive status update for sent messages.
 
-
 ## What you need before start
 
 Before use this API you need the following prerequisites:
@@ -27,51 +27,23 @@ Before use this API you need the following prerequisites:
 * **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
 * **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
 
+You can use [sandbox](#section/Getting-started-with-Sandbox) to start and test this API immediately.
 
-# Resources Tree
+# Getting started with Sandbox
 
-This API is oriented by resources and sub-resources. Resources are collections of some kind of object and can be manipulated using HTTP methods.
+The fastest way to start using this API is using the [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
 
-All our resources is represented using the JSON format and the content type `application/json`.
+When you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.
 
-There are the resources of this API:
+[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
-* Channels: Conversational channels where you can send or receive messages from/to some contact.
+# SDKs
 
-  * Messages: A collection of messages for one channel
+SDKs make it easy to use our APIs just by including them in your software.
 
-* Subscriptions: Control the events to be sent for webhook endpoint.
+These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).
 
-* Templates: Message templates for sending notifications to customers.
-
-
-# API Design
-
-This API is based on resources witch are represented by JSON format and are manipulated using HTTP protocol.
-
-
-## Resources path
-
-The [resources tree](#section/Resources-Tree) is represented in HTTP paths in the following way.
-
-To access the top-level resource collections, use the root path and resource name. Example for `channel` collection:
-
-`/v1/channels`
-
-To access some resource item use the collection name and and resource ID. Example for item `sms` of collection `channels`:
-
-`/v1/channels/sms`
-
-To access a sub-resource use the sub-resource name after the some resource item. Example for sub-resource `messages` of `sms` item of `channels` collection:
-
-`/v1/channels/sms/messages`
-
-The generic formula is:
-
-`/v1/collection/itemId/collection/itemId/.....`
-
-
-## HTTP Methods
+# HTTP Methods
 
 HTTP methods are used for manipulate resources.
 
@@ -94,16 +66,13 @@ Methods used with item endpoints:
 
 When one operation is executed successfully, the API will respond with 2xx status code.
 
-
-## Error Handling
+# Error Handling
 
 When one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.
 
-The error object has:
+The error object have the follwing schema:
 
-* Code: An error code to identify the error programmatically.
-* Message: A human readable text to help on error troubleshoot.
-* Details: Error details to help identify the problem source.
+<SchemaDefinition schemaRef="#/components/schemas/error.base" />
 
 Responses error codes are detailed below.
 
@@ -115,9 +84,7 @@ Responses error codes are detailed below.
 | 409              | DUPLICATED           | Entity already exists            | No            |
 | 500              | INTERNAL_ERROR       | Internal error                   | Yes           |
 
-
 # Authentication
-
 
 ## TOKEN
 To use this API you need to send the API token in all requests.
@@ -129,16 +96,8 @@ Example:
 
 You can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.
 
-
 ## JWT
 
 The JWT token is primarily used by front-end applications for user interactions.
 
 For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.
-
-
-# SDKs
-
-SDKs make it easy to use our APIs just by including them in your software.
-
-These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).

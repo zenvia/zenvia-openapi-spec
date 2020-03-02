@@ -6,34 +6,7 @@ The event type MESSAGE refers to messages dispatched and/or received in the desi
 
 When you are subscribed in this type of event, your webhook will receive a request with the schema as follows:
 
-```json
-{
-  "id": "string",
-  "timestamp": "string", 
-  "type": "MESSAGE",
-  "subscriptionId": "string",
-  "channel": "string",
-  "direction": "string",
-  "message": {
-    "id": "string",
-    "from": "string",
-    "to": "string",
-    "direction": "string",
-    "channel": "string",
-    "visitor": {
-      "name": "string",
-      "firstName": "string",
-      "lastName": "string"
-    },
-    "contents": [
-      {
-        "type": "string",
-        "text": "string"
-      }
-    ]    
-  }
-}
-```
+<SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
 
 The <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.
 
@@ -43,29 +16,7 @@ The event type MESSAGE_STATUS refers to a status update related to a prior sent 
 
 If you are subscribed in this type of event, your webhook will receive a request with the schema as follows:
 
-```json
-{
-  "id": "string",
-  "timestamp": "string", 
-  "type": "MESSAGE_STATUS",
-  "subscriptionId": "string",
-  "channel": "string",
-  "messageId": "string",
-  "contentIndex": "number",
-  "messageStatus": {
-    "timestamp": "string",
-    "code": "string",
-    "description": "string",
-    "causes": [
-      {
-        "channelErrorCode": "number or string",
-        "reason": "string",
-        "details": "string"
-      }
-    ],
-  }
-}
-```
+<SchemaDefinition schemaRef="#/components/schemas/events.message-status-event" />
 <br>
 
 ### Code field
