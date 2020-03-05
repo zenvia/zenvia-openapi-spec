@@ -17,7 +17,7 @@ const base: SchemaObject = {
     },
     message: {
       title: 'Message',
-      description: 'A human readable text to help on error troubleshoot.',
+      description: 'A human readable text to help on error troubleshooting.',
       type: 'string',
       readOnly: true,
       example: 'Validation error',
