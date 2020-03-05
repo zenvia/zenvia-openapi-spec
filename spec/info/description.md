@@ -2,7 +2,7 @@
 
 This is the reference documentation for the Zenvia *REST-like* API.
 
-This API is based on resources witch are represented by JSON format and are manipulated using HTTP protocol.
+This API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.
 
 ## What you can do with this API
 
