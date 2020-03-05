@@ -27,11 +27,11 @@ Before use this API you need the following prerequisites:
 * **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
 * **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
 
-You can use [sandbox](#section/Getting-started-with-Sandbox) to start and test this API immediately.
+You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
 
 # Getting started with Sandbox
 
-The fastest way to start using this API is using the [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
+The fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
 
 When you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.
 
