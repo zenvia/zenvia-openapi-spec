@@ -11,6 +11,9 @@ const messageEvent: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        example: 'MESSAGE_STATUS',
+      },
       channel: {
         title: 'Message channel',
         type: 'string',

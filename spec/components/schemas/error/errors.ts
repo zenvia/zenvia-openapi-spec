@@ -8,7 +8,7 @@ const error: SchemaObject = {
   properties: {
     code: {
       title: 'Code',
-      description: 'Code error.',
+      description: 'Detail error code.',
       type: 'string',
       readOnly: true,
     },
@@ -20,7 +20,7 @@ const error: SchemaObject = {
     },
     message: {
       title: 'Message',
-      description: 'Error message.',
+      description: 'Human readable message.',
       type: 'string',
       readOnly: true,
     },

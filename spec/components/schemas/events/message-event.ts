@@ -11,6 +11,9 @@ const messageEvent: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        example: 'MESSAGE',
+      },
       direction: {
         title: 'Message Direction',
         type: 'string',
