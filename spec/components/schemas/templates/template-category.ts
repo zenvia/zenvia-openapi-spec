@@ -2,16 +2,11 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const status: SchemaObject = {
-  title: 'Status of template',
+const category: SchemaObject = {
+  title: 'Category',
+  description: 'Category of use for this template',
   type: 'string',
-  enum: [
-    'APPROVED',
-    'REFUSED',
-    'PENDING',
-    'CANCELED',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
-export default status;
+export default category;
