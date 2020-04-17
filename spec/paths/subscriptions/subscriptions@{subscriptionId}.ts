@@ -58,7 +58,7 @@ const deleteOperation: OperationObject = {
   tags: ['Subscriptions'],
   responses: {
     204: {
-      description: 'Subscription Object',
+      description: 'No content',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
