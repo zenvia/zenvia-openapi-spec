@@ -5,8 +5,37 @@ import {
   ResponseObject,
   ResponsesObject,
 } from 'openapi3-ts';
-import { ref as templateSchemaRef } from '../../components/schemas/templates/base';
+import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
 import { ref as errorResponseRef } from '../../components/responses/error';
+
+const post: OperationObject = {
+  description: 'Create a new',
+  tags: ['Templates'],
+  requestBody: {
+    content: {
+      'application/json': {
+        schema: {
+          $ref: templateSchemaRef,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: 'Created template',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: templateSchemaRef,
+          } as SchemaObject,
+        },
+      },
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  } as ResponsesObject,
+};
 
 const get: OperationObject = {
   description: 'List all templates',
@@ -32,6 +61,7 @@ const get: OperationObject = {
 };
 
 const path: PathItemObject = {
+  post,
   get,
 };
 
