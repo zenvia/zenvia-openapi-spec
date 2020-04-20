@@ -3,6 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as localeSchemaRef } from './template-locale';
 import { ref as categorySchemaRef } from './template-category';
+import { ref as commentSchemaRef } from './template-comment';
 import { ref as componentsSchemaRef } from './template-components';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
 
@@ -74,37 +75,7 @@ const template: SchemaObject = {
       type: 'array',
       readOnly: true,
       items: {
-        type: 'object',
-        properties: {
-          author: {
-            title: 'Author',
-            description: 'Comment author',
-            type: 'string',
-          },
-          role: {
-            title: 'Role',
-            description: 'Author role',
-            type: 'string',
-            enum: ['REQUESTER', 'REVIEWER', 'WHATSAPP'],
-          },
-          text: {
-            title: 'Text',
-            description: 'Comment text',
-            type: 'string',
-          },
-          createdAt: {
-            title: 'Creation timestamp',
-            description: 'Creation timestamp in ISO format',
-            type: 'string',
-            readOnly: true,
-          },
-          updatedAt: {
-            title: 'Update timestamp',
-            description: 'Update timestamp in ISO format',
-            type: 'string',
-            readOnly: true,
-          },
-        },
+        $ref: commentSchemaRef,
       },
     },
     status: {
