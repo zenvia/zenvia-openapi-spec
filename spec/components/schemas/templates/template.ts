@@ -75,7 +75,6 @@ const template: SchemaObject = {
       readOnly: true,
       items: {
         type: 'object',
-        readOnly: true,
         properties: {
           author: {
             title: 'Author',
