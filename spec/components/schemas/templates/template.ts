@@ -91,6 +91,7 @@ const template: SchemaObject = {
     },
     channels: {
       title: 'Channels',
+      deprecated: true,
       description: 'Channels where this template can be used. _Deprecated attribute, can be removed on next API versions._',
       type: 'array',
       items: {
