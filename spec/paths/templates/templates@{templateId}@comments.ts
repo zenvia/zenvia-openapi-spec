@@ -5,28 +5,29 @@ import {
   ResponseObject,
   ResponsesObject,
 } from 'openapi3-ts';
-import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
+import { ref as templateIdRef } from '../../components/parameters/templateId';
+import { ref as templateCommentSchemaRef } from '../../components/schemas/templates/template-comment';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
-  description: 'Create a new',
+  description: 'Create a new comment',
   tags: ['Templates'],
   requestBody: {
     content: {
       'application/json': {
         schema: {
-          $ref: templateSchemaRef,
+          $ref: templateCommentSchemaRef,
         },
       },
     },
   },
   responses: {
     200: {
-      description: 'Created template',
+      description: 'Created comment',
       content: {
         'application/json': {
           schema: {
-            $ref: templateSchemaRef,
+            $ref: templateCommentSchemaRef,
           } as SchemaObject,
         },
       },
@@ -38,17 +39,17 @@ const post: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List all templates',
+  description: 'List all comments',
   tags: ['Templates'],
   responses: {
     200: {
-      description: 'Template Object List',
+      description: 'Comment Object List',
       content: {
         'application/json': {
           schema: {
             type: 'array',
             items: {
-              $ref: templateSchemaRef,
+              $ref: templateCommentSchemaRef,
             },
           } as SchemaObject,
         },
@@ -63,6 +64,9 @@ const get: OperationObject = {
 const path: PathItemObject = {
   post,
   get,
+  parameters: [{
+    $ref: templateIdRef,
+  }],
 };
 
 export default path;

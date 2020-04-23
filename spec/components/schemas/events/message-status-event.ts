@@ -12,6 +12,12 @@ const messageEvent: SchemaObject = {
     type: 'object',
     properties: {
       type: {
+        title: 'Event type',
+        type: 'string',
+        enum: [
+          'MESSAGE',
+          'MESSAGE_STATUS',
+        ],
         example: 'MESSAGE_STATUS',
       },
       channel: {
