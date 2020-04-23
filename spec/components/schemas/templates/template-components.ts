@@ -18,9 +18,9 @@ const components: SchemaObject = {
       properties: {
         type: {
           title: 'Header type',
-          description: 'The header can have an image or a document.',
+          description: 'The header can have an image, document or text.',
           type: 'string',
-          enum: ['MEDIA_DOCUMENT', 'MEDIA_IMAGE'],
+          enum: ['MEDIA_DOCUMENT', 'MEDIA_IMAGE', 'TEXT_FIXED', 'TEXT_TEMPLATE'],
         },
       },
     },
