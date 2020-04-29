@@ -40,6 +40,22 @@ const post: OperationObject = {
 const get: OperationObject = {
   description: 'List all templates',
   tags: ['Templates'],
+  parameters: [{
+    name: 'status',
+    in: 'query',
+    description: 'Filter by status',
+    allowEmptyValue: false,
+    schema: {
+      type: 'string',
+      enum: [
+        'WAITING_REVIEW',
+        'REJECTED',
+        'WAITING_APPROVAL',
+        'APPROVED',
+      ],
+    },
+    example: 'APPROVED',
+  }],
   responses: {
     200: {
       description: 'Template Object List',
