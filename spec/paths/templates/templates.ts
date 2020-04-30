@@ -41,6 +41,27 @@ const get: OperationObject = {
   description: 'List all templates',
   tags: ['Templates'],
   parameters: [{
+    name: 'channel',
+    in: 'query',
+    description: 'Filter by channel',
+    allowEmptyValue: false,
+    schema: {
+      type: 'string',
+      enum: [
+        'WHATSAPP',
+      ],
+    },
+    example: 'WHATSAPP',
+  }, {
+    name: 'senderId',
+    in: 'query',
+    description: 'Filter by senderId',
+    allowEmptyValue: false,
+    schema: {
+      type: 'string',
+    },
+    example: 'b5agf1-y237-11e8-b127-1230f6c2d98m',
+  }, {
     name: 'status',
     in: 'query',
     description: 'Filter by status',
