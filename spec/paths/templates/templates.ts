@@ -7,9 +7,9 @@ import {
 } from 'openapi3-ts';
 import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as channel } from '../../components/parameters/template/channel';
-import { ref as senderId } from '../../components/parameters/template/senderId';
-import { ref as status } from '../../components/parameters/template/status';
+import { ref as channel } from '../../components/parameters/templates/channel';
+import { ref as senderId } from '../../components/parameters/templates/senderId';
+import { ref as status } from '../../components/parameters/templates/status';
 
 const post: OperationObject = {
   description: 'Create a new',
