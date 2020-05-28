@@ -1,6 +1,8 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as actionsRef } from './template-actions';
+import { ref as quickRepliesRef } from './template-quick-replies';
 
 const components: SchemaObject = {
   title: 'Components',
@@ -57,6 +59,23 @@ const components: SchemaObject = {
         text: {
           title: 'Footer text',
           type: 'string',
+        },
+      },
+    },
+    buttons: {
+      title: 'Buttons',
+      description: 'Buttons type',
+      type: 'object',
+      oneOf: [{
+        $ref: actionsRef,
+      }, {
+        $ref: quickRepliesRef,
+      }],
+      discriminator: {
+        propertyName: 'type',
+        mapping: {
+          ACTIONS: actionsRef,
+          QUICK_REPLIES: quickRepliesRef,
         },
       },
     },

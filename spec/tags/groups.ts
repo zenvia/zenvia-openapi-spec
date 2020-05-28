@@ -16,6 +16,7 @@ const groups: TagGroupObject[] = [{
   name: 'Templates',
   tags: [
     'Templates',
+    'Interactive Templates',
   ],
 }, {
   name: 'Reports',
