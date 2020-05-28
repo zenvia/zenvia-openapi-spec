@@ -64,7 +64,7 @@ const components: SchemaObject = {
     },
     buttons: {
       title: 'Buttons',
-      description: 'Buttons type',
+      description: 'Template buttons',
       type: 'object',
       oneOf: [{
         $ref: actionsRef,
