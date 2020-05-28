@@ -1,37 +1,37 @@
 import { SchemaObject } from 'openapi3-ts';
+import { ref as baseRef } from './base';
+import { ref as clickRef } from '../message/quick-replies';
 import { createComponentRef } from '../../../../utils/ref';
 
 const callback: SchemaObject = {
-  title: 'Quick Replies Callback',
-  description: 'This is a Callback object model',
   type: 'object',
-  properties: {
-    type: {
-      title: 'Type of callback',
-      format: 'application/vnd.zenvia.v1.event.click+json',
-      type: 'string',
-    },
-    payload: {
-      title: 'Payload of callback',
-      type: 'object',
-      properties: {
-        json:{
-          title: 'Json object',
-          type: 'object',
-          properties: {
-            text: {
-              title: 'Text of selected button',
-              type: 'string',
-            },
-            payload: {
-              title: 'Payload of selected button',
-              type: 'string',
-            },
-          },
-        },
+  allOf: [{
+    $ref: baseRef,
+  }, {
+    type: 'object',
+    properties: {
+      type: {
+        title: 'Event type',
+        type: 'string',
+        enum: [
+          'MESSAGE',
+          'MESSAGE_STATUS',
+        ],
+        example: 'MESSAGE',
+      },
+      direction: {
+        title: 'Message Direction',
+        type: 'string',
+      },
+      channel: {
+        title: 'Message channel',
+        type: 'string',
+      },
+      message: {
+        $ref: clickRef,
       },
     },
-  },
+  }],
 };
 
 export const ref = createComponentRef(__filename);

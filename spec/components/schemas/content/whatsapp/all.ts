@@ -4,6 +4,7 @@ import { ref as fileRef } from './file';
 import { ref as templateRef } from '../template';
 import { ref as contactsRef } from '../contacts';
 import { ref as locationRef } from '../location';
+import { ref as clickRef } from '../click';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -17,6 +18,8 @@ const all: SchemaObject = {
     $ref: contactsRef,
   }, {
     $ref: locationRef,
+  }, {
+    $ref: clickRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -26,6 +29,7 @@ const all: SchemaObject = {
       template: templateRef,
       contacts: contactsRef,
       location: locationRef,
+      click: clickRef,
     },
   },
 };
