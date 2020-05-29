@@ -22,9 +22,6 @@ const tags: TagObject[] = [{
   name: 'Templates',
   description: templatesDescription,
 }, {
-  name: 'Interactive Templates',
-  description: interactiveTemplatesDescription,
-}, {
   name: 'Message Report',
   description: messageReportDescription,
 }, {
