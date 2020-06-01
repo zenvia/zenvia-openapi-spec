@@ -1,9 +1,9 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as baseRef } from './base';
-import { ref as urlRef } from './template-url';
-import { ref as phoneNumberRef } from './template-phone-number';
+import { ref as urlRef } from './button-item-url';
+import { ref as phoneNumberRef } from './button-item-phone-number';
 
 const buttons: SchemaObject = {
   type: 'object',

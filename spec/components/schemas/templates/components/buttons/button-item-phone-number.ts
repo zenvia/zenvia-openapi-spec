@@ -1,20 +1,15 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as baseRef } from './base';
 
-const buttons: SchemaObject = {
+const phoneNumberButton: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
   }, {
     type: 'object',
     properties: {
-      text: {
-        title: 'Button text',
-        description: 'Text that will fill the button',
-        type: 'string',
-      },
       phoneNumber: {
         title: 'Phone number of button',
         description: 'Phone number to be sent in the button',
@@ -29,4 +24,4 @@ const buttons: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default buttons;
+export default phoneNumberButton;

@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 import { ref as localeSchemaRef } from './template-locale';
 import { ref as categorySchemaRef } from './template-category';
 import { ref as commentSchemaRef } from './template-comment';
-import { ref as componentsSchemaRef } from './template-components';
+import { ref as componentsSchemaRef } from './components';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
 
 const template: SchemaObject = {
