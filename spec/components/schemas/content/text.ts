@@ -13,6 +13,10 @@ const text: SchemaObject = {
         description: 'Text to be sent',
         type: 'string',
       },
+      payload: {
+        description: 'Payload of selected button',
+        type: 'string',
+      },
     },
     required: [
       'text',

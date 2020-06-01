@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as clickRef } from '../content/click';
+import { ref as clickRef } from '../content/text';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as visitorSchemaRef } from './visitor';
 
