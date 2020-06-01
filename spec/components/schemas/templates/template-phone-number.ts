@@ -15,7 +15,7 @@ const buttons: SchemaObject = {
         description: 'Text that will fill the button',
         type: 'string',
       },
-      phone_number: {
+      phoneNumber: {
         title: 'Phone number of button',
         description: 'Phone number to be sent in the button',
         type: 'string',
@@ -23,7 +23,7 @@ const buttons: SchemaObject = {
     },
     required: [
       'text',
-      'phone_number',
+      'phoneNumber',
     ],
   }],
 };
