@@ -13,7 +13,7 @@ import { ref as status } from '../../components/parameters/templates/status';
 
 const post: OperationObject = {
   description: 'Create a new',
-  tags: ['Templates', 'Interactive Templates'],
+  tags: ['Templates'],
   requestBody: {
     content: {
       'application/json': {
