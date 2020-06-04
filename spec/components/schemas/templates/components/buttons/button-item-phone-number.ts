@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
-import { ref as baseRef } from './base';
+import { ref as baseRef } from './button-item-base';
 
 const phoneNumberButton: SchemaObject = {
   type: 'object',
@@ -17,6 +17,7 @@ const phoneNumberButton: SchemaObject = {
       },
     },
     required: [
+      'type',
       'text',
       'phoneNumber',
     ],

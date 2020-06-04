@@ -21,6 +21,9 @@ const buttons: SchemaObject = {
           oneOf: [{
             $ref: quickReplyRef,
           }],
+          required: [
+            'type',
+          ],
           discriminator: {
             propertyName: 'type',
             mapping: {

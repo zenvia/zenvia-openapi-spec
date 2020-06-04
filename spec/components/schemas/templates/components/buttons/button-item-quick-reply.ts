@@ -11,13 +11,15 @@ const quickReplyButton: SchemaObject = {
     type: 'object',
     properties: {
       payload: {
+        type: 'string',
         title: 'Payload of button',
         description: 'This payload is used for identify the click in the callback',
       },
     },
     required: [
+      'type',
       'text',
-      'url',
+      'payload',
     ],
   }],
 };

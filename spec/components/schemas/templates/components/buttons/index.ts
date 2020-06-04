@@ -12,6 +12,7 @@ export const buttons: SchemaObject = {
   }, {
     $ref: quickRepliesRef,
   }],
+  required: ['type'],
   discriminator: {
     propertyName: 'type',
     mapping: {

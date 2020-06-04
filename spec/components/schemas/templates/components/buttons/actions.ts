@@ -24,6 +24,9 @@ const buttons: SchemaObject = {
           }, {
             $ref: phoneNumberRef,
           }],
+          required: [
+            'type',
+          ],
           discriminator: {
             propertyName: 'type',
             mapping: {
