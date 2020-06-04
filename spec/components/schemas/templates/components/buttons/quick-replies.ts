@@ -27,7 +27,7 @@ const buttons: SchemaObject = {
           discriminator: {
             propertyName: 'type',
             mapping: {
-              QUICK_REPLIES: quickReplyRef,
+              QUICK_REPLY: quickReplyRef,
             },
           },
         },
