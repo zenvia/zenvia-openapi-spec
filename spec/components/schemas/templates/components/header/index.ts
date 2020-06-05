@@ -5,13 +5,17 @@ export const header: SchemaObject = {
   title: 'Header',
   description: 'Template header',
   type: 'object',
-  required: ['type'],
+  required: ['type', 'text'],
   properties: {
     type: {
       title: 'Header type',
       description: 'The header can have an image, document or text.',
       type: 'string',
       enum: ['MEDIA_DOCUMENT', 'MEDIA_IMAGE', 'TEXT_FIXED', 'TEXT_TEMPLATE'],
+    },
+    text: {
+      title: 'Header text',
+      type: 'string',
     },
   },
 };
