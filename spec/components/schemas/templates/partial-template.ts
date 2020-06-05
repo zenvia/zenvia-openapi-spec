@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as localeSchemaRef } from './template-locale';
 import { ref as categorySchemaRef } from './template-category';
-import { ref as componentsSchemaRef } from './template-components';
+import { ref as componentsSchemaRef } from './components';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
 
 const partial: SchemaObject = {
