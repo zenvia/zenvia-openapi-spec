@@ -1,7 +1,7 @@
 const { post } = require('request-promise');
 
 post({
-  uri: 'https://api.zenvia.com/v1/channels/facebook/messages',
+  uri: 'https://api.zenvia.com/v2/channels/facebook/messages',
   headers: {
     'X-API-TOKEN': 'YOUR_API_TOKEN'
   },
