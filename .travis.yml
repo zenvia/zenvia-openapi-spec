@@ -13,4 +13,4 @@ deploy:
   local_dir: web_deploy
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(v[0-9]+|master)$
+    condition: $TRAVIS_BRANCH =~ ^(v[0-9]+(-beta)?|master)$
