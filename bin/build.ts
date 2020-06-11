@@ -9,11 +9,13 @@ async function build() {
   const ncpAsync = promisify(ncp);
   const outDir = 'web_deploy';
   const branch = process.argv[2] ?? process.env.TRAVIS_BRANCH;
-  const isVersionBranch = branch !== undefined && /^v[0-9]+(-beta)?$/.test(branch);
 
-  await ncpAsync('public', outDir);
+  if (branch === undefined || branch === 'master') {
+    await ncpAsync('public', outDir);
+  }
 
   let specDir;
+  const isVersionBranch = branch !== undefined && /^v[0-9]+(-beta)?$/.test(branch);
   if (isVersionBranch) {
     specDir = `${outDir}/${branch}`;
   } else if (branch === undefined) {
@@ -21,7 +23,6 @@ async function build() {
   }
 
   if (specDir) {
-    console.log('creating version dir');
     mkdirp(specDir);
     writeFileSync(`${specDir}/openapi.json`, generateJSON());
     writeFileSync(`${specDir}/openapi.yaml`, generateYAML());
