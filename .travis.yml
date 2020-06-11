@@ -7,8 +7,10 @@ script:
   - npm run build
 deploy:
   provider: pages
+  keep_history: true
   skip_cleanup: true
   github_token: $GH_TOKEN
   local_dir: web_deploy
   on:
-    branch: master
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^(v[0-9]+|master)$
