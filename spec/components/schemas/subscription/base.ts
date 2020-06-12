@@ -30,6 +30,15 @@ const subscriptionBase: SchemaObject = {
     status: {
       $ref: statusRef,
     },
+    version: {
+      title: 'Version of subscription',
+      type: 'string',
+      enum: [
+        'v1',
+        'v2',
+      ],
+      default: 'v1',
+    },
     createdAt: {
       title: 'Creation timestamp',
       description: 'Creation timestamp in ISO format',
