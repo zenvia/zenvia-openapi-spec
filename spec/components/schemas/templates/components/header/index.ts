@@ -5,7 +5,7 @@ export const header: SchemaObject = {
   title: 'Header',
   description: 'Template header',
   type: 'object',
-  required: ['type', 'text'],
+  required: ['type'],
   properties: {
     type: {
       title: 'Header type',
