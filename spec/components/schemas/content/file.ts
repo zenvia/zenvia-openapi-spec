@@ -15,11 +15,11 @@ const file: SchemaObject = {
       },
       fileMimeType: {
         type: 'string',
-        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. [See the supported contents and sizes.](#section/Limitations)',
+        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations)',
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Applicable only to the WhatsApp channel.',
+        description: 'Some description for the file. Applicable only to the [WhatsApp channel](#tag/WhatsApp).',
       },
     },
     required: [
