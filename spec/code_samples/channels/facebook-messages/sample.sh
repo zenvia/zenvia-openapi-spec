@@ -1,4 +1,4 @@
-curl "https://api.zenvia.com/v2/channels/facebook/messages" \
+curl "https://api.zenvia.com/v1/channels/facebook/messages" \
 -H "Content-Type: application/json" \
 -H "X-API-TOKEN: YOUR_API_TOKEN" \
 -d '{
