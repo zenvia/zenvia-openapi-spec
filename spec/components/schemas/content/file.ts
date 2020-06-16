@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as baseRef } from '../base';
-import { createComponentRef } from '../../../../../utils/ref';
+import { ref as baseRef } from './base';
+import { createComponentRef } from '../../../../utils/ref';
 
 const file: SchemaObject = {
   type: 'object',
@@ -19,7 +19,7 @@ const file: SchemaObject = {
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file.',
+        description: 'Some description for the file. Applicable only to the WhatsApp channel.',
       },
     },
     required: [
