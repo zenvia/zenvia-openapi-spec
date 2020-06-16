@@ -11,15 +11,15 @@ const file: SchemaObject = {
     properties: {
       fileUrl: {
         type: 'string',
-        description: 'The URL of the file to be sent. Example: \'file:///c:/Users/myuser/file.pdf\'',
+        description: 'The URL of the file to be sent. Example: \'file:///c:/Users/myuser/file.pdf\'.',
       },
       fileMimeType: {
         type: 'string',
-        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations) Example of valid mime type: \'text/plain\'',
+        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations) Example of valid mime type: \'text/plain\'.',
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Applicable only to the [WhatsApp channel](#tag/WhatsApp). Example: \'Some caption\'',
+        description: 'Some description for the file. Applicable only to the [WhatsApp channel](#tag/WhatsApp). Example: \'Some caption\'.',
       },
     },
     required: [

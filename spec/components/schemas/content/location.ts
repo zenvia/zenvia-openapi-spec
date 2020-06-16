@@ -19,11 +19,11 @@ const location: SchemaObject = {
       },
       name: {
         type: 'string',
-        description: 'Name of the location. Example: \'Home\'',
+        description: 'Name of the location. Example: \'Home\'.',
       },
       address: {
         type: 'string',
-        description: 'Address of the location. Only displayed if name is present. Example: \'Home Address\'',
+        description: 'Address of the location. Only displayed if name is present. Example: \'Home Address\'.',
       },
       url: {
         type: 'string',
