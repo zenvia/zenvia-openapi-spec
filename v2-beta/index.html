@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-148364475-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+
+    <title>ZenAPI | API Reference</title>
+    <!-- needed for adaptive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon192x192.png">
+    <link rel="apple-touch-icon-precomposed" type="image/png" href="../assets/favicon.png">
+
+    <!--
+    ReDoc uses font options from the parent element
+    So override default browser styles
+    -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .menu-content img {
+        padding: 25px;
+      }
+    </style>
+    <script src="/reload/reload.js"></script>
+  </head>
+  <body>
+    <div id="redoc_container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.23/bundles/redoc.standalone.js"></script>
+    <script>
+      Redoc.init(
+        './openapi.json',
+        {"theme":{"colors":{"primary":{"main":"#32329f"}},"breakpoints":{"small":"600px","medium":"800px"}},"pathInMiddlePanel":false,"noAutoAuth":true,"jsonSampleExpandLevel":"all","expandResponses":"200"},
+        document.getElementById("redoc_container"),
+        function () {
+          var els = document.querySelectorAll('td');
+          for (el of els) {
+            el.click();
+          }
+        }
+      );
+    </script>
+  </body>
+</html>
