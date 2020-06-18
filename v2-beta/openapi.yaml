@@ -1356,6 +1356,13 @@ components:
                 - url
         status:
           $ref: '#/components/schemas/subscription.status'
+        version:
+          title: Version of subscription
+          type: string
+          enum:
+            - v1
+            - v2
+          default: v1
         createdAt:
           title: Creation timestamp
           description: Creation timestamp in ISO format
@@ -1863,7 +1870,6 @@ components:
       type: object
       required:
         - type
-        - text
       properties:
         type:
           title: Header type
