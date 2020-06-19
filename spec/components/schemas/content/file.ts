@@ -19,7 +19,7 @@ const file: SchemaObject = {
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Applicable only to the [WhatsApp channel](#tag/WhatsApp). Example: \"Some caption\".',
+        description: 'Some description for the file. Example: \"Some caption\". Only applicable to the [WhatsApp channel](#tag/WhatsApp).',
       },
     },
     required: [
