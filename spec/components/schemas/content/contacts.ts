@@ -22,27 +22,27 @@ const contacts: SchemaObject = {
                 type: 'object',
                 properties: {
                   street: {
-                    description: 'Street number and name',
+                    description: 'Street number and name. Example: \"Street Address, 123\".',
                     type: 'string',
                   },
                   city: {
-                    description: 'City name',
+                    description: 'City name. Example: \"City name\".',
                     type: 'string',
                   },
                   state: {
-                    description: 'State abbreviation',
+                    description: 'State abbreviation. Example: \"SP\".',
                     type: 'string',
                   },
                   zip: {
-                    description: 'ZIP code',
+                    description: 'ZIP code. Example: \"01000-000\".',
                     type: 'string',
                   },
                   country: {
-                    description: 'Full country name',
+                    description: 'Full country name. Example: \"Brazil\".',
                     type: 'string',
                   },
                   countryCode: {
-                    description: 'Two-letter country abbreviation',
+                    description: 'Two-letter country abbreviation. Example: \"BR\".',
                     type: 'string',
                   },
                   type: {
@@ -58,11 +58,11 @@ const contacts: SchemaObject = {
               minItems: 0,
             },
             birthday: {
-              description: 'The birthday of the contact',
+              description: 'The birthday of the contact. Example: \"11/10/1980\".',
               type: 'string',
             },
             contactImage: {
-              description: 'Base64-encoded image',
+              description: 'Base64-encoded image. Its value has to be a string based on the Base64 Data Encodings specification (RFC 4648).',
               type: 'string',
             },
             emails: {
@@ -72,7 +72,7 @@ const contacts: SchemaObject = {
                 type: 'object',
                 properties: {
                   email: {
-                    description: 'E-mail address',
+                    description: 'E-mail address. Example: \"my-email@email-domain.com\".',
                     type: 'string',
                   },
                   type: {
@@ -94,11 +94,11 @@ const contacts: SchemaObject = {
                 type: 'object',
                 properties: {
                   service: {
-                    description: 'Instant messaging service name',
+                    description: 'Instant messaging service name. Example: \"This is a messaging service\".',
                     type: 'string',
                   },
                   userId: {
-                    description: 'User identifier in this instant messaging service',
+                    description: 'User identifier in this instant messaging service. Example: \"johnsmith\"',
                     type: 'string',
                   },
                 },
@@ -110,27 +110,27 @@ const contacts: SchemaObject = {
               type: 'object',
               properties: {
                 formattedName: {
-                  description: 'Full name as it normally appears',
+                  description: 'Full name as it normally appears. Example: \"John Megan Smith\".',
                   type: 'string',
                 },
                 firstName: {
-                  description: 'First name',
+                  description: 'First name. Example: \"John\".',
                   type: 'string',
                 },
                 lastName: {
-                  description: 'Last name',
+                  description: 'Last name. Example: \"Smith\".',
                   type: 'string',
                 },
                 middleName: {
-                  description: 'Middle name',
+                  description: 'Middle name. Example: \"Megan\".',
                   type: 'string',
                 },
                 suffix: {
-                  description: 'Name suffix',
+                  description: 'Name suffix. Example: \"Mr.\".',
                   type: 'string',
                 },
                 prefix: {
-                  description: 'Name preffix',
+                  description: 'Name preffix. Example: \"D.Sc.\".',
                   type: 'string',
                 },
               },
@@ -141,19 +141,19 @@ const contacts: SchemaObject = {
             },
             org: {
               title: 'Organization',
-              description: 'Contact organization information',
+              description: 'Contact organization information. Example: \"Contact by organization home form or email\".',
               type: 'object',
               properties: {
                 company: {
-                  description: 'Name of the contact\'s company',
+                  description: 'Name of the contact\'s company. Example: \"Ms. Sara\".',
                   type: 'string',
                 },
                 department: {
-                  description: 'Name of the contact\'s department',
+                  description: 'Name of the contact\'s department. Example: \"Sales\".',
                   type: 'string',
                 },
                 title: {
-                  description: 'Contact\'s business title',
+                  description: 'Contact\'s business title. Example: \"Manager\".',
                   type: 'string',
                 },
               },
@@ -165,7 +165,7 @@ const contacts: SchemaObject = {
                 type: 'object',
                 properties: {
                   phone: {
-                    description: 'Formatted phone number',
+                    description: 'Formatted phone number. Example: \"+5521999998888\".',
                     type: 'string',
                   },
                   type: {
@@ -194,7 +194,7 @@ const contacts: SchemaObject = {
                 type: 'object',
                 properties: {
                   url: {
-                    description: 'URL',
+                    description: 'URL. Example: <a href="https://www.zenvia.com" target="_blank">\"https://www.zenvia.com\"</a>.',
                     type: 'string',
                   },
                   type: {
