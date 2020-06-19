@@ -10,7 +10,7 @@ const text: SchemaObject = {
     type: 'object',
     properties: {
       text: {
-        description: 'Text to be sent. Any text without line break or special characters will be valid. Example: \"This is a text\".',
+        description: 'Text to be sent. Example: \"This is a text\".',
         type: 'string',
       },
       payload: {
