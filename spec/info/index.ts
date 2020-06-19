@@ -18,7 +18,7 @@ const info: InfoObject = {
     url:  'https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE.md',
   },
   'x-logo': {
-    url: 'https://zenvia.github.io/zenvia-openapi-spec/zenapi.png',
+    url: 'https://zenvia.github.io/zenvia-openapi-spec/assets/zenapi.png',
   },
 };
 

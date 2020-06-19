@@ -6,9 +6,9 @@ script:
   - npm test
   - npm run build
 deploy:
-  provider: pages
+  provider: script
   skip_cleanup: true
-  github_token: $GH_TOKEN
-  local_dir: web_deploy
+  script: bash scripts/gh-pages-deploy.sh
   on:
-    branch: master
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^(v[0-9]+(-beta)?|master)$
