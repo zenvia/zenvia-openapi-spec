@@ -1,3 +1,24 @@
+## About Channels
+
+Sending messages through channels is quite similar, with a few differences between them.
+
+### SMS
+
+//TODO perguntar se sugerem um texto ao menos para introduzir sobre SMS.
+The SMS channel can be used after your activation on Zenvia platform.
+
+### WhatsApp
+
+The WhatsApp channel can be used after your activation on Zenvia platform.
+
+To activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.
+
+**Get in touch with Zenvia consultants to start your account creation.**
+
+### Facebook
+
+The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
+
 ## Message content types
 WhatsApp support a few types of contents, which we categorize into to groups: standard contents, and notification contents.
 <br><br>
@@ -32,3 +53,29 @@ Template contents have a fixed text content, with a few variables placed where n
 
 ##### Submitting a template content for approval
 If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
+
+## Message sender and recipient
+
+When you send some message for one contact using SMS, WhatsApp or Facebook channel:
+
+* Recipient:
+  * SMS: is the phone number of contact
+  * WhatsApp: is the phone number of contact
+  * Facebook: is the user id on your page (PSID - page scoped id)
+* Sender:
+  * SMS: is the SMS sender id
+  * WhatsApp: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+  * Facebook: is your page id
+
+When you receive a message from one contact, the sender and recipient is inverted:
+
+* Recipient:
+  * SMS: is the SMS sender id
+  * WhatsApp: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+  * Facebook: is your page id
+* Sender:
+  * SMS: is the phone number of contact
+  * WhatsApp: is the phone number of contact
+  * Facebook: is the user id on your page (PSID - page scoped id)
+
+In API the sender is the field `from` and the receiver is the field `to` of message object.

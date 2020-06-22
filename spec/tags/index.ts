@@ -10,7 +10,7 @@ const messageReportDescription = rawLoad(__dirname, './message-report.md');
 const flowReportDescription = rawLoad(__dirname, './flow-report.md');
 
 const tags: TagObject[] = [{
-  name: 'Content types',
+  name: 'Messaging',
   description: contentTypesDescription,
 }, {
   name: 'WhatsApp',
