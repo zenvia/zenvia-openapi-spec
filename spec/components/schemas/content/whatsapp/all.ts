@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
-import { ref as fileRef } from './file';
+import { ref as fileRef } from '../file';
 import { ref as templateRef } from '../template';
 import { ref as contactsRef } from '../contacts';
 import { ref as locationRef } from '../location';
