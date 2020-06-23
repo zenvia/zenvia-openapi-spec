@@ -16,7 +16,7 @@ This kind of message content may only be sent as a reply to a message sent by th
 ### Text content
 This type of content is the most used type of content, and its composed of a plain text.
 
-<SchemaDefinition schemaRef="#/components/schemas/content.contentTypes.text" />
+<SchemaDefinition schemaRef="#/components/schemas/content.text" />
 
 ### File content
 This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
@@ -24,13 +24,18 @@ This is used to send a file to the user. The file will be presented to the user 
 * Video
 * Audio
 * Document
-<br><br>
+
+<SchemaDefinition schemaRef="#/components/schemas/content.file" />
 
 ### Contacts content
 Use this type of content to send contacts information to the user.
 
+<SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
 ### Location content
 This content is used to send location messages representing a point on the map to the user.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.location" />
 
 ## Notification contents
 These types of contents are special, because they are allowed to be sent without any user interaction and also even if the last user message was sent more than 24 hours ago.
@@ -39,6 +44,8 @@ However, it is not allowed to send these these types of contents without some ki
 
 ### Template content
 Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.template" />
 
 #### Submitting a template content for approval
 If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
