@@ -2,7 +2,7 @@ The SMS channel can be used after your activation on Zenvia platform.
 
 ## Message sender and recipient
 
-When you send some message for one contact using WhatsApp channel:
+When you send some message for one contact using SMS channel:
 
 * Recipient: is the phone number of contact
 * Sender: is the SMS sender id
