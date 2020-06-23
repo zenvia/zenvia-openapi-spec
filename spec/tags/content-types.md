@@ -1,5 +1,5 @@
 ## Message content types
-WhatsApp support a few types of contents, which we categorize into to groups: standard contents, and notification contents.
+The supported types of contents are categorized into standard and notification contents.
 <br><br>
 
 ### Standard contents
@@ -32,3 +32,13 @@ Template contents have a fixed text content, with a few variables placed where n
 
 ##### Submitting a template content for approval
 If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
+
+## Supported Channels
+
+| Content Type | SMS | Facebook | WhatsApp |
+|---|:---:|:---:|:---:|
+| text | &#10004; | &#10004; | &#10004; |
+| file | &#10005; | &#10004; | &#10004; |
+| contacts | &#10005; | &#10005; | &#10004; |
+| location | &#10005; | &#10005; | &#10004; |
+| template | &#10005; | &#10005; | &#10004; |
