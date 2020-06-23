@@ -1,6 +1,6 @@
 The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
 
-## Message sender and recipient
+## Facebook sender and recipient
 
 When you send some message for one contact using Facebook channel:
 

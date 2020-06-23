@@ -21,7 +21,7 @@ Supported content types and sizes:
 | video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |
 
 
-## Message sender and recipient
+## WhatsApp sender and recipient
 
 When you send some message for one contact using WhatsApp channel:
 

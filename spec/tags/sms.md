@@ -1,6 +1,6 @@
 The SMS channel can be used after your activation on Zenvia platform.
 
-## Message sender and recipient
+## SMS sender and recipient
 
 When you send some message for one contact using SMS channel:
 
