@@ -9,6 +9,10 @@ const contacts: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'contacts',
+      },
       contacts: {
         description: 'A list of contacts',
         type: 'array',
@@ -243,6 +247,7 @@ const contacts: SchemaObject = {
       },
     },
     required: [
+      'type',
       'contacts',
     ],
   }],

@@ -9,6 +9,10 @@ const location: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'location',
+      },
       longitude: {
         type: 'number',
         description: 'Longitude of the location',
@@ -36,6 +40,7 @@ const location: SchemaObject = {
       },
     },
     required: [
+      'type',
       'longitude',
       'latitude',
     ],

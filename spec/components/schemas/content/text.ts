@@ -9,17 +9,23 @@ const text: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'text',
+      },
       text: {
         description: 'Text to be sent',
         type: 'string',
         example: 'This is a text',
       },
       payload: {
-        description: 'Payload of selected button',
+        description: 'Payload of selected button.',
         type: 'string',
+        readOnly: true,
       },
     },
     required: [
+      'type',
       'text',
     ],
   }],

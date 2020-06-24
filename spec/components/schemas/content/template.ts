@@ -9,6 +9,10 @@ const template: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'template',
+      },
       templateId: {
         type: 'string',
         description: 'The template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.',
@@ -30,6 +34,7 @@ const template: SchemaObject = {
       },
     },
     required: [
+      'type',
       'templateId',
       'fields',
     ],

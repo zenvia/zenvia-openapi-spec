@@ -9,6 +9,10 @@ const file: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'file',
+      },
       fileUrl: {
         type: 'string',
         description: 'The URL of the file to be sent.',
@@ -26,6 +30,7 @@ const file: SchemaObject = {
       },
     },
     required: [
+      'type',
       'fileUrl',
     ],
   }],
