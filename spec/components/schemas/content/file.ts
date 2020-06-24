@@ -12,14 +12,17 @@ const file: SchemaObject = {
       fileUrl: {
         type: 'string',
         description: 'The URL of the file to be sent.',
+        example: 'https://example.com/document.pdf',
       },
       fileMimeType: {
         type: 'string',
         description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations)',
+        example: 'application/pdf',
       },
       fileCaption: {
         type: 'string',
         description: 'Some description for the file. Only applicable to the [WhatsApp channel](#tag/WhatsApp).',
+        example: 'Some caption',
       },
     },
     required: [
