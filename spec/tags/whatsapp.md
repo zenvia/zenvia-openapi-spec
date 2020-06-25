@@ -9,7 +9,9 @@ To activate WhatsApp you a need a registered number on WhatsApp Business API and
 
 The WhatsApp API has some limitations:
 
-* To start a conversation with someone you need a special type of message ([a template message](#notification-contents)), which needs an approval before being used.
+* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.
+
+* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.
 
 Supported content types and sizes:
 
@@ -19,7 +21,6 @@ Supported content types and sizes:
 | image | image/jpeg<br>image/png | 5 MB |
 | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |
 | video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |
-
 
 ## WhatsApp sender and recipient
 
