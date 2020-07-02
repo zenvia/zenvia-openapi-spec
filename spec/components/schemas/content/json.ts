@@ -9,9 +9,14 @@ const file: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'json',
+      },
       payload: { type: 'object' },
     },
     required: [
+      'type',
       'payload',
     ],
   }],
