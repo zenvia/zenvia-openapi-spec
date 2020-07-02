@@ -706,6 +706,7 @@ components:
       properties:
         type:
           title: Content type
+          description: Content type descriminator
           type: string
       required:
         - type
@@ -715,6 +716,9 @@ components:
         - $ref: '#/components/schemas/content.base'
         - type: object
           properties:
+            type:
+              type: string
+              example: contacts
             contacts:
               description: A list of contacts
               type: array
@@ -730,33 +734,41 @@ components:
                         street:
                           description: Street number and name
                           type: string
+                          example: 'Street Address, 123'
                         city:
                           description: City name
                           type: string
+                          example: City name
                         state:
                           description: State abbreviation
                           type: string
+                          example: SP
                         zip:
                           description: ZIP code
                           type: string
+                          example: 01000-000
                         country:
                           description: Full country name
                           type: string
+                          example: Brazil
                         countryCode:
                           description: Two-letter country abbreviation
                           type: string
+                          example: BR
                         type:
                           description: The type of the address
                           type: string
                           enum:
                             - HOME
                             - WORK
+                          example: WORK
                     minItems: 0
                   birthday:
                     description: The birthday of the contact
                     type: string
+                    example: 11/10/1980
                   contactImage:
-                    description: Base64-encoded image
+                    description: Base64-encoded image. Its value has to be a string based on the Base64 Data Encodings specification (RFC 4648).
                     type: string
                   emails:
                     description: A list of e-mails
@@ -767,12 +779,14 @@ components:
                         email:
                           description: E-mail address
                           type: string
+                          example: my-email@email-domain.com
                         type:
                           description: The type of e-mail
                           type: string
                           enum:
                             - HOME
                             - WORK
+                          example: HOME
                     minItems: 0
                   ims:
                     description: A list of messaging contact information
@@ -783,9 +797,11 @@ components:
                         service:
                           description: Instant messaging service name
                           type: string
+                          example: This is a messaging service
                         userId:
                           description: User identifier in this instant messaging service
                           type: string
+                          example: johnsmith
                     minItems: 0
                   name:
                     description: Full contact name
@@ -794,21 +810,27 @@ components:
                       formattedName:
                         description: Full name as it normally appears
                         type: string
+                        example: John Megan Smith
                       firstName:
                         description: First name
                         type: string
+                        example: John
                       lastName:
                         description: Last name
                         type: string
+                        example: Smith
                       middleName:
                         description: Middle name
                         type: string
+                        example: Megan
                       suffix:
                         description: Name suffix
                         type: string
+                        example: PhD
                       prefix:
                         description: Name preffix
                         type: string
+                        example: Mr.
                     required:
                       - formattedName
                       - firstName
@@ -820,12 +842,15 @@ components:
                       company:
                         description: Name of the contact's company
                         type: string
+                        example: Ms. Sara
                       department:
                         description: Name of the contact's department
                         type: string
+                        example: Sales
                       title:
                         description: Contact's business title
                         type: string
+                        example: Manager
                   phones:
                     description: A list of contact phone numbers
                     type: array
@@ -835,6 +860,7 @@ components:
                         phone:
                           description: Formatted phone number
                           type: string
+                          example: '+5521999998888'
                         type:
                           description: The type of the phone number
                           type: string
@@ -844,6 +870,7 @@ components:
                             - IPHONE
                             - HOME
                             - WORK
+                          example: CELL
                         waId:
                           description: 'WhatsApp ID _(supported channels: WhatsApp)_'
                           type: string
@@ -857,27 +884,58 @@ components:
                         url:
                           description: URL
                           type: string
+                          example: 'https://www.zenvia.com'
                         type:
                           description: The type of the phone number
                           type: string
                           enum:
                             - HOME
                             - WORK
+                          example: WORK
                     minItems: 0
                 required:
                   - name
               minItems: 1
           required:
+            - type
             - contacts
+    content.file:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: file
+            fileUrl:
+              type: string
+              description: The URL of the file to be sent.
+              example: 'https://example.com/document.pdf'
+            fileMimeType:
+              type: string
+              description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations)'
+              example: application/pdf
+            fileCaption:
+              type: string
+              description: 'Some description for the file. Only applicable to the [WhatsApp channel](#tag/WhatsApp).'
+              example: Some caption
+          required:
+            - type
+            - fileUrl
     content.json:
       type: object
       allOf:
         - $ref: '#/components/schemas/content.base'
         - type: object
           properties:
+            type:
+              type: string
+              example: json
             payload:
               type: object
           required:
+            - type
             - payload
     content.location:
       type: object
@@ -885,22 +943,31 @@ components:
         - $ref: '#/components/schemas/content.base'
         - type: object
           properties:
+            type:
+              type: string
+              example: location
             longitude:
               type: number
               description: Longitude of the location
+              example: -122.425332
             latitude:
               type: number
               description: Latitude of the location
+              example: 37.758056
             name:
               type: string
               description: Name of the location
+              example: Home
             address:
               type: string
               description: Address of the location. Only displayed if name is present.
+              example: Home Address
             url:
               type: string
               description: 'URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_'
+              example: 'https://www.zenvia.com'
           required:
+            - type
             - longitude
             - latitude
     content.template:
@@ -909,9 +976,13 @@ components:
         - $ref: '#/components/schemas/content.base'
         - type: object
           properties:
+            type:
+              type: string
+              example: template
             templateId:
               type: string
               description: 'The template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.'
+              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             fields:
               type: object
               description: The available fields to be used in this template.
@@ -919,7 +990,11 @@ components:
                 field:
                   type: string
                   description: Message that will be replaced on field
+                  example:
+                    user: John Smith
+                    protocol: '34534252'
           required:
+            - type
             - templateId
             - fields
     content.text:
@@ -928,38 +1003,29 @@ components:
         - $ref: '#/components/schemas/content.base'
         - type: object
           properties:
+            type:
+              type: string
+              example: text
             text:
               description: Text to be sent
               type: string
+              example: This is a text
             payload:
-              description: Payload of selected button
+              description: Payload of selected button.
               type: string
+              readOnly: true
           required:
+            - type
             - text
     content.facebook.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
-        - $ref: '#/components/schemas/content.facebook.file'
+        - $ref: '#/components/schemas/content.file'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
-          file: '#/components/schemas/content.facebook.file'
-    content.facebook.file:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/content.base'
-        - type: object
-          properties:
-            fileUrl:
-              type: string
-              description: The URL of the file to be sent.
-            fileMimeType:
-              type: string
-              description: MIME type of the file to be sent.
-          required:
-            - fileUrl
-            - fileMimeType
+          file: '#/components/schemas/content.file'
     content.sms.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -970,7 +1036,7 @@ components:
     content.whatsapp.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
-        - $ref: '#/components/schemas/content.whatsapp.file'
+        - $ref: '#/components/schemas/content.file'
         - $ref: '#/components/schemas/content.template'
         - $ref: '#/components/schemas/content.contacts'
         - $ref: '#/components/schemas/content.location'
@@ -978,27 +1044,10 @@ components:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
-          file: '#/components/schemas/content.whatsapp.file'
+          file: '#/components/schemas/content.file'
           template: '#/components/schemas/content.template'
           contacts: '#/components/schemas/content.contacts'
           location: '#/components/schemas/content.location'
-    content.whatsapp.file:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/content.base'
-        - type: object
-          properties:
-            fileUrl:
-              type: string
-              description: The URL of the file to be sent.
-            fileMimeType:
-              type: string
-              description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. [See the supported contents and sizes.](#section/Limitations)'
-            fileCaption:
-              type: string
-              description: Some description for the file.
-          required:
-            - fileUrl
     error.base:
       title: Error Object
       description: This is a Error object model.
@@ -2054,8 +2103,70 @@ security:
   - JWT: []
   - TOKEN: []
 tags:
-  - name: WhatsApp
+  - name: Content types
     description: |
+      ## Supported Channels
+
+      Messaging can be handled through SMS, WhatsApp and Facebook channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+
+      | Content Type | SMS | Facebook | WhatsApp |
+      |---|:---:|:---:|:---:|
+      | text | &#10004; | &#10004; | &#10004; |
+      | file | &#10005; | &#10004; | &#10004; |
+      | contacts | &#10005; | &#10005; | &#10004; |
+      | location | &#10005; | &#10005; | &#10004; |
+      | template | &#10005; | &#10005; | &#10004; |
+
+      ## Text
+      This type of content is the most used type of content, and its composed of a plain text.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.text" />
+
+      ## File
+      This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
+      * Image
+      * Video
+      * Audio
+      * Document
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.file" />
+
+      ## Contacts
+      Use this type of content to send contacts information to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
+      ## Location
+      This content is used to send location messages representing a point on the map to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.location" />
+
+      ## Template
+      Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.template" />
+
+      ### Submitting a template content for approval
+      If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
+  - name: SMS
+    description: |-
+      The SMS channel can be used after your activation on Zenvia platform.
+
+      ## SMS sender and recipient
+
+      When you send some message for one contact using SMS channel:
+
+      * Recipient: is the phone number of contact
+      * Sender: is the SMS sender id
+
+      When you receive a message from one contact, the sender and recipient is inverted:
+
+      * Recipient: is the SMS sender id
+      * Sender: is the phone number of contact
+
+      In API the sender is the field `from` and the receiver is the field `to` of message object.
+  - name: WhatsApp
+    description: |-
       The WhatsApp channel can be used after your activation on Zenvia platform.
 
       To activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.
@@ -2067,7 +2178,9 @@ tags:
 
       The WhatsApp API has some limitations:
 
-      * To start a conversation with someone you need a special type of message ([a template message](#notification-contents)), which needs an approval before being used.
+      * To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.
+
+      * Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.
 
       Supported content types and sizes:
 
@@ -2078,8 +2191,7 @@ tags:
       | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |
       | video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |
 
-
-      ## Message sender and recipient
+      ## WhatsApp sender and recipient
 
       When you send some message for one contact using WhatsApp channel:
 
@@ -2092,47 +2204,11 @@ tags:
       * Sender: is the phone number of contact
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
-
-
-      ## Message content types
-      WhatsApp support a few types of contents, which we categorize into to groups: standard contents, and notification contents.
-      <br><br>
-
-      ### Standard contents
-      This kind of message content may only be sent as a reply to a message sent by the user. So these kind of message content cannot be sent to start a interaction with an user. And even as a reply, these kind of message contents can only be sent if the last message from the user was sent less than 24 hours ago.
-
-      #### Text content
-      This type of content is the most used type of content, and its composed of a plain text.
-
-      #### File content
-      This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
-      * Image
-      * Video
-      * Audio
-      * Document
-      <br><br>
-
-      #### Contacts content
-      Use this type of content to send contacts information to the user.
-
-      #### Location content
-      This content is used to send location messages representing a point on the map to the user.
-
-      ### Notification contents
-      These types of contents are special, because they are allowed to be sent without any user interaction and also even if the last user message was sent more than 24 hours ago.
-
-      However, it is not allowed to send these these types of contents without some kind of opt-in from the user. This is a business restriction, not a technical one.
-
-      #### Template content
-      Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
-
-      ##### Submitting a template content for approval
-      If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
   - name: Facebook
     description: |
       The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
 
-      ## Message sender and recipient
+      ## Facebook sender and recipient
 
       When you send some message for one contact using Facebook channel:
 
@@ -2231,6 +2307,7 @@ tags:
 x-tagGroups:
   - name: Messaging
     tags:
+      - Content types
       - SMS
       - WhatsApp
       - Facebook

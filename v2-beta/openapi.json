@@ -637,6 +637,7 @@
         "properties": {
           "type": {
             "title": "Content type",
+            "description": "Content type descriminator",
             "type": "string"
           }
         },
@@ -653,6 +654,10 @@
           {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "example": "contacts"
+              },
               "contacts": {
                 "description": "A list of contacts",
                 "type": "array",
@@ -667,27 +672,33 @@
                         "properties": {
                           "street": {
                             "description": "Street number and name",
-                            "type": "string"
+                            "type": "string",
+                            "example": "Street Address, 123"
                           },
                           "city": {
                             "description": "City name",
-                            "type": "string"
+                            "type": "string",
+                            "example": "City name"
                           },
                           "state": {
                             "description": "State abbreviation",
-                            "type": "string"
+                            "type": "string",
+                            "example": "SP"
                           },
                           "zip": {
                             "description": "ZIP code",
-                            "type": "string"
+                            "type": "string",
+                            "example": "01000-000"
                           },
                           "country": {
                             "description": "Full country name",
-                            "type": "string"
+                            "type": "string",
+                            "example": "Brazil"
                           },
                           "countryCode": {
                             "description": "Two-letter country abbreviation",
-                            "type": "string"
+                            "type": "string",
+                            "example": "BR"
                           },
                           "type": {
                             "description": "The type of the address",
@@ -695,7 +706,8 @@
                             "enum": [
                               "HOME",
                               "WORK"
-                            ]
+                            ],
+                            "example": "WORK"
                           }
                         }
                       },
@@ -703,10 +715,11 @@
                     },
                     "birthday": {
                       "description": "The birthday of the contact",
-                      "type": "string"
+                      "type": "string",
+                      "example": "11/10/1980"
                     },
                     "contactImage": {
-                      "description": "Base64-encoded image",
+                      "description": "Base64-encoded image. Its value has to be a string based on the Base64 Data Encodings specification (RFC 4648).",
                       "type": "string"
                     },
                     "emails": {
@@ -717,7 +730,8 @@
                         "properties": {
                           "email": {
                             "description": "E-mail address",
-                            "type": "string"
+                            "type": "string",
+                            "example": "my-email@email-domain.com"
                           },
                           "type": {
                             "description": "The type of e-mail",
@@ -725,7 +739,8 @@
                             "enum": [
                               "HOME",
                               "WORK"
-                            ]
+                            ],
+                            "example": "HOME"
                           }
                         }
                       },
@@ -739,11 +754,13 @@
                         "properties": {
                           "service": {
                             "description": "Instant messaging service name",
-                            "type": "string"
+                            "type": "string",
+                            "example": "This is a messaging service"
                           },
                           "userId": {
                             "description": "User identifier in this instant messaging service",
-                            "type": "string"
+                            "type": "string",
+                            "example": "johnsmith"
                           }
                         }
                       },
@@ -755,27 +772,33 @@
                       "properties": {
                         "formattedName": {
                           "description": "Full name as it normally appears",
-                          "type": "string"
+                          "type": "string",
+                          "example": "John Megan Smith"
                         },
                         "firstName": {
                           "description": "First name",
-                          "type": "string"
+                          "type": "string",
+                          "example": "John"
                         },
                         "lastName": {
                           "description": "Last name",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Smith"
                         },
                         "middleName": {
                           "description": "Middle name",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Megan"
                         },
                         "suffix": {
                           "description": "Name suffix",
-                          "type": "string"
+                          "type": "string",
+                          "example": "PhD"
                         },
                         "prefix": {
                           "description": "Name preffix",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Mr."
                         }
                       },
                       "required": [
@@ -790,15 +813,18 @@
                       "properties": {
                         "company": {
                           "description": "Name of the contact's company",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Ms. Sara"
                         },
                         "department": {
                           "description": "Name of the contact's department",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Sales"
                         },
                         "title": {
                           "description": "Contact's business title",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Manager"
                         }
                       }
                     },
@@ -810,7 +836,8 @@
                         "properties": {
                           "phone": {
                             "description": "Formatted phone number",
-                            "type": "string"
+                            "type": "string",
+                            "example": "+5521999998888"
                           },
                           "type": {
                             "description": "The type of the phone number",
@@ -821,7 +848,8 @@
                               "IPHONE",
                               "HOME",
                               "WORK"
-                            ]
+                            ],
+                            "example": "CELL"
                           },
                           "waId": {
                             "description": "WhatsApp ID _(supported channels: WhatsApp)_",
@@ -839,7 +867,8 @@
                         "properties": {
                           "url": {
                             "description": "URL",
-                            "type": "string"
+                            "type": "string",
+                            "example": "https://www.zenvia.com"
                           },
                           "type": {
                             "description": "The type of the phone number",
@@ -847,7 +876,8 @@
                             "enum": [
                               "HOME",
                               "WORK"
-                            ]
+                            ],
+                            "example": "WORK"
                           }
                         }
                       },
@@ -862,7 +892,44 @@
               }
             },
             "required": [
+              "type",
               "contacts"
+            ]
+          }
+        ]
+      },
+      "content.file": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "file"
+              },
+              "fileUrl": {
+                "type": "string",
+                "description": "The URL of the file to be sent.",
+                "example": "https://example.com/document.pdf"
+              },
+              "fileMimeType": {
+                "type": "string",
+                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see the [supported contents and sizes.](#section/Limitations)",
+                "example": "application/pdf"
+              },
+              "fileCaption": {
+                "type": "string",
+                "description": "Some description for the file. Only applicable to the [WhatsApp channel](#tag/WhatsApp).",
+                "example": "Some caption"
+              }
+            },
+            "required": [
+              "type",
+              "fileUrl"
             ]
           }
         ]
@@ -876,11 +943,16 @@
           {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "example": "json"
+              },
               "payload": {
                 "type": "object"
               }
             },
             "required": [
+              "type",
               "payload"
             ]
           }
@@ -895,28 +967,38 @@
           {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "example": "location"
+              },
               "longitude": {
                 "type": "number",
-                "description": "Longitude of the location"
+                "description": "Longitude of the location",
+                "example": -122.425332
               },
               "latitude": {
                 "type": "number",
-                "description": "Latitude of the location"
+                "description": "Latitude of the location",
+                "example": 37.758056
               },
               "name": {
                 "type": "string",
-                "description": "Name of the location"
+                "description": "Name of the location",
+                "example": "Home"
               },
               "address": {
                 "type": "string",
-                "description": "Address of the location. Only displayed if name is present."
+                "description": "Address of the location. Only displayed if name is present.",
+                "example": "Home Address"
               },
               "url": {
                 "type": "string",
-                "description": "URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_"
+                "description": "URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_",
+                "example": "https://www.zenvia.com"
               }
             },
             "required": [
+              "type",
               "longitude",
               "latitude"
             ]
@@ -932,9 +1014,14 @@
           {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "example": "template"
+              },
               "templateId": {
                 "type": "string",
-                "description": "The template identifier. Click <a href=\"https://app.zenvia.com/home/templates\" target=\"_blank\">here</a> to go to the template page."
+                "description": "The template identifier. Click <a href=\"https://app.zenvia.com/home/templates\" target=\"_blank\">here</a> to go to the template page.",
+                "example": "c2c3e42d-6fb7-4ad6-897a-dd7613469f58"
               },
               "fields": {
                 "type": "object",
@@ -942,12 +1029,17 @@
                 "properties": {
                   "field": {
                     "type": "string",
-                    "description": "Message that will be replaced on field"
+                    "description": "Message that will be replaced on field",
+                    "example": {
+                      "user": "John Smith",
+                      "protocol": "34534252"
+                    }
                   }
                 }
               }
             },
             "required": [
+              "type",
               "templateId",
               "fields"
             ]
@@ -963,16 +1055,23 @@
           {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "example": "text"
+              },
               "text": {
                 "description": "Text to be sent",
-                "type": "string"
+                "type": "string",
+                "example": "This is a text"
               },
               "payload": {
-                "description": "Payload of selected button",
-                "type": "string"
+                "description": "Payload of selected button.",
+                "type": "string",
+                "readOnly": true
               }
             },
             "required": [
+              "type",
               "text"
             ]
           }
@@ -984,41 +1083,16 @@
             "$ref": "#/components/schemas/content.text"
           },
           {
-            "$ref": "#/components/schemas/content.facebook.file"
+            "$ref": "#/components/schemas/content.file"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
-            "file": "#/components/schemas/content.facebook.file"
+            "file": "#/components/schemas/content.file"
           }
         }
-      },
-      "content.facebook.file": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/content.base"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "fileUrl": {
-                "type": "string",
-                "description": "The URL of the file to be sent."
-              },
-              "fileMimeType": {
-                "type": "string",
-                "description": "MIME type of the file to be sent."
-              }
-            },
-            "required": [
-              "fileUrl",
-              "fileMimeType"
-            ]
-          }
-        ]
       },
       "content.sms.all": {
         "oneOf": [
@@ -1039,7 +1113,7 @@
             "$ref": "#/components/schemas/content.text"
           },
           {
-            "$ref": "#/components/schemas/content.whatsapp.file"
+            "$ref": "#/components/schemas/content.file"
           },
           {
             "$ref": "#/components/schemas/content.template"
@@ -1055,40 +1129,12 @@
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
-            "file": "#/components/schemas/content.whatsapp.file",
+            "file": "#/components/schemas/content.file",
             "template": "#/components/schemas/content.template",
             "contacts": "#/components/schemas/content.contacts",
             "location": "#/components/schemas/content.location"
           }
         }
-      },
-      "content.whatsapp.file": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/content.base"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "fileUrl": {
-                "type": "string",
-                "description": "The URL of the file to be sent."
-              },
-              "fileMimeType": {
-                "type": "string",
-                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. [See the supported contents and sizes.](#section/Limitations)"
-              },
-              "fileCaption": {
-                "type": "string",
-                "description": "Some description for the file."
-              }
-            },
-            "required": [
-              "fileUrl"
-            ]
-          }
-        ]
       },
       "error.base": {
         "title": "Error Object",
@@ -2554,12 +2600,20 @@
   ],
   "tags": [
     {
+      "name": "Content types",
+      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp and Facebook channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS | Facebook | WhatsApp |\n|---|:---:|:---:|:---:|\n| text | &#10004; | &#10004; | &#10004; |\n| file | &#10005; | &#10004; | &#10004; |\n| contacts | &#10005; | &#10005; | &#10004; |\n| location | &#10005; | &#10005; | &#10004; |\n| template | &#10005; | &#10005; | &#10004; |\n\n## Text\nThis type of content is the most used type of content, and its composed of a plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" />\n\n## File\nThis is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Contacts\nUse this type of content to send contacts information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis content is used to send location messages representing a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nTemplate contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.\n"
+    },
+    {
+      "name": "SMS",
+      "description": "The SMS channel can be used after your activation on Zenvia platform.\n\n## SMS sender and recipient\n\nWhen you send some message for one contact using SMS channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the SMS sender id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS sender id\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+    },
+    {
       "name": "WhatsApp",
-      "description": "The WhatsApp channel can be used after your activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#notification-contents)), which needs an approval before being used.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n\n## Message sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n\n\n## Message content types\nWhatsApp support a few types of contents, which we categorize into to groups: standard contents, and notification contents.\n<br><br>\n\n### Standard contents\nThis kind of message content may only be sent as a reply to a message sent by the user. So these kind of message content cannot be sent to start a interaction with an user. And even as a reply, these kind of message contents can only be sent if the last message from the user was sent less than 24 hours ago.\n\n#### Text content\nThis type of content is the most used type of content, and its composed of a plain text.\n\n#### File content\nThis is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n<br><br>\n\n#### Contacts content\nUse this type of content to send contacts information to the user.\n\n#### Location content\nThis content is used to send location messages representing a point on the map to the user.\n\n### Notification contents\nThese types of contents are special, because they are allowed to be sent without any user interaction and also even if the last user message was sent more than 24 hours ago.\n\nHowever, it is not allowed to send these these types of contents without some kind of opt-in from the user. This is a business restriction, not a technical one.\n\n#### Template content\nTemplate contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.\n\n##### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.\n"
+      "description": "The WhatsApp channel can be used after your activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
     },
     {
       "name": "Facebook",
-      "description": "The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.\n\n## Message sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
+      "description": "The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
     },
     {
       "name": "Subscriptions",
@@ -2582,6 +2636,7 @@
     {
       "name": "Messaging",
       "tags": [
+        "Content types",
         "SMS",
         "WhatsApp",
         "Facebook"
