@@ -25,8 +25,13 @@ const file: SchemaObject = {
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Only applicable to the [WhatsApp channel](#tag/WhatsApp).',
+        description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) images and videos.',
         example: 'Some caption',
+      },
+      fileName: {
+        type: 'string',
+        description: 'The name of the file. Only applicabl to [WhatsApp channel](#tag/WhatsApp) documents.',
+        example: 'document.pdf',
       },
     },
     required: [
