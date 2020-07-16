@@ -1,0 +1,32 @@
+{
+  "name": "post new comment to template",
+  "request": {
+    "method": "POST",
+    "path": "/templates/ID/comments",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "author": "Jhon",
+      "role": "REQUESTER",
+      "text": "comment text"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "comment id",
+      "author": "Jhon",
+      "role": "REQUESTER",
+      "text": "comment text",
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}

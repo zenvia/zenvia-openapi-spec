@@ -1,0 +1,39 @@
+{
+  "name": "update one subscription by id",
+  "request": {
+    "method": "PATCH",
+    "path": "/subscriptions/ID",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "webhook": {
+        "url": "https://myhost.com/webhook/path/new"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "subscription id",
+      "status": "ACTIVE",
+      "eventType": "MESSAGE",
+      "version": "v1",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path/new"
+      },
+      "criteria": {
+        "channel": "whatsapp",
+        "direction": "IN"
+      },
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T19:00:00.000Z"
+    }
+  }
+}

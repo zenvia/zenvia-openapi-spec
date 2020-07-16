@@ -1,0 +1,120 @@
+{
+  "name": "send contacts content with all possible fields",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "contacts",
+        "contacts": [{
+          "addresses": [{
+            "street": "Street Address, 123",
+            "city": "City name",
+            "state": "SP",
+            "zip": "01000-000",
+            "country": "Brazil",
+            "countryCode": "BR",
+            "type": "WORK"
+          }],
+          "birthday": "11/10/1980",
+          "contactImage": "string",
+          "emails": [{
+            "email": "my-email@email-domain.com",
+            "type": "HOME"
+          }],
+          "ims": [{
+            "service": "This is a messaging service",
+            "userId": "johnsmith"
+          }],
+          "name": {
+            "formattedName": "John Megan Smith",
+            "firstName": "John",
+            "lastName": "Smith",
+            "middleName": "Megan",
+            "suffix": "PhD",
+            "prefix": "Mr."
+          },
+          "org": {
+            "company": "Ms. Sara",
+            "department": "Sales",
+            "title": "Manager"
+          },
+          "phones": [{
+            "phone": "+5521999998888",
+            "type": "CELL",
+            "waId": "string"
+          }],
+          "urls": [{
+            "url": "https://www.zenvia.com",
+            "type": "WORK"
+          }]
+        }]
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "contacts",
+        "contacts": [{
+          "addresses": [{
+            "street": "Street Address, 123",
+            "city": "City name",
+            "state": "SP",
+            "zip": "01000-000",
+            "country": "Brazil",
+            "countryCode": "BR",
+            "type": "WORK"
+          }],
+          "birthday": "11/10/1980",
+          "contactImage": "string",
+          "emails": [{
+            "email": "my-email@email-domain.com",
+            "type": "HOME"
+          }],
+          "ims": [{
+            "service": "This is a messaging service",
+            "userId": "johnsmith"
+          }],
+          "name": {
+            "formattedName": "John Megan Smith",
+            "firstName": "John",
+            "lastName": "Smith",
+            "middleName": "Megan",
+            "suffix": "PhD",
+            "prefix": "Mr."
+          },
+          "org": {
+            "company": "Ms. Sara",
+            "department": "Sales",
+            "title": "Manager"
+          },
+          "phones": [{
+            "phone": "+5521999998888",
+            "type": "CELL",
+            "waId": "string"
+          }],
+          "urls": [{
+            "url": "https://www.zenvia.com",
+            "type": "WORK"
+          }]
+        }]
+      }]
+    }
+  }
+}
