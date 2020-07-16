@@ -21,15 +21,9 @@ const template: SchemaObject = {
       fields: {
         type: 'object',
         description: 'The available fields to be used in this template.',
-        properties: {
-          field: {
-            type: 'string',
-            description: 'Message that will be replaced on field',
-            example: {
-              user: 'John Smith',
-              protocol: '34534252',
-            },
-          },
+        example: {
+          user: 'John Smith',
+          protocol: '34534252',
         },
       },
     },
