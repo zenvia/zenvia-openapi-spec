@@ -1,0 +1,17 @@
+{
+  "name": "delete one comment from template by id",
+  "request": {
+    "method": "DELETE",
+    "path": "/templates/TEMPLATE_ID/comments/COMMENT_ID",
+    "query": {
+    },
+    "headers": {
+      "x-api-token": "some-api-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+    }
+  }
+}

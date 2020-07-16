@@ -1,0 +1,17 @@
+{
+  "name": "delete one template by id",
+  "request": {
+    "method": "DELETE",
+    "path": "/templates/ID",
+    "query": {
+    },
+    "headers": {
+      "x-api-token": "some-api-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+    }
+  }
+}

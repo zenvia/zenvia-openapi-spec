@@ -1,0 +1,44 @@
+{
+  "name": "send location content with all fields",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "location",
+        "latitude": -23.556974,
+        "longitude": -46.661290,
+        "name": "Zenvia",
+        "address": "Av. Paulista 2300, São Paulo - SP",
+        "url": "https://www.zenvia.com"
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "location",
+        "latitude": -23.556974,
+        "longitude": -46.661290,
+        "name": "Zenvia",
+        "address": "Av. Paulista 2300, São Paulo - SP",
+        "url": "https://www.zenvia.com"
+      }]
+    }
+  }
+}
