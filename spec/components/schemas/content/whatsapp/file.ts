@@ -9,20 +9,33 @@ const file: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      type: {
+        type: 'string',
+        example: 'file',
+      },
       fileUrl: {
         type: 'string',
         description: 'The URL of the file to be sent.',
+        example: 'https://example.com/document.pdf',
       },
       fileMimeType: {
         type: 'string',
-        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. [See the supported contents and sizes.](#section/Limitations)',
+        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. See [supported contents and sizes.](#section/Limitations)',
+        example: 'application/pdf',
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file.',
+        description: 'Some description for the file. Only applicable to images and videos.',
+        example: 'Some caption',
+      },
+      fileName: {
+        type: 'string',
+        description: 'The name of the file. Only applicable to documents.',
+        example: 'document.pdf',
       },
     },
     required: [
+      'type',
       'fileUrl',
     ],
   }],
