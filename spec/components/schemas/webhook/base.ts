@@ -31,7 +31,7 @@ const subscriptionBase: SchemaObject = {
       $ref: statusRef,
     },
     version: {
-      title: 'Version of subscription',
+      title: 'Version of wehbook',
       type: 'string',
       enum: [
         'v1',

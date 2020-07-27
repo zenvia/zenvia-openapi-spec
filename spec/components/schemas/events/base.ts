@@ -5,11 +5,11 @@ const eventBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Event Id',
+      title: 'Event ID',
       type: 'string',
     },
     timestamp: {
-      title: 'Event Timestamp',
+      title: 'Event timestamp',
       type: 'string',
       format: 'date-time',
     },
@@ -22,7 +22,7 @@ const eventBase: SchemaObject = {
       ],
     },
     subscriptionId: {
-      title: 'Subscription Id',
+      title: 'Webhook ID',
       type: 'string',
     },
   },

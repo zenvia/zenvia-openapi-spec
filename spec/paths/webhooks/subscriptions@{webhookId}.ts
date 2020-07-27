@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
-import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
-import { ref as partialSubscriptionSchemaRef } from '../../components/schemas/subscription/partial-subscription';
-import { ref as subscriptionIdRef } from '../../components/parameters/subscriptionId';
+import { ref as webhookSchemaRef } from '../../components/schemas/webhook/all';
+import { ref as partialWebhookSchemaRef } from '../../components/schemas/webhook/partial-webhook';
+import { ref as webhookIdRef } from '../../components/parameters/webhookId';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const getOperation: OperationObject = {
@@ -13,7 +13,7 @@ const getOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: subscriptionSchemaRef,
+            $ref: webhookSchemaRef,
           },
         },
       },
@@ -31,7 +31,7 @@ const updateOperation: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: partialSubscriptionSchemaRef,
+          $ref: partialWebhookSchemaRef,
         },
       },
     },
@@ -42,7 +42,7 @@ const updateOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: subscriptionSchemaRef,
+            $ref: webhookSchemaRef,
           },
         },
       },
@@ -71,7 +71,7 @@ const path: PathItemObject = {
   delete: deleteOperation,
   patch: updateOperation,
   parameters: [{
-    $ref: subscriptionIdRef,
+    $ref: webhookIdRef,
   }],
 };
 

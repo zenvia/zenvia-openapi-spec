@@ -21,7 +21,7 @@ const messageEvent: SchemaObject = {
         example: 'MESSAGE',
       },
       direction: {
-        title: 'Message Direction',
+        title: 'Message direction',
         type: 'string',
       },
       channel: {

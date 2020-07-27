@@ -4,7 +4,7 @@ import { ref as baseRef } from './base';
 import { ref as channelRef } from '../message/channel';
 import { createComponentRef } from '../../../../utils/ref';
 
-const subscription: SchemaObject = {
+const webhook: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
@@ -35,4 +35,4 @@ const subscription: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default subscription;
+export default webhook;
