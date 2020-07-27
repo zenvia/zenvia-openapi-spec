@@ -1,4 +1,4 @@
-Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
+Webhooks allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
 
 ## MESSAGE
 

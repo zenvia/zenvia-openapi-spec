@@ -2,10 +2,10 @@ import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../utils/ref';
 
 const subscriptionId: ParameterObject = {
-  name: 'subscriptionId',
+  name: 'webhookId',
   in: 'path',
   required: true,
-  description: 'the subscription identifier',
+  description: 'the webhook identifier',
   schema: {
     type: 'string',
   },

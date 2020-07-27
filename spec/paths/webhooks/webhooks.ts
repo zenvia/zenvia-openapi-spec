@@ -5,16 +5,16 @@ import {
   ResponseObject,
   ResponsesObject,
 } from 'openapi3-ts';
-import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
-import { ref as notificationCallbackRef } from '../../components/callbacks/subscription-event';
+import { ref as subscriptionSchemaRef } from '../../components/schemas/webhook/all';
+import { ref as notificationCallbackRef } from '../../components/callbacks/webhook-event';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
-  description: 'Create a new subscription',
-  tags: ['Subscriptions'],
+  description: 'Create a new webhook',
+  tags: ['Webhooks'],
   responses: {
     200: {
-      description: 'Created subscription',
+      description: 'Created webhook',
       content: {
         'application/json': {
           schema: {
@@ -44,11 +44,11 @@ const post: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List all subscriptions',
-  tags: ['Subscriptions'],
+  description: 'List all webhooks',
+  tags: ['Webhooks'],
   responses: {
     200: {
-      description: 'Subscription Object List',
+      description: 'Webhook Object List',
       content: {
         'application/json': {
           schema: {

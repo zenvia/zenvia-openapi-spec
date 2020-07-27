@@ -7,7 +7,7 @@ const subscriptionBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Subscription Id',
+      title: 'Webhook Id',
       type: 'string',
       readOnly: true,
     },

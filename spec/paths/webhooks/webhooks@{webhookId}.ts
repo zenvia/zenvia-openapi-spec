@@ -5,11 +5,11 @@ import { ref as subscriptionIdRef } from '../../components/parameters/subscripti
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const getOperation: OperationObject = {
-  description: 'Retrieve one subscription by id',
-  tags: ['Subscriptions'],
+  description: 'Retrieve one webhook by id',
+  tags: ['Webhooks'],
   responses: {
     200: {
-      description: 'Subscription Object',
+      description: 'Webhook Object',
       content: {
         'application/json': {
           schema: {
@@ -25,8 +25,8 @@ const getOperation: OperationObject = {
 };
 
 const updateOperation: OperationObject = {
-  description: 'Update one subscription by id',
-  tags: ['Subscriptions'],
+  description: 'Update one webhook by id',
+  tags: ['Webhooks'],
   requestBody: {
     content: {
       'application/json': {
@@ -38,7 +38,7 @@ const updateOperation: OperationObject = {
   },
   responses: {
     200: {
-      description: 'Subscription Object',
+      description: 'Webhook Object',
       content: {
         'application/json': {
           schema: {
@@ -54,8 +54,8 @@ const updateOperation: OperationObject = {
 };
 
 const deleteOperation: OperationObject = {
-  description: 'Delete one subscription by id',
-  tags: ['Subscriptions'],
+  description: 'Delete one webhook by id',
+  tags: ['Webhooks'],
   responses: {
     204: {
       description: 'No content',
