@@ -1,4 +1,4 @@
-The SMS channel can be used after your activation on Zenvia platform.
+The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
 ## SMS sender and recipient
 
