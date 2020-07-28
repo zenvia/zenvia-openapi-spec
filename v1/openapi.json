@@ -2315,6 +2315,7 @@
             "enum": [
               "MEDIA_DOCUMENT",
               "MEDIA_IMAGE",
+              "MEDIA_VIDEO",
               "TEXT_FIXED",
               "TEXT_TEMPLATE"
             ]
