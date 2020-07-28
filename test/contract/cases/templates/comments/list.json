@@ -1,0 +1,33 @@
+{
+  "name": "get all comment from template",
+  "request": {
+    "method": "GET",
+    "path": "/templates/ID/comments",
+    "query": {
+    },
+    "headers": {
+      "x-api-token": "some-api-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": [{
+      "id": "comment id 1",
+      "author": "Jhon",
+      "role": "REQUESTER",
+      "text": "comment text",
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }, {
+      "id": "comment id 2",
+      "author": "Reviewer Name",
+      "role": "REVIEWER",
+      "text": "comment text",
+      "createdAt": "2020-07-15T19:00:00.000Z",
+      "updatedAt": "2020-07-15T19:00:00.000Z"
+    }]
+  }
+}

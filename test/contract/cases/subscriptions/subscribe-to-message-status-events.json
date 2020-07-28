@@ -1,0 +1,41 @@
+{
+  "name": "subscribe to MESSAGE_STATUS events",
+  "request": {
+    "method": "POST",
+    "path": "/subscriptions",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "eventType": "MESSAGE_STATUS",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "criteria": {
+        "channel": "whatsapp"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "subscription id",
+      "status": "ACTIVE",
+      "eventType": "MESSAGE_STATUS",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "criteria": {
+        "channel": "whatsapp"
+      },
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}

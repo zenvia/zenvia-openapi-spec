@@ -1,0 +1,56 @@
+{
+  "name": "send contacts content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "contacts",
+        "contacts": [{
+          "name": {
+            "formattedName": "John Megan Smith",
+            "firstName": "John"
+          },
+          "phones": [{
+            "type": "CELL",
+            "phone": "+55 (11) 98888-0000",
+            "waId": "5511988880000"
+          }]
+        }]
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "contacts",
+        "contacts": [{
+          "name": {
+            "formattedName": "John Megan Smith",
+            "firstName": "John"
+          },
+          "phones": [{
+            "type": "CELL",
+            "phone": "+55 (11) 98888-0000",
+            "waId": "5511988880000"
+          }]
+        }]
+      }]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "subscribe to MESSAGE events",
+  "request": {
+    "method": "POST",
+    "path": "/subscriptions",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "eventType": "MESSAGE",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "criteria": {
+        "channel": "whatsapp",
+        "direction": "IN"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "subscription id",
+      "status": "ACTIVE",
+      "eventType": "MESSAGE",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "criteria": {
+        "channel": "whatsapp",
+        "direction": "IN"
+      },
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}
