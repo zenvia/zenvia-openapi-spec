@@ -11,7 +11,6 @@
     },
     "body": {
       "eventType": "MESSAGE",
-      "version": "v2",
       "webhook": {
         "url": "https://myhost.com/webhook/path"
       },
@@ -30,7 +29,6 @@
       "id": "subscription id",
       "status": "ACTIVE",
       "eventType": "MESSAGE",
-      "version": "v2",
       "webhook": {
         "url": "https://myhost.com/webhook/path"
       },

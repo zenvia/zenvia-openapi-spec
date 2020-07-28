@@ -18,7 +18,6 @@
       "id": "subscription id 1",
       "status": "ACTIVE",
       "eventType": "MESSAGE",
-      "version": "v1",
       "webhook": {
         "url": "https://myhost.com/webhook/path"
       },
