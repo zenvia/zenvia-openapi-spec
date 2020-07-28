@@ -2305,8 +2305,7 @@
         "description": "Template header",
         "type": "object",
         "required": [
-          "type",
-          "text"
+          "type"
         ],
         "properties": {
           "type": {
