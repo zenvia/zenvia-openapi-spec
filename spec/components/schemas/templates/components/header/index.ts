@@ -11,7 +11,7 @@ export const header: SchemaObject = {
       title: 'Header type',
       description: 'The header can have an image, document or text.',
       type: 'string',
-      enum: ['MEDIA_DOCUMENT', 'MEDIA_IMAGE', 'TEXT_FIXED', 'TEXT_TEMPLATE'],
+      enum: ['MEDIA_DOCUMENT', 'MEDIA_IMAGE', 'MEDIA_VIDEO', 'TEXT_FIXED', 'TEXT_TEMPLATE'],
     },
     text: {
       title: 'Header text',
