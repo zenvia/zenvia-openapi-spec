@@ -1,6 +1,6 @@
-The WhatsApp channel can be used after your activation on Zenvia platform.
+The WhatsApp channel may be used after its activation on Zenvia platform.
 
-To activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.
+To activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.
 
 **Get in touch with Zenvia consultants to start your account creation.**
 
