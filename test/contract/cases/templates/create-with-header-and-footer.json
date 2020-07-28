@@ -1,0 +1,60 @@
+{
+  "name": "create template with header and body",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "ACCOUNT_UPDATE",
+      "components": {
+        "header": {
+          "type": "MEDIA_DOCUMENT"
+        },
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "footer": {
+          "type": "TEXT_FIXED",
+          "text": "footer text"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "ACCOUNT_UPDATE",
+      "components": {
+        "header": {
+          "type": "MEDIA_DOCUMENT"
+        },
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "footer": {
+          "type": "TEXT_FIXED",
+          "text": "footer text"
+        }
+      }
+    }
+  }
+}

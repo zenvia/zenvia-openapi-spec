@@ -1,0 +1,17 @@
+{
+  "name": "delete one subscription by id",
+  "request": {
+    "method": "DELETE",
+    "path": "/subscriptions/ID",
+    "query": {
+    },
+    "headers": {
+      "x-api-token": "some-api-token"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+    }
+  }
+}

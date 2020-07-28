@@ -1,0 +1,50 @@
+{
+  "name": "get one template by id",
+  "request": {
+    "method": "GET",
+    "path": "/templates/ID",
+    "query": {
+    },
+    "headers": {
+      "x-api-token": "some-api-token"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "ACCOUNT_UPDATE",
+      "components": {
+        "header": {
+          "type": "TEXT_TEMPLATE",
+          "text": "header with {{variable}}"
+        },
+        "body": {
+          "type": "TEXT_TEMPLATE",
+          "text": "some text with {{variable}}"
+        }
+      },
+      "notificationEmail": "notification@mail.com",
+      "text": "header with {{variable}} some text with {{variable}}",
+      "fields": ["variable"],
+      "comments": [{
+        "id": "comment id",
+        "author": "Jhon",
+        "role": "REVIEWER",
+        "text": "review text",
+        "createdAt": "2020-07-16T18:00:00.000Z",
+        "updatedAt": "2020-07-16T18:00:00.000Z"
+      }],
+      "status": "APPROVED",
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}
