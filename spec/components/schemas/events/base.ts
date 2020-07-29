@@ -9,7 +9,7 @@ const eventBase: SchemaObject = {
       type: 'string',
     },
     timestamp: {
-      title: 'Event timestamp',
+      title: 'Event Timestamp',
       type: 'string',
       format: 'date-time',
     },
