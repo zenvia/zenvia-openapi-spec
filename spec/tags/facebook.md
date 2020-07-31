@@ -1,4 +1,4 @@
-The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
+The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
 ## Message sender and recipient
 
