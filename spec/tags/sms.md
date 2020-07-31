@@ -1,12 +1,11 @@
 The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
 ## ZenAPI vs SMS API
-This API allows you to use other channels beyond SMS.
+ZenAPI allows you to use multiple channels. However, if you are interested in just
+the SMS channel, you may access the old API, which for now, have more
+SMS features.
 
-However, if you are interested in just the SMS channel, or you need a feature still
-unavailable on this API, you may want to use the previous [SMS API](https://zenviasmsenus.docs.apiary.io/#).
-
-The SMS API is officially supported, but it *might* be discontinued one day.
+For more information about it, visit: [SMS API documentation](https://zenviasmsenus.docs.apiary.io/#).
 
 ## SMS sender and recipient
 When you send some message for one contact using SMS channel:
