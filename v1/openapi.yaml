@@ -2059,11 +2059,21 @@ security:
   - JWT: []
   - TOKEN: []
 tags:
+  - name: SMS
+    description: |
+      The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
+
+      ## ZenAPI vs SMS API
+      ZenAPI allows you to use multiple channels. However, if you are interested in just
+      the SMS channel, you may access the old API, which for now, have more
+      SMS features.
+
+      For more information about it, visit: [SMS API documentation](https://zenviasmsenus.docs.apiary.io/#).
   - name: WhatsApp
     description: |
-      The WhatsApp channel can be used after your activation on Zenvia platform.
+      The WhatsApp channel may be used after its activation on Zenvia platform.
 
-      To activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.
+      To activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.
 
       **Get in touch with Zenvia consultants to start your account creation.**
 
@@ -2135,7 +2145,7 @@ tags:
       If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
   - name: Facebook
     description: |
-      The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
+      The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
       ## Message sender and recipient
 
