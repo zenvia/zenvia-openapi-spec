@@ -35,3 +35,42 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *READ: "**The message has been read by the recipient**".*
 * *REJECTED: "**The message was rejected by the provider**".*
 * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
+
+
+## Webhook request error handling
+As described before, webhooks allow you to receive events in your application.
+
+However, if a webhook request fails, a retry procedure begins. This procedurece consists of the following rules:
+* There will be at least 30 seconds between each request attempt for the same event.
+* There will be at most 30 request attempts for the same event.
+
+This means a single event may be retried for around 15 minutes. After this the event will no longer be available.
+
+Event retries are handled separately from the initial request. This ensure webhooks without request fails are not penalized by webhooks with many request fails.
+<br/><br/>
+
+### Webhook (quality) status handling
+Multiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:
+* **ACTIVE**: This is the initial status for every webhook created.
+* **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.
+<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.
+<br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.
+* **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.
+Events no longer will be posted on webhooks with *INACTIVE* status.
+
+The rules which trigger status changes are the following:
+* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.
+* 500 consecutive request fails will result in demotion to *INACTIVE*.
+ * Responses slower than *1 second* also count as a fail and may result in status demotion.
+<br>Only slow responses on the initial request count as a fail.
+ * All connection timeouts count as fail and may result in status demotion.
+<br>The connection timeout is *8 seconds*.
+ * All response (read) timeouts count as fail and may result in status demotion.
+<br>The response timeout is *8 seconds*.
+* 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.
+ * Successful requests on retry atempts also count toward status promotion.
+ * Responses slower than *1 second* do not count either as a success or as a fail.
+* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically
+promote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.
+
+Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
