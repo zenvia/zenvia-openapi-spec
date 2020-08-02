@@ -36,6 +36,7 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *REJECTED: "**The message was rejected by the provider**".*
 * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
 
+
 ## Webhook request error handling
 As described before, webhooks allow you to receive events in your application.
 
