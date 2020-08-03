@@ -5,7 +5,7 @@ const eventBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Event ID',
+      title: 'Event Id',
       type: 'string',
     },
     timestamp: {
@@ -22,7 +22,7 @@ const eventBase: SchemaObject = {
       ],
     },
     subscriptionId: {
-      title: 'Subscription ID',
+      title: 'Subscription Id',
       type: 'string',
     },
   },

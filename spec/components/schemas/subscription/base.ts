@@ -7,7 +7,7 @@ const subscriptionBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Subscription ID',
+      title: 'Subscription Id',
       type: 'string',
       readOnly: true,
     },
