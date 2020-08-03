@@ -22,7 +22,7 @@ const eventBase: SchemaObject = {
       ],
     },
     subscriptionId: {
-      title: 'Webhook subscription ID',
+      title: 'Webhook ID',
       type: 'string',
     },
   },

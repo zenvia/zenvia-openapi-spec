@@ -7,7 +7,7 @@ const subscriptionBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Webhook  subscription ID',
+      title: 'Subscription ID',
       type: 'string',
       readOnly: true,
     },
@@ -31,7 +31,7 @@ const subscriptionBase: SchemaObject = {
       $ref: statusRef,
     },
     version: {
-      title: 'Version of wehbook subscription',
+      title: 'Version of subscription',
       type: 'string',
       enum: [
         'v1',
