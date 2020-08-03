@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
-import { ref as partialSubscriptionSchemaRef  } from '../../components/schemas/subscription/partial-subscription';
+import { ref as partialSubscriptionSchemaRef } from '../../components/schemas/subscription/partial-subscription';
 import { ref as subscriptionIdRef } from '../../components/parameters/subscriptionId';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
@@ -31,7 +31,7 @@ const updateOperation: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: partialSubscriptionSchemaRef ,
+          $ref: partialSubscriptionSchemaRef,
         },
       },
     },
