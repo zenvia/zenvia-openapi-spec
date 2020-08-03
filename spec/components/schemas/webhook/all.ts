@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as messageSubscriptionRef } from './message-webhook';
-import { ref as messageStatusSubscriptionRef } from './message-status-webhook';
+import { ref as messageSubscriptionRef } from './message-subscription';
+import { ref as messageStatusSubscriptionRef } from './message-status-subscription';
 
 const all: SchemaObject = {
   oneOf: [{
