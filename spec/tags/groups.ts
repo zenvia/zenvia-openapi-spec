@@ -11,7 +11,7 @@ const groups: TagGroupObject[] = [{
 }, {
   name: 'Webhooks',
   tags: [
-    'Webhooks',
+    'Webhook Subscriptions',
   ],
 }, {
   name: 'Templates',

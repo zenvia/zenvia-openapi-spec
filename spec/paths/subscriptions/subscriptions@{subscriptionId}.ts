@@ -1,12 +1,12 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
-import { ref as webhookSchemaRef } from '../../components/schemas/webhook/all';
-import { ref as partialWebhookSchemaRef } from '../../components/schemas/webhook/partial-webhook';
-import { ref as webhookIdRef } from '../../components/parameters/webhookId';
+import { ref as webhookSchemaRef } from '../../components/schemas/subscription/all';
+import { ref as partialWebhookSchemaRef } from '../../components/schemas/subscription/partial-webhook';
+import { ref as webhookIdRef } from '../../components/parameters/subscriptionId';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const getOperation: OperationObject = {
-  description: 'Retrieve one webhook by id',
-  tags: ['Webhooks'],
+  description: 'Retrieve one webhook subscription by id',
+  tags: ['Webhook Subscriptions'],
   responses: {
     200: {
       description: 'Webhook Object',
@@ -25,8 +25,8 @@ const getOperation: OperationObject = {
 };
 
 const updateOperation: OperationObject = {
-  description: 'Update one webhook by id',
-  tags: ['Webhooks'],
+  description: 'Update one webhook subscription by id',
+  tags: ['Webhook Subscriptions'],
   requestBody: {
     content: {
       'application/json': {
@@ -38,7 +38,7 @@ const updateOperation: OperationObject = {
   },
   responses: {
     200: {
-      description: 'Webhook Object',
+      description: 'Webhook Subscription Object',
       content: {
         'application/json': {
           schema: {
@@ -54,8 +54,8 @@ const updateOperation: OperationObject = {
 };
 
 const deleteOperation: OperationObject = {
-  description: 'Delete one webhook by id',
-  tags: ['Webhooks'],
+  description: 'Delete one webhook subscription by id',
+  tags: ['Webhook Subscriptions'],
   responses: {
     204: {
       description: 'No content',

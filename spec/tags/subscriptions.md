@@ -1,4 +1,4 @@
-Webhooks allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
+Webhook subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
 
 ## MESSAGE
 

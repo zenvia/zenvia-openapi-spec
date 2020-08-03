@@ -5,7 +5,7 @@ const subscriptionId: ParameterObject = {
   name: 'webhookId',
   in: 'path',
   required: true,
-  description: 'the webhook identifier',
+  description: 'the webhook subscription identifier',
   schema: {
     type: 'string',
   },

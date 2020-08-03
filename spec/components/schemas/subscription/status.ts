@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
 const status: SchemaObject = {
-  title: 'Status of webhook',
+  title: 'Status of webhook subscription',
   type: 'string',
   enum: [
     'ACTIVE',
