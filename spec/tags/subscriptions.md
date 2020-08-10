@@ -40,7 +40,7 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 ## Webhook request error handling
 As described before, webhooks allow you to receive events in your application.
 
-However, if a webhook request fails, a retry procedure begins. This procedurece consists of the following rules:
+However, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:
 * There will be at least 30 seconds between each request attempt for the same event.
 * There will be at most 30 request attempts for the same event.
 
