@@ -8,9 +8,9 @@ const groups: TagGroupObject[] = [{
     'Facebook',
   ],
 }, {
-  name: 'Subscriptions',
+  name: 'Webhooks',
   tags: [
-    'Subscriptions',
+    'Webhooks',
   ],
 }, {
   name: 'Templates',
