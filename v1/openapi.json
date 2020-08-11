@@ -274,9 +274,9 @@
     },
     "/subscriptions": {
       "post": {
-        "description": "Create a new subscription",
+        "description": "Create a new webhook",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
@@ -309,13 +309,13 @@
         }
       },
       "get": {
-        "description": "List all subscriptions",
+        "description": "List all webhooks",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
-            "description": "Subscription Object List",
+            "description": "Webhook Object List",
             "content": {
               "application/json": {
                 "schema": {
@@ -335,13 +335,13 @@
     },
     "/subscriptions/{subscriptionId}": {
       "get": {
-        "description": "Retrieve one subscription by id",
+        "description": "Retrieve one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
-            "description": "Subscription Object",
+            "description": "Webhook Object",
             "content": {
               "application/json": {
                 "schema": {
@@ -356,9 +356,9 @@
         }
       },
       "delete": {
-        "description": "Delete one subscription by id",
+        "description": "Delete one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "204": {
@@ -370,9 +370,9 @@
         }
       },
       "patch": {
-        "description": "Update one subscription by id",
+        "description": "Update one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "requestBody": {
           "content": {
@@ -385,7 +385,7 @@
         },
         "responses": {
           "200": {
-            "description": "Subscription Object",
+            "description": "Webhook Object",
             "content": {
               "application/json": {
                 "schema": {
@@ -2571,8 +2571,8 @@
       "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Message sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
     },
     {
-      "name": "Subscriptions",
-      "description": "Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n"
+      "name": "Webhooks",
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n"
     },
     {
       "name": "Templates",
@@ -2597,9 +2597,9 @@
       ]
     },
     {
-      "name": "Subscriptions",
+      "name": "Webhooks",
       "tags": [
-        "Subscriptions"
+        "Webhooks"
       ]
     },
     {

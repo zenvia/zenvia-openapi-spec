@@ -491,9 +491,9 @@ paths:
       - $ref: '#/components/parameters/reports.message.type'
   /subscriptions:
     post:
-      description: Create a new subscription
+      description: Create a new webhook
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
           description: Created subscription
@@ -512,12 +512,12 @@ paths:
         onEvent:
           $ref: '#/components/callbacks/subscription-event'
     get:
-      description: List all subscriptions
+      description: List all webhooks
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
-          description: Subscription Object List
+          description: Webhook Object List
           content:
             application/json:
               schema:
@@ -528,12 +528,12 @@ paths:
           $ref: '#/components/responses/error'
   '/subscriptions/{subscriptionId}':
     get:
-      description: Retrieve one subscription by id
+      description: Retrieve one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
-          description: Subscription Object
+          description: Webhook Object
           content:
             application/json:
               schema:
@@ -541,18 +541,18 @@ paths:
         default:
           $ref: '#/components/responses/error'
     delete:
-      description: Delete one subscription by id
+      description: Delete one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '204':
           description: No content
         default:
           $ref: '#/components/responses/error'
     patch:
-      description: Update one subscription by id
+      description: Update one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       requestBody:
         content:
           application/json:
@@ -560,7 +560,7 @@ paths:
               $ref: '#/components/schemas/subscription.partial-subscription'
       responses:
         '200':
-          description: Subscription Object
+          description: Webhook Object
           content:
             application/json:
               schema:
@@ -2162,9 +2162,9 @@ tags:
       * Sender: is the user id on your page (PSID - page scoped id)
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
-  - name: Subscriptions
+  - name: Webhooks
     description: |
-      Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
+      Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
 
       ## MESSAGE
 
@@ -2251,9 +2251,9 @@ x-tagGroups:
       - SMS
       - WhatsApp
       - Facebook
-  - name: Subscriptions
+  - name: Webhooks
     tags:
-      - Subscriptions
+      - Webhooks
   - name: Templates
     tags:
       - Templates
