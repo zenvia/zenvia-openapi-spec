@@ -23,7 +23,7 @@ const tags: TagObject[] = [{
   name: 'Facebook',
   description: facebookDescription,
 }, {
-  name: 'Subscriptions',
+  name: 'Webhooks',
   description: subscriptionsDescription,
 }, {
   name: 'Templates',

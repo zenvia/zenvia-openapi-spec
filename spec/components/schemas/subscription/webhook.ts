@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const webhook: SchemaObject = {
+const subscription: SchemaObject = {
   type: 'object',
   properties: {
     url: {
@@ -17,4 +17,4 @@ const webhook: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default webhook;
+export default subscription;
