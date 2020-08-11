@@ -46,7 +46,7 @@ However, if a webhook request fails, a retry procedure begins. This procedure co
 
 This means a single event may be retried for around 15 minutes. After this the event will no longer be available.
 
-Event retries are handled separately from the initial request. This ensure webhooks without request fails are not penalized by webhooks with many request fails.
+Event retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.
 <br/><br/>
 
 ### Webhook (quality) status handling
