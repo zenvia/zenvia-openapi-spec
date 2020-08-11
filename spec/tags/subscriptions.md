@@ -61,15 +61,17 @@ Events no longer will be posted on webhooks with *INACTIVE* status.
 The rules which trigger status changes are the following:
 * 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.
 * 500 consecutive request fails will result in demotion to *INACTIVE*.
- * Responses slower than *1 second* also count as a fail and may result in status demotion.
-<br>Only slow responses on the initial request count as a fail.
- * All connection timeouts count as fail and may result in status demotion.
-<br>The connection timeout is *8 seconds*.
- * All response (read) timeouts count as fail and may result in status demotion.
-<br>The response timeout is *8 seconds*.
+  * Responses slower than *1 second* also count as a fail and may result in status demotion.
+    * Only slow responses on the initial request count as a fail.
+    * Only slow responses on an *ACTIVE* webhook count as a fail.
+     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.
+  * All connection timeouts count as fail and may result in status demotion.
+    <br>The connection timeout is *8 seconds*.
+  * All response (read) timeouts count as fail and may result in status demotion.
+    <br>The response timeout is *8 seconds*.
 * 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.
- * Successful requests on retry atempts also count toward status promotion.
- * Responses slower than *1 second* do not count either as a success or as a fail.
+  * Successful requests on retry atempts also count toward status promotion.
+  * Responses slower than *1 second* do not count either as a success or as a fail.
 * Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically
 promote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.
 
