@@ -10,8 +10,8 @@ import { ref as notificationCallbackRef } from '../../components/callbacks/subsc
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
-  description: 'Create a new subscription',
-  tags: ['Subscriptions'],
+  description: 'Create a new webhook',
+  tags: ['Webhooks'],
   responses: {
     200: {
       description: 'Created subscription',
@@ -44,11 +44,11 @@ const post: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List all subscriptions',
-  tags: ['Subscriptions'],
+  description: 'List all webhooks',
+  tags: ['Webhooks'],
   responses: {
     200: {
-      description: 'Subscription Object List',
+      description: 'Webhook Object List',
       content: {
         'application/json': {
           schema: {
