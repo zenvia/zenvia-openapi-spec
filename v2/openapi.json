@@ -1,0 +1,2665 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "version": "2.0.0",
+    "title": "ZenAPI",
+    "description": "# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API.\n\nThis API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.\n\n## What you can do with this API\n\nYou can send messages for the following channels:\n\n* SMS\n* WhatsApp\n* Facebook\n\nYou can subscribe for some events and receive then in one webhook endpoint.\nThe available events are:\n\n* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.\n* Messages status: You can receive status update for sent messages.\n\n## What you need before start\n\nBefore use this API you need the following prerequisites:\n\n* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)\n* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)\n* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)\n\nYou can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.\n\n# Getting started with Sandbox\n\nThe fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).\n\nWhen you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.\n\n[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\n# SDKs\n\nSDKs make it easy to use our APIs just by including them in your software.\n\nThese helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).\n\n# HTTP Methods\n\nHTTP methods are used for manipulate resources.\n\nNot all resources have all operations, see the reference of each resource.\n\nMethods used with collection endpoints:\n\n| Http Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - Ok            |\n| POST             | Create a new item        | 200 - Ok            |\n\nMethods used with item endpoints:\n\n| Http Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - Ok            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - Ok            |\n\nWhen one operation is executed successfully, the API will respond with 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.\n\nThe error object have the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## TOKEN\nTo use this API you need to send the API token in all requests.\n\nThis TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.\n\nExample:\n```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```\n\nYou can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.\n",
+    "termsOfService": "https://zenvia.com/",
+    "contact": {
+      "name": "API Support",
+      "email": "apisupport@zenvia.com",
+      "url": "https://zenapi.zenvia.com/"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE.md"
+    },
+    "x-logo": {
+      "url": "https://zenvia.github.io/zenvia-openapi-spec/assets/zenapi.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.zenvia.com/v2"
+    }
+  ],
+  "paths": {
+    "/channels/facebook/messages": {
+      "post": {
+        "description": "Send a Facebook message",
+        "tags": [
+          "Facebook"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/message.facebook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/message.facebook"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash",
+            "source": "curl \"https://api.zenvia.com/v2/channels/facebook/messages\" \\\n-H \"Content-Type: application/json\" \\\n-H \"X-API-TOKEN: YOUR_API_TOKEN\" \\\n-d '{\n  \"from\": \"sender-identifier\",\n  \"to\": \"recipient-identifier\",\n  \"contents\": [{\n    \"type\": \"text\",\n    \"text\": \"Some text message\"\n  }]\n}'\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js",
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/facebook/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js SDK",
+            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/facebook-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst facebook = client.getChannel('facebook');\n\nconst content = new TextContent('Some text message');\n\nfacebook.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "Java",
+            "label": "Java SDK",
+            "source": "import com.zenvia.api.sdk.client.Channel;\nimport com.zenvia.api.sdk.client.apache.Client;\nimport com.zenvia.api.sdk.contents.TextContent;\nimport com.zenvia.api.sdk.messages.Message;\n\npublic class FacebookSendTextMessage {\n\n  public static void main (String arg []) {\n    Client client = new Client(\"YOUR_API_TOKEN\");\n\n    Channel facebook = client.getChannel(\"facebook\");\n\n    TextContent content = new TextContent(\"Some text message\");\n\n    try {\n      Message response = facebook.sendMessage(\"sender-identifier\", \"recipient-identifier\", content);\n      System.out.println(\"Response: \" + response.toString());\n    } catch(Exception e) {\n      System.out.println(\"Error: \" + e.getMessage());\n    }\n  }\n\n}\n"
+          }
+        ]
+      }
+    },
+    "/channels/sms/messages": {
+      "post": {
+        "description": "Send a SMS message",
+        "tags": [
+          "SMS"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/message.sms"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/message.sms"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash",
+            "source": "curl \"https://api.zenvia.com/v2/channels/sms/messages\" \\\n-H \"Content-Type: application/json\" \\\n-H \"X-API-TOKEN: YOUR_API_TOKEN\" \\\n-d '{\n  \"from\": \"sender-identifier\",\n  \"to\": \"recipient-identifier\",\n  \"contents\": [{\n    \"type\": \"text\",\n    \"text\": \"Some text message\"\n  }]\n}'\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js",
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/sms/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js SDK",
+            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/sms-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst sms = client.getChannel('sms');\n\nconst content = new TextContent('Some text message');\n\nsms.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "Java",
+            "label": "Java SDK",
+            "source": "import com.zenvia.api.sdk.client.Channel;\nimport com.zenvia.api.sdk.client.apache.Client;\nimport com.zenvia.api.sdk.contents.TextContent;\nimport com.zenvia.api.sdk.messages.Message;\n\npublic class SmsSendTextMessage {\n\n  public static void main (String arg []) {\n    Client client = new Client(\"YOUR_API_TOKEN\");\n\n    Channel sms = client.getChannel(\"sms\");\n\n    TextContent content = new TextContent(\"Some text message\");\n\n    try {\n      Message response = sms.sendMessage(\"sender-identifier\", \"recipient-identifier\", content);\n      System.out.println(\"Response: \" + response.toString());\n    } catch(Exception e) {\n      System.out.println(\"Error: \" + e.getMessage());\n    }\n  }\n\n}\n"
+          }
+        ]
+      }
+    },
+    "/channels/whatsapp/messages": {
+      "post": {
+        "description": "Send a WhatsApp message",
+        "tags": [
+          "WhatsApp"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/message.whatsapp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/message.whatsapp"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash",
+            "source": "curl \"https://api.zenvia.com/v2/channels/whatsapp/messages\" \\\n-H \"Content-Type: application/json\" \\\n-H \"X-API-TOKEN: YOUR_API_TOKEN\" \\\n-d '{\n  \"from\": \"sender-identifier\",\n  \"to\": \"recipient-identifier\",\n  \"contents\": [{\n    \"type\": \"text\",\n    \"text\": \"Some text message\"\n  }]\n}'\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js",
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/whatsapp/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js SDK",
+            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/whatsapp-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst whatsapp = client.getChannel('whatsapp');\n\nconst content = new TextContent('Some text message');\n\nwhatsapp.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "Java",
+            "label": "Java SDK",
+            "source": "import com.zenvia.api.sdk.client.Channel;\nimport com.zenvia.api.sdk.client.apache.Client;\nimport com.zenvia.api.sdk.contents.TextContent;\nimport com.zenvia.api.sdk.messages.Message;\n\npublic class WhatsAppSendTextMessage {\n\n  public static void main (String arg []) {\n    Client client = new Client(\"YOUR_API_TOKEN\");\n\n    Channel whatsapp = client.getChannel(\"whatsapp\");\n\n    TextContent content = new TextContent(\"Some text message\");\n\n    try {\n      Message response = whatsapp.sendMessage(\"sender-identifier\", \"recipient-identifier\", content);\n      System.out.println(\"Response: \" + response.toString());\n    } catch(Exception e) {\n      System.out.println(\"Error: \" + e.getMessage());\n    }\n  }\n\n}\n"
+          }
+        ]
+      }
+    },
+    "/reports/flow/entries": {
+      "get": {
+        "description": "Retrieve all entries applying the given filters",
+        "tags": [
+          "Flow Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow report entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/reports.flow.entries.base"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/reports.flow.startDate"
+        },
+        {
+          "$ref": "#/components/parameters/reports.flow.endDate"
+        },
+        {
+          "$ref": "#/components/parameters/reports.flow.flowId"
+        },
+        {
+          "$ref": "#/components/parameters/reports.flow.dispatchId"
+        },
+        {
+          "$ref": "#/components/parameters/reports.flow.sessionId"
+        }
+      ]
+    },
+    "/reports/message/entries": {
+      "get": {
+        "description": "Retrieve all entries applying the given filters",
+        "tags": [
+          "Message Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "Message report entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/reports.message.entry.base"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/reports.message.startDate"
+        },
+        {
+          "$ref": "#/components/parameters/reports.message.endDate"
+        },
+        {
+          "$ref": "#/components/parameters/reports.message.channels"
+        },
+        {
+          "$ref": "#/components/parameters/reports.message.type"
+        }
+      ]
+    },
+    "/subscriptions": {
+      "post": {
+        "description": "Create a new subscription",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Created subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscription.all"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscription.all"
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "onEvent": {
+            "$ref": "#/components/callbacks/subscription-event"
+          }
+        }
+      },
+      "get": {
+        "description": "List all subscriptions",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription Object List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/subscription.all"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "description": "Retrieve one subscription by id",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription Object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscription.all"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one subscription by id",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update one subscription by id",
+        "tags": [
+          "Subscriptions"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscription.partial-subscription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription Object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscription.all"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/subscriptionId"
+        }
+      ]
+    },
+    "/templates": {
+      "post": {
+        "description": "Create a new",
+        "tags": [
+          "Templates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/templates.template"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created template",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/templates.template"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "get": {
+        "description": "List all templates",
+        "tags": [
+          "Templates"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/templates.channel"
+          },
+          {
+            "$ref": "#/components/parameters/templates.senderId"
+          },
+          {
+            "$ref": "#/components/parameters/templates.status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template Object List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/templates.template"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/templates/{templateId}": {
+      "get": {
+        "description": "Retrieve one template by id",
+        "tags": [
+          "Templates"
+        ],
+        "responses": {
+          "200": {
+            "description": "Template Object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/templates.template"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one template by id",
+        "tags": [
+          "Templates"
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update one template by id",
+        "tags": [
+          "Templates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/templates.partial-template"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Template Object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/templates.template"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/templateId"
+        }
+      ]
+    },
+    "/templates/{templateId}/comments": {
+      "post": {
+        "description": "Create a new comment",
+        "tags": [
+          "Templates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/templates.template-comment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/templates.template-comment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "get": {
+        "description": "List all comments",
+        "tags": [
+          "Templates"
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment Object List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/templates.template-comment"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/templateId"
+        }
+      ]
+    },
+    "/templates/{templateId}/comments/{templateCommentId}": {
+      "delete": {
+        "description": "Delete comment by id",
+        "tags": [
+          "Templates"
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/templateId"
+        },
+        {
+          "$ref": "#/components/parameters/templateCommentId"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "content.base": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Content type",
+            "description": "Content type descriminator",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "content.contacts": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "contacts"
+              },
+              "contacts": {
+                "description": "A list of contacts",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "addresses": {
+                      "description": "A list of contact addresses",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "street": {
+                            "description": "Street number and name",
+                            "type": "string",
+                            "example": "Street Address, 123"
+                          },
+                          "city": {
+                            "description": "City name",
+                            "type": "string",
+                            "example": "City name"
+                          },
+                          "state": {
+                            "description": "State abbreviation",
+                            "type": "string",
+                            "example": "SP"
+                          },
+                          "zip": {
+                            "description": "ZIP code",
+                            "type": "string",
+                            "example": "01000-000"
+                          },
+                          "country": {
+                            "description": "Full country name",
+                            "type": "string",
+                            "example": "Brazil"
+                          },
+                          "countryCode": {
+                            "description": "Two-letter country abbreviation",
+                            "type": "string",
+                            "example": "BR"
+                          },
+                          "type": {
+                            "description": "The type of the address",
+                            "type": "string",
+                            "enum": [
+                              "HOME",
+                              "WORK"
+                            ],
+                            "example": "WORK"
+                          }
+                        }
+                      },
+                      "minItems": 0
+                    },
+                    "birthday": {
+                      "description": "The birthday of the contact",
+                      "type": "string",
+                      "example": "11/10/1980"
+                    },
+                    "contactImage": {
+                      "description": "Base64-encoded image. Its value has to be a string based on the Base64 Data Encodings specification (RFC 4648).",
+                      "type": "string"
+                    },
+                    "emails": {
+                      "description": "A list of e-mails",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "description": "E-mail address",
+                            "type": "string",
+                            "example": "my-email@email-domain.com"
+                          },
+                          "type": {
+                            "description": "The type of e-mail",
+                            "type": "string",
+                            "enum": [
+                              "HOME",
+                              "WORK"
+                            ],
+                            "example": "HOME"
+                          }
+                        }
+                      },
+                      "minItems": 0
+                    },
+                    "ims": {
+                      "description": "A list of messaging contact information",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "service": {
+                            "description": "Instant messaging service name",
+                            "type": "string",
+                            "example": "This is a messaging service"
+                          },
+                          "userId": {
+                            "description": "User identifier in this instant messaging service",
+                            "type": "string",
+                            "example": "johnsmith"
+                          }
+                        }
+                      },
+                      "minItems": 0
+                    },
+                    "name": {
+                      "description": "Full contact name",
+                      "type": "object",
+                      "properties": {
+                        "formattedName": {
+                          "description": "Full name as it normally appears",
+                          "type": "string",
+                          "example": "John Megan Smith"
+                        },
+                        "firstName": {
+                          "description": "First name",
+                          "type": "string",
+                          "example": "John"
+                        },
+                        "lastName": {
+                          "description": "Last name",
+                          "type": "string",
+                          "example": "Smith"
+                        },
+                        "middleName": {
+                          "description": "Middle name",
+                          "type": "string",
+                          "example": "Megan"
+                        },
+                        "suffix": {
+                          "description": "Name suffix",
+                          "type": "string",
+                          "example": "PhD"
+                        },
+                        "prefix": {
+                          "description": "Name preffix",
+                          "type": "string",
+                          "example": "Mr."
+                        }
+                      },
+                      "required": [
+                        "formattedName",
+                        "firstName"
+                      ]
+                    },
+                    "org": {
+                      "title": "Organization",
+                      "description": "Contact organization information",
+                      "type": "object",
+                      "properties": {
+                        "company": {
+                          "description": "Name of the contact's company",
+                          "type": "string",
+                          "example": "Ms. Sara"
+                        },
+                        "department": {
+                          "description": "Name of the contact's department",
+                          "type": "string",
+                          "example": "Sales"
+                        },
+                        "title": {
+                          "description": "Contact's business title",
+                          "type": "string",
+                          "example": "Manager"
+                        }
+                      }
+                    },
+                    "phones": {
+                      "description": "A list of contact phone numbers",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "phone": {
+                            "description": "Formatted phone number",
+                            "type": "string",
+                            "example": "+5521999998888"
+                          },
+                          "type": {
+                            "description": "The type of the phone number",
+                            "type": "string",
+                            "enum": [
+                              "CELL",
+                              "MAIN",
+                              "IPHONE",
+                              "HOME",
+                              "WORK"
+                            ],
+                            "example": "CELL"
+                          },
+                          "waId": {
+                            "description": "WhatsApp ID _(supported channels: WhatsApp)_",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "minItems": 0
+                    },
+                    "urls": {
+                      "description": "A list of contact URLs",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "description": "URL",
+                            "type": "string",
+                            "example": "https://www.zenvia.com"
+                          },
+                          "type": {
+                            "description": "The type of the phone number",
+                            "type": "string",
+                            "enum": [
+                              "HOME",
+                              "WORK"
+                            ],
+                            "example": "WORK"
+                          }
+                        }
+                      },
+                      "minItems": 0
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "type",
+              "contacts"
+            ]
+          }
+        ]
+      },
+      "content.file": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "file"
+              },
+              "fileUrl": {
+                "type": "string",
+                "description": "The URL of the file to be sent.",
+                "example": "https://example.com/document.pdf"
+              },
+              "fileMimeType": {
+                "type": "string",
+                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/Limitations)",
+                "example": "application/pdf"
+              },
+              "fileCaption": {
+                "type": "string",
+                "description": "Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) images and videos.",
+                "example": "Some caption"
+              },
+              "fileName": {
+                "type": "string",
+                "description": "The name of the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) documents.",
+                "example": "document.pdf"
+              }
+            },
+            "required": [
+              "type",
+              "fileUrl"
+            ]
+          }
+        ]
+      },
+      "content.json": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "json"
+              },
+              "payload": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "type",
+              "payload"
+            ]
+          }
+        ]
+      },
+      "content.location": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "location"
+              },
+              "longitude": {
+                "type": "number",
+                "description": "Longitude of the location",
+                "example": -122.425332
+              },
+              "latitude": {
+                "type": "number",
+                "description": "Latitude of the location",
+                "example": 37.758056
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the location",
+                "example": "Home"
+              },
+              "address": {
+                "type": "string",
+                "description": "Address of the location. Only displayed if name is present.",
+                "example": "Home Address"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_",
+                "example": "https://www.zenvia.com"
+              }
+            },
+            "required": [
+              "type",
+              "longitude",
+              "latitude"
+            ]
+          }
+        ]
+      },
+      "content.template": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "template"
+              },
+              "templateId": {
+                "type": "string",
+                "description": "The template identifier. Click <a href=\"https://app.zenvia.com/home/templates\" target=\"_blank\">here</a> to go to the template page.",
+                "example": "c2c3e42d-6fb7-4ad6-897a-dd7613469f58"
+              },
+              "fields": {
+                "type": "object",
+                "description": "The available fields to be used in this template.",
+                "example": {
+                  "user": "John Smith",
+                  "protocol": "34534252"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "templateId",
+              "fields"
+            ]
+          }
+        ]
+      },
+      "content.text": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "text"
+              },
+              "text": {
+                "description": "Text to be sent",
+                "type": "string",
+                "example": "This is a text"
+              },
+              "payload": {
+                "description": "Payload of selected button.",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ]
+          }
+        ]
+      },
+      "content.facebook.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "$ref": "#/components/schemas/content.file"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/content.text",
+            "file": "#/components/schemas/content.file"
+          }
+        }
+      },
+      "content.sms.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/content.text"
+          }
+        }
+      },
+      "content.whatsapp.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.template"
+          },
+          {
+            "$ref": "#/components/schemas/content.contacts"
+          },
+          {
+            "$ref": "#/components/schemas/content.location"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/content.text",
+            "file": "#/components/schemas/content.file",
+            "template": "#/components/schemas/content.template",
+            "contacts": "#/components/schemas/content.contacts",
+            "location": "#/components/schemas/content.location"
+          }
+        }
+      },
+      "error.base": {
+        "title": "Error Object",
+        "description": "This is a Error object model.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "description": "An error code to identify the error programmatically.",
+            "type": "string",
+            "readOnly": true,
+            "example": "VALIDATION_ERROR"
+          },
+          "message": {
+            "title": "Message",
+            "description": "A human readable text to help on error troubleshooting.",
+            "type": "string",
+            "readOnly": true,
+            "example": "Validation error"
+          },
+          "details": {
+            "title": "Details",
+            "description": "Error details to help identify the problem source.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/error.errors"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "error.errors": {
+        "title": "Error object",
+        "description": "This is a Error object schema.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "description": "Detail error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "path": {
+            "title": "Path",
+            "description": "Error path.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "title": "Message",
+            "description": "Human readable message.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "events.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/events.message-event"
+          },
+          {
+            "$ref": "#/components/schemas/events.message-status-event"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "MESSAGE": "#/components/schemas/events.message-event",
+            "MESSAGE_STATUS": "#/components/schemas/events.message-status-event"
+          }
+        }
+      },
+      "events.base": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Event Id",
+            "type": "string"
+          },
+          "timestamp": {
+            "title": "Event Timestamp",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "title": "Event type",
+            "type": "string",
+            "enum": [
+              "MESSAGE",
+              "MESSAGE_STATUS"
+            ]
+          },
+          "subscriptionId": {
+            "title": "Subscription Id",
+            "type": "string"
+          }
+        }
+      },
+      "events.message-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "MESSAGE",
+                  "MESSAGE_STATUS"
+                ],
+                "example": "MESSAGE"
+              },
+              "direction": {
+                "title": "Message Direction",
+                "type": "string"
+              },
+              "channel": {
+                "title": "Message channel",
+                "type": "string"
+              },
+              "message": {
+                "$ref": "#/components/schemas/message.all"
+              }
+            }
+          }
+        ]
+      },
+      "events.message-status-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "MESSAGE",
+                  "MESSAGE_STATUS"
+                ],
+                "example": "MESSAGE_STATUS"
+              },
+              "channel": {
+                "title": "Message channel",
+                "type": "string"
+              },
+              "messageId": {
+                "title": "Message ID",
+                "description": "The ID of the message whose status is being delived",
+                "type": "string"
+              },
+              "contentIndex": {
+                "title": "Index of content that is receiving the status update",
+                "type": "number"
+              },
+              "messageStatus": {
+                "$ref": "#/components/schemas/events.message-status"
+              }
+            }
+          }
+        ]
+      },
+      "events.message-status": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "title": "Status timestamp",
+            "type": "string",
+            "format": "date-time"
+          },
+          "code": {
+            "title": "Status code",
+            "description": "Code that indicates the message status",
+            "type": "string",
+            "enum": [
+              "REJECTED",
+              "SENT",
+              "DELIVERED",
+              "NOT_DELIVERED",
+              "READ"
+            ]
+          },
+          "description": {
+            "title": "Status description",
+            "description": "A description of status",
+            "type": "string"
+          },
+          "cause": {
+            "title": "Status cause",
+            "description": "A likely raw message with the information about the status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "timestamp"
+        ]
+      },
+      "message.all": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "visitor": {
+                "$ref": "#/components/schemas/message.visitor"
+              },
+              "contents": {
+                "title": "Message Contents",
+                "description": "A list of content to be sent",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/content.whatsapp.all"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "message.base": {
+        "title": "Message Object",
+        "description": "This is a Message object model.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Message ID",
+            "description": "An ID for this message. This can be used for future message consulting or callback notifications.",
+            "type": "string",
+            "readOnly": true
+          },
+          "from": {
+            "title": "Sender ID",
+            "description": "This is the identifier of sender of this message. The sender shoud be created with a credential.",
+            "type": "string"
+          },
+          "to": {
+            "title": "Recipient ID",
+            "description": "The recipient is the identifier of a contact in this channel.",
+            "type": "string"
+          },
+          "direction": {
+            "title": "Message direction",
+            "description": "It indicates if message is received from channel (IN) or is sent to channel (OUT)",
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT"
+            ],
+            "readOnly": true
+          },
+          "channel": {
+            "title": "Channel",
+            "description": "Message channel",
+            "type": "string",
+            "readOnly": true
+          },
+          "contents": {
+            "title": "Message Contents",
+            "description": "A list of content to be sent",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "contents"
+        ]
+      },
+      "message.channel": {
+        "type": "string",
+        "title": "Channel",
+        "description": "Message channel"
+      },
+      "message.facebook": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contents": {
+                "title": "Message Contents",
+                "description": "A list of content to be sent",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/content.facebook.all"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "message.sms": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contents": {
+                "title": "Message Contents",
+                "description": "A list of content to be sent",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/content.sms.all"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "message.visitor": {
+        "title": "Visitor Object",
+        "description": "It indicates the name of the visitor who sent the message",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "description": "Full name of the visitor",
+            "type": "string"
+          },
+          "firstName": {
+            "title": "First name",
+            "description": "First name of the visitor",
+            "type": "string"
+          },
+          "lastName": {
+            "title": "Last name",
+            "description": "Last name of the visitor",
+            "type": "string"
+          }
+        }
+      },
+      "message.whatsapp": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contents": {
+                "title": "Message Contents",
+                "description": "A list of content to be sent",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/content.whatsapp.all"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "reports.flow.entries.base": {
+        "title": "Entry object for Flow Report",
+        "description": "The entry object model for Flow Report.",
+        "type": "object",
+        "properties": {
+          "flowId": {
+            "title": "Flow ID",
+            "description": "The flow identifier.",
+            "type": "string"
+          },
+          "dispatchId": {
+            "title": "Dispatch ID",
+            "description": "The dispatch identifier.",
+            "type": "string"
+          },
+          "sessionId": {
+            "title": "Session ID",
+            "description": "This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.",
+            "type": "string"
+          },
+          "firstEventTimestamp": {
+            "title": "First event timestamp",
+            "description": "Time of the first event with the client.",
+            "type": "string"
+          },
+          "lastEventTimestamp": {
+            "title": "Last event timestamp",
+            "description": "Time of the last event with the client.",
+            "type": "string"
+          },
+          "variables": {
+            "title": "Objects of varibles",
+            "description": "Object where session variables are saved.",
+            "type": "object"
+          }
+        }
+      },
+      "reports.message.entry.base": {
+        "title": "Entry object for Message Report",
+        "description": "The entry object model for Message Report.",
+        "type": "object",
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "title": "Message type",
+            "description": "The type of messages, which may be either \"message\" or \"notification\".",
+            "type": "string",
+            "readOnly": true
+          },
+          "directionInTotal": {
+            "title": "IN messages total",
+            "description": "The total of IN direction messages.",
+            "type": "number",
+            "readOnly": true
+          },
+          "directionOutTotal": {
+            "title": "OUT messages total",
+            "description": "The total of OUT direction messages.",
+            "type": "number",
+            "readOnly": true
+          },
+          "total": {
+            "title": "Messages total",
+            "description": "The total of messages including IN and OUT directions.",
+            "type": "number",
+            "readOnly": true
+          }
+        }
+      },
+      "subscription.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/subscription.message-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.message-status-subscription"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "eventType",
+          "mapping": {
+            "MESSAGE": "#/components/schemas/subscription.message-subscription",
+            "MESSAGE_STATUS": "#/components/schemas/subscription.message-status-subscription"
+          }
+        }
+      },
+      "subscription.base": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Subscription Id",
+            "type": "string",
+            "readOnly": true
+          },
+          "eventType": {
+            "title": "Event type to subscribe",
+            "type": "string",
+            "enum": [
+              "MESSAGE",
+              "MESSAGE_STATUS"
+            ]
+          },
+          "webhook": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/subscription.webhook"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "url"
+                ]
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/subscription.status"
+          },
+          "version": {
+            "title": "Version of subscription",
+            "type": "string",
+            "enum": [
+              "v1",
+              "v2"
+            ],
+            "default": "v1"
+          },
+          "createdAt": {
+            "title": "Creation timestamp",
+            "description": "Creation timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "title": "Update timestamp",
+            "description": "Update timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "eventType",
+          "webhook"
+        ]
+      },
+      "subscription.message-status-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "$ref": "#/components/schemas/message.channel"
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
+          }
+        ]
+      },
+      "subscription.message-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "$ref": "#/components/schemas/message.channel"
+                  },
+                  "direction": {
+                    "title": "Message direction",
+                    "description": "It indicates if message is received from channel (IN) or is sent to channel (OUT)",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
+          }
+        ]
+      },
+      "subscription.partial-subscription": {
+        "type": "object",
+        "properties": {
+          "webhook": {
+            "$ref": "#/components/schemas/subscription.webhook"
+          },
+          "status": {
+            "$ref": "#/components/schemas/subscription.status"
+          }
+        }
+      },
+      "subscription.status": {
+        "title": "Status of subscription",
+        "type": "string",
+        "enum": [
+          "ACTIVE",
+          "DEGRADED",
+          "INACTIVE"
+        ]
+      },
+      "subscription.webhook": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "title": "Webhook URL",
+            "description": "URL to post events",
+            "type": "string"
+          },
+          "headers": {
+            "title": "Request headers",
+            "type": "object"
+          }
+        }
+      },
+      "templates.partial-template": {
+        "title": "Template Object",
+        "description": "This is a Template object model.",
+        "type": "object",
+        "properties": {
+          "locale": {
+            "$ref": "#/components/schemas/templates.template-locale"
+          },
+          "category": {
+            "$ref": "#/components/schemas/templates.template-category"
+          },
+          "components": {
+            "$ref": "#/components/schemas/templates.components.index"
+          },
+          "notificationEmail": {
+            "$ref": "#/components/schemas/templates.template-notification-email"
+          }
+        }
+      },
+      "templates.template-category": {
+        "title": "Category",
+        "description": "Category of use for this template",
+        "type": "string",
+        "enum": [
+          "ACCOUNT_UPDATE",
+          "PAYMENT_UPDATE",
+          "PERSONAL_FINANCE_UPDATE",
+          "SHIPPING_UPDATE",
+          "RESERVATION_UPDATE",
+          "ISSUE_RESOLUTION",
+          "APPOINTMENT_UPDATE",
+          "TRANSPORTATION_UPDATE",
+          "TICKET_UPDATE",
+          "ALERT_UPDATE",
+          "AUTO_REPLY"
+        ]
+      },
+      "templates.template-comment": {
+        "type": "object",
+        "required": [
+          "author",
+          "role",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "title": "Comment ID",
+            "type": "string",
+            "readOnly": true
+          },
+          "author": {
+            "title": "Author",
+            "description": "Author",
+            "type": "string"
+          },
+          "role": {
+            "title": "Role",
+            "description": "Author role",
+            "type": "string",
+            "enum": [
+              "REQUESTER",
+              "REVIEWER",
+              "WHATSAPP"
+            ]
+          },
+          "text": {
+            "title": "Text",
+            "description": "Comment text",
+            "type": "string"
+          },
+          "createdAt": {
+            "title": "Creation timestamp",
+            "description": "Creation timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "title": "Update timestamp",
+            "description": "Update timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "templates.template-locale": {
+        "title": "Locale",
+        "description": "Template language and locale",
+        "type": "string",
+        "enum": [
+          "af",
+          "sq",
+          "ar",
+          "az",
+          "bn",
+          "bg",
+          "ca",
+          "zh_CN",
+          "zh_HK",
+          "zh_TW",
+          "hr",
+          "cs",
+          "da",
+          "nl",
+          "en",
+          "en_GB",
+          "en_US",
+          "et",
+          "fil",
+          "fi",
+          "fr",
+          "de",
+          "el",
+          "gu",
+          "ha",
+          "he",
+          "hi",
+          "hu",
+          "id",
+          "ga",
+          "it",
+          "ja",
+          "kn",
+          "kk",
+          "ko",
+          "lo",
+          "lv",
+          "lt",
+          "mk",
+          "ms",
+          "ml",
+          "mr",
+          "nb",
+          "fa",
+          "pl",
+          "pt_BR",
+          "pt_PT",
+          "pa",
+          "ro",
+          "ru",
+          "sr",
+          "sk",
+          "sl",
+          "es",
+          "es_AR",
+          "es_ES",
+          "es_MX",
+          "sw",
+          "sv",
+          "ta",
+          "te",
+          "th",
+          "tr",
+          "uk",
+          "ur",
+          "uz",
+          "vi",
+          "zu"
+        ]
+      },
+      "templates.template-notification-email": {
+        "title": "Notification e-mail",
+        "description": "E-mail list (comma-separated) to send notifications about the message template approving process.",
+        "type": "string"
+      },
+      "templates.template": {
+        "title": "Template Object",
+        "description": "This is a Template object model.",
+        "type": "object",
+        "required": [
+          "name",
+          "locale",
+          "channel",
+          "senderId",
+          "category",
+          "components"
+        ],
+        "properties": {
+          "id": {
+            "title": "Template ID",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Template name",
+            "description": "The name of this template",
+            "type": "string"
+          },
+          "locale": {
+            "$ref": "#/components/schemas/templates.template-locale"
+          },
+          "channel": {
+            "title": "Channel",
+            "description": "Channel for template use. For now, only WHATSAPP channel is allowed.",
+            "type": "string",
+            "enum": [
+              "WHATSAPP"
+            ]
+          },
+          "senderId": {
+            "title": "Sender ID",
+            "description": "This is the identifier of sender for this template. The sender shoud be created with a credential.",
+            "type": "string"
+          },
+          "category": {
+            "$ref": "#/components/schemas/templates.template-category"
+          },
+          "components": {
+            "$ref": "#/components/schemas/templates.components.index"
+          },
+          "notificationEmail": {
+            "$ref": "#/components/schemas/templates.template-notification-email"
+          },
+          "text": {
+            "title": "Template text",
+            "description": "This is a text reference for this template. This field is a merge of all content components.",
+            "type": "string",
+            "readOnly": true
+          },
+          "fields": {
+            "title": "Fields",
+            "description": "The available fields to be used in this template.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "readOnly": true
+          },
+          "comments": {
+            "title": "Comments",
+            "description": "Comments added to the template during the approval process.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/templates.template-comment"
+            }
+          },
+          "status": {
+            "title": "Status of template",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "WAITING_REVIEW",
+              "REJECTED",
+              "WAITING_APPROVAL",
+              "APPROVED"
+            ]
+          },
+          "channels": {
+            "title": "Channels",
+            "deprecated": true,
+            "description": "Channels where this template can be used. _Deprecated attribute, can be removed on next API versions._",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "title": "Template type",
+                  "type": "string",
+                  "enum": [
+                    "WHATSAPP",
+                    "FACEBOOK",
+                    "SMS"
+                  ]
+                },
+                "senderId": {
+                  "title": "Sender ID",
+                  "type": "string"
+                },
+                "status": {
+                  "title": "Status of template",
+                  "type": "string",
+                  "enum": [
+                    "APPROVED",
+                    "REFUSED",
+                    "PENDING",
+                    "CANCELED"
+                  ]
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 1,
+            "readOnly": true
+          },
+          "createdAt": {
+            "title": "Creation timestamp",
+            "description": "Creation timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "title": "Update timestamp",
+            "description": "Update timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "templates.components.index": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "required": [
+          "body"
+        ],
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/templates.components.header.index"
+          },
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
+          },
+          "footer": {
+            "$ref": "#/components/schemas/templates.components.footer.index"
+          },
+          "buttons": {
+            "$ref": "#/components/schemas/templates.components.buttons.index"
+          }
+        }
+      },
+      "templates.components.body.index": {
+        "title": "Body",
+        "description": "Template body",
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "title": "Body type",
+            "description": "The body should have a fixed or variable text. Variable text can have variables using format _{{var_name}}_",
+            "type": "string",
+            "enum": [
+              "TEXT_FIXED",
+              "TEXT_TEMPLATE"
+            ]
+          },
+          "text": {
+            "title": "Body text",
+            "type": "string"
+          }
+        }
+      },
+      "templates.components.buttons.actions": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "title": "Buttons",
+                "description": "List of buttons. Only one URL and phone number can be sent",
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-url"
+                    },
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-phone-number"
+                    }
+                  ],
+                  "required": [
+                    "type"
+                  ],
+                  "discriminator": {
+                    "propertyName": "type",
+                    "mapping": {
+                      "URL": "#/components/schemas/templates.components.buttons.button-item-url",
+                      "PHONE_NUMBER": "#/components/schemas/templates.components.buttons.button-item-phone-number"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "items"
+            ]
+          }
+        ]
+      },
+      "templates.components.buttons.base": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Content type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "templates.components.buttons.button-item-base": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Button type",
+            "enum": [
+              "URL",
+              "PHONE_NUMBER",
+              "QUICK_REPLY"
+            ],
+            "type": "string"
+          },
+          "text": {
+            "title": "Button text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "text"
+        ]
+      },
+      "templates.components.buttons.button-item-phone-number": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "title": "Phone number of button",
+                "description": "Phone number to be sent in the button",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text",
+              "phoneNumber"
+            ]
+          }
+        ]
+      },
+      "templates.components.buttons.button-item-quick-reply": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "payload": {
+                "type": "string",
+                "title": "Payload of button",
+                "description": "This payload is used for identify the click in the callback"
+              }
+            },
+            "required": [
+              "type",
+              "text",
+              "payload"
+            ]
+          }
+        ]
+      },
+      "templates.components.buttons.button-item-url": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "url": {
+                "title": "URL of button",
+                "description": "URL to be sent in the button. It can be dynamic",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text",
+              "url"
+            ]
+          }
+        ]
+      },
+      "templates.components.buttons.index": {
+        "title": "Buttons",
+        "description": "Template buttons",
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.actions"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.quick-replies"
+          }
+        ],
+        "required": [
+          "type"
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ACTIONS": "#/components/schemas/templates.components.buttons.actions",
+            "QUICK_REPLIES": "#/components/schemas/templates.components.buttons.quick-replies"
+          }
+        }
+      },
+      "templates.components.buttons.quick-replies": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "title": "Buttons",
+                "description": "List of buttons",
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                    }
+                  ],
+                  "required": [
+                    "type"
+                  ],
+                  "discriminator": {
+                    "propertyName": "type",
+                    "mapping": {
+                      "QUICK_REPLY": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "items"
+            ]
+          }
+        ]
+      },
+      "templates.components.footer.index": {
+        "title": "Footer",
+        "description": "Template footer",
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "title": "Footer type",
+            "description": "The footer can only be a fixed text",
+            "type": "string",
+            "enum": [
+              "TEXT_FIXED"
+            ]
+          },
+          "text": {
+            "title": "Footer text",
+            "type": "string"
+          }
+        }
+      },
+      "templates.components.header.index": {
+        "title": "Header",
+        "description": "Template header",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "title": "Header type",
+            "description": "The header can have an image, document or text.",
+            "type": "string",
+            "enum": [
+              "MEDIA_DOCUMENT",
+              "MEDIA_IMAGE",
+              "MEDIA_VIDEO",
+              "TEXT_FIXED",
+              "TEXT_TEMPLATE"
+            ]
+          },
+          "text": {
+            "title": "Header text",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error response. See the [Error Handling](#section/API-Design/Error-Handling) section for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error.base"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "chatbotId": {
+        "name": "chatbotId",
+        "in": "path",
+        "required": true,
+        "description": "the chatbot identifier",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "description": "the subscription identifier",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "templateCommentId": {
+        "name": "templateCommentId",
+        "in": "path",
+        "required": true,
+        "description": "the comment identifier.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "templateId": {
+        "name": "templateId",
+        "in": "path",
+        "required": true,
+        "description": "the template identifier. Click <a href=\"https://app.zenvia.com/home/templates\">here</a>.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "reports.flow.dispatchId": {
+        "name": "dispatchId",
+        "in": "query",
+        "required": false,
+        "description": "This is the ID generated at the time of dispatch.",
+        "schema": {
+          "title": "Dispatch ID",
+          "type": "string"
+        }
+      },
+      "reports.flow.endDate": {
+        "name": "endDate",
+        "in": "query",
+        "required": false,
+        "description": "The end of the period to query entries.",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "reports.flow.flowId": {
+        "name": "flowId",
+        "in": "query",
+        "required": false,
+        "description": "This is the flow identifier. You can view your <a href=\"https://app.zenvia.com/home/chatbot\" target=\"_blank\"> Flow IDs here.</a>",
+        "schema": {
+          "title": "Flow ID",
+          "type": "string"
+        }
+      },
+      "reports.flow.sessionId": {
+        "name": "sessionId",
+        "in": "query",
+        "required": false,
+        "description": "This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.",
+        "schema": {
+          "title": "Session ID",
+          "type": "string"
+        }
+      },
+      "reports.flow.startDate": {
+        "name": "startDate",
+        "in": "query",
+        "required": true,
+        "description": "The start of the period to query entries.",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "reports.message.channels": {
+        "name": "channels",
+        "in": "query",
+        "required": false,
+        "description": "A comma-separated list of the channels identifier.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "reports.message.endDate": {
+        "name": "endDate",
+        "in": "query",
+        "required": true,
+        "description": "The end of the period to query entries.",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "reports.message.startDate": {
+        "name": "startDate",
+        "in": "query",
+        "required": true,
+        "description": "The start of the period to query entries.",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "reports.message.type": {
+        "name": "type",
+        "in": "query",
+        "required": false,
+        "description": "The type of the messages.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "message",
+            "notification"
+          ]
+        }
+      },
+      "templates.channel": {
+        "name": "channel",
+        "in": "query",
+        "required": false,
+        "description": "Filter by channel",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "WHATSAPP"
+          ]
+        },
+        "example": "WHATSAPP"
+      },
+      "templates.senderId": {
+        "name": "senderId",
+        "in": "query",
+        "required": false,
+        "description": "Filter by senderId",
+        "schema": {
+          "type": "string"
+        },
+        "example": "b5agf1-y237-11e8-b127-1230f6c2d98m"
+      },
+      "templates.status": {
+        "name": "status",
+        "in": "query",
+        "description": "Filter by status",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "WAITING_REVIEW",
+            "REJECTED",
+            "WAITING_APPROVAL",
+            "APPROVED"
+          ]
+        },
+        "example": "APPROVED"
+      }
+    },
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {
+      "JWT": {
+        "description": "User JWT token used for Zenvia front-end service",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "TOKEN": {
+        "description": "Token created on API console for clients using server to server integration",
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-TOKEN"
+      }
+    },
+    "links": {},
+    "callbacks": {
+      "subscription-event": {
+        "{$request.body#/webhook/url}": {
+          "post": {
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/events.all"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "webhook successfully processed and no retries will be performed"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "JWT": []
+    },
+    {
+      "TOKEN": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Content types",
+      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp and Facebook channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS | Facebook | WhatsApp |\n|---|:---:|:---:|:---:|\n| text | &#10004; | &#10004; | &#10004; |\n| file | &#10005; | &#10004; | &#10004; |\n| contacts | &#10005; | &#10005; | &#10004; |\n| location | &#10005; | &#10005; | &#10004; |\n| template | &#10005; | &#10005; | &#10004; |\n\n## Text\nThis type of content is the most used type of content, and its composed of a plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" />\n\n## File\nThis is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Contacts\nUse this type of content to send contacts information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis content is used to send location messages representing a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nTemplate contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.\n"
+    },
+    {
+      "name": "SMS",
+      "description": "The SMS channel can be used after your activation on Zenvia platform.\n\n## SMS sender and recipient\n\nWhen you send some message for one contact using SMS channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the SMS sender id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS sender id\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+    },
+    {
+      "name": "WhatsApp",
+      "description": "The WhatsApp channel can be used after your activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+    },
+    {
+      "name": "Facebook",
+      "description": "The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n"
+    },
+    {
+      "name": "Templates",
+      "description": "Message Templates are message formats for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.\n\nTemplates have the following components:\n* header\n* body\n* footer\n* buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standart message templates\n\nThe standard message templates enables you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the content you can send recipients beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the content you can send recipients beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are two types of predefined buttons offered:\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT` if you subscribed to that kind of event. The `MESSAGE_EVENT` will contains one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive template.\n\nYou can know more about it in the [subscriptions section](#section/MESSAGE)."
+    },
+    {
+      "name": "Message Report",
+      "description": "Report to show all messages sent and received in a period, it may also filter by channel or type.\n"
+    },
+    {
+      "name": "Flow Report",
+      "description": "Report to provide current state of sessions (executions) of flows in a period. These states contain session variables and their current value. The report can be filtered by flow, dispatch or session."
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Messaging",
+      "tags": [
+        "Content types",
+        "SMS",
+        "WhatsApp",
+        "Facebook"
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "name": "Templates",
+      "tags": [
+        "Templates"
+      ]
+    },
+    {
+      "name": "Reports",
+      "tags": [
+        "Message Report",
+        "Flow Report"
+      ]
+    }
+  ]
+}
