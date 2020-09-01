@@ -274,9 +274,9 @@
     },
     "/subscriptions": {
       "post": {
-        "description": "Create a new subscription",
+        "description": "Create a new webhook",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
@@ -309,13 +309,13 @@
         }
       },
       "get": {
-        "description": "List all subscriptions",
+        "description": "List all webhooks",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
-            "description": "Subscription Object List",
+            "description": "Webhook Object List",
             "content": {
               "application/json": {
                 "schema": {
@@ -335,13 +335,13 @@
     },
     "/subscriptions/{subscriptionId}": {
       "get": {
-        "description": "Retrieve one subscription by id",
+        "description": "Retrieve one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "200": {
-            "description": "Subscription Object",
+            "description": "Webhook Object",
             "content": {
               "application/json": {
                 "schema": {
@@ -356,9 +356,9 @@
         }
       },
       "delete": {
-        "description": "Delete one subscription by id",
+        "description": "Delete one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "responses": {
           "204": {
@@ -370,9 +370,9 @@
         }
       },
       "patch": {
-        "description": "Update one subscription by id",
+        "description": "Update one webhook by id",
         "tags": [
-          "Subscriptions"
+          "Webhooks"
         ],
         "requestBody": {
           "content": {
@@ -385,7 +385,7 @@
         },
         "responses": {
           "200": {
-            "description": "Subscription Object",
+            "description": "Webhook Object",
             "content": {
               "application/json": {
                 "schema": {
@@ -2605,19 +2605,19 @@
     },
     {
       "name": "SMS",
-      "description": "The SMS channel can be used after your activation on Zenvia platform.\n\n## SMS sender and recipient\n\nWhen you send some message for one contact using SMS channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the SMS sender id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS sender id\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/><br/>\n\n### ZenAPI vs SMS API\nZenAPI allows you to use multiple channels. However, if you are interested in just\nthe SMS channel, you may access the old API version, which for now have more\nSMS features.\n\nFor more information about our [SMS API](https://zenviasmsenus.docs.apiary.io/#),\nvisit its [documentation](https://zenviasmsenus.docs.apiary.io/#).\n\n## SMS sender and recipient\nWhen you send some message for one contact using SMS channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the SMS sender id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS sender id\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
     },
     {
       "name": "WhatsApp",
-      "description": "The WhatsApp channel can be used after your activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+      "description": "The WhatsApp channel may be used after its activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
     },
     {
       "name": "Facebook",
-      "description": "The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
+      "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
     },
     {
-      "name": "Subscriptions",
-      "description": "Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n"
+      "name": "Webhooks",
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:\n* There will be at least 30 seconds between each request attempt for the same event.\n* There will be at most 30 request attempts for the same event.\n\nThis means a single event may be retried for around 15 minutes. After this the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: This is the initial status for every webhook created.\n* **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.\n* **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with *INACTIVE* status.\n\nThe rules which trigger status changes are the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion.\n    * Only slow responses on the initial request count as a fail.\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.\n  * Successful requests on retry atempts also count toward status promotion.\n  * Responses slower than *1 second* do not count either as a success or as a fail.\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
     },
     {
       "name": "Templates",
@@ -2643,9 +2643,9 @@
       ]
     },
     {
-      "name": "Subscriptions",
+      "name": "Webhooks",
       "tags": [
-        "Subscriptions"
+        "Webhooks"
       ]
     },
     {

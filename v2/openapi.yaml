@@ -491,9 +491,9 @@ paths:
       - $ref: '#/components/parameters/reports.message.type'
   /subscriptions:
     post:
-      description: Create a new subscription
+      description: Create a new webhook
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
           description: Created subscription
@@ -512,12 +512,12 @@ paths:
         onEvent:
           $ref: '#/components/callbacks/subscription-event'
     get:
-      description: List all subscriptions
+      description: List all webhooks
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
-          description: Subscription Object List
+          description: Webhook Object List
           content:
             application/json:
               schema:
@@ -528,12 +528,12 @@ paths:
           $ref: '#/components/responses/error'
   '/subscriptions/{subscriptionId}':
     get:
-      description: Retrieve one subscription by id
+      description: Retrieve one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '200':
-          description: Subscription Object
+          description: Webhook Object
           content:
             application/json:
               schema:
@@ -541,18 +541,18 @@ paths:
         default:
           $ref: '#/components/responses/error'
     delete:
-      description: Delete one subscription by id
+      description: Delete one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       responses:
         '204':
           description: No content
         default:
           $ref: '#/components/responses/error'
     patch:
-      description: Update one subscription by id
+      description: Update one webhook by id
       tags:
-        - Subscriptions
+        - Webhooks
       requestBody:
         content:
           application/json:
@@ -560,7 +560,7 @@ paths:
               $ref: '#/components/schemas/subscription.partial-subscription'
       responses:
         '200':
-          description: Subscription Object
+          description: Webhook Object
           content:
             application/json:
               schema:
@@ -2151,10 +2151,18 @@ tags:
       If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
   - name: SMS
     description: |-
-      The SMS channel can be used after your activation on Zenvia platform.
+      The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      <br/><br/>
+
+      ### ZenAPI vs SMS API
+      ZenAPI allows you to use multiple channels. However, if you are interested in just
+      the SMS channel, you may access the old API version, which for now have more
+      SMS features.
+
+      For more information about our [SMS API](https://zenviasmsenus.docs.apiary.io/#),
+      visit its [documentation](https://zenviasmsenus.docs.apiary.io/#).
 
       ## SMS sender and recipient
-
       When you send some message for one contact using SMS channel:
 
       * Recipient: is the phone number of contact
@@ -2168,9 +2176,9 @@ tags:
       In API the sender is the field `from` and the receiver is the field `to` of message object.
   - name: WhatsApp
     description: |-
-      The WhatsApp channel can be used after your activation on Zenvia platform.
+      The WhatsApp channel may be used after its activation on Zenvia platform.
 
-      To activate WhatsApp you a need a registered number on WhatsApp Business API and account informations configured on Zenvia platform.
+      To activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.
 
       **Get in touch with Zenvia consultants to start your account creation.**
 
@@ -2207,7 +2215,7 @@ tags:
       In API the sender is the field `from` and the receiver is the field `to` of message object.
   - name: Facebook
     description: |
-      The Facebook channel can be used after that you add Facebook Pages on Zenvia platform.
+      The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
       ## Facebook sender and recipient
 
@@ -2222,9 +2230,9 @@ tags:
       * Sender: is the user id on your page (PSID - page scoped id)
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
-  - name: Subscriptions
+  - name: Webhooks
     description: |
-      Subscriptions allow you to receive events in configured webhooks. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
+      Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
 
       ## MESSAGE
 
@@ -2261,6 +2269,47 @@ tags:
       * *READ: "**The message has been read by the recipient**".*
       * *REJECTED: "**The message was rejected by the provider**".*
       * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
+
+
+      ## Webhook request error handling
+      As described before, webhooks allow you to receive events in your application.
+
+      However, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:
+      * There will be at least 30 seconds between each request attempt for the same event.
+      * There will be at most 30 request attempts for the same event.
+
+      This means a single event may be retried for around 15 minutes. After this the event will no longer be available.
+
+      Event retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.
+      <br/><br/>
+
+      ### Webhook (quality) status handling
+      Multiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:
+      * **ACTIVE**: This is the initial status for every webhook created.
+      * **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.
+      <br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.
+      <br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.
+      * **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.
+      Events no longer will be posted on webhooks with *INACTIVE* status.
+
+      The rules which trigger status changes are the following:
+      * 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.
+      * 500 consecutive request fails will result in demotion to *INACTIVE*.
+        * Responses slower than *1 second* also count as a fail and may result in status demotion.
+          * Only slow responses on the initial request count as a fail.
+          * Only slow responses on an *ACTIVE* webhook count as a fail.
+           <br>Therefore, slow responses should never result in demotion to *INACTIVE*.
+        * All connection timeouts count as fail and may result in status demotion.
+          <br>The connection timeout is *8 seconds*.
+        * All response (read) timeouts count as fail and may result in status demotion.
+          <br>The response timeout is *8 seconds*.
+      * 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.
+        * Successful requests on retry atempts also count toward status promotion.
+        * Responses slower than *1 second* do not count either as a success or as a fail.
+      * Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically
+      promote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.
+
+      Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
   - name: Templates
     description: |-
       Message Templates are message formats for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.
@@ -2312,9 +2361,9 @@ x-tagGroups:
       - SMS
       - WhatsApp
       - Facebook
-  - name: Subscriptions
+  - name: Webhooks
     tags:
-      - Subscriptions
+      - Webhooks
   - name: Templates
     tags:
       - Templates
