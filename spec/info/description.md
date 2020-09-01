@@ -37,6 +37,44 @@ When you create a new Sandbox, you will be guided step-by-step to send and recei
 
 [Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
+# API versions
+
+All notable changes to ZenAPI will be documented here.
+
+<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->
+<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->
+
+Currently the ZenAPI is on version v2
+
+You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
+
+v2:
+
+    2020-09-01
+
+Breaking Changes
+
+* Does not use visitor as a json within contents block. Use the visitor sent in ".visitor" instead of ".contents[type = json].payload.visitor"
+* Location is no longer used as json
+* Removed deprecated template channels
+
+v1:
+
+    2020-02-01
+
+Added
+
+* Added templates
+* Added reporting API
+
+    
+    2020-01-01
+
+Added
+
+* Added Subscription section
+* Added WhatsApp, SMS and Facebook Channels sections
+
 # SDKs
 
 SDKs make it easy to use our APIs just by including them in your software.
