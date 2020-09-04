@@ -26,7 +26,7 @@ const tags: TagObject[] = [{
 }, {
   name: 'Batches',
   description: batchesDescription,
-},{
+}, {
   name: 'Webhooks',
   description: subscriptionsDescription,
 }, {

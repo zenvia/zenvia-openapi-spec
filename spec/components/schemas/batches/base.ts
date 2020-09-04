@@ -16,18 +16,17 @@ const base: SchemaObject = {
     name: {
       title: 'Batch Name',
       description: 'Batch identification name sent',
-      type: 'string'
+      type: 'string',
     },
     channel: {
       title: 'Channel',
       description: 'Message channel',
       type: 'string',
-      readOnly: true,
     },
   },
   required: [
     'name',
-    'channel'
+    'channel',
   ],
 };
 

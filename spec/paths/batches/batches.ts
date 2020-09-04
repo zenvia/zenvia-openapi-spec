@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as batchRef } from '../../components/schemas/batches/base';
+import { ref as batchRef } from '../../components/schemas/batches/batch';
 
 const post: OperationObject = {
   description: 'Create batch',
@@ -10,17 +10,21 @@ const post: OperationObject = {
     content: {
       'multipart/form-data': {
         schema: {
+          type: 'object',
           properties: {
-            file: {
+            batch: {
+              $ref: batchRef,
+            },
+            contacts: {
               type: 'string',
               title: 'CSV File',
               description: 'CSV file with recipients and variable values ​​when necessary.',
-              format: 'binary'
+              format: 'binary',
             },
-            batch: { //TODO batch
-              $ref: batchRef
-            }
           },
+          required: [
+            'batch',
+          ],
         },
       },
     },
