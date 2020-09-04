@@ -23,6 +23,12 @@ const base: SchemaObject = {
       description: 'Message channel',
       type: 'string',
     },
+    contacts: {
+      type: 'object',
+    },
+    columnMap: {
+      type: 'object',
+    },
   },
   required: [
     'name',
