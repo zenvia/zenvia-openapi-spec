@@ -1,0 +1,38 @@
+{
+  "name": "send contacts content",
+  "request": {
+    "method": "POST",
+    "path": "/batches",
+    "query": {},
+    "headers": {
+      "content-type": "multipart/form-data"
+    },
+    "body": {
+      "batch": {
+        "name": "BATCH NAME",
+        "channel": "WHATSAPP",
+        "message": {
+          "type": "template",
+          "templateId": "ID",
+          "fields": {}
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "BATCH ID",
+      "name": "BATCH NAME",
+      "channel": "WHATSAPP",
+      "message": {
+        "type": "template",
+        "templateId": "ID",
+        "fields": {}
+      }
+    }
+  }
+}
