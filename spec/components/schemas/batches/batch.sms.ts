@@ -13,14 +13,17 @@ const obj: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      message: {
-        oneOf: [{
-          $ref: textContentRef,
-        }],
-        discriminator: {
-          propertyName: 'type',
-          mapping: {
-            text: textContentRef,
+      contents: {
+        type: 'array',
+        items: {
+          oneOf: [{
+            $ref: textContentRef,
+          }],
+          discriminator: {
+            propertyName: 'type',
+            mapping: {
+              text: textContentRef,
+            },
           },
         },
       },
