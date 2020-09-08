@@ -1,10 +1,9 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
-import { ref as baseRef } from './base';
-import { ref as textContentRef } from '../content/text';
+import { createComponentRef } from '../../../../../utils/ref';
+import { ref as baseRef } from '../base';
 
-const obj: SchemaObject = {
+const base: SchemaObject = {
   title: 'Batch Object',
   description: 'This is a Batch object model.',
   type: 'object',
@@ -13,6 +12,9 @@ const obj: SchemaObject = {
   }, {
     type: 'object',
     properties: {
+      columnMapper: {
+        type: 'object',
+      },
       message: {
         type: 'object',
         properties: {
@@ -22,27 +24,22 @@ const obj: SchemaObject = {
             type: 'string',
           },
           contents: {
+            title: 'Message Contents',
+            description: 'A list of content to be sent',
             type: 'array',
             items: {
-              oneOf: [{
-                $ref: textContentRef,
-              }],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  text: textContentRef,
-                },
-              },
+              type: 'object',
             },
           },
         },
       },
     },
     required: [
-      'message'
+      'message',
+      'columnMapper',
     ],
   }],
 };
 
 export const ref = createComponentRef(__filename);
-export default obj;
+export default base;

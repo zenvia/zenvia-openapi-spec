@@ -1,8 +1,8 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as smsBatchRef } from './batch.sms';
-import { ref as whatsAppBatchRef } from './batch.whatsapp';
+import { ref as smsBatchRef } from './multipart/batch.sms';
+import { ref as whatsAppBatchRef } from './multipart/batch.whatsapp';
 
 const base: SchemaObject = {
   title: 'Batch Object',

@@ -11,10 +11,10 @@
       "batch": {
         "name": "BATCH NAME",
         "channel": "WHATSAPP",
+        "columnMapper": {},
         "message": {
           "type": "template",
-          "templateId": "ID",
-          "fields": {}
+          "templateId": "ID"
         }
       }
     }
@@ -28,10 +28,10 @@
       "id": "BATCH ID",
       "name": "BATCH NAME",
       "channel": "WHATSAPP",
+      "columnMapper": {},
       "message": {
         "type": "template",
-        "templateId": "ID",
-        "fields": {}
+        "templateId": "ID"
       }
     }
   }
