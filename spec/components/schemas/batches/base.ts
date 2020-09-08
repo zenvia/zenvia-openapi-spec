@@ -8,7 +8,7 @@ const base: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Message ID',
+      title: 'Batch ID',
       description: 'An ID for this message. This can be used for future message consulting or callback notifications.',
       type: 'string',
       readOnly: true,

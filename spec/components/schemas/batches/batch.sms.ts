@@ -13,23 +13,33 @@ const obj: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      contents: {
-        type: 'array',
-        items: {
-          oneOf: [{
-            $ref: textContentRef,
-          }],
-          discriminator: {
-            propertyName: 'type',
-            mapping: {
-              text: textContentRef,
+      message: {
+        type: 'object',
+        properties: {
+          from: {
+            title: 'Sender ID',
+            description: 'This is the identifier of sender of this message. The sender shoud be created with a credential.',
+            type: 'string',
+          },
+          contents: {
+            type: 'array',
+            items: {
+              oneOf: [{
+                $ref: textContentRef,
+              }],
+              discriminator: {
+                propertyName: 'type',
+                mapping: {
+                  text: textContentRef,
+                },
+              },
             },
           },
         },
       },
     },
     required: [
-      'message',
+      'message'
     ],
   }],
 };
