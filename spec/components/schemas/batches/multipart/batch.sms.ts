@@ -2,7 +2,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as multipartBaseRef } from './base';
-import { ref as textContentRef } from '../../content/text';
+import { ref as textContentRef } from './content/text';
 
 const obj: SchemaObject = {
   title: 'Batch Object',
