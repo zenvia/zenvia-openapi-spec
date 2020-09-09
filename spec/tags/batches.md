@@ -17,4 +17,4 @@ Supported channels are **SMS** and **WhatsApp**.
 * The file must be in **.csv** format;
 * The maximum file size is **50MB**;
 * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
-* There must be a column filled with the recipients' phone numbers. If your content has variables, there must be corresponding columns.
+* The first line of the file is dedicated to the header. There must be a column that has the recipients' phone numbers. If your content has variables, there must be corresponding columns.
