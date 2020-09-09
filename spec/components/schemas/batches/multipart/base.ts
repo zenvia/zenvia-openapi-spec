@@ -2,6 +2,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as baseRef } from '../base';
+import { ref as messageRef } from './message';
 
 const base: SchemaObject = {
   title: 'Batch Object',
@@ -13,25 +14,17 @@ const base: SchemaObject = {
     type: 'object',
     properties: {
       columnMapper: {
+        title: 'Column Mapper',
         type: 'object',
+        description: 'The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required because the column of the file that has the recipient`s contact number must be related to this variable.',
+        example: {
+          recipient_header_name: 'recipient_number_column',
+          name: 'recipient_name_column',
+          protocol: 'protocol_column',
+        },
       },
       message: {
-        type: 'object',
-        properties: {
-          from: {
-            title: 'Sender ID',
-            description: 'This is the identifier of sender of this message. The sender shoud be created with a credential.',
-            type: 'string',
-          },
-          contents: {
-            title: 'Message Contents',
-            description: 'A list of content to be sent',
-            type: 'array',
-            items: {
-              type: 'object',
-            },
-          },
-        },
+        $ref: messageRef,
       },
     },
     required: [

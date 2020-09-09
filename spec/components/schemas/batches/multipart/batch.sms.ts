@@ -13,7 +13,7 @@ const obj: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      messages: {
+      message: {
         type: 'object',
         properties: {
           contents: {

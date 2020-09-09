@@ -9,13 +9,13 @@ const base: SchemaObject = {
   properties: {
     id: {
       title: 'Batch ID',
-      description: 'An ID for this message. This can be used for future message consulting or callback notifications.',
+      description: 'Batch identifier created automatically',
       type: 'string',
       readOnly: true,
     },
     name: {
       title: 'Batch Name',
-      description: 'Batch identification name sent',
+      description: 'Batch identification name',
       type: 'string',
     },
     channel: {
