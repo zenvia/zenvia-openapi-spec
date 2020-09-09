@@ -5,9 +5,6 @@ import { ref as multipartBaseRef } from './base';
 import { ref as templateContentRef } from './content/template';
 
 const obj: SchemaObject = {
-  title: 'Batch Object',
-  description: 'This is a Batch object model.',
-  type: 'object',
   allOf: [{
     $ref: multipartBaseRef,
   }, {
