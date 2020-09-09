@@ -13,8 +13,11 @@
         "channel": "WHATSAPP",
         "columnMapper": {},
         "message": {
-          "type": "template",
-          "templateId": "ID"
+          "from": "SENDER ID",
+          "contents": [{
+            "type": "template",
+            "templateId": "ID"
+          }]
         }
       }
     }
@@ -25,13 +28,15 @@
       "content-type": "application/json"
     },
     "body": {
-      "id": "BATCH ID",
       "name": "BATCH NAME",
       "channel": "WHATSAPP",
       "columnMapper": {},
       "message": {
-        "type": "template",
-        "templateId": "ID"
+        "from": "SENDER ID",
+        "contents": [{
+          "type": "template",
+          "templateId": "ID"
+        }]
       }
     }
   }
