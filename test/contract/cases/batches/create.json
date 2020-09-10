@@ -11,6 +11,7 @@
       "batch": {
         "name": "BATCH NAME",
         "channel": "WHATSAPP",
+        "standardAnswer": "STANDARD_ANSWER",
         "columnMapper": {},
         "message": {
           "from": "SENDER ID",
@@ -30,6 +31,7 @@
     "body": {
       "name": "BATCH NAME",
       "channel": "WHATSAPP",
+      "standardAnswer": "STANDARD_ANSWER",
       "columnMapper": {},
       "message": {
         "from": "SENDER ID",

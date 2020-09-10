@@ -23,6 +23,11 @@ const base: SchemaObject = {
       description: 'Message channel',
       type: 'string',
     },
+    starndardAnswer: {
+      title: 'Standard Answer',
+      description: 'Standard answer to be sent if recipient to reply the message sent',
+      type: 'string',
+    },
   },
   required: [
     'name',
