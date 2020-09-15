@@ -16,13 +16,13 @@ const post: OperationObject = {
               type: 'string',
               title: 'CSV File',
               description: 'CSV file with recipients and variable values ​​when necessary.',
-              format: 'binary',
             },
             batch: {
               $ref: multipartBatchRef,
             },
           },
           required: [
+            'contacts',
             'batch',
           ],
         },

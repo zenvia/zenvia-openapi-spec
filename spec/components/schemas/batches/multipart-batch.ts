@@ -15,8 +15,8 @@ const base: SchemaObject = {
   discriminator: {
     propertyName: 'channel',
     mapping: {
-      SMS: multipartSmsBatchRef,
-      WHATSAPP: multipartWhatsAppBatchRef,
+      sms: multipartSmsBatchRef,
+      whatsapp: multipartWhatsAppBatchRef,
     },
   },
 };
