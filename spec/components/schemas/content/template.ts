@@ -30,7 +30,6 @@ const template: SchemaObject = {
     required: [
       'type',
       'templateId',
-      'fields',
     ],
   }],
 };

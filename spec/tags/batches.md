@@ -8,7 +8,7 @@ Supported channels are **SMS** and **WhatsApp**.
 | text | &#10004; | &#10005; |
 | template | &#10005; | &#10004; |
 
-> To send batch with WhatsApp channel you must have ([a template message](#section/Template)), which needs an approval before being used.
+> To send batch with WhatsApp channel you must have a template message, which needs an approval before being used.
 
 <br/>
 

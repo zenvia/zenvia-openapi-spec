@@ -2,7 +2,7 @@
   "name": "send contacts content",
   "request": {
     "method": "POST",
-    "path": "/batches",
+    "path": "/message-batches",
     "query": {},
     "headers": {
       "content-type": "multipart/form-data"
