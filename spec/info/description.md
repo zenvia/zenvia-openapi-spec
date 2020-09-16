@@ -46,34 +46,30 @@ All notable changes to ZenAPI will be documented here.
 
 Currently the ZenAPI is on version v2
 
+## v2 (current)
+
+### 2020-09-01
+
+* Breaking Changes
+    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.
+    * Location is no longer used as JSON.
+    * Removed deprecated `channels` attribute from template resource.
+
+## v1 (deprecated)
+
 You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
 
-v2:
+### 2020-02-01
 
-    2020-09-01
+* Added
+    * Added templates.
+    * Added reporting API.
 
-Breaking Changes
+### 2020-01-01
 
-* Does not use visitor as a json within contents block. Use the visitor sent in ".visitor" instead of ".contents[type = json].payload.visitor"
-* Location is no longer used as json
-* Removed deprecated template channels
-
-v1:
-
-    2020-02-01
-
-Added
-
-* Added templates
-* Added reporting API
-
-    
-    2020-01-01
-
-Added
-
-* Added Subscription section
-* Added WhatsApp, SMS and Facebook Channels sections
+* Added
+    * Added Subscription section.
+    * Added WhatsApp, SMS and Facebook Channels sections.
 
 # SDKs
 
