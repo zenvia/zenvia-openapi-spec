@@ -8,7 +8,9 @@ When you are subscribed in this type of event, your webhook will receive a reque
 
 <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
 
-The <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: IN or OUT.
+The <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: **IN** or **OUT**.
+
+> **Note:** The **OUT** direction is under construction.
 
 ## MESSAGE_STATUS
 
