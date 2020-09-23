@@ -37,7 +37,7 @@ const subscriptionBase: SchemaObject = {
         'v1',
         'v2',
       ],
-      default: 'v1',
+      default: 'v2',
     },
     createdAt: {
       title: 'Creation timestamp',

@@ -89,43 +89,6 @@ const template: SchemaObject = {
         'APPROVED',
       ],
     },
-    channels: {
-      title: 'Channels',
-      deprecated: true,
-      description: 'Channels where this template can be used. _Deprecated attribute, can be removed on next API versions._',
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          type: {
-            title: 'Template type',
-            type: 'string',
-            enum: [
-              'WHATSAPP',
-              'FACEBOOK',
-              'SMS',
-            ],
-          },
-          senderId: {
-            title: 'Sender ID',
-            type: 'string',
-          },
-          status: {
-            title: 'Status of template',
-            type: 'string',
-            enum: [
-              'APPROVED',
-              'REFUSED',
-              'PENDING',
-              'CANCELED',
-            ],
-          },
-        },
-      },
-      minItems: 1,
-      maxItems: 1,
-      readOnly: true,
-    },
     createdAt: {
       title: 'Creation timestamp',
       description: 'Creation timestamp in ISO format',
