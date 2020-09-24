@@ -24,7 +24,7 @@ const base: SchemaObject = {
       title: 'Channel',
       description: 'Message channel',
       type: 'string',
-    }
+    },
   },
   required: [
     'name',
