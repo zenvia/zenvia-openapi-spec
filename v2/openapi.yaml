@@ -53,6 +53,11 @@ info:
 
     ## v2 (current)
 
+    ### 2020-09-24
+
+    * Added
+        * Added message-batches: Api to send messages in batch.
+
     ### 2020-09-01
 
     * Breaking Changes
@@ -153,6 +158,36 @@ info:
 servers:
   - url: 'https://api.zenvia.com/v2'
 paths:
+  /message-batches:
+    post:
+      description: Create batch
+      tags:
+        - Batches
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contacts:
+                  type: string
+                  title: Binary CSV File
+                  description: Binary csv file with recipients and variable values ​​when necessary.
+                batch:
+                  $ref: '#/components/schemas/batches.multipart-batch'
+              required:
+                - contacts
+                - batch
+      responses:
+        '200':
+          description: Created batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/batches.multipart-batch'
+        default:
+          $ref: '#/components/responses/error'
   /channels/facebook/messages:
     post:
       description: Send a Facebook message
@@ -735,6 +770,146 @@ paths:
       - $ref: '#/components/parameters/templateCommentId'
 components:
   schemas:
+    batches.base:
+      title: Batch Object
+      description: This is a Batch object model.
+      type: object
+      properties:
+        id:
+          title: Batch ID
+          description: Batch identifier created automatically
+          type: string
+          example: ad48e792-7d6e-464f-a478-df3239475016
+          readOnly: true
+        name:
+          title: Batch Name
+          description: Batch identification name
+          type: string
+          example: My batch name
+        channel:
+          title: Channel
+          description: Message channel
+          type: string
+      required:
+        - name
+        - channel
+    batches.multipart-batch:
+      title: Batch Object
+      description: This is a Batch object model.
+      oneOf:
+        - $ref: '#/components/schemas/batches.multipart.batch.sms'
+        - $ref: '#/components/schemas/batches.multipart.batch.whatsapp'
+      discriminator:
+        propertyName: channel
+        mapping:
+          sms: '#/components/schemas/batches.multipart.batch.sms'
+          whatsapp: '#/components/schemas/batches.multipart.batch.whatsapp'
+    batches.multipart.base:
+      title: Batch Object
+      description: This is a Batch object model.
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/batches.base'
+        - type: object
+          properties:
+            columnMapper:
+              title: Column Mapper
+              type: object
+              description: The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required because the column of the file that has the recipient`s contact number must be related to this variable.
+              example:
+                recipient_header_name: recipient_number_column
+                name: recipient_name_column
+                protocol: protocol_column
+            message:
+              $ref: '#/components/schemas/batches.multipart.message'
+          required:
+            - message
+            - columnMapper
+    batches.multipart.batch.sms:
+      allOf:
+        - $ref: '#/components/schemas/batches.multipart.base'
+        - type: object
+          properties:
+            message:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: '#/components/schemas/batches.multipart.content.text'
+                    discriminator:
+                      propertyName: type
+                      mapping:
+                        text: '#/components/schemas/batches.multipart.content.text'
+    batches.multipart.batch.whatsapp:
+      allOf:
+        - $ref: '#/components/schemas/batches.multipart.base'
+        - type: object
+          properties:
+            message:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: '#/components/schemas/batches.multipart.content.template'
+                    discriminator:
+                      propertyName: type
+                      mapping:
+                        template: '#/components/schemas/batches.multipart.content.template'
+    batches.multipart.message:
+      title: Message Object
+      description: This is a Message object model.
+      type: object
+      properties:
+        from:
+          title: Sender ID
+          description: This is the identifier of sender of this message. The sender shoud be created with a credential.
+          type: string
+        contents:
+          title: Message Contents
+          description: A list of content to be sent
+          type: array
+          minItems: 1
+          items:
+            type: object
+      required:
+        - from
+        - contents
+    batches.multipart.content.template:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: template
+            templateId:
+              type: string
+              description: 'The template identifier. Click <a href="https://app.zenvia.com/home/templates" target="_blank">here</a> to go to the template page.'
+              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
+          required:
+            - type
+            - templateId
+    batches.multipart.content.text:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: text
+            text:
+              description: 'Text to be sent to all recipients in the contact file. The text supports the use of variables, for its creation the following pattern must be used: **{{variable}}**'
+              type: string
+              example: 'Hello {{name}} your service protocol is number {{protocol}}'
+          required:
+            - type
+            - text
     content.base:
       type: object
       properties:
@@ -1030,7 +1205,6 @@ components:
           required:
             - type
             - templateId
-            - fields
     content.text:
       type: object
       allOf:
@@ -2235,6 +2409,28 @@ tags:
       * Sender: is the user id on your page (PSID - page scoped id)
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
+  - name: Batches
+    description: |
+      The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
+      <br/><br/>
+      The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).
+      Supported channels are **SMS** and **WhatsApp**.
+
+      | Content Type | SMS | WhatsApp |
+      |---|:---:|:---:|
+      | text | &#10004; | &#10005; |
+      | template | &#10005; | &#10004; |
+
+      > To send batch with WhatsApp channel you must have a template message, which needs an approval before being used.
+
+      <br/>
+
+      ### What you need to know about the contacts file
+
+      * The file must be in **.csv** format;
+      * The maximum file size is **50MB**;
+      * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
+      * The first line of the file is dedicated to the header. There must be a column that has the recipients' phone numbers. If your content has variables, there must be corresponding columns.
   - name: Webhooks
     description: |
       Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
@@ -2368,6 +2564,7 @@ x-tagGroups:
       - SMS
       - WhatsApp
       - Facebook
+      - Batches
   - name: Webhooks
     tags:
       - Webhooks

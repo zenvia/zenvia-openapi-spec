@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0.0",
     "title": "ZenAPI",
-    "description": "# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API.\n\nThis API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.\n\n## What you can do with this API\n\nYou can send messages for the following channels:\n\n* SMS\n* WhatsApp\n* Facebook\n\nYou can subscribe for some events and receive then in one webhook endpoint.\nThe available events are:\n\n* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.\n* Messages status: You can receive status update for sent messages.\n\n## What you need before start\n\nBefore use this API you need the following prerequisites:\n\n* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)\n* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)\n* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)\n\nYou can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.\n\n# Getting started with Sandbox\n\nThe fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).\n\nWhen you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.\n\n[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\n# API versions\n\nAll notable changes to ZenAPI will be documented here.\n\n<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->\n<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->\n\nCurrently the ZenAPI is on version v2\n\n## v2 (current)\n\n### 2020-09-01\n\n* Breaking Changes\n    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking <a target=\"_blank\" href=\"https://zenvia.github.io/zenvia-openapi-spec/v1/\">here</a>.\n\n### 2020-02-01\n\n* Added\n    * Added templates.\n    * Added reporting API.\n\n### 2020-01-01\n\n* Added\n    * Added Subscription section.\n    * Added WhatsApp, SMS and Facebook Channels sections.\n\n# SDKs\n\nSDKs make it easy to use our APIs just by including them in your software.\n\nThese helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).\n\n# HTTP Methods\n\nHTTP methods are used for manipulate resources.\n\nNot all resources have all operations, see the reference of each resource.\n\nMethods used with collection endpoints:\n\n| Http Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - Ok            |\n| POST             | Create a new item        | 200 - Ok            |\n\nMethods used with item endpoints:\n\n| Http Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - Ok            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - Ok            |\n\nWhen one operation is executed successfully, the API will respond with 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.\n\nThe error object have the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## TOKEN\nTo use this API you need to send the API token in all requests.\n\nThis TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.\n\nExample:\n```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```\n\nYou can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.\n",
+    "description": "# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API.\n\nThis API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.\n\n## What you can do with this API\n\nYou can send messages for the following channels:\n\n* SMS\n* WhatsApp\n* Facebook\n\nYou can subscribe for some events and receive then in one webhook endpoint.\nThe available events are:\n\n* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.\n* Messages status: You can receive status update for sent messages.\n\n## What you need before start\n\nBefore use this API you need the following prerequisites:\n\n* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)\n* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)\n* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)\n\nYou can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.\n\n# Getting started with Sandbox\n\nThe fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).\n\nWhen you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.\n\n[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\n# API versions\n\nAll notable changes to ZenAPI will be documented here.\n\n<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->\n<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->\n\nCurrently the ZenAPI is on version v2\n\n## v2 (current)\n\n### 2020-09-24\n\n* Added\n    * Added message-batches: Api to send messages in batch.\n\n### 2020-09-01\n\n* Breaking Changes\n    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking <a target=\"_blank\" href=\"https://zenvia.github.io/zenvia-openapi-spec/v1/\">here</a>.\n\n### 2020-02-01\n\n* Added\n    * Added templates.\n    * Added reporting API.\n\n### 2020-01-01\n\n* Added\n    * Added Subscription section.\n    * Added WhatsApp, SMS and Facebook Channels sections.\n\n# SDKs\n\nSDKs make it easy to use our APIs just by including them in your software.\n\nThese helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).\n\n# HTTP Methods\n\nHTTP methods are used for manipulate resources.\n\nNot all resources have all operations, see the reference of each resource.\n\nMethods used with collection endpoints:\n\n| Http Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - Ok            |\n| POST             | Create a new item        | 200 - Ok            |\n\nMethods used with item endpoints:\n\n| Http Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - Ok            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - Ok            |\n\nWhen one operation is executed successfully, the API will respond with 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.\n\nThe error object have the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## TOKEN\nTo use this API you need to send the API token in all requests.\n\nThis TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.\n\nExample:\n```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```\n\nYou can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.\n",
     "termsOfService": "https://zenvia.com/",
     "contact": {
       "name": "API Support",
@@ -24,6 +24,53 @@
     }
   ],
   "paths": {
+    "/message-batches": {
+      "post": {
+        "description": "Create batch",
+        "tags": [
+          "Batches"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contacts": {
+                    "type": "string",
+                    "title": "Binary CSV File",
+                    "description": "Binary csv file with recipients and variable values ​​when necessary."
+                  },
+                  "batch": {
+                    "$ref": "#/components/schemas/batches.multipart-batch"
+                  }
+                },
+                "required": [
+                  "contacts",
+                  "batch"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created batch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/batches.multipart-batch"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/channels/facebook/messages": {
       "post": {
         "description": "Send a Facebook message",
@@ -632,6 +679,229 @@
   },
   "components": {
     "schemas": {
+      "batches.base": {
+        "title": "Batch Object",
+        "description": "This is a Batch object model.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Batch ID",
+            "description": "Batch identifier created automatically",
+            "type": "string",
+            "example": "ad48e792-7d6e-464f-a478-df3239475016",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Batch Name",
+            "description": "Batch identification name",
+            "type": "string",
+            "example": "My batch name"
+          },
+          "channel": {
+            "title": "Channel",
+            "description": "Message channel",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "channel"
+        ]
+      },
+      "batches.multipart-batch": {
+        "title": "Batch Object",
+        "description": "This is a Batch object model.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/batches.multipart.batch.sms"
+          },
+          {
+            "$ref": "#/components/schemas/batches.multipart.batch.whatsapp"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "channel",
+          "mapping": {
+            "sms": "#/components/schemas/batches.multipart.batch.sms",
+            "whatsapp": "#/components/schemas/batches.multipart.batch.whatsapp"
+          }
+        }
+      },
+      "batches.multipart.base": {
+        "title": "Batch Object",
+        "description": "This is a Batch object model.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/batches.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "columnMapper": {
+                "title": "Column Mapper",
+                "type": "object",
+                "description": "The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required because the column of the file that has the recipient`s contact number must be related to this variable.",
+                "example": {
+                  "recipient_header_name": "recipient_number_column",
+                  "name": "recipient_name_column",
+                  "protocol": "protocol_column"
+                }
+              },
+              "message": {
+                "$ref": "#/components/schemas/batches.multipart.message"
+              }
+            },
+            "required": [
+              "message",
+              "columnMapper"
+            ]
+          }
+        ]
+      },
+      "batches.multipart.batch.sms": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/batches.multipart.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "object",
+                "properties": {
+                  "contents": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/batches.multipart.content.text"
+                        }
+                      ],
+                      "discriminator": {
+                        "propertyName": "type",
+                        "mapping": {
+                          "text": "#/components/schemas/batches.multipart.content.text"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "batches.multipart.batch.whatsapp": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/batches.multipart.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "object",
+                "properties": {
+                  "contents": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/batches.multipart.content.template"
+                        }
+                      ],
+                      "discriminator": {
+                        "propertyName": "type",
+                        "mapping": {
+                          "template": "#/components/schemas/batches.multipart.content.template"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "batches.multipart.message": {
+        "title": "Message Object",
+        "description": "This is a Message object model.",
+        "type": "object",
+        "properties": {
+          "from": {
+            "title": "Sender ID",
+            "description": "This is the identifier of sender of this message. The sender shoud be created with a credential.",
+            "type": "string"
+          },
+          "contents": {
+            "title": "Message Contents",
+            "description": "A list of content to be sent",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "from",
+          "contents"
+        ]
+      },
+      "batches.multipart.content.template": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "template"
+              },
+              "templateId": {
+                "type": "string",
+                "description": "The template identifier. Click <a href=\"https://app.zenvia.com/home/templates\" target=\"_blank\">here</a> to go to the template page.",
+                "example": "c2c3e42d-6fb7-4ad6-897a-dd7613469f58"
+              }
+            },
+            "required": [
+              "type",
+              "templateId"
+            ]
+          }
+        ]
+      },
+      "batches.multipart.content.text": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "text"
+              },
+              "text": {
+                "description": "Text to be sent to all recipients in the contact file. The text supports the use of variables, for its creation the following pattern must be used: **{{variable}}**",
+                "type": "string",
+                "example": "Hello {{name}} your service protocol is number {{protocol}}"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ]
+          }
+        ]
+      },
       "content.base": {
         "type": "object",
         "properties": {
@@ -1039,8 +1309,7 @@
             },
             "required": [
               "type",
-              "templateId",
-              "fields"
+              "templateId"
             ]
           }
         ]
@@ -2579,6 +2848,10 @@
       "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
     },
     {
+      "name": "Batches",
+      "description": "The batch api makes it possible to send a message with one or more contents to multiple contacts at once.\n<br/><br/>\nThe channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).\nSupported channels are **SMS** and **WhatsApp**.\n\n| Content Type | SMS | WhatsApp |\n|---|:---:|:---:|\n| text | &#10004; | &#10005; |\n| template | &#10005; | &#10004; |\n\n> To send batch with WhatsApp channel you must have a template message, which needs an approval before being used.\n\n<br/>\n\n### What you need to know about the contacts file\n\n* The file must be in **.csv** format;\n* The maximum file size is **50MB**;\n* The mandatory delimiter to be used between the values ​​is the **semicolon (\";\")**;\n* The first line of the file is dedicated to the header. There must be a column that has the recipients' phone numbers. If your content has variables, there must be corresponding columns.\n"
+    },
+    {
       "name": "Webhooks",
       "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: **IN** or **OUT**.\n\n> **Note:** The **OUT** direction is under construction.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:\n* There will be at least 30 seconds between each request attempt for the same event.\n* There will be at most 30 request attempts for the same event.\n\nThis means a single event may be retried for around 15 minutes. After this the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: This is the initial status for every webhook created.\n* **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.\n* **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with *INACTIVE* status.\n\nThe rules which trigger status changes are the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion.\n    * Only slow responses on the initial request count as a fail.\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.\n  * Successful requests on retry atempts also count toward status promotion.\n  * Responses slower than *1 second* do not count either as a success or as a fail.\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
     },
@@ -2602,7 +2875,8 @@
         "Content types",
         "SMS",
         "WhatsApp",
-        "Facebook"
+        "Facebook",
+        "Batches"
       ]
     },
     {
