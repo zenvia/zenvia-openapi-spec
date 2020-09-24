@@ -48,6 +48,11 @@ Currently the ZenAPI is on version v2
 
 ## v2 (current)
 
+### 2020-09-24
+
+* Added
+    * Added message-batches: Api to send messages in batch.
+
 ### 2020-09-01
 
 * Breaking Changes

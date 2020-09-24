@@ -14,7 +14,7 @@ const post: OperationObject = {
           properties: {
             contacts: {
               type: 'string',
-              title: 'Binary csv File',
+              title: 'Binary CSV File',
               description: 'Binary csv file with recipients and variable values ​​when necessary.',
             },
             batch: {
