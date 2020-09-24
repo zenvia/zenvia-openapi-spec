@@ -5,6 +5,7 @@ const contentTypesDescription = rawLoad(__dirname, './content-types.md');
 const smsDescription = rawLoad(__dirname, './sms.md');
 const whatsappDescription = rawLoad(__dirname, './whatsapp.md');
 const facebookDescription = rawLoad(__dirname, './facebook.md');
+const batchesDescription = rawLoad(__dirname, './batches.md');
 const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
 const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
@@ -22,6 +23,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Facebook',
   description: facebookDescription,
+}, {
+  name: 'Batches',
+  description: batchesDescription,
 }, {
   name: 'Webhooks',
   description: subscriptionsDescription,

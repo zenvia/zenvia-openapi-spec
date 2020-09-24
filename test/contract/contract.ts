@@ -53,4 +53,8 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('subscriptions');
   });
 
+  describe('batches', () => {
+    loadTestCases('batches');
+  });
+
 });

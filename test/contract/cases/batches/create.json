@@ -1,0 +1,46 @@
+{
+  "name": "send contacts content",
+  "request": {
+    "method": "POST",
+    "path": "/message-batches",
+    "query": {},
+    "headers": {
+      "content-type": "multipart/form-data"
+    },
+    "body": {
+      "contacts": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=",
+      "batch": {
+        "name": "BATCH NAME",
+        "channel": "whatsapp",
+        "standardAnswer": "STANDARD_ANSWER",
+        "columnMapper": {},
+        "message": {
+          "from": "SENDER ID",
+          "contents": [{
+            "type": "template",
+            "templateId": "ID"
+          }]
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "name": "BATCH NAME",
+      "channel": "whatsapp",
+      "standardAnswer": "STANDARD_ANSWER",
+      "columnMapper": {},
+      "message": {
+        "from": "SENDER ID",
+        "contents": [{
+          "type": "template",
+          "templateId": "ID"
+        }]
+      }
+    }
+  }
+}
