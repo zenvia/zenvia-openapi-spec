@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.com/zenvia/zenvia-openapi-spec.svg?branch=master)](https://travis-ci.com/zenvia/zenvia-openapi-spec)
 [![Dependencies](https://img.shields.io/david/zenvia/zenvia-openapi-spec.svg)](https://david-dm.org/zenvia/zenvia-openapi-spec)
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/ZenviaMobile.svg?style=social)](https://twitter.com/intent/follow?screen_name=ZenviaMobile)
+
 
 
 ## Links
