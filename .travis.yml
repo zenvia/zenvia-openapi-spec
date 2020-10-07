@@ -1,10 +1,16 @@
 language: node_js
+
 node_js:
   - "node"
+
 script:
   - npm run lint
   - npm test
   - npm run build
+
+after_success:
+  - npm run test:coveralls
+
 deploy:
   provider: script
   skip_cleanup: true
@@ -12,3 +18,8 @@ deploy:
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(v[0-9]+(-beta)?|master)$
+
+notifications:
+  email:
+    recipients:
+    - apisupport@zenvia.com

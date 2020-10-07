@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/github/license/zenvia/zenvia-openapi-spec.svg)](LICENSE.md)
 [![Build Status](https://travis-ci.com/zenvia/zenvia-openapi-spec.svg?branch=master)](https://travis-ci.com/zenvia/zenvia-openapi-spec)
+[![Coverage Status](https://coveralls.io/repos/github/zenvia/zenvia-openapi-spec/badge.svg?branch=master)](https://coveralls.io/github/zenvia/zenvia-openapi-spec?branch=master)
 [![Dependencies](https://img.shields.io/david/zenvia/zenvia-openapi-spec.svg)](https://david-dm.org/zenvia/zenvia-openapi-spec)
 
 

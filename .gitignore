@@ -1,3 +1,7 @@
 node_modules
 web_deploy
 .vscode
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
