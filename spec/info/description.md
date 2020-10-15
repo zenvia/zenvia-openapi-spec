@@ -29,6 +29,9 @@ Before use this API you need the following prerequisites:
 
 You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
 
+## How to view your consumption report
+You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api) 
+
 # Getting started with Sandbox
 
 The fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
