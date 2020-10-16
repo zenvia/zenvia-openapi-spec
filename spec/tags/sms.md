@@ -9,6 +9,9 @@ SMS features.
 For more information about our [SMS API](https://zenviasmsenus.docs.apiary.io/#),
 visit its [documentation](https://zenviasmsenus.docs.apiary.io/#).
 
+## How to view your single shots report
+You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)  
+
 ## SMS sender and recipient
 When you send some message for one contact using SMS channel:
 
