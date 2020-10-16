@@ -18,3 +18,7 @@ Supported channels are **SMS** and **WhatsApp**.
 * The maximum file size is **50MB**;
 * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
 * The first line of the file is dedicated to the header. There must be a column that has the recipients' phone numbers. If your content has variables, there must be corresponding columns.
+
+<br/>
+## How to view your batches shots report
+You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard)  
