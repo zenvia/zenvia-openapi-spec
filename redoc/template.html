@@ -21,6 +21,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon192x192.png">
     <link rel="apple-touch-icon-precomposed" type="image/png" href="../assets/favicon.png">
 
+    <!-- Purple DS -->
+    <link rel="stylesheet" href="https://zenvia-purple.s3.amazonaws.com/css/purple.min.css">
+
     <!--
     ReDoc uses font options from the parent element
     So override default browser styles
@@ -32,6 +35,29 @@
       }
       .menu-content img {
         padding: 25px;
+      }
+
+      /* Content */
+      .api-content h1 {
+        font-size: 32px;
+      }
+
+      .api-content h2 {
+        font-size: 24px;
+      }
+
+      .api-content h3 {
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      /* .api-content h4 {
+        font-size: 20px;
+        font-weight: 400;
+      } */
+
+      .api-content ul {
+        list-style: disc outside;
       }
     </style>
     {{redocHead}}

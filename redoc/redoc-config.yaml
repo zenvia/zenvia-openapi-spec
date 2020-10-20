@@ -1,10 +1,54 @@
 theme:
   colors:
     primary:
-      main: '#32329f'
+      main: '#701c9a'
+      light: '#e3d1ee'
+      dark: '#5b1487'
+    success:
+      main: '#21a330'
+    error:
+      main: '#b7213c'
+    text:
+      primary: '#2f3039'
+      secondary: '#828388'
+    # gray:
+    #   50: '#f7f7f9'
+    #   100: '#d1d2d7'
+
+  typography:
+    fontSize: '16px'
+    fontFamily: 'Nunito Sans, sans-serif'
+    fontWeight: '400'
+    lineHeight: 1.5em
+    smoothing: 'antialiased'
+    optimizeSpeed: true,
+    headings:
+      fontFamily: 'Ubuntu, sans-serif'
+      fontWeight: '300'
+    heading1:
+      transform: 'uppercase'
+      # fontSize: '40px'
+      # color:
+
   breakpoints:
     small: '600px'
     medium: '800px'
+
+  menu:
+    backgroundColor: '#ffffff'
+    width: '280px'
+    textColor: '#2f3039'
+    arrow:
+      color: '#701c9a'
+
+  rightPanel:
+    backgroundColor: '#2f3039'
+    width: '40%'
+    textColor: '#ffffff'
+
+  codeSample:
+    backgroundColor: '#000000'
+
 pathInMiddlePanel: false
 noAutoAuth: true
 jsonSampleExpandLevel: all
