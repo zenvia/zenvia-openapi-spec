@@ -8,12 +8,11 @@ theme:
       main: '#21a330'
     error:
       main: '#b7213c'
+    warning:
+      main: '#ff9720'
     text:
       primary: '#2f3039'
       secondary: '#828388'
-    # gray:
-    #   50: '#f7f7f9'
-    #   100: '#d1d2d7'
 
   typography:
     fontSize: '16px'
@@ -25,10 +24,6 @@ theme:
     headings:
       fontFamily: 'Ubuntu, sans-serif'
       fontWeight: '300'
-    heading1:
-      transform: 'uppercase'
-      # fontSize: '40px'
-      # color:
 
   breakpoints:
     small: '600px'
