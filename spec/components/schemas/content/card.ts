@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as buttonsRef} from './rcs/buttons/buttons';
-import { ref as quickReplyRef} from './rcs/quickreply';
+import { ref as buttonsRef } from './rcs/buttons/buttons';
+import { ref as quickReplyRef } from './rcs/quickreply';
 import { createComponentRef } from '../../../../utils/ref';
 
 const card: SchemaObject = {
@@ -60,19 +60,18 @@ const card: SchemaObject = {
         description: 'Array of buttons displayed inside the card. The same used on Button Menu and Quick Reply.',
         items: {
           $ref: buttonsRef,
-
-        }
+        },
       },
       quickReplyButtons: {
         type: 'array',
         description: 'Array of buttons displayed as quick reply.',
         items: {
           $ref: quickReplyRef,
-
-        }
-      }
+        },
+      },
     },
-  }],
+  },
+  ],
 };
 
 export const ref = createComponentRef(__filename);

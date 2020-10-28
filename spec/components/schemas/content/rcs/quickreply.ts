@@ -8,13 +8,13 @@ export const quickreply: SchemaObject = {
   type: 'object',
   oneOf: [{
     $ref: postBackRef,
-  }
+  },
   ],
   required: ['type'],
   discriminator: {
     propertyName: 'type',
     mapping: {
-      postback: postBackRef
+      postback: postBackRef,
     },
   },
 };
