@@ -16,6 +16,7 @@ info:
     * SMS
     * WhatsApp
     * Facebook
+    * RCS
 
     You can subscribe for some events and receive then in one webhook endpoint.
     The available events are:
@@ -56,6 +57,11 @@ info:
 
     ## v2 (current)
 
+    ### 2020-10-27
+
+    * Added
+        * Added RCS Channels sections.
+        
     ### 2020-09-24
 
     * Added
@@ -72,6 +78,7 @@ info:
 
     You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
 
+       
     ### 2020-02-01
 
     * Added
@@ -300,6 +307,26 @@ paths:
               }
 
             }
+  /channels/rcs/messages:
+    post:
+      description: Send a RCS message
+      tags:
+        - RCS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.rcs'
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.rcs'
+        default:
+          $ref: '#/components/responses/error'
   /channels/sms/messages:
     post:
       description: Send a SMS message
@@ -922,6 +949,57 @@ components:
           type: string
       required:
         - type
+    content.card:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: card
+            label:
+              type: string
+              description: Card title.
+              example: example
+            text:
+              type: string
+              description: Text to be displayed inside the card.
+              example: Hello
+            orientation:
+              type: string
+              description: 'Card layout. it can be set as HORIZONTAL or VERTICAL. Default value: VERTICAL.'
+              example: VERTICAL
+            imageAlignment:
+              type: string
+              description: 'Preview image alignment, when the layout is HORIZONTAL. The alignment can be LEFT or RIGHT. Default value: LEFT.'
+              example: LEFT
+            imageUrl:
+              type: string
+              description: 'Public URL of media file, which can be an image, a GIF or a video, associated with the card.'
+              example: 'https://fooo.bar/image'
+            thumbnailUrl:
+              type: string
+              description: 'Public URL of media thumbnail file. If not sent, Google will generate it based on the imageUrl.'
+              example: 'https://fooo.bar/image'
+            imageDescription:
+              type: string
+              description: 'Media content description, used by screen readers to help users with disability to understand the context.'
+              example: ''
+            height:
+              type: string
+              description: 'Average height when the card layout is VERTICAL. The height can be SHORT (with 112 DP), MEDIUM (168 DP) or TALL (com 264 DP). When the card layout is HORIZONTAL this field will be ignored. Default value: SHORT'
+              example: SHORT
+            buttons:
+              type: array
+              description: Array of buttons displayed inside the card. The same used on Button Menu and Quick Reply.
+              items:
+                $ref: '#/components/schemas/content.rcs.buttons.buttons'
+            quickReplyButtons:
+              type: array
+              description: Array of buttons displayed as quick reply.
+              items:
+                $ref: '#/components/schemas/content.rcs.quickreply'
     content.contacts:
       type: object
       allOf:
@@ -1237,6 +1315,76 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+    content.rcs.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.card'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          card: '#/components/schemas/content.card'
+    content.rcs.quickreply:
+      title: QuickReply
+      description: QuickReply
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/content.rcs.buttons.postback'
+      required:
+        - type
+      discriminator:
+        propertyName: type
+        mapping:
+          postback: '#/components/schemas/content.rcs.buttons.postback'
+    content.rcs.buttons.buttons:
+      title: Buttons
+      description: RCS buttons
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/content.rcs.buttons.postback'
+        - $ref: '#/components/schemas/content.rcs.buttons.web-url'
+      required:
+        - type
+      discriminator:
+        propertyName: type
+        mapping:
+          postback: '#/components/schemas/content.rcs.buttons.postback'
+          web_url: '#/components/schemas/content.rcs.buttons.web-url'
+    content.rcs.buttons.postback:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            text:
+              type: string
+              description: Text to be send
+              title: Hello World
+            payload:
+              type: string
+              title: Payload of button
+              description: This payload is used for identify the click in the callback
+          required:
+            - type
+            - text
+            - payload
+    content.rcs.buttons.web-url:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            text:
+              type: string
+              title: Text to be send
+            link:
+              type: string
+              title: Link
+              description: Link to be send
+          required:
+            - type
+            - text
+            - link
     content.sms.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -1484,6 +1632,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/content.facebook.all'
+              minItems: 1
+    message.rcs:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.rcs.all'
               minItems: 1
     message.sms:
       type: object
@@ -2290,9 +2451,9 @@ tags:
     description: |
       ## Supported Channels
 
-      Messaging can be handled through SMS, WhatsApp and Facebook channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+      Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-      | Content Type | SMS | Facebook | WhatsApp |
+      | Content Type | SMS | Facebook | WhatsApp | RCS |
       |---|:---:|:---:|:---:|
       | text | &#10004; | &#10004; | &#10004; |
       | file | &#10005; | &#10004; | &#10004; |
@@ -2412,6 +2573,38 @@ tags:
       * Sender: is the user id on your page (PSID - page scoped id)
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
+  - name: RCS
+    description: |-
+      The RCS channel may be used after it's activation on Zenvia Platform.
+      Get in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
+
+      ## Limitations
+
+      When you send some message for one contact using RCS channel:
+
+      Recipient: is the phone number of contact
+      Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
+
+      When you receive a message from one contact, the sender and recipient is inverted:
+
+      Recipient: is the RCS Agent ID
+      Sender: is the phone number of contact
+
+      In API the sender is the field from and the receiver is the field to of message object.
+
+      ## RCS sender and recipient
+
+      When you send some message for one contact using RCS channel:
+
+      Recipient: is the phone number of contact
+      Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
+
+      When you receive a message from one contact, the sender and recipient is inverted:
+
+      Recipient: is the RCS Agent ID
+      Sender: is the phone number of contact
+
+      In API the sender is the field from and the receiver is the field to of message object.
   - name: Batches
     description: |
       The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
@@ -2567,6 +2760,7 @@ x-tagGroups:
       - SMS
       - WhatsApp
       - Facebook
+      - RCS
       - Batches
   - name: Webhooks
     tags:
