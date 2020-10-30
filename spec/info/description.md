@@ -11,6 +11,7 @@ You can send messages for the following channels:
 * SMS
 * WhatsApp
 * Facebook
+* RCS
 
 You can subscribe for some events and receive then in one webhook endpoint.
 The available events are:
@@ -51,6 +52,11 @@ Currently the ZenAPI is on version v2
 
 ## v2 (current)
 
+### 2020-10-27
+
+* Added
+    * Added RCS Channels sections.
+    
 ### 2020-09-24
 
 * Added
@@ -67,6 +73,7 @@ Currently the ZenAPI is on version v2
 
 You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
 
+   
 ### 2020-02-01
 
 * Added
