@@ -2453,13 +2453,13 @@ tags:
 
       Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-      | Content Type | SMS | Facebook | WhatsApp | RCS |
-      |---|:---:|:---:|:---:|
-      | text | &#10004; | &#10004; | &#10004; |
-      | file | &#10005; | &#10004; | &#10004; |
-      | contacts | &#10005; | &#10005; | &#10004; |
-      | location | &#10005; | &#10005; | &#10004; |
-      | template | &#10005; | &#10005; | &#10004; |
+      | Content Type | SMS      | Facebook | WhatsApp | RCS      |
+      |:-------------|:---------|:---------|:---------|:---------|
+      | text         | &#10004; | &#10004; | &#10004; | &#10004; |
+      | file         | &#10005; | &#10004; | &#10004; |          |
+      | contacts     | &#10005; | &#10005; | &#10004; |          |
+      | location     | &#10005; | &#10005; | &#10004; |          |
+      | template     | &#10005; | &#10005; | &#10004; |          |
 
       ## Text
       This type of content is the most used type of content, and its composed of a plain text.
@@ -2574,23 +2574,15 @@ tags:
 
       In API the sender is the field `from` and the receiver is the field `to` of message object.
   - name: RCS
-    description: |-
+    description: |
       The RCS channel may be used after it's activation on Zenvia Platform.
       Get in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
 
       ## Limitations
 
-      When you send some message for one contact using RCS channel:
-
-      Recipient: is the phone number of contact
-      Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
-
-      When you receive a message from one contact, the sender and recipient is inverted:
-
-      Recipient: is the RCS Agent ID
-      Sender: is the phone number of contact
-
-      In API the sender is the field from and the receiver is the field to of message object.
+      The RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo). 
+      To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
+      The use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
 
       ## RCS sender and recipient
 
