@@ -34,7 +34,6 @@ const text: SchemaObject = {
         example: 'true',
       },
       encodingMethod: {
-        name: 'encodingMethod',
         type: 'string',
         enum: [
           'AUTO',
