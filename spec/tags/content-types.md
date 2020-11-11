@@ -13,7 +13,7 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 ## Text
 This type of content is the most used type of content, and its composed of a plain text.
 
-<SchemaDefinition schemaRef="#/components/schemas/content.text" />
+<SchemaDefinition schemaRef="#/components/schemas/content.text" showWriteOnly="true" />
 
 ## File
 This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
