@@ -54,7 +54,7 @@ const text: SchemaObject = {
         type: 'number',
         writeOnly: true,
         title: 'write only',
-        description: `An id used for report purpose only (also known as aggregate id).
+        description: `An id used for report purposes only (also known as aggregate id).
           <br>*Only applicable to [SMS channel](#tag/SMS).*`,
         example: 12345,
         minimum: -2147483648,
