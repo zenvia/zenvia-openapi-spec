@@ -25,7 +25,7 @@ const file: SchemaObject = {
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) images and videos.',
+        description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) and [RCS channel](#tag/RCS) images and videos.',
         example: 'Some caption',
       },
       fileName: {
