@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as buttonsRef } from './rcs/buttons/buttons';
-import { ref as quickReplyRef } from './rcs/quickreply';
+import { ref as buttonsRef } from './buttons-list/buttons-list';
+import { ref as quickReplyRef } from './quickreply';
 import { createComponentRef } from '../../../../utils/ref';
 
 const card: SchemaObject = {

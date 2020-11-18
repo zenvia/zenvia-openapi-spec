@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
-import { ref as postBackRef } from './buttons/postback';
+import { createComponentRef } from '../../../../utils/ref';
+import { ref as postBackRef } from './buttons-list/postback';
 
 export const quickreply: SchemaObject = {
   title: 'QuickReply',

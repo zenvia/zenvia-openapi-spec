@@ -14,7 +14,7 @@ When you send some message for one contact using RCS channel:
 Recipient: is the phone number of contact
 Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
 
-When you receive a message from one contact, the sender and recipient is inverted:
+When you receive a message from one contact, the sender and recipient are inverted:
 
 Recipient: is the RCS Agent ID
 Sender: is the phone number of contact
