@@ -13,15 +13,15 @@ const dial: SchemaObject = {
     properties: {
       text: {
         type: 'string',
-        description: 'Text to be displayed inside the button.'
+        description: 'Text to be displayed inside the button.',
       },
       phoneNumber: {
         type: 'string',
-        description: 'Phone Number (E.164 format).'
+        description: 'Phone Number (E.164 format).',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.'
+        description: 'Content to be sent back to the Agent when the user clicks the button.',
       },
     },
     required: [

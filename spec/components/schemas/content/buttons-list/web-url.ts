@@ -13,19 +13,19 @@ const weburl: SchemaObject = {
     properties: {
       text:{
         type: 'string',
-        description: 'Text to be displayed inside the button.'
+        description: 'Text to be displayed inside the button.',
       },
       link: {
         type: 'string',
-        description: 'Link to be sent.'
+        description: 'Link to be sent.',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.'
+        description: 'Content to be sent back to the Agent when the user clicks the button.',
       },
     },
     required: [
-      'type'
+      'type',
     ],
   }],
 };

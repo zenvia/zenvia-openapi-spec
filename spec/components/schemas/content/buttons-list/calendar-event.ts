@@ -13,27 +13,27 @@ const calendarevent: SchemaObject = {
     properties: {
       text: {
         type: 'string',
-        description: 'Text to be displayed inside the button.'
+        description: 'Text to be displayed inside the button.',
       },
       startTime: {
         type: 'string',
-        description: 'Start date & time of the event (UTC format).'
+        description: 'Start date & time of the event (UTC format).',
       },
       endTime: {
         type: 'string',
-        description: 'End date & time of the event (UTC format).'
+        description: 'End date & time of the event (UTC format).',
       },
       title: {
         type: 'string',
-        description: 'Event description.'
+        description: 'Event description.',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.'
+        description: 'Content to be sent back to the Agent when the user clicks the button.',
       },
     },
     required: [
-      'type'
+      'type',
     ],
   }],
 };
