@@ -16,7 +16,7 @@ The WhatsApp API has some limitations:
 Supported content types and sizes:
 
 | Media | Content Type | Size |
-|---|---|---|
+|---|---|---|content types
 | document | Any valid MIME type. | 100&nbsp;MB |
 | image | image/jpeg<br>image/png | 5 MB |
 | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |

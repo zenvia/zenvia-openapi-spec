@@ -9,6 +9,9 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | contacts     | &#10005; | &#10005; | &#10004; |          |
 | location     | &#10005; | &#10005; | &#10004; |          |
 | template     | &#10005; | &#10005; | &#10004; |          |
+| card         |          |          | &#10004; |          |
+| carousel     |          |          | &#10004; | &#10004; |
+| button       |          |          | &#10004; |          |
 
 ## Text
 This type of content is the most used type of content, and its composed of a plain text.
@@ -37,7 +40,23 @@ This content is used to send location messages representing a point on the map t
 ## Template
 Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
 
-<SchemaDefinition schemaRef="#/components/schemas/content.template" />
+## Card
+
+Descritpion?
+
+<SchemaDefinition schemaRef="#/components/schemas/content.card" />
+
+## Carousel
+
+Descritpion?
+
+<SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
+
+## Buttons
+
+Descritpion?
+
+<SchemaDefinition schemaRef="#/components/schemas/content.buttons" />
 
 ### Submitting a template content for approval
 If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.

@@ -3,6 +3,7 @@ import { ref as textRef } from '../text';
 import { ref as cardRef } from '../card';
 import { ref as fileRef } from '../file';
 import { ref as buttonRef } from '../buttons';
+import { ref as carouselRef } from '../carousel';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -14,6 +15,8 @@ const all: SchemaObject = {
     $ref: buttonRef,
   }, {
     $ref: cardRef,
+  }, {
+    $ref: carouselRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -22,6 +25,7 @@ const all: SchemaObject = {
       file: fileRef,
       button: buttonRef,
       card: cardRef,
+      carousel: carouselRef,
     },
   },
 };
