@@ -11,13 +11,9 @@ const all: SchemaObject = {
     type: 'object',
     properties: {
       contents: {
-        title: 'Message Contents',
-        description: 'A list of content to be sent',
-        type: 'array',
         items: {
           $ref: allContentsRef,
         },
-        minItems: 1,
       },
     },
   }],
