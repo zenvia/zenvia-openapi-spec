@@ -15,12 +15,15 @@ const base: SchemaObject = {
     },
     from: {
       title: 'Sender ID',
-      description: 'This is the identifier of sender of this message. The sender shoud be created with a credential.',
+      description: `This is the identifier of sender of this message. The sender is created when an integration for the channel is connected
+        on the [integrations console](https://app.zenvia.com/home/credentials).
+        <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
     },
     to: {
       title: 'Recipient ID',
-      description: 'The recipient is the identifier of a contact in this channel.',
+      description: `The identifier of the contact (varies according to the channel) who will receive the message.
+        <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
     },
     direction: {
