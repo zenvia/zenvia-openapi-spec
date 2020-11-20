@@ -14,7 +14,7 @@ const text: SchemaObject = {
         enum: [
           'AUTO',
           'MORE_CHARACTER_SUPPORT',
-          'MORE_CHARACTER_PER_MESSAGE',
+          'MORE_CHARACTERS_PER_MESSAGE',
         ],
         default: 'AUTO',
         writeOnly: true,
