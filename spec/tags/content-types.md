@@ -5,13 +5,13 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | Content Type | SMS      | Facebook | WhatsApp | RCS      |
 |:-------------|:---------|:---------|:---------|:---------|
 | text         | &#10004; | &#10004; | &#10004; | &#10004; |
-| file         | &#10005; | &#10004; | &#10004; |          |
-| contacts     | &#10005; | &#10005; | &#10004; |          |
-| location     | &#10005; | &#10005; | &#10004; |          |
-| template     | &#10005; | &#10005; | &#10004; |          |
-| card         |          |          | &#10004; |          |
-| carousel     |          |          | &#10004; | &#10004; |
-| button       |          |          | &#10004; |          |
+| file         | &#10005; | &#10004; | &#10004; | &#10004; |
+| contacts     | &#10005; | &#10005; | &#10004; | &#10005; |     |
+| location     | &#10005; | &#10005; | &#10004; | &#10005; |
+| template     | &#10005; | &#10005; | &#10004; | &#10005; |
+| card         | &#10005; | &#10005; | &#10004; | &#10004; |
+| carousel     | &#10005; | &#10005; | &#10004; | &#10004; |
+| button       | &#10005; | &#10005; | &#10004; | &#10004; |
 
 ## Text
 This type of content is the most used type of content, and its composed of a plain text.
@@ -42,19 +42,23 @@ Template contents have a fixed text content, with a few variables placed where n
 
 ## Card
 
-Descritpion?
+The card is the container that holds the information that should be displayed by the connector.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.card" />
 
 ## Carousel
 
-Descritpion?
+The RCS carousel is a horizontally scrollable carousel of up to 10 vertical rich cards. Each card can include the following elements:
+* Title text.
+* Subtitle text.
+* Image (which will be placed above the title, subtitle and buttons) - image is not required to be placed in a card.
+* Up to 4 buttons (RCS limitation) with the following actions: Link, Navigation, Publish text.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
 
 ## Buttons
 
-Descritpion?
+Buttons contain click and action properties that define the type of action set on user click operation.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.buttons" />
 
