@@ -13,6 +13,7 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | carousel     | &#10005; | &#10005; | &#10004; | &#10004; |
 | button       | &#10005; | &#10005; | &#10004; | &#10004; |
 
+
 ## Text
 This type of content is the most used one and is composed of plain text.
 
