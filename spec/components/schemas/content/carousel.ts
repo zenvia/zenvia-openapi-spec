@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as buttonsRef } from './buttons-list/buttons-list';
-import { ref as quickReplyRef } from './quickreply';
+import { ref as buttonsRef } from './buttons';
+import { ref as quickReplyRef } from './quick-reply';
 import { createComponentRef } from '../../../../utils/ref';
 
 const carousel: SchemaObject = {
