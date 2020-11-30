@@ -8,8 +8,8 @@ const carousel: SchemaObject = {
   type: 'object',
   allOf: [
     {
-    $ref: baseRef,
-    }, 
+      $ref: baseRef,
+    },
     {
       type: 'object',
       properties: {
@@ -60,7 +60,7 @@ const carousel: SchemaObject = {
             $ref: quickReplyRef,
           },
         },
-      }
+      },
     },
   ],
 };
