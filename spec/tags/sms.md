@@ -1,5 +1,7 @@
 The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
-<br/><br/>
+<br/>
+
+Webhooks allow you to receive events in the configured URL. Learn more here: https://zenvia.github.io/zenvia-openapi-spec/v2/#tag/Webhooks.  
 
 ### ZenAPI vs SMS API
 ZenAPI allows you to use multiple channels. However, if you are interested in just
