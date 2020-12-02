@@ -23,6 +23,11 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
+      messageIdRef: {
+        title: 'Message Reply ID',
+        description: 'Replied message unique indentifier',
+        type: 'string',
+      },
     },
   }],
 };
