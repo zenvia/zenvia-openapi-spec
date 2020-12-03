@@ -24,8 +24,8 @@ const all: SchemaObject = {
         minItems: 1,
       },
       messageIdRef: {
-        title: 'Message Reply ID',
-        description: 'Replied message unique indentifier',
+        title: 'read only',
+        description: 'When an user sends a message quoting a previous message, the idetifier of the quoted message will be provided here.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*',
         type: 'string',
       },
     },
