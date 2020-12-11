@@ -63,24 +63,24 @@ const carousel: SchemaObject = {
                 $ref: buttonsRef,
               },
             },
-            quickReplyButtons: {
-              type: 'array',
-              description: 'Array of buttons displayed as quick reply.',
-              items: {
-                $ref: quickReplyRef,
-              },
-            },
           },
           required: [
             'buttons',
-            'quickReplyButtons',
           ],
         }          
-      }      
+      }, 
+      quickReplyButtons: {
+        type: 'array',
+        description: 'Array of buttons displayed as quick reply.',
+        items: {
+          $ref: quickReplyRef,
+        },
+      },     
     },
     required: [
       'type',
-      'carousel'
+      'carousel',
+      'quickReplyButtons'
     ],
   }],
 };
