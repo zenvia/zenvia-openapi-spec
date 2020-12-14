@@ -4,7 +4,7 @@ To activate WhatsApp you a need a registered number on WhatsApp Business API and
 
 **Get in touch with Zenvia consultants to start your account creation.**
 
-Webhooks allow you to receive events in the configured URL. Learn more here: https://zenvia.github.io/zenvia-openapi-spec/v2/#tag/Webhooks.
+Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
 
 ## Limitations
