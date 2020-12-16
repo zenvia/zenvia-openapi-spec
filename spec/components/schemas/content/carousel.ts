@@ -14,7 +14,7 @@ const carousel: SchemaObject = {
       type: {
         type: 'string',
         example: 'carousel',
-      }, 
+      },
       cardWidth: {
         type: 'string',
         description: 'Card width, which can be SMALL (with 120 DP) or MEDIUM (232 DP). Default value: SMALL',
@@ -67,20 +67,20 @@ const carousel: SchemaObject = {
           required: [
             'buttons',
           ],
-        }          
-      }, 
+        },
+      },
       quickReplyButtons: {
         type: 'array',
         description: 'Array of buttons displayed as quick reply.',
         items: {
           $ref: quickReplyRef,
         },
-      },     
+      },
     },
     required: [
       'type',
       'carousel',
-      'quickReplyButtons'
+      'quickReplyButtons',
     ],
   }],
 };
