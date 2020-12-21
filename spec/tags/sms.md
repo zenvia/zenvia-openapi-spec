@@ -1,5 +1,7 @@
 The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
-<br/><br/>
+<br/>
+
+Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 ## SMS sender and recipient
 When you send some message for one contact using SMS channel:
