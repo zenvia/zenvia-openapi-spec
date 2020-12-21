@@ -41,7 +41,7 @@ When you create a new Sandbox, you will be guided step-by-step to send and recei
 
 [Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
-You are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, sending the keyword again (https://app.zenvia.com/home/sandbox).
+You are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).
 
 # API versions
 
