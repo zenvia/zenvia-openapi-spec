@@ -10,7 +10,7 @@ Templates have the following components:
 
 The components object allows you to indicate the type of message and the message's parameters.
 
-## Standart message templates
+## Standard message templates
 
 The standard message templates enables you to send plain text-only messages using a <code>body</code> components object.
 
