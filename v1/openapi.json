@@ -2560,7 +2560,7 @@
   "tags": [
     {
       "name": "SMS",
-      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/><br/>\n\n### ZenAPI vs SMS API\nZenAPI allows you to use multiple channels. However, if you are interested in just\nthe SMS channel, you may access the old API version, which for now have more\nSMS features.\n\nFor more information about our [SMS API](https://zenviasmsenus.docs.apiary.io/#),\nvisit its [documentation](https://zenviasmsenus.docs.apiary.io/#).\n"
+      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/><br/>\n"
     },
     {
       "name": "WhatsApp",
