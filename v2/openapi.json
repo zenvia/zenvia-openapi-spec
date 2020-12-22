@@ -1617,7 +1617,7 @@
                 "default": "AUTO",
                 "writeOnly": true,
                 "title": "write only",
-                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTER_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS channel](#tag/SMS).*",
+                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS channel](#tag/SMS).*",
                 "example": "AUTO"
               }
             }
