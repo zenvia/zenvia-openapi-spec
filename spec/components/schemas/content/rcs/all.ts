@@ -2,6 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
 import { ref as cardRef } from '../card';
 import { ref as fileRef } from '../file';
+import { ref as buttonRef } from '../buttons';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -10,6 +11,8 @@ const all: SchemaObject = {
   }, {
     $ref: fileRef,
   }, {
+    $ref: buttonRef,
+  }, {
     $ref: cardRef,
   }],
   discriminator: {
@@ -17,6 +20,7 @@ const all: SchemaObject = {
     mapping: {
       text: textRef,
       file: fileRef,
+      button: buttonRef,
       card: cardRef,
     },
   },

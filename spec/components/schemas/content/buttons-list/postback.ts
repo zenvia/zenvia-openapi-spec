@@ -1,30 +1,27 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../../utils/ref';
-import { ref as baseRef } from './../../base';
+import { createComponentRef } from '../../../../../utils/ref';
+import { ref as baseRef } from '../base';
 
 const postback: SchemaObject = {
   type: 'object',
+  description: 'Sends the payload content to the Agent (similar to Omni-chat)',
   allOf: [{
     $ref: baseRef,
   }, {
     type: 'object',
     properties: {
-      text:{
+      text: {
         type: 'string',
-        description: 'Text to be send',
-        title: 'Hello World',
+        description: 'Text to be displayed inside the button.',
       },
       payload: {
         type: 'string',
-        title: 'Payload of button',
-        description: 'This payload is used for identify the click in the callback',
+        description: 'Content to be sent to the Agent when the user clicks the button.',
       },
     },
     required: [
       'type',
-      'text',
-      'payload',
     ],
   }],
 };
