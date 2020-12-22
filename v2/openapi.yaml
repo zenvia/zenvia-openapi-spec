@@ -46,6 +46,8 @@ info:
 
     [Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
+    You are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).
+
     # API versions
 
     All notable changes to ZenAPI will be documented here.
@@ -1208,7 +1210,7 @@ components:
               example: application/pdf
             fileCaption:
               type: string
-              description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) images and videos.'
+              description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) and [RCS channel](#tag/RCS) images and videos.'
               example: Some caption
             fileName:
               type: string
@@ -1318,11 +1320,13 @@ components:
     content.rcs.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
         - $ref: '#/components/schemas/content.card'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
           card: '#/components/schemas/content.card'
     content.rcs.quickreply:
       title: QuickReply
@@ -1574,6 +1578,11 @@ components:
               items:
                 $ref: '#/components/schemas/content.whatsapp.all'
               minItems: 1
+            messageIdRef:
+              title: read only
+              description: 'When an user sends a message quoting a previous message, the idetifier of the quoted message will be provided here.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*'
+              type: string
+              readOnly: true
     message.base:
       title: Message Object
       description: This is a Message object model.
@@ -2495,15 +2504,9 @@ tags:
   - name: SMS
     description: |-
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
-      <br/><br/>
+      <br/>
 
-      ### ZenAPI vs SMS API
-      ZenAPI allows you to use multiple channels. However, if you are interested in just
-      the SMS channel, you may access the old API version, which for now have more
-      SMS features.
-
-      For more information about our [SMS API](https://zenviasmsenus.docs.apiary.io/#),
-      visit its [documentation](https://zenviasmsenus.docs.apiary.io/#).
+      Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       ## SMS sender and recipient
       When you send some message for one contact using SMS channel:
@@ -2524,6 +2527,8 @@ tags:
       To activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.
 
       **Get in touch with Zenvia consultants to start your account creation.**
+
+      Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
 
       ## Limitations
@@ -2715,7 +2720,7 @@ tags:
 
       The components object allows you to indicate the type of message and the message's parameters.
 
-      ## Standart message templates
+      ## Standard message templates
 
       The standard message templates enables you to send plain text-only messages using a <code>body</code> components object.
 
