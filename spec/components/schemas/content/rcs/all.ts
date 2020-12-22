@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
 import { ref as cardRef } from '../card';
+import { ref as carouselRef } from '../carousel';
 import { ref as fileRef } from '../file';
 import { ref as buttonRef } from '../buttons';
 import { ref as quickReplyRef } from '../quick-reply';
@@ -17,6 +18,8 @@ const all: SchemaObject = {
     $ref: quickReplyRef,
   }, {
     $ref: cardRef,
+  }, {
+    $ref: carouselRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -26,6 +29,7 @@ const all: SchemaObject = {
       button: buttonRef,
       quick_reply: quickReplyRef,
       card: cardRef,
+      carousel: carouselRef,
     },
   },
 };

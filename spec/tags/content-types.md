@@ -9,6 +9,10 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | contacts     | &#10005; | &#10005; | &#10004; | &#10005; |
 | location     | &#10005; | &#10005; | &#10004; | &#10005; |
 | template     | &#10005; | &#10005; | &#10004; | &#10005; |
+| card         | &#10005; | &#10005; | &#10004; | &#10004; |
+| carousel     | &#10005; | &#10005; | &#10004; | &#10004; |
+| button       | &#10005; | &#10005; | &#10004; | &#10004; |
+
 
 ## Text
 This type of content is the most used one and is composed of plain text.
@@ -38,6 +42,28 @@ This type of content is used to send location messages represented as a point on
 This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
+
+## Card
+
+The card is the container that holds the information that should be displayed by the connector.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.card" />
+
+## Carousel
+
+The RCS carousel is a horizontally scrollable carousel of up to 10 vertical rich cards. Each card can include the following elements:
+* Title text.
+* Subtitle text.
+* Image (which will be placed above the title, subtitle and buttons) - image is not required to be placed in a card.
+* Up to 4 buttons (RCS limitation) with the following actions: Link, Navigation, Publish text.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
+
+## Buttons
+
+Buttons contain click and action properties that define the type of action set on user click operation.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.buttons" />
 
 ### Submitting a template content for approval
 If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
