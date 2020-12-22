@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as buttonsRef } from './buttons-list/buttons-list';
-import { ref as quickReplyRef } from './quickreply';
+import { ref as buttonsRef } from './nestable-contents/buttons-list';
+import { ref as quickReplyRef } from './nestable-contents/quick-reply-list';
 import { createComponentRef } from '../../../../utils/ref';
 
 const card: SchemaObject = {
@@ -64,7 +64,7 @@ const card: SchemaObject = {
       },
       quickReplyButtons: {
         type: 'array',
-        description: 'Array of buttons displayed as quick reply.',
+        description: 'Array of buttons displayed as quick reply. The same used on Button Menu and Quick Reply.',
         items: {
           $ref: quickReplyRef,
         },
