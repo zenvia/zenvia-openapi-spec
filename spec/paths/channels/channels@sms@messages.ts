@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as smsMessageRef } from '../../components/schemas/message/sms';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { text as textExample} from '../../resources/examples/text';
+import { text as textExample } from '../../resources/examples/text';
 
 const post: OperationObject = {
   description: 'Send a SMS message',
@@ -16,7 +16,7 @@ const post: OperationObject = {
         examples: {
           text: {
             value: textExample,
-          }
+          },
         },
       },
     },
