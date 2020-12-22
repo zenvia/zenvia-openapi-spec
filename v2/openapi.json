@@ -1434,12 +1434,13 @@
               "text": {
                 "description": "Text to be sent",
                 "type": "string",
-                "example": "This is a text"
+                "example": "This is a text."
               },
               "payload": {
                 "description": "Payload of selected button.",
                 "type": "string",
-                "readOnly": true
+                "readOnly": true,
+                "title": "read only"
               }
             },
             "required": [
@@ -1587,15 +1588,41 @@
       "content.sms.all": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/content.text"
+            "$ref": "#/components/schemas/content.sms.text"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "text": "#/components/schemas/content.text"
+            "text": "#/components/schemas/content.sms.text"
           }
         }
+      },
+      "content.sms.text": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "encodingStrategy": {
+                "type": "string",
+                "enum": [
+                  "AUTO",
+                  "MORE_CHARACTER_SUPPORT",
+                  "MORE_CHARACTERS_PER_MESSAGE"
+                ],
+                "default": "AUTO",
+                "writeOnly": true,
+                "title": "write only",
+                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTER_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS channel](#tag/SMS).*",
+                "example": "AUTO"
+              }
+            }
+          }
+        ]
       },
       "content.whatsapp.all": {
         "oneOf": [
@@ -1883,12 +1910,12 @@
           },
           "from": {
             "title": "Sender ID",
-            "description": "This is the identifier of sender of this message. The sender shoud be created with a credential.",
+            "description": "This is the identifier of sender of this message. The sender is created when an integration for the channel is connected\n        on the [integrations console](https://app.zenvia.com/home/credentials).\n        <br>More details on the channel's *sender and recipient* section.",
             "type": "string"
           },
           "to": {
             "title": "Recipient ID",
-            "description": "The recipient is the identifier of a contact in this channel.",
+            "description": "The identifier of the contact (varies according to the channel) who will receive the message.\n        <br>More details on the channel's *sender and recipient* section.",
             "type": "string"
           },
           "direction": {
@@ -3083,23 +3110,23 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      |\n|:-------------|:---------|:---------|:---------|:---------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10005; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; |\n| template     | &#10005; | &#10005; | &#10004; | &#10005; |\n\n## Text\nThis type of content is the most used type of content, and its composed of a plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" />\n\n## File\nThis is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Contacts\nUse this type of content to send contacts information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis content is used to send location messages representing a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nTemplate contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.\n"
+      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      |\n|:-------------|:---------|:---------|:---------|:---------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; |\n| template     | &#10005; | &#10005; | &#10004; | &#10005; |\n\n## Text\nThis type of content is the most used type of content, and its composed of a plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nUse this type of content to send contacts information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis content is used to send location messages representing a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nTemplate contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.\n"
     },
     {
       "name": "SMS",
-      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/>\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## SMS sender and recipient\nWhen you send some message for one contact using SMS channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the SMS sender id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS sender id\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/>\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## SMS sender and recipient\nWhen you send a message for one contact using SMS channel:\n\n* Recipient: is the complete phone number (including country code) of contact.\n* Sender: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).\n* Sender: is the complete phone number (including country code) of contact.\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "WhatsApp",
-      "description": "The WhatsApp channel may be used after its activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object."
+      "description": "The WhatsApp channel may be used after its activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Note:** Only H.264 video codec and AAC audio codec is supported. | 16 MB |\n\n## WhatsApp sender and recipient\n\nWhen you send some message for one contact using WhatsApp channel:\n\n* Recipient: is the phone number of contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object."
     },
     {
       "name": "Facebook",
-      "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nIn API the sender is the field `from` and the receiver is the field `to` of message object.\n"
+      "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "RCS",
-      "description": "The RCS channel may be used after it's activation on Zenvia Platform.\nGet in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).\n\n## Limitations\n\nThe RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo). \nTo enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.\nThe use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.\n\n## RCS sender and recipient\n\nWhen you send some message for one contact using RCS channel:\n\nRecipient: is the phone number of contact\nSender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\nRecipient: is the RCS Agent ID\nSender: is the phone number of contact\n\nIn API the sender is the field from and the receiver is the field to of message object.\n"
+      "description": "The RCS channel may be used after it's activation on Zenvia Platform.\nGet in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).\n\n## Limitations\n\nThe RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo). \nTo enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.\nThe use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.\n\n## RCS sender and recipient\n\nWhen you send some message for one contact using RCS channel:\n\nRecipient: is the phone number of contact\nSender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)\n\nWhen you receive a message from one contact, the sender and recipient is inverted:\n\nRecipient: is the RCS Agent ID\nSender: is the phone number of contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Batches",

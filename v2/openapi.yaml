@@ -1300,11 +1300,12 @@ components:
             text:
               description: Text to be sent
               type: string
-              example: This is a text
+              example: This is a text.
             payload:
               description: Payload of selected button.
               type: string
               readOnly: true
+              title: read only
           required:
             - type
             - text
@@ -1391,11 +1392,33 @@ components:
             - link
     content.sms.all:
       oneOf:
-        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.sms.text'
       discriminator:
         propertyName: type
         mapping:
-          text: '#/components/schemas/content.text'
+          text: '#/components/schemas/content.sms.text'
+    content.sms.text:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.text'
+        - type: object
+          properties:
+            encodingStrategy:
+              type: string
+              enum:
+                - AUTO
+                - MORE_CHARACTER_SUPPORT
+                - MORE_CHARACTERS_PER_MESSAGE
+              default: AUTO
+              writeOnly: true
+              title: write only
+              description: |-
+                The method used for selecting the message encoding used to dispatch the message to the provider.
+                          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary
+                          if you need to enforce **MORE_CHARACTER_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**
+                          if you have any trouble with **AUTO**.
+                          <br>*Only applicable to [SMS channel](#tag/SMS).*
+              example: AUTO
     content.whatsapp.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -1595,11 +1618,16 @@ components:
           readOnly: true
         from:
           title: Sender ID
-          description: This is the identifier of sender of this message. The sender shoud be created with a credential.
+          description: |-
+            This is the identifier of sender of this message. The sender is created when an integration for the channel is connected
+                    on the [integrations console](https://app.zenvia.com/home/credentials).
+                    <br>More details on the channel's *sender and recipient* section.
           type: string
         to:
           title: Recipient ID
-          description: The recipient is the identifier of a contact in this channel.
+          description: |-
+            The identifier of the contact (varies according to the channel) who will receive the message.
+                    <br>More details on the channel's *sender and recipient* section.
           type: string
         direction:
           title: Message direction
@@ -2465,7 +2493,7 @@ tags:
       | Content Type | SMS      | Facebook | WhatsApp | RCS      |
       |:-------------|:---------|:---------|:---------|:---------|
       | text         | &#10004; | &#10004; | &#10004; | &#10004; |
-      | file         | &#10005; | &#10004; | &#10004; | &#10005; |
+      | file         | &#10005; | &#10004; | &#10004; | &#10004; |
       | contacts     | &#10005; | &#10005; | &#10004; | &#10005; |
       | location     | &#10005; | &#10005; | &#10004; | &#10005; |
       | template     | &#10005; | &#10005; | &#10004; | &#10005; |
@@ -2473,7 +2501,7 @@ tags:
       ## Text
       This type of content is the most used type of content, and its composed of a plain text.
 
-      <SchemaDefinition schemaRef="#/components/schemas/content.text" />
+      <SchemaDefinition schemaRef="#/components/schemas/content.text" showWriteOnly="true" />
 
       ## File
       This is used to send a file to the user. The file will be presented to the user in different manner based on the file type. There are four types of presentation:
@@ -2482,44 +2510,44 @@ tags:
       * Audio
       * Document
 
-      <SchemaDefinition schemaRef="#/components/schemas/content.file" />
+      <SchemaDefinition schemaRef="#/components/schemas/content.file" showWriteOnly="true" />
 
       ## Contacts
       Use this type of content to send contacts information to the user.
 
-      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" showWriteOnly="true" />
 
       ## Location
       This content is used to send location messages representing a point on the map to the user.
 
-      <SchemaDefinition schemaRef="#/components/schemas/content.location" />
+      <SchemaDefinition schemaRef="#/components/schemas/content.location" showWriteOnly="true" />
 
       ## Template
       Template contents have a fixed text content, with a few variables placed where necessary. This type of content must be submitted for approval to WhatsApp. The nature of the content that is subjected to approval is very limited.
 
-      <SchemaDefinition schemaRef="#/components/schemas/content.template" />
+      <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
       ### Submitting a template content for approval
       If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
   - name: SMS
-    description: |-
+    description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
       <br/>
 
       Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       ## SMS sender and recipient
-      When you send some message for one contact using SMS channel:
+      When you send a message for one contact using SMS channel:
 
-      * Recipient: is the phone number of contact
-      * Sender: is the SMS sender id
+      * Recipient: is the complete phone number (including country code) of contact.
+      * Sender: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
 
       When you receive a message from one contact, the sender and recipient is inverted:
 
-      * Recipient: is the SMS sender id
-      * Sender: is the phone number of contact
+      * Recipient: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
+      * Sender: is the complete phone number (including country code) of contact.
 
-      In API the sender is the field `from` and the receiver is the field `to` of message object.
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: WhatsApp
     description: |-
       The WhatsApp channel may be used after its activation on Zenvia platform.
@@ -2560,7 +2588,7 @@ tags:
       * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
       * Sender: is the phone number of contact
 
-      In API the sender is the field `from` and the receiver is the field `to` of message object.
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Facebook
     description: |
       The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).
@@ -2577,7 +2605,7 @@ tags:
       * Recipient: is your page id
       * Sender: is the user id on your page (PSID - page scoped id)
 
-      In API the sender is the field `from` and the receiver is the field `to` of message object.
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: RCS
     description: |
       The RCS channel may be used after it's activation on Zenvia Platform.
@@ -2601,7 +2629,7 @@ tags:
       Recipient: is the RCS Agent ID
       Sender: is the phone number of contact
 
-      In API the sender is the field from and the receiver is the field to of message object.
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Batches
     description: |
       The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
