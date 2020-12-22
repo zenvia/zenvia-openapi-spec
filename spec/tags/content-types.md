@@ -41,6 +41,8 @@ This type of content is used to send location messages represented as a point on
 ## Template
 This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.
 
+<SchemaDefinition schemaRef="#/components/schemas/content.template" />
+
 ## Card
 
 The card is the container that holds the information that should be displayed by the connector.
