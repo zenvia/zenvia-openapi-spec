@@ -16,12 +16,13 @@ const text: SchemaObject = {
       text: {
         description: 'Text to be sent',
         type: 'string',
-        example: 'This is a text',
+        example: 'This is a text.',
       },
       payload: {
         description: 'Payload of selected button.',
         type: 'string',
         readOnly: true,
+        title: 'read only',
       },
     },
     required: [

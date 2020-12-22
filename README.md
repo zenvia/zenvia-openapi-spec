@@ -47,6 +47,17 @@ npm run build
 npm test
 ```
 
+**4.** Starts the development server (with the public version of the specification).
+
+```shell
+npm run start:public
+```
+
+**5.** Bundles the spec (with the public version of the specification) and prepares web_deploy folder with static assets.
+
+```shell
+npm run build:public
+```
 
 
 ## License
