@@ -5,11 +5,13 @@
   "main": "spec/index.js",
   "scripts": {
     "start": "ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
+    "start:public": "PUBLIC=true ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
     "lint": "tslint --project tsconfig.json --config tslint.json 'spec/**/*.ts' 'bin/**/*.ts' 'utils/**/*.ts'",
     "validate": "ts-node --files ./bin/validate.ts",
     "test-unit": "mocha",
     "test": "npm run validate && npm run test-unit",
-    "build": "ts-node --files ./bin/build.ts"
+    "build": "ts-node --files ./bin/build.ts",
+    "build:public": "PUBLIC=true ts-node --files ./bin/build.ts"
   },
   "author": "Henrique Magarotto <henrique.magarotto@zenvia.com> (https://github.com/hmagarotto)",
   "contributors": [

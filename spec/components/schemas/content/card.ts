@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as buttonsRef } from './nestable-contents/buttons-list';
-import { ref as quickReplyRef } from './quick-reply';
+import { ref as quickReplyRef } from './nestable-contents/quick-reply-list';
 import { createComponentRef } from '../../../../utils/ref';
 
 const card: SchemaObject = {

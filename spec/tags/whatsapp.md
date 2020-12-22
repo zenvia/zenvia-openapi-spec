@@ -4,6 +4,8 @@ To activate WhatsApp you a need a registered number on WhatsApp Business API and
 
 **Get in touch with Zenvia consultants to start your account creation.**
 
+Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
+
 
 ## Limitations
 
@@ -34,4 +36,4 @@ When you receive a message from one contact, the sender and recipient are invert
 * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 * Sender: is the phone number of contact
 
-In API the sender is the field `from` and the receiver is the field `to` of message object.
+The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
