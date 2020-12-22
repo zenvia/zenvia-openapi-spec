@@ -12,4 +12,4 @@ When you receive a message from one contact, the sender and recipient is inverte
 * Recipient: is your page id
 * Sender: is the user id on your page (PSID - page scoped id)
 
-In API the sender is the field `from` and the receiver is the field `to` of message object.
+The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
