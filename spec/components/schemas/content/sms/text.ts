@@ -21,7 +21,7 @@ const text: SchemaObject = {
         title: 'write only',
         description: `The method used for selecting the message encoding used to dispatch the message to the provider.
           <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary
-          if you need to enforce **MORE_CHARACTER_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**
+          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**
           if you have any trouble with **AUTO**.
           <br>*Only applicable to [SMS channel](#tag/SMS).*`,
         example: 'AUTO',
