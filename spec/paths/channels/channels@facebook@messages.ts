@@ -2,7 +2,6 @@ import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as facebookMessageRef } from '../../components/schemas/message/facebook';
 import { text as textExample } from '../../resources/examples/text';
-import * as _ from 'lodash';
 
 const post: OperationObject = {
   description: 'Send a Facebook message',
@@ -16,7 +15,7 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: _.cloneDeep(textExample),
+            value: textExample(),
           },
         },
       },

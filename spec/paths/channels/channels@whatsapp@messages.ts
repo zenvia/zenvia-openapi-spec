@@ -6,7 +6,6 @@ import { text as textExample } from '../../resources/examples/text';
 import { template as templateExample } from '../../resources/examples/template';
 import { contacts as contactsExample } from '../../resources/examples/contacts';
 import { location as locationExample } from '../../resources/examples/location';
-import * as _ from 'lodash';
 
 const post: OperationObject = {
   description: 'Send a WhatsApp message',
@@ -20,19 +19,19 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: _.cloneDeep(textExample),
+            value: textExample(),
           },
           file: {
-            value: _.cloneDeep(fileExample),
+            value: fileExample(),
           },
           template: {
-            value: _.cloneDeep(templateExample),
+            value: templateExample(),
           },
           contacts: {
-            value: _.cloneDeep(contactsExample),
+            value: contactsExample(),
           },
           location: {
-            value: _.cloneDeep(locationExample),
+            value: locationExample(),
           },
 
         },
