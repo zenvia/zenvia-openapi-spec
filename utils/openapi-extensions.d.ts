@@ -1,4 +1,4 @@
-import { ExampleObject, BaseParameterObject } from 'openapi3-ts';
+import {} from 'openapi3-ts';
 
 declare module 'openapi3-ts' {
   export interface TagGroupObject {
@@ -12,6 +12,9 @@ declare module 'openapi3-ts' {
     lang: string;
     label?: string;
     source: string;
+  }
+  export interface SchemaObject {
+    'x-unpublished'?: boolean;
   }
   /*
   export interface OpenAPIObject  extends ISpecificationExtension {

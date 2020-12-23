@@ -19,4 +19,4 @@ When you receive a message from one contact, the sender and recipient is inverte
 Recipient: is the RCS Agent ID
 Sender: is the phone number of contact
 
-In API the sender is the field from and the receiver is the field to of message object.
+The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

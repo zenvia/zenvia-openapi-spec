@@ -49,6 +49,29 @@ export function loadPathsObject(pathBase: string): PathsObject {
   return paths;
 }
 
+function removeUnpublishedSchemas(items: any) {
+  if (Array.isArray(items)) {
+    items.forEach(item => removeUnpublishedSchemas(item));
+  } else if (typeof(items) === 'object') {
+    for (const propertyName of Object.keys(items)) {
+      if (items[propertyName]['x-unpublished']) {
+        delete items[propertyName];
+      } else {
+        removeUnpublishedSchemas(items[propertyName]);
+      }
+    }
+  }
+
+  return items;
+}
+
+function removeUnpublished(type: string, items: any) {
+  if (type === 'schemas' && process.env.PUBLIC) {
+    return removeUnpublishedSchemas(items);
+  }
+  return items;
+}
+
 function loadComponentTypeObject(pathBase: string, type: string): any {
   const items = {};
   fileSearch(`${pathBase}/${type}/**/*.ts`, { nosort: true })
@@ -59,7 +82,7 @@ function loadComponentTypeObject(pathBase: string, type: string): any {
     if (name.length) name += '.';
     name += parsedPath.name;
     const pathModule = require(file).default;
-    items[name] = pathModule;
+    items[name] = removeUnpublished(type, pathModule);
   });
   return items;
 }

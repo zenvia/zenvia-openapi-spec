@@ -4,7 +4,7 @@ node_js:
 script:
   - npm run lint
   - npm test
-  - npm run build
+  - npm run build:public
 deploy:
   provider: script
   skip_cleanup: true
