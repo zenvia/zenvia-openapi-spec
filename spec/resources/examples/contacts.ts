@@ -19,19 +19,19 @@ export const contacts = {
         email: 'jhon@zenvia.com',
         type: 'WORK',
       }],
-      name: [{
+      name: {
         formattedName: 'Jhon Zenvia',
         firstName: 'Jhon',
         lastName: 'Zenvia',
         middleName: '',
         suffix: '',
         prefix: '',
-      }],
-      org: [{
+      },
+      org: {
         company: 'Zenvia',
         department: 'Sales',
         title: 'Sales',
-      }],
+      },
       phones: [{
         phone: '08006464777',
         type: 'WORK',

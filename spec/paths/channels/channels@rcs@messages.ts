@@ -4,6 +4,7 @@ import { ref as rcsMessageRef } from '../../components/schemas/message/rcs';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 import { card as cardExample } from '../../resources/examples/card';
+import * as _ from 'lodash';
 
 const post: OperationObject = {
   description: 'Send a RCS message',
@@ -17,13 +18,13 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample,
+            value: _.cloneDeep(textExample),
           },
           file: {
-            value: fileExample,
+            value: _.cloneDeep(fileExample),
           },
           card: {
-            value: cardExample,
+            value: _.cloneDeep(cardExample),
           },
         },
       },

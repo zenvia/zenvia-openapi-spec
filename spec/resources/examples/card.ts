@@ -12,6 +12,7 @@ export const card = {
     height: 'SHORT',
     buttons: [{
       type: 'web_url',
+      text: 'Site',
       link: 'https://www.zenvia.com/',
     }],
     quickReplyButtons: [{

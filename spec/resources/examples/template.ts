@@ -4,9 +4,9 @@ export const template = {
   contents: [{
     type: 'template',
     templateId: 'template_id',
-    fields: [{
+    fields: {
       name: 'Jhon',
       product: 'Zenvia Chat',
-    }],
+    },
   }],
 };
