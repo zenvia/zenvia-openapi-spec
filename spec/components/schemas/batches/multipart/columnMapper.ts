@@ -13,11 +13,11 @@ const base: SchemaObject = {
     "protocol": "protocol_column"
   },
   properties: {
-    recipient_header_name: {
-      title: 'Recipient number column',
-      description: 'Recipient number column',
+    header: {
+      title: 'Recipient header name',
+      description: 'Recipient header name',
       type: 'string',
-      example: 'recipient_number_column',
+      example: 'recipient_header_name',
     },
     name: {
       title: 'Recipient name column',
@@ -33,7 +33,7 @@ const base: SchemaObject = {
     },
   },
     required: [
-      'recipient_header_name'
+      'header'
     ],
 };
 
