@@ -23,7 +23,7 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
-      messageIdRef: {
+      idRef: {
         title: 'read only',
         description: 'When an user sends a message quoting a previous message, the idetifier of the quoted message will be provided here.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*',
         type: 'string',
