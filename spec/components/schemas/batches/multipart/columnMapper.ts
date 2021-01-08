@@ -18,19 +18,7 @@ const base: SchemaObject = {
       description: 'Recipient header name',
       type: 'string',
       example: 'recipient_header_name',
-    },
-    name: {
-      title: 'Recipient name column',
-      description: 'Recipient name column',
-      type: 'string',
-      example: 'recipient_name_column',
-    },
-    protocol: {
-      title: 'Protocol column',
-      description: 'Protocol column',
-      type: 'string',
-      example: 'protocol_column',
-    },
+    }
   },
     required: [
       'recipient_header_name'
