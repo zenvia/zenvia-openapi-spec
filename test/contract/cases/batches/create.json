@@ -35,7 +35,9 @@
       "name": "BATCH NAME",
       "channel": "whatsapp",
       "standardAnswer": "STANDARD_ANSWER",
-      "columnMapper": {},
+      "columnMapper": {
+        "recipient_header_name": "recipient_number_column"
+      },
       "message": {
         "from": "SENDER ID",
         "contents": [{
