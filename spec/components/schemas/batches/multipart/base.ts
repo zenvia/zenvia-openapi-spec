@@ -14,7 +14,7 @@ const base: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      columnMapper: {        
+      columnMapper: {
         $ref: columnMapper,
       },
       message: {
