@@ -7,7 +7,7 @@ const base: SchemaObject = {
   description: 'The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required because the column of the file that has the recipient`s contact number must be related to this variable.',
   type: 'object',
   example: {
-    'recipient_header_name': 'recipient_number_column',
+    recipient_header_name: 'recipient_number_column',
   },
   properties: {
     recipient_header_name: {
