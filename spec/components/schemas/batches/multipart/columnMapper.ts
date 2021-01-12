@@ -1,7 +1,6 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-// import { ref as columnMapperContents } from './content/columnMapperContents';
 
 const base: SchemaObject = {
   title: 'Column Mapper',
@@ -20,9 +19,9 @@ const base: SchemaObject = {
       example: 'recipient_header_name',
     }
   },
-    required: [
-      'recipient_header_name'
-    ],
+  required: [
+    'recipient_header_name'
+  ],
 };
 
 export const ref = createComponentRef(__filename);
