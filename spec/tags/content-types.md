@@ -43,6 +43,9 @@ This type of content has an underlying fixed text content with some required var
 
 <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
+### Submitting a template content for approval
+If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
+
 ## Card
 
 The card is the container that holds the information that should be displayed by the connector.
