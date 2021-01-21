@@ -1,40 +1,15 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as postBackRef } from './postback';
-import { ref as webUrlRef } from './web-url';
-import { ref as calendarEventRef } from './calendar-event';
-import { ref as dialRef } from './dial';
-import { ref as shareLocationRef } from './share-location';
-import { ref as viewLocationRef } from './view-location';
+import { ref as buttonsRef } from './all-buttons';
 
 export const quickReplyList: SchemaObject = {
-  type: 'object',
-  title: 'Buttons',
-  description: 'RCS buttons in quick reply format',
-  oneOf: [{
-    $ref: postBackRef,
-  }, {
-    $ref: webUrlRef,
-  }, {
-    $ref: calendarEventRef,
-  }, {
-    $ref: dialRef,
-  }, {
-    $ref: shareLocationRef,
-  }, {
-    $ref: viewLocationRef,
-  }],
-  required: ['type'],
-  discriminator: {
-    propertyName: 'type',
-    mapping: {
-      postback: postBackRef,
-      web_url: webUrlRef,
-      calendar_event: calendarEventRef,
-      dial: dialRef,
-      share_location: shareLocationRef,
-      view_location: viewLocationRef,
-    },
+  type: 'array',
+  title: 'Quick reply buttons',
+  description: `Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.
+    <br><br>*A maximum of 11 buttons is supported by RCS channel.*`,
+  maxItems: 11,
+  items: {
+    $ref: buttonsRef,
   },
 };
 

@@ -1,40 +1,15 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as postBackRef } from './postback';
-import { ref as webUrlRef } from './web-url';
-import { ref as calendarEventRef } from './calendar-event';
-import { ref as dialRef } from './dial';
-import { ref as shareLocationRef } from './share-location';
-import { ref as viewLocationRef } from './view-location';
+import { ref as buttonsRef } from './all-buttons';
 
 export const buttonsList: SchemaObject = {
-  type: 'object',
+  type: 'array',
   title: 'Buttons',
-  description: 'RCS buttons',
-  oneOf: [{
-    $ref: postBackRef,
-  }, {
-    $ref: webUrlRef,
-  }, {
-    $ref: calendarEventRef,
-  }, {
-    $ref: dialRef,
-  }, {
-    $ref: shareLocationRef,
-  }, {
-    $ref: viewLocationRef,
-  }],
-  required: ['type'],
-  discriminator: {
-    propertyName: 'type',
-    mapping: {
-      postback: postBackRef,
-      web_url: webUrlRef,
-      calendar_event: calendarEventRef,
-      dial: dialRef,
-      share_location: shareLocationRef,
-      view_location: viewLocationRef,
-    },
+  description: `Vertical list of buttons displayed inside a card. These will *not* fade away once one is clicked.
+    <br><br>*A maximum of 4 buttons is supported by RCS channel, but they might not be shown if they do not fit in the available space.*`,
+  maxItems: 4,
+  items: {
+    $ref: buttonsRef,
   },
 };
 
