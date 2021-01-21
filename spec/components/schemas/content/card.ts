@@ -31,9 +31,9 @@ const card: SchemaObject = {
               enum: [
                 'ON_THE_LEFT',
                 'ON_THE_RIGHT',
-                'SHORT_HEIGHT_ON_THE_TOP',
-                'MEDIUM_HEIGHT_ON_THE_TOP',
-                'TALL_HEIGHT_ON_THE_TOP',
+                'ON_THE_TOP_SHORT_HEIGHT',
+                'ON_THE_TOP_MEDIUM_HEIGHT',
+                'ON_THE_TOP_TALL_HEIGHT',
               ],
               default: 'SHORT_HEIGHT_ON_THE_TOP',
             },

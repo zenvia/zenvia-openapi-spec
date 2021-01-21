@@ -48,9 +48,9 @@ const carousel: SchemaObject = {
                     disposition: {
                       type: 'string',
                       enum: [
-                        'SHORT_HEIGHT_ON_THE_TOP',
-                        'MEDIUM_HEIGHT_ON_THE_TOP',
-                        'TALL_HEIGHT_ON_THE_TOP',
+                        'ON_THE_TOP_SHORT_HEIGHT',
+                        'ON_THE_TOP_MEDIUM_HEIGHT',
+                        'ON_THE_TOP_TALL_HEIGHT',
                       ],
                     },
                   },
