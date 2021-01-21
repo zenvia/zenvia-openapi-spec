@@ -61,12 +61,3 @@ The RCS carousel is a horizontally scrollable carousel of up to 10 vertical rich
 * Up to 4 buttons (RCS limitation) with the following actions: Link, Navigation, Publish text.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
-
-## Buttons
-
-Buttons contain click and action properties that define the type of action set on user click operation.
-
-<SchemaDefinition schemaRef="#/components/schemas/content.buttons" />
-
-### Submitting a template content for approval
-If you already have a WhatsApp business account with us, just send email to *whatsapp@zenvia.com* and we will start the process for you.
