@@ -48,16 +48,23 @@ If you already have a WhatsApp business account with us, you may submit template
 
 ## Card
 
-The card is the container that holds the information that should be displayed by the connector.
+This is a rich content composed of *at least one* of these components (none of them are mandatory):
+* Media
+* Title
+* Text
+
+And additionally, it may also have these:
+* Buttons
+* Quick reply buttons (they are not part of the card itself and instead are shown below it)
+
+More information on each attribute may be found below.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.card" />
 
 ## Carousel
 
-The RCS carousel is a horizontally scrollable carousel of up to 10 vertical rich cards. Each card can include the following elements:
-* Title text.
-* Subtitle text.
-* Image (which will be placed above the title, subtitle and buttons) - image is not required to be placed in a card.
-* Up to 4 buttons (RCS limitation) with the following actions: Link, Navigation, Publish text.
+This is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.
+
+More details may be found below.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
