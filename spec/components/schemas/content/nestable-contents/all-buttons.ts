@@ -6,6 +6,7 @@ import { ref as calendarEventRef } from './calendar-event';
 import { ref as dialRef } from './dial';
 import { ref as shareLocationRef } from './share-location';
 import { ref as viewLocationRef } from './view-location';
+import { ref as searchLocationRef } from './search-location';
 
 const all: SchemaObject = {
   oneOf: [{
@@ -20,6 +21,8 @@ const all: SchemaObject = {
     $ref: shareLocationRef,
   }, {
     $ref: viewLocationRef,
+  }, {
+    $ref: searchLocationRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -30,6 +33,7 @@ const all: SchemaObject = {
       dial: dialRef,
       share_location: shareLocationRef,
       view_location: viewLocationRef,
+      search_location: searchLocationRef,
     },
   },
 };

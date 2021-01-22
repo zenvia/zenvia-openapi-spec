@@ -13,14 +13,17 @@ const weburl: SchemaObject = {
       text:{
         type: 'string',
         description: 'Text to be displayed inside the button.',
+        example: 'Our site',
       },
       link: {
         type: 'string',
         description: 'Link to be sent.',
+        example: 'https://zenvia.com/',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        description: 'Content to be sent back as a message event when the user clicks the button.',
+        example: 'site-accessed',
       },
     },
     required: [

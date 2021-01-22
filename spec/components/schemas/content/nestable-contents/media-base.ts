@@ -8,7 +8,7 @@ const mediaBase: SchemaObject = {
       type: 'string',
       description: `Public URL of media file, which can be an image, a GIF or a video, which will be diplayed in the card.
         <br><br>*Videos will display a play button instead of a preview of the content.*`,
-      example: 'https://fooo.bar/image',
+      example: 'https://zenvia.br/zenvia-team.png',
     },
     disposition: {
       type: 'string',
@@ -18,6 +18,7 @@ const mediaBase: SchemaObject = {
     caption: {
       type: 'string',
       description: 'Media content description, used by screen readers to help users with disability to understand the context.',
+      example: 'Zenvia\'s team picture',
     },
   },
   required: ['url'],

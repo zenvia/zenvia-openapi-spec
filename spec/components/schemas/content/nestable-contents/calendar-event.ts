@@ -13,22 +13,27 @@ const calendarevent: SchemaObject = {
       text: {
         type: 'string',
         description: 'Text to be displayed inside the button.',
+        example: 'Add to calendar',
       },
       startTime: {
         type: 'string',
-        description: 'Start date & time of the event (UTC format).',
+        description: 'Start date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.',
+        example: '2021-01-15T17:30:00-03:00',
       },
       endTime: {
         type: 'string',
-        description: 'End date & time of the event (UTC format).',
+        description: 'End date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.',
+        example: '2021-01-15T17:30:00-03:00',
       },
       title: {
         type: 'string',
         description: 'Event description.',
+        example: 'API development',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        description: 'Content to be sent back as a message event when the user clicks the button.',
+        example: 'scheduled',
       },
     },
     required: [

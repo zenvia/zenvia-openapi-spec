@@ -2,9 +2,9 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as baseRef } from './base';
 
-const dial: SchemaObject = {
+const searchLocation: SchemaObject = {
   type: 'object',
-  description: "Opesn the default dial opp on the user's device.",
+  description: "Opens the standard calendar application on the user's device and creates a new event with the sent data.",
   allOf: [{
     $ref: baseRef,
   }, {
@@ -13,17 +13,22 @@ const dial: SchemaObject = {
       text: {
         type: 'string',
         description: 'Text to be displayed inside the button.',
-        example: 'Call us',
+        example: 'Visit us',
       },
-      phoneNumber: {
+      label: {
         type: 'string',
-        description: 'Phone Number (E.164 format).',
-        example: '+558006464777',
+        description: 'Text to be displayed with the map position pin icon.',
+        example: 'Zenvia',
+      },
+      query: {
+        type: 'string',
+        description: "A text, for example, an address or a company name, to be searched in the default user's map application.",
+        example: 'Av. Paulista, 2300 - São Paulo',
       },
       payload: {
         type: 'string',
         description: 'Content to be sent back as a message event when the user clicks the button.',
-        example: 'will-dial',
+        example: 'location-searched',
       },
     },
     required: [
@@ -33,4 +38,4 @@ const dial: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default dial;
+export default searchLocation;

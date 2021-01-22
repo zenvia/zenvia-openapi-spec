@@ -1,15 +1,15 @@
 export function card() {
   return {
-    from: '5511999999999',
-    to: '55118888888888',
+    from: '5510999999999',
+    to: '55108888888888',
     contents: [{
       type: 'card',
       label: 'Card from Zenvia',
       text: 'This is our products',
       media: {
-        url: 'http://fooooo.br/zenvia.png',
+        url: 'https://zenvia.br/zenvia-office.png',
         disposition: 'ON_THE_TOP_MEDIUM_HEIGHT',
-        caption: 'An amazing office!',
+        caption: 'Our amazing office!',
       },
       buttons: [{
         type: 'web_url',

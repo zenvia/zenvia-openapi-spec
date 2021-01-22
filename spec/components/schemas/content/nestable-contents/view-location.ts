@@ -13,26 +13,27 @@ const viewLocation: SchemaObject = {
       text: {
         type: 'string',
         description: 'Text to be displayed inside the button.',
+        example: 'Visit us',
       },
       label: {
         type: 'string',
         description: 'Text to be displayed with the map position pin icon.',
+        example: 'Zenvia',
       },
       latitude: {
         type: 'string',
         description: 'Latitude in degrees (range from -90.0 and +90.0).',
+        example: '-23.557260',
       },
       longitude: {
         type: 'string',
         description: 'Longitude in degrees (range from -180.0 and +180.0).',
-      },
-      query: {
-        type: 'string',
-        description: "Send text as an address to be searched in the default user's map application. An alternative to using latitude & longitude.",
+        example: '-46.661030',
       },
       payload: {
         type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        description: 'Content to be sent back as a message event when the user clicks the button.',
+        example: 'location-viewed',
       },
     },
     required: [
