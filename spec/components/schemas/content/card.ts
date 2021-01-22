@@ -35,7 +35,7 @@ const card: SchemaObject = {
                 'ON_THE_TOP_MEDIUM_HEIGHT',
                 'ON_THE_TOP_TALL_HEIGHT',
               ],
-              default: 'SHORT_HEIGHT_ON_THE_TOP',
+              default: 'ON_THE_TOP_SHORT_HEIGHT',
             },
           },
         }],
