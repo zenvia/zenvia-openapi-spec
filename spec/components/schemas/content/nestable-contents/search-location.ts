@@ -11,8 +11,6 @@ const searchLocation: SchemaObject = {
     type: 'object',
     properties: {
       text: {
-        type: 'string',
-        description: 'Text to be displayed inside the button.',
         example: 'Visit us',
       },
       label: {
@@ -26,8 +24,6 @@ const searchLocation: SchemaObject = {
         example: 'Av. Paulista, 2300 - São Paulo',
       },
       payload: {
-        type: 'string',
-        description: 'Content to be sent back as a message event when the user clicks the button.',
         example: 'location-searched',
       },
     },

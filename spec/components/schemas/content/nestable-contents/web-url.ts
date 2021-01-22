@@ -11,8 +11,6 @@ const weburl: SchemaObject = {
     type: 'object',
     properties: {
       text:{
-        type: 'string',
-        description: 'Text to be displayed inside the button.',
         example: 'Our site',
       },
       link: {
@@ -21,8 +19,6 @@ const weburl: SchemaObject = {
         example: 'https://zenvia.com/',
       },
       payload: {
-        type: 'string',
-        description: 'Content to be sent back as a message event when the user clicks the button.',
         example: 'site-accessed',
       },
     },

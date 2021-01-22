@@ -11,13 +11,9 @@ const shareLocation: SchemaObject = {
     type: 'object',
     properties: {
       text: {
-        type: 'string',
-        description: 'Text to be displayed inside the button.',
         example: 'Send us your location',
       },
       payload: {
-        type: 'string',
-        description: 'Content to be sent back as a message event when the user clicks the button.',
         example: 'help-requested',
       },
     },

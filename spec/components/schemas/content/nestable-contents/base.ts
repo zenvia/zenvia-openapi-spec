@@ -9,6 +9,14 @@ const buttonBase: SchemaObject = {
       description: 'Button type discriminator',
       type: 'string',
     },
+    text: {
+      type: 'string',
+      description: 'Text to be displayed inside the button.',
+    },
+    payload: {
+      type: 'string',
+      description: 'Content to be sent back as a message event when the user clicks the button.',
+    },
   },
   required: [
     'type',
