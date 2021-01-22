@@ -6,11 +6,11 @@ export function card() {
       type: 'card',
       label: 'Card from Zenvia',
       text: 'This is our products',
-      orientation: 'VERTICAL',
-      imageAlignment: 'LEFT',
-      imageUrl: 'http://fooooo.br/zenvia.png',
-      imageDescription: 'Zenvia',
-      height: 'SHORT',
+      media: {
+        url: 'http://fooooo.br/zenvia.png',
+        disposition: 'ON_THE_TOP_MEDIUM_HEIGHT',
+        caption: 'An amazing office!',
+      },
       buttons: [{
         type: 'web_url',
         text: 'Site',
