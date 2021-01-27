@@ -20,12 +20,16 @@ const viewLocation: SchemaObject = {
       },
       latitude: {
         type: 'string',
-        description: 'Latitude in degrees (range from -90.0 and +90.0).',
+        description: 'Latitude in degrees.',
         example: '-23.557260',
+        minimum: -90.0,
+        maximum: +90.0,
       },
       longitude: {
         type: 'string',
-        description: 'Longitude in degrees (range from -180.0 and +180.0).',
+        description: 'Longitude in degrees.',
+        minimum: -180.0,
+        maximum: +180.0,
         example: '-46.661030',
       },
       payload: {
