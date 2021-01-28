@@ -12,12 +12,12 @@ export function card() {
         caption: 'Our amazing office!',
       },
       buttons: [{
-        type: 'web_url',
+        type: 'link',
         text: 'Site',
         url: 'https://www.zenvia.com/',
       }],
       quickReplyButtons: [{
-        type: 'postback',
+        type: 'text',
         text: 'Click here',
         payload: 'success',
       }],

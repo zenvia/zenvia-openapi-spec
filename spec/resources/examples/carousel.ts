@@ -14,12 +14,12 @@ export function carousel() {
           caption: 'Our amazing office!',
         },
         buttons: [{
-          type: 'web_url',
+          type: 'link',
           text: 'Site',
-          link: 'https://www.zenvia.com/',
+          url: 'https://www.zenvia.com/',
         }],
         quickReplyButtons: [{
-          type: 'postback',
+          type: 'text',
           text: 'Click here',
           payload: 'success',
         }],
