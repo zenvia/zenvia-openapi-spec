@@ -27,8 +27,8 @@ const all: SchemaObject = {
   discriminator: {
     propertyName: 'type',
     mapping: {
-      postback: postBackRef,
-      web_url: webUrlRef,
+      text: postBackRef,
+      link: webUrlRef,
       calendar_event: calendarEventRef,
       dial: dialRef,
       share_location: shareLocationRef,
