@@ -12,15 +12,14 @@ const buttonBase: SchemaObject = {
     text: {
       type: 'string',
       description: 'Text to be displayed inside the button.',
+      example: 'Click me!',
     },
     payload: {
       type: 'string',
-      description: 'Content to be sent back as a message event when the user clicks the button.',
+      description: 'Content to be sent back as a message event when the user clicks the button. By default, the text of the button will be used as payload.',
+      example: 'clicked',
     },
   },
-  required: [
-    'type',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
