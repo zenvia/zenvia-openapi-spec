@@ -10,25 +10,16 @@ const searchLocation: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        example: 'Visit us',
-      },
-      label: {
-        type: 'string',
-        description: 'Text to be displayed with the map position pin icon.',
-        example: 'Zenvia',
-      },
       query: {
         type: 'string',
         description: "A text, for example, an address or a company name, to be searched in the default user's map application.",
         example: 'Av. Paulista, 2300 - São Paulo',
       },
-      payload: {
-        example: 'location-searched',
-      },
     },
     required: [
       'type',
+      'text',
+      'query',
     ],
   }],
 };

@@ -9,16 +9,9 @@ const postback: SchemaObject = {
     $ref: baseRef,
   }, {
     type: 'object',
-    properties: {
-      text: {
-        example: 'Yes',
-      },
-      payload: {
-        example: 'accepted',
-      },
-    },
     required: [
       'type',
+      'text',
     ],
   }],
 };

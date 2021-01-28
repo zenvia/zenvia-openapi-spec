@@ -9,16 +9,9 @@ const shareLocation: SchemaObject = {
     $ref: baseRef,
   }, {
     type: 'object',
-    properties: {
-      text: {
-        example: 'Send us your location',
-      },
-      payload: {
-        example: 'help-requested',
-      },
-    },
     required: [
       'type',
+      'text',
     ],
   }],
 };

@@ -10,20 +10,16 @@ const dial: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        example: 'Call us',
-      },
       phoneNumber: {
         type: 'string',
         description: 'Phone Number (E.164 format).',
         example: '+558006464777',
       },
-      payload: {
-        example: 'is-gonna-dial',
-      },
     },
     required: [
       'type',
+      'text',
+      'phoneNumber',
     ],
   }],
 };

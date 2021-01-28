@@ -10,9 +10,6 @@ const calendarevent: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        example: 'Add to calendar',
-      },
       startTime: {
         type: 'string',
         description: 'Start date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.',
@@ -28,12 +25,10 @@ const calendarevent: SchemaObject = {
         description: 'Event description.',
         example: 'API development',
       },
-      payload: {
-        example: 'scheduled',
-      },
     },
     required: [
       'type',
+      'text',
     ],
   }],
 };
