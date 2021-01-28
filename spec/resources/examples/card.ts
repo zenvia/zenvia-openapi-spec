@@ -14,7 +14,7 @@ export function card() {
       buttons: [{
         type: 'web_url',
         text: 'Site',
-        link: 'https://www.zenvia.com/',
+        url: 'https://www.zenvia.com/',
       }],
       quickReplyButtons: [{
         type: 'postback',

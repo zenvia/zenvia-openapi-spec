@@ -10,20 +10,16 @@ const weburl: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text:{
-        example: 'Our site',
-      },
-      link: {
+      url: {
         type: 'string',
-        description: 'Link to be sent.',
+        description: 'URL to be accessed upon click.',
         example: 'https://zenvia.com/',
-      },
-      payload: {
-        example: 'site-accessed',
       },
     },
     required: [
       'type',
+      'text',
+      'url',
     ],
   }],
 };
