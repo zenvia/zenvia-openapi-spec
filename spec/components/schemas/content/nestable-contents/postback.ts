@@ -4,7 +4,7 @@ import { ref as baseRef } from './base';
 
 const postback: SchemaObject = {
   type: 'object',
-  description: 'Sends the payload content to the Agent (similar to Omni-chat)',
+  description: 'Send back a text message event when the user clicks on the button.',
   allOf: [{
     $ref: baseRef,
   }, {

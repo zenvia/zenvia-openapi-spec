@@ -16,7 +16,7 @@ const buttonBase: SchemaObject = {
     },
     payload: {
       type: 'string',
-      description: 'Content to be sent back as a message event when the user clicks the button. By default, the text of the button will be used as payload.',
+      description: 'Content to be sent back as a message event when the user clicks on the button. By default, the text of the button will be used as payload.',
       example: 'clicked',
     },
   },
