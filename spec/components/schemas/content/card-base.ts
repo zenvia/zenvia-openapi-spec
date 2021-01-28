@@ -5,7 +5,7 @@ import { createComponentRef } from '../../../../utils/ref';
 const card: SchemaObject = {
   type: 'object',
   properties: {
-    label: {
+    title: {
       type: 'string',
       description: 'A title in bold shown above the text of the card.',
       example: 'Hello',
