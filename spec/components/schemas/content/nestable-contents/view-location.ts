@@ -10,11 +10,6 @@ const viewLocation: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      label: {
-        type: 'string',
-        description: 'Text to be displayed with the map position pin icon.',
-        example: 'Zenvia',
-      },
       latitude: {
         type: 'string',
         description: 'Latitude in degrees (range from -90.0 and +90.0).',
@@ -24,6 +19,11 @@ const viewLocation: SchemaObject = {
         type: 'string',
         description: 'Longitude in degrees (range from -180.0 and +180.0).',
         example: '-46.661030',
+      },
+      label: {
+        type: 'string',
+        description: 'Text to be displayed with the map position pin icon.',
+        example: 'Zenvia',
       },
     },
     required: [
