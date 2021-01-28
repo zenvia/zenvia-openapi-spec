@@ -29,6 +29,9 @@ const calendarevent: SchemaObject = {
     required: [
       'type',
       'text',
+      'startTime',
+      'endTime',
+      'title',
     ],
   }],
 };
