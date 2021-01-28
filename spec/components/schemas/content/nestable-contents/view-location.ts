@@ -10,9 +10,6 @@ const viewLocation: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        example: 'Visit us',
-      },
       label: {
         type: 'string',
         description: 'Text to be displayed with the map position pin icon.',
@@ -20,24 +17,20 @@ const viewLocation: SchemaObject = {
       },
       latitude: {
         type: 'string',
-        description: 'Latitude in degrees.',
+        description: 'Latitude in degrees (range from -90.0 and +90.0).',
         example: '-23.557260',
-        minimum: -90.0,
-        maximum: +90.0,
       },
       longitude: {
         type: 'string',
-        description: 'Longitude in degrees.',
-        minimum: -180.0,
-        maximum: +180.0,
+        description: 'Longitude in degrees (range from -180.0 and +180.0).',
         example: '-46.661030',
-      },
-      payload: {
-        example: 'location-viewed',
       },
     },
     required: [
       'type',
+      'text',
+      'latitude',
+      'longitude',
     ],
   }],
 };
