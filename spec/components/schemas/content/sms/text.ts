@@ -47,7 +47,7 @@ const text: SchemaObject = {
         title: 'write only',
         description: `When **true**, the message will pop up on screen (also known as flash message).
           <br>*Only applicable to [SMS channel](#tag/SMS).*`,
-        example: 'true',
+        example: true,
       },
     },
   }],
