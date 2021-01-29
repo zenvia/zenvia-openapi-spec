@@ -61,7 +61,7 @@ describe('API contract test against OpenAPI specification', () => {
   }
 
   before(async () => {
-    enforcer = await Enforcer(spec, { componentOptions: { showWarnings: false } });
+    enforcer = await Enforcer(spec, { componentOptions: {} });
   });
 
   describe('whatsapp messages', () => {
