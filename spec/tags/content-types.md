@@ -11,7 +11,6 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | template     | &#10005; | &#10005; | &#10004; | &#10005; |
 | card         | &#10005; | &#10005; | &#10004; | &#10004; |
 | carousel     | &#10005; | &#10005; | &#10004; | &#10004; |
-| button       | &#10005; | &#10005; | &#10004; | &#10004; |
 
 
 ## Text
