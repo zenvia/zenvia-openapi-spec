@@ -4,6 +4,7 @@ import { ref as rcsMessageRef } from '../../components/schemas/message/rcs';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 import { card as cardExample } from '../../resources/examples/card';
+import { carousel as carouselExample } from '../../resources/examples/carousel';
 
 const post: OperationObject = {
   description: 'Send a RCS message',
@@ -24,6 +25,9 @@ const post: OperationObject = {
           },
           card: {
             value: cardExample(),
+          },
+          carousel: {
+            value: carouselExample(),
           },
         },
       },

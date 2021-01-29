@@ -5,6 +5,32 @@ import { assert } from 'chai';
 import * as Enforcer from 'openapi-enforcer';
 import spec from '../../spec';
 
+describe('Loading OpenAPI specification by Enforcer', () => {
+
+  it('Checking for errors', (done) => {
+    Enforcer(spec, { fullResult: true, toString: true })
+      .then(function ({ error, warning }) {
+        if (error) {
+          done(new Error(error));
+          return;
+        }
+        done();
+      });
+  });
+
+  it('Checking for warnings', (done) => {
+    Enforcer(spec, { fullResult: true, toString: true })
+      .then(function ({ error, warning }) {
+        if (warning) {
+          done(new Error(warning));
+          return;
+        }
+        done();
+      });
+  });
+
+});
+
 describe('API contract test against OpenAPI specification', () => {
   let enforcer;
 

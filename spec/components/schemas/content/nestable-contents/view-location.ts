@@ -1,7 +1,6 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as baseRef } from '../base';
+import { ref as baseRef } from './base';
 
 const viewLocation: SchemaObject = {
   type: 'object',
@@ -11,33 +10,27 @@ const viewLocation: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        type: 'string',
-        description: 'Text to be displayed inside the button.',
-      },
-      label: {
-        type: 'string',
-        description: 'Text to be displayed with the map position pin icon.',
-      },
       latitude: {
         type: 'string',
         description: 'Latitude in degrees (range from -90.0 and +90.0).',
+        example: '-23.557260',
       },
       longitude: {
         type: 'string',
         description: 'Longitude in degrees (range from -180.0 and +180.0).',
+        example: '-46.661030',
       },
-      query: {
+      label: {
         type: 'string',
-        description: "Send text as an address to be searched in the default user's map application. An alternative to using latitude & longitude.",
-      },
-      payload: {
-        type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        description: 'Text to be displayed with the map position pin icon.',
+        example: 'Zenvia',
       },
     },
     required: [
       'type',
+      'text',
+      'latitude',
+      'longitude',
     ],
   }],
 };

@@ -1,7 +1,6 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as baseRef } from '../base';
+import { ref as baseRef } from './base';
 
 const weburl: SchemaObject = {
   type: 'object',
@@ -11,21 +10,16 @@ const weburl: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text:{
+      url: {
         type: 'string',
-        description: 'Text to be displayed inside the button.',
-      },
-      link: {
-        type: 'string',
-        description: 'Link to be sent.',
-      },
-      payload: {
-        type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        description: 'URL to be accessed upon click.',
+        example: 'https://zenvia.com/',
       },
     },
     required: [
       'type',
+      'text',
+      'url',
     ],
   }],
 };

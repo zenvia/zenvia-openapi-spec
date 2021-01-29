@@ -1,7 +1,6 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as baseRef } from '../base';
+import { ref as baseRef } from './base';
 
 const calendarevent: SchemaObject = {
   type: 'object',
@@ -11,29 +10,28 @@ const calendarevent: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      text: {
-        type: 'string',
-        description: 'Text to be displayed inside the button.',
-      },
       startTime: {
         type: 'string',
-        description: 'Start date & time of the event (UTC format).',
+        description: 'Start date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.',
+        example: '2021-01-15T17:30:00-03:00',
       },
       endTime: {
         type: 'string',
-        description: 'End date & time of the event (UTC format).',
+        description: 'End date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.',
+        example: '2021-01-15T17:30:00-03:00',
       },
       title: {
         type: 'string',
         description: 'Event description.',
-      },
-      payload: {
-        type: 'string',
-        description: 'Content to be sent back to the Agent when the user clicks the button.',
+        example: 'API development',
       },
     },
     required: [
       'type',
+      'text',
+      'startTime',
+      'endTime',
+      'title',
     ],
   }],
 };
