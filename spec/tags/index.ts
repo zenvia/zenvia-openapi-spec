@@ -11,6 +11,7 @@ const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
 const flowReportDescription = rawLoad(__dirname, './flow-report.md');
 const rcsDescription = rawLoad(__dirname, './rcs.md');
+const voiceDescription = rawLoad(__dirname, './voice.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -27,6 +28,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'RCS',
   description: rcsDescription,
+}, {
+  name: 'Voice',
+  description: voiceDescription,
 }, {
   name: 'Batches',
   description: batchesDescription,

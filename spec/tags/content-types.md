@@ -2,13 +2,14 @@
 
 Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-| Content Type | SMS      | Facebook | WhatsApp | RCS      |
-|:-------------|:---------|:---------|:---------|:---------|
-| text         | &#10004; | &#10004; | &#10004; | &#10004; |
-| file         | &#10005; | &#10004; | &#10004; | &#10004; |
-| contacts     | &#10005; | &#10005; | &#10004; | &#10005; |
-| location     | &#10005; | &#10005; | &#10004; | &#10005; |
-| template     | &#10005; | &#10005; | &#10004; | &#10005; |
+| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    |
+|:-------------|:---------|:---------|:---------|:---------|:---------|
+| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |
+| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; | 
+| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |  
 
 ## Text
 This type of content is the most used type of content, and its composed of a plain text.
