@@ -49,13 +49,17 @@ describe('API contract test against OpenAPI specification', () => {
       it(testCase.name, () => {
         // check request
         const [request, requestErr, requestWarn] = enforcer.request(testCase.request, { allowOtherQueryParameters: [] });
-        assert.isUndefined(requestErr, `Client request was rejected: [${formatErrorMessage(requestErr)}]`);
-        assert.isUndefined(requestWarn, `Client request have warnings: [${formatErrorMessage(requestWarn)}]`);
+        if (testCase.expectedFail) {
+          assert.equal(formatErrorMessage(requestErr), testCase.expectedFail.error);
+        } else {
+          assert.isUndefined(requestErr, `Client request was rejected: [${formatErrorMessage(requestErr)}]`);
+          assert.isUndefined(requestWarn, `Client request have warnings: [${formatErrorMessage(requestWarn)}]`);
 
-        // check response
-        const [, responseErr, responseWarn] = request.operation.response(testCase.response.status, testCase.response.body, testCase.response.headers);
-        assert.isUndefined(responseErr, `Server response was rejected: [${formatErrorMessage(responseErr)}]`);
-        assert.isUndefined(responseWarn, `Server response have warnings: [${formatErrorMessage(responseWarn)}]`);
+          // check response
+          const [, responseErr, responseWarn] = request.operation.response(testCase.response.status, testCase.response.body, testCase.response.headers);
+          assert.isUndefined(responseErr, `Server response was rejected: [${formatErrorMessage(responseErr)}]`);
+          assert.isUndefined(responseWarn, `Server response have warnings: [${formatErrorMessage(responseWarn)}]`);
+        }
       });
     }
   }
