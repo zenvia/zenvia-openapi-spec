@@ -22,7 +22,6 @@ const text: SchemaObject = {
         description: 'Payload of selected button.',
         type: 'string',
         readOnly: true,
-        title: 'read only',
       },
     },
     required: [
