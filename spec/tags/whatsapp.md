@@ -31,7 +31,7 @@ When you send some message for one contact using WhatsApp channel:
 * Recipient: is the phone number of contact
 * Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
-When you receive a message from one contact, the sender and recipient is inverted:
+When you receive a message from one contact, the sender and recipient are inverted:
 
 * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 * Sender: is the phone number of contact

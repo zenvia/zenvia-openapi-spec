@@ -1,23 +1,23 @@
 export function card() {
   return {
-    from: '5511999999999',
-    to: '55118888888888',
+    from: '5510999999999',
+    to: '55108888888888',
     contents: [{
       type: 'card',
       label: 'Card from Zenvia',
       text: 'This is our products',
-      orientation: 'VERTICAL',
-      imageAlignment: 'LEFT',
-      imageUrl: 'http://fooooo.br/zenvia.png',
-      imageDescription: 'Zenvia',
-      height: 'SHORT',
+      media: {
+        url: 'https://zenvia.br/zenvia-office.png',
+        disposition: 'ON_THE_TOP_MEDIUM_HEIGHT',
+        caption: 'Our amazing office!',
+      },
       buttons: [{
-        type: 'web_url',
+        type: 'link',
         text: 'Site',
-        link: 'https://www.zenvia.com/',
+        url: 'https://www.zenvia.com/',
       }],
       quickReplyButtons: [{
-        type: 'postback',
+        type: 'text',
         text: 'Click here',
         payload: 'success',
       }],

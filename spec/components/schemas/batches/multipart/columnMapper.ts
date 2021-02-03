@@ -8,6 +8,8 @@ const base: SchemaObject = {
   type: 'object',
   example: {
     recipient_header_name: 'recipient_number_column',
+    name: 'recipient_name_column',
+    protocol: 'protocol_column',
   },
   properties: {
     recipient_header_name: {

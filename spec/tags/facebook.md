@@ -7,7 +7,7 @@ When you send some message for one contact using Facebook channel:
 * Recipient: is the user id on your page (PSID - page scoped id)
 * Sender: is your page id
 
-When you receive a message from one contact, the sender and recipient is inverted:
+When you receive a message from one contact, the sender and recipient are inverted:
 
 * Recipient: is your page id
 * Sender: is the user id on your page (PSID - page scoped id)
