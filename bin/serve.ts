@@ -41,14 +41,14 @@ const watchFilesByPattern = (... patterns: string[]) => {
 async function main() {
   const app = express();
   app.use(cors());
-  await reload(app);
+  const port = process.env.PORT || '8080';
+  await reload(app, { port: parseInt(port, 10) + 1 });
   app.get('/', sendIndex);
   app.get('/openapi.json', sendJsonSpec);
   app.get('/openapi.yaml', sendYamlSpec);
   app.use(express.static('public'));
   app.use(sendNotFoundStatus);
   app.use(sendInternalError);
-  const port = process.env.PORT || 8080;
   app.listen(port);
 
   watchFilesByPattern(

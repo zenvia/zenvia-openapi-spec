@@ -9,7 +9,7 @@ When you send a message for one contact using SMS channel:
 * Recipient: is the complete phone number (including country code) of contact.
 * Sender: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
 
-When you receive a message from one contact, the sender and recipient is inverted:
+When you receive a message from one contact, the sender and recipient are inverted:
 
 * Recipient: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
 * Sender: is the complete phone number (including country code) of contact.
