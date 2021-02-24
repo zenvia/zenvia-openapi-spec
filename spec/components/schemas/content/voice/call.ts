@@ -1,5 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './../base';
+import { ref as ttsRef } from '../tts';
+import { ref as audioFileRef } from '../audiofile';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const text: SchemaObject = {
@@ -14,47 +16,22 @@ const text: SchemaObject = {
         example: 'call',
       },
       audio: {
-        description: 'A list of contacts',
+        description: 'An array of audio actions',
         type: 'array',
         items: {
-          type: 'object',
-          properties: {
-            file: {
-                title: 'Audio file',
-                description: 'Send a audio file',
-                type: 'object',
-                properties: {
-                    fileUrl: {
-                    description: 'URL of audio',
-                    type: 'string',
-                    example: 'http://fooooo.bar/audio.mp3',
-                    },
-                },
+          anyOf: [{
+            $ref: ttsRef,
+          }, {
+            $ref: audioFileRef,
+          }],
+          discriminator: {
+            propertyName: 'type',
+            mapping: {
+              tts: ttsRef,
+              file: audioFileRef,
             },
-            tts: {
-                title: 'Text to speech',
-                description: 'Send a text to speech',
-                type: 'object',
-                properties: {
-                    text: {
-                    description: 'Text to be converted',
-                    type: 'string',
-                    example: 'This is a text',
-                    },
-                    voiceStyle: {
-                        description: 'Language and type of the audio message',
-                        type: 'string',
-                        example: 'br-Ricardo',
-                    },
-                    awaitRecipientAnswer: {
-                      description: 'Await recipient answer',
-                      type: 'boolean',
-                      example: true
-                    }
-                },
-            },
-          }
-        }
+          },
+        },
       },
       transferTo: {
         description: 'Transfer or call to another number',
@@ -62,7 +39,7 @@ const text: SchemaObject = {
         example: '5511999999999',
       },
       recordAudio: {
-        description: 'Record call',
+        description: 'To record the call',
         type: 'boolean',
         example: true,
       },
@@ -76,6 +53,7 @@ const text: SchemaObject = {
       'type',
     ],
   }],
+
 };
 
 export const ref = createComponentRef(__filename);
