@@ -13,12 +13,12 @@ const text: SchemaObject = {
       description: 'URL of audio',
       type: 'string',
       example: 'http://fooooo.bar/audio.mp3',
-      },
+    },
   },
-    required: [
-      'type',
-      'fileUrl',
-    ],
+  required: [
+    'type',
+    'fileUrl',
+  ],
 };
 
 export const ref = createComponentRef(__filename);

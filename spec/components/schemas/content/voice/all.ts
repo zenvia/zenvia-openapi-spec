@@ -5,7 +5,7 @@ import { createComponentRef } from '../../../../../utils/ref';
 const all: SchemaObject = {
   oneOf: [{
     $ref: callRef,
-  },],
+  }],
   discriminator: {
     propertyName: 'type',
     mapping: {
