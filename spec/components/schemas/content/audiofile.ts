@@ -3,11 +3,11 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const text: SchemaObject = {
   title: 'Audio file',
-  description: 'URL of the audio file that will be played to the recipient',
+  description: 'URL of audio',
   type: 'object',
   properties: {
     type:{
-      type: 'object',
+      type: 'string',
     },
     fileUrl: {
       description: 'URL of audio',

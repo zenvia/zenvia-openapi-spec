@@ -7,7 +7,7 @@ const text: SchemaObject = {
   type: 'object',
   properties: {
     type:{
-      type: 'object',
+      type: 'string',
     },
     text: {
       description: 'Text that will be read in the call with the chosen voice type',
@@ -15,8 +15,28 @@ const text: SchemaObject = {
       example: 'This is a text',
     },
     voiceStyle: {
-      description: 'Language and type of the audio message',
       type: 'string',
+      description: 'Language and type of the audio message',
+      enum: [
+        'br-Camila',
+        'br-Vitoria',
+        'br-Ricardo',
+        'en-Joey',
+        'en-Joanna',
+        'fre-Celine',
+        'fre-Mathieu',
+        'ger-Vicki',
+        'ger-Hans',
+        'ita-Carla',
+        'ita-Giorgio',
+        'jap-Mizuki',
+        'pol-Jan',
+        'rus-Tatyana',
+        'rus-Maxim',
+        'esp-Conchita',
+        'esp-Enrique',
+      ],
+      default: 'br-Vitoria',
       example: 'br-Ricardo',
     },
     awaitRecipientAnswer: {

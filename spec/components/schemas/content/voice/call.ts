@@ -16,7 +16,7 @@ const text: SchemaObject = {
         example: 'call',
       },
       audio: {
-        description: 'An array of audio actions',
+        description: 'A sequence of audio bits forming an message to be played on the start of the call',
         type: 'array',
         items: {
           anyOf: [{
@@ -34,7 +34,7 @@ const text: SchemaObject = {
         },
       },
       transferTo: {
-        description: 'Transfer or call to another number',
+        description: 'Transfer or call to another number after the (optional) audio message has been played',
         type: 'string',
         example: '5511999999999',
       },
