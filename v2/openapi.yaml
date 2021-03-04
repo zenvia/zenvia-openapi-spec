@@ -17,6 +17,7 @@ info:
     * WhatsApp
     * Facebook
     * RCS
+    * Voice
 
     You can subscribe for some events and receive then in one webhook endpoint.
     The available events are:
@@ -514,6 +515,26 @@ paths:
               }
 
             }
+  /channels/voice/message:
+    post:
+      description: Send a Voice message
+      tags:
+        - Voice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.voice'
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.voice'
+        default:
+          $ref: '#/components/responses/error'
   /channels/whatsapp/messages:
     post:
       description: Send a WhatsApp message
@@ -1105,6 +1126,20 @@ components:
           required:
             - type
             - text
+    content.audiofile:
+      title: Audio file
+      description: URL of audio
+      type: object
+      properties:
+        type:
+          type: string
+        fileUrl:
+          description: URL of audio
+          type: string
+          example: 'http://fooooo.bar/audio.mp3'
+      required:
+        - type
+        - fileUrl
     content.base:
       type: object
       properties:
@@ -1509,6 +1544,47 @@ components:
           required:
             - type
             - text
+    content.tts:
+      title: Text to speech
+      description: Send a text to speech
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          description: Text that will be read in the call with the chosen voice type
+          type: string
+          example: This is a text
+        voiceStyle:
+          type: string
+          description: Language and type of the audio message
+          enum:
+            - br-Camila
+            - br-Vitoria
+            - br-Ricardo
+            - en-Joey
+            - en-Joanna
+            - fre-Celine
+            - fre-Mathieu
+            - ger-Vicki
+            - ger-Hans
+            - ita-Carla
+            - ita-Giorgio
+            - jap-Mizuki
+            - pol-Jan
+            - rus-Tatyana
+            - rus-Maxim
+            - esp-Conchita
+            - esp-Enrique
+          default: br-Vitoria
+          example: br-Ricardo
+        awaitRecipientAnswer:
+          description: Await recipient answer
+          type: boolean
+          example: true
+      required:
+        - type
+        - text
     content.facebook.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -1741,6 +1817,48 @@ components:
                           if you have any trouble with **AUTO**.
                           <br>*Only applicable to [SMS channel](#tag/SMS).*
               example: AUTO
+    content.voice.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.voice.call'
+      discriminator:
+        propertyName: type
+        mapping:
+          call: '#/components/schemas/content.voice.call'
+    content.voice.call:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: call
+            audio:
+              description: A sequence of audio bits forming an message to be played on the start of the call
+              type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/content.tts'
+                  - $ref: '#/components/schemas/content.audiofile'
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    tts: '#/components/schemas/content.tts'
+                    file: '#/components/schemas/content.audiofile'
+            transferTo:
+              description: Transfer or call to another number after the (optional) audio message has been played
+              type: string
+              example: '5511999999999'
+            recordAudio:
+              description: To record the call
+              type: boolean
+              example: true
+            hangUpOnVoiceMail:
+              description: End the call on voice mail
+              type: boolean
+              example: true
+          required:
+            - type
     content.whatsapp.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -2034,6 +2152,19 @@ components:
           title: Last name
           description: Last name of the visitor
           type: string
+    message.voice:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.voice.all'
+              minItems: 1
     message.whatsapp:
       type: object
       allOf:
@@ -2811,16 +2942,15 @@ tags:
 
       Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-      | Content Type | SMS      | Facebook | WhatsApp | RCS      |
-      |:-------------|:---------|:---------|:---------|:---------|
-      | text         | &#10004; | &#10004; | &#10004; | &#10004; |
-      | file         | &#10005; | &#10004; | &#10004; | &#10004; |
-      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; |
-      | location     | &#10005; | &#10005; | &#10004; | &#10005; |
-      | template     | &#10005; | &#10005; | &#10004; | &#10005; |
-      | card         | &#10005; | &#10005; | &#10004; | &#10004; |
-      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; |
-
+      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    |
+      |:-------------|:---------|:---------|:---------|:---------|:---------|
+      | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |
+      | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; | 
+      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+      | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+      | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
+      | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |
+      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |
 
       ## Text
       This type of content is the most used one and is composed of plain text.
@@ -2977,6 +3107,34 @@ tags:
       Sender: is the phone number of contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
+  - name: Voice
+    description: |
+      To access  the voice channel, you need to create your account here:
+      https://voice-app.zenvia.com/painel/signup.php. 
+
+      After creating  the account, you can get your Access Token (SenderId) on your voice panel homepage: https://voice-app.zenvia.com/painel/
+
+
+
+      Voice types for TTS (Text to Speech)
+      List of available voices :
+      * br-Camila
+      * br-Vitoria
+      * br-Ricardo
+      * en-Joey
+      * en-Joanna
+      * fre-Celine
+      * fre-Mathieu
+      * ger-Vicki
+      * ger-Hans
+      * ita-Carla
+      * ita-Giorgio
+      * jap-Mizuki
+      * pol-Jan
+      * rus-Tatyana
+      * rus-Maxim
+      * esp-Conchita
+      * esp-Enrique
   - name: Batches
     description: |
       The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
@@ -3133,6 +3291,7 @@ x-tagGroups:
       - WhatsApp
       - Facebook
       - RCS
+      - Voice
       - Batches
   - name: Webhooks
     tags:
