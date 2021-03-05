@@ -515,6 +515,26 @@ paths:
               }
 
             }
+  /channels/voice/messages:
+    post:
+      description: Send a Voice message
+      tags:
+        - Voice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.voice'
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.voice'
+        default:
+          $ref: '#/components/responses/error'
   /channels/whatsapp/messages:
     post:
       description: Send a WhatsApp message
