@@ -1,22 +1,32 @@
-The Telegram channel may be used after it's activation on Zenvia Platform.
-Get in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
+The Telegram can be used after it's activation on Zenvia Platform.
+
+To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on Zenvia platform.
+
+**Get in touch with Zenvia consultants to start your account creation.**
+
+Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
 ## Limitations
 
-The Telegram channel is compatible only with smartphones Android, from 8.0 version (Oreo). 
-To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
-The use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
+Currently, the use of Telegram channel is available only for Telegram Bots. The use for personal numbers will be latter offered by Zenvia.
+
+Supported content types and sizes:
+
+| Media | Content Type | Size |
+|---|---|---|
+| document | Any valid MIME type. | 2000&nbsp;MB |
+
 
 ## Telegram sender and recipient
 
 When you send some message for one contact using Telegram channel:
 
-Recipient: is the phone number of contact
-Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
+* Recipient: is the Telegram Bot address
+* Sender: contact atendimento@zenvia.com for setting the Sender id 
 
 When you receive a message from one contact, the sender and recipient are inverted:
 
-Recipient: is the RCS Agent ID
-Sender: is the phone number of contact
+* Recipient: is the Telegram Bot address
+* Sender: the settled Sender id
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

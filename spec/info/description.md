@@ -12,6 +12,7 @@ You can send messages for the following channels:
 * WhatsApp
 * Facebook
 * RCS
+* Telegram
 
 You can subscribe for some events and receive then in one webhook endpoint.
 The available events are:

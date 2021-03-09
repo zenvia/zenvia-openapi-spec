@@ -3,8 +3,6 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as telegramMessageRef } from '../../components/schemas/message/telegram';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
-import { card as cardExample } from '../../resources/examples/card';
-import { carousel as carouselExample } from '../../resources/examples/carousel';
 
 const post: OperationObject = {
   description: 'Send a Telegram message',
@@ -22,12 +20,6 @@ const post: OperationObject = {
           },
           file: {
             value: fileExample(),
-          },
-          card: {
-            value: cardExample(),
-          },
-          carousel: {
-            value: carouselExample(),
           },
         },
       },

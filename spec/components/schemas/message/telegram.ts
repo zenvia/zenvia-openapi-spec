@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as allContentsRef } from '../content/rcs/all';
+import { ref as allContentsRef } from '../content/telegram/all';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
