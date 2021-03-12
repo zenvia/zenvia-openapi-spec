@@ -32,7 +32,7 @@ const tags: TagObject[] = [{
 }, {
   name: 'Telegram',
   description: telegramDescription,
-},{
+}, {
   name: 'Voice',
   description: voiceDescription,
 }, {
