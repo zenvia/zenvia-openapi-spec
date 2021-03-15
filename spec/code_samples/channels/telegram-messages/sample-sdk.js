@@ -6,7 +6,7 @@ import { Client, TextContent } from '@zenvia/sdk';
 
 const client = new Client('YOUR_API_TOKEN');
 
-const whatsapp = client.getChannel('whatsapp');
+const telegram = client.getChannel('telegram');
 
 const content = new TextContent('Some text message');
 

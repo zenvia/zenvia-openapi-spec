@@ -72,6 +72,10 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('channels/whatsapp');
   });
 
+  describe('telegram messages', () => {
+    loadTestCases('channels/telegram');
+  });
+
   describe('templates collection', () => {
     loadTestCases('templates');
     describe('template comments', () => {
