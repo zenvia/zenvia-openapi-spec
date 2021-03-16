@@ -14,7 +14,9 @@ Supported content types and sizes:
 
 | Media | Content Type | Size |
 |---|---|---|
-| document | Any valid MIME type. | 2000&nbsp;MB |
+| document | Any valid MIME type. | 2000&nbsp;MB* |
+
+*2000MB is available only when sending document. When receiving, the total capacity available is 100MB. 
 
 
 ## Telegram sender and recipient
