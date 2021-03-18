@@ -8,7 +8,7 @@ Webhooks allow you to receive events in the configured URL. [Learn more here.](#
 
 ## Limitations
 
-Currently, the use of Telegram channel is available only for Telegram Bots. The use for personal numbers will be latter offered by Zenvia.
+Currently, the use of Telegram channel is available only for Telegram Bots. The use for personal numbers will be later offered by Zenvia.
 
 Supported content types and sizes:
 
