@@ -10,7 +10,7 @@ const telegram = client.getChannel('telegram');
 
 const content = new TextContent('Some text message');
 
-whatsapp.sendMessage('sender-identifier', 'recipient-identifier', content)
+telegram.sendMessage('sender-identifier', 'recipient-identifier', content)
 .then((response) => {
   console.log('Response:', response);
 })
