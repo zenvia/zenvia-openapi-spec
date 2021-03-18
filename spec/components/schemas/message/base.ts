@@ -55,6 +55,7 @@ const base: SchemaObject = {
       title: 'Message timestamp',
       type: 'string',
       format: 'date-time',
+      readOnly: true,
     },
   },
   required: [
