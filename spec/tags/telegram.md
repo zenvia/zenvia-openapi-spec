@@ -8,8 +8,6 @@ Webhooks allow you to receive events in the configured URL. [Learn more here.](#
 
 ## Limitations
 
-Currently, the use of Telegram channel is available only for Telegram Bots. The use for personal numbers will be later offered by Zenvia.
-
 Supported content types and sizes:
 
 | Media | Content Type | Size |
@@ -21,12 +19,12 @@ Supported content types and sizes:
 
 When you send some message for one contact using Telegram channel:
 
-* Recipient: is the Telegram Bot address
-* Sender: contact atendimento@zenvia.com for setting the Sender id 
+* Recipient: is the phone number of contact
+* Sender: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
 
 When you receive a message from one contact, the sender and recipient are inverted:
 
-* Recipient: is the Telegram Bot address
-* Sender: the settled Sender id
+* Recipient: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+* Sender: is the phone number of contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
