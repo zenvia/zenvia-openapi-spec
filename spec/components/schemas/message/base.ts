@@ -51,12 +51,6 @@ const base: SchemaObject = {
       },
       minItems: 1,
     },
-    timestamp: {
-      title: 'Message timestamp',
-      type: 'string',
-      format: 'date-time',
-      readOnly: true,
-    },
   },
   required: [
     'from',
