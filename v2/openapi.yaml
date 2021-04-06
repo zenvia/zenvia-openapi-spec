@@ -1952,6 +1952,21 @@ components:
         subscriptionId:
           title: Subscription Id
           type: string
+    events.error-cause:
+      type: object
+      properties:
+        channelErrorCode:
+          title: Channel Error Code
+          description: An error code returned by the channel.
+          type: string
+        reason:
+          title: Reason
+          description: A likely raw message with the information about the status.
+          type: string
+        details:
+          title: Details
+          description: A human readable text to help identify the error reason.
+          type: string
     events.message-event:
       type: object
       allOf:
@@ -2019,10 +2034,12 @@ components:
           title: Status description
           description: A description of status
           type: string
-        cause:
-          title: Status cause
-          description: A likely raw message with the information about the status
-          type: string
+        causes:
+          title: Status causes
+          description: A list of errors or cause of status
+          type: array
+          items:
+            $ref: '#/components/schemas/events.error-cause'
       required:
         - code
         - timestamp
