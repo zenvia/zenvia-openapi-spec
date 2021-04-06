@@ -15,6 +15,8 @@ The WhatsApp API has some limitations:
 
 * Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.
 
+* When sending PNG images with a **transparent background**, you can get an unexpected final result due to the image processing performed by WhatsApp in order to convert the image to JPEG.
+
 Supported content types and sizes:
 
 | Media | Content Type | Post-Processing Media Size* |
