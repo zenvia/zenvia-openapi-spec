@@ -16,7 +16,7 @@ const errorCause: SchemaObject = {
     },
     details: {
       title: 'Details',
-      description: 'A human readable text to help identify the problem source.',
+      description: 'A human readable text to help identify the error reason.',
       type: 'string',
     },
   },
