@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as errorCauseRef } from './error-cause';
 
 const webhook: SchemaObject = {
   type: 'object',
@@ -26,10 +27,13 @@ const webhook: SchemaObject = {
       description: 'A description of status',
       type: 'string',
     },
-    cause: {
-      title: 'Status cause',
-      description: 'A likely raw message with the information about the status',
-      type: 'string',
+    causes: {
+      title: 'Status causes',
+      description: 'A list of errors or cause of status',
+      type: 'array',
+      items: {
+        $ref: errorCauseRef,
+      },
     },
   },
   required: [
