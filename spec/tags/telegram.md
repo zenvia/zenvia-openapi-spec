@@ -12,8 +12,8 @@ Supported content types and sizes:
 
 | Media | Content Type | Size |
 |---|---|---|
-| file | Any valid MIME type. | 50&nbsp;MB |
-| photo | image/jpeg<br>image/png | 10&nbsp;MB |
+| document | Any valid MIME type. | 50&nbsp;MB |
+| image | image/jpeg<br>image/png | 10&nbsp;MB |
 
 ## Telegram sender and recipient
 
