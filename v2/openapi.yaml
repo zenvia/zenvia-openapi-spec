@@ -18,6 +18,7 @@ info:
     * Facebook
     * RCS
     * Voice
+    * Telegram
 
     You can subscribe for some events and receive then in one webhook endpoint.
     The available events are:
@@ -508,6 +509,133 @@ paths:
 
                 try {
                   Message response = sms.sendMessage("sender-identifier", "recipient-identifier", content);
+                  System.out.println("Response: " + response.toString());
+                } catch(Exception e) {
+                  System.out.println("Error: " + e.getMessage());
+                }
+              }
+
+            }
+  /channels/telegram/messages:
+    post:
+      description: Send a Telegram message
+      tags:
+        - Telegram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.telegram'
+            examples:
+              text:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: text
+                      text: Hi Zenvia!
+              file:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: file
+                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileMimeType: image/png
+                      fileCaption: 'Our pic :)'
+                      fileName: team.png
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.telegram'
+        default:
+          $ref: '#/components/responses/error'
+      x-code-samples:
+        - lang: Shell
+          label: Bash
+          source: |
+            curl "https://api.zenvia.com/v2/channels/telegram/messages" \
+            -H "Content-Type: application/json" \
+            -H "X-API-TOKEN: YOUR_API_TOKEN" \
+            -d '{
+              "from": "sender-identifier",
+              "to": "recipient-identifier",
+              "contents": [{
+                "type": "text",
+                "text": "Some text message"
+              }]
+            }'
+        - lang: JavaScript
+          label: Node.js
+          source: |
+            const { post } = require('request-promise');
+
+            post({
+              uri: 'https://api.zenvia.com/v2/channels/telegram/messages',
+              headers: {
+                'X-API-TOKEN': 'YOUR_API_TOKEN'
+              },
+              body: {
+                from: 'sender-identifier',
+                to: 'recipient-identifier',
+                contents: [{
+                  type: 'text',
+                  text: 'Some text message'
+                }]
+              },
+              json: true
+            })
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: JavaScript
+          label: Node.js SDK
+          source: |
+            /**
+             * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/telegram-send-text-message.js
+             */
+
+            import { Client, TextContent } from '@zenvia/sdk';
+
+            const client = new Client('YOUR_API_TOKEN');
+
+            const telegram = client.getChannel('telegram');
+
+            const content = new TextContent('Some text message');
+
+            telegram.sendMessage('sender-identifier', 'recipient-identifier', content)
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: Java
+          label: Java SDK
+          source: |
+            import com.zenvia.api.sdk.client.Channel;
+            import com.zenvia.api.sdk.client.apache.Client;
+            import com.zenvia.api.sdk.contents.TextContent;
+            import com.zenvia.api.sdk.messages.Message;
+
+            public class TelegramSendTextMessage {
+
+              public static void main (String arg []) {
+                Client client = new Client("YOUR_API_TOKEN");
+
+                Channel telegram = client.getChannel("telegram");
+
+                TextContent content = new TextContent("Some text message");
+
+                try {
+                  Message response = telegram.sendMessage("sender-identifier", "recipient-identifier", content);
                   System.out.println("Response: " + response.toString());
                 } catch(Exception e) {
                   System.out.println("Error: " + e.getMessage());
@@ -1817,6 +1945,15 @@ components:
                           if you have any trouble with **AUTO**.
                           <br>*Only applicable to [SMS channel](#tag/SMS).*
               example: AUTO
+    content.telegram.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
     content.voice.all:
       oneOf:
         - $ref: '#/components/schemas/content.voice.call'
@@ -2156,6 +2293,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/content.sms.all'
+              minItems: 1
+    message.telegram:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.telegram.all'
               minItems: 1
     message.visitor:
       title: Visitor Object
@@ -3134,6 +3284,38 @@ tags:
       Sender: is the phone number of contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
+  - name: Telegram
+    description: |-
+      The Telegram can be used after it's activation on Zenvia Platform.
+
+      To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on Zenvia platform.
+
+      **Get in touch with Zenvia consultants to start your account creation.**
+
+      Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
+
+      ## Limitations
+
+      Supported content types and sizes:
+
+      | Media | Content Type | Size |
+      |---|---|---|
+      | document | Any valid MIME type. | 50&nbsp;MB |
+      | image | image/jpeg<br>image/png | 10&nbsp;MB |
+
+      ## Telegram sender and recipient
+
+      When you send some message for one contact using Telegram channel:
+
+      * Recipient: is the phone number of contact
+      * Sender: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+
+      When you receive a message from one contact, the sender and recipient are inverted:
+
+      * Recipient: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+      * Sender: is the phone number of contact
+
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Voice
     description: |
       To access  the voice channel, you need to create your account here:
@@ -3318,6 +3500,7 @@ x-tagGroups:
       - WhatsApp
       - Facebook
       - RCS
+      - Telegram
       - Voice
       - Batches
   - name: Webhooks
