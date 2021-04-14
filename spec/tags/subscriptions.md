@@ -39,6 +39,15 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
 
 
+## Zenvia outbound IP addresses
+
+Webhook notifications sent from Zenvia come from any of the following ranges of IP addresses:
+
+* 45.233.20.0/24
+* 45.233.22.0/24
+* 45.233.23.0/24
+* 3.233.231.228/32
+
 ## Webhook request error handling
 As described before, webhooks allow you to receive events in your application.
 
