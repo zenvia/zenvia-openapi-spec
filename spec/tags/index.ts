@@ -30,7 +30,7 @@ const tags: TagObject[] = [{
 }, {
   name: 'Google Business Message',
   description: gbmDescription,
-},{
+}, {
   name: 'RCS',
   description: rcsDescription,
 }, {
