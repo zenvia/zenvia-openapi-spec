@@ -10,7 +10,7 @@ Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For e
 | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; | &#10005; |
 | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; | &#10005; |
 | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |
-| carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |
+| carousel     | &#10005; | &#10005; | &#10004; | &#10005; | &#10004; | &#10005; |
 
 ## Text
 This type of content is the most used one and is composed of plain text.
