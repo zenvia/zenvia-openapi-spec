@@ -1,6 +1,6 @@
 ## Supported Channels
 
-Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
 | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | GBM     |
 |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|
