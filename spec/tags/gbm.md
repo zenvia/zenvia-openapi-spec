@@ -10,12 +10,12 @@ Webhooks allow you to receive events in the configured URL. [Learn more here.](#
 
 When you send some message for one contact using Google Business Message channel:
 
-* Recipient: is the phone number of contact
-* Sender: is the Google Business Message sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+* Recipient: is the id of the contact
+* Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
 
 When you receive a message from one contact, the sender and recipient are inverted:
 
-* Recipient: is the Google Business Message sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
-* Sender: is the phone number of contact
+* Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+* Sender: is the id of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

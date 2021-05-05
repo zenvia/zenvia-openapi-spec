@@ -7,11 +7,11 @@ const groups: TagGroupObject[] = [{
     'SMS',
     'WhatsApp',
     'Facebook',
-    'Google Business Message',
     'RCS',
     'Telegram',
     'Voice',
     'Batches',
+    'Google Business Message',
   ],
 }, {
   name: 'Webhooks',
