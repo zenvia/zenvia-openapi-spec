@@ -11,6 +11,7 @@ const groups: TagGroupObject[] = [{
     'Telegram',
     'Voice',
     'Batches',
+    'Google Business Message',
   ],
 }, {
   name: 'Webhooks',

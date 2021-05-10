@@ -14,6 +14,7 @@ You can send messages for the following channels:
 * RCS
 * Voice
 * Telegram
+* Google Business Message
 
 You can subscribe for some events and receive then in one webhook endpoint.
 The available events are:
