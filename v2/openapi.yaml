@@ -19,6 +19,7 @@ info:
     * RCS
     * Voice
     * Telegram
+    * Google Business Message
 
     You can subscribe for some events and receive then in one webhook endpoint.
     The available events are:
@@ -312,6 +313,133 @@ paths:
 
                 try {
                   Message response = facebook.sendMessage("sender-identifier", "recipient-identifier", content);
+                  System.out.println("Response: " + response.toString());
+                } catch(Exception e) {
+                  System.out.println("Error: " + e.getMessage());
+                }
+              }
+
+            }
+  /channels/gbm/messages:
+    post:
+      description: Send a Google Business Message message
+      tags:
+        - Google Business Message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.gbm'
+            examples:
+              text:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: text
+                      text: Hi Zenvia!
+              file:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: file
+                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileMimeType: image/png
+                      fileCaption: 'Our pic :)'
+                      fileName: team.png
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.gbm'
+        default:
+          $ref: '#/components/responses/error'
+      x-code-samples:
+        - lang: Shell
+          label: Bash
+          source: |
+            curl "https://api.zenvia.com/v2/channels/gbm/messages" \
+            -H "Content-Type: application/json" \
+            -H "X-API-TOKEN: YOUR_API_TOKEN" \
+            -d '{
+              "from": "sender-identifier",
+              "to": "recipient-identifier",
+              "contents": [{
+                "type": "text",
+                "text": "Some text message"
+              }]
+            }'
+        - lang: JavaScript
+          label: Node.js
+          source: |
+            const { post } = require('request-promise');
+
+            post({
+              uri: 'https://api.zenvia.com/v2/channels/gbm/messages',
+              headers: {
+                'X-API-TOKEN': 'YOUR_API_TOKEN'
+              },
+              body: {
+                from: 'sender-identifier',
+                to: 'recipient-identifier',
+                contents: [{
+                  type: 'text',
+                  text: 'Some text message'
+                }]
+              },
+              json: true
+            })
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: JavaScript
+          label: Node.js SDK
+          source: |
+            /**
+             * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/gbm-send-text-message.js
+             */
+
+            import { Client, TextContent } from '@zenvia/sdk';
+
+            const client = new Client('YOUR_API_TOKEN');
+
+            const gbm = client.getChannel('gbm');
+
+            const content = new TextContent('Some text message');
+
+            facebook.sendMessage('sender-identifier', 'recipient-identifier', content)
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: Java
+          label: Java SDK
+          source: |
+            import com.zenvia.api.sdk.client.Channel;
+            import com.zenvia.api.sdk.client.apache.Client;
+            import com.zenvia.api.sdk.contents.TextContent;
+            import com.zenvia.api.sdk.messages.Message;
+
+            public class GBMSendTextMessage {
+
+              public static void main (String arg []) {
+                Client client = new Client("YOUR_API_TOKEN");
+
+                Channel gbm = client.getChannel("gbm");
+
+                TextContent content = new TextContent("Some text message");
+
+                try {
+                  Message response = gbm.sendMessage("sender-identifier", "recipient-identifier", content);
                   System.out.println("Response: " + response.toString());
                 } catch(Exception e) {
                   System.out.println("Error: " + e.getMessage());
@@ -1722,6 +1850,15 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+    content.gbm.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
     content.nestable-contents.all-buttons:
       oneOf:
         - $ref: '#/components/schemas/content.nestable-contents.postback'
@@ -2267,6 +2404,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/content.facebook.all'
+              minItems: 1
+    message.gbm:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.gbm.all'
               minItems: 1
     message.rcs:
       type: object
@@ -3112,17 +3262,17 @@ tags:
     description: |
       ## Supported Channels
 
-      Messaging can be handled through SMS, WhatsApp, Facebook and RCS channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+      Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    |
-      |:-------------|:---------|:---------|:---------|:---------|:---------|
-      | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |
-      | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; | 
-      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
-      | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
-      | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |
-      | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |
-      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |
+      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     | 
+      |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|
+      | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |
+      | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |
+      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |
+      | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; | 
+      | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |
+      | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |
+      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |
 
       ## Text
       This type of content is the most used one and is composed of plain text.
@@ -3258,6 +3408,29 @@ tags:
 
       * Recipient: is your page id
       * Sender: is the user id on your page (PSID - page scoped id)
+
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
+  - name: Google Business Message
+    description: |
+      The Google Business Message channel may be used after its activation on Zenvia platform.
+
+      To activate Google Business Message you need to be registered as a partner with Google Business Message and get an account information configured on Zenvia platform.
+
+      **Get in touch with Zenvia consultants to start your account creation.**
+
+      Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
+
+      ## Google Business Message sender and recipient
+
+      When you send some message for one contact using Google Business Message channel:
+
+      * Recipient: is the contact id
+      * Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+
+      When you receive a message from one contact, the sender and recipient are inverted:
+
+      * Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+      * Recipient: is the contact id
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: RCS
@@ -3501,6 +3674,7 @@ x-tagGroups:
       - Facebook
       - RCS
       - Telegram
+      - Google Business Message
       - Voice
       - Batches
   - name: Webhooks
