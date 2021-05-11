@@ -13,6 +13,7 @@ const flowReportDescription = rawLoad(__dirname, './flow-report.md');
 const rcsDescription = rawLoad(__dirname, './rcs.md');
 const telegramDescription = rawLoad(__dirname, './telegram.md');
 const voiceDescription = rawLoad(__dirname, './voice.md');
+const gbmDescription = rawLoad(__dirname, './gbm.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -26,6 +27,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Facebook',
   description: facebookDescription,
+}, {
+  name: 'Google Business Message',
+  description: gbmDescription,
 }, {
   name: 'RCS',
   description: rcsDescription,
