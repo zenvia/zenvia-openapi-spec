@@ -7,6 +7,7 @@ const groups: TagGroupObject[] = [{
     'SMS',
     'WhatsApp',
     'Facebook',
+    'Instagram',
     'RCS',
     'Telegram',
     'Google Business Message',

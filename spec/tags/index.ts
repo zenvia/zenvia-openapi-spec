@@ -14,6 +14,7 @@ const rcsDescription = rawLoad(__dirname, './rcs.md');
 const telegramDescription = rawLoad(__dirname, './telegram.md');
 const voiceDescription = rawLoad(__dirname, './voice.md');
 const gbmDescription = rawLoad(__dirname, './gbm.md');
+const instagramDescription = rawLoad(__dirname, './instagram.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -27,6 +28,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Facebook',
   description: facebookDescription,
+}, {
+  name: 'Instagram',
+  description: instagramDescription,
 }, {
   name: 'Google Business Message',
   description: gbmDescription,
