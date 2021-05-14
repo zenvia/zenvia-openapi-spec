@@ -10,7 +10,7 @@
       "x-api-token": "some-api-token"
     },
     "body": {
-      "from": "SENDER ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "from": "SENDER ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       "to": "RECIPIENT ID",
       "contents": [{
         "type": "text",

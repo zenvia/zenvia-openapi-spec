@@ -1,5 +1,5 @@
 {
-  "name": "send invalid 'from' characters length",
+  "name": "send invalid 'to' characters length",
   "request": {
     "method": "POST",
     "path": "/channels/gbm/messages",
