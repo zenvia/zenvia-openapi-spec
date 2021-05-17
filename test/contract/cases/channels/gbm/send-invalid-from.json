@@ -19,6 +19,6 @@
     }
   },
   "expectedFail": {
-    "error": "Request has one or more errors => In body => For Content-Type application/json => Invalid value => Did not validate against all schemas => at: 0 > from => String too long at \"from\""
+    "error": "Request has one or more errors => In body => For Content-Type application/json => Invalid value => Did not validate against all schemas => at: 0 > from => String too long. \"SENDER ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" (65) above maximum length of 64"
   }
 }
