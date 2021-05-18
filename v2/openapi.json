@@ -2814,12 +2814,14 @@
           "from": {
             "title": "Sender ID",
             "description": "This is the identifier of sender of this message. The sender is created when an integration for the channel is connected\n        on the [integrations console](https://app.zenvia.com/home/credentials).\n        <br>More details on the channel's *sender and recipient* section.",
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "to": {
             "title": "Recipient ID",
             "description": "The identifier of the contact (varies according to the channel) who will receive the message.\n        <br>More details on the channel's *sender and recipient* section.",
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "direction": {
             "title": "Message direction",
