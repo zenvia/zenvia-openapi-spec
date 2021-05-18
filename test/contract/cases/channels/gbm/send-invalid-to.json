@@ -1,0 +1,24 @@
+{
+  "name": "send invalid 'to' characters length",
+  "request": {
+    "method": "POST",
+    "path": "/channels/gbm/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "contents": [{
+        "type": "text",
+        "text": "some text"
+      }]
+    }
+  },
+  "expectedFail": {
+    "error": "Request has one or more errors => In body => For Content-Type application/json => Invalid value => Did not validate against all schemas => at: 0 > to => String too long. \"RECIPIENT ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" (68) above maximum length of 64"
+  }
+}

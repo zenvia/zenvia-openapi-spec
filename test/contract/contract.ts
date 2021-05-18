@@ -76,6 +76,10 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('channels/telegram');
   });
 
+  describe('gbm messages', () => {
+    loadTestCases('channels/gbm');
+  });
+
   describe('templates collection', () => {
     loadTestCases('templates');
     describe('template comments', () => {
