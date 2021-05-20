@@ -34,7 +34,7 @@ Before use this API you need the following prerequisites:
 You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
 
 ## How to view your consumption report
-You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api) 
+You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)
 
 # Getting started with Sandbox
 
@@ -57,11 +57,16 @@ Currently the ZenAPI is on version v2
 
 ## v2 (current)
 
+### 2021-05-21
+
+* Added
+    * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.
+
 ### 2020-10-27
 
 * Added
     * Added RCS Channels sections.
-    
+
 ### 2020-09-24
 
 * Added
@@ -78,7 +83,7 @@ Currently the ZenAPI is on version v2
 
 You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
 
-   
+
 ### 2020-02-01
 
 * Added
