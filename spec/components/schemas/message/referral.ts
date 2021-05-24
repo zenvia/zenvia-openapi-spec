@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const referral: SchemaObject = {
   title: 'Referral Object',
-  description: `Included in notifications when a user clicks on an ad that clicks to WhatsApp and sends a message to the business.
+  description: `Included in notifications when a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
                 This object has the ad's information.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
   type: 'object',
   properties: {
