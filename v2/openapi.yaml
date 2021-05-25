@@ -39,7 +39,7 @@ info:
     You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
 
     ## How to view your consumption report
-    You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api) 
+    You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)
 
     # Getting started with Sandbox
 
@@ -62,11 +62,16 @@ info:
 
     ## v2 (current)
 
+    ### 2021-05-24
+
+    * Added
+        * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.
+
     ### 2020-10-27
 
     * Added
         * Added RCS Channels sections.
-        
+
     ### 2020-09-24
 
     * Added
@@ -83,7 +88,7 @@ info:
 
     You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
 
-       
+
     ### 2020-02-01
 
     * Added
@@ -2325,6 +2330,8 @@ components:
           properties:
             visitor:
               $ref: '#/components/schemas/message.visitor'
+            referral:
+              $ref: '#/components/schemas/message.referral'
             contents:
               title: Message Contents
               description: A list of content to be sent
@@ -2433,6 +2440,43 @@ components:
               items:
                 $ref: '#/components/schemas/content.rcs.all'
               minItems: 1
+    message.referral:
+      title: Referral Object
+      description: |-
+        Included in notifications when a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
+                        This object has the ad's information.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
+      type: object
+      properties:
+        headline:
+          title: Headline
+          description: Headline used in the ad that generated the message.
+          type: string
+          example: This is a headline
+        body:
+          title: Body
+          description: Body from the ad that generated the message.
+          type: string
+          example: This is a body
+        source:
+          type: object
+          title: Referral source
+          properties:
+            id:
+              title: Id
+              description: Facebook ID for an ad or a post.
+              type: string
+            type:
+              title: Type
+              description: 'The type of the ad’s source. Currently, supported values are ad and post.'
+              type: string
+              enum:
+                - ad
+                - post
+            url:
+              title: Url
+              description: The url that leads to the ad. Opening this url takes you to the ad viewed by your user.
+              type: string
+              example: 'https://www.zenvia.com'
     message.sms:
       type: object
       allOf:
