@@ -3,6 +3,7 @@ import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/whatsapp/all';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as visitorSchemaRef } from './visitor';
+import { ref as referralSchemaRef } from './referral';
 
 const all: SchemaObject = {
   type: 'object',
@@ -13,6 +14,9 @@ const all: SchemaObject = {
     properties: {
       visitor: {
         $ref: visitorSchemaRef,
+      },
+      referral: {
+        $ref: referralSchemaRef,
       },
       contents: {
         title: 'Message Contents',
