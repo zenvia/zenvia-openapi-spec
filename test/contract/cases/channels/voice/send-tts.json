@@ -1,0 +1,41 @@
+{
+  "name": "send tts content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/voice/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "tts",
+        "text": "Hi Zenvia!",
+        "voiceStyle": "br-Vitoria",
+        "awaitRecipientAnswer": true
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "tts",
+        "text": "Hi Zenvia!",
+        "voiceStyle": "br-Vitoria",
+        "awaitRecipientAnswer": true
+      }]
+    }
+  }
+}

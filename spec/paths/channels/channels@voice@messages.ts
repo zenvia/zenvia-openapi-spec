@@ -1,6 +1,8 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
-import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as voiceMessageRef } from '../../components/schemas/message/voice';
+import { ref as errorResponseRef } from '../../components/responses/error';
+import { tts as ttsExample } from '../../resources/examples/tts';
+import { audiofile as audiofileExample } from '../../resources/examples/audiofile';
 
 const post: OperationObject = {
   description: 'Send a Voice message',
@@ -11,6 +13,14 @@ const post: OperationObject = {
       'application/json': {
         schema: {
           $ref: voiceMessageRef,
+        },
+        examples: {
+          tts: {
+            value: ttsExample(),
+          },
+          file: {
+            value: audiofileExample(),
+          },
         },
       },
     },

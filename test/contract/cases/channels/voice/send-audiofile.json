@@ -1,0 +1,37 @@
+{
+  "name": "send audiofile",
+  "request": {
+    "method": "POST",
+    "path": "/channels/voice/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "audiofile",
+        "audioFileUrl": "https://zenvia.br/zenvia-team.png"
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "audiofile",
+        "audioFileUrl": "https://actions.google.com/sounds/v1/human_voices/babies_cry.ogg"
+      }]
+    }
+  }
+}
