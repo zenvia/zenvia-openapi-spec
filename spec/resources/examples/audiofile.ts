@@ -4,7 +4,7 @@ export function audiofile() {
     to: '55108888888888',
     contents: [{
       type: 'audiofile',
-      audioFileUrl: 'https://actions.google.com/sounds/v1/human_voices/babies_cry.ogg',
+      audioFileUrl: 'http://fooooo.bar/audio.mp3',
     }],
   };
 }
