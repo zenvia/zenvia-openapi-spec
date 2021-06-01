@@ -1,4 +1,4 @@
-export function tts() {
+export function tts_transferTo() {
   return {
     from: '12345a123a1234a1a2a123a1234ab1ab',
     to: '55108888888888',
@@ -11,6 +11,7 @@ export function tts() {
         awaitRecipientAnswer: true,
       }],
     }],
+    transferTo: '5511999999999',
     recordAudio: true,
     hangUpOnVoiceMail: true
   };

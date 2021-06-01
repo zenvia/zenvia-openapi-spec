@@ -2,7 +2,9 @@ import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as voiceMessageRef } from '../../components/schemas/message/voice';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { tts as ttsExample } from '../../resources/examples/tts';
+import { tts_transferTo as ttsTransferToExample } from '../../resources/examples/ttsTransferto';
 import { audiofile as audiofileExample } from '../../resources/examples/audiofile';
+import { audiofileTransferTo as audiofileTransferToExample } from '../../resources/examples/audiofileTransferTo';
 
 const post: OperationObject = {
   description: 'Send a Voice message',
@@ -18,8 +20,14 @@ const post: OperationObject = {
           tts: {
             value: ttsExample(),
           },
+          tts_transferTo: {
+            value: ttsTransferToExample(),
+          },
           file: {
             value: audiofileExample(),
+          },
+          file_transferTo: {
+            value: audiofileTransferToExample(),
           },
         },
       },
