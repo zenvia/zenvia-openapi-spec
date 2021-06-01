@@ -7,10 +7,10 @@ export function audiofileTransferTo() {
       audio: [{
         type: 'file',
         fileUrl: 'http://fooooo.bar/audio.mp3',
-      }]
+      }],
     }],
-    transferTo: "5511999999999",
+    transferTo: '5511999999999',
     recordAudio: true,
-    hangUpOnVoiceMail: true
+    hangUpOnVoiceMail: true,
   };
 }

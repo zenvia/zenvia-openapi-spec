@@ -7,9 +7,9 @@ export function audiofile() {
       audio: [{
         type: 'file',
         fileUrl: 'http://fooooo.bar/audio.mp3',
-      }]
+      }],
     }],
     recordAudio: true,
-    hangUpOnVoiceMail: true
+    hangUpOnVoiceMail: true,
   };
 }

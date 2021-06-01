@@ -12,6 +12,6 @@ export function tts() {
       }],
     }],
     recordAudio: true,
-    hangUpOnVoiceMail: true
+    hangUpOnVoiceMail: true,
   };
 }

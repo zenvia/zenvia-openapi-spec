@@ -13,6 +13,6 @@ export function tts_transferTo() {
     }],
     transferTo: '5511999999999',
     recordAudio: true,
-    hangUpOnVoiceMail: true
+    hangUpOnVoiceMail: true,
   };
 }
