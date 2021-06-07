@@ -15,6 +15,7 @@ You can send messages for the following channels:
 * Voice
 * Telegram
 * Google Business Message
+* Instagram
 
 You can subscribe for some events and receive then in one webhook endpoint.
 The available events are:
