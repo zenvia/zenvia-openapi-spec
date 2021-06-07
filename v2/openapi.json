@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0.0",
     "title": "ZenAPI",
-    "description": "# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API.\n\nThis API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.\n\n## What you can do with this API\n\nYou can send messages for the following channels:\n\n* SMS\n* WhatsApp\n* Facebook\n* RCS\n* Voice\n* Telegram\n* Google Business Message\n\nYou can subscribe for some events and receive then in one webhook endpoint.\nThe available events are:\n\n* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.\n* Messages status: You can receive status update for sent messages.\n\n## What you need before start\n\nBefore use this API you need the following prerequisites:\n\n* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)\n* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)\n* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)\n\nYou can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.\n\n## How to view your consumption report\nYou can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)\n\n# Getting started with Sandbox\n\nThe fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).\n\nWhen you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.\n\n[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\nYou are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).\n\n# API versions\n\nAll notable changes to ZenAPI will be documented here.\n\n<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->\n<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->\n\nCurrently the ZenAPI is on version v2\n\n## v2 (current)\n\n### 2021-05-24\n\n* Added\n    * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.\n\n### 2020-10-27\n\n* Added\n    * Added RCS Channels sections.\n\n### 2020-09-24\n\n* Added\n    * Added message-batches: Api to send messages in batch.\n\n### 2020-09-01\n\n* Breaking Changes\n    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking <a target=\"_blank\" href=\"https://zenvia.github.io/zenvia-openapi-spec/v1/\">here</a>.\n\n\n### 2020-02-01\n\n* Added\n    * Added templates.\n    * Added reporting API.\n\n### 2020-01-01\n\n* Added\n    * Added Subscription section.\n    * Added WhatsApp, SMS and Facebook Channels sections.\n\n# SDKs\n\nSDKs make it easy to use our APIs just by including them in your software.\n\nThese helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).\n\n# HTTP Methods\n\nHTTP methods are used for manipulate resources.\n\nNot all resources have all operations, see the reference of each resource.\n\nMethods used with collection endpoints:\n\n| Http Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - Ok            |\n| POST             | Create a new item        | 200 - Ok            |\n\nMethods used with item endpoints:\n\n| Http Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - Ok            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - Ok            |\n\nWhen one operation is executed successfully, the API will respond with 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.\n\nThe error object have the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## TOKEN\nTo use this API you need to send the API token in all requests.\n\nThis TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.\n\nExample:\n```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```\n\nYou can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.\n",
+    "description": "# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API.\n\nThis API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.\n\n## What you can do with this API\n\nYou can send messages for the following channels:\n\n* SMS\n* WhatsApp\n* Facebook\n* RCS\n* Voice\n* Telegram\n* Google Business Message\n* Instagram\n\nYou can subscribe for some events and receive then in one webhook endpoint.\nThe available events are:\n\n* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.\n* Messages status: You can receive status update for sent messages.\n\n## What you need before start\n\nBefore use this API you need the following prerequisites:\n\n* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)\n* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)\n* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)\n\nYou can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.\n\n## How to view your consumption report\nYou can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)\n\n# Getting started with Sandbox\n\nThe fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).\n\nWhen you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.\n\n[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\nYou are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).\n\n# API versions\n\nAll notable changes to ZenAPI will be documented here.\n\n<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->\n<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->\n\nCurrently the ZenAPI is on version v2\n\n## v2 (current)\n\n### 2021-05-24\n\n* Added\n    * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.\n\n### 2020-10-27\n\n* Added\n    * Added RCS Channels sections.\n\n### 2020-09-24\n\n* Added\n    * Added message-batches: Api to send messages in batch.\n\n### 2020-09-01\n\n* Breaking Changes\n    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking <a target=\"_blank\" href=\"https://zenvia.github.io/zenvia-openapi-spec/v1/\">here</a>.\n\n\n### 2020-02-01\n\n* Added\n    * Added templates.\n    * Added reporting API.\n\n### 2020-01-01\n\n* Added\n    * Added Subscription section.\n    * Added WhatsApp, SMS and Facebook Channels sections.\n\n# SDKs\n\nSDKs make it easy to use our APIs just by including them in your software.\n\nThese helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).\n\n# HTTP Methods\n\nHTTP methods are used for manipulate resources.\n\nNot all resources have all operations, see the reference of each resource.\n\nMethods used with collection endpoints:\n\n| Http Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - Ok            |\n| POST             | Create a new item        | 200 - Ok            |\n\nMethods used with item endpoints:\n\n| Http Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - Ok            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - Ok            |\n\nWhen one operation is executed successfully, the API will respond with 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.\n\nThe error object have the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## TOKEN\nTo use this API you need to send the API token in all requests.\n\nThis TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.\n\nExample:\n```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```\n\nYou can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.\n",
     "termsOfService": "https://zenvia.com/",
     "contact": {
       "name": "API Support",
@@ -222,6 +222,68 @@
             "source": "import com.zenvia.api.sdk.client.Channel;\nimport com.zenvia.api.sdk.client.apache.Client;\nimport com.zenvia.api.sdk.contents.TextContent;\nimport com.zenvia.api.sdk.messages.Message;\n\npublic class GBMSendTextMessage {\n\n  public static void main (String arg []) {\n    Client client = new Client(\"YOUR_API_TOKEN\");\n\n    Channel gbm = client.getChannel(\"gbm\");\n\n    TextContent content = new TextContent(\"Some text message\");\n\n    try {\n      Message response = gbm.sendMessage(\"sender-identifier\", \"recipient-identifier\", content);\n      System.out.println(\"Response: \" + response.toString());\n    } catch(Exception e) {\n      System.out.println(\"Error: \" + e.getMessage());\n    }\n  }\n\n}\n"
           }
         ]
+      }
+    },
+    "/channels/instagram/messages": {
+      "post": {
+        "description": "Send a Instagram message",
+        "tags": [
+          "Instagram"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/message.instagram"
+              },
+              "examples": {
+                "text": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "Hi Zenvia!"
+                      }
+                    ]
+                  }
+                },
+                "file": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "file",
+                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileMimeType": "image/png",
+                        "fileCaption": "Our pic :)",
+                        "fileName": "team.png"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/message.instagram"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
       }
     },
     "/channels/rcs/messages": {
@@ -2084,6 +2146,23 @@
           }
         }
       },
+      "content.instagram.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "$ref": "#/components/schemas/content.file"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/content.text",
+            "file": "#/components/schemas/content.file"
+          }
+        }
+      },
       "content.nestable-contents.all-buttons": {
         "oneOf": [
           {
@@ -2906,6 +2985,28 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/content.gbm.all"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "message.instagram": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contents": {
+                "title": "Message Contents",
+                "description": "A list of content to be sent",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/content.instagram.all"
                 },
                 "minItems": 1
               }
@@ -4135,7 +4236,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     | \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).\n\n## Card\n\nThis is a rich content composed of *at least one* of these components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAnd additionally, it may also have these:\n* Buttons\n* Quick reply buttons (they are not part of the card itself and instead are shown below it)\n\nMore information on each attribute may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n"
+      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).\n\n## Card\n\nThis is a rich content composed of *at least one* of these components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAnd additionally, it may also have these:\n* Buttons\n* Quick reply buttons (they are not part of the card itself and instead are shown below it)\n\nMore information on each attribute may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n"
     },
     {
       "name": "SMS",
@@ -4148,6 +4249,10 @@
     {
       "name": "Facebook",
       "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n## Facebook sender and recipient\n\nWhen you send some message for one contact using Facebook channel:\n\n* Recipient: is the user id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nWhen you receive a message from one contact, the sender and recipient are inverted:\n\n* Recipient: is your page id\n* Sender: is the user id on your page (PSID - page scoped id)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+    },
+    {
+      "name": "Instagram",
+      "description": "The Instagram channel may be used after it's activation on Zenvia Platform.\nGet in touch with Zenvia consultants to connect your account.\n"
     },
     {
       "name": "Google Business Message",
@@ -4194,6 +4299,7 @@
         "SMS",
         "WhatsApp",
         "Facebook",
+        "Instagram",
         "RCS",
         "Telegram",
         "Google Business Message",

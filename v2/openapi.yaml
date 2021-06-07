@@ -20,6 +20,7 @@ info:
     * Voice
     * Telegram
     * Google Business Message
+    * Instagram
 
     You can subscribe for some events and receive then in one webhook endpoint.
     The available events are:
@@ -452,6 +453,44 @@ paths:
               }
 
             }
+  /channels/instagram/messages:
+    post:
+      description: Send a Instagram message
+      tags:
+        - Instagram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.instagram'
+            examples:
+              text:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: text
+                      text: Hi Zenvia!
+              file:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: file
+                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileMimeType: image/png
+                      fileCaption: 'Our pic :)'
+                      fileName: team.png
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.instagram'
+        default:
+          $ref: '#/components/responses/error'
   /channels/rcs/messages:
     post:
       description: Send a RCS message
@@ -1864,6 +1903,15 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+    content.instagram.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
     content.nestable-contents.all-buttons:
       oneOf:
         - $ref: '#/components/schemas/content.nestable-contents.postback'
@@ -2426,6 +2474,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/content.gbm.all'
+              minItems: 1
+    message.instagram:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.instagram.all'
               minItems: 1
     message.rcs:
       type: object
@@ -3310,15 +3371,15 @@ tags:
 
       Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
 
-      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     | 
-      |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|
-      | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |
-      | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |
-      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |
-      | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; | 
-      | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |
-      | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |
-      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |
+      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
+      |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
+      | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
+      | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
+      | contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | 
+      | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |
+      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 
       ## Text
       This type of content is the most used one and is composed of plain text.
@@ -3456,6 +3517,10 @@ tags:
       * Sender: is the user id on your page (PSID - page scoped id)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
+  - name: Instagram
+    description: |
+      The Instagram channel may be used after it's activation on Zenvia Platform.
+      Get in touch with Zenvia consultants to connect your account.
   - name: Google Business Message
     description: |
       The Google Business Message channel may be used after its activation on Zenvia platform.
@@ -3727,6 +3792,7 @@ x-tagGroups:
       - SMS
       - WhatsApp
       - Facebook
+      - Instagram
       - RCS
       - Telegram
       - Google Business Message
