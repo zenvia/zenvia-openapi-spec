@@ -10,7 +10,7 @@ const text: SchemaObject = {
       type: 'string',
     },
     text: {
-      description: 'Text that will be read in the call with the chosen voice type',
+      description: 'Text that will be read on the call with the chosen voice type',
       type: 'string',
       example: 'This is a text',
     },
@@ -40,7 +40,7 @@ const text: SchemaObject = {
       example: 'br-Ricardo',
     },
     awaitRecipientAnswer: {
-      description: 'Await recipient answer',
+      description: 'Await for the recipient answer',
       type: 'boolean',
       example: true,
     },
