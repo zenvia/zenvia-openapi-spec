@@ -582,6 +582,90 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/message.voice"
+              },
+              "examples": {
+                "tts": {
+                  "value": {
+                    "from": "12345a123a1234a1a2a123a1234ab1ab",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "call",
+                        "audio": [
+                          {
+                            "type": "tts",
+                            "text": "Hi Zenvia!",
+                            "voiceStyle": "br-Vitoria",
+                            "awaitRecipientAnswer": true
+                          }
+                        ]
+                      }
+                    ],
+                    "recordAudio": true,
+                    "hangUpOnVoiceMail": true
+                  }
+                },
+                "tts_transferTo": {
+                  "value": {
+                    "from": "12345a123a1234a1a2a123a1234ab1ab",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "call",
+                        "audio": [
+                          {
+                            "type": "tts",
+                            "text": "Hi Zenvia!",
+                            "voiceStyle": "br-Vitoria",
+                            "awaitRecipientAnswer": true
+                          }
+                        ]
+                      }
+                    ],
+                    "transferTo": "5511999999999",
+                    "recordAudio": true,
+                    "hangUpOnVoiceMail": true
+                  }
+                },
+                "file": {
+                  "value": {
+                    "from": "12345a123a1234a1a2a123a1234ab1ab",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "call",
+                        "audio": [
+                          {
+                            "type": "file",
+                            "fileUrl": "http://fooooo.bar/audio.mp3"
+                          }
+                        ]
+                      }
+                    ],
+                    "recordAudio": true,
+                    "hangUpOnVoiceMail": true
+                  }
+                },
+                "file_transferTo": {
+                  "value": {
+                    "from": "12345a123a1234a1a2a123a1234ab1ab",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "call",
+                        "audio": [
+                          {
+                            "type": "file",
+                            "fileUrl": "http://fooooo.bar/audio.mp3"
+                          }
+                        ]
+                      }
+                    ],
+                    "transferTo": "5511999999999",
+                    "recordAudio": true,
+                    "hangUpOnVoiceMail": true
+                  }
+                }
               }
             }
           }
@@ -600,7 +684,29 @@
           "default": {
             "$ref": "#/components/responses/error"
           }
-        }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash",
+            "source": "curl \"https://api.zenvia.com/v2/channels/voice/messages\" \\\n-H \"Content-Type: application/json\" \\\n-H \"X-API-TOKEN: YOUR_API_TOKEN\" \\\n-d '{\n  \"from\": \"sender-identifier\",\n  \"to\": \"recipient-identifier\",\n  \"contents\": [{\n    \"type\": \"text\",\n    \"text\": \"Some text message\"\n  }]\n}'\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js",
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/voice/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "Node.js SDK",
+            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/whatsapp-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst voice = client.getChannel('voice');\n\nconst content = new TextContent('Some text message');\n\nvoice.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+          },
+          {
+            "lang": "Java",
+            "label": "Java SDK",
+            "source": "import com.zenvia.api.sdk.client.Channel;\nimport com.zenvia.api.sdk.client.apache.Client;\nimport com.zenvia.api.sdk.contents.TextContent;\nimport com.zenvia.api.sdk.messages.Message;\n\npublic class VoiceSendTextMessage {\n\n  public static void main (String arg []) {\n    Client client = new Client(\"YOUR_API_TOKEN\");\n\n    Channel voice = client.getChannel(\"voice\");\n\n    TextContent content = new TextContent(\"Some text message\");\n\n    try {\n      Message response = voice.sendMessage(\"sender-identifier\", \"recipient-identifier\", content);\n      System.out.println(\"Response: \" + response.toString());\n    } catch(Exception e) {\n      System.out.println(\"Error: \" + e.getMessage());\n    }\n  }\n\n}\n"
+          }
+        ]
       }
     },
     "/channels/whatsapp/messages": {
@@ -2072,7 +2178,7 @@
             "type": "string"
           },
           "text": {
-            "description": "Text that will be read in the call with the chosen voice type",
+            "description": "Text that will be read on the call with the chosen voice type",
             "type": "string",
             "example": "This is a text"
           },
@@ -2102,7 +2208,7 @@
             "example": "br-Ricardo"
           },
           "awaitRecipientAnswer": {
-            "description": "Await recipient answer",
+            "description": "Await for the recipient answer",
             "type": "boolean",
             "example": true
           }
@@ -2542,7 +2648,7 @@
                 "example": "call"
               },
               "audio": {
-                "description": "A sequence of audio bits forming an message to be played on the start of the call",
+                "description": "A sequence of audio bits forming a message to be played at the beginning of the call",
                 "type": "array",
                 "items": {
                   "anyOf": [
@@ -2563,7 +2669,7 @@
                 }
               },
               "transferTo": {
-                "description": "Transfer or call to another number after the (optional) audio message has been played",
+                "description": "Transfer or call to another number when the audio message has been completely played",
                 "type": "string",
                 "example": "5511999999999"
               },
@@ -4268,7 +4374,7 @@
     },
     {
       "name": "Voice",
-      "description": "To access  the voice channel, you need to create your account here:\nhttps://voice-app.zenvia.com/painel/signup.php. \n\nAfter creating  the account, you can get your Access Token (SenderId) on your voice panel homepage: https://voice-app.zenvia.com/painel/\n\n\n\nVoice types for TTS (Text to Speech)\nList of available voices :\n* br-Camila\n* br-Vitoria\n* br-Ricardo\n* en-Joey\n* en-Joanna\n* fre-Celine\n* fre-Mathieu\n* ger-Vicki\n* ger-Hans\n* ita-Carla\n* ita-Giorgio\n* jap-Mizuki\n* pol-Jan\n* rus-Tatyana\n* rus-Maxim\n* esp-Conchita\n* esp-Enrique\n"
+      "description": "To access  the voice channel, you need to create your account here:\nhttps://voice-app.zenvia.com/painel/signup.php. \n\nAfter creating  the account, you can get your Access Token (SenderId) on your voice panel homepage: https://voice-app.zenvia.com/painel/\n\n\n\nVoice types for TTS (Text to Speech)\nList of available voices :\n* br-Camila\n* br-Vitoria\n* br-Ricardo\n* en-Joey\n* en-Joanna\n* fre-Celine\n* fre-Mathieu\n* ger-Vicki\n* ger-Hans\n* ita-Carla\n* ita-Giorgio\n* jap-Mizuki\n* pol-Jan\n* rus-Tatyana\n* rus-Maxim\n* esp-Conchita\n* esp-Enrique\n\n## Limitations\n\nThe Voice API has some limitations:\n\n* To send an audio file you wil have to inform the number destination and a public URL which contains the audio file.\n\n* Some additionall options are allowed such as: await for an answer, record the audio of the calling or  \n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| audio | audio/mp3<br>audio/wav | 5&nbsp;MB |\n\n## Voice sender and recipient\n\nWhen you send some voice message for one contact using Voice channel:\n\n* Recipient: is the phone number of the contact\n* Sender: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above\n\nWhen you receive a voice message from one contact, the sender and recipient are inverted:\n\n* Recipient: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above\n* Sender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object."
     },
     {
       "name": "Batches",

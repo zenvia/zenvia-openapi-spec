@@ -826,6 +826,57 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/message.voice'
+            examples:
+              tts:
+                value:
+                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  to: '55108888888888'
+                  contents:
+                    - type: call
+                      audio:
+                        - type: tts
+                          text: Hi Zenvia!
+                          voiceStyle: br-Vitoria
+                          awaitRecipientAnswer: true
+                  recordAudio: true
+                  hangUpOnVoiceMail: true
+              tts_transferTo:
+                value:
+                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  to: '55108888888888'
+                  contents:
+                    - type: call
+                      audio:
+                        - type: tts
+                          text: Hi Zenvia!
+                          voiceStyle: br-Vitoria
+                          awaitRecipientAnswer: true
+                  transferTo: '5511999999999'
+                  recordAudio: true
+                  hangUpOnVoiceMail: true
+              file:
+                value:
+                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  to: '55108888888888'
+                  contents:
+                    - type: call
+                      audio:
+                        - type: file
+                          fileUrl: 'http://fooooo.bar/audio.mp3'
+                  recordAudio: true
+                  hangUpOnVoiceMail: true
+              file_transferTo:
+                value:
+                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  to: '55108888888888'
+                  contents:
+                    - type: call
+                      audio:
+                        - type: file
+                          fileUrl: 'http://fooooo.bar/audio.mp3'
+                  transferTo: '5511999999999'
+                  recordAudio: true
+                  hangUpOnVoiceMail: true
       responses:
         '200':
           description: Created message
@@ -835,6 +886,95 @@ paths:
                 $ref: '#/components/schemas/message.voice'
         default:
           $ref: '#/components/responses/error'
+      x-code-samples:
+        - lang: Shell
+          label: Bash
+          source: |
+            curl "https://api.zenvia.com/v2/channels/voice/messages" \
+            -H "Content-Type: application/json" \
+            -H "X-API-TOKEN: YOUR_API_TOKEN" \
+            -d '{
+              "from": "sender-identifier",
+              "to": "recipient-identifier",
+              "contents": [{
+                "type": "text",
+                "text": "Some text message"
+              }]
+            }'
+        - lang: JavaScript
+          label: Node.js
+          source: |
+            const { post } = require('request-promise');
+
+            post({
+              uri: 'https://api.zenvia.com/v2/channels/voice/messages',
+              headers: {
+                'X-API-TOKEN': 'YOUR_API_TOKEN'
+              },
+              body: {
+                from: 'sender-identifier',
+                to: 'recipient-identifier',
+                contents: [{
+                  type: 'text',
+                  text: 'Some text message'
+                }]
+              },
+              json: true
+            })
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: JavaScript
+          label: Node.js SDK
+          source: |
+            /**
+             * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/whatsapp-send-text-message.js
+             */
+
+            import { Client, TextContent } from '@zenvia/sdk';
+
+            const client = new Client('YOUR_API_TOKEN');
+
+            const voice = client.getChannel('voice');
+
+            const content = new TextContent('Some text message');
+
+            voice.sendMessage('sender-identifier', 'recipient-identifier', content)
+            .then((response) => {
+              console.log('Response:', response);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        - lang: Java
+          label: Java SDK
+          source: |
+            import com.zenvia.api.sdk.client.Channel;
+            import com.zenvia.api.sdk.client.apache.Client;
+            import com.zenvia.api.sdk.contents.TextContent;
+            import com.zenvia.api.sdk.messages.Message;
+
+            public class VoiceSendTextMessage {
+
+              public static void main (String arg []) {
+                Client client = new Client("YOUR_API_TOKEN");
+
+                Channel voice = client.getChannel("voice");
+
+                TextContent content = new TextContent("Some text message");
+
+                try {
+                  Message response = voice.sendMessage("sender-identifier", "recipient-identifier", content);
+                  System.out.println("Response: " + response.toString());
+                } catch(Exception e) {
+                  System.out.println("Error: " + e.getMessage());
+                }
+              }
+
+            }
   /channels/whatsapp/messages:
     post:
       description: Send a WhatsApp message
@@ -1852,7 +1992,7 @@ components:
         type:
           type: string
         text:
-          description: Text that will be read in the call with the chosen voice type
+          description: Text that will be read on the call with the chosen voice type
           type: string
           example: This is a text
         voiceStyle:
@@ -1879,7 +2019,7 @@ components:
           default: br-Vitoria
           example: br-Ricardo
         awaitRecipientAnswer:
-          description: Await recipient answer
+          description: Await for the recipient answer
           type: boolean
           example: true
       required:
@@ -2161,7 +2301,7 @@ components:
               type: string
               example: call
             audio:
-              description: A sequence of audio bits forming an message to be played on the start of the call
+              description: A sequence of audio bits forming a message to be played at the beginning of the call
               type: array
               items:
                 anyOf:
@@ -2173,7 +2313,7 @@ components:
                     tts: '#/components/schemas/content.tts'
                     file: '#/components/schemas/content.audiofile'
             transferTo:
-              description: Transfer or call to another number after the (optional) audio message has been played
+              description: Transfer or call to another number when the audio message has been completely played
               type: string
               example: '5511999999999'
             recordAudio:
@@ -3601,7 +3741,7 @@ tags:
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Voice
-    description: |
+    description: |-
       To access  the voice channel, you need to create your account here:
       https://voice-app.zenvia.com/painel/signup.php. 
 
@@ -3628,6 +3768,34 @@ tags:
       * rus-Maxim
       * esp-Conchita
       * esp-Enrique
+
+      ## Limitations
+
+      The Voice API has some limitations:
+
+      * To send an audio file you wil have to inform the number destination and a public URL which contains the audio file.
+
+      * Some additionall options are allowed such as: await for an answer, record the audio of the calling or  
+
+      Supported content types and sizes:
+
+      | Media | Content Type | Size |
+      |---|---|---|
+      | audio | audio/mp3<br>audio/wav | 5&nbsp;MB |
+
+      ## Voice sender and recipient
+
+      When you send some voice message for one contact using Voice channel:
+
+      * Recipient: is the phone number of the contact
+      * Sender: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above
+
+      When you receive a voice message from one contact, the sender and recipient are inverted:
+
+      * Recipient: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above
+      * Sender: is the phone number of the contact
+
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.
   - name: Batches
     description: |
       The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
