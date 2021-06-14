@@ -7,33 +7,8 @@ The voice channel may be used after you connect a voice access token on [Zenvia 
 
 Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
-Voice types for TTS (Text to Speech)
-List of available voices :
-* br-Camila
-* br-Vitoria
-* br-Ricardo
-* en-Joey
-* en-Joanna
-* fre-Celine
-* fre-Mathieu
-* ger-Vicki
-* ger-Hans
-* ita-Carla
-* ita-Giorgio
-* jap-Mizuki
-* pol-Jan
-* rus-Tatyana
-* rus-Maxim
-* esp-Conchita
-* esp-Enrique
 
 ## Limitations
-
-The Voice API has some limitations:
-
-* To send an audio file you wil have to inform the number destination and a public URL which contains the audio file.
-
-* Some additionall options are allowed such as: await for an answer, record the audio of the calling or  
 
 Supported content types and sizes:
 
