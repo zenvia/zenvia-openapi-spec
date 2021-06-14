@@ -2,12 +2,13 @@ The Instagram channel may be used after it's activation on Zenvia Platform.
 
 Get in touch with Zenvia consultants to connect your account.
 
-To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
-
 
 ## Limitations
 
-The Instagram API content type and size support for sending messages:
+To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
+
+The Instagram API content type and size support for sending media:
 
 | Media | Content Type | Media Size |
 |---|---|---|

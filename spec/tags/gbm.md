@@ -4,6 +4,9 @@ To activate Google Business Message you need to be registered as a partner with 
 
 **Get in touch with Zenvia consultants to start your account creation.**
 
+
+## Limitations
+
 To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
