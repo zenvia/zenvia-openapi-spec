@@ -2,6 +2,8 @@ The RCS channel may be used after it's activation on Zenvia Platform.
 
 Get in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
 
+Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
 
 ## Limitations
 
