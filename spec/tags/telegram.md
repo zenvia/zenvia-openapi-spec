@@ -2,10 +2,10 @@ The Telegram can be used after it's activation on Zenvia Platform.
 
 To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
 
-To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
-
 
 ## Limitations
+
+To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 Supported content types and sizes:
 
