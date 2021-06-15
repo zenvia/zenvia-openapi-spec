@@ -5,7 +5,7 @@ Get in touch with Zenvia consultants to connect your account.
 
 ## Limitations
 
-To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
 The Instagram API content type and size support for sending media:

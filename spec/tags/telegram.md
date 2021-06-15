@@ -5,7 +5,7 @@ To activate Telegram you a need a registered Bot account on Telegram Bot API and
 
 ## Limitations
 
-To be able to send messages to a contact, you first need to setup a webhook, which allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 Supported content types and sizes:
 
