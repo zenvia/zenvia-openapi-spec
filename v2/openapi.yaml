@@ -1566,20 +1566,6 @@ components:
           required:
             - type
             - text
-    content.audiofile:
-      title: Audio file
-      description: URL of audio
-      type: object
-      properties:
-        type:
-          type: string
-        fileUrl:
-          description: URL of audio
-          type: string
-          example: 'http://fooooo.bar/audio.mp3'
-      required:
-        - type
-        - fileUrl
     content.base:
       type: object
       properties:
@@ -1589,26 +1575,39 @@ components:
           type: string
       required:
         - type
-    content.card-base:
+    content.call:
       type: object
-      properties:
-        title:
-          type: string
-          description: A title in bold shown above the text of the card.
-          example: Hello
-        text:
-          type: string
-          description: A text to be displayed inside the card.
-          example: This is the best thing you will see today!
-        media:
-          type: object
-        buttons:
-          $ref: '#/components/schemas/content.nestable-contents.buttons-list'
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: call
+            audio:
+              description: A sequence of audio bits forming a message to be played at the beginning of the call
+              type: array
+              items:
+                $ref: '#/components/schemas/content.audio-sources.all'
+            transferTo:
+              description: Transfer or call to another number when the audio message has been completely played
+              type: string
+              example: '5510999999999'
+            recordAudio:
+              description: To record the call
+              type: boolean
+              example: true
+            hangUpOnVoiceMail:
+              description: End the call on voice mail
+              type: boolean
+              example: true
+          required:
+            - type
     content.card:
       type: object
       allOf:
         - $ref: '#/components/schemas/content.base'
-        - $ref: '#/components/schemas/content.card-base'
+        - $ref: '#/components/schemas/content.bases.card-base'
         - type: object
           properties:
             type:
@@ -1617,7 +1616,7 @@ components:
             media:
               type: object
               allOf:
-                - $ref: '#/components/schemas/content.nestable-contents.media-base'
+                - $ref: '#/components/schemas/content.bases.card-media-base'
                 - type: object
                   properties:
                     disposition:
@@ -1631,7 +1630,7 @@ components:
                         - ON_THE_TOP_TALL_HEIGHT
                       default: ON_THE_TOP_SHORT_HEIGHT
             quickReplyButtons:
-              $ref: '#/components/schemas/content.nestable-contents.quick-reply-list'
+              $ref: '#/components/schemas/content.bases.quick-reply-list'
     content.carousel:
       type: object
       allOf:
@@ -1658,13 +1657,13 @@ components:
               items:
                 type: object
                 allOf:
-                  - $ref: '#/components/schemas/content.card-base'
+                  - $ref: '#/components/schemas/content.bases.card-base'
                   - type: object
                     properties:
                       media:
                         type: object
                         allOf:
-                          - $ref: '#/components/schemas/content.nestable-contents.media-base'
+                          - $ref: '#/components/schemas/content.bases.card-media-base'
                           - type: object
                             properties:
                               disposition:
@@ -1674,7 +1673,7 @@ components:
                                   - ON_THE_TOP_MEDIUM_HEIGHT
                                   - ON_THE_TOP_TALL_HEIGHT
             quickReplyButtons:
-              $ref: '#/components/schemas/content.nestable-contents.quick-reply-list'
+              $ref: '#/components/schemas/content.bases.quick-reply-list'
           required:
             - type
             - cards
@@ -1984,7 +1983,30 @@ components:
           required:
             - type
             - text
-    content.tts:
+    content.audio-sources.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.audio-sources.tts'
+        - $ref: '#/components/schemas/content.audio-sources.file'
+      discriminator:
+        propertyName: type
+        mapping:
+          tts: '#/components/schemas/content.audio-sources.tts'
+          file: '#/components/schemas/content.audio-sources.file'
+    content.audio-sources.file:
+      title: Audio file
+      description: URL of audio
+      type: object
+      properties:
+        type:
+          type: string
+        fileUrl:
+          description: URL of audio
+          type: string
+          example: 'http://fooooo.bar/audio.mp3'
+      required:
+        - type
+        - fileUrl
+    content.audio-sources.tts:
       title: Text to speech
       description: Send a text to speech
       type: object
@@ -2025,6 +2047,204 @@ components:
       required:
         - type
         - text
+    content.bases.buttons-list:
+      type: array
+      title: Buttons
+      description: |-
+        Vertical list of buttons displayed inside a card. These will *not* fade away once one is clicked.
+            <br><br>*A maximum of 4 buttons is supported by RCS channel, but they might not be shown if they do not fit in the available space.*
+      maxItems: 4
+      items:
+        $ref: '#/components/schemas/content.bases.buttons.all'
+    content.bases.card-base:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A title in bold shown above the text of the card.
+          example: Hello
+        text:
+          type: string
+          description: A text to be displayed inside the card.
+          example: This is the best thing you will see today!
+        media:
+          type: object
+        buttons:
+          $ref: '#/components/schemas/content.bases.buttons-list'
+    content.bases.card-media-base:
+      type: object
+      properties:
+        url:
+          type: string
+          description: |-
+            Public URL of media file, which can be an image, a GIF or a video, which will be diplayed in the card.
+                    <br><br>*Videos will display a play button instead of a preview of the content.*
+          example: 'https://zenvia.br/zenvia-team.png'
+        disposition:
+          type: string
+          description: 'Controls where in the card the media will be shown, and some values also influence the media height.'
+          default: ON_THE_TOP_SHORT_HEIGHT
+        caption:
+          type: string
+          description: 'Media content description, used by screen readers to help users with disability to understand the context.'
+          example: Zenvia's team picture
+      required:
+        - url
+    content.bases.quick-reply-list:
+      type: array
+      title: Quick reply buttons
+      description: |-
+        Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.
+            <br><br>*A maximum of 11 buttons is supported by RCS channel.*
+      maxItems: 11
+      items:
+        $ref: '#/components/schemas/content.bases.buttons.all'
+    content.bases.buttons.all:
+      oneOf:
+        - $ref: '#/components/schemas/content.bases.buttons.postback'
+        - $ref: '#/components/schemas/content.bases.buttons.web-url'
+        - $ref: '#/components/schemas/content.bases.buttons.calendar-event'
+        - $ref: '#/components/schemas/content.bases.buttons.dial'
+        - $ref: '#/components/schemas/content.bases.buttons.share-location'
+        - $ref: '#/components/schemas/content.bases.buttons.view-location'
+        - $ref: '#/components/schemas/content.bases.buttons.search-location'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.bases.buttons.postback'
+          link: '#/components/schemas/content.bases.buttons.web-url'
+          calendar_event: '#/components/schemas/content.bases.buttons.calendar-event'
+          dial: '#/components/schemas/content.bases.buttons.dial'
+          share_location: '#/components/schemas/content.bases.buttons.share-location'
+          view_location: '#/components/schemas/content.bases.buttons.view-location'
+          search_location: '#/components/schemas/content.bases.buttons.search-location'
+    content.bases.buttons.base:
+      type: object
+      properties:
+        type:
+          title: Button type
+          description: Button type discriminator
+          type: string
+        text:
+          type: string
+          description: Text to be displayed inside the button.
+          example: Click me!
+        payload:
+          type: string
+          description: 'Content to be sent back as a message event when the user clicks on the button. By default, the text of the button will be used as payload.'
+          example: clicked
+    content.bases.buttons.calendar-event:
+      type: object
+      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          properties:
+            startTime:
+              type: string
+              description: Start date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.
+              example: '2021-01-15T17:30:00-03:00'
+            endTime:
+              type: string
+              description: End date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.
+              example: '2021-01-15T17:30:00-03:00'
+            title:
+              type: string
+              description: Event description.
+              example: API development
+          required:
+            - type
+            - text
+            - startTime
+            - endTime
+            - title
+    content.bases.buttons.dial:
+      type: object
+      description: Opesn the default dial opp on the user's device.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          properties:
+            phoneNumber:
+              type: string
+              description: Phone Number (E.164 format).
+              example: '+558006464777'
+          required:
+            - type
+            - text
+            - phoneNumber
+    content.bases.buttons.postback:
+      type: object
+      description: Send back a text message event when the user clicks on the button.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          required:
+            - type
+            - text
+    content.bases.buttons.search-location:
+      type: object
+      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          properties:
+            query:
+              type: string
+              description: 'A text, for example, an address or a company name, to be searched in the default user''s map application.'
+              example: 'Av. Paulista, 2300 - São Paulo'
+          required:
+            - type
+            - text
+            - query
+    content.bases.buttons.share-location:
+      type: object
+      description: Opens the default app for maps on the user's device and requests the user's location.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          required:
+            - type
+            - text
+    content.bases.buttons.view-location:
+      type: object
+      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          properties:
+            latitude:
+              type: string
+              description: Latitude in degrees (range from -90.0 and +90.0).
+              example: '-23.557260'
+            longitude:
+              type: string
+              description: Longitude in degrees (range from -180.0 and +180.0).
+              example: '-46.661030'
+            label:
+              type: string
+              description: Text to be displayed with the map position pin icon.
+              example: Zenvia
+          required:
+            - type
+            - text
+            - latitude
+            - longitude
+    content.bases.buttons.web-url:
+      type: object
+      description: Opens a URL on user's device and sends the payload field content to the Agent.
+      allOf:
+        - $ref: '#/components/schemas/content.bases.buttons.base'
+        - type: object
+          properties:
+            url:
+              type: string
+              description: URL to be accessed upon click.
+              example: 'https://zenvia.com/'
+          required:
+            - type
+            - text
+            - url
     content.facebook.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -2052,189 +2272,6 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
-    content.nestable-contents.all-buttons:
-      oneOf:
-        - $ref: '#/components/schemas/content.nestable-contents.postback'
-        - $ref: '#/components/schemas/content.nestable-contents.web-url'
-        - $ref: '#/components/schemas/content.nestable-contents.calendar-event'
-        - $ref: '#/components/schemas/content.nestable-contents.dial'
-        - $ref: '#/components/schemas/content.nestable-contents.share-location'
-        - $ref: '#/components/schemas/content.nestable-contents.view-location'
-        - $ref: '#/components/schemas/content.nestable-contents.search-location'
-      discriminator:
-        propertyName: type
-        mapping:
-          text: '#/components/schemas/content.nestable-contents.postback'
-          link: '#/components/schemas/content.nestable-contents.web-url'
-          calendar_event: '#/components/schemas/content.nestable-contents.calendar-event'
-          dial: '#/components/schemas/content.nestable-contents.dial'
-          share_location: '#/components/schemas/content.nestable-contents.share-location'
-          view_location: '#/components/schemas/content.nestable-contents.view-location'
-          search_location: '#/components/schemas/content.nestable-contents.search-location'
-    content.nestable-contents.base:
-      type: object
-      properties:
-        type:
-          title: Button type
-          description: Button type discriminator
-          type: string
-        text:
-          type: string
-          description: Text to be displayed inside the button.
-          example: Click me!
-        payload:
-          type: string
-          description: 'Content to be sent back as a message event when the user clicks on the button. By default, the text of the button will be used as payload.'
-          example: clicked
-    content.nestable-contents.buttons-list:
-      type: array
-      title: Buttons
-      description: |-
-        Vertical list of buttons displayed inside a card. These will *not* fade away once one is clicked.
-            <br><br>*A maximum of 4 buttons is supported by RCS channel, but they might not be shown if they do not fit in the available space.*
-      maxItems: 4
-      items:
-        $ref: '#/components/schemas/content.nestable-contents.all-buttons'
-    content.nestable-contents.calendar-event:
-      type: object
-      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          properties:
-            startTime:
-              type: string
-              description: Start date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.
-              example: '2021-01-15T17:30:00-03:00'
-            endTime:
-              type: string
-              description: End date and time of the event formatted following RFC3339 standard (similar to ISO 8601). Default timezone is UTC.
-              example: '2021-01-15T17:30:00-03:00'
-            title:
-              type: string
-              description: Event description.
-              example: API development
-          required:
-            - type
-            - text
-            - startTime
-            - endTime
-            - title
-    content.nestable-contents.dial:
-      type: object
-      description: Opesn the default dial opp on the user's device.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          properties:
-            phoneNumber:
-              type: string
-              description: Phone Number (E.164 format).
-              example: '+558006464777'
-          required:
-            - type
-            - text
-            - phoneNumber
-    content.nestable-contents.media-base:
-      type: object
-      properties:
-        url:
-          type: string
-          description: |-
-            Public URL of media file, which can be an image, a GIF or a video, which will be diplayed in the card.
-                    <br><br>*Videos will display a play button instead of a preview of the content.*
-          example: 'https://zenvia.br/zenvia-team.png'
-        disposition:
-          type: string
-          description: 'Controls where in the card the media will be shown, and some values also influence the media height.'
-          default: ON_THE_TOP_SHORT_HEIGHT
-        caption:
-          type: string
-          description: 'Media content description, used by screen readers to help users with disability to understand the context.'
-          example: Zenvia's team picture
-      required:
-        - url
-    content.nestable-contents.postback:
-      type: object
-      description: Send back a text message event when the user clicks on the button.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          required:
-            - type
-            - text
-    content.nestable-contents.quick-reply-list:
-      type: array
-      title: Quick reply buttons
-      description: |-
-        Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.
-            <br><br>*A maximum of 11 buttons is supported by RCS channel.*
-      maxItems: 11
-      items:
-        $ref: '#/components/schemas/content.nestable-contents.all-buttons'
-    content.nestable-contents.search-location:
-      type: object
-      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          properties:
-            query:
-              type: string
-              description: 'A text, for example, an address or a company name, to be searched in the default user''s map application.'
-              example: 'Av. Paulista, 2300 - São Paulo'
-          required:
-            - type
-            - text
-            - query
-    content.nestable-contents.share-location:
-      type: object
-      description: Opens the default app for maps on the user's device and requests the user's location.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          required:
-            - type
-            - text
-    content.nestable-contents.view-location:
-      type: object
-      description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          properties:
-            latitude:
-              type: string
-              description: Latitude in degrees (range from -90.0 and +90.0).
-              example: '-23.557260'
-            longitude:
-              type: string
-              description: Longitude in degrees (range from -180.0 and +180.0).
-              example: '-46.661030'
-            label:
-              type: string
-              description: Text to be displayed with the map position pin icon.
-              example: Zenvia
-          required:
-            - type
-            - text
-            - latitude
-            - longitude
-    content.nestable-contents.web-url:
-      type: object
-      description: Opens a URL on user's device and sends the payload field content to the Agent.
-      allOf:
-        - $ref: '#/components/schemas/content.nestable-contents.base'
-        - type: object
-          properties:
-            url:
-              type: string
-              description: URL to be accessed upon click.
-              example: 'https://zenvia.com/'
-          required:
-            - type
-            - text
-            - url
     content.rcs.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -2286,46 +2323,11 @@ components:
           file: '#/components/schemas/content.file'
     content.voice.all:
       oneOf:
-        - $ref: '#/components/schemas/content.voice.call'
+        - $ref: '#/components/schemas/content.call'
       discriminator:
         propertyName: type
         mapping:
-          call: '#/components/schemas/content.voice.call'
-    content.voice.call:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/content.base'
-        - type: object
-          properties:
-            type:
-              type: string
-              example: call
-            audio:
-              description: A sequence of audio bits forming a message to be played at the beginning of the call
-              type: array
-              items:
-                anyOf:
-                  - $ref: '#/components/schemas/content.tts'
-                  - $ref: '#/components/schemas/content.audiofile'
-                discriminator:
-                  propertyName: type
-                  mapping:
-                    tts: '#/components/schemas/content.tts'
-                    file: '#/components/schemas/content.audiofile'
-            transferTo:
-              description: Transfer or call to another number when the audio message has been completely played
-              type: string
-              example: '5511999999999'
-            recordAudio:
-              description: To record the call
-              type: boolean
-              example: true
-            hangUpOnVoiceMail:
-              description: End the call on voice mail
-              type: boolean
-              example: true
-          required:
-            - type
+          call: '#/components/schemas/content.call'
     content.whatsapp.all:
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -2644,8 +2646,11 @@ components:
     message.referral:
       title: Referral Object
       description: |-
-        Included in notifications when a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-                        This object has the ad's information.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
+        Included in notifications where it is possible to track the source of the message. Examples:
+        * When a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
+        * When users tag the business on their story.
+
+        *Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*
       type: object
       properties:
         headline:
@@ -2664,18 +2669,19 @@ components:
           properties:
             id:
               title: Id
-              description: Facebook ID for an ad or a post.
+              description: An id for the message source. The format of the id will depend on the source type.
               type: string
             type:
               title: Type
-              description: 'The type of the ad’s source. Currently, supported values are ad and post.'
+              description: The type of content where the message originated.
               type: string
               enum:
                 - ad
                 - post
+                - story_mention
             url:
               title: Url
-              description: The url that leads to the ad. Opening this url takes you to the ad viewed by your user.
+              description: The url that leads to the message source. Opening this url takes you to the content viewed by your user.
               type: string
               example: 'https://www.zenvia.com'
     message.sms:
@@ -3583,15 +3589,16 @@ tags:
       Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       ## SMS sender and recipient
-      When you send a message for one contact using SMS channel:
 
-      * Recipient: is the complete phone number (including country code) of contact.
-      * Sender: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
+      When you send a message to a contact using SMS channel:
 
-      When you receive a message from one contact, the sender and recipient are inverted:
+      * Recipient: is the complete phone number (including country code) of the contact.
+      * Sender: is the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
-      * Recipient: is the SMS account alias connected on [integrations console](https://app.zenvia.com/home/credentials).
-      * Sender: is the complete phone number (including country code) of contact.
+      When you receive a message from a contact, the sender and recipient are inverted:
+
+      * Recipient: is the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      * Sender: is the complete phone number (including country code) of the contact.
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: WhatsApp
@@ -3629,38 +3636,75 @@ tags:
 
       ## WhatsApp sender and recipient
 
-      When you send some message for one contact using WhatsApp channel:
+      When you send a message to a contact using WhatsApp channel:
 
-      * Recipient: is the phone number of contact
+      * Recipient: is the phone number of the contact
       * Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
-      When you receive a message from one contact, the sender and recipient are inverted:
+      When you receive a message from a contact, the sender and recipient are inverted:
 
       * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
-      * Sender: is the phone number of contact
+      * Sender: is the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Facebook
     description: |
-      The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
+
+
+      ## Limitations
+
+      To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
 
       ## Facebook sender and recipient
 
-      When you send some message for one contact using Facebook channel:
-
-      * Recipient: is the user id on your page (PSID - page scoped id)
-      * Sender: is your page id
-
-      When you receive a message from one contact, the sender and recipient are inverted:
+      When you receive a message from a contact from Facebook channel:
 
       * Recipient: is your page id
-      * Sender: is the user id on your page (PSID - page scoped id)
+      * Sender: is the contact id on your page (PSID - page scoped id)
+
+      When you send some message to a contact, the sender and recipient are inverted:
+
+      * Recipient: is the contact id on your page (PSID - page scoped id)
+      * Sender: is your page id
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Instagram
     description: |
       The Instagram channel may be used after it's activation on Zenvia Platform.
+
       Get in touch with Zenvia consultants to connect your account.
+
+
+      ## Limitations
+
+      To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
+
+      The Instagram API content type and size support for sending media:
+
+      | Media | Content Type | Media Size |
+      |---|---|---|
+      | image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp | 8 MB |
+      | audio | audio/* | *Currently not supported* |
+      | video | video/* | *Currently not supported* |
+      | document | Any other valid MIME type. | *Currently not supported* |
+
+
+      ## Instagram sender and recipient
+
+      When you receive a message from a contact from instagram channel:
+
+      * Recipient: is your instagram account id (this is not your account @)
+      * Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)
+
+      When you send a message to a contact, the sender and recipient are inverted:
+
+      * Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)
+      * Sender: is your instagram account id (this is not your account @)
+
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Google Business Message
     description: |
       The Google Business Message channel may be used after its activation on Zenvia platform.
@@ -3669,113 +3713,101 @@ tags:
 
       **Get in touch with Zenvia consultants to start your account creation.**
 
-      Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
+
+      ## Limitations
+
+      To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
 
       ## Google Business Message sender and recipient
 
-      When you send some message for one contact using Google Business Message channel:
+      When you receive a message from a contact from Google Business Message channel:
+
+      * Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+      * Recipient: is the contact id
+
+      When you send a message to a contact, the sender and recipient are inverted:
 
       * Recipient: is the contact id
-      * Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
-
-      When you receive a message from one contact, the sender and recipient are inverted:
-
-      * Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
-      * Recipient: is the contact id
+      * Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: RCS
     description: |
       The RCS channel may be used after it's activation on Zenvia Platform.
-      Get in touch with Zenvia consultants to create your Google agent (An agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
+
+      Get in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
+
+      Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
 
       ## Limitations
 
-      The RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo). 
+      The RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo).
+
       To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
+
       The use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
+
 
       ## RCS sender and recipient
 
-      When you send some message for one contact using RCS channel:
+      When you send a message to a contact using RCS channel:
 
-      Recipient: is the phone number of contact
-      Sender: is the RCS Agent ID (an email created and linked with a Zenvia's OrgID)
+      Recipient: is the phone number of the contact
+      Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
 
-      When you receive a message from one contact, the sender and recipient are inverted:
+      When you receive a message from a contact, the sender and recipient are inverted:
 
-      Recipient: is the RCS Agent ID
-      Sender: is the phone number of contact
+      Recipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
+      Sender: is the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Telegram
-    description: |-
+    description: |
       The Telegram can be used after it's activation on Zenvia Platform.
 
-      To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on Zenvia platform.
+      To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
 
-      **Get in touch with Zenvia consultants to start your account creation.**
-
-      Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
       ## Limitations
+
+      To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       Supported content types and sizes:
 
       | Media | Content Type | Size |
       |---|---|---|
-      | document | Any valid MIME type. | 50&nbsp;MB |
       | image | image/jpeg<br>image/png | 10&nbsp;MB |
+      | document | Any other valid MIME type. | 50&nbsp;MB |
+
 
       ## Telegram sender and recipient
 
-      When you send some message for one contact using Telegram channel:
+      When you receive a message from a contact from Telegram channel:
 
-      * Recipient: is the phone number of contact
-      * Sender: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+      * Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+      * Sender: is the conversation id (this is not the phone number)
 
-      When you receive a message from one contact, the sender and recipient are inverted:
+      When you send a message to a contact, the sender and recipient are inverted:
 
-      * Recipient: is the Telegram sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
-      * Sender: is the phone number of contact
+      * Recipient: is the conversation id (this is not the phone number)
+      * Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Voice
-    description: |-
+    description: |
       To access  the voice channel, you need to create your account here:
       https://voice-app.zenvia.com/painel/signup.php. 
 
-      After creating  the account, you can get your Access Token (SenderId) on your voice panel homepage: https://voice-app.zenvia.com/painel/
+      After creating the account, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/
 
+      The voice channel may be used after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
+      Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
-      Voice types for TTS (Text to Speech)
-      List of available voices :
-      * br-Camila
-      * br-Vitoria
-      * br-Ricardo
-      * en-Joey
-      * en-Joanna
-      * fre-Celine
-      * fre-Mathieu
-      * ger-Vicki
-      * ger-Hans
-      * ita-Carla
-      * ita-Giorgio
-      * jap-Mizuki
-      * pol-Jan
-      * rus-Tatyana
-      * rus-Maxim
-      * esp-Conchita
-      * esp-Enrique
 
       ## Limitations
-
-      The Voice API has some limitations:
-
-      * To send an audio file you wil have to inform the number destination and a public URL which contains the audio file.
-
-      * Some additionall options are allowed such as: await for an answer, record the audio of the calling or  
 
       Supported content types and sizes:
 
@@ -3785,14 +3817,14 @@ tags:
 
       ## Voice sender and recipient
 
-      When you send some voice message for one contact using Voice channel:
+      When you send a voice message to a contact using Voice channel:
 
       * Recipient: is the phone number of the contact
-      * Sender: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above
+      * Sender: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
 
-      When you receive a voice message from one contact, the sender and recipient are inverted:
+      When you receive a voice message from a contact, the sender and recipient are inverted:
 
-      * Recipient: is the Access Token got on the voice panel homepage: https://voice-app.zenvia.com/painel as mentioned above
+      * Recipient: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
       * Sender: is the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.
