@@ -1,15 +1,19 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as callRef } from '../call';
+import { ref as ttsRef } from './tts';
+import { ref as fileRef } from './file';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
   oneOf: [{
-    $ref: callRef,
+    $ref: ttsRef,
+  }, {
+    $ref: fileRef,
   }],
   discriminator: {
     propertyName: 'type',
     mapping: {
-      call: callRef,
+      tts: ttsRef,
+      file: fileRef,
     },
   },
 };

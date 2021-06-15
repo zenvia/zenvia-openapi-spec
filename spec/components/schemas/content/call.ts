@@ -1,8 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as baseRef } from './../base';
-import { ref as ttsRef } from '../tts';
-import { ref as audioFileRef } from '../audiofile';
-import { createComponentRef } from '../../../../../utils/ref';
+import { ref as baseRef } from './base';
+import { ref as allAudioRef } from './audio-sources/all';
+import { createComponentRef } from '../../../../utils/ref';
 
 const text: SchemaObject = {
   type: 'object',
@@ -19,24 +18,13 @@ const text: SchemaObject = {
         description: 'A sequence of audio bits forming a message to be played at the beginning of the call',
         type: 'array',
         items: {
-          anyOf: [{
-            $ref: ttsRef,
-          }, {
-            $ref: audioFileRef,
-          }],
-          discriminator: {
-            propertyName: 'type',
-            mapping: {
-              tts: ttsRef,
-              file: audioFileRef,
-            },
-          },
+          $ref: allAudioRef,
         },
       },
       transferTo: {
         description: 'Transfer or call to another number when the audio message has been completely played',
         type: 'string',
-        example: '5511999999999',
+        example: '5510999999999',
       },
       recordAudio: {
         description: 'To record the call',
