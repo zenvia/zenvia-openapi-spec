@@ -1,8 +1,8 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as cardRef } from './card-base';
-import { ref as mediaRef } from './nestable-contents/media-base';
-import { ref as quickReplyRef } from './nestable-contents/quick-reply-list';
+import { ref as cardRef } from './bases/card-base';
+import { ref as mediaRef } from './bases/card-media-base';
+import { ref as quickReplyRef } from './bases/quick-reply-list';
 import { createComponentRef } from '../../../../utils/ref';
 
 const card: SchemaObject = {
