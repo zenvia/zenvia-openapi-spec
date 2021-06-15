@@ -5,16 +5,13 @@ const example: SchemaObject = {
   title: 'Examples',
   description: `Provides an example of possible model data. This helps during the review and approval process so that Facebook can understand what
                 kind of messages you plan to send. Make sure they are examples and do not include personal or confidential information.
-                If you decide to include variables and examples, provide them in the same number.`,
+                If you decide to include variables and examples, provide them in the same number.
+                <br>If you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
+                being assigned the example url.`,
   type: 'object',
-  properties: {
-    variable_name: {
-      title: 'variable name',
-      description: `variable_name must be the variable to which the example will be assigned.
-                    <br>If you are creating a template with media, the variable_name must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
-                    being assigned the example url.`,
-      type: 'string',
-    },
+  example: {
+    imageUrl: 'https://example.com/image.jpeg',
+    name: 'John Smith',
   },
 };
 
