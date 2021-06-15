@@ -31,14 +31,14 @@ Supported content types and sizes:
 
 ## WhatsApp sender and recipient
 
-When you send some message for one contact using WhatsApp channel:
+When you send a message to a contact using WhatsApp channel:
 
-* Recipient: is the phone number of contact
+* Recipient: is the phone number of the contact
 * Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
-When you receive a message from one contact, the sender and recipient are inverted:
+When you receive a message from a contact, the sender and recipient are inverted:
 
 * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
-* Sender: is the phone number of contact
+* Sender: is the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

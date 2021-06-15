@@ -1,10 +1,10 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as baseRef } from './base';
 
-const shareLocation: SchemaObject = {
+const postback: SchemaObject = {
   type: 'object',
-  description: "Opens the default app for maps on the user's device and requests the user's location.",
+  description: 'Send back a text message event when the user clicks on the button.',
   allOf: [{
     $ref: baseRef,
   }, {
@@ -17,4 +17,4 @@ const shareLocation: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default shareLocation;
+export default postback;

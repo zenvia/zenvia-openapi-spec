@@ -3,8 +3,11 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const referral: SchemaObject = {
   title: 'Referral Object',
-  description: `Included in notifications when a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-                This object has the ad's information.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
+  description: `Included in notifications where it is possible to track the source of the message. Examples:
+* When a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
+* When users tag the business on their story.
+
+*Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*`,
   type: 'object',
   properties: {
     headline: {
@@ -25,18 +28,18 @@ const referral: SchemaObject = {
       properties: {
         id: {
           title: 'Id',
-          description: 'Facebook ID for an ad or a post.',
+          description: 'An id for the message source. The format of the id will depend on the source type.',
           type: 'string',
         },
         type: {
           title: 'Type',
-          description: 'The type of the ad’s source. Currently, supported values are ad and post.',
+          description: 'The type of content where the message originated.',
           type: 'string',
-          enum: ['ad', 'post'],
+          enum: ['ad', 'post', 'story_mention'],
         },
         url: {
           title: 'Url',
-          description: 'The url that leads to the ad. Opening this url takes you to the ad viewed by your user.',
+          description: 'The url that leads to the message source. Opening this url takes you to the content viewed by your user.',
           type: 'string',
           example: 'https://www.zenvia.com',
         },

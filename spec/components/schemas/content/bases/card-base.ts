@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as buttonsRef } from './nestable-contents/buttons-list';
-import { createComponentRef } from '../../../../utils/ref';
+import { ref as buttonsRef } from './buttons-list';
+import { createComponentRef } from '../../../../../utils/ref';
 
 const card: SchemaObject = {
   type: 'object',

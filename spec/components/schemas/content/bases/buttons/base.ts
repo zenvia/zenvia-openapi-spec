@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 
 const buttonBase: SchemaObject = {
   type: 'object',

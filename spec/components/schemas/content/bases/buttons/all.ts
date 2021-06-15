@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as postBackRef } from './postback';
 import { ref as webUrlRef } from './web-url';
 import { ref as calendarEventRef } from './calendar-event';
