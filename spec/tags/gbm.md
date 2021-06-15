@@ -4,18 +4,22 @@ To activate Google Business Message you need to be registered as a partner with 
 
 **Get in touch with Zenvia consultants to start your account creation.**
 
-Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
+
+## Limitations
+
+To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
 
 ## Google Business Message sender and recipient
 
-When you send some message for one contact using Google Business Message channel:
+When you receive a message from a contact from Google Business Message channel:
+
+* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+* Recipient: is the contact id
+
+When you send a message to a contact, the sender and recipient are inverted:
 
 * Recipient: is the contact id
-* Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
-
-When you receive a message from one contact, the sender and recipient are inverted:
-
-* Sender: is the Google Business Message agent ID configured on [Google Business Message](https://developers.google.com) and on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
-* Recipient: is the contact id
+* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
