@@ -66,3 +66,11 @@ This is very similar to a [card](#section/Card), except this is a horizontally s
 More details may be found below.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
+
+## WhatsApp buttons
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.button.index" />
+
+## WhatsApp list
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
