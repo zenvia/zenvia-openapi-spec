@@ -88,6 +88,7 @@ const list: SchemaObject = {
     required: [
       'type',
       'body',
+      'button',
       'sections',
     ],
   }],
