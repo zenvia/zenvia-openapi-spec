@@ -6,6 +6,8 @@ import { text as textExample } from '../../resources/examples/text';
 import { template as templateExample } from '../../resources/examples/template';
 import { contacts as contactsExample } from '../../resources/examples/contacts';
 import { location as locationExample } from '../../resources/examples/location';
+import { button as buttonExample } from '../../resources/examples/button';
+import { list as listExample } from '../../resources/examples/list';
 
 const post: OperationObject = {
   description: 'Send a WhatsApp message',
@@ -32,6 +34,12 @@ const post: OperationObject = {
           },
           location: {
             value: locationExample(),
+          },
+          button: {
+            value: buttonExample(),
+          },
+          list: {
+            value: listExample(),
           },
 
         },
