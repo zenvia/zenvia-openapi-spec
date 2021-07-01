@@ -1,5 +1,5 @@
 {
-  "name": "send button content with text header",
+  "name": "send button content with text header and footer",
   "request": {
     "method": "POST",
     "path": "/channels/whatsapp/messages",

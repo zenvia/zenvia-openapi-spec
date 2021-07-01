@@ -1,5 +1,5 @@
 {
-  "name": "send button content with document header and all optional fields",
+  "name": "send button content with document header with fileMimeType and fileName fields",
   "request": {
     "method": "POST",
     "path": "/channels/whatsapp/messages",

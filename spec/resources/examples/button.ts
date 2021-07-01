@@ -18,8 +18,8 @@ export function button() {
         {
           id: 'btn2',
           title: 'Button Two',
-        }
-      ]
+        },
+      ],
     }],
   };
 }

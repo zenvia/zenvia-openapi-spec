@@ -27,9 +27,9 @@ export function list() {
               title: 'Item Three',
               description: 'Item three description.',
             },
-          ]
+          ],
         },
-      ]
+      ],
     }],
   };
 }

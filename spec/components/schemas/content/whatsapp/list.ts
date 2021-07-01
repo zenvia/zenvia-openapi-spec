@@ -43,7 +43,7 @@ const list: SchemaObject = {
         items: {
           type: 'object',
           properties: {
-            tile: {
+            title: {
               type: 'string',
               title: 'Section title',
               example: 'Section name',
