@@ -1063,6 +1063,44 @@ paths:
                       name: Zenvia
                       address: 'Av. Paulista, 2300 - 18º Andar - Bela Vista, São Paulo - SP, 01310-300'
                       url: 'https://www.zenvia.com/'
+              button:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: button
+                      header:
+                        type: file
+                        fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      body: Your message body text here
+                      footer: Your message footer text here
+                      buttons:
+                        - id: btn1
+                          title: Button One
+                        - id: btn2
+                          title: Button Two
+              list:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: list
+                      header: Message Header
+                      body: Your message body text here
+                      footer: Your message footer text here
+                      button: Button Text
+                      sections:
+                        - title: Section Title
+                          rows:
+                            - id: row1
+                              title: Item One
+                              description: Item one description.
+                            - id: row2
+                              title: Item Two
+                              description: Item two description.
+                            - id: row3
+                              title: Item Three
+                              description: Item three description.
       responses:
         '200':
           description: Created message
@@ -2335,6 +2373,8 @@ components:
         - $ref: '#/components/schemas/content.template'
         - $ref: '#/components/schemas/content.contacts'
         - $ref: '#/components/schemas/content.location'
+        - $ref: '#/components/schemas/content.whatsapp.button.index'
+        - $ref: '#/components/schemas/content.whatsapp.list'
       discriminator:
         propertyName: type
         mapping:
@@ -2343,6 +2383,175 @@ components:
           template: '#/components/schemas/content.template'
           contacts: '#/components/schemas/content.contacts'
           location: '#/components/schemas/content.location'
+          button: '#/components/schemas/content.whatsapp.button.index'
+          list: '#/components/schemas/content.whatsapp.list'
+    content.whatsapp.list:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: list
+            header:
+              type: string
+              title: Header text
+              example: Header text.
+            body:
+              type: string
+              title: Body text
+              example: Body text.
+            footer:
+              type: string
+              title: Footer text
+              example: Footer text.
+            button:
+              type: string
+              title: List button
+              description: Button used to open the list. Does not allow emojis or markdown.
+              minLength: 1
+              maxLength: 20
+            sections:
+              type: array
+              title: List of sections
+              minItems: 1
+              maxItems: 10
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    title: Section title
+                    example: Section name
+                  rows:
+                    type: array
+                    minItems: 1
+                    maxItems: 10
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          title: Row id
+                          example: Row id
+                        title:
+                          type: string
+                          title: Row title
+                          example: Row title
+                        description:
+                          type: string
+                          title: Row description
+                          example: Row description
+                      required:
+                        - id
+                        - title
+                required:
+                  - title
+                  - rows
+          required:
+            - type
+            - body
+            - button
+            - sections
+    content.whatsapp.button.index:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: button
+            header:
+              $ref: '#/components/schemas/content.whatsapp.button.header.index'
+            body:
+              type: string
+              title: Body text
+              example: Body text.
+            footer:
+              type: string
+              title: Footer text
+              example: Footer text.
+            buttons:
+              type: array
+              title: List of buttons
+              minItems: 1
+              maxItems: 3
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: Button ID
+                  title:
+                    type: string
+                    example: Button text
+                required:
+                  - id
+                  - title
+          required:
+            - type
+            - body
+            - buttons
+    content.whatsapp.button.header.base:
+      type: object
+      properties:
+        type:
+          title: Header Type
+          type: string
+      required:
+        - type
+    content.whatsapp.button.header.file:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.whatsapp.button.header.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: file
+            fileUrl:
+              type: string
+              description: The URL of the file to be sent.
+              example: 'https://example.com/document.pdf'
+            fileMimeType:
+              type: string
+              description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/Limitations)'
+              example: application/pdf
+            fileName:
+              type: string
+              description: The name of the file.
+              example: document.pdf
+          required:
+            - type
+            - fileUrl
+    content.whatsapp.button.header.index:
+      title: Object header
+      oneOf:
+        - $ref: '#/components/schemas/content.whatsapp.button.header.text'
+        - $ref: '#/components/schemas/content.whatsapp.button.header.file'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.whatsapp.button.header.text'
+          file: '#/components/schemas/content.whatsapp.button.header.file'
+    content.whatsapp.button.header.text:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.whatsapp.button.header.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: text
+            text:
+              type: string
+              title: Header text
+              example: Header text
+          required:
+            - type
+            - text
     error.base:
       title: Error Object
       description: This is a Error object model.
@@ -3595,6 +3804,14 @@ tags:
       More details may be found below.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
+
+      ## WhatsApp buttons
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.button.index" />
+
+      ## WhatsApp list
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
   - name: SMS
     description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
