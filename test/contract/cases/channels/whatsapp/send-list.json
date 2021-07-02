@@ -1,0 +1,76 @@
+{
+  "name": "send list content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "list",
+          "body": "text-body-content",
+          "button": "button-title",
+          "sections": [
+            {
+              "title": "the-section-title",
+              "rows": [
+                {
+                  "id": "row-1",
+                  "title": "row-title",
+                  "description": "row-description"
+                },
+                {
+                  "id": "row-2",
+                  "title": "row-title",
+                  "description": "row-description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "list",
+          "body": "text-body-content",
+          "button": "button-title",
+          "sections": [
+            {
+              "title": "the-section-title",
+              "rows": [
+                {
+                  "id": "row-1",
+                  "title": "row-title",
+                  "description": "row-description"
+                },
+                {
+                  "id": "row-2",
+                  "title": "row-title",
+                  "description": "row-description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
