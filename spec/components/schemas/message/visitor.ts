@@ -32,6 +32,12 @@ const visitor: SchemaObject = {
                     <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
       type: 'string',
     },
+    picture: {
+      title: 'Picture',
+      description: `URL for the profile picture of the contact.
+                    <br>*Only applicable to [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) channels.*`,
+      type: 'string',
+    },
 
   },
 };
