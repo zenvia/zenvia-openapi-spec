@@ -21,6 +21,13 @@ const visitor: SchemaObject = {
       description: 'Last name of the visitor',
       type: 'string',
     },
+    userName: {
+      title: 'User name',
+      description: `User name of the contact.
+                    <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+      type: 'string',
+    },
+
   },
 };
 
