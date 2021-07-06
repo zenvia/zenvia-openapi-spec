@@ -4,7 +4,7 @@ export function card() {
     to: '55108888888888',
     contents: [{
       type: 'card',
-      label: 'Card from Zenvia',
+      title: 'Card from Zenvia',
       text: 'This is our products',
       media: {
         url: 'https://zenvia.br/zenvia-office.png',
