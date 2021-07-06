@@ -21,12 +21,13 @@ const messageEvent: SchemaObject = {
         example: 'MESSAGE_STATUS',
       },
       messageId: {
-        title: 'Message ID',
-        description: 'The ID of the message whose status is being delived',
+        title: 'Message Id',
+        description: 'The id of the message whose status is being delivered.',
         type: 'string',
       },
       contentIndex: {
-        title: 'Index of content that is receiving the status update',
+        title: 'Content Index',
+        description: 'Index of content that is receiving the status update.',
         type: 'number',
       },
       messageStatus: {
