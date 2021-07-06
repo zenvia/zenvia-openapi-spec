@@ -30,7 +30,7 @@ const base: SchemaObject = {
     },
     direction: {
       title: 'Message direction',
-      description: 'It indicates if message is received from channel (IN) or is sent to channel (OUT)',
+      description: 'It indicates if message is received from the channel (IN) or is sent to the channel (OUT)',
       type: 'string',
       enum: [
         'IN',
