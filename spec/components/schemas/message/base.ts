@@ -55,6 +55,7 @@ const base: SchemaObject = {
     },
     timestamp: {
       title: 'Message timestamp',
+      description: 'Timestamp of the message. Usually received from the provider of the channel.',
       type: 'string',
       format: 'date-time',
       readOnly: true,
