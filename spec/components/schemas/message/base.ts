@@ -39,7 +39,7 @@ const base: SchemaObject = {
       readOnly: true,
     },
     channel: {
-      title: 'Channel',
+      title: 'Message channel',
       description: 'Message channel',
       type: 'string',
       readOnly: true,
