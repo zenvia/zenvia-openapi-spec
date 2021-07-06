@@ -23,10 +23,10 @@ const messageEvent: SchemaObject = {
       direction: {
         title: 'Message Direction',
         type: 'string',
-      },
-      channel: {
-        title: 'Message channel',
-        type: 'string',
+        enum: [
+          'IN',
+          'OUT',
+        ],
       },
       message: {
         $ref: messageRef,
