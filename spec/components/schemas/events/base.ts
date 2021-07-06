@@ -22,7 +22,8 @@ const eventBase: SchemaObject = {
       ],
     },
     subscriptionId: {
-      title: 'Subscription Id',
+    channel: {
+      title: 'Message Channel',
       type: 'string',
     },
   },
