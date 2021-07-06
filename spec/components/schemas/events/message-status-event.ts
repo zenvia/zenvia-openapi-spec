@@ -21,8 +21,8 @@ const messageEvent: SchemaObject = {
         example: 'MESSAGE_STATUS',
       },
       messageId: {
-        title: 'Message Id',
-        description: 'The id of the message whose status is being delivered.',
+        title: 'Message ID',
+        description: 'The ID of the message whose status is being delivered.',
         type: 'string',
       },
       contentIndex: {
