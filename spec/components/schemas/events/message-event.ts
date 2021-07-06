@@ -22,6 +22,8 @@ const messageEvent: SchemaObject = {
       },
       direction: {
         title: 'Message Direction',
+        description: `Indicates if the message is received from a channel (IN) or sent to a channel (OUT).
+> **Note:** The **OUT** direction is under construction.`,
         type: 'string',
         enum: [
           'IN',
