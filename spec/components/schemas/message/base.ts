@@ -30,7 +30,7 @@ const base: SchemaObject = {
     },
     direction: {
       title: 'Message direction',
-      description: 'It indicates if message is received from channel (IN) or is sent to channel (OUT)',
+      description: 'It indicates if message is received from the channel (IN) or is sent to the channel (OUT)',
       type: 'string',
       enum: [
         'IN',
@@ -39,7 +39,7 @@ const base: SchemaObject = {
       readOnly: true,
     },
     channel: {
-      title: 'Channel',
+      title: 'Message channel',
       description: 'Message channel',
       type: 'string',
       readOnly: true,
@@ -55,6 +55,7 @@ const base: SchemaObject = {
     },
     timestamp: {
       title: 'Message timestamp',
+      description: 'Timestamp of the message. Usually received from the provider of the channel.',
       type: 'string',
       format: 'date-time',
       readOnly: true,

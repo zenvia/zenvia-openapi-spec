@@ -7,6 +7,7 @@ const webhook: SchemaObject = {
   properties: {
     timestamp: {
       title: 'Status timestamp',
+      description: 'Timestamp of the message status. Usually received from the provider of the channel.',
       type: 'string',
       format: 'date-time',
     },

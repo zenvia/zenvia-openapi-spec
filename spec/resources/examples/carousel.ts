@@ -6,7 +6,7 @@ export function carousel() {
       type: 'carousel',
       cardWidth: 'MEDIUM',
       cards: [{
-        label: 'Card from Zenvia',
+        title: 'Card from Zenvia',
         text: 'This is our products',
         media: {
           url: 'https://zenvia.br/zenvia-office.png',
