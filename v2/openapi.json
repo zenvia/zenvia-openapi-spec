@@ -334,7 +334,7 @@
                     "contents": [
                       {
                         "type": "card",
-                        "label": "Card from Zenvia",
+                        "title": "Card from Zenvia",
                         "text": "This is our products",
                         "media": {
                           "url": "https://zenvia.br/zenvia-office.png",
@@ -369,7 +369,7 @@
                         "cardWidth": "MEDIUM",
                         "cards": [
                           {
-                            "label": "Card from Zenvia",
+                            "title": "Card from Zenvia",
                             "text": "This is our products",
                             "media": {
                               "url": "https://zenvia.br/zenvia-office.png",
@@ -3123,10 +3123,12 @@
         "properties": {
           "id": {
             "title": "Event Id",
+            "description": "Id of the webhook event. Can be used to identify redeliveries in case of webhook errors.",
             "type": "string"
           },
           "timestamp": {
             "title": "Event Timestamp",
+            "description": "The timestamp of the webhook event.",
             "type": "string",
             "format": "date-time"
           },
@@ -3139,7 +3141,12 @@
             ]
           },
           "subscriptionId": {
-            "title": "Subscription Id",
+            "title": "Webhook Id",
+            "description": "Id of the webhook that caused this event to be delivered.",
+            "type": "string"
+          },
+          "channel": {
+            "title": "Message Channel",
             "type": "string"
           }
         }
@@ -3184,11 +3191,12 @@
               },
               "direction": {
                 "title": "Message Direction",
-                "type": "string"
-              },
-              "channel": {
-                "title": "Message channel",
-                "type": "string"
+                "description": "Indicates if the message is received from a channel (IN) or sent to a channel (OUT).\n> **Note:** The **OUT** direction is under construction.",
+                "type": "string",
+                "enum": [
+                  "IN",
+                  "OUT"
+                ]
               },
               "message": {
                 "$ref": "#/components/schemas/message.all"
@@ -3215,17 +3223,14 @@
                 ],
                 "example": "MESSAGE_STATUS"
               },
-              "channel": {
-                "title": "Message channel",
-                "type": "string"
-              },
               "messageId": {
                 "title": "Message ID",
-                "description": "The ID of the message whose status is being delived",
+                "description": "The ID of the message whose status is being delivered.",
                 "type": "string"
               },
               "contentIndex": {
-                "title": "Index of content that is receiving the status update",
+                "title": "Content Index",
+                "description": "Index of content that is receiving the status update.",
                 "type": "number"
               },
               "messageStatus": {
@@ -3240,6 +3245,7 @@
         "properties": {
           "timestamp": {
             "title": "Status timestamp",
+            "description": "Timestamp of the message status. Usually received from the provider of the channel.",
             "type": "string",
             "format": "date-time"
           },
@@ -3299,7 +3305,7 @@
                 "minItems": 1
               },
               "idRef": {
-                "description": "When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*",
+                "description": "When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.\n                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.\n                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [SMS](#tag/SMS) channels.*",
                 "type": "string",
                 "readOnly": true
               }
@@ -3332,7 +3338,7 @@
           },
           "direction": {
             "title": "Message direction",
-            "description": "It indicates if message is received from channel (IN) or is sent to channel (OUT)",
+            "description": "It indicates if message is received from the channel (IN) or is sent to the channel (OUT)",
             "type": "string",
             "enum": [
               "IN",
@@ -3341,7 +3347,7 @@
             "readOnly": true
           },
           "channel": {
-            "title": "Channel",
+            "title": "Message channel",
             "description": "Message channel",
             "type": "string",
             "readOnly": true
@@ -3357,6 +3363,7 @@
           },
           "timestamp": {
             "title": "Message timestamp",
+            "description": "Timestamp of the message. Usually received from the provider of the channel.",
             "type": "string",
             "format": "date-time",
             "readOnly": true
@@ -3463,7 +3470,7 @@
       },
       "message.referral": {
         "title": "Referral Object",
-        "description": "Included in notifications where it is possible to track the source of the message. Examples:\n* When a user clicks on an ad that redirects to WhatsApp and sends a message to the business.\n* When users tag the business on their story.\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*",
+        "description": "Included in notifications where it is possible to track the source of the message. Examples:\n* When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.\n* When an user tags the business on their story.\n* When an user replies to a story from the business.\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*",
         "type": "object",
         "properties": {
           "headline": {
@@ -3481,6 +3488,7 @@
           "source": {
             "type": "object",
             "title": "Referral source",
+            "description": "Provide details about the source of the message.",
             "properties": {
               "id": {
                 "title": "Id",
@@ -3494,7 +3502,8 @@
                 "enum": [
                   "ad",
                   "post",
-                  "story_mention"
+                  "story_mention",
+                  "story"
                 ]
               },
               "url": {
@@ -3553,22 +3562,32 @@
       },
       "message.visitor": {
         "title": "Visitor Object",
-        "description": "It indicates the name of the visitor who sent the message",
+        "description": "It provides information about the contact who sent the message.\n                <br>The availability of this information depends on privacy settings of the contact.\n                <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),\n                [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*",
         "type": "object",
         "properties": {
           "name": {
             "title": "Name",
-            "description": "Full name of the visitor",
+            "description": "Full name of the contact.",
             "type": "string"
           },
           "firstName": {
             "title": "First name",
-            "description": "First name of the visitor",
+            "description": "First name of the contact.\n                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*",
             "type": "string"
           },
           "lastName": {
             "title": "Last name",
-            "description": "Last name of the visitor",
+            "description": "Last name of the contact.\n                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*",
+            "type": "string"
+          },
+          "userName": {
+            "title": "User name",
+            "description": "User name of the contact.\n                    <br>*Only applicable to [Instagram channel](#tag/Instagram).*",
+            "type": "string"
+          },
+          "picture": {
+            "title": "Picture",
+            "description": "URL for the profile picture of the contact.\n                    <br>*Only applicable to [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) channels.*",
             "type": "string"
           }
         }
@@ -4674,7 +4693,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).\n\n## Card\n\nThis is a rich content composed of *at least one* of these components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAnd additionally, it may also have these:\n* Buttons\n* Quick reply buttons (they are not part of the card itself and instead are shown below it)\n\nMore information on each attribute may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n"
+      "description": "## Supported Channels\n\nMessaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nIf you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).\n\n## Card\n\nThis is a rich content composed of *at least one* of these components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAnd additionally, it may also have these:\n* Buttons\n* Quick reply buttons (they are not part of the card itself and instead are shown below it)\n\nMore information on each attribute may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n"
     },
     {
       "name": "SMS",
@@ -4690,7 +4709,7 @@
     },
     {
       "name": "Instagram",
-      "description": "The Instagram channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to connect your account.\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\nThe Instagram API content type and size support for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from instagram channel:\n\n* Recipient: is your instagram account id (this is not your account @)\n* Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n* Sender: is your instagram account id (this is not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Instagram channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to connect your account.\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\nThe Instagram API content type and size support for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from instagram channel:\n\n* Recipient: is your instagram account id (this is not your account @)\n* Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n* Sender: is your instagram account id (this is not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Google Business Message",
@@ -4702,7 +4721,7 @@
     },
     {
       "name": "Telegram",
-      "description": "The Telegram can be used after it's activation on Zenvia Platform.\n\nTo activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/jpeg<br>image/png | 10&nbsp;MB |\n| document | Any other valid MIME type. | 50&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n* Sender: is the conversation id (this is not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the conversation id (this is not the phone number)\n* Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Telegram can be used after it's activation on Zenvia Platform.\n\nTo activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/* | 5&nbsp;MB |\n| video | video/* | 20&nbsp;MB |\n| audio | audio/* | 20&nbsp;MB |\n| document | Any other valid MIME type. | 20&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n* Sender: is the conversation id (this is not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the conversation id (this is not the phone number)\n* Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Voice",
@@ -4714,7 +4733,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\nThe <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: **IN** or **OUT**.\n\n> **Note:** The **OUT** direction is under construction.\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:\n* There will be at least 30 seconds between each request attempt for the same event.\n* There will be at most 30 request attempts for the same event.\n\nThis means a single event may be retried for around 15 minutes. After this the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: This is the initial status for every webhook created.\n* **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.\n* **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with *INACTIVE* status.\n\nThe rules which trigger status changes are the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion.\n    * Only slow responses on the initial request count as a fail.\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.\n  * Successful requests on retry atempts also count toward status promotion.\n  * Responses slower than *1 second* do not count either as a success or as a fail.\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a prior sent message.\n\nIf you are subscribed in this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: The message sent by your business was received by the provider's server.\n* **REJECTED**: The message sent by your business failed to be sent to the provider's server.\n* **DELIVERED**: The message sent by your business was delivered to the user's device.\n* **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:\n* There will be at least 30 seconds between each request attempt for the same event.\n* There will be at most 30 request attempts for the same event.\n\nThis means a single event may be retried for around 15 minutes. After this the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: This is the initial status for every webhook created.\n* **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.\n* **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with *INACTIVE* status.\n\nThe rules which trigger status changes are the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion.\n    * Only slow responses on the initial request count as a fail.\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.\n  * Successful requests on retry atempts also count toward status promotion.\n  * Responses slower than *1 second* do not count either as a success or as a fail.\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
     },
     {
       "name": "Templates",

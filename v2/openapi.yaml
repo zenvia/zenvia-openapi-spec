@@ -526,7 +526,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: card
-                      label: Card from Zenvia
+                      title: Card from Zenvia
                       text: This is our products
                       media:
                         url: 'https://zenvia.br/zenvia-office.png'
@@ -548,7 +548,7 @@ paths:
                     - type: carousel
                       cardWidth: MEDIUM
                       cards:
-                        - label: Card from Zenvia
+                        - title: Card from Zenvia
                           text: This is our products
                           media:
                             url: 'https://zenvia.br/zenvia-office.png'
@@ -2616,9 +2616,11 @@ components:
       properties:
         id:
           title: Event Id
+          description: Id of the webhook event. Can be used to identify redeliveries in case of webhook errors.
           type: string
         timestamp:
           title: Event Timestamp
+          description: The timestamp of the webhook event.
           type: string
           format: date-time
         type:
@@ -2628,7 +2630,11 @@ components:
             - MESSAGE
             - MESSAGE_STATUS
         subscriptionId:
-          title: Subscription Id
+          title: Webhook Id
+          description: Id of the webhook that caused this event to be delivered.
+          type: string
+        channel:
+          title: Message Channel
           type: string
     events.error-cause:
       type: object
@@ -2660,10 +2666,13 @@ components:
               example: MESSAGE
             direction:
               title: Message Direction
+              description: |-
+                Indicates if the message is received from a channel (IN) or sent to a channel (OUT).
+                > **Note:** The **OUT** direction is under construction.
               type: string
-            channel:
-              title: Message channel
-              type: string
+              enum:
+                - IN
+                - OUT
             message:
               $ref: '#/components/schemas/message.all'
     events.message-status-event:
@@ -2679,15 +2688,13 @@ components:
                 - MESSAGE
                 - MESSAGE_STATUS
               example: MESSAGE_STATUS
-            channel:
-              title: Message channel
-              type: string
             messageId:
               title: Message ID
-              description: The ID of the message whose status is being delived
+              description: The ID of the message whose status is being delivered.
               type: string
             contentIndex:
-              title: Index of content that is receiving the status update
+              title: Content Index
+              description: Index of content that is receiving the status update.
               type: number
             messageStatus:
               $ref: '#/components/schemas/events.message-status'
@@ -2696,6 +2703,7 @@ components:
       properties:
         timestamp:
           title: Status timestamp
+          description: Timestamp of the message status. Usually received from the provider of the channel.
           type: string
           format: date-time
         code:
@@ -2739,7 +2747,10 @@ components:
                 $ref: '#/components/schemas/content.whatsapp.all'
               minItems: 1
             idRef:
-              description: 'When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.<br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*'
+              description: |-
+                When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
+                                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.
+                                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [SMS](#tag/SMS) channels.*
               type: string
               readOnly: true
     message.base:
@@ -2769,14 +2780,14 @@ components:
           maxLength: 64
         direction:
           title: Message direction
-          description: It indicates if message is received from channel (IN) or is sent to channel (OUT)
+          description: It indicates if message is received from the channel (IN) or is sent to the channel (OUT)
           type: string
           enum:
             - IN
             - OUT
           readOnly: true
         channel:
-          title: Channel
+          title: Message channel
           description: Message channel
           type: string
           readOnly: true
@@ -2789,6 +2800,7 @@ components:
           minItems: 1
         timestamp:
           title: Message timestamp
+          description: Timestamp of the message. Usually received from the provider of the channel.
           type: string
           format: date-time
           readOnly: true
@@ -2856,8 +2868,9 @@ components:
       title: Referral Object
       description: |-
         Included in notifications where it is possible to track the source of the message. Examples:
-        * When a user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-        * When users tag the business on their story.
+        * When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.
+        * When an user tags the business on their story.
+        * When an user replies to a story from the business.
 
         *Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*
       type: object
@@ -2875,6 +2888,7 @@ components:
         source:
           type: object
           title: Referral source
+          description: Provide details about the source of the message.
           properties:
             id:
               title: Id
@@ -2888,6 +2902,7 @@ components:
                 - ad
                 - post
                 - story_mention
+                - story
             url:
               title: Url
               description: The url that leads to the message source. Opening this url takes you to the content viewed by your user.
@@ -2921,20 +2936,40 @@ components:
               minItems: 1
     message.visitor:
       title: Visitor Object
-      description: It indicates the name of the visitor who sent the message
+      description: |-
+        It provides information about the contact who sent the message.
+                        <br>The availability of this information depends on privacy settings of the contact.
+                        <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),
+                        [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*
       type: object
       properties:
         name:
           title: Name
-          description: Full name of the visitor
+          description: Full name of the contact.
           type: string
         firstName:
           title: First name
-          description: First name of the visitor
+          description: |-
+            First name of the contact.
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*
           type: string
         lastName:
           title: Last name
-          description: Last name of the visitor
+          description: |-
+            Last name of the contact.
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*
+          type: string
+        userName:
+          title: User name
+          description: |-
+            User name of the contact.
+                                <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+          type: string
+        picture:
+          title: Picture
+          description: |-
+            URL for the profile picture of the contact.
+                                <br>*Only applicable to [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) channels.*
           type: string
     message.voice:
       type: object
@@ -3748,7 +3783,8 @@ tags:
       | location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | 
       | template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |
       | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |
-      | carousel     | &#10005; | &#10005; | &#10004; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 
       ## Text
       This type of content is the most used one and is composed of plain text.
@@ -3917,7 +3953,7 @@ tags:
 
       | Media | Content Type | Media Size |
       |---|---|---|
-      | image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp | 8 MB |
+      | image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |
       | audio | audio/* | *Currently not supported* |
       | video | video/* | *Currently not supported* |
       | document | Any other valid MIME type. | *Currently not supported* |
@@ -4009,8 +4045,10 @@ tags:
 
       | Media | Content Type | Size |
       |---|---|---|
-      | image | image/jpeg<br>image/png | 10&nbsp;MB |
-      | document | Any other valid MIME type. | 50&nbsp;MB |
+      | image | image/* | 5&nbsp;MB |
+      | video | video/* | 20&nbsp;MB |
+      | audio | audio/* | 20&nbsp;MB |
+      | document | Any other valid MIME type. | 20&nbsp;MB |
 
 
       ## Telegram sender and recipient
@@ -4092,10 +4130,6 @@ tags:
       When you are subscribed in this type of event, your webhook will receive a request with the schema as follows:
 
       <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
-
-      The <code>direction</code> field, that indicates if the message is received from a channel or sent to a channel, may assume the following values: **IN** or **OUT**.
-
-      > **Note:** The **OUT** direction is under construction.
 
       ## MESSAGE_STATUS
 
