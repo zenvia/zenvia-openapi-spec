@@ -12,7 +12,7 @@ The Instagram API content type and size support for sending media:
 
 | Media | Content Type | Media Size |
 |---|---|---|
-| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp | 8 MB |
+| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |
 | audio | audio/* | *Currently not supported* |
 | video | video/* | *Currently not supported* |
 | document | Any other valid MIME type. | *Currently not supported* |
