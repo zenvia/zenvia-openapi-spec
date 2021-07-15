@@ -34,7 +34,7 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *READ: "**The message has been read by the recipient**".*
 * *REJECTED: "**The message was rejected by the provider**".*
 * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
-* *READ: "**The message has been deleted by the recipient**".*
+* *DELETED: "**The message has been deleted by the contact**".*
 
 
 ## Zenvia outbound IP addresses
