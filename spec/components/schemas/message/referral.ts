@@ -14,13 +14,15 @@ const referral: SchemaObject = {
   properties: {
     headline: {
       title: 'Headline',
-      description: 'Headline used in the ad that generated the message.',
+      description: `Headline used in the ad that generated the message.
+                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).`,
       type: 'string',
       example: 'This is a headline',
     },
     body: {
       title: 'Body',
-      description: 'Body from the ad that generated the message.',
+      description: `Body from the ad that generated the message.
+                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
       type: 'string',
       example: 'This is a body',
     },
@@ -41,8 +43,8 @@ const referral: SchemaObject = {
           enum: ['ad', 'post', 'story_mention', 'story', 'message'],
         },
         url: {
-          title: 'Url',
-          description: 'The url that leads to the message source. Opening this url takes you to the content viewed by your user.',
+          title: 'URL',
+          description: 'The URL that leads to the message source. Opening this URL takes you to the content viewed by the user.',
           type: 'string',
           example: 'https://www.zenvia.com',
         },
