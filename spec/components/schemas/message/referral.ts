@@ -15,7 +15,7 @@ const referral: SchemaObject = {
     headline: {
       title: 'Headline',
       description: `Headline used in the ad that generated the message.
-                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).`,
+                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
       type: 'string',
       example: 'This is a headline',
     },
