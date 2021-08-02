@@ -46,6 +46,18 @@ const referral: SchemaObject = {
           type: 'string',
           example: 'https://www.zenvia.com',
         },
+        text: {
+          title: 'Text',
+          description: `The content of the quoted text message.
+                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+          type: 'string',
+        },
+        user: {
+          title: 'User',
+          description: `The user who sent the quoted text message.
+                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+          type: 'string',
+        },
       },
     },
   },
