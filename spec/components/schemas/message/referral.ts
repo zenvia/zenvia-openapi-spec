@@ -60,6 +60,12 @@ const referral: SchemaObject = {
                         <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
           type: 'string',
         },
+        timestamp: {
+          title: 'Timestamp',
+          description: `The timestamp of the quoted text message.
+                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+          type: 'string',
+        },
       },
     },
   },
