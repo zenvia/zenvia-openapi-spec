@@ -3305,7 +3305,7 @@
                 "minItems": 1
               },
               "idRef": {
-                "description": "When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.\n                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.\n                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [SMS](#tag/SMS) channels.*",
+                "description": "When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.\n                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.\n                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram) and [SMS](#tag/SMS) channels.*",
                 "type": "string",
                 "readOnly": true
               }
@@ -3470,18 +3470,18 @@
       },
       "message.referral": {
         "title": "Referral Object",
-        "description": "Included in notifications where it is possible to track the source of the message. Examples:\n* When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.\n* When an user tags the business on their story.\n* When an user replies to a story from the business.\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*",
+        "description": "Included in notifications where it is possible to track the source of the message. Examples:\n* When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.\n* When an user tags the business on their Instagram story.\n* When an user replies to a Instagram story from the business.\n* When an user quotes an message in the Instagram direct conversation.\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*",
         "type": "object",
         "properties": {
           "headline": {
             "title": "Headline",
-            "description": "Headline used in the ad that generated the message.",
+            "description": "Headline used in the ad that generated the message.\n                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*",
             "type": "string",
             "example": "This is a headline"
           },
           "body": {
             "title": "Body",
-            "description": "Body from the ad that generated the message.",
+            "description": "Body from the ad that generated the message.\n                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*",
             "type": "string",
             "example": "This is a body"
           },
@@ -3503,14 +3503,30 @@
                   "ad",
                   "post",
                   "story_mention",
-                  "story"
+                  "story",
+                  "message"
                 ]
               },
               "url": {
-                "title": "Url",
-                "description": "The url that leads to the message source. Opening this url takes you to the content viewed by your user.",
+                "title": "URL",
+                "description": "The URL that leads to the message source. Opening this URL takes you to the content viewed by the user.",
                 "type": "string",
                 "example": "https://www.zenvia.com"
+              },
+              "text": {
+                "title": "Text",
+                "description": "The content of the quoted text message.\n                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*",
+                "type": "string"
+              },
+              "user": {
+                "title": "User",
+                "description": "The user who sent the quoted text message.\n                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*",
+                "type": "string"
+              },
+              "timestamp": {
+                "title": "Timestamp",
+                "description": "The timestamp of the quoted text message.\n                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*",
+                "type": "string"
               }
             }
           }

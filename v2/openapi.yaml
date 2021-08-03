@@ -2750,7 +2750,7 @@ components:
               description: |-
                 When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
                                       On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.
-                                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [SMS](#tag/SMS) channels.*
+                                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram) and [SMS](#tag/SMS) channels.*
               type: string
               readOnly: true
     message.base:
@@ -2869,20 +2869,25 @@ components:
       description: |-
         Included in notifications where it is possible to track the source of the message. Examples:
         * When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-        * When an user tags the business on their story.
-        * When an user replies to a story from the business.
+        * When an user tags the business on their Instagram story.
+        * When an user replies to a Instagram story from the business.
+        * When an user quotes an message in the Instagram direct conversation.
 
         *Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*
       type: object
       properties:
         headline:
           title: Headline
-          description: Headline used in the ad that generated the message.
+          description: |-
+            Headline used in the ad that generated the message.
+                                <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
           type: string
           example: This is a headline
         body:
           title: Body
-          description: Body from the ad that generated the message.
+          description: |-
+            Body from the ad that generated the message.
+                                <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
           type: string
           example: This is a body
         source:
@@ -2903,11 +2908,30 @@ components:
                 - post
                 - story_mention
                 - story
+                - message
             url:
-              title: Url
-              description: The url that leads to the message source. Opening this url takes you to the content viewed by your user.
+              title: URL
+              description: The URL that leads to the message source. Opening this URL takes you to the content viewed by the user.
               type: string
               example: 'https://www.zenvia.com'
+            text:
+              title: Text
+              description: |-
+                The content of the quoted text message.
+                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+              type: string
+            user:
+              title: User
+              description: |-
+                The user who sent the quoted text message.
+                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+              type: string
+            timestamp:
+              title: Timestamp
+              description: |-
+                The timestamp of the quoted text message.
+                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+              type: string
     message.sms:
       type: object
       allOf:
