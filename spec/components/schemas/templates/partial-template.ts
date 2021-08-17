@@ -5,6 +5,7 @@ import { ref as localeSchemaRef } from './template-locale';
 import { ref as categorySchemaRef } from './template-category';
 import { ref as componentsSchemaRef } from './components';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
+import { ref as examplesSchemaRef } from './template-example';
 
 const partial: SchemaObject = {
   title: 'Template Object',
@@ -19,6 +20,9 @@ const partial: SchemaObject = {
     },
     components: {
       $ref: componentsSchemaRef,
+    },
+    examples: {
+      $ref: examplesSchemaRef,
     },
     notificationEmail: {
       $ref: notificationEmailSchemaRef,
