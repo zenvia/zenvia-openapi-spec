@@ -3912,6 +3912,9 @@
           "components": {
             "$ref": "#/components/schemas/templates.components.index"
           },
+          "examples": {
+            "$ref": "#/components/schemas/templates.template-example"
+          },
           "notificationEmail": {
             "$ref": "#/components/schemas/templates.template-notification-email"
           }

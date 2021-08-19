@@ -3201,6 +3201,8 @@ components:
           $ref: '#/components/schemas/templates.template-category'
         components:
           $ref: '#/components/schemas/templates.components.index'
+        examples:
+          $ref: '#/components/schemas/templates.template-example'
         notificationEmail:
           $ref: '#/components/schemas/templates.template-notification-email'
     templates.template-category:
