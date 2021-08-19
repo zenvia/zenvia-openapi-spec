@@ -1,0 +1,53 @@
+{
+  "name": "update one template by id with examples",
+  "request": {
+    "method": "PATCH",
+    "path": "/templates/ID",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "locale": "pt_BR",
+      "category": "ACCOUNT_UPDATE",
+      "components": {
+        "body": {
+          "type": "TEXT_TEMPLATE",
+          "text": "some text {{var1}} {{var2}}"
+        }
+      },
+      "examples": {
+        "var1": "var 1 example",
+        "var2": "var 2 example"
+      },
+      "notificationEmail": "notification@mail.com"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "ACCOUNT_UPDATE",
+      "components": {
+        "body": {
+          "type": "TEXT_TEMPLATE",
+          "text": "some text {{var1}} {{var2}}"
+        }
+      },
+      "examples": {
+        "var1": "var 1 example",
+        "var2": "var 2 example"
+      },
+      "notificationEmail": "notification@mail.com"
+    }
+  }
+}
