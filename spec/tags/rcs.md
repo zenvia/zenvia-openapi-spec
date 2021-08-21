@@ -1,4 +1,4 @@
-The RCS channel may be used after it's activation on Zenvia Platform.
+The RCS channel may be used after its activation on the Zenvia Platform.
 
 Get in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
 
@@ -18,12 +18,12 @@ The use of RCS channel follows the Google content policies, available here: http
 
 When you send a message to a contact using RCS channel:
 
-Recipient: is the phone number of the contact
-Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
+* Recipient: is the phone number of the contact
+* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
 
 When you receive a message from a contact, the sender and recipient are inverted:
 
-Recipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
-Sender: is the phone number of the contact
+* Recipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
+* Sender: is the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
