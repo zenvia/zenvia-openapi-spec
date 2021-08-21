@@ -1,6 +1,16 @@
 ## Supported Channels
 
-Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+Messaging can be handled through the following channels:
+
+* SMS
+* WhatsApp
+* Facebook
+* Instagram
+* RCS
+* Telegram
+* Google Business Message
+
+For each content type covered in the next section, the following table reflects the applicability concerning these channels:
 
 | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
 |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
@@ -38,23 +48,23 @@ This type of content is used to send location messages represented as a point on
 <SchemaDefinition schemaRef="#/components/schemas/content.location" showWriteOnly="true" />
 
 ## Template
-This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.
+This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide by are very restrictive.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
 ### Submitting a template content for approval
-If you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).
+If you already own a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).
 
 ## Card
 
-This is a rich content composed of *at least one* of these components (none of them are mandatory):
+This type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):
 * Media
 * Title
 * Text
 
-And additionally, it may also have these:
+Additionally, it may include:
 * Buttons
-* Quick reply buttons (they are not part of the card itself and instead are shown below it)
+* Quick reply buttons (not part of the card itself, but are instead shown below it)
 
 More information on each attribute may be found below.
 
@@ -62,7 +72,7 @@ More information on each attribute may be found below.
 
 ## Carousel
 
-This is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.
+This is very similar to a [card](#section/Card), except it's a horizontally scrollable sequence of them, with a few differences and limitations.
 
 More details may be found below.
 
