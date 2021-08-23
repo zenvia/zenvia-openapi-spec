@@ -21,6 +21,7 @@ const webhook: SchemaObject = {
         'DELIVERED',
         'NOT_DELIVERED',
         'READ',
+        'DELETED',
       ],
     },
     description: {
