@@ -5,7 +5,7 @@ Get in touch with Zenvia consultants to create your Google agent (an agent is a 
 Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
-## Limitations
+## RCS limitations
 
 The RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo).
 

@@ -3,7 +3,7 @@ The Instagram channel may be used after it's activation on Zenvia Platform.
 Get in touch with Zenvia consultants to connect your account.
 
 
-## Limitations
+## Instagram limitations
 
 To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 

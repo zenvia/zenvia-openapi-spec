@@ -8,7 +8,7 @@ The voice channel may be used after you connect a voice access token on [Zenvia 
 Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
 
-## Limitations
+## Voice limitations
 
 Supported content types and sizes:
 

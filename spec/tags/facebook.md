@@ -1,7 +1,7 @@
 The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
 
 
-## Limitations
+## Facebook limitations
 
 To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
