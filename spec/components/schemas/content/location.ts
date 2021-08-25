@@ -35,7 +35,7 @@ const location: SchemaObject = {
       },
       url: {
         type: 'string',
-        description: 'URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_',
+        description: 'URL for the website where the location information was downloaded _(WhatsApp restriction: available only on IN direction)_',
         example: 'https://www.zenvia.com',
       },
     },

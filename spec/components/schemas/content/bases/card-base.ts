@@ -7,12 +7,12 @@ const card: SchemaObject = {
   properties: {
     title: {
       type: 'string',
-      description: 'A title in bold shown above the text of the card.',
+      description: 'A title in bold shown above the text of the card',
       example: 'Hello',
     },
     text: {
       type: 'string',
-      description: 'A text to be displayed inside the card.',
+      description: 'A text to be displayed inside the card',
       example: 'This is the best thing you will see today!',
     },
     media: {

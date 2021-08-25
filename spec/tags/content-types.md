@@ -48,12 +48,12 @@ This type of content is used to send location messages represented as a point on
 <SchemaDefinition schemaRef="#/components/schemas/content.location" showWriteOnly="true" />
 
 ## Template
-This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide by are very restrictive.
+This type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template will then submitted for approval. This approval depends solely on WhatsApp and the criteria are strict.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
 ### Submitting a template content for approval
-If you already own a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).
+You may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.
 
 ## Card
 
@@ -66,13 +66,13 @@ Additionally, it may include:
 * Buttons
 * Quick reply buttons (not part of the card itself, but are instead shown below it)
 
-More information on each attribute may be found below.
+More information on each attribute may be found below:
 
 <SchemaDefinition schemaRef="#/components/schemas/content.card" />
 
 ## Carousel
 
-This is very similar to a [card](#section/Card), except it's a horizontally scrollable sequence of them, with a few differences and limitations.
+This type of content displays a horizontally scrollable sequence of cards, with some differences and limitations.
 
 More details may be found below.
 
