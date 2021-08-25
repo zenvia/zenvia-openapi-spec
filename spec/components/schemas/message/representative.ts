@@ -19,13 +19,13 @@ const representative: SchemaObject = {
     name: {
       title: 'Name',
       description: `Representative's name shown on the message.
-                    <br>*Only applicable to [Google Business channel](#tag/Google-Business-Message).*`,
+                    <br>*Only applicable to [Google Business Message channel](#tag/Google-Business-Message).*`,
       type: 'string',
     },
     picture: {
       title: 'Picture',
       description: `URL for the avatar picture of the representative message.
-                    <br>*Only applicable to [Google Business channel](#tag/Google-Business-Message).*`,
+                    <br>*Only applicable to [Google Business Message channel](#tag/Google-Business-Message).*`,
       type: 'string',
     },
 
