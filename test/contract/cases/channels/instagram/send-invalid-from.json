@@ -1,0 +1,24 @@
+{
+  "name": "send invalid 'from' characters length",
+  "request": {
+    "method": "POST",
+    "path": "/channels/instagram/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "text",
+        "text": "some text"
+      }]
+    }
+  },
+  "expectedFail": {
+    "error": "Request has one or more errors => In body => For Content-Type application/json => Invalid value => Did not validate against all schemas => at: 0 > from => String too long. \"SENDER ID xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" (65) above maximum length of 64"
+  }
+}

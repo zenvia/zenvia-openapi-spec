@@ -80,6 +80,10 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('channels/gbm');
   });
 
+  describe('instagram messages', () => {
+    loadTestCases('channels/instagram');
+  });
+
   describe('templates collection', () => {
     loadTestCases('templates');
     describe('template comments', () => {
