@@ -10,8 +10,8 @@ const representative: SchemaObject = {
   properties: {
     type: {
       title: 'Type',
-      description: `Indicates whether the message sender is a *bot* or a *human* agent.
-                    <br>The \`HUMAN\` value must only be used on a **human** agent message.`,
+      description: `Indicates whether the message sender is a *bot* or a *human agent*.
+                    <br>The \`HUMAN\` value must only be used on a **human agent** message.`,
       type: 'string',
       enum: ['BOT', 'HUMAN'],
       default: 'BOT',
