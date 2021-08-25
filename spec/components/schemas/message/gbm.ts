@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/gbm/all';
+import { ref as representativeRef } from './representative';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -18,6 +19,9 @@ const all: SchemaObject = {
           $ref: allContentsRef,
         },
         minItems: 1,
+      },
+      representaive: {
+        $ref: representativeRef,
       },
     },
   }],
