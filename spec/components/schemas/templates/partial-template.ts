@@ -9,7 +9,7 @@ import { ref as examplesSchemaRef } from './template-example';
 
 const partial: SchemaObject = {
   title: 'Template Object',
-  description: 'This is a Template object model.',
+  description: 'This is a Template object model',
   type: 'object',
   properties: {
     locale: {

@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Object',
-  description: 'This is a Message object model.',
+  description: 'This is a Message object model',
   type: 'object',
   properties: {
     from: {

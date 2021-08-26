@@ -6,12 +6,12 @@ const eventBase: SchemaObject = {
   properties: {
     id: {
       title: 'Event Id',
-      description: 'Id of the webhook event. Can be used to identify redeliveries in case of webhook errors.',
+      description: 'ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.',
       type: 'string',
     },
     timestamp: {
       title: 'Event Timestamp',
-      description: 'The timestamp of the webhook event.',
+      description: 'The timestamp of the webhook event',
       type: 'string',
       format: 'date-time',
     },
@@ -24,8 +24,8 @@ const eventBase: SchemaObject = {
       ],
     },
     subscriptionId: {
-      title: 'Webhook Id',
-      description: 'Id of the webhook that caused this event to be delivered.',
+      title: 'Webhook ID',
+      description: 'ID of the webhook that caused this event to be delivered',
       type: 'string',
     },
     channel: {

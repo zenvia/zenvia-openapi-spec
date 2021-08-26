@@ -10,7 +10,7 @@ import { ref as notificationEmailSchemaRef } from './template-notification-email
 
 const template: SchemaObject = {
   title: 'Template Object',
-  description: 'This is a Template object model.',
+  description: 'This is a Template object model',
   type: 'object',
   required: [
     'name',
