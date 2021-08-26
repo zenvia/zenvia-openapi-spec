@@ -1,0 +1,42 @@
+{
+  "name": "send text content with representative info",
+  "request": {
+    "method": "POST",
+    "path": "/channels/gbm/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "text",
+        "text": "some text"
+      }],
+      "representative": {
+        "type": "HUMAN",
+        "name": "AGENT",
+        "picture": "AVATAR_URL"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "text",
+        "text": "some text"
+      }]
+    }
+  }
+}
