@@ -142,9 +142,9 @@
     },
     "/channels/gbm/messages": {
       "post": {
-        "description": "Send a Google Business Message message",
+        "description": "Send a Google Business Messages message",
         "tags": [
-          "Google Business Message"
+          "Google Business Messages"
         ],
         "requestBody": {
           "required": true,
@@ -2078,7 +2078,7 @@
               },
               "fileMimeType": {
                 "type": "string",
-                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/Limitations)",
+                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)",
                 "example": "application/pdf"
               },
               "fileCaption": {
@@ -2978,7 +2978,7 @@
               },
               "fileMimeType": {
                 "type": "string",
-                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/Limitations)",
+                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)",
                 "example": "application/pdf"
               },
               "fileName": {
@@ -3420,6 +3420,9 @@
                   "$ref": "#/components/schemas/content.gbm.all"
                 },
                 "minItems": 1
+              },
+              "representaive": {
+                "$ref": "#/components/schemas/message.representative"
               }
             }
           }
@@ -3442,6 +3445,9 @@
                   "$ref": "#/components/schemas/content.instagram.all"
                 },
                 "minItems": 1
+              },
+              "representaive": {
+                "$ref": "#/components/schemas/message.representative"
               }
             }
           }
@@ -3533,6 +3539,33 @@
           }
         }
       },
+      "message.representative": {
+        "title": "Representative Object",
+        "description": "It provides information about the representative who sent the message.\n                <br>It is mainly meant to be used when a **human agent** is the message's sender.\n                <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "description": "Indicates whether the message sender is a *bot* or a *human agent*.\n                    <br>The `HUMAN` value must only be used on a **human agent** message.",
+            "type": "string",
+            "enum": [
+              "BOT",
+              "HUMAN"
+            ],
+            "default": "BOT"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Representative's name shown on the message.\n                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*",
+            "type": "string"
+          },
+          "picture": {
+            "title": "Picture",
+            "description": "URL for the avatar picture of the representative message.\n                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*",
+            "type": "string"
+          }
+        }
+      },
       "message.sms": {
         "type": "object",
         "allOf": [
@@ -3579,7 +3612,7 @@
       },
       "message.visitor": {
         "title": "Visitor Object",
-        "description": "It provides information about the contact who sent the message.\n                <br>The availability of this information depends on privacy settings of the contact.\n                <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),\n                [Facebook](#tag/Facebook) and [Telegram](#tag/Telegram) channels.*",
+        "description": "It provides information about the contact who sent the message.\n                <br>The availability of this information depends on privacy settings of the contact.\n                <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),\n                [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*",
         "type": "object",
         "properties": {
           "name": {
@@ -4721,31 +4754,31 @@
     },
     {
       "name": "WhatsApp",
-      "description": "The WhatsApp channel may be used after its activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\n* When sending PNG images with a **transparent background**, you can get an unexpected final result due to the image processing performed by WhatsApp in order to convert the image to JPEG.\n\nSupported content types and sizes:\n\n| Media | Content Type | Post-Processing Media Size* |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| sticker | image/webp<br>**Note:** Animated sticker is not supported.  | 100 KB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus<br>**Note:** The base audio/ogg type is not supported. | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Notes:** <ul><li>Only H.264 video codec and AAC audio codec is supported.</li><li>Only videos with a single audio stream are supported.</li></ul> | 16 MB |\n\n*This is the size of the media file after encryption. The maximum file size for media that can be uploaded is 64MB.\n\n## WhatsApp sender and recipient\n\nWhen you send a message to a contact using WhatsApp channel:\n\n* Recipient: is the phone number of the contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The WhatsApp channel may be used after its activation on Zenvia platform.\n\nTo activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## WhatsApp limitations\n\nThe WhatsApp API has some limitations:\n\n* To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.\n\n* Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.\n\n* When sending PNG images with a **transparent background**, you can get an unexpected final result due to the image processing performed by WhatsApp in order to convert the image to JPEG.\n\n<br>\nSupported content types and sizes:\n\n| Media | Content Type | Post-Processing Media Size* |\n|---|---|---|\n| document | Any valid MIME type. | 100&nbsp;MB |\n| image | image/jpeg<br>image/png | 5 MB |\n| sticker | image/webp<br>**Note:** Animated sticker is not supported.  | 100 KB |\n| audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus<br>**Note:** The base audio/ogg type is not supported. | 16 MB |\n| video | video/mp4<br>video/3gpp<br>**Notes:** <ul><li>Only H.264 video codec and AAC audio codec is supported.</li><li>Only videos with a single audio stream are supported.</li></ul> | 16 MB |\n\n*This is the size of the media file after encryption. The maximum file size for media that can be uploaded is 64MB.\n\n## WhatsApp sender and recipient\n\nWhen you send a message to a contact using WhatsApp channel:\n\n* Recipient: is the phone number of the contact\n* Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n* Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)\n* Sender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Facebook",
-      "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## Facebook sender and recipient\n\nWhen you receive a message from a contact from Facebook channel:\n\n* Recipient: is your page id\n* Sender: is the contact id on your page (PSID - page scoped id)\n\nWhen you send some message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).\n\n\n## Facebook limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## Facebook sender and recipient\n\nWhen you receive a message from a contact from Facebook channel:\n\n* Recipient: is your page id\n* Sender: is the contact id on your page (PSID - page scoped id)\n\nWhen you send some message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your page (PSID - page scoped id)\n* Sender: is your page id\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Instagram",
-      "description": "The Instagram channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to connect your account.\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\nThe Instagram API content type and size support for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from instagram channel:\n\n* Recipient: is your instagram account id (this is not your account @)\n* Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n* Sender: is your instagram account id (this is not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Instagram channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to connect your account.\n\n\n## Instagram limitations\n\n* To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n* The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.\n\n<br>\nThe Instagram API content type and size support for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from instagram channel:\n\n* Recipient: is your instagram account id (this is not your account @)\n* Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)\n* Sender: is your instagram account id (this is not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
-      "name": "Google Business Message",
-      "description": "The Google Business Message channel may be used after its activation on Zenvia platform.\n\nTo activate Google Business Message you need to be registered as a partner with Google Business Message and get an account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## Google Business Message sender and recipient\n\nWhen you receive a message from a contact from Google Business Message channel:\n\n* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)\n* Recipient: is the contact id\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id\n* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "name": "Google Business Messages",
+      "description": "The Google Business Messages channel may be used after its activation on Zenvia platform.\n\nTo activate Google Business Messages you need to be registered as a partner with Google Business Messages and get an account information configured on Zenvia platform.\n\n**Get in touch with Zenvia consultants to start your account creation.**\n\n\n## Google Business Messages limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## Google Business Messages sender and recipient\n\nWhen you receive a message from a contact from Google Business Messages channel:\n\n* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)\n* Recipient: is the contact id\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the contact id\n* Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "RCS",
-      "description": "The RCS channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## Limitations\n\nThe RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo).\n\nTo enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.\n\nThe use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.\n\n\n## RCS sender and recipient\n\nWhen you send a message to a contact using RCS channel:\n\nRecipient: is the phone number of the contact\nSender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\nRecipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)\nSender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The RCS channel may be used after it's activation on Zenvia Platform.\n\nGet in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n\n## RCS limitations\n\nThe RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo).\n\nTo enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.\n\nThe use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.\n\n\n## RCS sender and recipient\n\nWhen you send a message to a contact using RCS channel:\n\nRecipient: is the phone number of the contact\nSender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\nRecipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)\nSender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Telegram",
-      "description": "The Telegram can be used after it's activation on Zenvia Platform.\n\nTo activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n\n## Limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/* | 5&nbsp;MB |\n| video | video/* | 20&nbsp;MB |\n| audio | audio/* | 20&nbsp;MB |\n| document | Any other valid MIME type. | 20&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n* Sender: is the conversation id (this is not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the conversation id (this is not the phone number)\n* Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Telegram can be used after it's activation on Zenvia Platform.\n\nTo activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n\n## Telegram limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/* | 5&nbsp;MB |\n| video | video/* | 20&nbsp;MB |\n| audio | audio/* | 20&nbsp;MB |\n| document | Any other valid MIME type. | 20&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n* Sender: is the conversation id (this is not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: is the conversation id (this is not the phone number)\n* Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Voice",
-      "description": "To access  the voice channel, you need to create your account here:\nhttps://voice-app.zenvia.com/painel/signup.php. \n\nAfter creating the account, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/\n\nThe voice channel may be used after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\nWebhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Limitations\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| audio | audio/mp3<br>audio/wav | 5&nbsp;MB |\n\n## Voice sender and recipient\n\nWhen you send a voice message to a contact using Voice channel:\n\n* Recipient: is the phone number of the contact\n* Sender: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)\n\nWhen you receive a voice message from a contact, the sender and recipient are inverted:\n\n* Recipient: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)\n* Sender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.\n"
+      "description": "To access  the voice channel, you need to create your account here:\nhttps://voice-app.zenvia.com/painel/signup.php. \n\nAfter creating the account, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/\n\nThe voice channel may be used after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\nWebhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Voice limitations\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| audio | audio/mp3<br>audio/wav | 5&nbsp;MB |\n\n## Voice sender and recipient\n\nWhen you send a voice message to a contact using Voice channel:\n\n* Recipient: is the phone number of the contact\n* Sender: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)\n\nWhen you receive a voice message from a contact, the sender and recipient are inverted:\n\n* Recipient: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)\n* Sender: is the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.\n"
     },
     {
       "name": "Batches",
@@ -4779,7 +4812,7 @@
         "Instagram",
         "RCS",
         "Telegram",
-        "Google Business Message",
+        "Google Business Messages",
         "Voice",
         "Batches"
       ]
