@@ -32,7 +32,7 @@ Before using this API you need the following:
 You can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.
 
 ## View your Usage Report
-You can also access the Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)
+You can also access Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)
 
 # Getting started with Sandbox
 

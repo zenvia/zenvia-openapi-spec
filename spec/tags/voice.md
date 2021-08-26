@@ -1,9 +1,11 @@
-To access  the voice channel, you need to create your account here:
-https://voice-app.zenvia.com/painel/signup.php. 
+To access the Voice channel, you need to create your account here:
+https://voice-app.zenvia.com/painel/signup.php.
 
-After creating the account, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/
+Once the account is created, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/
 
-The voice channel may be used after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).
+The voice channel will be available for use after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).
+
+**Get in touch with Zenvia consultants to create your account.**
 
 Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
@@ -20,12 +22,12 @@ Supported content types and sizes:
 
 When you send a voice message to a contact using Voice channel:
 
-* Recipient: is the phone number of the contact
-* Sender: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
+* Recipient: the phone number of the contact
+* Sender: the sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials)
 
 When you receive a voice message from a contact, the sender and recipient are inverted:
 
-* Recipient: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
-* Sender: is the phone number of the contact
+* Recipient: the sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials)
+* Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.

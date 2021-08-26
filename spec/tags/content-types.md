@@ -10,7 +10,7 @@ Messaging can be handled through the following channels:
 * Telegram
 * Google Business Message
 
-For each content type covered in the next section, the following table reflects the applicability concerning these channels:
+For each content type covered in the next section, the following table reflects the usability concerning these channels:
 
 | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
 |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
