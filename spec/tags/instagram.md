@@ -3,11 +3,13 @@ The Instagram channel may be used after it's activation on Zenvia Platform.
 Get in touch with Zenvia consultants to connect your account.
 
 
-## Limitations
+## Instagram limitations
 
-To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+* To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
+* The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.
 
+<br>
 The Instagram API content type and size support for sending media:
 
 | Media | Content Type | Media Size |
