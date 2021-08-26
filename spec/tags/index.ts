@@ -32,7 +32,7 @@ const tags: TagObject[] = [{
   name: 'Instagram',
   description: instagramDescription,
 }, {
-  name: 'Google Business Message',
+  name: 'Google Business Messages',
   description: gbmDescription,
 }, {
   name: 'RCS',

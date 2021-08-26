@@ -5,7 +5,7 @@ const representative: SchemaObject = {
   title: 'Representative Object',
   description: `It provides information about the representative who sent the message.
                 <br>It is mainly meant to be used when a **human agent** is the message's sender.
-                <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Message](#tag/Google-Business-Message) channels.*`,
+                <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*`,
   type: 'object',
   properties: {
     type: {
@@ -19,13 +19,13 @@ const representative: SchemaObject = {
     name: {
       title: 'Name',
       description: `Representative's name shown on the message.
-                    <br>*Only applicable to [Google Business Message channel](#tag/Google-Business-Message).*`,
+                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*`,
       type: 'string',
     },
     picture: {
       title: 'Picture',
       description: `URL for the avatar picture of the representative message.
-                    <br>*Only applicable to [Google Business Message channel](#tag/Google-Business-Message).*`,
+                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*`,
       type: 'string',
     },
 

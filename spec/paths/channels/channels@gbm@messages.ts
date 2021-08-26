@@ -5,8 +5,8 @@ import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 
 const post: OperationObject = {
-  description: 'Send a Google Business Message message',
-  tags: ['Google Business Message'],
+  description: 'Send a Google Business Messages message',
+  tags: ['Google Business Messages'],
   requestBody: {
     required: true,
     content: {

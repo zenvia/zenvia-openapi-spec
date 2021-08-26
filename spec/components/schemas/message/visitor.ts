@@ -6,7 +6,7 @@ const visitor: SchemaObject = {
   description: `It provides information about the contact who sent the message.
                 <br>The availability of this information depends on privacy settings of the contact.
                 <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),
-                [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Message](#tag/Google-Business-Message) channels.*`,
+                [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*`,
   type: 'object',
   properties: {
     name: {
