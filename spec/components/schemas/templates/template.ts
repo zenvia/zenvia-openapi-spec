@@ -36,7 +36,7 @@ const template: SchemaObject = {
     },
     channel: {
       title: 'Channel',
-      description: 'Channel for template use. As of this writing, only Whatsapp channel is allowed.',
+      description: 'Channel for template use. Currently, only Whatsapp channel is allowed.',
       type: 'string',
       enum: ['WHATSAPP'],
     },
@@ -59,13 +59,13 @@ const template: SchemaObject = {
     },
     text: {
       title: 'Template text',
-      description: 'This is a text reference for this template. This field is a merge of all content components.',
+      description: 'This is a text reference for this template. This field is a combination of all content components.',
       type: 'string',
       readOnly: true,
     },
     fields: {
       title: 'Fields',
-      description: 'The available fields to be used in this template.',
+      description: 'The available fields to be used in this template',
       type: 'array',
       items: {
         type: 'string',
@@ -75,7 +75,7 @@ const template: SchemaObject = {
     },
     comments: {
       title: 'Comments',
-      description: 'Comments added to the template during the approval process.',
+      description: 'Comments added to the template during the approval process',
       type: 'array',
       readOnly: true,
       items: {
