@@ -2839,7 +2839,7 @@ components:
               items:
                 $ref: '#/components/schemas/content.gbm.all'
               minItems: 1
-            representaive:
+            representative:
               $ref: '#/components/schemas/message.representative'
     message.instagram:
       type: object
@@ -2854,7 +2854,7 @@ components:
               items:
                 $ref: '#/components/schemas/content.instagram.all'
               minItems: 1
-            representaive:
+            representative:
               $ref: '#/components/schemas/message.representative'
     message.rcs:
       type: object

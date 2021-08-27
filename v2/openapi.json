@@ -3421,7 +3421,7 @@
                 },
                 "minItems": 1
               },
-              "representaive": {
+              "representative": {
                 "$ref": "#/components/schemas/message.representative"
               }
             }
@@ -3446,7 +3446,7 @@
                 },
                 "minItems": 1
               },
-              "representaive": {
+              "representative": {
                 "$ref": "#/components/schemas/message.representative"
               }
             }
