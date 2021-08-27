@@ -20,7 +20,7 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
-      representaive: {
+      representative: {
         $ref: representativeRef,
       },
     },
