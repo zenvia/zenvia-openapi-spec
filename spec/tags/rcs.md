@@ -5,7 +5,7 @@ The RCS channel may be used after its activation on [Zenvia platform](https://ap
 Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
-## Limitations
+## RCS limitations
 
 The RCS channel is compatible only with Android smartphones with 8.0 version (Oreo) or above.
 

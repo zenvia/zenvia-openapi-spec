@@ -12,7 +12,7 @@ You can send messages through the following channels:
 * RCS
 * Voice
 * Telegram
-* Google Business Message
+* Google Business Messages
 * Instagram
 
 You can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:

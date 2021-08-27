@@ -36,7 +36,7 @@ const template: SchemaObject = {
     },
     channel: {
       title: 'Channel',
-      description: 'Channel for template use. For now, only WHATSAPP channel is allowed.',
+      description: 'Channel for template use. As of this writing, only Whatsapp channel is allowed.',
       type: 'string',
       enum: ['WHATSAPP'],
     },

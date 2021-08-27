@@ -7,7 +7,7 @@ To activate WhatsApp you a need a registered number on WhatsApp Business API and
 Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
 
-## Limitations
+## WhatsApp limitations
 
 The WhatsApp API has some limitations:
 
@@ -17,6 +17,7 @@ The WhatsApp API has some limitations:
 
 * When sending PNG images with a **transparent background**, you can get an unexpected final result due to the image processing performed by WhatsApp in order to convert the image to JPEG.
 
+<br>
 Supported content types and sizes:
 
 | Media | Content Type | Post-Processing Media Size* |

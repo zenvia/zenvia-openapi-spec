@@ -8,7 +8,7 @@ Messaging can be handled through the following channels:
 * Instagram
 * RCS
 * Telegram
-* Google Business Message
+* Google Business Messages
 
 For each content type covered in the next section, the following table reflects the usability concerning these channels:
 

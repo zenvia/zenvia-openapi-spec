@@ -10,7 +10,7 @@ The voice channel will be available for use after you connect a voice access tok
 Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
 
-## Limitations
+## Voice limitations
 
 Supported content types and sizes:
 
