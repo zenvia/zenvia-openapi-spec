@@ -18,7 +18,7 @@ const carousel: SchemaObject = {
       },
       cardWidth: {
         type: 'string',
-        description: `The card width, which is always smaller than the width of the standalone card. It would be the equivalent of *LARGE* if it were available for use for the cards of the carousel.`,
+        description: 'The card width, which is always smaller than the width of the standalone card. It would be the equivalent of *LARGE* if it were available for use for the cards of the carousel.',
         enum: [
           'SMALL',
           'MEDIUM',

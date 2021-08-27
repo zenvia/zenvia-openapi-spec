@@ -102,24 +102,22 @@ These helper libraries are available on [Node](https://github.com/zenvia/zenvia-
 
 # HTTP Methods
 
-HTTP methods are used to manipulate resources.
-
-As not all resources allow all HTTP operations, see the reference of each resource below.
+HTTP methods are used to manipulate resources. Though, as not all resources allow all HTTP operations, observeOK the reference of each resource below.
 
 Methods used with collection endpoints:
 
 | HTTP Method      | Operation                | Success HTTP status |
 |:-----------------|:-------------------------|:--------------------|
-| GET              | List collection items    | 200 - Ok            |
-| POST             | Create a new item        | 200 - Ok            |
+| GET              | List collection items    | 200 - OK            |
+| POST             | Create a new item        | 200 - OK            |
 
 Methods used with item endpoints:
 
 | HTTP Method      | Operation                    | Success HTTP status |
 |:-----------------|:-----------------------------|:--------------------|
-| GET              | Retrieve one resource item   | 200 - Ok            |
+| GET              | Retrieve one resource item   | 200 - OK            |
 | DELETE           | Delete one resource item     | 204 - No content    |
-| PATCH            | Update one resource item     | 200 - Ok            |
+| PATCH            | Update one resource item     | 200 - OK            |
 
 When an operation is executed successfully, the API will respond with a 2xx status code.
 
@@ -151,10 +149,10 @@ The token needs to be sent with the HTTP header 'X-API-TOKEN'.
 Example:
 ```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
 
-Generate your token on the [API console](https://app.zenvia.com/home/api) inside Zenvia platform's site.
+Generate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
 
 ## JWT
 
 The JWT token is primarily used by front-end applications for user interactions.
 
-For server to server integrations use the [Token](/#section/Authentication/TOKEN) authentication approach.
+For server-to-server integrations use the [token authentication](/#section/Authentication/TOKEN) approach.

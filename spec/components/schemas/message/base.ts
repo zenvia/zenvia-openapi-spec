@@ -9,13 +9,13 @@ const base: SchemaObject = {
   properties: {
     id: {
       title: 'Message ID',
-      description: 'An ID for this message. This can be used for future message consulting or callback notifications.',
+      description: 'An ID for the message. It can be used for future message consulting or callback notifications.',
       type: 'string',
       readOnly: true,
     },
     from: {
       title: 'Sender ID',
-      description: `This is the identifier of sender of this message. The sender is created when an integration for the channel is connected
+      description: `The identifier for the sender of the message. The sender is created when an integration for the channel is connected
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
@@ -23,7 +23,7 @@ const base: SchemaObject = {
     },
     to: {
       title: 'Recipient ID',
-      description: `The identifier of the contact (varies according to the channel) who will receive the message.
+      description: `The identifier for the recipient of the message (varies according to the channel).
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
       maxLength: 64,

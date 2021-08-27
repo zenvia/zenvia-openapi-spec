@@ -28,7 +28,7 @@ const template: SchemaObject = {
     },
     name: {
       title: 'Template name',
-      description: 'The name of this template',
+      description: 'The name of the template',
       type: 'string',
     },
     locale: {
@@ -42,7 +42,7 @@ const template: SchemaObject = {
     },
     senderId: {
       title: 'Sender ID',
-      description: 'This is the identifier of sender for this template. The sender shoud be created with a credential.',
+      description: 'The identifier for the sender of the template. The sender shoud be created with a credential.',
       type: 'string',
     },
     category: {
@@ -59,7 +59,7 @@ const template: SchemaObject = {
     },
     text: {
       title: 'Template text',
-      description: 'This is a text reference for this template. This field is a combination of all content components.',
+      description: 'A text reference for the template. This field encompasses all content components.',
       type: 'string',
       readOnly: true,
     },

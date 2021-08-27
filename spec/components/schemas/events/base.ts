@@ -11,7 +11,7 @@ const eventBase: SchemaObject = {
     },
     timestamp: {
       title: 'Event Timestamp',
-      description: 'The timestamp of the webhook event',
+      description: 'Timestamp of the webhook event',
       type: 'string',
       format: 'date-time',
     },

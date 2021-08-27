@@ -19,7 +19,7 @@ const subscription: SchemaObject = {
           },
           direction: {
             title: 'Message direction',
-            description: 'Indicates if the message is incoming (IN) or outgoing (OUT)',
+            description: 'Indicates whether the message is incoming (IN) or outgoing (OUT)',
             type: 'string',
             enum: [
               'IN',

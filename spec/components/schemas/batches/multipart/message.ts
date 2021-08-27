@@ -9,7 +9,7 @@ const base: SchemaObject = {
   properties: {
     from: {
       title: 'Sender ID',
-      description: 'This is the identifier of sender of this message. The sender shoud be created with a credential.',
+      description: 'The identifier for the sender of the message. The sender shoud be created with a credential.',
       type: 'string',
     },
     contents: {

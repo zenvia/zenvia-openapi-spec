@@ -8,19 +8,19 @@ const error: SchemaObject = {
   properties: {
     code: {
       title: 'Code',
-      description: 'Detail error code.',
+      description: 'Details error code',
       type: 'string',
       readOnly: true,
     },
     path: {
       title: 'Path',
-      description: 'Error path.',
+      description: 'Error path',
       type: 'string',
       readOnly: true,
     },
     message: {
       title: 'Message',
-      description: 'Human readable message.',
+      description: 'Human readable message',
       type: 'string',
       readOnly: true,
     },
