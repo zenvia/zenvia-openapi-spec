@@ -27,4 +27,3 @@ When you receive a message from a contact, the sender and recipient are inverted
 * Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
-
