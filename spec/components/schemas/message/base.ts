@@ -15,7 +15,7 @@ const base: SchemaObject = {
     },
     from: {
       title: 'Sender ID',
-      description: `The identifier for the sender of the message. The sender is created when an integration for the channel is connected
+      description: `The identifier of the sender of the message. The sender is created when an integration for the channel is connected
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
@@ -23,7 +23,7 @@ const base: SchemaObject = {
     },
     to: {
       title: 'Recipient ID',
-      description: `The identifier for the recipient of the message (varies according to the channel).
+      description: `The identifier of the recipient (varies according to the channel) of the message.
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
       maxLength: 64,

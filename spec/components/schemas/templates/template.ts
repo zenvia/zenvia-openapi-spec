@@ -42,7 +42,7 @@ const template: SchemaObject = {
     },
     senderId: {
       title: 'Sender ID',
-      description: 'The identifier for the sender of the template. The sender shoud be created with a credential.',
+      description: 'The identifier of the sender of the template. The sender shoud be created with a credential.',
       type: 'string',
     },
     category: {

@@ -14,12 +14,12 @@ To be able to send messages to a contact, you first need to setup a webhook, whi
 
 When you receive a message from a contact from Google Business Messages channel:
 
-* Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+* Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
 * Recipient: the contact id
 
 When you send a message to a contact, the sender and recipient are inverted:
 
 * Recipient: the contact id
-* Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-message/list)
+* Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

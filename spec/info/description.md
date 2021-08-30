@@ -36,7 +36,7 @@ You can also access Zenvia platform to view your [Usage Report](https://app.zenv
 
 # Getting started with Sandbox
 
-The fastest track to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).
+The fastest way to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).
 
 As you create your new Sandbox, you'll be guided step-by-step in order to start sending and receiving messages using your desired channel.
 
@@ -125,7 +125,7 @@ When an operation is executed successfully, the API will respond with a 2xx stat
 
 When one error occurs, the API will return a 4xx or 5xx HTTP status code and the payload with an Error Object.
 
-The Error Object obeys the follwing schema:
+The error object obeys the follwing schema:
 
 <SchemaDefinition schemaRef="#/components/schemas/error.base" />
 
@@ -142,9 +142,9 @@ Responses error codes are detailed below.
 # Authentication
 
 ## Token
-To use this API you need to send the API token with every request.
+To use this API you need to send the API token in every request.
 
-The token needs to be sent with the HTTP header 'X-API-TOKEN'.
+The token needs to be sent in the HTTP header 'X-API-TOKEN'.
 
 Example:
 ```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
