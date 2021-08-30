@@ -1,6 +1,6 @@
 Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
 
-## MESSAGE events
+## MESSAGE
 
 The event type MESSAGE refers to messages dispatched and/or received in the desired channel.
 
@@ -8,7 +8,7 @@ When you are subscribed to this type of event, your webhook will receive a reque
 
 <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
 
-## MESSAGE_STATUS events
+## MESSAGE_STATUS
 
 The event type MESSAGE_STATUS refers to a status update related to a previously sent message.
 
@@ -24,6 +24,7 @@ The <code>code</code> field may assume the following values:
 * **DELIVERED**: the message sent by your business was delivered to the user's device
 * **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
 * **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.
+* **DELETED**: the message sent by the user was deleted by the user
 <br><br>
 
 ### Description field
@@ -33,11 +34,13 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *READ: "**The message has been read by the recipient.**"*
 * *REJECTED: "**The message was rejected by the provider.**"*
 * *NOT_DELIVERED: "**The provider was unable to deliver the message.**"*
+* *DELETED: "**The message has been deleted by the contact**".*
+
 
 
 ## Zenvia outbound IP addresses
 
-Webhook notifications sent from Zenvia come from any of the following IP addresses:
+Webhook notifications sent from Zenvia come from any of the following ranges of IP addresses:
 
 * 45.233.20.0/24
 * 45.233.22.0/24
@@ -60,8 +63,8 @@ Event retries are handled separately from the initial request. This ensures that
 Multiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:
 * **ACTIVE**: the initial status for every webhook created
 * **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.
-Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.
-This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.
+<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.
+<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.
 * **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.
 Events no longer will be posted on webhooks with an *INACTIVE* status.
 

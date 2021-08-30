@@ -23,11 +23,11 @@ Supported content types and sizes:
 When you send a voice message to a contact using Voice channel:
 
 * Recipient: the phone number of the contact
-* Sender: the sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials)
+* Sender: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)
 
 When you receive a voice message from a contact, the sender and recipient are inverted:
 
-* Recipient: the sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials)
+* Recipient: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)
 * Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.

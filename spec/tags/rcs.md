@@ -11,7 +11,7 @@ The RCS channel is compatible only with Android smartphones with 8.0 version (Or
 
 To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
 
-The usability of RCS channel follows Google's content policies, available through this link: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
+The use of RCS channel follows Google's content policies, available through this link: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
 
 
 ## RCS sender and recipient

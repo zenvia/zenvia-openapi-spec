@@ -1,6 +1,6 @@
 The WhatsApp channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list).
 
-To activate WhatsApp you a need a registered number on WhatsApp Business API and an account enabled on Zenvia platform.
+To activate WhatsApp you a need a registered number on WhatsApp Business API and an account registered on Zenvia platform.
 
 **Get in touch with Zenvia consultants to create your account.**
 
@@ -35,11 +35,11 @@ Supported content types and sizes:
 When you send a message to a contact using WhatsApp channel:
 
 * Recipient: the phone number of the contact
-* Sender: the WhatsApp sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+* Sender: the WhatsApp sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
 When you receive a message from a contact, the sender and recipient are inverted:
 
-* Recipient: the WhatsApp sender id enabled on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+* Recipient: the WhatsApp sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 * Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
