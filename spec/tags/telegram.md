@@ -21,12 +21,12 @@ Supported content types and sizes:
 
 When you receive a message from a contact from Telegram channel:
 
-* Recipient: the Telegram Bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
+* Recipient: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
 * Sender: the conversation id (not the phone number)
 
 When you send a message to a contact, the sender and recipient are inverted:
 
 * Recipient: the conversation id (not the phone number)
-* Sender: the Telegram Bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
+* Sender: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

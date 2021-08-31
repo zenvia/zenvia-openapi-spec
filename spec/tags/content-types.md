@@ -1,18 +1,8 @@
 ## Supported Channels
 
-Messaging can be handled through the following channels:
+For each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:
 
-* SMS
-* WhatsApp
-* Facebook
-* Instagram
-* RCS
-* Telegram
-* Google Business Messages
-
-For each content type covered in the next section, the following table reflects the usability concerning these channels:
-
-| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
+| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| 
 |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
 | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
 | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
@@ -23,6 +13,7 @@ For each content type covered in the next section, the following table reflects 
 | card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 | carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 
+_*GBM stands for Google Business Messages_
 ## Text
 This type of content is the most used one and is composed of plain text.
 

@@ -1,4 +1,4 @@
-The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
+The Facebook channel may be used after you connect a Facebook page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
 
 
 ## Facebook limitations
@@ -10,12 +10,12 @@ To be able to send messages to a contact, you first need to setup a webhook, whi
 
 When you receive a message from a contact from Facebook channel:
 
-* Recipient: your Facebook Page id
-* Sender: the contact id on your Facebook Page (PSID - Page scoped id)
+* Recipient: your Facebook page id
+* Sender: the contact id on your Facebook page (PSID - page scoped id)
 
 When you send some message to a contact, the sender and recipient are inverted:
 
-* Recipient: the contact id on your Facebook Page (PSID - Page scoped id)
-* Sender: your Facebook Page id
+* Recipient: the contact id on your Facebook page (PSID - page scoped id)
+* Sender: your Facebook page id
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.

@@ -4,16 +4,7 @@ This is the reference documentation for the Zenvia *REST-like* API. The API itse
 
 ## Features
 
-You can send messages through the following channels:
-
-* SMS
-* WhatsApp
-* Facebook
-* RCS
-* Voice
-* Telegram
-* Google Business Messages
-* Instagram
+You can send messages through the [Zenvia-supported channels](#section/Supported-Channels).
 
 You can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:
 

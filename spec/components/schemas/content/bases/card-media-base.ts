@@ -6,7 +6,7 @@ const mediaBase: SchemaObject = {
   properties: {
     url: {
       type: 'string',
-      description: `Public URL of media file, which can be an image, a GIF, or a video, and will be displayed inside the card.
+      description: `Public URL of media file, which can be an image, a GIF, or a video. The public URL will be displayed inside the card.
         <br><br>*Videos will display a play button instead of a preview of the content sent.*`,
       example: 'https://zenvia.br/zenvia-team.png',
     },
