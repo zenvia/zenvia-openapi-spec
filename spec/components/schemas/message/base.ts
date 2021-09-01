@@ -4,18 +4,18 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Object',
-  description: 'This is a Message object model.',
+  description: 'This is a Message object model',
   type: 'object',
   properties: {
     id: {
       title: 'Message ID',
-      description: 'An ID for this message. This can be used for future message consulting or callback notifications.',
+      description: 'An ID for the message. It can be used for future message consulting or callback notifications.',
       type: 'string',
       readOnly: true,
     },
     from: {
       title: 'Sender ID',
-      description: `This is the identifier of sender of this message. The sender is created when an integration for the channel is connected
+      description: `The identifier of the sender of the message. The sender is created when an integration for the channel is connected
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
@@ -23,14 +23,14 @@ const base: SchemaObject = {
     },
     to: {
       title: 'Recipient ID',
-      description: `The identifier of the contact (varies according to the channel) who will receive the message.
+      description: `The identifier of the recipient (varies according to the channel) of the message.
         <br>More details on the channel\'s *sender and recipient* section.`,
       type: 'string',
       maxLength: 64,
     },
     direction: {
       title: 'Message direction',
-      description: 'It indicates if message is received from the channel (IN) or is sent to the channel (OUT)',
+      description: 'Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)',
       type: 'string',
       enum: [
         'IN',

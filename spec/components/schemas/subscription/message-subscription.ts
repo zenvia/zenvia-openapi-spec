@@ -19,7 +19,7 @@ const subscription: SchemaObject = {
           },
           direction: {
             title: 'Message direction',
-            description: 'It indicates if message is received from channel (IN) or is sent to channel (OUT)',
+            description: 'Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)',
             type: 'string',
             enum: [
               'IN',

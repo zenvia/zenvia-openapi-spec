@@ -7,7 +7,7 @@ import { ref as columnMapper } from './columnMapper';
 
 const base: SchemaObject = {
   title: 'Batch Object',
-  description: 'This is a Batch object model.',
+  description: 'This is a Batch object model',
   type: 'object',
   allOf: [{
     $ref: baseRef,

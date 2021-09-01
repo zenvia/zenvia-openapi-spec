@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const representative: SchemaObject = {
   title: 'Representative Object',
-  description: `It provides information about the representative who sent the message.
+  description: `Provides information on the representative who sent the message.
                 <br>It is mainly meant to be used when a **human agent** is the message's sender.
                 <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*`,
   type: 'object',
@@ -11,7 +11,7 @@ const representative: SchemaObject = {
     type: {
       title: 'Type',
       description: `Indicates whether the message sender is a *bot* or a *human agent*.
-                    <br>The \`HUMAN\` value must only be used on a **human agent** message.`,
+                    <br>The \`HUMAN\` value must only be used on a message coming from a **human agent**.`,
       type: 'string',
       enum: ['BOT', 'HUMAN'],
       default: 'BOT',

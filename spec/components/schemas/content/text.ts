@@ -19,7 +19,7 @@ const text: SchemaObject = {
         example: 'This is a text.',
       },
       payload: {
-        description: 'Payload of selected button.',
+        description: 'Payload of selected button',
         type: 'string',
         readOnly: true,
       },

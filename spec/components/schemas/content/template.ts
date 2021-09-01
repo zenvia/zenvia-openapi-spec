@@ -20,7 +20,7 @@ const template: SchemaObject = {
       },
       fields: {
         type: 'object',
-        description: 'The available fields to be used in this template.',
+        description: 'The available fields to be used in this template',
         example: {
           user: 'John Smith',
           protocol: '34534252',

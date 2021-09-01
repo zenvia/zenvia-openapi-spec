@@ -4,10 +4,10 @@ import { createComponentRef } from '../../../../utils/ref';
 const referral: SchemaObject = {
   title: 'Referral Object',
   description: `Included in notifications where it is possible to track the source of the message. Examples:
-* When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-* When an user tags the business on their Instagram story.
-* When an user replies to a Instagram story from the business.
-* When an user quotes an message in the Instagram direct conversation.
+* When a user clicks on an ad that redirects to WhatsApp and sends a message to the business
+* When a user tags the business on their Instagram story
+* When a user replies to a Instagram story from the business
+* When a user quotes an message in the Instagram direct conversation
 
 *Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*`,
   type: 'object',
