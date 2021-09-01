@@ -5,52 +5,40 @@ info:
   description: |
     # Overview
 
-    This is the reference documentation for the Zenvia *REST-like* API.
+    This is the reference documentation for the Zenvia *REST-like* API. The API itself is based on resources that are represented by JSON format and are manipulated using the HTTP protocol.
 
-    This API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.
+    ## Features
 
-    ## What you can do with this API
+    You can send messages through the [Zenvia-supported channels](#section/Supported-Channels).
 
-    You can send messages for the following channels:
+    You can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:
 
-    * SMS
-    * WhatsApp
-    * Facebook
-    * RCS
-    * Voice
-    * Telegram
-    * Google Business Message
-    * Instagram
+    * Messages: Receive messages events for outgoing and/or incoming messages.
+    * Messages status: Receive status updates for outgoing messages.
 
-    You can subscribe for some events and receive then in one webhook endpoint.
-    The available events are:
+    ## Pre-requisites
 
-    * Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.
-    * Messages status: You can receive status update for sent messages.
+    Before using this API you need the following:
 
-    ## What you need before start
+    * **Zenvia Account**: create an account on [Zenvia platform's site](https://app.zenvia.com/)
+    * **Integrations**: configure desired channels to send and/or receive messages on the [integrations page](https://app.zenvia.com/home/credentials)
+    * **API Token**: create an API token on the [API console](https://app.zenvia.com/home/api)
+    * **Webhook** (optional): receive messages by subscribing to events using [subscriptions API resources](#tag/Subscriptions)
 
-    Before use this API you need the following prerequisites:
+    You can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.
 
-    * **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)
-    * **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
-    * **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
-    * **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
-
-    You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
-
-    ## How to view your consumption report
-    You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)
+    ## View your Usage Report
+    You can also access Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)
 
     # Getting started with Sandbox
 
-    The fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
+    The fastest way to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).
 
-    When you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.
+    As you create your new Sandbox, you'll be guided step-by-step in order to start sending and receiving messages using your desired channel.
 
-    [Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
+    [Click here and start sending and receiving messages using RCS, WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
-    You are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).
+    You are allowed to send test messages to phone numbers you've connected during a 24-hour period. Following that, you must reconnect your number by sending the keyword once again to continue using the Sandbox's features.
 
     # API versions
 
@@ -59,14 +47,14 @@ info:
     <!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->
     <!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->
 
-    Currently the ZenAPI is on version v2
+    Currently, the ZenAPI is on version v2.
 
     ## v2 (current)
 
     ### 2021-05-24
 
     * Added
-        * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.
+        * Added the referral section that indicates an advertisement was clicked by the user to the [message event](#section/MESSAGE) received by the webhook
 
     ### 2020-10-27
 
@@ -76,14 +64,14 @@ info:
     ### 2020-09-24
 
     * Added
-        * Added message-batches: Api to send messages in batch.
+        * Added message-batches: API to send messages in batch.
 
     ### 2020-09-01
 
     * Breaking Changes
-        * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.
+        * Visitor not sent as a JSON within contents block. Instead, it's sent directly under the message object.
         * Location is no longer used as JSON.
-        * Removed deprecated `channels` attribute from template resource.
+        * Removed deprecated `channels` attribute from the template resource.
 
     ## v1 (deprecated)
 
@@ -100,42 +88,40 @@ info:
 
     * Added
         * Added Subscription section.
-        * Added WhatsApp, SMS and Facebook Channels sections.
+        * Added WhatsApp, SMS, and Facebook Channels sections.
 
     # SDKs
 
-    SDKs make it easy to use our APIs just by including them in your software.
+    Make it simpler to use our API by integrating our SDK into your software.
 
-    These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).
+    These helper libraries are available on [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages and located on our [GitHub](https://github.com/zenvia) page.
 
     # HTTP Methods
 
-    HTTP methods are used for manipulate resources.
-
-    Not all resources have all operations, see the reference of each resource.
+    HTTP methods are used to manipulate resources. Though, as not all resources allow all HTTP operations, observeOK the reference of each resource below.
 
     Methods used with collection endpoints:
 
-    | Http Method      | Operation                | Success HTTP status |
+    | HTTP Method      | Operation                | Success HTTP status |
     |:-----------------|:-------------------------|:--------------------|
-    | GET              | List collection items    | 200 - Ok            |
-    | POST             | Create a new item        | 200 - Ok            |
+    | GET              | List collection items    | 200 - OK            |
+    | POST             | Create a new item        | 200 - OK            |
 
     Methods used with item endpoints:
 
-    | Http Method      | Operation                    | Success HTTP status |
+    | HTTP Method      | Operation                    | Success HTTP status |
     |:-----------------|:-----------------------------|:--------------------|
-    | GET              | Retrieve one resource item   | 200 - Ok            |
+    | GET              | Retrieve one resource item   | 200 - OK            |
     | DELETE           | Delete one resource item     | 204 - No content    |
-    | PATCH            | Update one resource item     | 200 - Ok            |
+    | PATCH            | Update one resource item     | 200 - OK            |
 
-    When one operation is executed successfully, the API will respond with 2xx status code.
+    When an operation is executed successfully, the API will respond with a 2xx status code.
 
     # Error Handling
 
-    When one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.
+    When one error occurs, the API will return a 4xx or 5xx HTTP status code and the payload with an Error Object.
 
-    The error object have the follwing schema:
+    The error object obeys the follwing schema:
 
     <SchemaDefinition schemaRef="#/components/schemas/error.base" />
 
@@ -151,21 +137,21 @@ info:
 
     # Authentication
 
-    ## TOKEN
-    To use this API you need to send the API token in all requests.
+    ## Token
+    To use this API you need to send the API token in every request.
 
-    This TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.
+    The token needs to be sent in the HTTP header 'X-API-TOKEN'.
 
     Example:
     ```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
 
-    You can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.
+    Generate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
 
     ## JWT
 
     The JWT token is primarily used by front-end applications for user interactions.
 
-    For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.
+    For server-to-server integrations use the [token authentication](/#section/Authentication/TOKEN) approach.
   termsOfService: 'https://zenvia.com/'
   contact:
     name: API Support
@@ -1456,7 +1442,7 @@ components:
   schemas:
     batches.base:
       title: Batch Object
-      description: This is a Batch object model.
+      description: This is a Batch object model
       type: object
       properties:
         id:
@@ -1479,7 +1465,7 @@ components:
         - channel
     batches.multipart-batch:
       title: Batch Object
-      description: This is a Batch object model.
+      description: This is a Batch object model
       oneOf:
         - $ref: '#/components/schemas/batches.multipart.batch.sms'
         - $ref: '#/components/schemas/batches.multipart.batch.whatsapp'
@@ -1490,7 +1476,7 @@ components:
           whatsapp: '#/components/schemas/batches.multipart.batch.whatsapp'
     batches.multipart.base:
       title: Batch Object
-      description: This is a Batch object model.
+      description: This is a Batch object model
       type: object
       allOf:
         - $ref: '#/components/schemas/batches.base'
@@ -1539,7 +1525,7 @@ components:
                         template: '#/components/schemas/batches.multipart.content.template'
     batches.multipart.columnMapper:
       title: Column Mapper
-      description: The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required because the column of the file that has the recipient`s contact number must be related to this variable.
+      description: The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required so the values below it indicate that they are a recipient's contact number.
       type: object
       example:
         recipient_header_name: recipient_number_column
@@ -1555,12 +1541,12 @@ components:
         - recipient_header_name
     batches.multipart.message:
       title: Message Object
-      description: This is a Message object model.
+      description: This is a Message object model
       type: object
       properties:
         from:
           title: Sender ID
-          description: This is the identifier of sender of this message. The sender shoud be created with a credential.
+          description: The identifier of the sender of the message. The sender shoud be created with a credential.
           type: string
         contents:
           title: Message Contents
@@ -1632,11 +1618,11 @@ components:
               type: string
               example: '5510999999999'
             recordAudio:
-              description: To record the call
+              description: Record the call
               type: boolean
               example: true
             hangUpOnVoiceMail:
-              description: End the call on voice mail
+              description: End the call on voicemail
               type: boolean
               example: true
           required:
@@ -1680,15 +1666,13 @@ components:
               example: carousel
             cardWidth:
               type: string
-              description: |-
-                Card width, which is always smaller than the width of the standalone card,
-                          which would be the equivalent of *LARGE* if it were available for use for the cards of the carosel.
+              description: 'The card width, which is always smaller than the width of the standalone card. The standard card width would be the equivalent of *LARGE* if it were available for use for the cards of the carousel.'
               enum:
                 - SMALL
                 - MEDIUM
               default: MEDIUM
             cards:
-              description: The sequence of cards to be shown in the carousel.
+              description: The sequence of cards to be shown in the carousel
               type: array
               minItems: 1
               maxItems: 10
@@ -1915,7 +1899,7 @@ components:
               example: file
             fileUrl:
               type: string
-              description: The URL of the file to be sent.
+              description: URL of the file to be sent
               example: 'https://example.com/document.pdf'
             fileMimeType:
               type: string
@@ -1973,7 +1957,7 @@ components:
               example: Home Address
             url:
               type: string
-              description: 'URL for the website where the location information was downloaded. _(WhatsApp restriction: available only on IN direction)_'
+              description: 'URL for the website where the location information was downloaded _(WhatsApp restriction: available only on IN direction)_'
               example: 'https://www.zenvia.com'
           required:
             - type
@@ -1994,7 +1978,7 @@ components:
               example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             fields:
               type: object
-              description: The available fields to be used in this template.
+              description: The available fields to be used in this template
               example:
                 user: John Smith
                 protocol: '34534252'
@@ -2015,7 +1999,7 @@ components:
               type: string
               example: This is a text.
             payload:
-              description: Payload of selected button.
+              description: Payload of selected button
               type: string
               readOnly: true
           required:
@@ -2089,7 +2073,7 @@ components:
       type: array
       title: Buttons
       description: |-
-        Vertical list of buttons displayed inside a card. These will *not* fade away once one is clicked.
+        Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.
             <br><br>*A maximum of 4 buttons is supported by RCS channel, but they might not be shown if they do not fit in the available space.*
       maxItems: 4
       items:
@@ -2099,11 +2083,11 @@ components:
       properties:
         title:
           type: string
-          description: A title in bold shown above the text of the card.
+          description: A title in bold shown above the text of the card
           example: Hello
         text:
           type: string
-          description: A text to be displayed inside the card.
+          description: A text to be displayed inside the card
           example: This is the best thing you will see today!
         media:
           type: object
@@ -2115,16 +2099,16 @@ components:
         url:
           type: string
           description: |-
-            Public URL of media file, which can be an image, a GIF or a video, which will be diplayed in the card.
-                    <br><br>*Videos will display a play button instead of a preview of the content.*
+            Public URL of media file, which can be an image, a GIF, or a video. The public URL will be displayed inside the card.
+                    <br><br>*Videos will display a play button instead of a preview of the content sent.*
           example: 'https://zenvia.br/zenvia-team.png'
         disposition:
           type: string
-          description: 'Controls where in the card the media will be shown, and some values also influence the media height.'
+          description: Defines the position that the media will be shown inside the card. Some of the values influence the media height.
           default: ON_THE_TOP_SHORT_HEIGHT
         caption:
           type: string
-          description: 'Media content description, used by screen readers to help users with disability to understand the context.'
+          description: Media content description used by screen readers to aid users with disability understand the context
           example: Zenvia's team picture
       required:
         - url
@@ -2165,11 +2149,11 @@ components:
           type: string
         text:
           type: string
-          description: Text to be displayed inside the button.
+          description: Text to be displayed inside the button
           example: Click me!
         payload:
           type: string
-          description: 'Content to be sent back as a message event when the user clicks on the button. By default, the text of the button will be used as payload.'
+          description: 'Content to be sent back as a message event when the user clicks the button. By default, the text of the button will be used as payload.'
           example: clicked
     content.bases.buttons.calendar-event:
       type: object
@@ -2554,7 +2538,7 @@ components:
             - text
     error.base:
       title: Error Object
-      description: This is a Error object model.
+      description: This is a Error object model
       type: object
       properties:
         code:
@@ -2586,17 +2570,17 @@ components:
       properties:
         code:
           title: Code
-          description: Detail error code.
+          description: Details error code
           type: string
           readOnly: true
         path:
           title: Path
-          description: Error path.
+          description: Error path
           type: string
           readOnly: true
         message:
           title: Message
-          description: Human readable message.
+          description: Human readable message
           type: string
           readOnly: true
       required:
@@ -2616,11 +2600,11 @@ components:
       properties:
         id:
           title: Event Id
-          description: Id of the webhook event. Can be used to identify redeliveries in case of webhook errors.
+          description: ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.
           type: string
         timestamp:
           title: Event Timestamp
-          description: The timestamp of the webhook event.
+          description: Timestamp of the webhook event
           type: string
           format: date-time
         type:
@@ -2630,8 +2614,8 @@ components:
             - MESSAGE
             - MESSAGE_STATUS
         subscriptionId:
-          title: Webhook Id
-          description: Id of the webhook that caused this event to be delivered.
+          title: Webhook ID
+          description: ID of the webhook that caused this event to be delivered
           type: string
         channel:
           title: Message Channel
@@ -2667,7 +2651,7 @@ components:
             direction:
               title: Message Direction
               description: |-
-                Indicates if the message is received from a channel (IN) or sent to a channel (OUT).
+                Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)
                 > **Note:** The **OUT** direction is under construction.
               type: string
               enum:
@@ -2690,11 +2674,11 @@ components:
               example: MESSAGE_STATUS
             messageId:
               title: Message ID
-              description: The ID of the message whose status is being delivered.
+              description: ID of the message whose status is being delivered
               type: string
             contentIndex:
               title: Content Index
-              description: Index of content that is receiving the status update.
+              description: Index of content that is receiving the status update
               type: number
             messageStatus:
               $ref: '#/components/schemas/events.message-status'
@@ -2749,25 +2733,25 @@ components:
               minItems: 1
             idRef:
               description: |-
-                When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
-                                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.
+                When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
+                                      On [SMS channel](#tag/SMS), this is the ID of the last message sent to the contact.
                                       <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram) and [SMS](#tag/SMS) channels.*
               type: string
               readOnly: true
     message.base:
       title: Message Object
-      description: This is a Message object model.
+      description: This is a Message object model
       type: object
       properties:
         id:
           title: Message ID
-          description: An ID for this message. This can be used for future message consulting or callback notifications.
+          description: An ID for the message. It can be used for future message consulting or callback notifications.
           type: string
           readOnly: true
         from:
           title: Sender ID
           description: |-
-            This is the identifier of sender of this message. The sender is created when an integration for the channel is connected
+            The identifier of the sender of the message. The sender is created when an integration for the channel is connected
                     on the [integrations console](https://app.zenvia.com/home/credentials).
                     <br>More details on the channel's *sender and recipient* section.
           type: string
@@ -2775,13 +2759,13 @@ components:
         to:
           title: Recipient ID
           description: |-
-            The identifier of the contact (varies according to the channel) who will receive the message.
+            The identifier of the recipient (varies according to the channel) of the message.
                     <br>More details on the channel's *sender and recipient* section.
           type: string
           maxLength: 64
         direction:
           title: Message direction
-          description: It indicates if message is received from the channel (IN) or is sent to the channel (OUT)
+          description: Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)
           type: string
           enum:
             - IN
@@ -2873,10 +2857,10 @@ components:
       title: Referral Object
       description: |-
         Included in notifications where it is possible to track the source of the message. Examples:
-        * When an user clicks on an ad that redirects to WhatsApp and sends a message to the business.
-        * When an user tags the business on their Instagram story.
-        * When an user replies to a Instagram story from the business.
-        * When an user quotes an message in the Instagram direct conversation.
+        * When a user clicks on an ad that redirects to WhatsApp and sends a message to the business
+        * When a user tags the business on their Instagram story
+        * When a user replies to a Instagram story from the business
+        * When a user quotes an message in the Instagram direct conversation
 
         *Only applicable to [WhatsApp](#tag/WhatsApp) and [Instagram](#tag/Instagram) channels.*
       type: object
@@ -2940,7 +2924,7 @@ components:
     message.representative:
       title: Representative Object
       description: |-
-        It provides information about the representative who sent the message.
+        Provides information on the representative who sent the message.
                         <br>It is mainly meant to be used when a **human agent** is the message's sender.
                         <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
       type: object
@@ -2949,7 +2933,7 @@ components:
           title: Type
           description: |-
             Indicates whether the message sender is a *bot* or a *human agent*.
-                                <br>The `HUMAN` value must only be used on a **human agent** message.
+                                <br>The `HUMAN` value must only be used on a message coming from a **human agent**.
           type: string
           enum:
             - BOT
@@ -3063,27 +3047,27 @@ components:
       properties:
         flowId:
           title: Flow ID
-          description: The flow identifier.
+          description: The flow identifier
           type: string
         dispatchId:
           title: Dispatch ID
-          description: The dispatch identifier.
+          description: The dispatch identifier
           type: string
         sessionId:
           title: Session ID
-          description: 'This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.'
+          description: 'An ID that represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.'
           type: string
         firstEventTimestamp:
           title: First event timestamp
-          description: Time of the first event with the client.
+          description: Time of the first event with the client
           type: string
         lastEventTimestamp:
           title: Last event timestamp
-          description: Time of the last event with the client.
+          description: Time of the last event with the client
           type: string
         variables:
           title: Objects of varibles
-          description: Object where session variables are saved.
+          description: Object where session variables are saved
           type: object
     reports.message.entry.base:
       title: Entry object for Message Report
@@ -3192,7 +3176,7 @@ components:
                   $ref: '#/components/schemas/message.channel'
                 direction:
                   title: Message direction
-                  description: It indicates if message is received from channel (IN) or is sent to channel (OUT)
+                  description: Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)
                   type: string
                   enum:
                     - IN
@@ -3227,7 +3211,7 @@ components:
           type: object
     templates.partial-template:
       title: Template Object
-      description: This is a Template object model.
+      description: This is a Template object model
       type: object
       properties:
         locale:
@@ -3297,10 +3281,10 @@ components:
       title: Examples
       description: |-
         Provides an example of possible model data. This helps during the review and approval process so that Facebook can understand what
-                        kind of messages you plan to send. Make sure they are examples and do not include personal or confidential information.
-                        If you decide to include variables and examples, provide them in the same number.
-                        <br>If you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
-                        being assigned the example url.
+                        kind of messages you plan to send. Ensure these are examples and do not include personal or confidential information.
+                        In case you decide to include variables and examples, provide them with the same number.
+                        <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
+                        being assigned the example URL.
       type: object
       example:
         imageUrl: 'https://example.com/image.jpeg'
@@ -3380,11 +3364,11 @@ components:
         - zu
     templates.template-notification-email:
       title: Notification e-mail
-      description: E-mail list (comma-separated) to send notifications about the message template approving process.
+      description: E-mail list (comma-separated) to send notifications about the message template approving process
       type: string
     templates.template:
       title: Template Object
-      description: This is a Template object model.
+      description: This is a Template object model
       type: object
       required:
         - name
@@ -3400,19 +3384,19 @@ components:
           readOnly: true
         name:
           title: Template name
-          description: The name of this template
+          description: The name of the template
           type: string
         locale:
           $ref: '#/components/schemas/templates.template-locale'
         channel:
           title: Channel
-          description: 'Channel for template use. For now, only WHATSAPP channel is allowed.'
+          description: 'Channel for template use. Currently, only Whatsapp channel is allowed.'
           type: string
           enum:
             - WHATSAPP
         senderId:
           title: Sender ID
-          description: This is the identifier of sender for this template. The sender shoud be created with a credential.
+          description: The identifier of the sender of the template. The sender shoud be created with a credential.
           type: string
         category:
           $ref: '#/components/schemas/templates.template-category'
@@ -3424,12 +3408,12 @@ components:
           $ref: '#/components/schemas/templates.template-notification-email'
         text:
           title: Template text
-          description: This is a text reference for this template. This field is a merge of all content components.
+          description: A text reference for the template. This field encompasses all content components.
           type: string
           readOnly: true
         fields:
           title: Fields
-          description: The available fields to be used in this template.
+          description: The available fields to be used in this template
           type: array
           items:
             type: string
@@ -3437,7 +3421,7 @@ components:
           readOnly: true
         comments:
           title: Comments
-          description: Comments added to the template during the approval process.
+          description: Comments added to the template during the approval process
           type: array
           readOnly: true
           items:
@@ -3678,28 +3662,28 @@ components:
       name: subscriptionId
       in: path
       required: true
-      description: the subscription identifier
+      description: The subscription identifier
       schema:
         type: string
     templateCommentId:
       name: templateCommentId
       in: path
       required: true
-      description: the comment identifier.
+      description: The comment identifier
       schema:
         type: string
     templateId:
       name: templateId
       in: path
       required: true
-      description: 'the template identifier. Click <a href="https://app.zenvia.com/home/templates">here</a>.'
+      description: 'The <a href="https://app.zenvia.com/home/templates">template identifier</a>'
       schema:
         type: string
     reports.flow.dispatchId:
       name: dispatchId
       in: query
       required: false
-      description: This is the ID generated at the time of dispatch.
+      description: The ID generated at the time of the dispatch
       schema:
         title: Dispatch ID
         type: string
@@ -3707,7 +3691,7 @@ components:
       name: endDate
       in: query
       required: false
-      description: The end of the period to query entries.
+      description: The end date for query entries
       schema:
         type: string
         format: date
@@ -3715,7 +3699,7 @@ components:
       name: flowId
       in: query
       required: false
-      description: 'This is the flow identifier. You can view your <a href="https://app.zenvia.com/home/chatbot" target="_blank"> Flow IDs here.</a>'
+      description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/home/chatbot" target="_blank"> Flow IDs here.</a>'
       schema:
         title: Flow ID
         type: string
@@ -3723,7 +3707,7 @@ components:
       name: sessionId
       in: query
       required: false
-      description: 'This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.'
+      description: 'An ID that represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.'
       schema:
         title: Session ID
         type: string
@@ -3731,7 +3715,7 @@ components:
       name: startDate
       in: query
       required: true
-      description: The start of the period to query entries.
+      description: The start date for query entries
       schema:
         type: string
         format: date
@@ -3739,14 +3723,14 @@ components:
       name: channels
       in: query
       required: false
-      description: A comma-separated list of the channels identifier.
+      description: A comma-separated list of the channels identifier
       schema:
         type: string
     reports.message.endDate:
       name: endDate
       in: query
       required: true
-      description: The end of the period to query entries.
+      description: The end date for query entries
       schema:
         type: string
         format: date
@@ -3754,7 +3738,7 @@ components:
       name: startDate
       in: query
       required: true
-      description: The start of the period to query entries.
+      description: The start date for query entries
       schema:
         type: string
         format: date
@@ -3762,7 +3746,7 @@ components:
       name: type
       in: query
       required: false
-      description: The type of the messages.
+      description: The type of the messages
       schema:
         type: string
         enum:
@@ -3834,9 +3818,9 @@ tags:
     description: |
       ## Supported Channels
 
-      Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+      For each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:
 
-      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
+      | Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| 
       |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
       | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
       | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
@@ -3847,6 +3831,7 @@ tags:
       | card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
       | carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 
+      _*GBM stands for Google Business Messages_
       ## Text
       This type of content is the most used one and is composed of plain text.
 
@@ -3872,31 +3857,31 @@ tags:
       <SchemaDefinition schemaRef="#/components/schemas/content.location" showWriteOnly="true" />
 
       ## Template
-      This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.
+      This type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
       ### Submitting a template content for approval
-      If you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).
+      You may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.
 
       ## Card
 
-      This is a rich content composed of *at least one* of these components (none of them are mandatory):
+      This type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):
       * Media
       * Title
       * Text
 
-      And additionally, it may also have these:
+      Additionally, it may include:
       * Buttons
-      * Quick reply buttons (they are not part of the card itself and instead are shown below it)
+      * Quick reply buttons (not part of the card itself, but are instead shown below it)
 
-      More information on each attribute may be found below.
+      More information on each attribute may be found below:
 
       <SchemaDefinition schemaRef="#/components/schemas/content.card" />
 
       ## Carousel
 
-      This is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.
+      This type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.
 
       More details may be found below.
 
@@ -3914,28 +3899,30 @@ tags:
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
       <br/>
 
+      **Get in touch with Zenvia consultants to create your account.**
+
       Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       ## SMS sender and recipient
 
       When you send a message to a contact using SMS channel:
 
-      * Recipient: is the complete phone number (including country code) of the contact.
-      * Sender: is the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      * Recipient: the complete phone number (including country code) of the contact.
+      * Sender: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
 
       When you receive a message from a contact, the sender and recipient are inverted:
 
-      * Recipient: is the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
-      * Sender: is the complete phone number (including country code) of the contact.
+      * Recipient: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      * Sender: the complete phone number (including country code) of the contact.
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: WhatsApp
     description: |
-      The WhatsApp channel may be used after its activation on Zenvia platform.
+      The WhatsApp channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list).
 
-      To activate WhatsApp you a need a registered number on WhatsApp Business API and account information configured on Zenvia platform.
+      To activate WhatsApp you a need a registered number on WhatsApp Business API and an account registered on Zenvia platform.
 
-      **Get in touch with Zenvia consultants to start your account creation.**
+      **Get in touch with Zenvia consultants to create your account.**
 
       Webhooks allow you to receive events in the configured URL. [Learn more here.](#tag/Webhooks)
 
@@ -3944,9 +3931,9 @@ tags:
 
       The WhatsApp API has some limitations:
 
-      * To start a conversation with someone you need a special type of message ([a template message](#section/Template)), which needs an approval before being used.
+      * To start a conversation with someone you need a specific type of message caled [a template message](#section/Template), which requires approval before being used.
 
-      * Messages not being as template content type, can only be delivered on the 24 hours after the last sent message by the client to the company.
+      * Messages not being as template content type, can only be delivered inside a 24-hour window since the last sent message by the client to the company.
 
       * When sending PNG images with a **transparent background**, you can get an unexpected final result due to the image processing performed by WhatsApp in order to convert the image to JPEG.
 
@@ -3961,59 +3948,58 @@ tags:
       | audio | audio/acc<br>audio/mp4<br>audio/amr<br>audio/mpeg<br>audio/ogg; codecs=opus<br>**Note:** The base audio/ogg type is not supported. | 16 MB |
       | video | video/mp4<br>video/3gpp<br>**Notes:** <ul><li>Only H.264 video codec and AAC audio codec is supported.</li><li>Only videos with a single audio stream are supported.</li></ul> | 16 MB |
 
-      *This is the size of the media file after encryption. The maximum file size for media that can be uploaded is 64MB.
+      *The size of the media file after encryption. The maximum file size for media that can be uploaded is 64MB.
 
       ## WhatsApp sender and recipient
 
       When you send a message to a contact using WhatsApp channel:
 
-      * Recipient: is the phone number of the contact
-      * Sender: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+      * Recipient: the phone number of the contact
+      * Sender: the WhatsApp sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
 
       When you receive a message from a contact, the sender and recipient are inverted:
 
-      * Recipient: is the WhatsApp sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
-      * Sender: is the phone number of the contact
+      * Recipient: the WhatsApp sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials/whatsapp/list)
+      * Sender: the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Facebook
     description: |
-      The Facebook channel may be used after you connect a Facebook Page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
+      The Facebook channel may be used after you connect a Facebook page on [Zenvia platform](https://app.zenvia.com/home/credentials/facebook/list).
 
 
       ## Facebook limitations
 
-      To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+      To be able to send messages to a contact, you first need to setup a webhook, which will allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
       ## Facebook sender and recipient
 
       When you receive a message from a contact from Facebook channel:
 
-      * Recipient: is your page id
-      * Sender: is the contact id on your page (PSID - page scoped id)
+      * Recipient: your Facebook page id
+      * Sender: the contact id on your Facebook page (PSID - page scoped id)
 
       When you send some message to a contact, the sender and recipient are inverted:
 
-      * Recipient: is the contact id on your page (PSID - page scoped id)
-      * Sender: is your page id
+      * Recipient: the contact id on your Facebook page (PSID - page scoped id)
+      * Sender: your Facebook page id
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Instagram
     description: |
-      The Instagram channel may be used after it's activation on Zenvia Platform.
+      The Instagram channel may be used after its activation on Zenvia Platform.
 
-      Get in touch with Zenvia consultants to connect your account.
+      **Get in touch with Zenvia consultants to connect your account.**
 
 
       ## Instagram limitations
 
-      * To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+      To be able to send messages to a contact, you first need to setup a webhook, which will allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
       * The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.
 
-      <br>
-      The Instagram API content type and size support for sending media:
+      The Instagram API content type and size limitations for sending media:
 
       | Media | Content Type | Media Size |
       |---|---|---|
@@ -4025,24 +4011,24 @@ tags:
 
       ## Instagram sender and recipient
 
-      When you receive a message from a contact from instagram channel:
+      When you receive a message from a contact from Instagram channel:
 
-      * Recipient: is your instagram account id (this is not your account @)
-      * Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)
+      * Recipient: your Instagram account id (not your account @)
+      * Sender: the contact id on your account (not the contact @ and it will differ across accounts)
 
       When you send a message to a contact, the sender and recipient are inverted:
 
-      * Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)
-      * Sender: is your instagram account id (this is not your account @)
+      * Recipient: the contact id on your account (not the contact @ and it will differ across accounts)
+      * Sender: your Instagram account id (not your account @)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Google Business Messages
     description: |
-      The Google Business Messages channel may be used after its activation on Zenvia platform.
+      The Google Business Messages channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list).
 
       To activate Google Business Messages you need to be registered as a partner with Google Business Messages and get an account information configured on Zenvia platform.
 
-      **Get in touch with Zenvia consultants to start your account creation.**
+      **Get in touch with Zenvia consultants to create your account.**
 
 
       ## Google Business Messages limitations
@@ -4054,31 +4040,31 @@ tags:
 
       When you receive a message from a contact from Google Business Messages channel:
 
-      * Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
-      * Recipient: is the contact id
+      * Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
+      * Recipient: the contact id
 
       When you send a message to a contact, the sender and recipient are inverted:
 
-      * Recipient: is the contact id
-      * Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
+      * Recipient: the contact id
+      * Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/google-business-messages/list)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: RCS
     description: |
-      The RCS channel may be used after it's activation on Zenvia Platform.
+      The RCS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list).
 
-      Get in touch with Zenvia consultants to create your Google agent (an agent is a conversational entity that interacts with users by sending messages and reacting to users' responses).
+      **Get in touch with Zenvia consultants to create your Google agent (a conversational entity that interacts with users by sending messages and reacting to users' responses).**
 
       Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
 
       ## RCS limitations
 
-      The RCS channel is compatible only with smartphones Android, from 8.0 version (Oreo).
+      The RCS channel is compatible only with Android smartphones with 8.0 version (Oreo) or above.
 
       To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
 
-      The use of RCS channel follows the Google content policies, available here: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
+      The use of RCS channel follows Google's content policies, available through this link: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
 
 
       ## RCS sender and recipient
@@ -4096,9 +4082,9 @@ tags:
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Telegram
     description: |
-      The Telegram can be used after it's activation on Zenvia Platform.
+      The Telegram can be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
 
-      To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
+      **To activate Telegram you a need a registered Bot account on Telegram Bot API and an account enabled on Zenvia platform.**
 
 
       ## Telegram limitations
@@ -4119,23 +4105,25 @@ tags:
 
       When you receive a message from a contact from Telegram channel:
 
-      * Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
-      * Sender: is the conversation id (this is not the phone number)
+      * Recipient: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
+      * Sender: the conversation id (not the phone number)
 
       When you send a message to a contact, the sender and recipient are inverted:
 
-      * Recipient: is the conversation id (this is not the phone number)
-      * Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+      * Recipient: the conversation id (not the phone number)
+      * Sender: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Voice
     description: |
-      To access  the voice channel, you need to create your account here:
-      https://voice-app.zenvia.com/painel/signup.php. 
+      To access the Voice channel, you need to create your account here:
+      https://voice-app.zenvia.com/painel/signup.php.
 
-      After creating the account, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/
+      Once the account is created, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/
 
-      The voice channel may be used after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).
+      The voice channel will be available for use after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).
+
+      **Get in touch with Zenvia consultants to create your account.**
 
       Webhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)
 
@@ -4152,76 +4140,74 @@ tags:
 
       When you send a voice message to a contact using Voice channel:
 
-      * Recipient: is the phone number of the contact
-      * Sender: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
+      * Recipient: the phone number of the contact
+      * Sender: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)
 
       When you receive a voice message from a contact, the sender and recipient are inverted:
 
-      * Recipient: is the sender id configured on [Zenvia platform](https://app.zenvia.com/home/credentials)
-      * Sender: is the phone number of the contact
+      * Recipient: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)
+      * Sender: the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.
   - name: Batches
     description: |
-      The batch api makes it possible to send a message with one or more contents to multiple contacts at once.
-      <br/><br/>
-      The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).
-      Supported channels are **SMS** and **WhatsApp**.
+      The batch API makes it possible to send a message with one or more contents to multiple contacts at once. The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).
+
+      The supported channels are SMS and WhatsApp.
 
       | Content Type | SMS | WhatsApp |
       |---|:---:|:---:|
       | text | &#10004; | &#10005; |
       | template | &#10005; | &#10004; |
 
-      > To send batch with WhatsApp channel you must have a template message, which needs an approval before being used.
-
-      <br/>
+      > To send batch through WhatsApp channel, you must have a template message, which needs an approval before being used.
 
       ### What you need to know about the contacts file
 
       * The file must be in **.csv** format;
       * The maximum file size is **50MB**;
       * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
-      * The first line of the file is dedicated to the header. There must be a column that has the recipients' phone numbers. If your content has variables, there must be corresponding columns.
+      * The first line of the file is dedicated to the header. There must be a column that contains the recipients' phone numbers. If your content has variables, there must be corresponding columns.
   - name: Webhooks
     description: |
-      Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**:
+      Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
 
       ## MESSAGE
 
       The event type MESSAGE refers to messages dispatched and/or received in the desired channel.
 
-      When you are subscribed in this type of event, your webhook will receive a request with the schema as follows:
+      When you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
 
       <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
 
       ## MESSAGE_STATUS
 
-      The event type MESSAGE_STATUS refers to a status update related to a prior sent message.
+      The event type MESSAGE_STATUS refers to a status update related to a previously sent message.
 
-      If you are subscribed in this type of event, your webhook will receive a request with the schema as follows:
+      If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
 
       <SchemaDefinition schemaRef="#/components/schemas/events.message-status-event" />
       <br>
 
       ### Code field
       The <code>code</code> field may assume the following values:
-      * **SENT**: The message sent by your business was received by the provider's server.
-      * **REJECTED**: The message sent by your business failed to be sent to the provider's server.
-      * **DELIVERED**: The message sent by your business was delivered to the user's device.
-      * **NOT_DELIVERED**: The message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
-      * **READ**: The message sent by your business was read by the user. This status might not be sent, since it depends on the channel and on the user's device configuration.
-      * **DELETED**: The message sent by the user was deleted by the user.
+      * **SENT**: the message sent by your business was received by the provider's server
+      * **REJECTED**: the message sent by your business has failed to be sent to the provider's server
+      * **DELIVERED**: the message sent by your business was delivered to the user's device
+      * **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
+      * **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.
+      * **DELETED**: the message sent by the user was deleted by the user
       <br><br>
 
       ### Description field
       The <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:
-      * *SENT: "**The message has been forwarded to the provider**".*
-      * *DELIVERED: "**The message has been delivered by the provider**".*
-      * *READ: "**The message has been read by the recipient**".*
-      * *REJECTED: "**The message was rejected by the provider**".*
-      * *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
+      * *SENT: "**The message has been forwarded to the provider.**"*
+      * *DELIVERED: "**The message has been delivered by the provider.**"*
+      * *READ: "**The message has been read by the recipient.**"*
+      * *REJECTED: "**The message was rejected by the provider.**"*
+      * *NOT_DELIVERED: "**The provider was unable to deliver the message.**"*
       * *DELETED: "**The message has been deleted by the contact**".*
+
 
 
       ## Zenvia outbound IP addresses
@@ -4236,69 +4222,69 @@ tags:
       ## Webhook request error handling
       As described before, webhooks allow you to receive events in your application.
 
-      However, if a webhook request fails, a retry procedure begins. This procedure consists of the following rules:
-      * There will be at least 30 seconds between each request attempt for the same event.
-      * There will be at most 30 request attempts for the same event.
+      However, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules
+      * There will be at least 30 seconds between each request attempt for the same event
+      * There will be at most 30 request attempts for the same event
 
-      This means a single event may be retried for around 15 minutes. After this the event will no longer be available.
+      This means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.
 
-      Event retries are handled separately from the initial request. This ensures webhooks without request fails are not penalized by webhooks with many request fails.
+      Event retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.
       <br/><br/>
 
       ### Webhook (quality) status handling
       Multiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:
-      * **ACTIVE**: This is the initial status for every webhook created.
-      * **DEGRADED**: After a set of rules is met, an *ACTIVE* webhook will be demoted to *DEGRADED*.
+      * **ACTIVE**: the initial status for every webhook created
+      * **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.
       <br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.
-      <br>This is to ensure high quality webhooks are not penalized by the handling of low quality webhooks.
-      * **INACTIVE**: After another set of rules is met, a *DEGRADED* webhook will be demoted to *INACTIVE*.
-      Events no longer will be posted on webhooks with *INACTIVE* status.
+      <br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.
+      * **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.
+      Events no longer will be posted on webhooks with an *INACTIVE* status.
 
-      The rules which trigger status changes are the following:
-      * 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.
+      The criteria which trigger status changes consist of the following:
+      * 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*
       * 500 consecutive request fails will result in demotion to *INACTIVE*.
-        * Responses slower than *1 second* also count as a fail and may result in status demotion.
-          * Only slow responses on the initial request count as a fail.
+        * Responses slower than *1 second* also count as a fail and may result in status demotion
+          * Only slow responses on the initial request count as a fail
           * Only slow responses on an *ACTIVE* webhook count as a fail.
            <br>Therefore, slow responses should never result in demotion to *INACTIVE*.
         * All connection timeouts count as fail and may result in status demotion.
           <br>The connection timeout is *8 seconds*.
-        * All response (read) timeouts count as fail and may result in status demotion.
+        * All response (read) timeouts count as a fail and may result in status demotion.
           <br>The response timeout is *8 seconds*.
-      * 50 consecutives successful requests on a *DEGRADED* webhook are necessary for a promotion back to *ACTIVE*.
-        * Successful requests on retry atempts also count toward status promotion.
-        * Responses slower than *1 second* do not count either as a success or as a fail.
+      * 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*
+        * Successful requests on retry attempts also count toward status promotion
+        * Responses slower than *1 second* do not count either as a success or as a fail
       * Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically
       promote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.
 
       Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
   - name: Templates
-    description: |-
-      Message Templates are message formats for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.
+    description: |
+      Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.
 
-      This allows a business to send just the template identifier along with the appropriate parameters instead of the full message content.
+      This allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.
 
       Templates have the following components:
-      * header
-      * body
-      * footer
-      * buttons
+      * Header
+      * Body
+      * Footer
+      * Buttons
 
       The components object allows you to indicate the type of message and the message's parameters.
 
       ## Standard message templates
 
-      The standard message templates enables you to send plain text-only messages using a <code>body</code> components object.
+      The standard message templates allows you to send plain text-only messages using a <code>body</code> components object.
 
       ## Media message templates
 
-      Media message templates expand the content you can send recipients beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.
+      Media message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.
 
       ## Interactive message templates
 
-      Interactive message templates expand the content you can send recipients beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.
+      Interactive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.
 
-      There are two types of predefined buttons offered:
+      There are two types of predefined buttons offered: actions and quick replies.
 
       ### ACTIONS
 
@@ -4308,14 +4294,15 @@ tags:
 
       Allows your customer to return a simple text message.
 
-      When a quick reply message is sent and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT` if you subscribed to that kind of event. The `MESSAGE_EVENT` will contains one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive template.
+      When a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.
 
-      You can know more about it in the [subscriptions section](#section/MESSAGE).
+      You can learn more about it on the [subscriptions section](#section/MESSAGE).
   - name: Message Report
     description: |
-      Report to show all messages sent and received in a period, it may also filter by channel or type.
+      A report that shows all messages sent and received during a period. It may also be filtered by channel or type.
   - name: Flow Report
-    description: 'Report to provide current state of sessions (executions) of flows in a period. These states contain session variables and their current value. The report can be filtered by flow, dispatch or session.'
+    description: |
+      A report that provides the current state of sessions (executions) of flows for a specific time frame. These states contain session variables and their current value. The report can be filtered by flow, dispatch, or session.
 x-tagGroups:
   - name: Messaging
     tags:
