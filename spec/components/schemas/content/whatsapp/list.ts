@@ -50,6 +50,7 @@ const list: SchemaObject = {
             },
             rows: {
               type: 'array',
+              description: 'Max of 10 rows considering all sections together.',
               minItems: 1,
               maxItems: 10,
               items: {
