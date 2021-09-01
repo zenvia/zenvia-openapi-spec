@@ -18,12 +18,12 @@ The use of RCS channel follows the Google content policies, available here: http
 
 When you send a message to a contact using RCS channel:
 
-Recipient: is the phone number of the contact
-Sender: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
+* Recipient: the phone number of the contact
+* Sender: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
 
 When you receive a message from a contact, the sender and recipient are inverted:
 
-Recipient: is the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
-Sender: is the phone number of the contact
+* Recipient: the agent id configured on [Zenvia platform](https://app.zenvia.com/home/credentials/rcs/list)
+* Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
