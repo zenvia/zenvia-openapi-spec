@@ -9,32 +9,32 @@ const base: SchemaObject = {
   properties: {
     flowId: {
       title: 'Flow ID',
-      description: 'The flow identifier.',
+      description: 'The flow identifier',
       type: 'string',
     },
     dispatchId: {
       title: 'Dispatch ID',
-      description: 'The dispatch identifier.',
+      description: 'The dispatch identifier',
       type: 'string',
     },
     sessionId: {
       title: 'Session ID',
-      description: 'This ID represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.',
+      description: 'An ID that represents a flow execution. In case of conversational flows, it identifies the conversation in our platform.',
       type: 'string',
     },
     firstEventTimestamp: {
       title: 'First event timestamp',
-      description: 'Time of the first event with the client.',
+      description: 'Time of the first event with the client',
       type: 'string',
     },
     lastEventTimestamp: {
       title: 'Last event timestamp',
-      description: 'Time of the last event with the client.',
+      description: 'Time of the last event with the client',
       type: 'string',
     },
     variables: {
       title: 'Objects of varibles',
-      description: 'Object where session variables are saved.',
+      description: 'Object where session variables are saved',
       type: 'object',
     },
   },

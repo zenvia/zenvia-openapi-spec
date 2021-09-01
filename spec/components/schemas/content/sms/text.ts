@@ -28,7 +28,7 @@ const text: SchemaObject = {
         'x-unpublished': true,
         deprecated: true,
         type: 'number',
-        description: `An id used for report purposes only (also known as aggregate id). It must be setup before use.
+        description: `An ID used for report purposes only (also known as aggregate id). It must be setup before use.
           <br>*Only applicable to [SMS channel](#tag/SMS).*`,
         example: 12345,
         minimum: -2147483648,

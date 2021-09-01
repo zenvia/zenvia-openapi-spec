@@ -1,1 +1,1 @@
-Report to show all messages sent and received in a period, it may also filter by channel or type.
+A report that shows all messages sent and received during a period. It may also be filtered by channel or type.

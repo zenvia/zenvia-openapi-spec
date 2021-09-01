@@ -11,12 +11,12 @@ const buttonBase: SchemaObject = {
     },
     text: {
       type: 'string',
-      description: 'Text to be displayed inside the button.',
+      description: 'Text to be displayed inside the button',
       example: 'Click me!',
     },
     payload: {
       type: 'string',
-      description: 'Content to be sent back as a message event when the user clicks on the button. By default, the text of the button will be used as payload.',
+      description: 'Content to be sent back as a message event when the user clicks the button. By default, the text of the button will be used as payload.',
       example: 'clicked',
     },
   },

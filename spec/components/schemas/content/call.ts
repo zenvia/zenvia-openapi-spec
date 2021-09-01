@@ -27,12 +27,12 @@ const text: SchemaObject = {
         example: '5510999999999',
       },
       recordAudio: {
-        description: 'To record the call',
+        description: 'Record the call',
         type: 'boolean',
         example: true,
       },
       hangUpOnVoiceMail: {
-        description: 'End the call on voice mail',
+        description: 'End the call on voicemail',
         type: 'boolean',
         example: true,
       },

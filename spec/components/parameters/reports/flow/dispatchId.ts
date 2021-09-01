@@ -5,7 +5,7 @@ const dispatchId: ParameterObject = {
   name: 'dispatchId',
   in: 'query',
   required: false,
-  description: 'This is the ID generated at the time of dispatch.',
+  description: 'The ID generated at the time of the dispatch',
   schema: {
     title: 'Dispatch ID',
     type: 'string',

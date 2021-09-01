@@ -4,12 +4,12 @@ import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Object',
-  description: 'This is a Message object model.',
+  description: 'This is a Message object model',
   type: 'object',
   properties: {
     from: {
       title: 'Sender ID',
-      description: 'This is the identifier of sender of this message. The sender shoud be created with a credential.',
+      description: 'The identifier of the sender of the message. The sender shoud be created with a credential.',
       type: 'string',
     },
     contents: {

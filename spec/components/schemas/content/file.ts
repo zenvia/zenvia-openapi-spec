@@ -15,7 +15,7 @@ const file: SchemaObject = {
       },
       fileUrl: {
         type: 'string',
-        description: 'The URL of the file to be sent.',
+        description: 'URL of the file to be sent',
         example: 'https://example.com/document.pdf',
       },
       fileMimeType: {

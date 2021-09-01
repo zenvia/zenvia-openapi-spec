@@ -5,7 +5,7 @@ import { ref as errorsRef } from './errors';
 
 const base: SchemaObject = {
   title: 'Error Object',
-  description: 'This is a Error object model.',
+  description: 'This is a Error object model',
   type: 'object',
   properties: {
     code: {

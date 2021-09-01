@@ -1,51 +1,39 @@
 # Overview
 
-This is the reference documentation for the Zenvia *REST-like* API.
+This is the reference documentation for the Zenvia *REST-like* API. The API itself is based on resources that are represented by JSON format and are manipulated using the HTTP protocol.
 
-This API is based on resources which are represented by JSON format and are manipulated using HTTP protocol.
+## Features
 
-## What you can do with this API
+You can send messages through the [Zenvia-supported channels](#section/Supported-Channels).
 
-You can send messages for the following channels:
+You can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:
 
-* SMS
-* WhatsApp
-* Facebook
-* RCS
-* Voice
-* Telegram
-* Google Business Message
-* Instagram
+* Messages: Receive messages events for outgoing and/or incoming messages.
+* Messages status: Receive status updates for outgoing messages.
 
-You can subscribe for some events and receive then in one webhook endpoint.
-The available events are:
+## Pre-requisites
 
-* Messages: You can receive messages events. You can select the channel of the messages which you want to receive as much as her direction.
-* Messages status: You can receive status update for sent messages.
+Before using this API you need the following:
 
-## What you need before start
+* **Zenvia Account**: create an account on [Zenvia platform's site](https://app.zenvia.com/)
+* **Integrations**: configure desired channels to send and/or receive messages on the [integrations page](https://app.zenvia.com/home/credentials)
+* **API Token**: create an API token on the [API console](https://app.zenvia.com/home/api)
+* **Webhook** (optional): receive messages by subscribing to events using [subscriptions API resources](#tag/Subscriptions)
 
-Before use this API you need the following prerequisites:
+You can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.
 
-* **Zenvia Account**: create one account on [Zenvia platform site](https://app.zenvia.com/)
-* **Integrations**: to send or receive messages for desired channels you need to configure these channels on [integrations page](https://app.zenvia.com/home/credentials)
-* **API Token**: create one API token on [API console](https://app.zenvia.com/home/api)
-* **Webhook** (optional): to receive messages you need to subscribe for this events using the [subscriptions API resources](#tag/Subscriptions)
-
-You can use [sandbox](#section/Getting-started-with-Sandbox) to start using and test this API immediately.
-
-## How to view your consumption report
-You can also access the Zenvia platform to view your [Consumption Report](https://app.zenvia.com/notifications/dashboard/api)
+## View your Usage Report
+You can also access Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)
 
 # Getting started with Sandbox
 
-The fastest way to start using this API is our [Sandbox available on Zenvia platform](https://app.zenvia.com/home/sandbox).
+The fastest way to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).
 
-When you create a new Sandbox, you will be guided step-by-step to send and receive messages using one desired channel.
+As you create your new Sandbox, you'll be guided step-by-step in order to start sending and receiving messages using your desired channel.
 
-[Click here and start sending and receiving messages using WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
+[Click here and start sending and receiving messages using RCS, WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)
 
-You are able to send test messages to the connected numbers over a 24-hour period. After that, you must reconnect your number, [sending the keyword again](https://app.zenvia.com/home/sandbox).
+You are allowed to send test messages to phone numbers you've connected during a 24-hour period. Following that, you must reconnect your number by sending the keyword once again to continue using the Sandbox's features.
 
 # API versions
 
@@ -54,14 +42,14 @@ All notable changes to ZenAPI will be documented here.
 <!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->
 <!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->
 
-Currently the ZenAPI is on version v2
+Currently, the ZenAPI is on version v2.
 
 ## v2 (current)
 
 ### 2021-05-24
 
 * Added
-    * Added in the [message](#section/MESSAGE) received in the webhook the referral to the ad that a user clicked.
+    * Added the referral section that indicates an advertisement was clicked by the user to the [message event](#section/MESSAGE) received by the webhook
 
 ### 2020-10-27
 
@@ -71,14 +59,14 @@ Currently the ZenAPI is on version v2
 ### 2020-09-24
 
 * Added
-    * Added message-batches: Api to send messages in batch.
+    * Added message-batches: API to send messages in batch.
 
 ### 2020-09-01
 
 * Breaking Changes
-    * Does not use visitor as a JSON within contents block. Use the visitor sent in content root.
+    * Visitor not sent as a JSON within contents block. Instead, it's sent directly under the message object.
     * Location is no longer used as JSON.
-    * Removed deprecated `channels` attribute from template resource.
+    * Removed deprecated `channels` attribute from the template resource.
 
 ## v1 (deprecated)
 
@@ -95,42 +83,40 @@ You can still check v1 version clicking <a target="_blank" href="https://zenvia.
 
 * Added
     * Added Subscription section.
-    * Added WhatsApp, SMS and Facebook Channels sections.
+    * Added WhatsApp, SMS, and Facebook Channels sections.
 
 # SDKs
 
-SDKs make it easy to use our APIs just by including them in your software.
+Make it simpler to use our API by integrating our SDK into your software.
 
-These helper libraries are available in the [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages on our [GitHub](https://github.com/zenvia).
+These helper libraries are available on [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages and located on our [GitHub](https://github.com/zenvia) page.
 
 # HTTP Methods
 
-HTTP methods are used for manipulate resources.
-
-Not all resources have all operations, see the reference of each resource.
+HTTP methods are used to manipulate resources. Though, as not all resources allow all HTTP operations, observeOK the reference of each resource below.
 
 Methods used with collection endpoints:
 
-| Http Method      | Operation                | Success HTTP status |
+| HTTP Method      | Operation                | Success HTTP status |
 |:-----------------|:-------------------------|:--------------------|
-| GET              | List collection items    | 200 - Ok            |
-| POST             | Create a new item        | 200 - Ok            |
+| GET              | List collection items    | 200 - OK            |
+| POST             | Create a new item        | 200 - OK            |
 
 Methods used with item endpoints:
 
-| Http Method      | Operation                    | Success HTTP status |
+| HTTP Method      | Operation                    | Success HTTP status |
 |:-----------------|:-----------------------------|:--------------------|
-| GET              | Retrieve one resource item   | 200 - Ok            |
+| GET              | Retrieve one resource item   | 200 - OK            |
 | DELETE           | Delete one resource item     | 204 - No content    |
-| PATCH            | Update one resource item     | 200 - Ok            |
+| PATCH            | Update one resource item     | 200 - OK            |
 
-When one operation is executed successfully, the API will respond with 2xx status code.
+When an operation is executed successfully, the API will respond with a 2xx status code.
 
 # Error Handling
 
-When one error occurs, the API will return one HTTP code 4xx or 5xx and the payload with Error Object.
+When one error occurs, the API will return a 4xx or 5xx HTTP status code and the payload with an Error Object.
 
-The error object have the follwing schema:
+The error object obeys the follwing schema:
 
 <SchemaDefinition schemaRef="#/components/schemas/error.base" />
 
@@ -146,18 +132,18 @@ Responses error codes are detailed below.
 
 # Authentication
 
-## TOKEN
-To use this API you need to send the API token in all requests.
+## Token
+To use this API you need to send the API token in every request.
 
-This TOKEN needs to be sent in HTTP header 'X-API-TOKEN'.
+The token needs to be sent in the HTTP header 'X-API-TOKEN'.
 
 Example:
 ```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
 
-You can generate your token on [API console](https://app.zenvia.com/home/api) inside Zenvia platform website.
+Generate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
 
 ## JWT
 
 The JWT token is primarily used by front-end applications for user interactions.
 
-For server to server integrations use [TOKEN](/#section/Authentication/TOKEN) authentication type.
+For server-to-server integrations use the [token authentication](/#section/Authentication/TOKEN) approach.

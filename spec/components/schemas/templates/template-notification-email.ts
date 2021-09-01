@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const notificationEmail: SchemaObject = {
   title: 'Notification e-mail',
-  description: 'E-mail list (comma-separated) to send notifications about the message template approving process.',
+  description: 'E-mail list (comma-separated) to send notifications about the message template approving process',
   type: 'string',
 };
 

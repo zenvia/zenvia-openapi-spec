@@ -5,7 +5,7 @@ const subscriptionId: ParameterObject = {
   name: 'subscriptionId',
   in: 'path',
   required: true,
-  description: 'the subscription identifier',
+  description: 'The subscription identifier',
   schema: {
     type: 'string',
   },

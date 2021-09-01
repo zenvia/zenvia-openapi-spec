@@ -1,8 +1,8 @@
 ## Supported Channels
 
-Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Business Messages channels. For each content type, covered in the next section, the following table reflects the applicability in relation to these channels:
+For each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:
 
-| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM     |Instagram| 
+| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| 
 |:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|
 | text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
 | file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |
@@ -13,6 +13,7 @@ Messaging can be handled through SMS, WhatsApp, Facebook, RCS and Google Busines
 | card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 | carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
 
+_*GBM stands for Google Business Messages_
 ## Text
 This type of content is the most used one and is composed of plain text.
 
@@ -38,31 +39,31 @@ This type of content is used to send location messages represented as a point on
 <SchemaDefinition schemaRef="#/components/schemas/content.location" showWriteOnly="true" />
 
 ## Template
-This type of content has an underlying fixed text content with some required variables. After being filled, the template must be submitted for approval to WhatsApp. The rules that the submitted content must abide to are very restrictive.
+This type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.template" showWriteOnly="true" />
 
 ### Submitting a template content for approval
-If you already have a WhatsApp business account with us, you may submit templates for approval using our [template console](https://app.zenvia.com/home/templates).
+You may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.
 
 ## Card
 
-This is a rich content composed of *at least one* of these components (none of them are mandatory):
+This type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):
 * Media
 * Title
 * Text
 
-And additionally, it may also have these:
+Additionally, it may include:
 * Buttons
-* Quick reply buttons (they are not part of the card itself and instead are shown below it)
+* Quick reply buttons (not part of the card itself, but are instead shown below it)
 
-More information on each attribute may be found below.
+More information on each attribute may be found below:
 
 <SchemaDefinition schemaRef="#/components/schemas/content.card" />
 
 ## Carousel
 
-This is very similar to a [card](#section/Card), except this is a horizontally scrollable sequence of them, with a few diferences and limitations.
+This type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.
 
 More details may be found below.
 

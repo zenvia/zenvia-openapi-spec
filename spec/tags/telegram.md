@@ -1,6 +1,6 @@
-The Telegram can be used after it's activation on Zenvia Platform.
+The Telegram can be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
 
-To activate Telegram you a need a registered Bot account on Telegram Bot API and an account information configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).
+**To activate Telegram you a need a registered Bot account on Telegram Bot API and an account enabled on Zenvia platform.**
 
 
 ## Telegram limitations
@@ -21,12 +21,12 @@ Supported content types and sizes:
 
 When you receive a message from a contact from Telegram channel:
 
-* Recipient: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
-* Sender: is the conversation id (this is not the phone number)
+* Recipient: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
+* Sender: the conversation id (not the phone number)
 
 When you send a message to a contact, the sender and recipient are inverted:
 
-* Recipient: is the conversation id (this is not the phone number)
-* Sender: is the bot username configured on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)
+* Recipient: the conversation id (not the phone number)
+* Sender: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
