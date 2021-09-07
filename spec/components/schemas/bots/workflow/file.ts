@@ -21,7 +21,7 @@ const base: SchemaObject = {
         fileContainsHeader: {
           description: 'A list of value (CSV)',
           type: 'boolean',
-          example: 'true',
+          example: true,
         },
         charset: {
           description: 'File headers (CSV)',

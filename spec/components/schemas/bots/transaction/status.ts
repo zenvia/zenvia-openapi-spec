@@ -90,7 +90,7 @@ const base: SchemaObject = {
     finalState: {
       description: 'The transaction session is finallized',
       type: 'boolean',
-      example: 'true',
+      example: true,
     },
     senderId: {
       description: 'The sender id',
@@ -106,62 +106,62 @@ const base: SchemaObject = {
     isTest: {
       description: 'If it is a test transaction',
       type: 'boolean',
-      example: 'false',
+      example: false,
     },
     originatedBySandbox: {
       description: 'If it is originated by sandbox',
       type: 'boolean',
-      example: 'false',
+      example: false,
     },
     scheduled: {
       description: 'If it is scheduled',
       type: 'boolean',
-      example: 'false',
+      example: false,
     },
     receivedRegisterCount: {
       description: 'The quantity of recived registers',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     successProcessedRecords: {
       description: 'The quantity of records processed with success',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     timedoutRecords: {
       description: 'The quantity of records in timed out',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     errorProcessedRecords: {
       description: 'The quantity of records processed with error',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     canceledRecords: {
       description: 'The quantity of records canceled',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     processingRecords: {
       description: 'The quantity of records in processing',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     workflowWaitingRecords: {
       description: 'The quantity of records in waiting workflow',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     queuedRecords: {
       description: 'The quantity of records in queue',
       type: 'number',
-      example: '1',
+      example: 1,
     },
     progress: {
       description: 'Progress of bulk. 0-100',
       type: 'number',
-      example: '100',
+      example: 100,
     },
     scheduleStart: {
       type: 'string',

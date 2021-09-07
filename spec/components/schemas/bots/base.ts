@@ -25,7 +25,7 @@ const base: SchemaObject = {
     enqueueAfterLoad: {
       description: 'Enqueue after load',
       type: 'boolean',
-      example: 'false',
+      example: false,
     },
     callbackUrl: {
       title: 'Callback URL',

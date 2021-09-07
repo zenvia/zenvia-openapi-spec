@@ -7,8 +7,10 @@ const page: ParameterObject = {
   required: false,
   description: 'This is the page number. Default is 0.',
   schema: {
+    title: 'page',
     type: 'number',
   },
+  example: 0,
 };
 
 export const ref = createComponentRef(__filename);

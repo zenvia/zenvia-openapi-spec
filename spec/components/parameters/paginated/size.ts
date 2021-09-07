@@ -7,8 +7,10 @@ const size: ParameterObject = {
   required: false,
   description: 'This is the page size. Default is 20.',
   schema: {
+    title: 'size',
     type: 'number',
   },
+  example: 10,
 };
 
 export const ref = createComponentRef(__filename);
