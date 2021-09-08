@@ -13,7 +13,7 @@ const base: SchemaObject = {
       type: 'string',
       example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
     },
-  }
+  },
 };
 
 export const ref = createComponentRef(__filename);

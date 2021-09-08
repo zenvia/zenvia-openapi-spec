@@ -25,15 +25,15 @@ const base: SchemaObject = {
           items: {
             type: 'string',
             example: '5511999999999,John,Smartphone,20/07/2021',
-          }
-        }
+          },
+        },
       },
       required: [
         'fileHeader',
         'contacts',
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 };
 
 export const ref = createComponentRef(__filename);

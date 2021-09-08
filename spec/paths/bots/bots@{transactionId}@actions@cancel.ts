@@ -11,7 +11,7 @@ const post: OperationObject = {
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
-    }
+    },
   } as ResponsesObject,
 };
 

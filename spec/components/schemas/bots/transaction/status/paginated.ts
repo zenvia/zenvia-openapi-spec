@@ -12,7 +12,7 @@ const base: SchemaObject = {
       type: 'array',
       items: {
         $ref: botsTrasactionStatusRef,
-      }
+      },
     },
     pageable: {
       type: 'object',

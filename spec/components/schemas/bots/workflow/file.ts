@@ -32,9 +32,9 @@ const base: SchemaObject = {
       required: [
         'fileHeader',
         'fileContainsHeader',
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 };
 
 export const ref = createComponentRef(__filename);

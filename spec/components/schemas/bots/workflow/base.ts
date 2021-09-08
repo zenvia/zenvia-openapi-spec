@@ -27,8 +27,8 @@ const base: SchemaObject = {
       },
       required: [
         'workflowId',
-      ]
-    }
+      ],
+    },
   ],
 };
 
