@@ -3,18 +3,13 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
-  title: 'Bot Transaction Status Object',
-  description: 'This is a Bot Transaction Status object model.',
+  title: 'Flow Batch Status Object',
+  description: 'This is a Flow Batch Status object model.',
   type: 'object',
   properties: {
     id: {
       type: 'string',
-      description: 'The bulk identifier.',
-      example: '853c2b58-8367-4fcb-8d16-d42208e15942',
-    },
-    transactionId: {
-      type: 'string',
-      description: 'The transaction identifier.',
+      description: 'The flow batch identifier.',
       example: '853c2b58-8367-4fcb-8d16-d42208e15942',
     },
     flowId: {
@@ -22,20 +17,10 @@ const base: SchemaObject = {
       description: 'The workflow identifier.',
       example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
     },
-    campaignId: {
+    campaignName: {
       type: 'string',
-      description: 'The campaign identifier.',
+      description: 'The campaign name.',
       example: 'Campanha de oferta',
-    },
-    batchName: {
-      type: 'string',
-      description: 'The batch name.',
-      example: 'Nome do batch',
-    },
-    fileId: {
-      type: 'string',
-      description: 'The file id.',
-      example: '61097903e3cba42959d0a472',
     },
     fileName: {
       type: 'string',
@@ -43,7 +28,7 @@ const base: SchemaObject = {
       example: 'arquivo.csv',
     },
     status: {
-      description: 'The transaction status',
+      description: 'The batch status',
       type: 'string',
       enum: [
         'LOADING',
@@ -60,7 +45,7 @@ const base: SchemaObject = {
       example: 'READY',
     },
     errorCode: {
-      description: 'The transaction error',
+      description: 'The batch error',
       type: 'string',
       enum: [
         'ERROR_SAVING_FILE',
@@ -86,37 +71,6 @@ const base: SchemaObject = {
         'RESCHEDULE_PROCESS_ERROR',
       ],
       example: 'WORKFLOW_ID_NOT_FOUND',
-    },
-    finalState: {
-      description: 'The transaction session is finallized',
-      type: 'boolean',
-      example: true,
-    },
-    senderId: {
-      description: 'The sender id',
-      type: 'string',
-    },
-    contents: {
-      description: 'The contents',
-      type: 'array',
-      items: {
-        type: 'object',
-      },
-    },
-    isTest: {
-      description: 'If it is a test transaction',
-      type: 'boolean',
-      example: false,
-    },
-    originatedBySandbox: {
-      description: 'If it is originated by sandbox',
-      type: 'boolean',
-      example: false,
-    },
-    scheduled: {
-      description: 'If it is scheduled',
-      type: 'boolean',
-      example: false,
     },
     receivedRegisterCount: {
       description: 'The quantity of recived registers',
@@ -159,7 +113,7 @@ const base: SchemaObject = {
       example: 1,
     },
     progress: {
-      description: 'Progress of bulk. 0-100',
+      description: 'Progress of batch. 0-100',
       type: 'number',
       example: 100,
     },
@@ -198,10 +152,6 @@ const base: SchemaObject = {
         'FACEBOOK',
       ],
       example: 'SMS',
-    },
-    fallback: {
-      type: 'object',
-      description: 'The fallbak message',
     },
   },
 };

@@ -1,11 +1,11 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../utils/ref';
 
-const transactionId: ParameterObject = {
-  name: 'transactionId',
+const flowBatchId: ParameterObject = {
+  name: 'flowBatchId',
   in: 'path',
   required: true,
-  description: 'the transaction identifier',
+  description: 'Flow Batch identifier',
   schema: {
     type: 'string',
   },
@@ -13,4 +13,4 @@ const transactionId: ParameterObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default transactionId;
+export default flowBatchId;

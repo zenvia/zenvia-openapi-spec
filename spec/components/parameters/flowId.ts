@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../utils/ref';
 
 const flowId: ParameterObject = {
   name: 'flowId',
-  in: 'path',
+  in: 'query',
   required: true,
   description: 'the flow identifier',
   schema: {

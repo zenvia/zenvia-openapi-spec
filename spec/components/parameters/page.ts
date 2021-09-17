@@ -1,5 +1,5 @@
 import { ParameterObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../utils/ref';
 
 const page: ParameterObject = {
   name: 'page',
@@ -10,7 +10,7 @@ const page: ParameterObject = {
     title: 'page',
     type: 'number',
   },
-  example: 0,
+  example: 5,
 };
 
 export const ref = createComponentRef(__filename);

@@ -1,13 +1,13 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as fileIdRef } from '../../components/parameters/fileId';
+import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
-  description: 'Get file of dispatch a bot',
-  tags: ['Bots'],
+  description: 'Get errors in flow batch',
+  tags: ['Flows'],
   responses: {
     200: {
-      description: 'File found',
+      description: 'Errors found as cvs file',
       content: {
         'text/cvs': {},
       },
@@ -21,7 +21,7 @@ const get: OperationObject = {
 const path: PathItemObject = {
   get,
   parameters: [{
-    $ref: fileIdRef,
+    $ref: flowBatchIdRef,
   }],
 };
 

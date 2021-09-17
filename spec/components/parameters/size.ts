@@ -1,5 +1,5 @@
 import { ParameterObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../utils/ref';
 
 const size: ParameterObject = {
   name: 'size',

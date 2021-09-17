@@ -12,7 +12,7 @@ const groups: TagGroupObject[] = [{
     'Telegram',
     'Google Business Message',
     'Voice',
-    'Bots',
+    'Flows',
     'Batches',
   ],
 }, {

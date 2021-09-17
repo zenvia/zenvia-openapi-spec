@@ -1,32 +1,32 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as botsBaseRef } from '../base';
+import { ref as flowsBaseRef } from '../base';
 
 const base: SchemaObject = {
-  title: 'Bot Object with Workflow',
-  description: 'This is a Bot object model with Workflow.',
+  title: 'Flow Batch Base Object',
+  description: 'This is a Flow Batch Base model.',
   type: 'object',
   allOf: [
     {
-      $ref: botsBaseRef,
+      $ref: flowsBaseRef,
     },
     {
       type: 'object',
       properties: {
-        workflowId: {
+        flowId: {
           type: 'string',
-          description: 'The workflow identifier.',
+          description: 'The flow identifier.',
           example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
         },
-        campaignId: {
+        campaignName: {
           type: 'string',
-          description: 'The campaign identifier.',
+          description: 'The campaign name.',
           example: 'Campanha de oferta',
         },
       },
       required: [
-        'workflowId',
+        'flowId',
       ],
     },
   ],

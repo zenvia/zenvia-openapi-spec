@@ -1,6 +1,6 @@
-The bots api makes it possible to send a message with one or more contents to multiple contacts at once.
+The flows-batches api makes it possible to send a message with one or more contents to multiple contacts at once.
 <br/><br/>
-Use your workflowId.
+Use your flowId.
 
 <br/>
 

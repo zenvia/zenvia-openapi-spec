@@ -1,14 +1,14 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as botsWorkflowBaseRef } from './base';
+import { ref as flowsWorkflowBaseRef } from './base';
 
 const base: SchemaObject = {
-  title: 'Bot Object for request with file.',
-  description: 'This is a Bot object model for request with file.',
+  title: 'Flow Batch Object for request with file.',
+  description: 'This is a Flow Batch object model for request with file.',
   allOf: [
     {
-      $ref: botsWorkflowBaseRef,
+      $ref: flowsWorkflowBaseRef,
     },
     {
       type: 'object',
@@ -23,7 +23,7 @@ const base: SchemaObject = {
           type: 'boolean',
           example: true,
         },
-        charset: {
+        fileCharset: {
           description: 'File headers (CSV)',
           type: 'string',
           example: 'UTF-8',

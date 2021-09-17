@@ -6,7 +6,7 @@ const smsDescription = rawLoad(__dirname, './sms.md');
 const whatsappDescription = rawLoad(__dirname, './whatsapp.md');
 const facebookDescription = rawLoad(__dirname, './facebook.md');
 const batchesDescription = rawLoad(__dirname, './batches.md');
-const botsDescription = rawLoad(__dirname, './bots.md');
+const flowsDescription = rawLoad(__dirname, './flows.md');
 const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
 const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
@@ -45,8 +45,8 @@ const tags: TagObject[] = [{
   name: 'Voice',
   description: voiceDescription,
 }, {
-  name: 'Bots',
-  description: botsDescription,
+  name: 'Flows',
+  description: flowsDescription,
 }, {
   name: 'Batches',
   description: batchesDescription,

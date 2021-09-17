@@ -3,13 +3,13 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
-  title: 'Bot Transaction Object',
-  description: 'TransactionId of Bot dispatch',
+  title: 'Flow Batch Transaction Object',
+  description: 'Flow Batch Transaction Object',
   type: 'object',
   properties: {
     id: {
-      title: 'Transaction ID',
-      description: 'Bot Transaction identifier',
+      title: 'Flow Batch ID',
+      description: 'Flow Batch identifier',
       type: 'string',
       example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
     },

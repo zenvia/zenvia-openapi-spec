@@ -1,16 +1,13 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as transactionIdRef } from '../../components/parameters/transactionId';
+import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
-const get: OperationObject = {
-  description: 'Get errors of dispatch a bot',
-  tags: ['Bots'],
+const post: OperationObject = {
+  description: 'Pause a flow batch',
+  tags: ['Flows'],
   responses: {
     200: {
-      description: 'Errors found',
-      content: {
-        'text/cvs': {},
-      },
+      description: 'Batch paused',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
@@ -19,9 +16,9 @@ const get: OperationObject = {
 };
 
 const path: PathItemObject = {
-  get,
+  post,
   parameters: [{
-    $ref: transactionIdRef,
+    $ref: flowBatchIdRef,
   }],
 };
 

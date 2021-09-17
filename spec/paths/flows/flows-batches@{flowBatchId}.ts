@@ -1,18 +1,21 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as botsTransactionFullRef } from '../../components/schemas/bots/transaction/full';
-import { ref as transactionIdRef } from '../../components/parameters/transactionId';
+import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
+import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
-  description: 'Get information about dispatch a bot',
-  tags: ['Bots'],
+  description: 'Get information about dispatch a flow',
+  tags: ['Flows'],
+  parameters: [{
+    $ref: flowBatchIdRef,
+  }],
   responses: {
     200: {
-      description: 'Transaction found',
+      description: 'Flow Batch found',
       content: {
         'application/json': {
           schema: {
-            $ref: botsTransactionFullRef,
+            $ref: flowsBatchStatusRef,
           },
         },
       },
@@ -25,9 +28,6 @@ const get: OperationObject = {
 
 const path: PathItemObject = {
   get,
-  parameters: [{
-    $ref: transactionIdRef,
-  }],
 };
 
 export default path;
