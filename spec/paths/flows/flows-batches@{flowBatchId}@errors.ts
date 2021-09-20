@@ -7,9 +7,9 @@ const get: OperationObject = {
   tags: ['Flows'],
   responses: {
     200: {
-      description: 'Errors found as cvs file',
+      description: 'Errors found as csv file',
       content: {
-        'text/cvs': {},
+        'text/csv': {},
       },
     } as ResponseObject,
     default: {

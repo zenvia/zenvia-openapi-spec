@@ -10,9 +10,9 @@ const get: OperationObject = {
   }],
   responses: {
     200: {
-      description: 'File found as cvs file',
+      description: 'File found as csv file',
       content: {
-        'text/cvs': {},
+        'text/csv': {},
       },
     } as ResponseObject,
     default: {
