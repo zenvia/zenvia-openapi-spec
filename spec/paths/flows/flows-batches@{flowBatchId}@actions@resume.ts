@@ -6,7 +6,7 @@ const post: OperationObject = {
   description: 'Resume a flow batch',
   tags: ['Flows'],
   responses: {
-    204: {
+    200: {
       description: 'Batch resumed',
     } as ResponseObject,
     default: {
