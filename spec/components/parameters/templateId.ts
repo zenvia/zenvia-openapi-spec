@@ -5,7 +5,7 @@ const templateId: ParameterObject = {
   name: 'templateId',
   in: 'path',
   required: true,
-  description: 'the template identifier. Click <a href="https://app.zenvia.com/home/templates">here</a>.',
+  description: 'The <a href="https://app.zenvia.com/home/templates">template identifier</a>',
   schema: {
     type: 'string',
   },

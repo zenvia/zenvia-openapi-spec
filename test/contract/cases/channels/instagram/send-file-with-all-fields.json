@@ -1,0 +1,43 @@
+{
+  "name": "send file content with all fields",
+  "request": {
+    "method": "POST",
+    "path": "/channels/instagram/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "file",
+        "fileUrl": "https://host.com/file/path",
+        "fileMimeType": "image/png",
+        "fileName": "file name",
+        "fileCaption": "file caption"
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "file",
+        "fileUrl": "https://host.com/file/path",
+        "fileMimeType": "image/png",
+        "fileName": "file name",
+        "fileCaption": "file caption"
+      }]
+    }
+  }
+}

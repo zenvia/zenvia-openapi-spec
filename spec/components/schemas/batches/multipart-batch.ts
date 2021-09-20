@@ -6,7 +6,7 @@ import { ref as multipartWhatsAppBatchRef } from './multipart/batch.whatsapp';
 
 const base: SchemaObject = {
   title: 'Batch Object',
-  description: 'This is a Batch object model.',
+  description: 'This is a Batch object model',
   oneOf: [{
     $ref: multipartSmsBatchRef,
   }, {

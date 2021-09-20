@@ -28,9 +28,9 @@ const all: SchemaObject = {
         minItems: 1,
       },
       idRef: {
-        description: `When an user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
-                      On the [SMS channel](#tag/SMS), this is the id of the last message sent to the contact.
-                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [SMS](#tag/SMS) channels.*`,
+        description: `When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here.
+                      On [SMS channel](#tag/SMS), this is the ID of the last message sent to the contact.
+                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram) and [SMS](#tag/SMS) channels.*`,
         type: 'string',
         readOnly: true,
       },

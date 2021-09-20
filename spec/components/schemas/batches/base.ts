@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Batch Object',
-  description: 'This is a Batch object model.',
+  description: 'This is a Batch object model',
   type: 'object',
   properties: {
     id: {

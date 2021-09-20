@@ -5,7 +5,7 @@ const templateCommentId: ParameterObject = {
   name: 'templateCommentId',
   in: 'path',
   required: true,
-  description: 'the comment identifier.',
+  description: 'The comment identifier',
   schema: {
     type: 'string',
   },

@@ -1,14 +1,15 @@
-The Instagram channel may be used after it's activation on Zenvia Platform.
+The Instagram channel may be used after its activation on Zenvia Platform.
 
-Get in touch with Zenvia consultants to connect your account.
-
-
-## Limitations
-
-To be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+**Get in touch with Zenvia consultants to connect your account.**
 
 
-The Instagram API content type and size support for sending media:
+## Instagram limitations
+
+To be able to send messages to a contact, you first need to setup a webhook, which will allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
+* The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.
+
+The Instagram API content type and size limitations for sending media:
 
 | Media | Content Type | Media Size |
 |---|---|---|
@@ -20,14 +21,14 @@ The Instagram API content type and size support for sending media:
 
 ## Instagram sender and recipient
 
-When you receive a message from a contact from instagram channel:
+When you receive a message from a contact from Instagram channel:
 
-* Recipient: is your instagram account id (this is not your account @)
-* Sender: is the contact id on your account (this is not the contact @ and it will differ across accounts)
+* Recipient: your Instagram account id (not your account @)
+* Sender: the contact id on your account (not the contact @ and it will differ across accounts)
 
 When you send a message to a contact, the sender and recipient are inverted:
 
-* Recipient: is the contact id on your account (this is not the contact @ and it will differ across accounts)
-* Sender: is your instagram account id (this is not your account @)
+* Recipient: the contact id on your account (not the contact @ and it will differ across accounts)
+* Sender: your Instagram account id (not your account @)
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
