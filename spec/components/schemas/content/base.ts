@@ -6,7 +6,7 @@ const contentBase: SchemaObject = {
   properties: {
     type: {
       title: 'Content type',
-      description: 'Content type descriminator',
+      description: 'Content type discriminator',
       type: 'string',
     },
   },

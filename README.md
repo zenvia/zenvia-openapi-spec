@@ -5,6 +5,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/zenvia/zenvia-openapi-spec/badge.svg?branch=master)](https://coveralls.io/github/zenvia/zenvia-openapi-spec?branch=master)
 [![Dependencies](https://img.shields.io/david/zenvia/zenvia-openapi-spec.svg)](https://david-dm.org/zenvia/zenvia-openapi-spec)
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/ZENVIA_.svg?style=social)](https://twitter.com/intent/follow?screen_name=ZENVIA_)
+
 
 
 ## Links
@@ -46,6 +48,17 @@ npm run build
 npm test
 ```
 
+**4.** Starts the development server (with the public version of the specification).
+
+```shell
+npm run start:public
+```
+
+**5.** Bundles the spec (with the public version of the specification) and prepares web_deploy folder with static assets.
+
+```shell
+npm run build:public
+```
 
 
 ## License

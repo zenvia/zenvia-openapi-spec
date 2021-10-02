@@ -10,6 +10,11 @@ const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
 const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
 const flowReportDescription = rawLoad(__dirname, './flow-report.md');
+const rcsDescription = rawLoad(__dirname, './rcs.md');
+const telegramDescription = rawLoad(__dirname, './telegram.md');
+const voiceDescription = rawLoad(__dirname, './voice.md');
+const gbmDescription = rawLoad(__dirname, './gbm.md');
+const instagramDescription = rawLoad(__dirname, './instagram.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -23,6 +28,21 @@ const tags: TagObject[] = [{
 }, {
   name: 'Facebook',
   description: facebookDescription,
+}, {
+  name: 'Instagram',
+  description: instagramDescription,
+}, {
+  name: 'Google Business Messages',
+  description: gbmDescription,
+}, {
+  name: 'RCS',
+  description: rcsDescription,
+}, {
+  name: 'Telegram',
+  description: telegramDescription,
+}, {
+  name: 'Voice',
+  description: voiceDescription,
 }, {
   name: 'Batches',
   description: batchesDescription,

@@ -1,0 +1,23 @@
+{
+  "name": "send invalid content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/gbm/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "invalid"
+      }]
+    }
+  },
+  "expectedFail": {
+    "error": "Request has one or more errors => In body => For Content-Type application/json => Unable to deserialize value => at: allOf > 1 > contents > 0 => Discriminator property \"type\" as \"invalid\" did not map to a schema"
+  }
+}

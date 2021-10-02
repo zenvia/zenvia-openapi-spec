@@ -22,11 +22,13 @@ const messageEvent: SchemaObject = {
       },
       direction: {
         title: 'Message Direction',
+        description: `Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)
+> **Note:** The **OUT** direction is under construction.`,
         type: 'string',
-      },
-      channel: {
-        title: 'Message channel',
-        type: 'string',
+        enum: [
+          'IN',
+          'OUT',
+        ],
       },
       message: {
         $ref: messageRef,

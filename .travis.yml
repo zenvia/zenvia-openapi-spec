@@ -6,7 +6,7 @@ node_js:
 script:
   - npm run lint
   - npm test
-  - npm run build
+  - npm run build:public
 
 after_success:
   - npm run test:coveralls
@@ -18,8 +18,3 @@ deploy:
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(v[0-9]+(-beta)?|master)$
-
-notifications:
-  email:
-    recipients:
-    - apisupport@zenvia.com
