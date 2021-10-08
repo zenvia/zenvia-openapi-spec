@@ -68,7 +68,14 @@
           "default": {
             "$ref": "#/components/responses/error"
           }
-        }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash",
+            "source": "curl \"https://api.zenvia.com/v2/message-batches\" \\\n-H \"X-API-TOKEN: YOUR_API_TOKEN\" \\\n-F 'batch={\n  \"name\": \"My batch name\",\n  \"channel\": \"sms\",\n  \"columnMapper\": {\n    \"recipient_header_name\": \"recipient_number_column\",\n    \"name\": \"recipient_name_column\",\n    \"protocol\": \"protocol_column\"\n  },\n  \"message\": {\n    \"from\": \"string\",\n    \"contents\": [{\n      \"type\": \"text\",\n      \"text\": \"Hello {{name}} your service protocol is number {{protocol}}\"\n    }]\n  }\n};type=application/json' \\\n-F 'contacts=@./contacts.csv;type=text/csv;filename=contacts.csv'\n"
+          }
+        ]
       }
     },
     "/channels/facebook/messages": {

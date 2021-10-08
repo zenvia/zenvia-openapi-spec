@@ -195,6 +195,29 @@ paths:
                 $ref: '#/components/schemas/batches.multipart-batch'
         default:
           $ref: '#/components/responses/error'
+      x-code-samples:
+        - lang: Shell
+          label: Bash
+          source: |
+            curl "https://api.zenvia.com/v2/message-batches" \
+            -H "X-API-TOKEN: YOUR_API_TOKEN" \
+            -F 'batch={
+              "name": "My batch name",
+              "channel": "sms",
+              "columnMapper": {
+                "recipient_header_name": "recipient_number_column",
+                "name": "recipient_name_column",
+                "protocol": "protocol_column"
+              },
+              "message": {
+                "from": "string",
+                "contents": [{
+                  "type": "text",
+                  "text": "Hello {{name}} your service protocol is number {{protocol}}"
+                }]
+              }
+            };type=application/json' \
+            -F 'contacts=@./contacts.csv;type=text/csv;filename=contacts.csv'
   /channels/facebook/messages:
     post:
       description: Send a Facebook message
