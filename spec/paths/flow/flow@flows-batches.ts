@@ -2,7 +2,6 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as flowsWorkflowJsonRef } from '../../components/schemas/flows/workflow/json';
 import { ref as flowsWorkflowFileRef } from '../../components/schemas/flows/workflow/file';
-import { ref as flowsBatchPaginatedRef } from '../../components/schemas/flows/batch/paginated';
 import { ref as flowIdRef } from '../../components/parameters/flowId';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
@@ -25,10 +24,36 @@ const get: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: flowsBatchPaginatedRef,
+            type: 'array',
+            items: {
+              $ref: flowsBatchStatusRef
+            }
           },
         },
       },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The number of results',
+            type: 'number',
+            example: 100
+          }
+        },
+        'x-page-size': {
+          schema: {
+            description: 'The number of results per page',
+            type: 'number',
+            example: 10,
+          }
+        },
+        'x-page': {
+          schema: {
+            description: 'The current page',
+            type: 'number',
+            example: 5
+          }
+        }
+      }
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
