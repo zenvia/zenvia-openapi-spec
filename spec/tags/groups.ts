@@ -1,36 +1,46 @@
 import { TagGroupObject } from 'openapi3-ts';
 
-const groups: TagGroupObject[] = [{
-  name: 'Messaging',
-  tags: [
-    'Content types',
-    'SMS',
-    'WhatsApp',
-    'Facebook',
-    'Instagram',
-    'RCS',
-    'Telegram',
-    'Google Business Messages',
-    'Voice',
-    'Flows',
-    'Batches',
-  ],
-}, {
-  name: 'Webhooks',
-  tags: [
-    'Webhooks',
-  ],
-}, {
-  name: 'Templates',
-  tags: [
-    'Templates',
-  ],
-}, {
-  name: 'Reports',
-  tags: [
-    'Message Report',
-    'Flow Report',
-  ],
-}];
+const groups: TagGroupObject[] = [
+  {
+    name: 'Messaging',
+    tags: [
+      'Content types',
+      'SMS',
+      'WhatsApp',
+      'Facebook',
+      'Instagram',
+      'RCS',
+      'Telegram',
+      'Google Business Messages',
+      'Voice',
+      'Batches',
+    ],
+  },
+  {
+    name: 'Webhooks',
+    tags: [
+      'Webhooks',
+    ],
+  },
+  {
+    name: 'Templates',
+    tags: [
+      'Templates',
+    ],
+  },
+  {
+    name: 'Reports',
+    tags: [
+      'Message Report',
+      'Flow Report',
+    ],
+  },
+  {
+    name: "Flow",
+    tags: [
+      'Flows Batches'
+    ]
+  }
+];
 
 export default groups;

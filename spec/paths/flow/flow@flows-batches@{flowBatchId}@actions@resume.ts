@@ -2,18 +2,12 @@ import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
-const get: OperationObject = {
-  description: 'Get file of flow batch',
-  tags: ['Flows'],
-  parameters: [{
-    $ref: flowBatchIdRef,
-  }],
+const post: OperationObject = {
+  description: 'Resume a flow batch',
+  tags: ['Flows Batches'],
   responses: {
-    200: {
-      description: 'File found as csv file',
-      content: {
-        'text/csv': {},
-      },
+    204: {
+      description: 'Batch resumed',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
@@ -22,7 +16,10 @@ const get: OperationObject = {
 };
 
 const path: PathItemObject = {
-  get,
+  post,
+  parameters: [{
+    $ref: flowBatchIdRef,
+  }],
 };
 
 export default path;

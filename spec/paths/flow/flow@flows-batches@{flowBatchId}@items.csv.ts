@@ -1,23 +1,18 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
-  description: 'Get information about dispatch a flow',
-  tags: ['Flows'],
+  description: 'Get file of flow batch',
+  tags: ['Flows Batches'],
   parameters: [{
     $ref: flowBatchIdRef,
   }],
   responses: {
     200: {
-      description: 'Flow Batch found',
+      description: 'File found as csv file',
       content: {
-        'application/json': {
-          schema: {
-            $ref: flowsBatchStatusRef,
-          },
-        },
+        'text/csv': {},
       },
     } as ResponseObject,
     default: {

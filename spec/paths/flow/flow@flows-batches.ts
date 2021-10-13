@@ -2,15 +2,16 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as flowsWorkflowJsonRef } from '../../components/schemas/flows/workflow/json';
 import { ref as flowsWorkflowFileRef } from '../../components/schemas/flows/workflow/file';
-import { ref as flowsTransactionRef } from '../../components/schemas/flows/transaction';
 import { ref as flowsBatchPaginatedRef } from '../../components/schemas/flows/batch/paginated';
 import { ref as flowIdRef } from '../../components/parameters/flowId';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
+import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
+
 
 const get: OperationObject = {
   description: 'Get list of flows-batches',
-  tags: ['Flows'],
+  tags: ['Flows Batches'],
   parameters: [{
     $ref: flowIdRef,
   }, {
@@ -37,7 +38,7 @@ const get: OperationObject = {
 
 const post: OperationObject = {
   description: 'Create a flow batch',
-  tags: ['Flows'],
+  tags: ['Flows Batches'],
   requestBody: {
     required: true,
     content: {
@@ -53,7 +54,12 @@ const post: OperationObject = {
             csv: {
               type: 'string',
               title: 'Binary CSV File',
-              description: 'Binary csv file with recipients and variable values ​​when necessary.',
+              description: 'Binary csv file with recipients and variable values ​​when necessary. \n \
+                            \n **Requirements**: \
+                            \n * The file must be in **.csv** format; \
+                            \n * The maximum file size is **50MB**; ,\
+                            \n * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**; \
+                            \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.'
             },
             request: {
               $ref: flowsWorkflowFileRef,
@@ -73,7 +79,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: flowsTransactionRef,
+            $ref: flowsBatchStatusRef,
           },
         },
       },

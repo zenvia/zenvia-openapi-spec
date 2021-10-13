@@ -1,6 +1,8 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as items } from './items';
+import { ref as schedule } from './schedule';
 
 const base: SchemaObject = {
   title: 'Flow Batch Status Object',
@@ -28,20 +30,18 @@ const base: SchemaObject = {
       example: 'arquivo.csv',
     },
     status: {
-      description: 'The batch status',
+      description: 'The batch status: \
+        \n `LOADING`:  Loading the batch \
+        \n `READY`: Batch loaded and ready to be dispatched \
+        \n `QUEUED`: Batch sent to dispatch queue \
+        \n `PROCESSING`: Batch dispatch in progress \
+        \n `WAITING`: Waiting confirmation of the batch status \
+        \n `COMPLETED`: Batch completed \
+        \n `CANCELING`: Batch being canceled \
+        \n `CANCELED`: Batch canceled \
+        \n `TIMEOUT`: Timeout to process the batch \
+        \n `ERROR`: Error to proceed with the batch',
       type: 'string',
-      enum: [
-        'LOADING',
-        'READY',
-        'QUEUED',
-        'PROCESSING',
-        'WORKFLOW',
-        'COMPLETED',
-        'CANCELING',
-        'CANCELED',
-        'TIMEOUT',
-        'ERROR',
-      ],
       example: 'READY',
     },
     errorCode: {
@@ -72,65 +72,23 @@ const base: SchemaObject = {
       ],
       example: 'WORKFLOW_ID_NOT_FOUND',
     },
-    receivedRegisterCount: {
+    size: {
       description: 'The quantity of recived registers',
       type: 'number',
       example: 1,
     },
-    successProcessedRecords: {
-      description: 'The quantity of records processed with success',
-      type: 'number',
-      example: 1,
-    },
-    timedoutRecords: {
-      description: 'The quantity of records in timed out',
-      type: 'number',
-      example: 1,
-    },
-    errorProcessedRecords: {
-      description: 'The quantity of records processed with error',
-      type: 'number',
-      example: 1,
-    },
-    canceledRecords: {
-      description: 'The quantity of records canceled',
-      type: 'number',
-      example: 1,
-    },
-    processingRecords: {
-      description: 'The quantity of records in processing',
-      type: 'number',
-      example: 1,
-    },
-    workflowWaitingRecords: {
-      description: 'The quantity of records in waiting workflow',
-      type: 'number',
-      example: 1,
-    },
-    queuedRecords: {
-      description: 'The quantity of records in queue',
-      type: 'number',
-      example: 1,
+    items: {
+      type: 'object',
+      $ref: items
     },
     progress: {
       description: 'Progress of batch. 0-100',
       type: 'number',
       example: 100,
     },
-    scheduleStart: {
-      type: 'string',
-      description: 'The schedule start date.',
-      example: '2021-08-03T16:26:23.616Z',
-    },
-    scheduleEnd: {
-      type: 'string',
-      description: 'The schedule end date.',
-      example: '2021-08-03T16:26:23.616Z',
-    },
-    scheduleLimit: {
-      type: 'string',
-      description: 'The schedule limit date.',
-      example: '2021-08-03T16:26:23.616Z',
+    schedule: {
+      type: 'object',
+      $ref: schedule
     },
     createdDate: {
       type: 'string',
@@ -146,12 +104,12 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The Channel',
       enum: [
-        'SMS',
-        'WHATSAPP',
-        'RCS',
-        'FACEBOOK',
+        'sms',
+        'whatsapp',
+        'rcs',
+        'facebook',
       ],
-      example: 'SMS',
+      example: 'sms',
     },
   },
 };
