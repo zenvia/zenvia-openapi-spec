@@ -3,14 +3,14 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
-  description: 'Get file of flow batch',
+  description: 'Get itens of flow batch',
   tags: ['Flows Batches'],
   parameters: [{
     $ref: flowBatchIdRef,
   }],
   responses: {
     200: {
-      description: 'File found as csv file',
+      description: 'Items found as csv file',
       content: {
         'text/csv': {},
       },
