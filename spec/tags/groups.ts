@@ -36,11 +36,11 @@ const groups: TagGroupObject[] = [
     ],
   },
   {
-    name: "Flow",
+    name: 'Flow',
     tags: [
-      'Flows Batches'
-    ]
-  }
+      'Flows Batches',
+    ],
+  },
 ];
 
 export default groups;

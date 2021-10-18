@@ -79,7 +79,7 @@ const base: SchemaObject = {
     },
     items: {
       type: 'object',
-      $ref: items
+      $ref: items,
     },
     progress: {
       description: 'Progress of batch. 0-100',
@@ -88,7 +88,7 @@ const base: SchemaObject = {
     },
     schedule: {
       type: 'object',
-      $ref: schedule
+      $ref: schedule,
     },
     createdDate: {
       type: 'string',

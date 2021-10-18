@@ -7,7 +7,6 @@ import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
 import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
 
-
 const get: OperationObject = {
   description: 'Get list of flows-batches',
   tags: ['Flows Batches'],
@@ -26,8 +25,8 @@ const get: OperationObject = {
           schema: {
             type: 'array',
             items: {
-              $ref: flowsBatchStatusRef
-            }
+              $ref: flowsBatchStatusRef,
+            },
           },
         },
       },
@@ -36,24 +35,24 @@ const get: OperationObject = {
           schema: {
             description: 'The number of results',
             type: 'number',
-            example: 100
-          }
+            example: 100,
+          },
         },
         'x-page-size': {
           schema: {
             description: 'The number of results per page',
             type: 'number',
             example: 10,
-          }
+          },
         },
         'x-page': {
           schema: {
             description: 'The current page',
             type: 'number',
-            example: 5
-          }
-        }
-      }
+            example: 5,
+          },
+        },
+      },
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
@@ -84,7 +83,7 @@ const post: OperationObject = {
                             \n * The file must be in **.csv** format; \
                             \n * The maximum file size is **50MB**; ,\
                             \n * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**; \
-                            \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.'
+                            \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.',
             },
             request: {
               $ref: flowsWorkflowFileRef,

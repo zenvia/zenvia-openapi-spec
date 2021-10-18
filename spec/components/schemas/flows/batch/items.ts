@@ -41,7 +41,7 @@ const base: SchemaObject = {
       description: 'The quantity of records in queue',
       type: 'number',
       example: 1,
-    }
+    },
   },
 };
 
