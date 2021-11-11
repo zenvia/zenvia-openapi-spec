@@ -17,16 +17,16 @@ const post: OperationObject = {
           $ref: voiceMessageRef,
         },
         examples: {
-          tts: {
+          call_tts: {
             value: ttsExample(),
           },
-          tts_transferTo: {
+          call_tts_transferTo: {
             value: ttsTransferToExample(),
           },
-          file: {
+          call_file: {
             value: audiofileExample(),
           },
-          file_transferTo: {
+          call_file_transferTo: {
             value: audiofileTransferToExample(),
           },
         },
