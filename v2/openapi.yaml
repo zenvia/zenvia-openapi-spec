@@ -237,6 +237,16 @@ paths:
                   contents:
                     - type: text
                       text: Hi Zenvia!
+              file:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: file
+                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileMimeType: image/png
+                      fileCaption: 'Our pic :)'
+                      fileName: team.png
       responses:
         '200':
           description: Created message
@@ -836,7 +846,7 @@ paths:
             schema:
               $ref: '#/components/schemas/message.voice'
             examples:
-              tts:
+              call_tts:
                 value:
                   from: 12345a123a1234a1a2a123a1234ab1ab
                   to: '55108888888888'
@@ -849,7 +859,7 @@ paths:
                           awaitRecipientAnswer: true
                   recordAudio: true
                   hangUpOnVoiceMail: true
-              tts_transferTo:
+              call_tts_transferTo:
                 value:
                   from: 12345a123a1234a1a2a123a1234ab1ab
                   to: '55108888888888'
@@ -863,7 +873,7 @@ paths:
                   transferTo: '5511999999999'
                   recordAudio: true
                   hangUpOnVoiceMail: true
-              file:
+              call_file:
                 value:
                   from: 12345a123a1234a1a2a123a1234ab1ab
                   to: '55108888888888'
@@ -874,7 +884,7 @@ paths:
                           fileUrl: 'http://fooooo.bar/audio.mp3'
                   recordAudio: true
                   hangUpOnVoiceMail: true
-              file_transferTo:
+              call_file_transferTo:
                 value:
                   from: 12345a123a1234a1a2a123a1234ab1ab
                   to: '55108888888888'
@@ -3854,6 +3864,8 @@ tags:
       | call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |
       | card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
       | carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | button       | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |
+      | list         | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |
 
       _*GBM stands for Google Business Messages_
       ## Text
@@ -4027,7 +4039,7 @@ tags:
 
       | Media | Content Type | Media Size |
       |---|---|---|
-      | image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |
+      | image | image/jpeg<br>image/png<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |
       | audio | audio/* | *Currently not supported* |
       | video | video/* | *Currently not supported* |
       | document | Any other valid MIME type. | *Currently not supported* |

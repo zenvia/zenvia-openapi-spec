@@ -103,6 +103,21 @@
                       }
                     ]
                   }
+                },
+                "file": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "file",
+                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileMimeType": "image/png",
+                        "fileCaption": "Our pic :)",
+                        "fileName": "team.png"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -591,7 +606,7 @@
                 "$ref": "#/components/schemas/message.voice"
               },
               "examples": {
-                "tts": {
+                "call_tts": {
                   "value": {
                     "from": "12345a123a1234a1a2a123a1234ab1ab",
                     "to": "55108888888888",
@@ -612,7 +627,7 @@
                     "hangUpOnVoiceMail": true
                   }
                 },
-                "tts_transferTo": {
+                "call_tts_transferTo": {
                   "value": {
                     "from": "12345a123a1234a1a2a123a1234ab1ab",
                     "to": "55108888888888",
@@ -634,7 +649,7 @@
                     "hangUpOnVoiceMail": true
                   }
                 },
-                "file": {
+                "call_file": {
                   "value": {
                     "from": "12345a123a1234a1a2a123a1234ab1ab",
                     "to": "55108888888888",
@@ -653,7 +668,7 @@
                     "hangUpOnVoiceMail": true
                   }
                 },
-                "file_transferTo": {
+                "call_file_transferTo": {
                   "value": {
                     "from": "12345a123a1234a1a2a123a1234ab1ab",
                     "to": "55108888888888",
@@ -4754,7 +4769,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n_*GBM stands for Google Business Messages_\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\n\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n"
+      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| button       | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| list         | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n_*GBM stands for Google Business Messages_\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\n\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n"
     },
     {
       "name": "SMS",
@@ -4770,7 +4785,7 @@
     },
     {
       "name": "Instagram",
-      "description": "The Instagram channel may be used after its activation on Zenvia Platform.\n\n**Get in touch with Zenvia consultants to connect your account.**\n\n\n## Instagram limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which will allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n* The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.\n\nThe Instagram API content type and size limitations for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/gif<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from Instagram channel:\n\n* Recipient: your Instagram account id (not your account @)\n* Sender: the contact id on your account (not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: the contact id on your account (not the contact @ and it will differ across accounts)\n* Sender: your Instagram account id (not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Instagram channel may be used after its activation on Zenvia Platform.\n\n**Get in touch with Zenvia consultants to connect your account.**\n\n\n## Instagram limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which will allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n* The response window is *24 hours*, with the exception when a human agent is replying the contact, then the response window is increased to 7 days.\n\nThe Instagram API content type and size limitations for sending media:\n\n| Media | Content Type | Media Size |\n|---|---|---|\n| image | image/jpeg<br>image/png<br>image/ico<br>image/bmp<br>image/webp<br>image/* | 8 MB |\n| audio | audio/* | *Currently not supported* |\n| video | video/* | *Currently not supported* |\n| document | Any other valid MIME type. | *Currently not supported* |\n\n\n## Instagram sender and recipient\n\nWhen you receive a message from a contact from Instagram channel:\n\n* Recipient: your Instagram account id (not your account @)\n* Sender: the contact id on your account (not the contact @ and it will differ across accounts)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: the contact id on your account (not the contact @ and it will differ across accounts)\n* Sender: your Instagram account id (not your account @)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Google Business Messages",
