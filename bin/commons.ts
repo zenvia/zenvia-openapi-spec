@@ -1,4 +1,4 @@
-import { safeDump, safeLoad } from 'js-yaml';
+import { dump, load } from 'js-yaml';
 import spec from '../spec';
 import { readFileSync } from 'fs';
 
@@ -7,12 +7,12 @@ export function generateJSON(): string {
 }
 
 export function generateYAML(): string {
-  return safeDump(spec, { indent: 2, lineWidth: -1, noRefs: true, skipInvalid: true });
+  return dump(spec, { indent: 2, lineWidth: -1, noRefs: true, skipInvalid: true });
 }
 
 export function generateReDocPage(): string {
   const pageTemplate = readFileSync('redoc/template.html', 'utf-8');
-  const redocConfig: any = safeLoad(readFileSync('redoc/redoc-config.yaml', 'utf-8'));
+  const redocConfig: any = load(readFileSync('redoc/redoc-config.yaml', 'utf-8'));
 
   const redocURL = redocConfig.redocURL || 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.23/bundles/redoc.standalone.js';
   const redocExport = redocConfig.redocExport || 'Redoc';
