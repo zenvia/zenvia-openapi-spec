@@ -81,3 +81,8 @@ More details may be found below.
 
 ## WhatsApp list
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
+
+## SMS Text
+This the SMS version of the text content. It has additional parameters specific to the SMS integration.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
