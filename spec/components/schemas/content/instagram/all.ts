@@ -17,7 +17,7 @@ const all: SchemaObject = {
     mapping: {
       text: textRef,
       file: fileRef,
-      text_replies: quickRepliesRef,
+      replyable_text: quickRepliesRef,
     },
   },
 };

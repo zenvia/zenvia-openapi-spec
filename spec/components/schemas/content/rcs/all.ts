@@ -25,7 +25,7 @@ const all: SchemaObject = {
       file: fileRef,
       card: cardRef,
       carousel: carouselRef,
-      text_replies: quickRepliesRef,
+      replyable_text: quickRepliesRef,
     },
   },
 };

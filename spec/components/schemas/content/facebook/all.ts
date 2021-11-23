@@ -23,9 +23,9 @@ const all: SchemaObject = {
     mapping: {
       text: textRef,
       file: fileRef,
-      text_replies: quickRepliesRef,
       card: cardRef,
       carousel: carouselRef,
+      replyable_text: quickRepliesRef,
     },
   },
 };

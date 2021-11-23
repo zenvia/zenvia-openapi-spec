@@ -13,7 +13,7 @@
       "from": "SENDER ID",
       "to": "RECIPIENT ID",
       "contents": [{
-        "type": "text_replies",
+        "type": "replyable_text",
         "text": "some text",
         "quickReplyButtons": [
           {"type": "text", "text": "label", "payload": "payload"}
@@ -32,7 +32,7 @@
       "from": "SENDER ID",
       "to": "RECIPIENT ID",
       "contents": [{
-        "type": "text_replies",
+        "type": "replyable_text",
         "text": "some text",
         "quickReplyButtons": [
           {"type": "text", "text": "label", "payload": "payload"}

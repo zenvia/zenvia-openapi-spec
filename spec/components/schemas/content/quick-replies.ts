@@ -12,7 +12,7 @@ const text: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'text_replies',
+        example: 'replyable_text',
       },
       quickReplyButtons: {
         $ref: quickReplyRef,
