@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
 import { ref as fileRef } from '../file';
+import { ref as quickRepliesRef } from '../quick-replies';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -14,6 +15,7 @@ const all: SchemaObject = {
     mapping: {
       text: textRef,
       file: fileRef,
+      text_replies: quickRepliesRef,
     },
   },
 };
