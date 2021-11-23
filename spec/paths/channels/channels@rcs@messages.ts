@@ -5,7 +5,7 @@ import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 import { card as cardExample } from '../../resources/examples/card';
 import { carousel as carouselExample } from '../../resources/examples/carousel';
-import { textQuickReply as textQuickReplyExample } from '../../resources/examples/replyable-text';
+import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
 
 const post: OperationObject = {
   description: 'Send a RCS message',
@@ -31,7 +31,7 @@ const post: OperationObject = {
             value: carouselExample(),
           },
           replyable_text: {
-            textQuickReply: textQuickReplyExample(),
+            value: replyableTextExample(),
           },
         },
       },
