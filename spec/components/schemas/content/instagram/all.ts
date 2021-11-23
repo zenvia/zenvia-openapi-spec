@@ -9,6 +9,8 @@ const all: SchemaObject = {
     $ref: textRef,
   }, {
     $ref: fileRef,
+  }, {
+    $ref: quickRepliesRef,
   }],
   discriminator: {
     propertyName: 'type',
