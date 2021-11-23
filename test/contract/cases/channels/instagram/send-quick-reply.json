@@ -1,0 +1,43 @@
+{
+  "name": "send quick reply content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/instagram/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "text_replies",
+        "text": "some text",
+        "quickReplyButtons": [
+          {"type": "text", "text": "label", "payload": "payload"}
+        ]
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "text_replies",
+        "text": "some text",
+        "quickReplyButtons": [
+          {"type": "text", "text": "label", "payload": "payload"}
+        ]
+      }]
+    }
+  }
+}
