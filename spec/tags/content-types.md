@@ -32,10 +32,10 @@ This type of content is used to send a file to the user. Depending on the file t
 
 <SchemaDefinition schemaRef="#/components/schemas/content.file" />
 
-## Text with reply buttons
+## Replyable Text
 This is the same as text content, but followed by buttons for quick replying.
 
-<SchemaDefinition schemaRef="#/components/schemas/content.quick-replies" showReadOnly={false} />
+<SchemaDefinition schemaRef="#/components/schemas/content.replyable-text" showReadOnly={false} />
 
 ## Contacts
 This type of content is used to send contact information to the user.
