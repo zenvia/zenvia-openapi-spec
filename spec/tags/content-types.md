@@ -23,11 +23,6 @@ This type of content is the most used one and is composed of plain text.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.text" showReadOnly={false} />
 
-## Text with reply buttons
-This is the same as text content, but followed with buttons for quick replying.
-
-<SchemaDefinition schemaRef="#/components/schemas/content.quick-replies" showReadOnly={false} />
-
 ## File
 This type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:
 * Image
@@ -36,6 +31,11 @@ This type of content is used to send a file to the user. Depending on the file t
 * Document
 
 <SchemaDefinition schemaRef="#/components/schemas/content.file" />
+
+## Text with reply buttons
+This is the same as text content, but followed by buttons for quick replying.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.quick-replies" showReadOnly={false} />
 
 ## Contacts
 This type of content is used to send contact information to the user.
