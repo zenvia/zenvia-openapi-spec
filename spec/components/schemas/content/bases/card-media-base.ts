@@ -12,7 +12,6 @@ const mediaBase: SchemaObject = {
     },
     disposition: {
       type: 'string',
-      description: 'Defines the position that the media will be shown inside the card. Some of the values influence the media height.',
       default: 'ON_THE_TOP_SHORT_HEIGHT',
     },
     caption: {
