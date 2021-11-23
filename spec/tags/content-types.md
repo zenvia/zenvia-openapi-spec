@@ -33,7 +33,7 @@ This type of content is used to send a file to the user. Depending on the file t
 <SchemaDefinition schemaRef="#/components/schemas/content.file" />
 
 ## Replyable Text
-This is the same as text content, but followed by buttons for quick replying.
+This is the same as [text](#section/Text) content, but is followed by buttons for quick replying.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.replyable-text" showReadOnly={false} />
 
@@ -83,6 +83,6 @@ More details may be found below.
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
 
 ## SMS Text
-This the SMS version of the text content. It has additional parameters specific to the SMS integration.
+This the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
