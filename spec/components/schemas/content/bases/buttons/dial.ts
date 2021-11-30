@@ -4,7 +4,7 @@ import { ref as baseRef } from './base';
 
 const dial: SchemaObject = {
   type: 'object',
-  description: "Opesn the default dial opp on the user's device.",
+  description: "It opens the default dial app on the user's device.",
   allOf: [{
     $ref: baseRef,
   }, {
