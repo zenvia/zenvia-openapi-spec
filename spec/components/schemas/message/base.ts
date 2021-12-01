@@ -46,7 +46,7 @@ const base: SchemaObject = {
     },
     contents: {
       title: 'Message Contents',
-      description: 'A list of content to be sent',
+      description: 'The list of contents to be sent',
       type: 'array',
       items: {
         type: 'object',
