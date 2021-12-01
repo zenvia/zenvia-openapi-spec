@@ -9,7 +9,7 @@ import { ref as listRef } from './list';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
-  title: 'Whatsapp',
+  title: 'WhatsApp',
   oneOf: [{
     $ref: textRef,
   }, {
