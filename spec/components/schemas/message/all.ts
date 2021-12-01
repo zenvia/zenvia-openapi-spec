@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as allContentsRef } from '../content/whatsapp/all';
+import { ref as allContentsRef } from '../content/all';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as visitorSchemaRef } from './visitor';
 import { ref as referralSchemaRef } from './referral';
