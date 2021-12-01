@@ -7,6 +7,7 @@ import { ref as carouselRef } from '../carousel';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
+  title: 'Facebook',
   oneOf: [{
     $ref: textRef,
   }, {

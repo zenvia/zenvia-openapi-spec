@@ -4,6 +4,7 @@ import { ref as fileRef } from '../file';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
+  title: 'Google Business Messages',
   oneOf: [{
     $ref: textRef,
   }, {

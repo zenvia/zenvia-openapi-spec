@@ -7,6 +7,7 @@ import { ref as quickRepliesRef } from '../replyable-text';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
+  title: 'RCS',
   oneOf: [{
     $ref: textRef,
   }, {
