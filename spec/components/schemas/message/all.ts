@@ -19,13 +19,9 @@ const all: SchemaObject = {
         $ref: referralSchemaRef,
       },
       contents: {
-        title: 'Message Contents',
-        description: 'A list of content to be sent',
-        type: 'array',
         items: {
           $ref: allContentsRef,
         },
-        minItems: 1,
       },
       idRef: {
         title: 'Referenced Message ID',
