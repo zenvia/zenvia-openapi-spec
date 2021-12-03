@@ -3,7 +3,7 @@ export function replyableText() {
     from: '5510999999999',
     to: '55108888888888',
     contents: [{
-      type: 'text',
+      type: 'replyable_text',
       text: 'Hi Zenvia!',
       quickReplyButtons: [{
         type: 'text',
