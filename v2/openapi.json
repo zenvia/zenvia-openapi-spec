@@ -118,6 +118,94 @@
                       }
                     ]
                   }
+                },
+                "card": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "card",
+                        "title": "Card from Zenvia",
+                        "text": "This is our products",
+                        "media": {
+                          "url": "https://zenvia.br/zenvia-office.png",
+                          "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
+                          "caption": "Our amazing office!"
+                        },
+                        "buttons": [
+                          {
+                            "type": "link",
+                            "text": "Site",
+                            "url": "https://www.zenvia.com/"
+                          }
+                        ],
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "carousel": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "carousel",
+                        "cardWidth": "MEDIUM",
+                        "cards": [
+                          {
+                            "title": "Card from Zenvia",
+                            "text": "This is our products",
+                            "media": {
+                              "url": "https://zenvia.br/zenvia-office.png",
+                              "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
+                              "caption": "Our amazing office!"
+                            },
+                            "buttons": [
+                              {
+                                "type": "link",
+                                "text": "Site",
+                                "url": "https://www.zenvia.com/"
+                              }
+                            ],
+                            "quickReplyButtons": [
+                              {
+                                "type": "text",
+                                "text": "Click here",
+                                "payload": "success"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "replyable_text": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "Hi Zenvia!",
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -286,6 +374,25 @@
                       }
                     ]
                   }
+                },
+                "replyable_text": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "Hi Zenvia!",
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -412,6 +519,25 @@
                                 "payload": "success"
                               }
                             ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "replyable_text": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "Hi Zenvia!",
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
                           }
                         ]
                       }
@@ -1651,6 +1777,34 @@
           }
         ]
       },
+      "content.all": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/content.whatsapp.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.instagram.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.sms.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.facebook.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.rcs.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.voice.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.telegram.all"
+          },
+          {
+            "$ref": "#/components/schemas/content.gbm.all"
+          }
+        ]
+      },
       "content.base": {
         "type": "object",
         "properties": {
@@ -1733,7 +1887,7 @@
                     "properties": {
                       "disposition": {
                         "type": "string",
-                        "description": "Controls where in the card the media will be shown, and some values also influence the media height.",
+                        "description": "Defines the position that the media will be shown inside the card. Some of the values influence the media height.<br>\n                            <br>*`ON_THE_LEFT` and `ON_THE_RIGHT` are only supported by RCS channel.*",
                         "enum": [
                           "ON_THE_LEFT",
                           "ON_THE_RIGHT",
@@ -1801,6 +1955,7 @@
                               "properties": {
                                 "disposition": {
                                   "type": "string",
+                                  "description": "Defines the position that the media will be shown inside the card. Some of the values influence the media height.",
                                   "enum": [
                                     "ON_THE_TOP_SHORT_HEIGHT",
                                     "ON_THE_TOP_MEDIUM_HEIGHT",
@@ -2192,6 +2347,26 @@
           }
         ]
       },
+      "content.replyable-text": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "replyable_text"
+              },
+              "quickReplyButtons": {
+                "$ref": "#/components/schemas/content.bases.quick-reply-list"
+              }
+            }
+          }
+        ]
+      },
       "content.template": {
         "type": "object",
         "allOf": [
@@ -2345,7 +2520,7 @@
       "content.bases.buttons-list": {
         "type": "array",
         "title": "Buttons",
-        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.\n    <br><br>*A maximum of 4 buttons is supported by RCS channel, but they might not be shown if they do not fit in the available space.*",
+        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>\n    <br>*__RCS__: A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*\n    <br>*__Facebook__: A maximum of 3 buttons is supported. Only `text` and `link` buttons are supported.*",
         "maxItems": 4,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
@@ -2377,12 +2552,11 @@
         "properties": {
           "url": {
             "type": "string",
-            "description": "Public URL of media file, which can be an image, a GIF, or a video. The public URL will be displayed inside the card.\n        <br><br>*Videos will display a play button instead of a preview of the content sent.*",
+            "description": "Public URL of media file, which can be an image, a GIF, or a video. The media will be displayed inside the card.\n        <br><br>*Videos will display a play button instead of a preview of the content sent.*",
             "example": "https://zenvia.br/zenvia-team.png"
           },
           "disposition": {
             "type": "string",
-            "description": "Defines the position that the media will be shown inside the card. Some of the values influence the media height.",
             "default": "ON_THE_TOP_SHORT_HEIGHT"
           },
           "caption": {
@@ -2398,8 +2572,8 @@
       "content.bases.quick-reply-list": {
         "type": "array",
         "title": "Quick reply buttons",
-        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.\n    <br><br>*A maximum of 11 buttons is supported by RCS channel.*",
-        "maxItems": 11,
+        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>\n    <br>*__RCS__: A maximum of 11 buttons is supported.*\n    <br>*__Instagram__: Only `text` buttons are supported.*\n    <br>*__Facebook__: Only `text` buttons are supported.*",
+        "maxItems": 13,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
         }
@@ -2499,7 +2673,7 @@
       },
       "content.bases.buttons.dial": {
         "type": "object",
-        "description": "Opesn the default dial opp on the user's device.",
+        "description": "It opens the default dial app on the user's device.",
         "allOf": [
           {
             "$ref": "#/components/schemas/content.bases.buttons.base"
@@ -2637,23 +2811,37 @@
         ]
       },
       "content.facebook.all": {
+        "title": "Facebook",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
           },
           {
             "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.card"
+          },
+          {
+            "$ref": "#/components/schemas/content.carousel"
+          },
+          {
+            "$ref": "#/components/schemas/content.replyable-text"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
-            "file": "#/components/schemas/content.file"
+            "file": "#/components/schemas/content.file",
+            "card": "#/components/schemas/content.card",
+            "carousel": "#/components/schemas/content.carousel",
+            "replyable_text": "#/components/schemas/content.replyable-text"
           }
         }
       },
       "content.gbm.all": {
+        "title": "Google Business Messages",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
@@ -2671,23 +2859,29 @@
         }
       },
       "content.instagram.all": {
+        "title": "Instagram",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
           },
           {
             "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.replyable-text"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
-            "file": "#/components/schemas/content.file"
+            "file": "#/components/schemas/content.file",
+            "replyable_text": "#/components/schemas/content.replyable-text"
           }
         }
       },
       "content.rcs.all": {
+        "title": "RCS",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
@@ -2700,6 +2894,9 @@
           },
           {
             "$ref": "#/components/schemas/content.carousel"
+          },
+          {
+            "$ref": "#/components/schemas/content.replyable-text"
           }
         ],
         "discriminator": {
@@ -2708,11 +2905,13 @@
             "text": "#/components/schemas/content.text",
             "file": "#/components/schemas/content.file",
             "card": "#/components/schemas/content.card",
-            "carousel": "#/components/schemas/content.carousel"
+            "carousel": "#/components/schemas/content.carousel",
+            "replyable_text": "#/components/schemas/content.replyable-text"
           }
         }
       },
       "content.sms.all": {
+        "title": "SMS",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.sms.text"
@@ -2742,7 +2941,7 @@
                   "MORE_CHARACTERS_PER_MESSAGE"
                 ],
                 "default": "AUTO",
-                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS channel](#tag/SMS).*",
+                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS channel](#tag/SMS).*",
                 "example": "AUTO"
               }
             }
@@ -2750,6 +2949,7 @@
         ]
       },
       "content.telegram.all": {
+        "title": "Telegram",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
@@ -2767,6 +2967,7 @@
         }
       },
       "content.voice.all": {
+        "title": "Voice",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.call"
@@ -2780,6 +2981,7 @@
         }
       },
       "content.whatsapp.all": {
+        "title": "WhatsApp",
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.text"
@@ -3282,7 +3484,9 @@
               "DELIVERED",
               "NOT_DELIVERED",
               "READ",
-              "DELETED"
+              "DELETED",
+              "CLICKED",
+              "VERIFIED"
             ]
           },
           "description": {
@@ -3320,16 +3524,13 @@
                 "$ref": "#/components/schemas/message.referral"
               },
               "contents": {
-                "title": "Message Contents",
-                "description": "A list of content to be sent",
-                "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/content.whatsapp.all"
-                },
-                "minItems": 1
+                  "$ref": "#/components/schemas/content.all"
+                }
               },
               "idRef": {
-                "description": "When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here.\n                      On [SMS channel](#tag/SMS), this is the ID of the last message sent to the contact.\n                      <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram) and [SMS](#tag/SMS) channels.*",
+                "title": "Referenced Message ID",
+                "description": "When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here. Also:\n* On reply button clicks (see [replyable text](#section/Replyable-Text) and [card](#section/Card) sections), this will refer to the ID of the clicked message.\n* On [SMS channel](#tag/SMS), this will refer to the ID of the last message sent to the contact.\n\n*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook) and [RCS](#tag/RCS) channels.*",
                 "type": "string",
                 "readOnly": true
               }
@@ -3378,7 +3579,7 @@
           },
           "contents": {
             "title": "Message Contents",
-            "description": "A list of content to be sent",
+            "description": "The list of contents to be sent",
             "type": "array",
             "items": {
               "type": "object"
@@ -3534,7 +3735,8 @@
                   "post",
                   "story_mention",
                   "story",
-                  "message"
+                  "message",
+                  "live"
                 ]
               },
               "url": {
@@ -4769,7 +4971,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n| Content Type | SMS      | Facebook | WhatsApp | RCS      | Voice    | Telegram| GBM*     |Instagram| \n|:-------------|:---------|:---------|:---------|:---------|:---------|:--------|:--------|:--------|\n| text         | &#10004; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| file         | &#10005; | &#10004; | &#10004; | &#10004; | &#10005; |&#10004; |&#10004; |&#10004; |\n| contacts     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| location     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; | \n| template     | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| call         | &#10005; | &#10005; | &#10005; | &#10005; | &#10004; |&#10005; |&#10005; |&#10005; |\n| card         | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| carousel     | &#10005; | &#10005; | &#10005; | &#10004; | &#10005; |&#10005; |&#10005; |&#10005; |\n| button       | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n| list         | &#10005; | &#10005; | &#10004; | &#10005; | &#10005; |&#10005; |&#10005; |&#10005; |\n\n_*GBM stands for Google Business Messages_\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showWriteOnly=\"true\" />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" showWriteOnly=\"true\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" showWriteOnly=\"true\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" showWriteOnly=\"true\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" showWriteOnly=\"true\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\n\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\n\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n"
+      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n|Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          | \n|:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| text           |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| file           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| replyable_text |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| contacts       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| location       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>| \n| template       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| card           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| carousel       |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| button         |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| list           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| call           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n"
     },
     {
       "name": "SMS",
@@ -4809,7 +5011,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider.**\"*\n* *DELIVERED: \"**The message has been delivered by the provider.**\"*\n* *READ: \"**The message has been read by the recipient.**\"*\n* *REJECTED: \"**The message was rejected by the provider.**\"*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message.**\"*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message.**\"*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically\npromote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n"
     },
     {
       "name": "Templates",
