@@ -3,6 +3,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as instagramMessageRef } from '../../components/schemas/message/instagram';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
+import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
 
 const post: OperationObject = {
   description: 'Send a Instagram message',
@@ -20,6 +21,9 @@ const post: OperationObject = {
           },
           file: {
             value: fileExample(),
+          },
+          replyable_text: {
+            value: replyableTextExample(),
           },
         },
       },
