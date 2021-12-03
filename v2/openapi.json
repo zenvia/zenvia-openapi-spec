@@ -194,7 +194,7 @@
                     "to": "55108888888888",
                     "contents": [
                       {
-                        "type": "text",
+                        "type": "replyable_text",
                         "text": "Hi Zenvia!",
                         "quickReplyButtons": [
                           {
@@ -381,7 +381,7 @@
                     "to": "55108888888888",
                     "contents": [
                       {
-                        "type": "text",
+                        "type": "replyable_text",
                         "text": "Hi Zenvia!",
                         "quickReplyButtons": [
                           {
@@ -531,7 +531,7 @@
                     "to": "55108888888888",
                     "contents": [
                       {
-                        "type": "text",
+                        "type": "replyable_text",
                         "text": "Hi Zenvia!",
                         "quickReplyButtons": [
                           {
