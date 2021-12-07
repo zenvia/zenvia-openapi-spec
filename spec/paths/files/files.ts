@@ -40,7 +40,6 @@ const post: OperationObject = {
           description: `The entire request body will be the file content to be stored.
                         <br><br>The main usage for this is for easier binary content streaming in the applications using this API.`,
           type: 'string',
-          format: 'binary',
         },
       },
     },
