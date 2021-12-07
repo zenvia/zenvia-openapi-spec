@@ -51,7 +51,6 @@ const post: OperationObject = {
           description: 'The URL for created file object.',
           schema: {
             type: 'string',
-            format: 'uri',
           },
         },
       },
