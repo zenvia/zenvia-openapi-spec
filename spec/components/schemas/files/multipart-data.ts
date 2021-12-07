@@ -19,12 +19,6 @@ const base: SchemaObject = {
       type: 'string',
       example: 'my-video.mp4',
     },
-    tag: {
-      title: 'Tag',
-      description: 'Tag may later be used to filter file list requests.',
-      type: 'string',
-      example: 'My-Tag',
-    },
   },
 };
 

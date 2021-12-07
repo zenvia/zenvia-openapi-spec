@@ -4,6 +4,5 @@ curl 'https://api.zenvia.com/v2/files' \
 -d '{
   "sourceUrl": "https://zenvia.com/example"
   "mimeType": "image/png",
-  "name": "my-image.png",
-  "tag": "my-tag"
+  "name": "my-image.png"
 }' \
