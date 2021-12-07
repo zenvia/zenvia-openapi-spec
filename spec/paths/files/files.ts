@@ -18,7 +18,6 @@ const post: OperationObject = {
               title: 'Binary File',
               description: 'Binary file content to be stored.',
               type: 'string',
-              format: 'binary',
             },
             file: {
               $ref: multipartDataRef,
@@ -47,6 +46,15 @@ const post: OperationObject = {
   responses: {
     201: {
       description: 'Created file',
+      headers: {
+        Location: {
+          description: 'The URL for created file object.',
+          schema: {
+            type: 'string',
+            format: 'uri',
+          },
+        },
+      },
       content: {
         'application/json': {
           schema: {
