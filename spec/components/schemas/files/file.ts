@@ -29,6 +29,16 @@ const base: SchemaObject = {
         example: 'https://zenvia.com/example.mp4',
         writeOnly: true,
       },
+      sourceHeaders: {
+        title: 'Source Headers',
+        description: 'These headers will be sent in the request to `sourceUrl` to get the file content.',
+        type: 'object',
+        example: {
+          Authorization: 'Basic dXNlcjpwd2Q=',
+          'X-Custom-Token': 'TOKEN',
+        },
+        writeOnly: true,
+      },
     },
     required: [
       'sourceUrl',
