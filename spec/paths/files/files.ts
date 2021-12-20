@@ -53,6 +53,12 @@ const post: OperationObject = {
             type: 'string',
           },
         },
+        'Content-Location': {
+          description: 'The URL for created file *content*.',
+          schema: {
+            type: 'string',
+          },
+        },
       },
       content: {
         'application/json': {
