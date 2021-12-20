@@ -19,6 +19,15 @@ const base: SchemaObject = {
       type: 'string',
       example: 'my-video.mp4',
     },
+    autoDeleteMinutes: {
+      title: 'Auto Delete Minutes',
+      default: null,
+      description: `Amount of minutes after which the file will be automatically deleted.
+                    <br>The default value, \`null\`, means the file will be kept until manually deleted.`,
+      type: 'string',
+      example: 1440,
+      writeOnly: true,
+    },
   },
 };
 
