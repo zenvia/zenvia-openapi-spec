@@ -25,15 +25,15 @@ const groups: TagGroupObject[] = [{
     'Templates',
   ],
 }, {
+  name: 'File Storage',
+  tags: [
+    'Files',
+  ],
+}, {
   name: 'Reports',
   tags: [
     'Message Report',
     'Flow Report',
-  ],
-}, {
-  name: 'File Storage',
-  tags: [
-    'Files',
   ],
 }];
 
