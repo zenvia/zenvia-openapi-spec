@@ -23,6 +23,7 @@ const base: SchemaObject = {
       title: 'Auto Delete Minutes',
       default: null,
       nullable: true,
+      minimum: 1,
       description: `Amount of minutes after which the file will be automatically deleted.
                     <br>The default value, \`null\`, means the file will be kept until manually deleted.`,
       type: 'number',
