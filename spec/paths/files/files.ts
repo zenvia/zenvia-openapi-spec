@@ -4,7 +4,7 @@ import { ref as multipartDataRef } from '../../components/schemas/files/multipar
 import { ref as fileRef } from '../../components/schemas/files/file';
 
 const post: OperationObject = {
-  summary: 'Create file',
+  summary: 'Create a new file',
   description: 'Allows the storage of files for later use.',
   tags: ['Files'],
   requestBody: {
