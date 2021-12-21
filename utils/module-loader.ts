@@ -54,10 +54,12 @@ function removeUnpublishedSchemas(items: any) {
     items.forEach(item => removeUnpublishedSchemas(item));
   } else if (typeof(items) === 'object') {
     for (const propertyName of Object.keys(items)) {
-      if (items[propertyName]['x-unpublished']) {
-        delete items[propertyName];
-      } else {
-        removeUnpublishedSchemas(items[propertyName]);
+      if (items[propertyName] !== null) {
+        if (items[propertyName]['x-unpublished']) {
+          delete items[propertyName];
+        } else {
+          removeUnpublishedSchemas(items[propertyName]);
+        }
       }
     }
   }
