@@ -3,6 +3,7 @@ import { ref as textRef } from './text';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
+  title: 'SMS',
   oneOf: [{
     $ref: textRef,
   }],
