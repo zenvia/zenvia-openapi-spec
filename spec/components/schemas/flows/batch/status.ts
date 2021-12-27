@@ -16,7 +16,7 @@ const base: SchemaObject = {
     },
     flowId: {
       type: 'string',
-      description: 'The workflow identifier.',
+      description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/flows" target="_blank"> Flow IDs here.</a>',
       example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
     },
     campaignName: {
@@ -41,6 +41,18 @@ const base: SchemaObject = {
         \n `CANCELED`: Batch canceled \
         \n `TIMEOUT`: Timeout to process the batch \
         \n `ERROR`: Error to proceed with the batch',
+      enum: [
+        'LOADING',
+        'READY',
+        'QUEUED',
+        'PROCESSING',
+        'WAITING',
+        'COMPLETED',
+        'CANCELING',
+        'CANCELED',
+        'TIMEOUT',
+        'ERROR'
+    ],
       type: 'string',
       example: 'READY',
     },
@@ -62,15 +74,15 @@ const base: SchemaObject = {
         'UNSUPPORTED_CONTENT',
         'HEADER_SIZE_MISMATCH',
         'INVALID_MESSAGE_FORMAT',
-        'WORKFLOW_ID_NOT_FOUND',
+        'FLOW_ID_NOT_FOUND',
         'GATEWAY_ERROR',
-        'WORKFLOW_ERROR',
+        'FLOW_ERROR',
         'INVALID_CONTENTS',
         'RECIPIENT_NOT_FOUND',
         'ERROR_REQUEST_STANDARD_ANSWER',
         'RESCHEDULE_PROCESS_ERROR',
       ],
-      example: 'WORKFLOW_ID_NOT_FOUND',
+      example: 'FLOW_ID_NOT_FOUND',
     },
     size: {
       description: 'The quantity of recived registers',
@@ -90,7 +102,7 @@ const base: SchemaObject = {
       type: 'object',
       $ref: schedule,
     },
-    createdDate: {
+    createdAt: {
       type: 'string',
       description: 'The created date.',
       example: '2021-08-03T16:26:23.616Z',
@@ -99,18 +111,7 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The creator e-mail',
       example: 'user@mail.com',
-    },
-    channel: {
-      type: 'string',
-      description: 'The Channel',
-      enum: [
-        'sms',
-        'whatsapp',
-        'rcs',
-        'facebook',
-      ],
-      example: 'sms',
-    },
+    }
   },
 };
 

@@ -8,8 +8,8 @@ import { ref as sizeRef } from '../../components/parameters/size';
 import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
 
 const get: OperationObject = {
-  description: 'Get list of flows-batches',
-  tags: ['Flows Batches'],
+  description: 'Get list of flow-batches',
+  tags: ['Flow Batches'],
   parameters: [{
     $ref: flowIdRef,
   }, {
@@ -19,7 +19,7 @@ const get: OperationObject = {
   }],
   responses: {
     200: {
-      description: 'Flows-batches found',
+      description: 'Flow-batches found',
       content: {
         'application/json': {
           schema: {
@@ -62,7 +62,7 @@ const get: OperationObject = {
 
 const post: OperationObject = {
   description: 'Create a flow batch',
-  tags: ['Flows Batches'],
+  tags: ['Flow Batches'],
   requestBody: {
     required: true,
     content: {
@@ -115,8 +115,8 @@ const post: OperationObject = {
 };
 
 const path: PathItemObject = {
-  get,
   post,
+  get,
 };
 
 export default path;

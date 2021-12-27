@@ -32,11 +32,6 @@ const base: SchemaObject = {
       type: 'number',
       example: 1,
     },
-    workflowWaitingRecords: {
-      description: 'The quantity of records in waiting workflow',
-      type: 'number',
-      example: 1,
-    },
     queuedRecords: {
       description: 'The quantity of records in queue',
       type: 'number',

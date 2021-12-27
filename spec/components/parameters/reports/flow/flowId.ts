@@ -5,7 +5,7 @@ const flowId: ParameterObject = {
   name: 'flowId',
   in: 'query',
   required: false,
-  description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/home/chatbot" target="_blank"> Flow IDs here.</a>',
+  description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/flows" target="_blank"> Flow IDs here.</a>',
   schema: {
     title: 'Flow ID',
     type: 'string',

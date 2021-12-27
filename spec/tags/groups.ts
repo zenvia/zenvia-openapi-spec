@@ -29,18 +29,18 @@ const groups: TagGroupObject[] = [
     ],
   },
   {
+    name: 'Flow',
+    tags: [
+      'Flow Batches',
+    ],
+  },
+  {
     name: 'Reports',
     tags: [
       'Message Report',
       'Flow Report',
     ],
-  },
-  {
-    name: 'Flow',
-    tags: [
-      'Flows Batches',
-    ],
-  },
+  }
 ];
 
 export default groups;

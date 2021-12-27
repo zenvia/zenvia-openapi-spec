@@ -13,26 +13,32 @@ const base: SchemaObject = {
     {
       type: 'object',
       properties: {
-        fileHeader: {
-          description: 'File headers (CSV), ignored when fileContainsHeader=true (you can send empty in this case)',
-          type: 'string',
-          example: 'sms,name,product,deliveryDate',
-        },
-        fileContainsHeader: {
-          description: 'A list of value (CSV)',
-          type: 'boolean',
-          example: true,
-        },
-        fileCharset: {
-          description: 'File headers (CSV)',
-          type: 'string',
-          example: 'UTF-8',
+        file: {
+          title: 'CSV file properties',
+          description: 'Informations about the CSV file',
+          type: 'object',
+          properties: {
+            header: {
+              description: 'File headers (CSV), ignored when containsHeader=true (you can send empty in this case)',
+              type: 'string',
+              example: 'sms,name,product,deliveryDate',
+            },
+            containsHeader: {
+              description: 'A list of value (CSV)',
+              type: 'boolean',
+              example: true,
+            },
+            charset: {
+              description: 'File headers (CSV)',
+              type: 'string',
+              example: 'UTF-8',
+            },
+          },
+          required: [
+            'containsHeader',
+          ],
         },
       },
-      required: [
-        'fileHeader',
-        'fileContainsHeader',
-      ],
     },
   ],
 };

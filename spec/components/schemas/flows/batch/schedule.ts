@@ -7,17 +7,17 @@ const base: SchemaObject = {
   description: 'Schedule to the batch dispatch',
   type: 'object',
   properties: {
-    scheduleStart: {
+    start: {
       type: 'string',
       description: 'The schedule start date.',
       example: '2021-08-03T16:26:23.616Z',
     },
-    scheduleEnd: {
+    end: {
       type: 'string',
       description: 'The schedule end date.',
       example: '2021-08-03T16:26:23.616Z',
     },
-    scheduleLimit: {
+    limit: {
       type: 'string',
       description: 'The schedule limit date.',
       example: '2021-08-03T16:26:23.616Z',
