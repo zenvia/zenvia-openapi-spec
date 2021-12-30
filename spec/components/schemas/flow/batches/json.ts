@@ -14,30 +14,31 @@ const json: SchemaObject = {
       type: 'object',
       properties: {
         content: {
+          type: 'object',
           allOf: [
             {
               $ref: flowBatchesContentRef,
             },
             {
+              type: 'object',
               required: [
                 'fieldNames',
                 'fields'
               ]
             }
           ],
-          type: 'object',
           properties: {
-          fields: {
-            description: 'A list of field values',
-            type: 'array',
-            minItems: 1,
-            items: {
-              type: 'string',
-              example: ['5511999999999','John','Smartphone','20/07/2021'],
+            fields: {
+              description: 'A list of field values',
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'string',
+              },
+              example: ['5511999999999', 'John', 'Smartphone', '20/07/2021'],
+              writeOnly: true
             },
-            writeOnly: true
-          },
-        }
+          }
         },
       },
       required: ['content']

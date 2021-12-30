@@ -47,7 +47,7 @@ const base: SchemaObject = {
         'CANCELED',
         'TIMEOUT',
         'ERROR'
-    ],
+      ],
       type: 'string',
       example: 'READY',
       readOnly: true
@@ -89,8 +89,12 @@ const base: SchemaObject = {
     },
     aggregatedStatus: {
       type: 'object',
-      $ref: aggregatedStatus,
-      readOnly: true
+      readOnly: true,
+      allOf: [
+        {
+          $ref: aggregatedStatus,
+        }
+      ]
     },
     progress: {
       description: 'Progress of batch. 0-100',

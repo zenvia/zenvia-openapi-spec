@@ -12,8 +12,8 @@ const content: SchemaObject = {
       minItems: 1,
       items: {
         type: 'string',
-        example: ['sms','name','product','deliveryDate']
       },
+      example: ['sms', 'name', 'product', 'deliveryDate']
     },
   }
 };

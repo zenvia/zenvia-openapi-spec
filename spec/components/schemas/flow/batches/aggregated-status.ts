@@ -5,7 +5,6 @@ const aggregatedStatus: SchemaObject = {
   title: 'Aggregated batch status',
   description: 'Detailed status of the batch items',
   type: 'object',
-  readOnly: true,
   properties: {
     successProcessedRecords: {
       description: 'The quantity of records processed with success',
