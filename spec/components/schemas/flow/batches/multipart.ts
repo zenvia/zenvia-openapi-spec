@@ -18,19 +18,19 @@ const multipart: SchemaObject = {
           type: 'object',
           allOf: [
             {
-              $ref: flowBatchesContentRef
+              $ref: flowBatchesContentRef,
             },
           ],
           properties: {
             file: {
-              $ref: flowBatchesFileRef
-            }
+              $ref: flowBatchesFileRef,
+            },
           },
-          required: ['file']
-        }
+          required: ['file'],
+        },
       },
-      required: ['content']
-    }
+      required: ['content'],
+    },
   ],
 };
 

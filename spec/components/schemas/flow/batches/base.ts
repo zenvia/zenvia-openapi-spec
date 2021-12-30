@@ -12,7 +12,7 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The flow batch identifier.',
       example: '853c2b58-8367-4fcb-8d16-d42208e15942',
-      readOnly: true
+      readOnly: true,
     },
     flowId: {
       type: 'string',
@@ -46,11 +46,11 @@ const base: SchemaObject = {
         'CANCELING',
         'CANCELED',
         'TIMEOUT',
-        'ERROR'
+        'ERROR',
       ],
       type: 'string',
       example: 'READY',
-      readOnly: true
+      readOnly: true,
     },
     errorCode: {
       description: 'The batch error',
@@ -79,13 +79,13 @@ const base: SchemaObject = {
         'RESCHEDULE_PROCESS_ERROR',
       ],
       example: 'FLOW_ID_NOT_FOUND',
-      readOnly: true
+      readOnly: true,
     },
     size: {
       description: 'The quantity of recived registers',
       type: 'number',
       example: 1,
-      readOnly: true
+      readOnly: true,
     },
     aggregatedStatus: {
       type: 'object',
@@ -93,14 +93,14 @@ const base: SchemaObject = {
       allOf: [
         {
           $ref: aggregatedStatus,
-        }
-      ]
+        },
+      ],
     },
     progress: {
       description: 'Progress of batch. 0-100',
       type: 'number',
       example: 100,
-      readOnly: true
+      readOnly: true,
     },
     schedule: {
       type: 'object',
@@ -110,19 +110,19 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The created date.',
       example: '2021-08-03T16:26:23.616Z',
-      readOnly: true
+      readOnly: true,
     },
     createdByUserEmail: {
       type: 'string',
       description: 'The creator e-mail',
       example: 'user@mail.com',
-      readOnly: true
-    }
+      readOnly: true,
+    },
   },
   required: [
     'flowId',
-    'name'
-  ]
+    'name',
+  ],
 };
 
 export const ref = createComponentRef(__filename);

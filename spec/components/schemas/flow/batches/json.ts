@@ -23,9 +23,9 @@ const json: SchemaObject = {
               type: 'object',
               required: [
                 'fieldNames',
-                'fields'
-              ]
-            }
+                'fields',
+              ],
+            },
           ],
           properties: {
             fields: {
@@ -36,13 +36,13 @@ const json: SchemaObject = {
                 type: 'string',
               },
               example: ['5511999999999', 'John', 'Smartphone', '20/07/2021'],
-              writeOnly: true
+              writeOnly: true,
             },
-          }
+          },
         },
       },
-      required: ['content']
-    }
+      required: ['content'],
+    },
   ],
 };
 

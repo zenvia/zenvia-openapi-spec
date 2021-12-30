@@ -7,7 +7,6 @@ import { ref as flowIdRef } from '../../components/parameters/flowId';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
 
-
 const get: OperationObject = {
   description: 'Get list of flow-batches',
   tags: ['Flow Batches'],

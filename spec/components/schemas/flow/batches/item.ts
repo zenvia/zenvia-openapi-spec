@@ -16,17 +16,17 @@ const item: SchemaObject = {
           type: 'object',
           allOf: [
             {
-              $ref: flowBatchesContentRef
+              $ref: flowBatchesContentRef,
             },
           ],
           properties: {
             file: {
-              $ref: flowBatchesFileRef
-            }
-          }
-        }
-      }
-    }
+              $ref: flowBatchesFileRef,
+            },
+          },
+        },
+      },
+    },
   ],
 };
 

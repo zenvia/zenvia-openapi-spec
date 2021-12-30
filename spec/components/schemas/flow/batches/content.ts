@@ -13,9 +13,9 @@ const content: SchemaObject = {
       items: {
         type: 'string',
       },
-      example: ['sms', 'name', 'product', 'deliveryDate']
+      example: ['sms', 'name', 'product', 'deliveryDate'],
     },
-  }
+  },
 };
 
 export const ref = createComponentRef(__filename);

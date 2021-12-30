@@ -10,7 +10,7 @@ const file: SchemaObject = {
       type: 'string',
       description: 'The file name.',
       example: 'file.csv',
-      readOnly: true
+      readOnly: true,
     },
     containsHeader: {
       description: 'Set true if the file contains the fields names in the header or false if not',
@@ -21,7 +21,7 @@ const file: SchemaObject = {
       description: 'File headers (CSV)',
       type: 'string',
       example: 'UTF-8',
-      readOnly: true
+      readOnly: true,
     },
   },
   required: [

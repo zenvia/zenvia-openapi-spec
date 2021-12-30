@@ -40,7 +40,7 @@ const groups: TagGroupObject[] = [
       'Message Report',
       'Flow Report',
     ],
-  }
+  },
 ];
 
 export default groups;
