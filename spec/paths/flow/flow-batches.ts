@@ -1,11 +1,12 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as flowsWorkflowJsonRef } from '../../components/schemas/flows/workflow/json';
-import { ref as flowsWorkflowFileRef } from '../../components/schemas/flows/workflow/file';
+import { ref as flowBatchesJsonRef } from '../../components/schemas/flow/batches/json';
+import { ref as flowBatchesMultipartRef } from '../../components/schemas/flow/batches/multipart';
+import { ref as flowBatchesItemRef } from '../../components/schemas/flow/batches/item';
 import { ref as flowIdRef } from '../../components/parameters/flowId';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
-import { ref as flowsBatchStatusRef } from '../../components/schemas/flows/batch/status';
+
 
 const get: OperationObject = {
   description: 'Get list of flow-batches',
@@ -25,7 +26,7 @@ const get: OperationObject = {
           schema: {
             type: 'array',
             items: {
-              $ref: flowsBatchStatusRef,
+              $ref: flowBatchesItemRef,
             },
           },
         },
@@ -68,7 +69,7 @@ const post: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: flowsWorkflowJsonRef,
+          $ref: flowBatchesJsonRef,
         },
       },
       'multipart/form-data': {
@@ -85,13 +86,13 @@ const post: OperationObject = {
                             \n * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**; \
                             \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.',
             },
-            request: {
-              $ref: flowsWorkflowFileRef,
+            body: {
+              $ref: flowBatchesMultipartRef,
             },
           },
           required: [
             'csv',
-            'request',
+            'body',
           ],
         },
       },
@@ -103,7 +104,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: flowsBatchStatusRef,
+            $ref: flowBatchesItemRef,
           },
         },
       },

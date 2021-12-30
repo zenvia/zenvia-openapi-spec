@@ -1,7 +1,6 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import { ref as items } from './items';
+import { ref as aggregatedStatus } from './aggregated-status';
 import { ref as schedule } from './schedule';
 
 const base: SchemaObject = {
@@ -13,21 +12,17 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The flow batch identifier.',
       example: '853c2b58-8367-4fcb-8d16-d42208e15942',
+      readOnly: true
     },
     flowId: {
       type: 'string',
       description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/flows" target="_blank"> Flow IDs here.</a>',
       example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
     },
-    campaignName: {
+    name: {
       type: 'string',
-      description: 'The campaign name.',
-      example: 'Campanha de oferta',
-    },
-    fileName: {
-      type: 'string',
-      description: 'The file name.',
-      example: 'arquivo.csv',
+      description: 'The batch name.',
+      example: 'Sales campaing',
     },
     status: {
       description: 'The batch status: \
@@ -55,6 +50,7 @@ const base: SchemaObject = {
     ],
       type: 'string',
       example: 'READY',
+      readOnly: true
     },
     errorCode: {
       description: 'The batch error',
@@ -83,20 +79,24 @@ const base: SchemaObject = {
         'RESCHEDULE_PROCESS_ERROR',
       ],
       example: 'FLOW_ID_NOT_FOUND',
+      readOnly: true
     },
     size: {
       description: 'The quantity of recived registers',
       type: 'number',
       example: 1,
+      readOnly: true
     },
-    items: {
+    aggregatedStatus: {
       type: 'object',
-      $ref: items,
+      $ref: aggregatedStatus,
+      readOnly: true
     },
     progress: {
       description: 'Progress of batch. 0-100',
       type: 'number',
       example: 100,
+      readOnly: true
     },
     schedule: {
       type: 'object',
@@ -106,13 +106,19 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The created date.',
       example: '2021-08-03T16:26:23.616Z',
+      readOnly: true
     },
     createdByUserEmail: {
       type: 'string',
       description: 'The creator e-mail',
       example: 'user@mail.com',
+      readOnly: true
     }
   },
+  required: [
+    'flowId',
+    'name'
+  ]
 };
 
 export const ref = createComponentRef(__filename);

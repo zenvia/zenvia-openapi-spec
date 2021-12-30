@@ -48,7 +48,7 @@ const tags: TagObject[] = [{
   name: 'Flow Batches',
   description: flowBatchesDescription,
 }, {
-  name: 'Batches',
+  name: 'Message Batches',
   description: batchesDescription,
 }, {
   name: 'Webhooks',

@@ -1,15 +1,23 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as flowBatchesJsonRef } from '../../components/schemas/flow/batches/json';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
-  description: 'Get errors in flow batch',
+  description: 'Retrieve one batch by id',
   tags: ['Flow Batches'],
+  parameters: [{
+    $ref: flowBatchIdRef,
+  }],
   responses: {
     200: {
-      description: 'Errors found as csv file',
+      description: 'Flow Batch found',
       content: {
-        'text/csv': {},
+        'application/json': {
+          schema: {
+            $ref: flowBatchesJsonRef,
+          },
+        },
       },
     } as ResponseObject,
     default: {
@@ -20,9 +28,6 @@ const get: OperationObject = {
 
 const path: PathItemObject = {
   get,
-  parameters: [{
-    $ref: flowBatchIdRef,
-  }],
 };
 
 export default path;

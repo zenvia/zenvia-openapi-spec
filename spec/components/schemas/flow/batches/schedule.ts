@@ -1,8 +1,7 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
-const base: SchemaObject = {
+const schedule: SchemaObject = {
   title: 'Batch schedule',
   description: 'Schedule to the batch dispatch',
   type: 'object',
@@ -26,4 +25,4 @@ const base: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default base;
+export default schedule;

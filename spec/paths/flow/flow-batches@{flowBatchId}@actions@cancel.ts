@@ -3,11 +3,11 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const post: OperationObject = {
-  description: 'Pause a flow batch',
+  description: 'Cancel a flow batch',
   tags: ['Flow Batches'],
   responses: {
     204: {
-      description: 'Batch paused',
+      description: 'Flow batch canceled',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,

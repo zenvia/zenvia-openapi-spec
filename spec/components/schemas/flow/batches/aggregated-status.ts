@@ -1,11 +1,11 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
-const base: SchemaObject = {
-  title: 'Items status',
+const aggregatedStatus: SchemaObject = {
+  title: 'Aggregated batch status',
   description: 'Detailed status of the batch items',
   type: 'object',
+  readOnly: true,
   properties: {
     successProcessedRecords: {
       description: 'The quantity of records processed with success',
@@ -41,4 +41,4 @@ const base: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default base;
+export default aggregatedStatus;
