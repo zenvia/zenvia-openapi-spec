@@ -16,6 +16,7 @@ const file: SchemaObject = {
       description: 'Set true if the file contains the fields names in the header or false if not',
       type: 'boolean',
       example: true,
+      writeOnly: true,
     },
     charset: {
       description: 'File headers (CSV)',
