@@ -85,13 +85,13 @@ const post: OperationObject = {
                             \n * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**; \
                             \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.',
             },
-            body: {
+            request: {
               $ref: flowBatchesMultipartRef,
             },
           },
           required: [
             'csv',
-            'body',
+            'request',
           ],
         },
       },

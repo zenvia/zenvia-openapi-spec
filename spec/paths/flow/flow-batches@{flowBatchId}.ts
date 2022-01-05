@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as flowBatchesJsonRef } from '../../components/schemas/flow/batches/json';
+import { ref as flowBatchesItemRef } from '../../components/schemas/flow/batches/item';
 import { ref as flowBatchIdRef } from '../../components/parameters/flowBatchId';
 
 const get: OperationObject = {
@@ -15,7 +15,7 @@ const get: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: flowBatchesJsonRef,
+            $ref: flowBatchesItemRef,
           },
         },
       },
