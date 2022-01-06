@@ -9,4 +9,4 @@ curl 'https://api.zenvia.com/v2/files' \
   },
   "mimeType": "image/png",
   "name": "my-image.png"
-}' \
+}'
