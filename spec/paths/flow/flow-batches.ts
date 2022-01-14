@@ -34,21 +34,21 @@ const get: OperationObject = {
         'x-total': {
           schema: {
             description: 'The number of results',
-            type: 'number',
+            type: 'string',
             example: 100,
           },
         },
         'x-page-size': {
           schema: {
             description: 'The number of results per page',
-            type: 'number',
+            type: 'string',
             example: 10,
           },
         },
         'x-page': {
           schema: {
             description: 'The current page',
-            type: 'number',
+            type: 'string',
             example: 5,
           },
         },
