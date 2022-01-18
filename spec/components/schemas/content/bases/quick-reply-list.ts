@@ -6,9 +6,9 @@ export const quickReplyList: SchemaObject = {
   type: 'array',
   title: 'Quick reply buttons',
   description: `Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>
-    <br>*__RCS__: A maximum of 11 buttons is supported.*
-    <br>*__Instagram__: Only \`text\` buttons are supported.*
-    <br>*__Facebook__: Only \`text\` buttons are supported.*`,
+    <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*
+    <br>*[Instagram](#tag/Instagram): Only \`text\` buttons are supported.*
+    <br>*[Facebook](#tag/Facebook): Only \`text\` buttons are supported.*`,
   maxItems: 13,
   items: {
     $ref: buttonsRef,
