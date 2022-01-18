@@ -1097,6 +1097,124 @@
         ]
       }
     },
+    "/files": {
+      "post": {
+        "summary": "Create a new file",
+        "description": "Allows the storage of files for later use.",
+        "tags": [
+          "Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "title": "Binary File",
+                    "description": "Binary file content to be stored.",
+                    "type": "string"
+                  },
+                  "file": {
+                    "$ref": "#/components/schemas/files.multipart-data"
+                  }
+                },
+                "required": [
+                  "content"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/files.file"
+              }
+            },
+            "*/*": {
+              "schema": {
+                "title": "Binary File",
+                "description": "The entire request body will be the file content to be stored.\n                        <br><br>The main usage for this is for easier binary content streaming in the applications using this API.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created file",
+            "headers": {
+              "Location": {
+                "description": "The URL for created file object.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/files.file"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "label": "Bash: multipart with data",
+            "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-F 'file={\n  \"mimeType\": \"image/png\",\n  \"name\": \"my-image.png\"\n};type=application/json' \\\n-F 'content=@./image-source.png'\n"
+          },
+          {
+            "lang": "Shell",
+            "label": "Bash: multipart",
+            "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-F 'content=@./image-source.png;type=image/png;filename=my-image.png'\n"
+          },
+          {
+            "lang": "Shell",
+            "label": "Bash: URL",
+            "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"sourceUrl\": \"https://zenvia.com/example\",\n  \"sourceHeaders\": {\n    \"Authorization\": \"Basic dXNlcjpwd2Q=\",\n    \"X-Custom-Token\": \"TOKEN\"\n  },\n  \"mimeType\": \"image/png\",\n  \"name\": \"my-image.png\"\n}'\n"
+          },
+          {
+            "lang": "Shell",
+            "label": "Bash: binary",
+            "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-H 'Content-Type: image/png' \\\n-H 'Content-Disposition: inline;filename=my-image.png' \\\n--data-binary '@./image-source.png'\n"
+          }
+        ]
+      }
+    },
+    "/files/{fileId}": {
+      "get": {
+        "summary": "Retrieve one file by id",
+        "description": "Allows to retrieve information about one previously stored file.",
+        "tags": [
+          "Files"
+        ],
+        "responses": {
+          "200": {
+            "description": "File object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/files.file"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/files.fileId"
+        }
+      ]
+    },
     "/reports/flow/entries": {
       "get": {
         "description": "Retrieve all entries applying the given filters",
@@ -1315,7 +1433,7 @@
     },
     "/templates": {
       "post": {
-        "description": "Create a new",
+        "description": "Create a new template",
         "tags": [
           "Templates"
         ],
@@ -2255,17 +2373,17 @@
               },
               "fileMimeType": {
                 "type": "string",
-                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)",
+                "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.\n                      <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*\n                      <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*\n                      <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*\n                      <br>*For the rest of the channels, the limitations are currently undocumented.*",
                 "example": "application/pdf"
               },
               "fileCaption": {
                 "type": "string",
-                "description": "Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) and [RCS channel](#tag/RCS) images and videos.",
+                "description": "Some description for the file.\n                      <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) images and videos.*",
                 "example": "Some caption"
               },
               "fileName": {
                 "type": "string",
-                "description": "The name of the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) documents.",
+                "description": "The name of the file.\n                      <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) documents.*",
                 "example": "document.pdf"
               }
             },
@@ -2520,7 +2638,7 @@
       "content.bases.buttons-list": {
         "type": "array",
         "title": "Buttons",
-        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>\n    <br>*__RCS__: A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*\n    <br>*__Facebook__: A maximum of 3 buttons is supported. Only `text` and `link` buttons are supported.*",
+        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*\n    <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Only `text` and `link` buttons are supported.*",
         "maxItems": 4,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
@@ -2572,7 +2690,7 @@
       "content.bases.quick-reply-list": {
         "type": "array",
         "title": "Quick reply buttons",
-        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>\n    <br>*__RCS__: A maximum of 11 buttons is supported.*\n    <br>*__Instagram__: Only `text` buttons are supported.*\n    <br>*__Facebook__: Only `text` buttons are supported.*",
+        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*\n    <br>*[Instagram](#tag/Instagram): Only `text` buttons are supported.*\n    <br>*[Facebook](#tag/Facebook): Only `text` buttons are supported.*",
         "maxItems": 13,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
@@ -3507,6 +3625,108 @@
           "code",
           "timestamp"
         ]
+      },
+      "files.file": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "title": "ID",
+                "description": "ID of the file resource created.",
+                "type": "string",
+                "example": "f8b5a77c7cd3403b08231a1a9c40705717cbc8cab4a9a9e08bf8a5c78905b7d5",
+                "readOnly": true
+              },
+              "url": {
+                "title": "URL",
+                "description": "URL from where the file content is available.",
+                "type": "string",
+                "example": "https://zenvia.chat/storage/files/f8b5a77c7cd3403b08231a1a9c40705717cbc8cab4a9a9e08bf8a5c78905b7d5.bin",
+                "readOnly": true
+              },
+              "sourceUrl": {
+                "title": "Source URL",
+                "description": "URL from where the file content will be obtained.",
+                "type": "string",
+                "example": "https://zenvia.com/example.mp4",
+                "writeOnly": true
+              },
+              "sourceHeaders": {
+                "title": "Source Headers",
+                "description": "These headers will be sent in the request to `sourceUrl` to get the file content.",
+                "type": "object",
+                "example": {
+                  "Authorization": "Basic dXNlcjpwd2Q=",
+                  "X-Custom-Token": "TOKEN"
+                },
+                "writeOnly": true
+              }
+            },
+            "required": [
+              "sourceUrl"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/files.multipart-data"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bytes": {
+                "title": "Bytes",
+                "description": "Size in bytes of the file content created.",
+                "type": "number",
+                "example": 1044889600,
+                "readOnly": true
+              },
+              "createdAt": {
+                "title": "Created At",
+                "description": "Timestamp of the file creation.",
+                "type": "string",
+                "example": "2021-12-20T14:37:59.000Z",
+                "readOnly": true
+              },
+              "deleteAt": {
+                "title": "Delete At",
+                "description": "Timestamp of the moment after which the file will be automatically deleted.",
+                "type": "string",
+                "example": "2021-12-21T14:37:59.000Z",
+                "readOnly": true
+              }
+            }
+          }
+        ]
+      },
+      "files.multipart-data": {
+        "title": "File object",
+        "description": "This is a file object model.",
+        "type": "object",
+        "properties": {
+          "mimeType": {
+            "title": "Mime Type",
+            "description": "Mime type of the file. When not provided, it will be determined based either on the header *Content-Type* or the file name *extension*.",
+            "type": "string",
+            "example": "video/mp4"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Name of the file. When not provided, it will be obtained from based either on the header *Content-Disposition* or the URL last path.",
+            "type": "string",
+            "example": "my-video.mp4"
+          },
+          "autoDeleteMinutes": {
+            "title": "Auto Delete Minutes",
+            "default": null,
+            "nullable": true,
+            "minimum": 1,
+            "description": "Amount of minutes after which the file will be automatically deleted.\n                    <br>The default value, `null`, means the file will be kept until manually deleted.",
+            "type": "number",
+            "example": 1440,
+            "writeOnly": true
+          }
+        }
       },
       "message.all": {
         "type": "object",
@@ -4740,7 +4960,7 @@
     },
     "responses": {
       "error": {
-        "description": "Error response. See the [Error Handling](#section/API-Design/Error-Handling) section for details.",
+        "description": "Error response. See the [Error Handling](#section/Error-Handling) section for details.",
         "content": {
           "application/json": {
             "schema": {
@@ -4783,6 +5003,15 @@
         "in": "path",
         "required": true,
         "description": "The <a href=\"https://app.zenvia.com/home/templates\">template identifier</a>",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "files.fileId": {
+        "name": "fileId",
+        "in": "path",
+        "required": true,
+        "description": "The file identifier",
         "schema": {
           "type": "string"
         }
@@ -5024,6 +5253,10 @@
     {
       "name": "Flow Report",
       "description": "A report that provides the current state of sessions (executions) of flows for a specific time frame. These states contain session variables and their current value. The report can be filtered by flow, dispatch, or session.\n"
+    },
+    {
+      "name": "Files",
+      "description": "This allows the storage files for later use elsewhere, usually for sending messages.\n"
     }
   ],
   "x-tagGroups": [
@@ -5033,8 +5266,8 @@
         "Content types",
         "SMS",
         "WhatsApp",
-        "Facebook",
         "Instagram",
+        "Facebook",
         "RCS",
         "Telegram",
         "Google Business Messages",
@@ -5052,6 +5285,12 @@
       "name": "Templates",
       "tags": [
         "Templates"
+      ]
+    },
+    {
+      "name": "File Storage",
+      "tags": [
+        "Files"
       ]
     },
     {

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -31,6 +33,12 @@
       .menu-content img {
         padding: 25px;
       }
+
+      .api-content h5 .dropdown {
+        background: rgba(150, 200, 255);
+        padding-left: 10px;
+        padding-right: 8px;
+      }
     </style>
     <script src="/reload/reload.js"></script>
   </head>
@@ -40,7 +48,7 @@
     <script>
       Redoc.init(
         './openapi.json',
-        {"theme":{"colors":{"primary":{"main":"#32329f"}},"breakpoints":{"small":"600px","medium":"800px"}},"pathInMiddlePanel":false,"noAutoAuth":true,"jsonSampleExpandLevel":"all","expandResponses":"200"},
+        {"theme":{"colors":{"primary":{"main":"#32329f"}},"breakpoints":{"small":"600px","medium":"800px"}},"pathInMiddlePanel":false,"noAutoAuth":true,"jsonSampleExpandLevel":"all","expandResponses":"200,201"},
         document.getElementById("redoc_container"),
         function () {
           var els = document.querySelectorAll('td');
