@@ -20,17 +20,23 @@ const file: SchemaObject = {
       },
       fileMimeType: {
         type: 'string',
-        description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)',
+        description: `MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.
+                      <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*
+                      <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*
+                      <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*
+                      <br>*For the rest of the channels, the limitations are currently undocumented.*`,
         example: 'application/pdf',
       },
       fileCaption: {
         type: 'string',
-        description: 'Some description for the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) and [RCS channel](#tag/RCS) images and videos.',
+        description: `Some description for the file.
+                      <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) images and videos.*`,
         example: 'Some caption',
       },
       fileName: {
         type: 'string',
-        description: 'The name of the file. Only applicable to [WhatsApp channel](#tag/WhatsApp) documents.',
+        description: `The name of the file.
+                      <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) documents.*`,
         example: 'document.pdf',
       },
     },

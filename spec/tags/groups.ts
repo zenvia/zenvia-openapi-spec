@@ -6,8 +6,8 @@ const groups: TagGroupObject[] = [{
     'Content types',
     'SMS',
     'WhatsApp',
-    'Facebook',
     'Instagram',
+    'Facebook',
     'RCS',
     'Telegram',
     'Google Business Messages',
@@ -23,6 +23,11 @@ const groups: TagGroupObject[] = [{
   name: 'Templates',
   tags: [
     'Templates',
+  ],
+}, {
+  name: 'File Storage',
+  tags: [
+    'Files',
   ],
 }, {
   name: 'Reports',
