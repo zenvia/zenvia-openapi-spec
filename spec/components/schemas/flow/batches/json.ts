@@ -29,13 +29,16 @@ const json: SchemaObject = {
           ],
           properties: {
             fields: {
-              description: 'A list of field values',
+              description: 'A list of field values, each item refers to a contact',
               type: 'array',
               minItems: 1,
               items: {
                 type: 'string',
               },
-              example: ['5511999999999', 'John', 'Smartphone', '20/07/2021'],
+              example: [
+                        ['5511999999999', 'John', 'Smartphone', '20/07/2021'], 
+                        ['5511911111111', 'Paul', 'Tablet', '21/07/2021']
+                      ],
               writeOnly: true,
             },
           },
