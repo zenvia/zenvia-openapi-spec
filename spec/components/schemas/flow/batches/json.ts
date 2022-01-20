@@ -33,12 +33,15 @@ const json: SchemaObject = {
               type: 'array',
               minItems: 1,
               items: {
-                type: 'string',
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
               },
               example: [
-                        ['5511999999999', 'John', 'Smartphone', '20/07/2021'], 
-                        ['5511911111111', 'Paul', 'Tablet', '21/07/2021']
-                      ],
+                ['5511999999999', 'John', 'Smartphone', '20/07/2021'],
+                ['5511911111111', 'Paul', 'Tablet', '21/07/2021'],
+              ],
               writeOnly: true,
             },
           },
