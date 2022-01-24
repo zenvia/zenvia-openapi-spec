@@ -9,7 +9,7 @@ const base: SchemaObject = {
   properties: {
     flowId: {
       title: 'Flow ID',
-      description: 'The flow identifier',
+      description: 'The the flow identifier. You can view your <a href="https://app.zenvia.com/flows" target="_blank"> Flow IDs here.</a>',
       type: 'string',
     },
     dispatchId: {

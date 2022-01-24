@@ -4,7 +4,7 @@ import { ref as multipartBatchRef } from '../../components/schemas/batches/multi
 
 const post: OperationObject = {
   description: 'Create batch',
-  tags: ['Batches'],
+  tags: ['Message Batches'],
   requestBody: {
     required: true,
     content: {

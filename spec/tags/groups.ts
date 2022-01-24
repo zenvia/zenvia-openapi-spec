@@ -12,7 +12,7 @@ const groups: TagGroupObject[] = [{
     'Telegram',
     'Google Business Messages',
     'Voice',
-    'Batches',
+    'Message Batches',
   ],
 }, {
   name: 'Webhooks',
@@ -28,6 +28,11 @@ const groups: TagGroupObject[] = [{
   name: 'File Storage',
   tags: [
     'Files',
+  ],
+}, {
+  name: 'Flow',
+  tags: [
+    'Flow Batches',
   ],
 }, {
   name: 'Reports',
