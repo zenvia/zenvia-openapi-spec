@@ -15,7 +15,7 @@ const base: SchemaObject = {
     },
     name: {
       title: 'Name',
-      description: 'Name of the file. When not provided, it will be obtained from based either on the header *Content-Disposition* or the URL last path.',
+      description: 'Name of the file. When not provided, it will be obtained from either the header *Content-Disposition* or the URL path.',
       type: 'string',
       example: 'my-video.mp4',
     },
