@@ -28,7 +28,7 @@
       "post": {
         "description": "Create batch",
         "tags": [
-          "Batches"
+          "Message Batches"
         ],
         "requestBody": {
           "required": true,
@@ -1212,6 +1212,207 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/files.fileId"
+        }
+      ]
+    },
+    "/flow-batches": {
+      "post": {
+        "description": "Create a flow batch",
+        "tags": [
+          "Flow Batches"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/flow.batches.json"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csv": {
+                    "type": "string",
+                    "title": "Binary CSV File",
+                    "description": "Binary csv file with recipients and variable values ​​when necessary. \n                             \n **Requirements**:                             \n * The file must be in **.csv** format;                             \n * The maximum file size is **50MB**; ,                            \n * The mandatory delimiter to be used between the values ​​is the **semicolon (\";\")**;                             \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns."
+                  },
+                  "request": {
+                    "$ref": "#/components/schemas/flow.batches.multipart"
+                  }
+                },
+                "required": [
+                  "csv",
+                  "request"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created flow batch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/flow.batches.item"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "get": {
+        "description": "Get list of flow-batches",
+        "tags": [
+          "Flow Batches"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/flowId"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow-batches found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/flow.batches.item"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The number of results",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/flow-batches/{flowBatchId}": {
+      "get": {
+        "description": "Retrieve one batch by id",
+        "tags": [
+          "Flow Batches"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/flowBatchId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow Batch found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/flow.batches.item"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/flow-batches/{flowBatchId}/actions/cancel": {
+      "post": {
+        "description": "Cancel a flow batch",
+        "tags": [
+          "Flow Batches"
+        ],
+        "responses": {
+          "204": {
+            "description": "Flow batch canceled"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/flowBatchId"
+        }
+      ]
+    },
+    "/flow-batches/{flowBatchId}/actions/pause": {
+      "post": {
+        "description": "Pause a flow batch",
+        "tags": [
+          "Flow Batches"
+        ],
+        "responses": {
+          "204": {
+            "description": "Flow batch paused"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/flowBatchId"
+        }
+      ]
+    },
+    "/flow-batches/{flowBatchId}/actions/resume": {
+      "post": {
+        "description": "Resume a flow batch",
+        "tags": [
+          "Flow Batches"
+        ],
+        "responses": {
+          "204": {
+            "description": "Flow batch resumed"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/flowBatchId"
         }
       ]
     },
@@ -3712,7 +3913,7 @@
           },
           "name": {
             "title": "Name",
-            "description": "Name of the file. When not provided, it will be obtained from based either on the header *Content-Disposition* or the URL last path.",
+            "description": "Name of the file. When not provided, it will be obtained from either the header *Content-Disposition* or the URL path.",
             "type": "string",
             "example": "my-video.mp4"
           },
@@ -3725,6 +3926,342 @@
             "type": "number",
             "example": 1440,
             "writeOnly": true
+          }
+        }
+      },
+      "flow.batches.aggregated-status": {
+        "title": "Aggregated batch status",
+        "description": "Detailed status of the batch items",
+        "type": "object",
+        "properties": {
+          "successProcessedRecords": {
+            "description": "The quantity of records processed with success",
+            "type": "number",
+            "example": 1
+          },
+          "timedoutRecords": {
+            "description": "The quantity of records in timed out",
+            "type": "number",
+            "example": 1
+          },
+          "errorProcessedRecords": {
+            "description": "The quantity of records processed with error",
+            "type": "number",
+            "example": 1
+          },
+          "canceledRecords": {
+            "description": "The quantity of records canceled",
+            "type": "number",
+            "example": 1
+          },
+          "processingRecords": {
+            "description": "The quantity of records in processing",
+            "type": "number",
+            "example": 1
+          },
+          "queuedRecords": {
+            "description": "The quantity of records in queue",
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "flow.batches.base": {
+        "title": "Flow Batch Status Object",
+        "description": "This is a Flow Batch Status object model.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The flow batch identifier.",
+            "example": "853c2b58-8367-4fcb-8d16-d42208e15942",
+            "readOnly": true
+          },
+          "flowId": {
+            "type": "string",
+            "description": "The the flow identifier. You can view your <a href=\"https://app.zenvia.com/flows\" target=\"_blank\"> Flow IDs here.</a>",
+            "example": "c2c3e42d-6fb7-4ad6-897a-dd7613469f58"
+          },
+          "name": {
+            "type": "string",
+            "description": "The batch name.",
+            "example": "Sales campaing"
+          },
+          "status": {
+            "description": "The batch status:         \n `LOADING`:  Loading the batch         \n `READY`: Batch loaded and ready to be dispatched         \n `QUEUED`: Batch sent to dispatch queue         \n `PROCESSING`: Batch dispatch in progress         \n `WAITING`: Waiting confirmation of the batch status         \n `COMPLETED`: Batch completed         \n `CANCELING`: Batch being canceled         \n `CANCELED`: Batch canceled         \n `TIMEOUT`: Timeout to process the batch         \n `ERROR`: Error to proceed with the batch",
+            "enum": [
+              "LOADING",
+              "READY",
+              "QUEUED",
+              "PROCESSING",
+              "WAITING",
+              "COMPLETED",
+              "CANCELING",
+              "CANCELED",
+              "TIMEOUT",
+              "ERROR"
+            ],
+            "type": "string",
+            "example": "READY",
+            "readOnly": true
+          },
+          "errorCode": {
+            "description": "The batch error",
+            "type": "string",
+            "enum": [
+              "ERROR_SAVING_FILE",
+              "ERROR_INVALID_MEDIA_TYPE",
+              "ERROR_IN_MEDIA_TYPE_DETECTION",
+              "ERROR_FILE_NOT_FOUND",
+              "ERROR_IN_FILE_PROCESSING",
+              "ERROR_PROCESSING_CONTACTS",
+              "ERROR_INVALID_BULK_HEADERS",
+              "ERROR_INVALID_CHARACTER",
+              "ERROR_INVALID_TELEPHONE_NUMBER",
+              "ERROR_SEEKING_CONTACTS",
+              "ERROR_MAX_TPS",
+              "UNSUPPORTED_CONTENT",
+              "HEADER_SIZE_MISMATCH",
+              "INVALID_MESSAGE_FORMAT",
+              "FLOW_ID_NOT_FOUND",
+              "GATEWAY_ERROR",
+              "FLOW_ERROR",
+              "INVALID_CONTENTS",
+              "RECIPIENT_NOT_FOUND",
+              "ERROR_REQUEST_STANDARD_ANSWER",
+              "RESCHEDULE_PROCESS_ERROR"
+            ],
+            "example": "FLOW_ID_NOT_FOUND",
+            "readOnly": true
+          },
+          "size": {
+            "description": "The quantity of recived registers",
+            "type": "number",
+            "example": 1,
+            "readOnly": true
+          },
+          "aggregatedStatus": {
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/flow.batches.aggregated-status"
+              }
+            ]
+          },
+          "progress": {
+            "description": "Progress of batch. 0-100",
+            "type": "number",
+            "example": 100,
+            "readOnly": true
+          },
+          "schedule": {
+            "type": "object",
+            "$ref": "#/components/schemas/flow.batches.schedule"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "The created date.",
+            "example": "2021-08-03T16:26:23.616Z",
+            "readOnly": true
+          },
+          "createdByUserEmail": {
+            "type": "string",
+            "description": "The creator e-mail",
+            "example": "user@mail.com",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "flowId",
+          "name"
+        ]
+      },
+      "flow.batches.content": {
+        "title": "The batch content",
+        "description": "The content to be used on dispatch",
+        "type": "object",
+        "properties": {
+          "fieldNames": {
+            "description": "Field names, ignored when containsHeader=true (you can send empty in this case)",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "sms",
+              "name",
+              "product",
+              "deliveryDate"
+            ]
+          }
+        }
+      },
+      "flow.batches.file": {
+        "title": "CSV file properties",
+        "description": "Informations about the CSV file",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The file name.",
+            "example": "file.csv",
+            "readOnly": true
+          },
+          "containsHeader": {
+            "description": "Set true if the file contains the fields names in the header or false if not",
+            "type": "boolean",
+            "example": true
+          },
+          "charset": {
+            "description": "File headers (CSV)",
+            "type": "string",
+            "example": "UTF-8",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "containsHeader"
+        ]
+      },
+      "flow.batches.item": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/flow.batches.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/flow.batches.content"
+                  }
+                ],
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/flow.batches.file"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "flow.batches.json": {
+        "title": "Flow Batch Object for request with json request.",
+        "description": "This is a Flow Batch object model for request with json request.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/flow.batches.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/flow.batches.content"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "fieldNames",
+                      "fields"
+                    ]
+                  }
+                ],
+                "properties": {
+                  "fields": {
+                    "description": "A list of field values, each item refers to a contact",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      [
+                        "5511999999999",
+                        "John",
+                        "Smartphone",
+                        "20/07/2021"
+                      ],
+                      [
+                        "5511911111111",
+                        "Paul",
+                        "Tablet",
+                        "21/07/2021"
+                      ]
+                    ],
+                    "writeOnly": true
+                  }
+                }
+              }
+            },
+            "required": [
+              "content"
+            ]
+          }
+        ]
+      },
+      "flow.batches.multipart": {
+        "title": "Flow Batch Object for request with file.",
+        "description": "This is a Flow Batch object model for request with file.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/flow.batches.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/flow.batches.content"
+                  }
+                ],
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/flow.batches.file"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            },
+            "required": [
+              "content"
+            ]
+          }
+        ]
+      },
+      "flow.batches.schedule": {
+        "title": "Batch schedule",
+        "description": "Schedule to the batch dispatch",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "The schedule start date.",
+            "example": "2021-08-03T16:26:23.616Z"
+          },
+          "end": {
+            "type": "string",
+            "description": "The schedule end date.",
+            "example": "2021-08-03T16:26:23.616Z"
+          },
+          "limit": {
+            "type": "string",
+            "description": "The schedule limit date.",
+            "example": "2021-08-03T16:26:23.616Z"
           }
         }
       },
@@ -4138,7 +4675,7 @@
         "properties": {
           "flowId": {
             "title": "Flow ID",
-            "description": "The flow identifier",
+            "description": "The the flow identifier. You can view your <a href=\"https://app.zenvia.com/flows\" target=\"_blank\"> Flow IDs here.</a>",
             "type": "string"
           },
           "dispatchId": {
@@ -4980,6 +5517,48 @@
           "type": "string"
         }
       },
+      "flowBatchId": {
+        "name": "flowBatchId",
+        "in": "path",
+        "required": true,
+        "description": "Flow Batch identifier",
+        "schema": {
+          "type": "string"
+        },
+        "example": "b5agf1-y237-11e8-b127-1230f6c2d98m"
+      },
+      "flowId": {
+        "name": "flowId",
+        "in": "query",
+        "required": true,
+        "description": "The the flow identifier. You can view your <a href=\"https://app.zenvia.com/flows\" target=\"_blank\"> Flow IDs here.</a>",
+        "schema": {
+          "type": "string"
+        },
+        "example": "b5agf1-y237-11e8-b127-1230f6c2d98m"
+      },
+      "page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "description": "This is the page number. Default is 0.",
+        "schema": {
+          "title": "page",
+          "type": "number"
+        },
+        "example": 5
+      },
+      "size": {
+        "name": "size",
+        "in": "query",
+        "required": false,
+        "description": "This is the page size. Default is 20.",
+        "schema": {
+          "title": "size",
+          "type": "number"
+        },
+        "example": 10
+      },
       "subscriptionId": {
         "name": "subscriptionId",
         "in": "path",
@@ -5040,7 +5619,7 @@
         "name": "flowId",
         "in": "query",
         "required": false,
-        "description": "The the flow identifier. You can view your <a href=\"https://app.zenvia.com/home/chatbot\" target=\"_blank\"> Flow IDs here.</a>",
+        "description": "The the flow identifier. You can view your <a href=\"https://app.zenvia.com/flows\" target=\"_blank\"> Flow IDs here.</a>",
         "schema": {
           "title": "Flow ID",
           "type": "string"
@@ -5235,7 +5814,11 @@
       "description": "To access the Voice channel, you need to create your account here:\nhttps://voice-app.zenvia.com/painel/signup.php.\n\nOnce the account is created, you can get your voice access token on your voice panel homepage: https://voice-app.zenvia.com/painel/\n\nThe voice channel will be available for use after you connect a voice access token on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\n**Get in touch with Zenvia consultants to create your account.**\n\nWebhooks allow you to receive status in the configured URL. [Learn more here.](#tag/Webhooks)\n\n\n## Voice limitations\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| audio | audio/mp3<br>audio/wav | 5&nbsp;MB |\n\n## Voice sender and recipient\n\nWhen you send a voice message to a contact using Voice channel:\n\n* Recipient: the phone number of the contact\n* Sender: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)\n\nWhen you receive a voice message from a contact, the sender and recipient are inverted:\n\n* Recipient: the sender id registered on [Zenvia platform](https://app.zenvia.com/home/credentials)\n* Sender: the phone number of the contact\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.\n"
     },
     {
-      "name": "Batches",
+      "name": "Flow Batches",
+      "description": "The flow-batches api makes it possible to dispatch a active Flow with one or more contents to multiple contacts at once.\n\nTo perform these operations, you will need your flowId and you can find it <a href=\"https://app.zenvia.com/flows\" target=\"_blank\">here</a>.\n"
+    },
+    {
+      "name": "Message Batches",
       "description": "The batch API makes it possible to send a message with one or more contents to multiple contacts at once. The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).\n\nThe supported channels are SMS and WhatsApp.\n\n| Content Type | SMS | WhatsApp |\n|---|:---:|:---:|\n| text | &#10004; | &#10005; |\n| template | &#10005; | &#10004; |\n\n> To send batch through WhatsApp channel, you must have a template message, which needs an approval before being used.\n\n### What you need to know about the contacts file\n\n* The file must be in **.csv** format;\n* The maximum file size is **50MB**;\n* The mandatory delimiter to be used between the values ​​is the **semicolon (\";\")**;\n* The first line of the file is dedicated to the header. There must be a column that contains the recipients' phone numbers. If your content has variables, there must be corresponding columns.\n"
     },
     {
@@ -5272,7 +5855,7 @@
         "Telegram",
         "Google Business Messages",
         "Voice",
-        "Batches"
+        "Message Batches"
       ]
     },
     {
@@ -5291,6 +5874,12 @@
       "name": "File Storage",
       "tags": [
         "Files"
+      ]
+    },
+    {
+      "name": "Flow",
+      "tags": [
+        "Flow Batches"
       ]
     },
     {
