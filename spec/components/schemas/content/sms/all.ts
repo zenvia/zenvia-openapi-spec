@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from './text';
-import { ref as templateFixedRef } from '../template-fixed';
+import { ref as templateRef } from '../template';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -8,13 +8,13 @@ const all: SchemaObject = {
   oneOf: [{
     $ref: textRef,
   }, {
-    $ref: templateFixedRef,
+    $ref: templateRef,
   }],
   discriminator: {
     propertyName: 'type',
     mapping: {
       text: textRef,
-      template: templateFixedRef,
+      template: templateRef,
     },
   },
 };
