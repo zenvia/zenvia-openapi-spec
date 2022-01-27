@@ -7,7 +7,9 @@ const example: SchemaObject = {
                 kind of messages you plan to send. Ensure these are examples and do not include personal or confidential information.
                 In case you decide to include variables and examples, provide them with the same number.
                 <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
-                being assigned the example URL.`,
+                being assigned the example URL.
+
+*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
   example: {
     imageUrl: 'https://example.com/image.jpeg',

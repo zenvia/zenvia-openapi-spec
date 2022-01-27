@@ -5,7 +5,9 @@ import { ref as quickRepliesRef } from './quick-replies';
 
 export const buttons: SchemaObject = {
   title: 'Buttons',
-  description: 'Template buttons',
+  description: `Template buttons
+
+*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
   oneOf: [{
     $ref: actionsRef,
