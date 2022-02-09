@@ -9,7 +9,7 @@ const channel: ParameterObject = {
   schema: {
     type: 'string',
     enum: [
-      'WHATSAPP', 'SMS',
+      'WHATSAPP', 'SMS', 'RCS',
     ],
   },
   example: 'WHATSAPP',
