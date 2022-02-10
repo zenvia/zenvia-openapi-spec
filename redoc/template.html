@@ -33,7 +33,7 @@
         const now = new Date();
         const expiresAt = new Date(now.setMonth(now.getMonth() + 1));
 
-        surveyCookie = surveyCookie ? surveyCookie : crypto.randomUUID ? `npsId=${crypto.randomUUID()}` : `npsId=${uuidv4()}`;
+        surveyCookie = surveyCookie ? surveyCookie : `npsId=${crypto.randomUUID ? crypto.randomUUID() : uuidv4()}`;
 
         const uuid = surveyCookie.split('=')[1];
         document.cookie = `${surveyCookie}; expires=${expiresAt.toUTCString()}; `;
