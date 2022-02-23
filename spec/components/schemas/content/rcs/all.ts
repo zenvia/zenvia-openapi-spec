@@ -5,6 +5,7 @@ import { ref as carouselRef } from '../carousel';
 import { ref as fileRef } from '../file';
 import { ref as quickRepliesRef } from '../replyable-text';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as templateRef } from '../template';
 
 const all: SchemaObject = {
   title: 'RCS',
@@ -18,11 +19,14 @@ const all: SchemaObject = {
     $ref: carouselRef,
   }, {
     $ref: quickRepliesRef,
+  }, {
+    $ref: templateRef,
   }],
   discriminator: {
     propertyName: 'type',
     mapping: {
       text: textRef,
+      template: templateRef,
       file: fileRef,
       card: cardRef,
       carousel: carouselRef,
