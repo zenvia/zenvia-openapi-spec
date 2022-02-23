@@ -3,7 +3,9 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 export const header: SchemaObject = {
   title: 'Header',
-  description: 'Template header',
+  description: `Template header
+
+*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
   required: ['type'],
   properties: {
