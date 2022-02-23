@@ -441,6 +441,22 @@
                     ]
                   }
                 },
+                "template": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "template",
+                        "templateId": "template_id",
+                        "fields": {
+                          "name": "Jhon",
+                          "product": "Zenvia Chat"
+                        }
+                      }
+                    ]
+                  }
+                },
                 "file": {
                   "value": {
                     "from": "5510999999999",
@@ -587,6 +603,22 @@
                       {
                         "type": "text",
                         "text": "Hi Zenvia!"
+                      }
+                    ]
+                  }
+                },
+                "template": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "template",
+                        "templateId": "template_id",
+                        "fields": {
+                          "name": "Jhon",
+                          "product": "Zenvia Chat"
+                        }
                       }
                     ]
                   }
@@ -3216,12 +3248,16 @@
           },
           {
             "$ref": "#/components/schemas/content.replyable-text"
+          },
+          {
+            "$ref": "#/components/schemas/content.template"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
+            "template": "#/components/schemas/content.template",
             "file": "#/components/schemas/content.file",
             "card": "#/components/schemas/content.card",
             "carousel": "#/components/schemas/content.carousel",
@@ -3234,12 +3270,16 @@
         "oneOf": [
           {
             "$ref": "#/components/schemas/content.sms.text"
+          },
+          {
+            "$ref": "#/components/schemas/content.template"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "text": "#/components/schemas/content.sms.text"
+            "text": "#/components/schemas/content.sms.text",
+            "template": "#/components/schemas/content.template"
           }
         }
       },
@@ -5118,15 +5158,17 @@
           },
           "channel": {
             "title": "Channel",
-            "description": "Channel for template use. Currently, only Whatsapp channel is allowed.",
+            "description": "Channel for template use. Currently, only Whatsapp, SMS and RCS channels is allowed.",
             "type": "string",
             "enum": [
-              "WHATSAPP"
+              "WHATSAPP",
+              "SMS",
+              "RCS"
             ]
           },
           "senderId": {
             "title": "Sender ID",
-            "description": "The identifier of the sender of the template. The sender shoud be created with a credential.",
+            "description": "The identifier of the sender of the template. The sender should be created with a credential.",
             "type": "string"
           },
           "category": {
@@ -5385,7 +5427,7 @@
       },
       "templates.components.buttons.index": {
         "title": "Buttons",
-        "description": "Template buttons",
+        "description": "Template buttons\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
         "type": "object",
         "oneOf": [
           {
@@ -5447,7 +5489,7 @@
       },
       "templates.components.footer.index": {
         "title": "Footer",
-        "description": "Template footer",
+        "description": "Template footer\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
         "type": "object",
         "required": [
           "type",
@@ -5470,7 +5512,7 @@
       },
       "templates.components.header.index": {
         "title": "Header",
-        "description": "Template header",
+        "description": "Template header\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
         "type": "object",
         "required": [
           "type"
@@ -5695,7 +5737,9 @@
         "schema": {
           "type": "string",
           "enum": [
-            "WHATSAPP"
+            "WHATSAPP",
+            "SMS",
+            "RCS"
           ]
         },
         "example": "WHATSAPP"
@@ -5779,7 +5823,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n|Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          | \n|:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| text           |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| file           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| replyable_text |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| contacts       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| location       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>| \n| template       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| card           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| carousel       |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| button         |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| list           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| call           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n"
+      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n|Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |\n|:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| text           |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| file           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|\n| replyable_text |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| contacts       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| location       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| template       |<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| card           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| carousel       |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| button         |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| list           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| call           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n"
     },
     {
       "name": "SMS",

@@ -593,6 +593,16 @@ paths:
                   contents:
                     - type: text
                       text: Hi Zenvia!
+              template:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: template
+                      templateId: template_id
+                      fields:
+                        name: Jhon
+                        product: Zenvia Chat
               file:
                 value:
                   from: '5510999999999'
@@ -684,6 +694,16 @@ paths:
                   contents:
                     - type: text
                       text: Hi Zenvia!
+              template:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: template
+                      templateId: template_id
+                      fields:
+                        name: Jhon
+                        product: Zenvia Chat
       responses:
         '200':
           description: Created message
@@ -2685,10 +2705,12 @@ components:
         - $ref: '#/components/schemas/content.card'
         - $ref: '#/components/schemas/content.carousel'
         - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.template'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
+          template: '#/components/schemas/content.template'
           file: '#/components/schemas/content.file'
           card: '#/components/schemas/content.card'
           carousel: '#/components/schemas/content.carousel'
@@ -2697,10 +2719,12 @@ components:
       title: SMS
       oneOf:
         - $ref: '#/components/schemas/content.sms.text'
+        - $ref: '#/components/schemas/content.template'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.sms.text'
+          template: '#/components/schemas/content.template'
     content.sms.text:
       type: object
       allOf:
@@ -4115,13 +4139,15 @@ components:
           $ref: '#/components/schemas/templates.template-locale'
         channel:
           title: Channel
-          description: 'Channel for template use. Currently, only Whatsapp channel is allowed.'
+          description: 'Channel for template use. Currently, only Whatsapp, SMS and RCS channels is allowed.'
           type: string
           enum:
             - WHATSAPP
+            - SMS
+            - RCS
         senderId:
           title: Sender ID
-          description: The identifier of the sender of the template. The sender shoud be created with a credential.
+          description: The identifier of the sender of the template. The sender should be created with a credential.
           type: string
         category:
           $ref: '#/components/schemas/templates.template-category'
@@ -4296,7 +4322,10 @@ components:
             - url
     templates.components.buttons.index:
       title: Buttons
-      description: Template buttons
+      description: |-
+        Template buttons
+
+        *Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
       type: object
       oneOf:
         - $ref: '#/components/schemas/templates.components.buttons.actions'
@@ -4333,7 +4362,10 @@ components:
             - items
     templates.components.footer.index:
       title: Footer
-      description: Template footer
+      description: |-
+        Template footer
+
+        *Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
       type: object
       required:
         - type
@@ -4350,7 +4382,10 @@ components:
           type: string
     templates.components.header.index:
       title: Header
-      description: Template header
+      description: |-
+        Template header
+
+        *Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
       type: object
       required:
         - type
@@ -4527,6 +4562,8 @@ components:
         type: string
         enum:
           - WHATSAPP
+          - SMS
+          - RCS
       example: WHATSAPP
     templates.senderId:
       name: senderId
@@ -4586,14 +4623,14 @@ tags:
 
       For each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:
 
-      |Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          | 
+      |Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |
       |:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
       | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|
       | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|
       | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
       | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>| 
-      | template       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | template       |<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
