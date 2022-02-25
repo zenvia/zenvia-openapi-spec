@@ -22,7 +22,7 @@ Media message templates expand the outgoing content beyond the standard message 
 
 Interactive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.
 
-There are two types of predefined buttons offered: actions and quick replies.
+There are three types of predefined buttons offered: actions, quick replies and mixed.
 
 ### ACTIONS
 
@@ -35,3 +35,7 @@ Allows your customer to return a simple text message.
 When a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.
 
 You can learn more about it on the [subscriptions section](#section/MESSAGE).
+
+### MIXED
+
+Allows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.
