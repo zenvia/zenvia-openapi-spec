@@ -2,6 +2,9 @@ import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as multipartDataRef } from '../../components/schemas/files/multipart-data';
 import { ref as fileRef } from '../../components/schemas/files/file';
+import { ref as startDate } from '../../components/parameters/files/startDate';
+import { ref as endDate } from '../../components/parameters/files/endDate';
+import { ref as limit } from '../../components/parameters/files/limit';
 
 const post: OperationObject = {
   summary: 'Create a new file',
@@ -68,8 +71,49 @@ const post: OperationObject = {
   },
 };
 
+const get: OperationObject = {
+  description: 'List all files according to query parameters',
+  tags: ['Files'],
+  parameters: [
+    {
+      $ref: startDate,
+    },
+    {
+      $ref: endDate,
+    },
+    {
+      $ref: limit,
+    },
+  ],
+  responses: {
+    200: {
+      description: 'Files found',
+      content: {
+        'application/json': {
+          schema: {
+            type: 'array',
+            items: {
+              $ref: fileRef,
+            },
+          },
+        },
+      },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The number of results',
+            type: 'string',
+            example: '100',
+          },
+        },
+      },
+    } as ResponseObject,
+  },
+};
+
 const path: PathItemObject = {
   post,
+  get,
 };
 
 export default path;
