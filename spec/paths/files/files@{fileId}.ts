@@ -37,7 +37,6 @@ const deleteOperation: OperationObject = {
   } as ResponsesObject,
 };
 
-
 const path: PathItemObject = {
   delete: deleteOperation,
   get,
