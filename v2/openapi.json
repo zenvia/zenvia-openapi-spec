@@ -5427,7 +5427,7 @@
       },
       "templates.components.buttons.index": {
         "title": "Buttons",
-        "description": "Template buttons\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+        "description": "Template buttons\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
         "type": "object",
         "oneOf": [
           {
@@ -5435,6 +5435,9 @@
           },
           {
             "$ref": "#/components/schemas/templates.components.buttons.quick-replies"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.mixed"
           }
         ],
         "required": [
@@ -5444,9 +5447,57 @@
           "propertyName": "type",
           "mapping": {
             "ACTIONS": "#/components/schemas/templates.components.buttons.actions",
-            "QUICK_REPLIES": "#/components/schemas/templates.components.buttons.quick-replies"
+            "QUICK_REPLIES": "#/components/schemas/templates.components.buttons.quick-replies",
+            "MIXED": "#/components/schemas/templates.components.buttons.mixed"
           }
         }
+      },
+      "templates.components.buttons.mixed": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "title": "Buttons",
+                "description": "List of buttons. Currently, only [RCS](#tag/RCS) channel is allowed. it is allowed to mix the 3 types of buttons, with a limit of up to 11 buttons.",
+                "maxItems": 11,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-url"
+                    },
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-phone-number"
+                    },
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                    }
+                  ],
+                  "required": [
+                    "type"
+                  ],
+                  "discriminator": {
+                    "propertyName": "type",
+                    "mapping": {
+                      "URL": "#/components/schemas/templates.components.buttons.button-item-url",
+                      "PHONE_NUMBER": "#/components/schemas/templates.components.buttons.button-item-phone-number",
+                      "QUICK_REPLY": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "items"
+            ]
+          }
+        ]
       },
       "templates.components.buttons.quick-replies": {
         "type": "object",
@@ -5489,7 +5540,7 @@
       },
       "templates.components.footer.index": {
         "title": "Footer",
-        "description": "Template footer\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+        "description": "Template footer\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
         "type": "object",
         "required": [
           "type",
@@ -5512,7 +5563,7 @@
       },
       "templates.components.header.index": {
         "title": "Header",
-        "description": "Template header\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+        "description": "Template header\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
         "type": "object",
         "required": [
           "type"
@@ -5871,7 +5922,7 @@
     },
     {
       "name": "Templates",
-      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are two types of predefined buttons offered: actions and quick replies.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n"
+      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n"
     },
     {
       "name": "Message Report",
