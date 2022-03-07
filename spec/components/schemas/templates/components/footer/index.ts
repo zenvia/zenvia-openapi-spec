@@ -6,7 +6,7 @@ const footer: SchemaObject = {
   title: 'Footer',
   description: `Template footer
 
-*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
+*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
   type: 'object',
   required: ['type', 'text'],
   properties: {
