@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 const endDate: ParameterObject = {
   name: 'endDate',
   in: 'query',
-  required: true,
+  required: false,
   description: 'Date the file were created',
   schema: {
     type: 'string',
