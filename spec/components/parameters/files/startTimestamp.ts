@@ -1,8 +1,8 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const startDate: ParameterObject = {
-  name: 'startDate',
+const startTimestamp: ParameterObject = {
+  name: 'startTimestamp',
   in: 'query',
   required: false,
   description: 'Date the file were created',
@@ -13,4 +13,4 @@ const startDate: ParameterObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default startDate;
+export default startTimestamp;
