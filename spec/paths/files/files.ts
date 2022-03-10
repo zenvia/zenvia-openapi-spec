@@ -2,8 +2,8 @@ import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as multipartDataRef } from '../../components/schemas/files/multipart-data';
 import { ref as fileRef } from '../../components/schemas/files/file';
-import { ref as startDate } from '../../components/parameters/files/startDate';
-import { ref as endDate } from '../../components/parameters/files/endDate';
+import { ref as startDate } from '../../components/parameters/files/startTimestamp';
+import { ref as endDate } from '../../components/parameters/files/endTimestamp';
 import { ref as limit } from '../../components/parameters/files/limit';
 
 const post: OperationObject = {
