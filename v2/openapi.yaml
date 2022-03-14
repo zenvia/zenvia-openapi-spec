@@ -3644,6 +3644,7 @@ components:
                 - ad
                 - post
                 - story_mention
+                - sharing
                 - story
                 - message
                 - live
