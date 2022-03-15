@@ -72,7 +72,7 @@ const post: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List all files',
+  description: 'Get list of files',
   tags: ['Files'],
   parameters: [
     {
