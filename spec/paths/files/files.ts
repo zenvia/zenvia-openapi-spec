@@ -98,6 +98,15 @@ const get: OperationObject = {
           },
         },
       },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The number of results',
+            type: 'string',
+            example: '100',
+          },
+        },
+      },
     } as ResponseObject,
   },
 };
