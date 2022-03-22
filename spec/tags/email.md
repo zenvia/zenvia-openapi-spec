@@ -3,7 +3,7 @@ The E-mail channel may be used after its activation on [Zenvia platform](https:/
 
 Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
-## E-mail limitations
+## E-Mail limitations
 
 You either can use one of the Zenvia domains provided in the e-mail activation console, or you can use your own domain.
 

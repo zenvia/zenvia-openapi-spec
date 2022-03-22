@@ -16,6 +16,7 @@ const fileBase: SchemaObject = {
                     <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*
                     <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*
                     <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*
+                    <br>*For [E-Mail channel](#tag/E-Mail), see [supported contents and sizes.](#section/E-Mail-limitations)*
                     <br>*For the rest of the channels, the limitations are currently undocumented.*`,
       example: 'application/pdf',
     },
