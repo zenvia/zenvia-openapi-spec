@@ -16,6 +16,7 @@ const telegramDescription = rawLoad(__dirname, './telegram.md');
 const voiceDescription = rawLoad(__dirname, './voice.md');
 const gbmDescription = rawLoad(__dirname, './gbm.md');
 const instagramDescription = rawLoad(__dirname, './instagram.md');
+const emailDescription = rawLoad(__dirname, './email.md');
 const filesDescription = rawLoad(__dirname, './files.md');
 
 const tags: TagObject[] = [{
@@ -45,6 +46,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Voice',
   description: voiceDescription,
+}, {
+  name: 'E-Mail',
+  description: emailDescription,
 }, {
   name: 'Flow Batches',
   description: flowBatchesDescription,
