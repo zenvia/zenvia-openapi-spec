@@ -1398,7 +1398,39 @@ paths:
             -H 'Content-Type: image/png' \
             -H 'Content-Disposition: inline;filename=my-image.png' \
             --data-binary '@./image-source.png'
+    get:
+      description: Get list of files
+      tags:
+        - Files
+      parameters:
+        - $ref: '#/components/parameters/files.startTimestamp'
+        - $ref: '#/components/parameters/files.endTimestamp'
+        - $ref: '#/components/parameters/files.limit'
+      responses:
+        '200':
+          description: Files found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/files.file'
+          headers:
+            x-total:
+              schema:
+                description: The number of results
+                type: string
+                example: '100'
   '/files/{fileId}':
+    delete:
+      description: Delete file by id
+      tags:
+        - Files
+      responses:
+        '204':
+          description: No content
+        default:
+          $ref: '#/components/responses/error'
     get:
       summary: Retrieve one file by id
       description: Allows to retrieve information about one previously stored file.
@@ -4503,6 +4535,14 @@ components:
       description: 'The <a href="https://app.zenvia.com/home/templates">template identifier</a>'
       schema:
         type: string
+    files.endTimestamp:
+      name: endTimestamp
+      in: query
+      required: false
+      description: 'Timestamp after which, the files to be returned, were created'
+      schema:
+        type: string
+      example: '2022-02-21T12:30:45Z'
     files.fileId:
       name: fileId
       in: path
@@ -4510,6 +4550,23 @@ components:
       description: The file identifier
       schema:
         type: string
+    files.limit:
+      name: limit
+      in: query
+      description: The maximum amount of files to be returned.
+      schema:
+        type: integer
+        default: 1000
+        maximum: 10000
+        minimum: 1
+    files.startTimestamp:
+      name: startTimestamp
+      in: query
+      required: false
+      description: 'Timestamp after which, the files to be returned, were created'
+      schema:
+        type: string
+      example: '2022-02-21T10:30:25Z'
     reports.flow.dispatchId:
       name: dispatchId
       in: query
