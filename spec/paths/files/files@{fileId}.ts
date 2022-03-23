@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
+import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as fileRef } from '../../components/schemas/files/file';
 import { ref as fileIdRef } from '../../components/parameters/files/fileId';
@@ -24,7 +24,21 @@ const get: OperationObject = {
   },
 };
 
+const deleteOperation: OperationObject = {
+  description: 'Delete file by id',
+  tags: ['Files'],
+  responses: {
+    204: {
+      description: 'No content',
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  } as ResponsesObject,
+};
+
 const path: PathItemObject = {
+  delete: deleteOperation,
   get,
   parameters: [{
     $ref: fileIdRef,
