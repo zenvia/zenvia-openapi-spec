@@ -29,7 +29,7 @@ const all: SchemaObject = {
 * On reply button clicks (see [replyable text](#section/Replyable-Text) and [card](#section/Card) sections), this will refer to the ID of the clicked message.
 * On [SMS channel](#tag/SMS), this will refer to the ID of the last message sent to the contact.
 
-*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook) and [RCS](#tag/RCS) channels.*`,
+*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*`,
         type: 'string',
         readOnly: true,
       },
