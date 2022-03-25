@@ -2,6 +2,9 @@ export function email() {
   return {
     from: 'sender@zenvia.com',
     to: 'recipient@zenvia.com',
+    representative: {
+      name: 'Sender Name',
+    },
     contents: [{
       type: 'email',
       subject: 'Re: Ticket 12345',
