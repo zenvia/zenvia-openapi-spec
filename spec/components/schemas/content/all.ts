@@ -7,6 +7,7 @@ import { ref as allRcsContentsRef } from '../content/rcs/all';
 import { ref as allVoiceContentsRef } from '../content/voice/all';
 import { ref as allTelegramContentsRef } from '../content/telegram/all';
 import { ref as allGbmContentsRef } from '../content/gbm/all';
+import { ref as allEmailContentsRef } from '../content/email/all';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -26,6 +27,8 @@ const all: SchemaObject = {
     $ref: allTelegramContentsRef,
   }, {
     $ref: allGbmContentsRef,
+  }, {
+    $ref: allEmailContentsRef,
   }],
 };
 
