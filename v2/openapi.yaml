@@ -218,6 +218,45 @@ paths:
               }
             };type=application/json' \
             -F 'contacts=@./contacts.csv;type=text/csv;filename=contacts.csv'
+  /channels/email/messages:
+    post:
+      description: Send a E-Mail message
+      tags:
+        - E-Mail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/message.email'
+            examples:
+              email:
+                value:
+                  from: sender@zenvia.com
+                  to: recipient@zenvia.com
+                  representative:
+                    name: Sender Name
+                  contents:
+                    - type: email
+                      subject: 'Re: Ticket 12345'
+                      attachments:
+                        - fileUrl: 'https://zenvia.com/example1.pdf'
+                        - fileUrl: 'https://zenvia.com/example2.png'
+                      cc:
+                        - cc1@zenvia.com
+                        - cc2@zenvia.com
+                      bcc:
+                        - bcc1@zenvia.com
+                        - bcc2@zenvia.com
+      responses:
+        '200':
+          description: Created message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message.email'
+        default:
+          $ref: '#/components/responses/error'
   /channels/facebook/messages:
     post:
       description: Send a Facebook message
@@ -1989,6 +2028,7 @@ components:
         - $ref: '#/components/schemas/content.voice.all'
         - $ref: '#/components/schemas/content.telegram.all'
         - $ref: '#/components/schemas/content.gbm.all'
+        - $ref: '#/components/schemas/content.email.all'
     content.base:
       type: object
       properties:
@@ -2290,6 +2330,56 @@ components:
           required:
             - type
             - contacts
+    content.email:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: email
+            subject:
+              type: string
+              description: The e-mail subject
+              example: 'Re: Ticket 12345'
+            html:
+              type: string
+              description: HTML version of the e-mail. This is the normally shown version.
+              example: <b>Hello!</b>
+            text:
+              type: string
+              description: Text version of the e-mail.
+              example: Hello!
+            attachments:
+              type: array
+              items:
+                $ref: '#/components/schemas/content.bases.file'
+              description: E-mail attachments.
+              example:
+                - fileUrl: 'https://zenvia.com/example1.pdf'
+                - fileUrl: 'https://zenvia.com/example2.pdf'
+            cc:
+              type: array
+              items:
+                type: string
+              title: Courtesy Copy
+              description: List of e-mails addresses to be copied on the e-mail.
+              example:
+                - example1@zenvia.com
+                - example2@zenvia.com
+            bcc:
+              type: array
+              items:
+                type: string
+              title: Blind Courtesy Copy
+              description: List of e-mails addresses to be secretly copied on the e-mail.
+              example:
+                - example3@zenvia.com
+                - example4@zenvia.com
+          required:
+            - type
+            - subject
     content.file:
       type: object
       allOf:
@@ -2299,34 +2389,17 @@ components:
             type:
               type: string
               example: file
-            fileUrl:
-              type: string
-              description: URL of the file to be sent
-              example: 'https://example.com/document.pdf'
-            fileMimeType:
-              type: string
-              description: |-
-                MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.
-                                      <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*
-                                      <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*
-                                      <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*
-                                      <br>*For the rest of the channels, the limitations are currently undocumented.*
-              example: application/pdf
+          required:
+            - type
+            - fileUrl
+        - $ref: '#/components/schemas/content.bases.file'
+        - properties:
             fileCaption:
               type: string
               description: |-
                 Some description for the file.
                                       <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) images and videos.*
               example: Some caption
-            fileName:
-              type: string
-              description: |-
-                The name of the file.
-                                      <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) documents.*
-              example: document.pdf
-          required:
-            - type
-            - fileUrl
     content.json:
       type: object
       allOf:
@@ -2534,6 +2607,32 @@ components:
           example: Zenvia's team picture
       required:
         - url
+    content.bases.file:
+      type: object
+      title: File
+      properties:
+        fileUrl:
+          type: string
+          description: URL of the file to be sent
+          example: 'https://example.com/document.pdf'
+        fileMimeType:
+          type: string
+          description: |-
+            MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.
+                                <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*
+                                <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*
+                                <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*
+                                <br>*For [E-Mail channel](#tag/E-Mail), see [supported contents and sizes.](#section/E-Mail-limitations)*
+                                <br>*For the rest of the channels, the limitations are currently undocumented.*
+          example: application/pdf
+        fileName:
+          type: string
+          description: |-
+            The name of the file.
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram), [Google Business Messages](#tag/Google-Business-Messages) and [E-mail](#tag/E-Mail) documents.*
+          example: document.pdf
+      required:
+        - fileUrl
     content.bases.quick-reply-list:
       type: array
       title: Quick reply buttons
@@ -2691,6 +2790,14 @@ components:
             - type
             - text
             - url
+    content.email.all:
+      title: E-Mail
+      oneOf:
+        - $ref: '#/components/schemas/content.email'
+      discriminator:
+        propertyName: type
+        mapping:
+          email: '#/components/schemas/content.email'
     content.facebook.all:
       title: Facebook
       oneOf:
@@ -3515,7 +3622,7 @@ components:
                 * On reply button clicks (see [replyable text](#section/Replyable-Text) and [card](#section/Card) sections), this will refer to the ID of the clicked message.
                 * On [SMS channel](#tag/SMS), this will refer to the ID of the last message sent to the contact.
 
-                *Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook) and [RCS](#tag/RCS) channels.*
+                *Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
               type: string
               readOnly: true
     message.base:
@@ -3577,6 +3684,19 @@ components:
       type: string
       title: Channel
       description: Message channel
+    message.email:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/message.base'
+        - type: object
+          properties:
+            contents:
+              title: Message Contents
+              description: A list of content to be sent
+              type: array
+              items:
+                $ref: '#/components/schemas/content.email.all'
+              minItems: 1
     message.facebook:
       type: object
       allOf:
@@ -3708,7 +3828,7 @@ components:
       description: |-
         Provides information on the representative who sent the message.
                         <br>It is mainly meant to be used when a **human agent** is the message's sender.
-                        <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
+                        <br><br>*Only applicable to [Instagram](#tag/Instagram), [Google Business Messages](#tag/Google-Business-Messages) and [E-Mail](#tag/E-Mail) channels.*
       type: object
       properties:
         type:
@@ -3716,6 +3836,7 @@ components:
           description: |-
             Indicates whether the message sender is a *bot* or a *human agent*.
                                 <br>The `HUMAN` value must only be used on a message coming from a **human agent**.
+                                <br><br>*Only applicable to [Instagram](#tag/Instagram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
           type: string
           enum:
             - BOT
@@ -3725,7 +3846,7 @@ components:
           title: Name
           description: |-
             Representative's name shown on the message.
-                                <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*
+                                <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) and [E-Mail](#tag/E-Mail) channels.*
           type: string
         picture:
           title: Picture
@@ -3765,7 +3886,8 @@ components:
         It provides information about the contact who sent the message.
                         <br>The availability of this information depends on privacy settings of the contact.
                         <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram),
-                        [Facebook](#tag/Facebook), [Telegram](#tag/Telegram) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
+                        [Facebook](#tag/Facebook), [Telegram](#tag/Telegram), [Google Business Messages](#tag/Google-Business-Messages)
+                        and [E-Mail](#tag/E-Mail) channels.*
       type: object
       properties:
         name:
@@ -4710,19 +4832,20 @@ tags:
 
       For each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:
 
-      |Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |
-      |:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
-      | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|
-      | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|
-      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
-      | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | template       |<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      |Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |
+      |:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
+      | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
 
       _*GBM stands for Google Business Messages_
 
@@ -4789,6 +4912,16 @@ tags:
 
       ## WhatsApp list
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
+
+      ## Call
+      This is the [Voice channel](#tag/Voice) channel content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.call" showReadOnly={false} showWriteOnly={true} />
+
+      ## E-Mail
+      This is the [E-Mail channel](#tag/E-Mail) content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
 
       ## SMS Text
       This the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.
@@ -5081,6 +5214,44 @@ tags:
       * Sender: the phone number of the contact
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of the message object.
+  - name: E-Mail
+    description: |
+      The E-mail channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
+      <br/>
+
+      Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
+
+      ## E-Mail limitations
+
+      You either can use one of the Zenvia domains provided in the e-mail activation console, or you can use your own domain.
+
+      However, to use your domain, your will need to change or create DNS entries to make this possible.
+
+      How to do this will be described in the e-mail activation console [Zenvia platform](https://app.zenvia.com/home/credentials/email/list)
+
+      <br>
+      Supported content types and sizes:
+
+      | Media | Content Type | E-Mail Size* |
+      |---|---|---|
+      | document | Any valid MIME type. | 25&nbsp;MB |
+
+      *The maximum size is for the entire e-mail.
+
+
+      ## SMS sender and recipient
+
+      When you send a message to a contact using SMS channel:
+
+      * Recipient: the e-mail address of the contact.
+      * Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
+
+      When you receive a message from a contact, the sender and recipient are inverted:
+
+      * Recipient: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
+      * Sender: the e-mail address of the contact.
+
+      The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Flow Batches
     description: |
       The flow-batches api makes it possible to dispatch a active Flow with one or more contents to multiple contacts at once.
@@ -5263,6 +5434,7 @@ x-tagGroups:
       - Telegram
       - Google Business Messages
       - Voice
+      - E-Mail
       - Message Batches
   - name: Webhooks
     tags:
