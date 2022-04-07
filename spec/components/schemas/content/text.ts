@@ -14,7 +14,7 @@ const text: SchemaObject = {
         example: 'text',
       },
       text: {
-        description: 'Text to be sent',
+        description: 'Text to be sent. When a URL is sent in the text, a preview url will be added to the message.',
         type: 'string',
         example: 'This is a text.',
       },
