@@ -8,6 +8,8 @@ export function email() {
     contents: [{
       type: 'email',
       subject: 'Re: Ticket 12345',
+      html: '<b>HTML content</b>',
+      text: 'Plain text content',
       attachments: [
         { fileUrl: 'https://zenvia.com/example1.pdf' },
         { fileUrl: 'https://zenvia.com/example2.png' },
