@@ -103,6 +103,8 @@
                       {
                         "type": "email",
                         "subject": "Re: Ticket 12345",
+                        "html": "<b>HTML content</b>",
+                        "text": "Plain text content",
                         "attachments": [
                           {
                             "fileUrl": "https://zenvia.com/example1.pdf"
@@ -2957,7 +2959,7 @@
                 "example": "text"
               },
               "text": {
-                "description": "Text to be sent",
+                "description": "Text to be sent. When a URL is sent in the text, a URL preview will be added to the message, if the channel supports it.\n          <br>*URL preview only applicable to [WhatsApp channel](#tag/WhatsApp).*",
                 "type": "string",
                 "example": "This is a text."
               },
