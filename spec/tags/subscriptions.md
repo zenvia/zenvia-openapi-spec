@@ -51,6 +51,10 @@ Webhook notifications sent from Zenvia come from any of the following ranges of 
 * 45.233.23.0/24
 * 3.233.231.228/32
 
+## Subscription creation limit
+
+Currently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).
+
 ## Webhook request error handling
 As described before, webhooks allow you to receive events in your application.
 
