@@ -78,12 +78,13 @@ const post: OperationObject = {
             csv: {
               type: 'string',
               title: 'Binary CSV File',
-              description: 'Binary csv file with recipients and variable values ​​when necessary. \n \
-                            \n **Requirements**: \
-                            \n * The file must be in **.csv** format; \
-                            \n * The maximum file size is **50MB**; ,\
-                            \n * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**; \
-                            \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.',
+              description: `Binary csv file with recipients and variable values when necessary.
+
+ **Requirements**:
+ * The file must be in **.csv** format;
+ * The maximum file size is **50MB**;
+ * The mandatory delimiter to be used between the values is the **semicolon (";")**;
+ * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.`,
             },
             request: {
               $ref: flowBatchesMultipartRef,
