@@ -5,6 +5,7 @@ import { ref as fileRef } from '../../components/schemas/files/file';
 import { ref as startDate } from '../../components/parameters/files/startTimestamp';
 import { ref as endDate } from '../../components/parameters/files/endTimestamp';
 import { ref as limit } from '../../components/parameters/files/limit';
+import rawExamples from '../../resources/examples/files/raw-examples';
 
 const post: OperationObject = {
   summary: 'Create a new file',
@@ -30,6 +31,9 @@ const post: OperationObject = {
             'content',
           ],
         },
+        examples: {
+          multipart: rawExamples.multipart,
+        },
       },
       'application/json': {
         schema: {
@@ -42,6 +46,9 @@ const post: OperationObject = {
           description: `The entire request body will be the file content to be stored.
                         <br><br>The main usage for this is for easier binary content streaming in the applications using this API.`,
           type: 'string',
+        },
+        examples: {
+          binary: rawExamples.binary,
         },
       },
     },
