@@ -15,7 +15,7 @@ Content-Disposition: form-data; name="content"; filename="original-name.png"
 Content-Type: image/png
 
 BINARY-CONTENT
---3bb873df66f5202e15d4b3b9a7eff
+--3bb873df66f5202e15d4b3b9a7eff--
 
 `,
 };
