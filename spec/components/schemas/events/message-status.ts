@@ -4,6 +4,7 @@ import { ref as errorCauseRef } from './error-cause';
 
 const webhook: SchemaObject = {
   type: 'object',
+  title: 'Message Status',
   properties: {
     timestamp: {
       title: 'Status timestamp',
