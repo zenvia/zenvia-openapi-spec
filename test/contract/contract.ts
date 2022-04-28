@@ -7,6 +7,10 @@ import spec from '../../spec';
 
 describe('Loading OpenAPI specification by Enforcer', () => {
 
+  before(async () => {
+    delete spec.paths['/files'].post.requestBody.content['multipart/form-data'].examples.multipart;
+  });
+
   it('Checking for errors', (done) => {
     Enforcer(spec, { fullResult: true, toString: true })
       .then(({ error, warning }) => {
