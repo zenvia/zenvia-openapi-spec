@@ -1375,6 +1375,10 @@ paths:
                   $ref: '#/components/schemas/files.multipart-data'
               required:
                 - content
+            examples:
+              multipart:
+                description: 'Content-Type: multipart/form-data; boundary=3bb873df66f5202e15d4b3b9a7eff'
+                value: "--3bb873df66f5202e15d4b3b9a7eff\r\nContent-Disposition: form-data; name=\"file\"\r\nContent-Type: application/json\r\n\r\n{\n  \"mimeType\": \"image/png\",\n  \"name\": \"my-image.png\"\n}\r\n--3bb873df66f5202e15d4b3b9a7eff\r\nContent-Disposition: form-data; name=\"content\"; filename=\"original-name.png\"\r\nContent-Type: image/png\r\n\r\nBINARY-CONTENT\r\n--3bb873df66f5202e15d4b3b9a7eff--\r\n\r\n"
           application/json:
             schema:
               $ref: '#/components/schemas/files.file'
@@ -1385,6 +1389,10 @@ paths:
                 The entire request body will be the file content to be stored.
                                         <br><br>The main usage for this is for easier binary content streaming in the applications using this API.
               type: string
+            examples:
+              binary:
+                description: 'Content-Type: image/png'
+                value: BINARY-CONTENT
       responses:
         '201':
           description: Created file
@@ -1416,6 +1424,27 @@ paths:
             curl 'https://api.zenvia.com/v2/files' \
             -H 'X-API-TOKEN: YOUR_API_TOKEN' \
             -F 'content=@./image-source.png;type=image/png;filename=my-image.png'
+        - lang: Shell
+          label: 'Bash: raw multipart with data'
+          source: |
+            curl 'https://api.zenvia.com/v2/files' \
+            -H 'X-API-TOKEN: YOUR_API_TOKEN' \
+            -H 'Content-Type: multipart/form-data; boundary=3bb873df66f5202e15d4b3b9a7eff' \
+            --data-binary "`echo -e '--3bb873df66f5202e15d4b3b9a7eff\r
+            Content-Disposition: form-data; name="file"\r
+            Content-Type: application/json\r
+            \r
+            {
+              "mimeType": "text/plain",
+              "name": "my-text.txt"
+            }\r
+            --3bb873df66f5202e15d4b3b9a7eff\r
+            Content-Disposition: form-data; name="content"; filename="original-name.txt"\r
+            Content-Type: text/plain\r
+            \r
+            BINARY-CONTENT\r
+            --3bb873df66f5202e15d4b3b9a7eff--\r
+            '`"
         - lang: Shell
           label: 'Bash: URL'
           source: |
@@ -1507,12 +1536,12 @@ paths:
                   type: string
                   title: Binary CSV File
                   description: |-
-                    Binary csv file with recipients and variable values ​​when necessary. 
-                                                 
-                     **Requirements**:                             
-                     * The file must be in **.csv** format;                             
-                     * The maximum file size is **50MB**; ,                            
-                     * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;                             
+                    Binary csv file with recipients and variable values when necessary.
+
+                     **Requirements**:
+                     * The file must be in **.csv** format;
+                     * The maximum file size is **50MB**;
+                     * The mandatory delimiter to be used between the values is the **semicolon (";")**;
                      * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns.
                 request:
                   $ref: '#/components/schemas/flow.batches.multipart'

@@ -1223,6 +1223,12 @@
                 "required": [
                   "content"
                 ]
+              },
+              "examples": {
+                "multipart": {
+                  "description": "Content-Type: multipart/form-data; boundary=3bb873df66f5202e15d4b3b9a7eff",
+                  "value": "--3bb873df66f5202e15d4b3b9a7eff\r\nContent-Disposition: form-data; name=\"file\"\r\nContent-Type: application/json\r\n\r\n{\n  \"mimeType\": \"image/png\",\n  \"name\": \"my-image.png\"\n}\r\n--3bb873df66f5202e15d4b3b9a7eff\r\nContent-Disposition: form-data; name=\"content\"; filename=\"original-name.png\"\r\nContent-Type: image/png\r\n\r\nBINARY-CONTENT\r\n--3bb873df66f5202e15d4b3b9a7eff--\r\n\r\n"
+                }
               }
             },
             "application/json": {
@@ -1235,6 +1241,12 @@
                 "title": "Binary File",
                 "description": "The entire request body will be the file content to be stored.\n                        <br><br>The main usage for this is for easier binary content streaming in the applications using this API.",
                 "type": "string"
+              },
+              "examples": {
+                "binary": {
+                  "description": "Content-Type: image/png",
+                  "value": "BINARY-CONTENT"
+                }
               }
             }
           }
@@ -1272,6 +1284,11 @@
             "lang": "Shell",
             "label": "Bash: multipart",
             "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-F 'content=@./image-source.png;type=image/png;filename=my-image.png'\n"
+          },
+          {
+            "lang": "Shell",
+            "label": "Bash: raw multipart with data",
+            "source": "curl 'https://api.zenvia.com/v2/files' \\\n-H 'X-API-TOKEN: YOUR_API_TOKEN' \\\n-H 'Content-Type: multipart/form-data; boundary=3bb873df66f5202e15d4b3b9a7eff' \\\n--data-binary \"`echo -e '--3bb873df66f5202e15d4b3b9a7eff\\r\nContent-Disposition: form-data; name=\"file\"\\r\nContent-Type: application/json\\r\n\\r\n{\n  \"mimeType\": \"text/plain\",\n  \"name\": \"my-text.txt\"\n}\\r\n--3bb873df66f5202e15d4b3b9a7eff\\r\nContent-Disposition: form-data; name=\"content\"; filename=\"original-name.txt\"\\r\nContent-Type: text/plain\\r\n\\r\nBINARY-CONTENT\\r\n--3bb873df66f5202e15d4b3b9a7eff--\\r\n'`\"\n"
           },
           {
             "lang": "Shell",
@@ -1391,7 +1408,7 @@
                   "csv": {
                     "type": "string",
                     "title": "Binary CSV File",
-                    "description": "Binary csv file with recipients and variable values ​​when necessary. \n                             \n **Requirements**:                             \n * The file must be in **.csv** format;                             \n * The maximum file size is **50MB**; ,                            \n * The mandatory delimiter to be used between the values ​​is the **semicolon (\";\")**;                             \n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns."
+                    "description": "Binary csv file with recipients and variable values when necessary.\n\n **Requirements**:\n * The file must be in **.csv** format;\n * The maximum file size is **50MB**;\n * The mandatory delimiter to be used between the values is the **semicolon (\";\")**;\n * The first line of the file is dedicated to the header. There must be a column that has the recipients phone numbers. If your content has variables, there must be corresponding columns."
                   },
                   "request": {
                     "$ref": "#/components/schemas/flow.batches.multipart"
