@@ -7,6 +7,8 @@ import { ref as referralSchemaRef } from './referral';
 
 const all: SchemaObject = {
   type: 'object',
+  title: 'Message',
+  description: 'Message sent by the contact',
   allOf: [{
     $ref: baseRef,
   }, {
