@@ -3271,6 +3271,7 @@ components:
               $ref: '#/components/schemas/events.message-status'
     events.message-status:
       type: object
+      title: Message Status
       properties:
         timestamp:
           title: Status timestamp
@@ -3300,9 +3301,75 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/events.error-cause'
+        context:
+          $ref: '#/components/schemas/events.context.index'
+        channelData:
+          $ref: '#/components/schemas/events.channel-data.index'
       required:
         - code
         - timestamp
+    events.channel-data.index:
+      type: object
+      title: Channel Data
+      description: Channel specific details about the message.
+      properties:
+        sms:
+          $ref: '#/components/schemas/events.channel-data.sms'
+    events.channel-data.sms:
+      type: object
+      title: SMS
+      description: SMS specific details about the message.
+      properties:
+        carrier:
+          title: Carrier
+          description: 'Carrier of the contact.<br>If the carrier is not included in this list, it will not be provided in the webhook payload.'
+          type: string
+          enum:
+            - VIVO_BR
+            - CLARO_BR
+            - TIM_BR
+            - OI_BR
+            - CTBC_BR
+            - SERCOMTEL_BR
+            - SURF_BR
+            - AMERICANET_BR
+            - SAFRA_BR
+            - TELECALL_BR
+            - DATORA_BR
+            - SAFRA_BR
+            - LIGUE_BR
+            - TELCEL_MX
+            - AT_T_MX
+            - MOVISTAR_MX
+            - ALTAN_MX
+    events.context.button:
+      type: object
+      title: Button
+      description: Details about the button clicked.
+      properties:
+        type:
+          title: Type
+          description: Type of the clicked button.
+          type: string
+          enum:
+            - text
+            - link
+            - calendar_event
+            - dial
+            - share_location
+            - view_location
+            - search_location
+        payload:
+          title: Payload
+          description: Payload of the clicked button.
+          type: string
+    events.context.index:
+      type: object
+      title: Context
+      description: Details about where the event happened.
+      properties:
+        button:
+          $ref: '#/components/schemas/events.context.button'
     files.file:
       type: object
       allOf:
@@ -3637,6 +3704,8 @@ components:
           example: '2021-08-03T16:26:23.616Z'
     message.all:
       type: object
+      title: Message
+      description: Message sent by the contact
       allOf:
         - $ref: '#/components/schemas/message.base'
         - type: object
