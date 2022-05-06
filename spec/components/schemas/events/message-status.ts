@@ -1,9 +1,12 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as errorCauseRef } from './error-cause';
+import { ref as contextRef } from './context';
+import { ref as channelDataRef } from './channel-data';
 
 const webhook: SchemaObject = {
   type: 'object',
+  title: 'Message Status',
   properties: {
     timestamp: {
       title: 'Status timestamp',
@@ -38,6 +41,12 @@ const webhook: SchemaObject = {
       items: {
         $ref: errorCauseRef,
       },
+    },
+    context: {
+      $ref: contextRef,
+    },
+    channelData: {
+      $ref: channelDataRef,
     },
   },
   required: [

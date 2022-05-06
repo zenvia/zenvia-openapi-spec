@@ -1,6 +1,6 @@
 import { ExampleObject } from 'openapi3-ts';
 
-const example: ExampleObject = {
+const multipart: ExampleObject = {
   description: 'Content-Type: multipart/form-data; boundary=3bb873df66f5202e15d4b3b9a7eff',
   value: `--3bb873df66f5202e15d4b3b9a7eff\r
 Content-Disposition: form-data; name="file"\r
@@ -20,4 +20,4 @@ BINARY-CONTENT\r
 `,
 };
 
-export default example;
+export default multipart;
