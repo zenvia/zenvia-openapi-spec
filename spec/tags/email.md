@@ -21,9 +21,9 @@ Supported content types and sizes:
 *The maximum size is for the entire e-mail.
 
 
-## SMS sender and recipient
+## E-Mail sender and recipient
 
-When you send a message to a contact using SMS channel:
+When you send a message to a contact using E-Mail channel:
 
 * Recipient: the e-mail address of the contact.
 * Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
