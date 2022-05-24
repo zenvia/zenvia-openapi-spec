@@ -17,6 +17,7 @@ const base: SchemaObject = {
       title: 'Channels',
       description: 'Contact communication channels. At least one communication channel must be provided.',
       type: 'object',
+      minProperties: 1,
       properties: {
         email: {
           title: 'E-mail',
