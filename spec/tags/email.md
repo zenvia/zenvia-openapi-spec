@@ -9,7 +9,7 @@ You either can use one of the Zenvia domains provided in the e-mail activation c
 
 However, to use your domain, your will need to change or create DNS entries to make this possible.
 
-How to do this will be described in the e-mail activation console [Zenvia platform](https://app.zenvia.com/home/credentials/email/list)
+The way to do this will be described in the activation console e-mail [Zenvia platform](https://app.zenvia.com/home/credentials/email/list)
 
 <br>
 Supported content types and sizes:
