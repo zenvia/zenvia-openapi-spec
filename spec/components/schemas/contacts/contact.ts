@@ -97,12 +97,12 @@ const base: SchemaObject = {
             type: 'string',
             example: '2300',
           },
-          unitNumber: {
+          /*unitNumber: {
             title: 'Unit number',
             description: 'Apartament, suite, unit number, etc... or address line 2.',
             type: 'string',
             example: 'Cj. 182',
-          },
+          },*/
           neighborhood: {
             title: 'Neighborhood',
             description: 'Address neighborhood or address line 3.',
