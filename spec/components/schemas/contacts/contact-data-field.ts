@@ -11,7 +11,7 @@ const base: SchemaObject = {
       title: 'ID',
       description: 'ID of the contact data field to be created. This will be field name to be used on the [contacts API](#tag/Contacts/paths/~1contacts/post).',
       type: 'string',
-      pattern: '^[-_a-z0-9]+$',
+      pattern: '^[-_a-zA-Z0-9]+$',
       example: 'my-field',
     },
     name: {
