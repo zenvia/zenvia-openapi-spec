@@ -25,6 +25,13 @@ const base: SchemaObject = {
       type: 'string',
       example: 'Users subscribed to technology product releases',
     },
+    size: {
+      title: 'Size',
+      description: 'Number of contacts are in the list.',
+      type: 'number',
+      example: '10',
+      readOnly: true,
+    },
     createdAt: {
       title: 'Created At',
       description: 'Timestamp of the contact list creation.',
