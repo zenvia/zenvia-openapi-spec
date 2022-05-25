@@ -29,7 +29,7 @@ const base: SchemaObject = {
       title: 'Size',
       description: 'Number of contacts are in the list.',
       type: 'number',
-      example: '10',
+      example: 10,
       readOnly: true,
     },
     createdAt: {
