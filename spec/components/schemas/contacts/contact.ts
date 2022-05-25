@@ -88,7 +88,7 @@ const base: SchemaObject = {
           },
           state: {
             title: 'State',
-            description: 'Address state.',
+            description: 'Address state or region.',
             type: 'string',
             example: 'SP',
           },
