@@ -358,6 +358,94 @@
                       }
                     ]
                   }
+                },
+                "card": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "card",
+                        "title": "Card from Zenvia",
+                        "text": "This is our products",
+                        "media": {
+                          "url": "https://zenvia.br/zenvia-office.png",
+                          "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
+                          "caption": "Our amazing office!"
+                        },
+                        "buttons": [
+                          {
+                            "type": "link",
+                            "text": "Site",
+                            "url": "https://www.zenvia.com/"
+                          }
+                        ],
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "carousel": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "carousel",
+                        "cardWidth": "MEDIUM",
+                        "cards": [
+                          {
+                            "title": "Card from Zenvia",
+                            "text": "This is our products",
+                            "media": {
+                              "url": "https://zenvia.br/zenvia-office.png",
+                              "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
+                              "caption": "Our amazing office!"
+                            },
+                            "buttons": [
+                              {
+                                "type": "link",
+                                "text": "Site",
+                                "url": "https://www.zenvia.com/"
+                              }
+                            ],
+                            "quickReplyButtons": [
+                              {
+                                "type": "text",
+                                "text": "Click here",
+                                "payload": "success"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "replyable_text": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "replyable_text",
+                        "text": "Hi Zenvia!",
+                        "quickReplyButtons": [
+                          {
+                            "type": "text",
+                            "text": "Click here",
+                            "payload": "success"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -3081,7 +3169,7 @@
       "content.bases.buttons-list": {
         "type": "array",
         "title": "Buttons",
-        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*\n    <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Only `text` and `link` buttons are supported.*",
+        "description": "Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*\n    <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: `text`, `link` and `dial`.*\n    <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: `text` and `link`.*",
         "maxItems": 4,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
@@ -3157,7 +3245,7 @@
       "content.bases.quick-reply-list": {
         "type": "array",
         "title": "Quick reply buttons",
-        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*\n    <br>*[Instagram](#tag/Instagram): Only `text` buttons are supported.*\n    <br>*[Facebook](#tag/Facebook): Only `text` buttons are supported.*",
+        "description": "Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>\n    <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*\n    <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 13 buttons of 25 characters is supported. Supported types: `text`, `link` and `dial`.*\n    <br>*[Instagram](#tag/Instagram): Only `text` buttons are supported.*\n    <br>*[Facebook](#tag/Facebook): Only `text` buttons are supported.*",
         "maxItems": 13,
         "items": {
           "$ref": "#/components/schemas/content.bases.buttons.all"
@@ -3447,13 +3535,25 @@
           },
           {
             "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.card"
+          },
+          {
+            "$ref": "#/components/schemas/content.carousel"
+          },
+          {
+            "$ref": "#/components/schemas/content.replyable-text"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/content.text",
-            "file": "#/components/schemas/content.file"
+            "file": "#/components/schemas/content.file",
+            "card": "#/components/schemas/content.card",
+            "carousel": "#/components/schemas/content.carousel",
+            "replyable_text": "#/components/schemas/content.replyable-text"
           }
         }
       },
@@ -6262,7 +6362,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n|Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| text           |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| file           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| replyable_text |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| contacts       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| location       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| template       |<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| card           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| carousel       |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| button         |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| list           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| call           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| email          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## Call\nThis is the [Voice channel](#tag/Voice) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.call\" showReadOnly={false} showWriteOnly={true} />\n\n## E-Mail\nThis is the [E-Mail channel](#tag/E-Mail) content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.email\" showReadOnly={false} showWriteOnly={true} />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n"
+      "description": "## Supported Channels\n\nFor each content type covered in the next section, the following table reflects the usability concerning the each Zenvia-supported channel:\n\n|Content Type    |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| text           |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| file           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| replyable_text |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| contacts       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| location       |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| template       |<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| card           |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| carousel       |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| button         |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| list           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| call           |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| email          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## WhatsApp buttons\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp list\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## Call\nThis is the [Voice channel](#tag/Voice) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.call\" showReadOnly={false} showWriteOnly={true} />\n\n## E-Mail\nThis is the [E-Mail channel](#tag/E-Mail) content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.email\" showReadOnly={false} showWriteOnly={true} />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n"
     },
     {
       "name": "SMS",
@@ -6298,7 +6398,7 @@
     },
     {
       "name": "E-Mail",
-      "description": "The E-mail channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n<br/>\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## E-Mail limitations\n\nYou either can use one of the Zenvia domains provided in the e-mail activation console, or you can use your own domain.\n\nHowever, to use your domain, your will need to change or create DNS entries to make this possible.\n\nHow to do this will be described in the e-mail activation console [Zenvia platform](https://app.zenvia.com/home/credentials/email/list)\n\n<br>\nSupported content types and sizes:\n\n| Media | Content Type | E-Mail Size* |\n|---|---|---|\n| document | Any valid MIME type. | 25&nbsp;MB |\n\n*The maximum size is for the entire e-mail.\n\n\n## E-Mail sender and recipient\n\nWhen you send a message to a contact using E-Mail channel:\n\n* Recipient: the e-mail address of the contact.\n* Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n* Recipient: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n* Sender: the e-mail address of the contact.\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The E-mail channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n<br/>\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## E-Mail limitations\n\nYou either can use one of the Zenvia domains provided in the e-mail activation console, or you can use your own domain.\n\nHowever, to use your domain, your will need to change or create DNS entries to make this possible.\n\nThe way to do this will be described on the [e-mail activation console](https://app.zenvia.com/home/credentials/email/list)\n\n<br>\nSupported content types and sizes:\n\n| Media    | Content Type         | E-Mail Size\\* |\n| -------- | -------------------- | ------------- |\n| document | Any valid MIME type. | 25&nbsp;MB    |\n\n\\*The maximum size is for the entire e-mail.\n\n## E-Mail sender and recipient\n\nWhen you send a message to a contact using E-Mail channel:\n\n- Recipient: the e-mail address of the contact.\n- Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n- Recipient: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).\n- Sender: the e-mail address of the contact.\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Flow Batches",

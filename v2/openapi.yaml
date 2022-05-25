@@ -468,6 +468,59 @@ paths:
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
+              card:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: card
+                      title: Card from Zenvia
+                      text: This is our products
+                      media:
+                        url: 'https://zenvia.br/zenvia-office.png'
+                        disposition: ON_THE_TOP_MEDIUM_HEIGHT
+                        caption: Our amazing office!
+                      buttons:
+                        - type: link
+                          text: Site
+                          url: 'https://www.zenvia.com/'
+                      quickReplyButtons:
+                        - type: text
+                          text: Click here
+                          payload: success
+              carousel:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: carousel
+                      cardWidth: MEDIUM
+                      cards:
+                        - title: Card from Zenvia
+                          text: This is our products
+                          media:
+                            url: 'https://zenvia.br/zenvia-office.png'
+                            disposition: ON_THE_TOP_MEDIUM_HEIGHT
+                            caption: Our amazing office!
+                          buttons:
+                            - type: link
+                              text: Site
+                              url: 'https://www.zenvia.com/'
+                          quickReplyButtons:
+                            - type: text
+                              text: Click here
+                              payload: success
+              replyable_text:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: replyable_text
+                      text: Hi Zenvia!
+                      quickReplyButtons:
+                        - type: text
+                          text: Click here
+                          payload: success
       responses:
         '200':
           description: Created message
@@ -2603,7 +2656,8 @@ components:
       description: |-
         Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>
             <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*
-            <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Only `text` and `link` buttons are supported.*
+            <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: `text`, `link` and `dial`.*
+            <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: `text` and `link`.*
       maxItems: 4
       items:
         $ref: '#/components/schemas/content.bases.buttons.all'
@@ -2672,6 +2726,7 @@ components:
       description: |-
         Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>
             <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*
+            <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 13 buttons of 25 characters is supported. Supported types: `text`, `link` and `dial`.*
             <br>*[Instagram](#tag/Instagram): Only `text` buttons are supported.*
             <br>*[Facebook](#tag/Facebook): Only `text` buttons are supported.*
       maxItems: 13
@@ -2852,11 +2907,17 @@ components:
       oneOf:
         - $ref: '#/components/schemas/content.text'
         - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.carousel'
+        - $ref: '#/components/schemas/content.replyable-text'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+          card: '#/components/schemas/content.card'
+          carousel: '#/components/schemas/content.carousel'
+          replyable_text: '#/components/schemas/content.replyable-text'
     content.instagram.all:
       title: Instagram
       oneOf:
@@ -4938,12 +4999,12 @@ tags:
       |:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
       | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
-      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
@@ -5329,29 +5390,28 @@ tags:
 
       However, to use your domain, your will need to change or create DNS entries to make this possible.
 
-      How to do this will be described in the e-mail activation console [Zenvia platform](https://app.zenvia.com/home/credentials/email/list)
+      The way to do this will be described on the [e-mail activation console](https://app.zenvia.com/home/credentials/email/list)
 
       <br>
       Supported content types and sizes:
 
-      | Media | Content Type | E-Mail Size* |
-      |---|---|---|
-      | document | Any valid MIME type. | 25&nbsp;MB |
+      | Media    | Content Type         | E-Mail Size\* |
+      | -------- | -------------------- | ------------- |
+      | document | Any valid MIME type. | 25&nbsp;MB    |
 
-      *The maximum size is for the entire e-mail.
-
+      \*The maximum size is for the entire e-mail.
 
       ## E-Mail sender and recipient
 
       When you send a message to a contact using E-Mail channel:
 
-      * Recipient: the e-mail address of the contact.
-      * Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
+      - Recipient: the e-mail address of the contact.
+      - Sender: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
 
       When you receive a message from a contact, the sender and recipient are inverted:
 
-      * Recipient: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
-      * Sender: the e-mail address of the contact.
+      - Recipient: the e-mail address connected on [Zenvia platform](https://app.zenvia.com/home/credentials/email/list).
+      - Sender: the e-mail address of the contact.
 
       The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
   - name: Flow Batches
