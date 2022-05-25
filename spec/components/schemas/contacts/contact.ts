@@ -86,6 +86,18 @@ const base: SchemaObject = {
             type: 'string',
             example: '01310-300',
           },
+          state: {
+            title: 'State',
+            description: 'Address state.',
+            type: 'string',
+            example: 'SP',
+          },
+          city: {
+            title: 'City',
+            description: 'Address city.',
+            type: 'string',
+            example: 'São Paulo',
+          },
           address: {
             title: 'Address',
             description: 'Street address.',
