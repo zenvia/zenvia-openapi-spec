@@ -7,6 +7,7 @@ export const quickReplyList: SchemaObject = {
   title: 'Quick reply buttons',
   description: `Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>
     <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*
+    <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 13 buttons of 25 characters is supported. Supported types: \`text\`, \`link\` and \`dial\`.*
     <br>*[Instagram](#tag/Instagram): Only \`text\` buttons are supported.*
     <br>*[Facebook](#tag/Facebook): Only \`text\` buttons are supported.*`,
   maxItems: 13,
