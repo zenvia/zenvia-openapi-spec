@@ -3,6 +3,9 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as gbmMessageRef } from '../../components/schemas/message/gbm';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
+import { card as cardExample } from '../../resources/examples/card';
+import { carousel as carouselExample } from '../../resources/examples/carousel';
+import { replyableText as replyableExample } from '../../resources/examples/replyable-text';
 
 const post: OperationObject = {
   description: 'Send a Google Business Messages message',
@@ -20,6 +23,15 @@ const post: OperationObject = {
           },
           file: {
             value: fileExample(),
+          },
+          card : {
+            value: cardExample(),
+          },
+          carousel: {
+            value: carouselExample(),
+          },
+          replyable_text: {
+            value: replyableExample(),
           },
         },
       },
