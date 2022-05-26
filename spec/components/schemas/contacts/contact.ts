@@ -51,13 +51,13 @@ const base: SchemaObject = {
       type: 'string',
       example: 'Souza',
     },
-    data: {
-      title: 'Data',
+    customData: {
+      title: 'Custom Data',
       description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
       type: 'object',
       additionalProperties: {
         title: 'Value',
-        description: 'Sets a value to a contact data field (the property name). Contact data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
+        description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
         oneOf: [
           { type: 'string', description: 'String type value' },
           { type: 'number', description: 'Number type value' },

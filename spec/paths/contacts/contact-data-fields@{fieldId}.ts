@@ -4,12 +4,12 @@ import { ref as contactDataFieldRef } from '../../components/schemas/contacts/co
 import { ref as contactDataFieldIdRef } from '../../components/parameters/contacts/fieldId';
 
 const get: OperationObject = {
-  summary: 'Retrieve a contact data field by id',
-  description: 'Allows to retrieve a contact data field information.',
-  tags: ['Contact Data Fields'],
+  summary: 'Retrieve a contact custom data field by id',
+  description: 'Allows to retrieve a contact custom data field information.',
+  tags: ['Contact Custom Data Fields'],
   responses: {
     200: {
-      description: 'Contact data field object',
+      description: 'Contact custom data field object',
       content: {
         'application/json': {
           schema: {
