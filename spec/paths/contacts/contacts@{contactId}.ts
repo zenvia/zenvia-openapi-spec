@@ -54,9 +54,24 @@ const patch: OperationObject = {
   } as ResponsesObject,
 };
 
+const del: OperationObject = {
+  summary: 'Delete one contact by id',
+  description: 'Allows to delete a contact.',
+  tags: ['Contacts'],
+  responses: {
+    204: {
+      description: 'No content',
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  } as ResponsesObject,
+};
+
 const path: PathItemObject = {
   get,
   patch,
+  delete: del,
   parameters: [{
     $ref: contactIdRef,
   }],
