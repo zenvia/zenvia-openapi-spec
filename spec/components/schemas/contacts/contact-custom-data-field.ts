@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
-  title: 'Contact Data Field',
+  title: 'Contact Custom Data Field',
   description: 'Definition of a field which can be provided on a contact data.',
   type: 'object',
   properties: {
@@ -11,8 +11,9 @@ const base: SchemaObject = {
       title: 'ID',
       description: 'ID of the contact data field to be created. This will be field name to be used on the [contacts API](#tag/Contacts/paths/~1contacts/post).',
       type: 'string',
-      pattern: '^[_a-zA-Z0-9]+$',
+      pattern: '^[_a-z0-9]+$',
       example: 'my_field',
+      readOnly: true,
     },
     name: {
       title: 'Name',
@@ -42,7 +43,7 @@ const base: SchemaObject = {
     },
   },
   required: [
-    'id',
+    'name',
   ],
 };
 
