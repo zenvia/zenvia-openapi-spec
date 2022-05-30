@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as contactDataFieldRef } from '../../components/schemas/contacts/contact-data-field';
+import { ref as contactDataFieldRef } from '../../components/schemas/contacts/contact-custom-data-field';
 import { ref as contactDataFieldIdRef } from '../../components/parameters/contacts/fieldId';
 
 const get: OperationObject = {
