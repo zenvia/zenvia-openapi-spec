@@ -1,0 +1,73 @@
+import { SchemaObject } from 'openapi3-ts';
+import { ref as baseRef } from '../base';
+import { createComponentRef } from '../../../../../utils/ref';
+
+const productList: SchemaObject = {
+  type: 'object',
+  allOf: [{
+    $ref: baseRef,
+  }, {
+    type: 'object',
+    properties: {
+      type: {
+        type: 'string',
+        example: 'product_list',
+      },
+      header: {
+        type: 'string',
+        description: 'Header content',
+        example: 'Text header content',
+      },
+      body: {
+        type: 'string',
+        description: 'Body content',
+        example: 'Text body content',
+      },
+      footer: {
+        type: 'string',
+        description: 'Footer content',
+        example: 'Text footer content',
+      },
+      catalogId: {
+        type: 'string',
+        description: 'The catalog identifier. Click ...',
+        example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
+      },
+      sections: {
+        type: 'array',
+        description: 'The available fields to be used in this product list.',
+        items: {
+          type: 'object',
+          properties: {
+            title: {
+              type: 'string',
+              description: 'The section title.',
+            },
+            productItems: {
+              type: 'array',
+              description: 'A list of products.',
+              items: {
+                type: 'object',
+                properties: {
+                  productId: {
+                    type: 'string',
+                    description: 'The product identifier.',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    required: [
+      'type',
+      'catalogId',
+      'body',
+      'sections',
+    ],
+  }],
+};
+
+export const ref = createComponentRef(__filename);
+export default productList;
