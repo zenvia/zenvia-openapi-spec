@@ -6,6 +6,7 @@ import { ref as contactsRef } from '../contacts';
 import { ref as locationRef } from '../location';
 import { ref as buttonRef } from './button';
 import { ref as listRef } from './list';
+import { ref as productListRef } from './product-list';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -24,6 +25,8 @@ const all: SchemaObject = {
     $ref: buttonRef,
   }, {
     $ref: listRef,
+  }, {
+    $ref: productListRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -35,6 +38,7 @@ const all: SchemaObject = {
       location: locationRef,
       button: buttonRef,
       list: listRef,
+      product_list: productListRef,
     },
   },
 };
