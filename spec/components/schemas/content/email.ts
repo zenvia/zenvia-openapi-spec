@@ -24,11 +24,6 @@ const file: SchemaObject = {
         description: 'HTML version of the e-mail. This is the normally shown version.',
         example: '<b>Hello!</b>',
       },
-      text: {
-        type: 'string',
-        description: 'Text version of the e-mail.',
-        example: 'Hello!',
-      },
       attachments: {
         type: 'array',
         items: {
@@ -59,6 +54,7 @@ const file: SchemaObject = {
     required: [
       'type',
       'subject',
+      'html',
     ],
   }],
 };
