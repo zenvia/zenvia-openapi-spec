@@ -21,6 +21,7 @@ const file: SchemaObject = {
       },
       html: {
         type: 'string',
+        maxLength: 32768,
         description: 'HTML version of the e-mail. This is the normally shown version.',
         example: '<b>Hello!</b>',
       },
