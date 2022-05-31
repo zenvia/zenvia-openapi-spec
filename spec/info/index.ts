@@ -10,7 +10,7 @@ const info: InfoObject = {
   termsOfService: 'https://zenvia.com/',
   contact: {
     name: 'API Support',
-    email: 'atendimento@zenvia.com',
+    email: undefined,
     url: 'https://zenapi.zenvia.com/',
   },
   license: {
