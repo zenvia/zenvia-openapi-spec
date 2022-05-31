@@ -1,4 +1,4 @@
-API Support: https://atendimento.zenvia.com/
+API Support: https://atendimento.zenvia.com/<span class="link-content">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>
 
 
 # Overview
