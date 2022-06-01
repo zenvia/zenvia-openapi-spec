@@ -5,6 +5,7 @@ import { ref as fileRef } from '../../components/schemas/files/file';
 import { ref as startDate } from '../../components/parameters/files/startTimestamp';
 import { ref as endDate } from '../../components/parameters/files/endTimestamp';
 import { ref as limit } from '../../components/parameters/files/limit';
+import { xTotal } from '../../components/headers/x-total';
 import rawExamples from '../../resources/examples/files/raw-examples';
 
 const post: OperationObject = {
@@ -107,13 +108,7 @@ const get: OperationObject = {
         },
       },
       headers: {
-        'x-total': {
-          schema: {
-            description: 'The number of results',
-            type: 'string',
-            example: '100',
-          },
-        },
+        ...xTotal,
       },
     } as ResponseObject,
   } as ResponsesObject,
