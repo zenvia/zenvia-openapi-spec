@@ -39,8 +39,8 @@ const del: OperationObject = {
 };
 
 const path: PathItemObject = {
-  delete: del,
   get,
+  delete: del,
   parameters: [{
     $ref: fileIdRef,
   }],
