@@ -127,6 +127,15 @@ const base: SchemaObject = {
         },
       },
     },
+    listNames: {
+      title: 'List Names',
+      description: 'Names of the lists the contact is included in.',
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      example: ['List 1', 'List 2', 'List 3'],
+    },
     createdAt: {
       title: 'Created At',
       description: 'Timestamp of the contact creation.',
