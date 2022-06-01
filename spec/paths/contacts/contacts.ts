@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts/contact';
+import { ref as listNamesRef } from '../../components/parameters/contacts/listNames';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -44,6 +45,9 @@ const get: OperationObject = {
   summary: 'List contacts',
   description: 'Lists all contacts available',
   tags: ['Contacts'],
+  parameters: [{
+    $ref: listNamesRef,
+  }],
   responses: {
     200: {
       description: 'Contacts available',
