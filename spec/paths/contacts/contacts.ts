@@ -2,6 +2,8 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts/contact';
 import { ref as listNamesRef } from '../../components/parameters/contacts/listNames';
+import { ref as pageRef } from '../../components/parameters/page';
+import { ref as sizeRef } from '../../components/parameters/size';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -47,6 +49,10 @@ const get: OperationObject = {
   tags: ['Contacts'],
   parameters: [{
     $ref: listNamesRef,
+  }, {
+    $ref: pageRef,
+  }, {
+    $ref: sizeRef,
   }],
   responses: {
     200: {
@@ -58,6 +64,15 @@ const get: OperationObject = {
             items: {
               $ref: contactRef,
             },
+          },
+        },
+      },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The total number of results available.',
+            type: 'string',
+            example: '100',
           },
         },
       },

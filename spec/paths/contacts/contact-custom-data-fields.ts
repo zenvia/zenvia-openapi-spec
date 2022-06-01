@@ -1,6 +1,8 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactDataFieldRef } from '../../components/schemas/contacts/contact-custom-data-field';
+import { ref as pageRef } from '../../components/parameters/page';
+import { ref as sizeRef } from '../../components/parameters/size';
 
 const post: OperationObject = {
   summary: 'Create a new contact custom data field',
@@ -37,6 +39,11 @@ const get: OperationObject = {
   summary: 'List contact data fields',
   description: 'Lists all contact custom data fields available.',
   tags: ['Contact Custom Data Fields'],
+  parameters: [{
+    $ref: pageRef,
+  }, {
+    $ref: sizeRef,
+  }],
   responses: {
     200: {
       description: 'Contact custom data fields available',
@@ -47,6 +54,15 @@ const get: OperationObject = {
             items: {
               $ref: contactDataFieldRef,
             },
+          },
+        },
+      },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The total number of results available.',
+            type: 'string',
+            example: '100',
           },
         },
       },
