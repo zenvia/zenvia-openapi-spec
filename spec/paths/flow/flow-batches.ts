@@ -6,8 +6,6 @@ import { ref as flowBatchesItemRef } from '../../components/schemas/flow/batches
 import { ref as flowIdRef } from '../../components/parameters/flowId';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
-import { xTotal } from '../../components/headers/x-total';
-import { xPageAndSize } from '../../components/headers/x-page-and-size';
 
 const get: OperationObject = {
   description: 'Get list of flow-batches',
@@ -33,8 +31,27 @@ const get: OperationObject = {
         },
       },
       headers: {
-        ...xTotal,
-        ...xPageAndSize,
+        'x-total': {
+          schema: {
+            description: 'The total number of results available.',
+            type: 'string',
+            example: '100',
+          },
+        },
+        'x-page-size': {
+          schema: {
+            description: 'The number of results per page.',
+            type: 'string',
+            example: '10',
+          },
+        },
+        'x-page': {
+          schema: {
+            description: 'The current page.',
+            type: 'string',
+            example: '5',
+          },
+        },
       },
     } as ResponseObject,
     default: {
