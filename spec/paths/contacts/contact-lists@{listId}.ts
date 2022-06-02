@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as contactListRef } from '../../components/schemas/contacts/contact-list';
-import { ref as listIdRef } from '../../components/parameters/contacts/listId';
+import { ref as contactListRef } from '../../components/schemas/contacts-management/contact-list';
+import { ref as listIdRef } from '../../components/parameters/contacts-management/listId';
 
 const get: OperationObject = {
   summary: 'Retrieve one contact list by id',

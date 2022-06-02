@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as contactRef } from '../../components/schemas/contacts/contact';
-import { ref as listIdsRef } from '../../components/parameters/contacts/listIds';
+import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
+import { ref as listIdsRef } from '../../components/parameters/contacts-management/listIds';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
 
