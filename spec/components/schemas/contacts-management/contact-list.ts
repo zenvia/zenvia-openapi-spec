@@ -19,12 +19,6 @@ const base: SchemaObject = {
       type: 'string',
       example: 'Technology interest',
     },
-    description: {
-      title: 'Descriptiion',
-      description: 'Contact list\'s description.',
-      type: 'string',
-      example: 'Users subscribed to technology product releases',
-    },
     size: {
       title: 'Size',
       description: 'Number of contacts are in the list.',
