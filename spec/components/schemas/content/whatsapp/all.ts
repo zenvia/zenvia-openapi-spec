@@ -6,8 +6,9 @@ import { ref as contactsRef } from '../contacts';
 import { ref as locationRef } from '../location';
 import { ref as buttonRef } from './button';
 import { ref as listRef } from './list';
-import { ref as productListRef } from './product-list';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as productListRef } from './product-list';
+import { ref as productListOrderRef } from './product-list-order';
 
 const all: SchemaObject = {
   title: 'WhatsApp',
@@ -27,6 +28,8 @@ const all: SchemaObject = {
     $ref: listRef,
   }, {
     $ref: productListRef,
+  }, {
+    $ref: productListOrderRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -39,6 +42,7 @@ const all: SchemaObject = {
       button: buttonRef,
       list: listRef,
       product_list: productListRef,
+      product_list_order: productListOrderRef,
     },
   },
 };
