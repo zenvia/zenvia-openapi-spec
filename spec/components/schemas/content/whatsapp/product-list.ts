@@ -11,7 +11,7 @@ const productList: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'product_list',
+        example: 'product-list',
       },
       header: {
         type: 'string',
@@ -30,7 +30,7 @@ const productList: SchemaObject = {
       },
       catalogId: {
         type: 'string',
-        description: 'The catalog identifier. Click ...',
+        description: 'The catalog identifier. Click <a href="https://business.facebook.com/commerce" target="_blank">here</a> to go to the catalogs page.',
         example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
       },
       sections: {
