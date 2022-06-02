@@ -66,7 +66,6 @@ const base: SchemaObject = {
         title: 'Delete At',
         description: 'Timestamp of the moment after which the file will be automatically deleted.',
         type: 'string',
-        format: 'date-time',
         example: '2021-12-21T14:37:59.000Z',
         readOnly: true,
       },

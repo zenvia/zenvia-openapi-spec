@@ -36,7 +36,6 @@ const base: SchemaObject = {
       title: 'Created At',
       description: 'Timestamp of the contact data field creation.',
       type: 'string',
-      format: 'date-time',
       example: '2022-05-23T19:37:59.000Z',
       readOnly: true,
     },
