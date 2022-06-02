@@ -2,17 +2,17 @@ import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
 const contactId: ParameterObject = {
-  name: 'listNames',
+  name: 'listIds',
   in: 'query',
   required: false,
-  description: 'Contact list names to filter the contacts.',
+  description: 'Contact list ids to filter the contacts.',
   schema: {
     type: 'array',
     items: {
       type: 'string',
     },
   },
-  example: ['List 1', 'List 2', 'List 3'],
+  example: ['list-id-01', 'list-id-02', 'list-id-03'],
 };
 
 export const ref = createComponentRef(__filename);

@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts/contact';
-import { ref as listNamesRef } from '../../components/parameters/contacts/listNames';
+import { ref as listIdsRef } from '../../components/parameters/contacts/listIds';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/size';
 
@@ -48,7 +48,7 @@ const get: OperationObject = {
   description: 'Lists all contacts available',
   tags: ['Contacts'],
   parameters: [{
-    $ref: listNamesRef,
+    $ref: listIdsRef,
   }, {
     $ref: pageRef,
   }, {
