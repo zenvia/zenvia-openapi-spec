@@ -9,7 +9,7 @@ import { ref as listRef } from './list';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as productListRef } from './product-list';
 
-const all: SchemaObject = {
+const mtContent: SchemaObject = {
   title: 'WhatsApp',
   oneOf: [{
     $ref: textRef,
@@ -44,4 +44,4 @@ const all: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default all;
+export default mtContent;
