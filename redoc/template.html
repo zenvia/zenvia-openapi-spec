@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -11,6 +13,37 @@
       ga('send', 'pageview');
     </script>
     <!-- End Google Analytics -->
+
+    <!-- Chameleon -->
+    <script>
+      !function(d,w){var t="SxwDe1SHyKIPk9yVrOBdgIZEJCbYyPqSsj4j9aBTi7kTE0-1KuSgl-CsEfJq8JP4SVT8gb",c="chmln",m="identify alias track clear set show on off custom help _data".split(" "),i=d.createElement("script");if(w[c]||(w[c]={}),!w[c].root){w[c].accountToken=t,w[c].location=w.location.href.toString(),w[c].now=new Date;for(var s=0;s<m.length;s++){!function(){var t=w[c][m[s]+"_a"]=[];w[c][m[s]]=function(){t.push(arguments);};}();}i.src="https://fast.trychameleon.com/messo/"+t+"/messo.min.js",i.async=!0,d.head.appendChild(i);}}(document,window);
+
+      // Generate a random uuid
+      const uuidv4 = () => {
+        // @ts-ignore
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+          // tslint:disable-next-line:no-bitwise
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+      }
+
+      const getOrCreateUserId = () => {
+        const allCookies = document.cookie;
+        let surveyCookie = allCookies ? allCookies.split('; ').find(row => row.startsWith('npsId=')) : null;
+        const now = new Date();
+        const expiresAt = new Date(now.setMonth(now.getMonth() + 1));
+
+        surveyCookie = surveyCookie ? surveyCookie : `npsId=${crypto.randomUUID ? crypto.randomUUID() : uuidv4()}`;
+
+        const uuid = surveyCookie.split('=')[1];
+        document.cookie = `${surveyCookie}; expires=${expiresAt.toUTCString()}; `;
+        return uuid;
+      }
+
+      const npsId = getOrCreateUserId();
+      chmln.identify(npsId, { visitor: true });
+    </script>
+    <!-- End Chameleon -->
 
     <title>ZenAPI | API Reference</title>
     <!-- needed for adaptive design -->
@@ -30,6 +63,20 @@
       }
       .menu-content img {
         padding: 25px;
+      }
+
+      .api-content h5 .dropdown {
+        background: rgba(150, 200, 255);
+        padding-left: 10px;
+        padding-right: 8px;
+      }
+
+      .link-content::before {
+        display: inline-block;
+        opacity: 0.5;
+        width: 15px;
+        content: '|';
+        text-align: center;
       }
     </style>
     {{redocHead}}

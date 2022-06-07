@@ -36,13 +36,13 @@ const template: SchemaObject = {
     },
     channel: {
       title: 'Channel',
-      description: 'Channel for template use. Currently, only Whatsapp channel is allowed.',
+      description: 'Channel for template use. Currently, only Whatsapp, SMS and RCS channels is allowed.',
       type: 'string',
-      enum: ['WHATSAPP'],
+      enum: ['WHATSAPP', 'SMS', 'RCS'],
     },
     senderId: {
       title: 'Sender ID',
-      description: 'The identifier of the sender of the template. The sender shoud be created with a credential.',
+      description: 'The identifier of the sender of the template. The sender should be created with a credential.',
       type: 'string',
     },
     category: {

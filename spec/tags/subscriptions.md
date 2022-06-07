@@ -24,17 +24,21 @@ The <code>code</code> field may assume the following values:
 * **DELIVERED**: the message sent by your business was delivered to the user's device
 * **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.
 * **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.
-* **DELETED**: the message sent by the user was deleted by the user
+* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.
+* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.
+* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.
 <br><br>
 
 ### Description field
 The <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:
-* *SENT: "**The message has been forwarded to the provider.**"*
-* *DELIVERED: "**The message has been delivered by the provider.**"*
-* *READ: "**The message has been read by the recipient.**"*
-* *REJECTED: "**The message was rejected by the provider.**"*
+* *SENT: "**The message has been forwarded to the provider**".*
+* *DELIVERED: "**The message has been delivered by the provider**".*
+* *READ: "**The message has been read by the recipient**".*
+* *REJECTED: "**The message was rejected by the provider**".*
 * *NOT_DELIVERED: "**The provider was unable to deliver the message.**"*
 * *DELETED: "**The message has been deleted by the contact**".*
+* *CLICKED: "**An action item in the message has been clicked by the contact**".*
+* *VERIFIED: "**The message has been verified by the device app/provider**".*
 
 
 
@@ -46,6 +50,10 @@ Webhook notifications sent from Zenvia come from any of the following ranges of 
 * 45.233.22.0/24
 * 45.233.23.0/24
 * 3.233.231.228/32
+
+## Subscription creation limit
+
+Currently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).
 
 ## Webhook request error handling
 As described before, webhooks allow you to receive events in your application.

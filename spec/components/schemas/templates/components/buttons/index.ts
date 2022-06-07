@@ -2,15 +2,20 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as actionsRef } from './actions';
 import { ref as quickRepliesRef } from './quick-replies';
+import { ref as mixedRef } from './mixed';
 
 export const buttons: SchemaObject = {
   title: 'Buttons',
-  description: 'Template buttons',
+  description: `Template buttons
+
+*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
   type: 'object',
   oneOf: [{
     $ref: actionsRef,
   }, {
     $ref: quickRepliesRef,
+  }, {
+    $ref: mixedRef,
   }],
   required: ['type'],
   discriminator: {
@@ -18,6 +23,7 @@ export const buttons: SchemaObject = {
     mapping: {
       ACTIONS: actionsRef,
       QUICK_REPLIES: quickRepliesRef,
+      MIXED: mixedRef,
     },
   },
 };

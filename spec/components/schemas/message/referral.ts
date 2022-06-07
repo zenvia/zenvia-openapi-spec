@@ -40,7 +40,7 @@ const referral: SchemaObject = {
           title: 'Type',
           description: 'The type of content where the message originated.',
           type: 'string',
-          enum: ['ad', 'post', 'story_mention', 'story', 'message'],
+          enum: ['ad', 'post', 'story_mention', 'sharing', 'story', 'message', 'live'],
         },
         url: {
           title: 'URL',

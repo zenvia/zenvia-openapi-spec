@@ -4,7 +4,7 @@ import { ref as multipartBatchRef } from '../../components/schemas/batches/multi
 
 const post: OperationObject = {
   description: 'Create batch',
-  tags: ['Batches'],
+  tags: ['Message Batches'],
   requestBody: {
     required: true,
     content: {
@@ -15,7 +15,7 @@ const post: OperationObject = {
             contacts: {
               type: 'string',
               title: 'Binary CSV File',
-              description: 'Binary csv file with recipients and variable values ​​when necessary.',
+              description: 'Binary csv file with recipients and variable values when necessary.',
             },
             batch: {
               $ref: multipartBatchRef,

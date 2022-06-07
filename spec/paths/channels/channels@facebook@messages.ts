@@ -2,6 +2,10 @@ import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as facebookMessageRef } from '../../components/schemas/message/facebook';
 import { text as textExample } from '../../resources/examples/text';
+import { file as fileExample } from '../../resources/examples/file';
+import { card as cardExample } from '../../resources/examples/card';
+import { carousel as carouselExample } from '../../resources/examples/carousel';
+import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
 
 const post: OperationObject = {
   description: 'Send a Facebook message',
@@ -16,6 +20,18 @@ const post: OperationObject = {
         examples: {
           text: {
             value: textExample(),
+          },
+          file: {
+            value: fileExample(),
+          },
+          card: {
+            value: cardExample(),
+          },
+          carousel: {
+            value: carouselExample(),
+          },
+          replyable_text: {
+            value: replyableTextExample(),
           },
         },
       },

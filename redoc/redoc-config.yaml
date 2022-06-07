@@ -8,4 +8,4 @@ theme:
 pathInMiddlePanel: false
 noAutoAuth: true
 jsonSampleExpandLevel: all
-expandResponses: '200'
+expandResponses: '200,201'

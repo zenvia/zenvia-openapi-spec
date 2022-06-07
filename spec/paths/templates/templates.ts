@@ -12,7 +12,7 @@ import { ref as senderId } from '../../components/parameters/templates/senderId'
 import { ref as status } from '../../components/parameters/templates/status';
 
 const post: OperationObject = {
-  description: 'Create a new',
+  description: 'Create a new template',
   tags: ['Templates'],
   requestBody: {
     content: {

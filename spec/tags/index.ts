@@ -6,6 +6,7 @@ const smsDescription = rawLoad(__dirname, './sms.md');
 const whatsappDescription = rawLoad(__dirname, './whatsapp.md');
 const facebookDescription = rawLoad(__dirname, './facebook.md');
 const batchesDescription = rawLoad(__dirname, './batches.md');
+const flowBatchesDescription = rawLoad(__dirname, './flow-batches.md');
 const subscriptionsDescription = rawLoad(__dirname, './subscriptions.md');
 const templatesDescription = rawLoad(__dirname, './templates.md');
 const messageReportDescription = rawLoad(__dirname, './message-report.md');
@@ -15,6 +16,8 @@ const telegramDescription = rawLoad(__dirname, './telegram.md');
 const voiceDescription = rawLoad(__dirname, './voice.md');
 const gbmDescription = rawLoad(__dirname, './gbm.md');
 const instagramDescription = rawLoad(__dirname, './instagram.md');
+const emailDescription = rawLoad(__dirname, './email.md');
+const filesDescription = rawLoad(__dirname, './files.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -44,7 +47,13 @@ const tags: TagObject[] = [{
   name: 'Voice',
   description: voiceDescription,
 }, {
-  name: 'Batches',
+  name: 'E-Mail',
+  description: emailDescription,
+}, {
+  name: 'Flow Batches',
+  description: flowBatchesDescription,
+}, {
+  name: 'Message Batches',
   description: batchesDescription,
 }, {
   name: 'Webhooks',
@@ -58,6 +67,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Flow Report',
   description: flowReportDescription,
+}, {
+  name: 'Files',
+  description: filesDescription,
 }];
 
 export default tags;

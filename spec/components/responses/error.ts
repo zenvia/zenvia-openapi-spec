@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../utils/ref';
 
 const response: ResponseObject = {
 // tslint:disable-next-line: max-line-length
-  description: 'Error response. See the [Error Handling](#section/API-Design/Error-Handling) section for details.',
+  description: 'Error response. See the [Error Handling](#section/Error-Handling) section for details.',
   content: {
     'application/json': {
       schema: {

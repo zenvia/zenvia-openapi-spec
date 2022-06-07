@@ -6,13 +6,14 @@ const groups: TagGroupObject[] = [{
     'Content types',
     'SMS',
     'WhatsApp',
-    'Facebook',
     'Instagram',
+    'Facebook',
     'RCS',
     'Telegram',
     'Google Business Messages',
     'Voice',
-    'Batches',
+    'E-Mail',
+    'Message Batches',
   ],
 }, {
   name: 'Webhooks',
@@ -23,6 +24,23 @@ const groups: TagGroupObject[] = [{
   name: 'Templates',
   tags: [
     'Templates',
+  ],
+}, {
+  name: 'File Storage',
+  tags: [
+    'Files',
+  ],
+}, {
+  name: 'Flow',
+  tags: [
+    'Flow Batches',
+  ],
+}, {
+  name: 'Contacts',
+  tags: [
+    'Contacts',
+    'Contact Lists',
+    'Contact Custom Data Fields',
   ],
 }, {
   name: 'Reports',

@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as allContentsRef } from '../content/whatsapp/all';
+import { ref as mtContentsRef } from '../content/whatsapp/mt';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -15,7 +15,7 @@ const all: SchemaObject = {
         description: 'A list of content to be sent',
         type: 'array',
         items: {
-          $ref: allContentsRef,
+          $ref: mtContentsRef,
         },
         minItems: 1,
       },

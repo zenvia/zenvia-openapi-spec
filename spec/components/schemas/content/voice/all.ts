@@ -3,6 +3,7 @@ import { ref as callRef } from '../call';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
+  title: 'Voice',
   oneOf: [{
     $ref: callRef,
   }],
