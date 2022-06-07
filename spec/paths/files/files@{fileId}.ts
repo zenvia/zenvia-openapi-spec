@@ -21,11 +21,12 @@ const get: OperationObject = {
     default: {
       $ref: errorResponseRef,
     },
-  },
+  } as ResponsesObject,
 };
 
-const deleteOperation: OperationObject = {
-  description: 'Delete file by id',
+const del: OperationObject = {
+  summary: 'Delete file by id',
+  description: 'Allows to delete one previously stored file.',
   tags: ['Files'],
   responses: {
     204: {
@@ -38,8 +39,8 @@ const deleteOperation: OperationObject = {
 };
 
 const path: PathItemObject = {
-  delete: deleteOperation,
   get,
+  delete: del,
   parameters: [{
     $ref: fileIdRef,
   }],

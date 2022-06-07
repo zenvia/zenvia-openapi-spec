@@ -1,4 +1,4 @@
-import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
+import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as multipartDataRef } from '../../components/schemas/files/multipart-data';
 import { ref as fileRef } from '../../components/schemas/files/file';
@@ -75,11 +75,12 @@ const post: OperationObject = {
     default: {
       $ref: errorResponseRef,
     },
-  },
+  } as ResponsesObject,
 };
 
 const get: OperationObject = {
-  description: 'Get list of files',
+  summary: 'List files',
+  description: 'Lists all files available',
   tags: ['Files'],
   parameters: [
     {
@@ -108,14 +109,14 @@ const get: OperationObject = {
       headers: {
         'x-total': {
           schema: {
-            description: 'The number of results',
+            description: 'The total number of results available.',
             type: 'string',
             example: '100',
           },
         },
       },
     } as ResponseObject,
-  },
+  } as ResponsesObject,
 };
 
 const path: PathItemObject = {

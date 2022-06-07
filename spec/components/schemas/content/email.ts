@@ -21,13 +21,9 @@ const file: SchemaObject = {
       },
       html: {
         type: 'string',
+        maxLength: 32768,
         description: 'HTML version of the e-mail. This is the normally shown version.',
         example: '<b>Hello!</b>',
-      },
-      text: {
-        type: 'string',
-        description: 'Text version of the e-mail.',
-        example: 'Hello!',
       },
       attachments: {
         type: 'array',
@@ -59,6 +55,7 @@ const file: SchemaObject = {
     required: [
       'type',
       'subject',
+      'html',
     ],
   }],
 };
