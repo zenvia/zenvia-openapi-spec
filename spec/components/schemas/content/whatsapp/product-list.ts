@@ -11,7 +11,7 @@ const productList: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'product-list',
+        example: 'product_list',
       },
       header: {
         type: 'string',

@@ -3,7 +3,7 @@ export function productList() {
     from: '5510999999999',
     to: '55108888888888',
     contents: [{
-      type: 'product-list',
+      type: 'product_list',
       header: 'Message Header',
       body: 'Your message body text here',
       footer: 'Your message footer text here',

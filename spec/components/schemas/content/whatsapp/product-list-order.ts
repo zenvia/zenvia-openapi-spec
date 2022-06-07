@@ -11,7 +11,7 @@ const productListOrder: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'product-list-order',
+        example: 'product_list_order',
       },
       text: {
         type: 'string',
