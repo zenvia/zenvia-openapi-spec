@@ -9,7 +9,7 @@ const all: SchemaObject = _.merge(
   mt,
   {
     oneOf: [{
-      $ref: productListOrderRef
+      $ref: productListOrderRef,
     }],
     discriminator: {
       mapping: {
