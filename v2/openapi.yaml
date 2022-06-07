@@ -3,6 +3,9 @@ info:
   version: 2.0.0
   title: ZenAPI
   description: |
+    API Support: https://atendimento.zenvia.com/<span class="link-content">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>
+
+
     # Overview
 
     This is the reference documentation for the Zenvia *REST-like* API. The API itself is based on resources that are represented by JSON format and are manipulated using the HTTP protocol.
@@ -155,7 +158,6 @@ info:
   termsOfService: 'https://zenvia.com/'
   contact:
     name: API Support
-    email: atendimento@zenvia.com
     url: 'https://zenapi.zenvia.com/'
   license:
     name: MIT
@@ -180,7 +182,7 @@ paths:
                 contacts:
                   type: string
                   title: Binary CSV File
-                  description: Binary csv file with recipients and variable values ​​when necessary.
+                  description: Binary csv file with recipients and variable values when necessary.
                 batch:
                   $ref: '#/components/schemas/batches.multipart-batch'
               required:
@@ -1309,6 +1311,21 @@ paths:
                             - id: row3
                               title: Item Three
                               description: Item three description.
+              product_list:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: product_list
+                      header: Message Header
+                      body: Your message body text here
+                      footer: Your message footer text here
+                      catalogId: CATALOG_ID
+                      sections:
+                        - title: Section Title
+                          productItems:
+                            - productId: product-SKU-in-catalog
+                            - productId: product-SKU-in-catalog
       responses:
         '200':
           description: Created message
@@ -1407,6 +1424,264 @@ paths:
               }
 
             }
+  /contact-custom-data-fields:
+    post:
+      summary: Create a new contact custom data field
+      description: 'Allows the creation of custom data fields to be used in the [contacts API](#tag/Contacts/paths/~1contacts/post).'
+      tags:
+        - Contact Custom Data Fields
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contacts-management.contact-custom-data-field'
+      responses:
+        '200':
+          description: Created contact custom data field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact-custom-data-field'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List contact data fields
+      description: Lists all contact custom data fields available.
+      tags:
+        - Contact Custom Data Fields
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          description: Contact custom data fields available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contacts-management.contact-custom-data-field'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+  /contact-lists:
+    post:
+      summary: Create a new contact list
+      description: Allows the creation of contact lists.
+      tags:
+        - Contact Lists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/contacts-management.contact-list'
+                - type: object
+                  required:
+                    - name
+      responses:
+        '200':
+          description: Created contact list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact-list'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List contact lists
+      description: Lists all contact lists available.
+      tags:
+        - Contact Lists
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          description: Contact lists available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contacts-management.contact-list'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+  '/contact-lists/{listId}':
+    get:
+      summary: Retrieve one contact list by id
+      description: Allows to retrieve a contact list's information.
+      tags:
+        - Contact Lists
+      responses:
+        '200':
+          description: Contact object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact-list'
+        default:
+          $ref: '#/components/responses/error'
+    patch:
+      summary: Update one contact list by id
+      description: Allows to update a contact list's information.
+      tags:
+        - Contact Lists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contacts-management.contact-list'
+      responses:
+        '200':
+          description: Updated contact list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact-list'
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete one contact list by id
+      description: 'Allows to delete a contact list. Only the list is deleted, not the contacts.'
+      tags:
+        - Contact Lists
+      responses:
+        '204':
+          description: No content
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/contacts-management.listId'
+  '/contact-lists/{listId}/contacts':
+    get:
+      summary: List the contacts in a list
+      description: Virtual collection to list the contacts in the list.
+      tags:
+        - Contact Lists
+      responses:
+        '200':
+          description: Contact IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contacts-management.contact'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/contacts-management.listId'
+  /contacts:
+    post:
+      summary: Create a new contact
+      description: Allows the creation of contacts.
+      tags:
+        - Contacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/contacts-management.contact'
+                - type: object
+                  required:
+                    - channels
+      responses:
+        '200':
+          description: Contact created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List contacts
+      description: Lists all contacts available
+      tags:
+        - Contacts
+      parameters:
+        - $ref: '#/components/parameters/contacts-management.listIds'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          description: Contacts available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contacts-management.contact'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+  '/contacts/{contactId}':
+    get:
+      summary: Retrieve one contact by id
+      description: Allows to retrieve a contact's information.
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: Contact object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact'
+        default:
+          $ref: '#/components/responses/error'
+    patch:
+      summary: Update one contact by id
+      description: Allows to update a contact's information.
+      tags:
+        - Contacts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contacts-management.contact'
+      responses:
+        '200':
+          description: Updated contact
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts-management.contact'
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete one contact by id
+      description: Allows to delete a contact.
+      tags:
+        - Contacts
+      responses:
+        '204':
+          description: No content
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/contacts-management.contactId'
   /files:
     post:
       summary: Create a new file
@@ -1522,7 +1797,8 @@ paths:
             -H 'Content-Disposition: inline;filename=my-image.png' \
             --data-binary '@./image-source.png'
     get:
-      description: Get list of files
+      summary: List files
+      description: Lists all files available
       tags:
         - Files
       parameters:
@@ -1541,19 +1817,10 @@ paths:
           headers:
             x-total:
               schema:
-                description: The number of results
+                description: The total number of results available.
                 type: string
                 example: '100'
   '/files/{fileId}':
-    delete:
-      description: Delete file by id
-      tags:
-        - Files
-      responses:
-        '204':
-          description: No content
-        default:
-          $ref: '#/components/responses/error'
     get:
       summary: Retrieve one file by id
       description: Allows to retrieve information about one previously stored file.
@@ -1566,6 +1833,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.file'
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete file by id
+      description: Allows to delete one previously stored file.
+      tags:
+        - Files
+      responses:
+        '204':
+          description: No content
         default:
           $ref: '#/components/responses/error'
     parameters:
@@ -1630,17 +1907,17 @@ paths:
           headers:
             x-total:
               schema:
-                description: The number of results
+                description: The total number of results available.
                 type: string
                 example: '100'
             x-page-size:
               schema:
-                description: The number of results per page
+                description: The number of results per page.
                 type: string
                 example: '10'
             x-page:
               schema:
-                description: The current page
+                description: The current page.
                 type: string
                 example: '5'
         default:
@@ -2037,7 +2314,7 @@ components:
                         template: '#/components/schemas/batches.multipart.content.template'
     batches.multipart.columnMapper:
       title: Column Mapper
-      description: The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required so the values below it indicate that they are a recipient's contact number.
+      description: The mapping of variables in relation to the columns of the file. This indicates in which column of the file is the value that must be used to fill each variable. The **recipient_header_name** variable is required so the values on it are used as recipient's contact number.
       type: object
       example:
         recipient_header_name: recipient_number_column
@@ -2049,6 +2326,10 @@ components:
           description: Recipient header name
           type: string
           example: recipient_header_name
+      additionalProperties:
+        title: Column Name
+        description: Values on the column provided as value will be made available as a variable named after the property name.
+        type: string
       required:
         - recipient_header_name
     batches.multipart.message:
@@ -2102,6 +2383,196 @@ components:
           required:
             - type
             - text
+    contacts-management.contact-custom-data-field:
+      title: Contact Custom Data Field
+      description: Definition of a field which can be provided on a contact data.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: 'ID of the contact data field to be created. This will be field name to be used on the [contacts API](#tag/Contacts/paths/~1contacts/post).'
+          type: string
+          example: my_field
+          readOnly: true
+        name:
+          title: Name
+          description: 'Friendly name for the field. This is used on user interfaces like [Zenvia Campaign](https://app.zenvia.com/campaign).<br>By default, it will be equal to the id.'
+          type: string
+          example: My Field
+        type:
+          title: Type
+          description: The type of values stored in this field. It affects validation and rendering in user interfaces.
+          type: string
+          example: date
+          enum:
+            - string
+            - number
+            - date
+          default: string
+        createdAt:
+          title: Created At
+          description: Timestamp of the contact data field creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+      required:
+        - name
+    contacts-management.contact-list:
+      title: Contact List
+      description: List of contacts.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: ID of the contact list.
+          type: string
+          readOnly: true
+        name:
+          title: Name
+          description: Contact list's name.
+          type: string
+          example: Technology interest
+        size:
+          title: Size
+          description: Number of contacts are in the list.
+          type: number
+          example: 10
+          readOnly: true
+        createdAt:
+          title: Created At
+          description: Timestamp of the contact list creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+        updatedAt:
+          title: Updated At
+          description: Timestamp of the contact list update.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+    contacts-management.contact:
+      title: Contact
+      description: Contact information.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: ID of the contact.
+          type: string
+          readOnly: true
+        channels:
+          title: Channels
+          description: Contact communication channels. At least one communication channel must be provided.
+          type: object
+          minProperties: 1
+          properties:
+            email:
+              title: E-mail
+              description: Contact's e-mail address.
+              type: string
+              example: contact@domain.example
+            mobile:
+              title: Mobile
+              description: Contact's mobile phone number.
+              type: string
+              pattern: '^[0-9]+$'
+              example: '5510888883333'
+            landline:
+              title: Landline
+              description: Contact's landline phone number.
+              type: string
+              pattern: '^[0-9]+$'
+              example: '551044443333'
+        firstName:
+          title: First Name
+          description: Contact's name.
+          type: string
+          example: Rafael
+        lastName:
+          title: Last Name
+          description: Contact's surname.
+          type: string
+          example: Souza
+        customData:
+          title: Custom Data
+          description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).'
+          type: object
+          additionalProperties:
+            title: Value
+            description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).'
+            oneOf:
+              - type: string
+                description: String type value
+              - type: number
+                description: Number type value
+              - type: boolean
+                description: Boolean type value
+        addresses:
+          title: Addresses
+          description: Contact's addresses.
+          type: array
+          items:
+            title: Address
+            description: Address object.
+            type: object
+            properties:
+              country:
+                title: Country
+                description: Address country.
+                type: string
+                example: Brazil
+              zipcode:
+                title: Zip Code
+                description: Address zip code.
+                type: string
+                example: 01310-300
+              state:
+                title: State
+                description: Address state or region.
+                type: string
+                example: SP
+              city:
+                title: City
+                description: Address city.
+                type: string
+                example: São Paulo
+              address:
+                title: Address
+                description: Street address.
+                type: string
+                example: Av. Paulista
+              streetNumber:
+                title: Street Number
+                description: Street number.
+                type: string
+                example: '2300'
+              neighborhood:
+                title: Neighborhood
+                description: Address neighborhood or address line 3.
+                type: string
+                example: Bela Vista
+        listIds:
+          title: List IDs
+          description: IDs of the lists the contact is included in.
+          type: array
+          items:
+            type: string
+          example:
+            - list-id-01
+            - list-id-02
+            - list-id-03
+        createdAt:
+          title: Created At
+          description: Timestamp of the contact creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+        updatedAt:
+          title: Updated At
+          description: Timestamp of the contact update.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
     content.all:
       anyOf:
         - $ref: '#/components/schemas/content.whatsapp.all'
@@ -2429,12 +2900,9 @@ components:
               example: 'Re: Ticket 12345'
             html:
               type: string
+              maxLength: 32768
               description: HTML version of the e-mail. This is the normally shown version.
               example: <b>Hello!</b>
-            text:
-              type: string
-              description: Text version of the e-mail.
-              example: Hello!
             attachments:
               type: array
               items:
@@ -2464,6 +2932,7 @@ components:
           required:
             - type
             - subject
+            - html
     content.file:
       type: object
       allOf:
@@ -3006,6 +3475,8 @@ components:
         - $ref: '#/components/schemas/content.location'
         - $ref: '#/components/schemas/content.whatsapp.button.index'
         - $ref: '#/components/schemas/content.whatsapp.list'
+        - $ref: '#/components/schemas/content.whatsapp.product-list'
+        - $ref: '#/components/schemas/content.whatsapp.product-list-order'
       discriminator:
         propertyName: type
         mapping:
@@ -3016,6 +3487,8 @@ components:
           location: '#/components/schemas/content.location'
           button: '#/components/schemas/content.whatsapp.button.index'
           list: '#/components/schemas/content.whatsapp.list'
+          product_list: '#/components/schemas/content.whatsapp.product-list'
+          product_list_order: '#/components/schemas/content.whatsapp.product-list-order'
     content.whatsapp.list:
       type: object
       allOf:
@@ -3085,6 +3558,115 @@ components:
             - type
             - body
             - button
+            - sections
+    content.whatsapp.mt:
+      title: WhatsApp
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.template'
+        - $ref: '#/components/schemas/content.contacts'
+        - $ref: '#/components/schemas/content.location'
+        - $ref: '#/components/schemas/content.whatsapp.button.index'
+        - $ref: '#/components/schemas/content.whatsapp.list'
+        - $ref: '#/components/schemas/content.whatsapp.product-list'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
+          template: '#/components/schemas/content.template'
+          contacts: '#/components/schemas/content.contacts'
+          location: '#/components/schemas/content.location'
+          button: '#/components/schemas/content.whatsapp.button.index'
+          list: '#/components/schemas/content.whatsapp.list'
+          product_list: '#/components/schemas/content.whatsapp.product-list'
+    content.whatsapp.product-list-order:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: product_list_order
+            text:
+              type: string
+              description: Text content
+              example: Text content
+            catalogId:
+              type: string
+              description: The catalog identifier.
+              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
+            productItems:
+              type: array
+              description: The available fields to be used in this product list order.
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: string
+                    description: The product identifier.
+                  quantity:
+                    type: string
+                    description: quantity
+                  itemPrice:
+                    type: string
+                    description: itemPrice
+                  currency:
+                    type: string
+                    description: currency
+          required:
+            - type
+            - catalogId
+            - productItems
+    content.whatsapp.product-list:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: product_list
+            header:
+              type: string
+              description: Header content
+              example: Text header content
+            body:
+              type: string
+              description: Body content
+              example: Text body content
+            footer:
+              type: string
+              description: Footer content
+              example: Text footer content
+            catalogId:
+              type: string
+              description: 'The catalog identifier. Click <a href="https://business.facebook.com/commerce" target="_blank">here</a> to go to the catalogs page.'
+              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
+            sections:
+              type: array
+              description: The available fields to be used in this product list.
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: The section title.
+                  productItems:
+                    type: array
+                    description: A list of products.
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                          description: The product identifier.
+          required:
+            - type
+            - catalogId
+            - body
             - sections
     content.whatsapp.button.index:
       type: object
@@ -3860,6 +4442,8 @@ components:
               items:
                 $ref: '#/components/schemas/content.email.all'
               minItems: 1
+            representative:
+              $ref: '#/components/schemas/message.representative'
     message.facebook:
       type: object
       allOf:
@@ -4105,7 +4689,7 @@ components:
               description: A list of content to be sent
               type: array
               items:
-                $ref: '#/components/schemas/content.whatsapp.all'
+                $ref: '#/components/schemas/content.whatsapp.mt'
               minItems: 1
     reports.flow.entries.base:
       title: Entry object for Flow Report
@@ -4785,19 +5369,21 @@ components:
       name: page
       in: query
       required: false
-      description: This is the page number. Default is 0.
+      description: This is the page number.
       schema:
         title: page
         type: number
+        default: 0
       example: 5
     size:
       name: size
       in: query
       required: false
-      description: This is the page size. Default is 20.
+      description: This is the page size.
       schema:
         title: size
         type: number
+        default: 20
       example: 10
     subscriptionId:
       name: subscriptionId
@@ -4820,6 +5406,40 @@ components:
       description: 'The <a href="https://app.zenvia.com/home/templates">template identifier</a>'
       schema:
         type: string
+    contacts-management.contactId:
+      name: contactId
+      in: path
+      required: true
+      description: The contact identifier
+      schema:
+        type: string
+    contacts-management.fieldId:
+      name: fieldId
+      in: path
+      required: true
+      description: The data field identifier
+      schema:
+        type: string
+    contacts-management.listId:
+      name: listId
+      in: path
+      required: true
+      description: The contact list identifier
+      schema:
+        type: string
+    contacts-management.listIds:
+      name: listId
+      in: query
+      required: false
+      description: Contact list ids to filter the contacts.
+      schema:
+        type: array
+        items:
+          type: string
+      example:
+        - list-id-01
+        - list-id-02
+        - list-id-03
     files.endTimestamp:
       name: endTimestamp
       in: query
@@ -5614,6 +6234,11 @@ x-tagGroups:
   - name: Flow
     tags:
       - Flow Batches
+  - name: Contacts
+    tags:
+      - Contacts
+      - Contact Lists
+      - Contact Custom Data Fields
   - name: Reports
     tags:
       - Message Report
