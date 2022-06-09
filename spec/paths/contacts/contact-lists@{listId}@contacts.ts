@@ -2,11 +2,18 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
 import { ref as listIdRef } from '../../components/parameters/contacts-management/listId';
+import { ref as pageRef } from '../../components/parameters/page';
+import { ref as sizeRef } from '../../components/parameters/size';
 
 const get: OperationObject = {
   summary: 'List the contacts in a list',
   description: 'Virtual collection to list the contacts in the list.',
   tags: ['Contact Lists'],
+  parameters: [{
+    $ref: pageRef,
+  }, {
+    $ref: sizeRef,
+  }],
   responses: {
     200: {
       description: 'Contact IDs',
