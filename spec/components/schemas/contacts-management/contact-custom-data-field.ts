@@ -16,7 +16,7 @@ const base: SchemaObject = {
     },
     name: {
       title: 'Name',
-      description: 'Friendly name for the field. This is used on user interfaces like [Zenvia Campaign](https://app.zenvia.com/campaign).<br>By default, it will be equal to the id.',
+      description: 'Friendly name for the field. This is used on user interfaces like [Zenvia Campaign](https://app.zenvia.com/campaign).',
       type: 'string',
       example: 'My Field',
     },
