@@ -116,6 +116,9 @@ const get: OperationObject = {
         },
       },
     } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
   } as ResponsesObject,
 };
 

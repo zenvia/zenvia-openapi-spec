@@ -16,6 +16,7 @@ For each content type covered in the next section, the following table reflects 
 | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+| product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
 _*GBM stands for Google Business Messages_
 
@@ -97,3 +98,8 @@ This is the [E-Mail channel](#tag/E-Mail) content.
 This the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
+
+## Product list
+This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
