@@ -1468,6 +1468,8 @@ paths:
                 description: The total number of results available.
                 type: string
                 example: '100'
+        default:
+          $ref: '#/components/responses/error'
   /contact-lists:
     post:
       summary: Create a new contact list
@@ -1516,6 +1518,8 @@ paths:
                 description: The total number of results available.
                 type: string
                 example: '100'
+        default:
+          $ref: '#/components/responses/error'
   '/contact-lists/{listId}':
     get:
       summary: Retrieve one contact list by id
@@ -1568,6 +1572,9 @@ paths:
       description: Virtual collection to list the contacts in the list.
       tags:
         - Contact Lists
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
       responses:
         '200':
           description: Contact IDs
@@ -1636,6 +1643,8 @@ paths:
                 description: The total number of results available.
                 type: string
                 example: '100'
+        default:
+          $ref: '#/components/responses/error'
   '/contacts/{contactId}':
     get:
       summary: Retrieve one contact by id
@@ -1820,6 +1829,8 @@ paths:
                 description: The total number of results available.
                 type: string
                 example: '100'
+        default:
+          $ref: '#/components/responses/error'
   '/files/{fileId}':
     get:
       summary: Retrieve one file by id
@@ -2396,7 +2407,7 @@ components:
           readOnly: true
         name:
           title: Name
-          description: 'Friendly name for the field. This is used on user interfaces like [Zenvia Campaign](https://app.zenvia.com/campaign).<br>By default, it will be equal to the id.'
+          description: 'Friendly name for the field. This is used on user interfaces like [Zenvia Campaign](https://app.zenvia.com/campaign).'
           type: string
           example: My Field
         type:
@@ -5629,6 +5640,7 @@ tags:
       | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+      | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
       _*GBM stands for Google Business Messages_
 
@@ -5710,6 +5722,11 @@ tags:
       This the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
+
+      ## Product list
+      This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
   - name: SMS
     description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
