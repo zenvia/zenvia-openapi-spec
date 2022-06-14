@@ -59,12 +59,20 @@ const base: SchemaObject = {
       type: 'object',
       additionalProperties: {
         title: 'Value',
-        description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
-        oneOf: [
-          { type: 'string', description: 'String type value' },
-          { type: 'number', description: 'Number type value' },
-          { type: 'boolean', description: 'Boolean type value' },
-        ],
+        description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.',
+        oneOf: [{
+          type: 'string',
+          title: 'String/Date',
+          example: '2022-06-13',
+        }, {
+          type: 'number',
+          title: 'Number',
+          example: 10,
+        }, {
+          type: 'boolean',
+          title: 'Boolean',
+          example: true,
+        }],
       },
     },
     addresses: {
