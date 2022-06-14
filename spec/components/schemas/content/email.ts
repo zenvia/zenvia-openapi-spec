@@ -36,20 +36,36 @@ const file: SchemaObject = {
       cc: {
         type: 'array',
         items: {
-          type: 'string',
+          $ref: contactRef,
         },
         title: 'Courtesy Copy',
         description: 'List of e-mails addresses to be copied on the e-mail.',
-        example: ['example1@zenvia.com', 'example2@zenvia.com'],
+        example: [
+          { email: 'cc1@zenvia.com' },
+          { email: 'cc2@zenvia.com', name: 'CC2' },
+        ],
       },
       bcc: {
         type: 'array',
         items: {
-          type: 'string',
+          $ref: contactRef,
         },
         title: 'Blind Courtesy Copy',
         description: 'List of e-mails addresses to be secretly copied on the e-mail.',
-        example: ['example3@zenvia.com', 'example4@zenvia.com'],
+        example: [
+          { email: 'bcc1@zenvia.com' },
+          { email: 'bcc2@zenvia.com', name: 'BCC2' },
+        ],
+      },
+      replyTo: {
+        allOf: [{
+          type: 'object',
+          title: 'Reply To',
+          description: 'E-mail that will be set as recipient when a e-mail response is initiated.',
+        }, {
+          $ref: contactRef,
+        }],
+        example: { email: 'reply-to@zenvia.com', name: 'Service Care' },
       },
     },
     required: [
