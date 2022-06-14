@@ -6,6 +6,7 @@ import { text as textExample } from '../../resources/examples/text';
 import { card as cardExample } from '../../resources/examples/card';
 import { carousel as carouselExample } from '../../resources/examples/carousel';
 import { replyableText as replyableExample } from '../../resources/examples/replyable-text';
+import { representativeExample } from '../../resources/examples/representative';
 
 const post: OperationObject = {
   description: 'Send a Google Business Messages message',
@@ -19,19 +20,19 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: { ...textExample(), ...representativeExample() },
           },
           file: {
-            value: fileExample(),
+            value: { ...fileExample(), ...representativeExample() },
           },
           card : {
-            value: cardExample(),
+            value: { ...cardExample(), ...representativeExample() },
           },
           carousel: {
-            value: carouselExample(),
+            value: { ...carouselExample(), ...representativeExample() },
           },
           replyable_text: {
-            value: replyableExample(),
+            value: { ...replyableExample(), ...representativeExample() },
           },
         },
       },
