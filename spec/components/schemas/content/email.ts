@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as fileRef } from './bases/file';
+import { ref as contactRef } from './email/recipient';
 import { createComponentRef } from '../../../../utils/ref';
 
 const file: SchemaObject = {
@@ -22,8 +23,10 @@ const file: SchemaObject = {
       html: {
         type: 'string',
         maxLength: 32768,
-        description: 'HTML version of the e-mail. This is the normally shown version.',
-        example: '<b>Hello!</b>',
+        description: `The e-mail content in HTML format.
+                      <br>Inline attachment *is supported*. The *cid* of the content is the *fileName*.
+                      <br>Ex: \`<img src="cid:example2.jpeg">\`.`,
+        example: '<b>Hi!</b><br><img src="cid:example2.jpeg">',
       },
       attachments: {
         type: 'array',
@@ -31,7 +34,7 @@ const file: SchemaObject = {
           $ref: fileRef,
         },
         description: 'E-mail attachments.',
-        example: [{ fileUrl: 'https://zenvia.com/example1.pdf' }, { fileUrl: 'https://zenvia.com/example2.pdf' }],
+        example: [{ fileUrl: 'https://zenvia.com/example1.pdf' }, { fileUrl: 'https://zenvia.com/example2.jpg', fileName: 'example2.jpeg' }],
       },
       cc: {
         type: 'array',
