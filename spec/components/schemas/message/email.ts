@@ -21,7 +21,12 @@ const all: SchemaObject = {
         minItems: 1,
       },
       representative: {
-        $ref: representativeRef,
+        allOf: [{
+          $ref: representativeRef,
+        }],
+        example: {
+          name: 'Sender Name',
+        },
       },
     },
   }],
