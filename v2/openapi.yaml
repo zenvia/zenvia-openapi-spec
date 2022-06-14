@@ -231,27 +231,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/message.email'
-            examples:
-              email:
-                value:
-                  from: sender@zenvia.com
-                  to: recipient@zenvia.com
-                  representative:
-                    name: Sender Name
-                  contents:
-                    - type: email
-                      subject: 'Re: Ticket 12345'
-                      html: <b>HTML content</b>
-                      text: Plain text content
-                      attachments:
-                        - fileUrl: 'https://zenvia.com/example1.pdf'
-                        - fileUrl: 'https://zenvia.com/example2.png'
-                      cc:
-                        - cc1@zenvia.com
-                        - cc2@zenvia.com
-                      bcc:
-                        - bcc1@zenvia.com
-                        - bcc2@zenvia.com
       responses:
         '200':
           description: Created message
@@ -460,6 +439,10 @@ paths:
                   contents:
                     - type: text
                       text: Hi Zenvia!
+                  representative:
+                    type: HUMAN
+                    name: Agent Name
+                    avatar: 'https://zenvia.com/favicon.ico'
               file:
                 value:
                   from: '5510999999999'
@@ -470,6 +453,10 @@ paths:
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
+                  representative:
+                    type: HUMAN
+                    name: Agent Name
+                    avatar: 'https://zenvia.com/favicon.ico'
               card:
                 value:
                   from: '5510999999999'
@@ -490,6 +477,10 @@ paths:
                         - type: text
                           text: Click here
                           payload: success
+                  representative:
+                    type: HUMAN
+                    name: Agent Name
+                    avatar: 'https://zenvia.com/favicon.ico'
               carousel:
                 value:
                   from: '5510999999999'
@@ -512,6 +503,10 @@ paths:
                             - type: text
                               text: Click here
                               payload: success
+                  representative:
+                    type: HUMAN
+                    name: Agent Name
+                    avatar: 'https://zenvia.com/favicon.ico'
               replyable_text:
                 value:
                   from: '5510999999999'
@@ -523,6 +518,10 @@ paths:
                         - type: text
                           text: Click here
                           payload: success
+                  representative:
+                    type: HUMAN
+                    name: Agent Name
+                    avatar: 'https://zenvia.com/favicon.ico'
       responses:
         '200':
           description: Created message
@@ -2510,14 +2509,17 @@ components:
           type: object
           additionalProperties:
             title: Value
-            description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).'
+            description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.'
             oneOf:
               - type: string
-                description: String type value
+                title: String/Date
+                example: '2022-06-13'
               - type: number
-                description: Number type value
+                title: Number
+                example: 10
               - type: boolean
-                description: Boolean type value
+                title: Boolean
+                example: true
         addresses:
           title: Addresses
           description: Contact's addresses.
@@ -2912,8 +2914,11 @@ components:
             html:
               type: string
               maxLength: 32768
-              description: HTML version of the e-mail. This is the normally shown version.
-              example: <b>Hello!</b>
+              description: |-
+                The e-mail content in HTML format.
+                                      <br>Inline attachment *is supported*. The *cid* of the content is the *fileName*.
+                                      <br>Ex: `<img src="cid:example2.jpeg">`.
+              example: '<b>Hi!</b><br><img src="cid:example2.jpeg">'
             attachments:
               type: array
               items:
@@ -2921,25 +2926,37 @@ components:
               description: E-mail attachments.
               example:
                 - fileUrl: 'https://zenvia.com/example1.pdf'
-                - fileUrl: 'https://zenvia.com/example2.pdf'
+                - fileUrl: 'https://zenvia.com/example2.jpg'
+                  fileName: example2.jpeg
             cc:
               type: array
               items:
-                type: string
+                $ref: '#/components/schemas/content.email.recipient'
               title: Courtesy Copy
               description: List of e-mails addresses to be copied on the e-mail.
               example:
-                - example1@zenvia.com
-                - example2@zenvia.com
+                - email: cc1@zenvia.com
+                - email: cc2@zenvia.com
+                  name: CC2
             bcc:
               type: array
               items:
-                type: string
+                $ref: '#/components/schemas/content.email.recipient'
               title: Blind Courtesy Copy
               description: List of e-mails addresses to be secretly copied on the e-mail.
               example:
-                - example3@zenvia.com
-                - example4@zenvia.com
+                - email: bcc1@zenvia.com
+                - email: bcc2@zenvia.com
+                  name: BCC2
+            replyTo:
+              allOf:
+                - type: object
+                  title: Reply To
+                  description: E-mail that will be set as recipient when a e-mail response is initiated.
+                - $ref: '#/components/schemas/content.email.recipient'
+              example:
+                email: reply-to@zenvia.com
+                name: Service Care
           required:
             - type
             - subject
@@ -3366,6 +3383,19 @@ components:
         propertyName: type
         mapping:
           email: '#/components/schemas/content.email'
+    content.email.recipient:
+      type: object
+      properties:
+        email:
+          type: string
+          title: E-mail
+          description: E-mail address of the recipient.
+        name:
+          type: string
+          title: Name
+          description: Name shown along the e-mail address.
+      required:
+        - email
     content.facebook.all:
       title: Facebook
       oneOf:
@@ -4454,7 +4484,10 @@ components:
                 $ref: '#/components/schemas/content.email.all'
               minItems: 1
             representative:
-              $ref: '#/components/schemas/message.representative'
+              allOf:
+                - $ref: '#/components/schemas/message.representative'
+              example:
+                name: Sender Name
     message.facebook:
       type: object
       allOf:
@@ -4497,7 +4530,10 @@ components:
                 $ref: '#/components/schemas/content.instagram.all'
               minItems: 1
             representative:
-              $ref: '#/components/schemas/message.representative'
+              allOf:
+                - $ref: '#/components/schemas/message.representative'
+              example:
+                type: HUMAN
     message.rcs:
       type: object
       allOf:
@@ -4600,18 +4636,21 @@ components:
             - BOT
             - HUMAN
           default: BOT
+          example: HUMAN
         name:
           title: Name
           description: |-
             Representative's name shown on the message.
                                 <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) and [E-Mail](#tag/E-Mail) channels.*
           type: string
+          example: Agent name
         picture:
           title: Picture
           description: |-
             URL for the avatar picture of the representative message.
                                 <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*
           type: string
+          example: 'https://zenvia.com/favicon.ico'
     message.sms:
       type: object
       allOf:
@@ -5748,24 +5787,24 @@ tags:
       <br>`çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛºª°|`
 
       ### Encoding selection
-      By default, our API selects automatically the SMS encoding based on the message content. However, it is also possible to enforce an `encoding strategy`.
-      More details can be found in the [SMS Text](#section/SMS-Text) section.
+      By default, our API selects automatically the SMS encoding based on the message content.
+      <br>However, it is also possible to enforce an `encoding strategy`. More details can be found in the [SMS Text](#section/SMS-Text) section.
 
       ### Concatenated SMS
-      To overcome the SMS size limitation, cellphone manufactures developed a feature called `concatenated SMS`.
+      To overcome the SMS size limitation, cellphone manufacturers developed a feature called `concatenated SMS`.
       <br>This allows a long message to be break down into multiple SMS messages for delivery, which are joined back together by the cellphone SMS application.
 
-      Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will automatically
-      be applied.
+      Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will
+      automatically be applied.
 
       Important things to keep in mind:
       * Longer messages means more cost, because they actually are multiple messages.
       * To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:
-      up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point is always a space, so some pieces might be
-      smaller than this.
+      up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point currently is always a space,
+      so some pieces might be smaller than this.
       * Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.
       * Double spaces and tabs will always be replaced by a single space.
-      * To send long messages it might be necessary to contact our service team and request that this feature be enabled on your account.
+      * To send long messages, it might be necessary to contact our service team and request that this feature be enabled on your account.
       * The maximum length currently supported is 1520 characters
 
       ## SMS sender and recipient

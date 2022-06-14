@@ -89,41 +89,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/message.email"
-              },
-              "examples": {
-                "email": {
-                  "value": {
-                    "from": "sender@zenvia.com",
-                    "to": "recipient@zenvia.com",
-                    "representative": {
-                      "name": "Sender Name"
-                    },
-                    "contents": [
-                      {
-                        "type": "email",
-                        "subject": "Re: Ticket 12345",
-                        "html": "<b>HTML content</b>",
-                        "text": "Plain text content",
-                        "attachments": [
-                          {
-                            "fileUrl": "https://zenvia.com/example1.pdf"
-                          },
-                          {
-                            "fileUrl": "https://zenvia.com/example2.png"
-                          }
-                        ],
-                        "cc": [
-                          "cc1@zenvia.com",
-                          "cc2@zenvia.com"
-                        ],
-                        "bcc": [
-                          "bcc1@zenvia.com",
-                          "bcc2@zenvia.com"
-                        ]
-                      }
-                    ]
-                  }
-                }
               }
             }
           }
@@ -340,7 +305,12 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ]
+                    ],
+                    "representative": {
+                      "type": "HUMAN",
+                      "name": "Agent Name",
+                      "avatar": "https://zenvia.com/favicon.ico"
+                    }
                   }
                 },
                 "file": {
@@ -355,7 +325,12 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ]
+                    ],
+                    "representative": {
+                      "type": "HUMAN",
+                      "name": "Agent Name",
+                      "avatar": "https://zenvia.com/favicon.ico"
+                    }
                   }
                 },
                 "card": {
@@ -387,7 +362,12 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "representative": {
+                      "type": "HUMAN",
+                      "name": "Agent Name",
+                      "avatar": "https://zenvia.com/favicon.ico"
+                    }
                   }
                 },
                 "carousel": {
@@ -424,7 +404,12 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "representative": {
+                      "type": "HUMAN",
+                      "name": "Agent Name",
+                      "avatar": "https://zenvia.com/favicon.ico"
+                    }
                   }
                 },
                 "replyable_text": {
@@ -443,7 +428,12 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "representative": {
+                      "type": "HUMAN",
+                      "name": "Agent Name",
+                      "avatar": "https://zenvia.com/favicon.ico"
+                    }
                   }
                 }
               }
@@ -2982,19 +2972,22 @@
             "type": "object",
             "additionalProperties": {
               "title": "Value",
-              "description": "Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).",
+              "description": "Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.",
               "oneOf": [
                 {
                   "type": "string",
-                  "description": "String type value"
+                  "title": "String/Date",
+                  "example": "2022-06-13"
                 },
                 {
                   "type": "number",
-                  "description": "Number type value"
+                  "title": "Number",
+                  "example": 10
                 },
                 {
                   "type": "boolean",
-                  "description": "Boolean type value"
+                  "title": "Boolean",
+                  "example": true
                 }
               ]
             }
@@ -3564,8 +3557,8 @@
               "html": {
                 "type": "string",
                 "maxLength": 32768,
-                "description": "HTML version of the e-mail. This is the normally shown version.",
-                "example": "<b>Hello!</b>"
+                "description": "The e-mail content in HTML format.\n                      <br>Inline attachment *is supported*. The *cid* of the content is the *fileName*.\n                      <br>Ex: `<img src=\"cid:example2.jpeg\">`.",
+                "example": "<b>Hi!</b><br><img src=\"cid:example2.jpeg\">"
               },
               "attachments": {
                 "type": "array",
@@ -3578,33 +3571,60 @@
                     "fileUrl": "https://zenvia.com/example1.pdf"
                   },
                   {
-                    "fileUrl": "https://zenvia.com/example2.pdf"
+                    "fileUrl": "https://zenvia.com/example2.jpg",
+                    "fileName": "example2.jpeg"
                   }
                 ]
               },
               "cc": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/content.email.recipient"
                 },
                 "title": "Courtesy Copy",
                 "description": "List of e-mails addresses to be copied on the e-mail.",
                 "example": [
-                  "example1@zenvia.com",
-                  "example2@zenvia.com"
+                  {
+                    "email": "cc1@zenvia.com"
+                  },
+                  {
+                    "email": "cc2@zenvia.com",
+                    "name": "CC2"
+                  }
                 ]
               },
               "bcc": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/content.email.recipient"
                 },
                 "title": "Blind Courtesy Copy",
                 "description": "List of e-mails addresses to be secretly copied on the e-mail.",
                 "example": [
-                  "example3@zenvia.com",
-                  "example4@zenvia.com"
+                  {
+                    "email": "bcc1@zenvia.com"
+                  },
+                  {
+                    "email": "bcc2@zenvia.com",
+                    "name": "BCC2"
+                  }
                 ]
+              },
+              "replyTo": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "title": "Reply To",
+                    "description": "E-mail that will be set as recipient when a e-mail response is initiated."
+                  },
+                  {
+                    "$ref": "#/components/schemas/content.email.recipient"
+                  }
+                ],
+                "example": {
+                  "email": "reply-to@zenvia.com",
+                  "name": "Service Care"
+                }
               }
             },
             "required": [
@@ -4219,6 +4239,24 @@
             "email": "#/components/schemas/content.email"
           }
         }
+      },
+      "content.email.recipient": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "title": "E-mail",
+            "description": "E-mail address of the recipient."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name shown along the e-mail address."
+          }
+        },
+        "required": [
+          "email"
+        ]
       },
       "content.facebook.all": {
         "title": "Facebook",
@@ -5754,7 +5792,14 @@
                 "minItems": 1
               },
               "representative": {
-                "$ref": "#/components/schemas/message.representative"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/message.representative"
+                  }
+                ],
+                "example": {
+                  "name": "Sender Name"
+                }
               }
             }
           }
@@ -5826,7 +5871,14 @@
                 "minItems": 1
               },
               "representative": {
-                "$ref": "#/components/schemas/message.representative"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/message.representative"
+                  }
+                ],
+                "example": {
+                  "type": "HUMAN"
+                }
               }
             }
           }
@@ -5933,17 +5985,20 @@
               "BOT",
               "HUMAN"
             ],
-            "default": "BOT"
+            "default": "BOT",
+            "example": "HUMAN"
           },
           "name": {
             "title": "Name",
             "description": "Representative's name shown on the message.\n                    <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) and [E-Mail](#tag/E-Mail) channels.*",
-            "type": "string"
+            "type": "string",
+            "example": "Agent name"
           },
           "picture": {
             "title": "Picture",
             "description": "URL for the avatar picture of the representative message.\n                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*",
-            "type": "string"
+            "type": "string",
+            "example": "https://zenvia.com/favicon.ico"
           }
         }
       },
@@ -7314,7 +7369,7 @@
     },
     {
       "name": "SMS",
-      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/>\n\n**Get in touch with Zenvia consultants to create your account.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## SMS limitations\n\n### SMS lenght\nA SMS has a maximum lenght of 140 bytes, which can be used either with the standard encoding, which supports 160 characters (7 bits each),\nor using an unicode encoding, which supports 70 characters (16 bits each).\n\n### Character support\nThe standard encoding supports around 110 different characters, while the unicode encoding supports around 65500 characters.\n<br>Here are *some* examples of characters which are **only** supported by the unicode encoding:\n<br>`çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛºª°|`\n\n### Encoding selection\nBy default, our API selects automatically the SMS encoding based on the message content. However, it is also possible to enforce an `encoding strategy`.\nMore details can be found in the [SMS Text](#section/SMS-Text) section.\n\n### Concatenated SMS\nTo overcome the SMS size limitation, cellphone manufactures developed a feature called `concatenated SMS`.\n<br>This allows a long message to be break down into multiple SMS messages for delivery, which are joined back together by the cellphone SMS application.\n\nTherefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will automatically\nbe applied.\n\nImportant things to keep in mind:\n* Longer messages means more cost, because they actually are multiple messages.\n* To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:\nup to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point is always a space, so some pieces might be\nsmaller than this.\n* Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.\n* Double spaces and tabs will always be replaced by a single space.\n* To send long messages it might be necessary to contact our service team and request that this feature be enabled on your account.\n* The maximum length currently supported is 1520 characters\n\n## SMS sender and recipient\n\nWhen you send a message to a contact using SMS channel:\n\n* Recipient: the complete phone number (including country code) of the contact.\n* Sender: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n* Recipient: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).\n* Sender: the complete phone number (including country code) of the contact.\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).\n<br/>\n\n**Get in touch with Zenvia consultants to create your account.**\n\nWebhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\n## SMS limitations\n\n### SMS lenght\nA SMS has a maximum lenght of 140 bytes, which can be used either with the standard encoding, which supports 160 characters (7 bits each),\nor using an unicode encoding, which supports 70 characters (16 bits each).\n\n### Character support\nThe standard encoding supports around 110 different characters, while the unicode encoding supports around 65500 characters.\n<br>Here are *some* examples of characters which are **only** supported by the unicode encoding:\n<br>`çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛºª°|`\n\n### Encoding selection\nBy default, our API selects automatically the SMS encoding based on the message content.\n<br>However, it is also possible to enforce an `encoding strategy`. More details can be found in the [SMS Text](#section/SMS-Text) section.\n\n### Concatenated SMS\nTo overcome the SMS size limitation, cellphone manufacturers developed a feature called `concatenated SMS`.\n<br>This allows a long message to be break down into multiple SMS messages for delivery, which are joined back together by the cellphone SMS application.\n\nTherefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will\nautomatically be applied.\n\nImportant things to keep in mind:\n* Longer messages means more cost, because they actually are multiple messages.\n* To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:\nup to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point currently is always a space,\nso some pieces might be smaller than this.\n* Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.\n* Double spaces and tabs will always be replaced by a single space.\n* To send long messages, it might be necessary to contact our service team and request that this feature be enabled on your account.\n* The maximum length currently supported is 1520 characters\n\n## SMS sender and recipient\n\nWhen you send a message to a contact using SMS channel:\n\n* Recipient: the complete phone number (including country code) of the contact.\n* Sender: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).\n\nWhen you receive a message from a contact, the sender and recipient are inverted:\n\n* Recipient: the SMS account alias connected on [Zenvia platform](https://app.zenvia.com/home/credentials).\n* Sender: the complete phone number (including country code) of the contact.\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "WhatsApp",
