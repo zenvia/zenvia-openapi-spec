@@ -35,7 +35,6 @@ const product: SchemaObject = {
     },
     required: [
       'type',
-      'body',
       'catalogId',
       'productId',
     ],
