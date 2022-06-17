@@ -2,6 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/email/all';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as representativeRef } from './representative';
 
 const all: SchemaObject = {
   type: 'object',
@@ -18,6 +19,14 @@ const all: SchemaObject = {
           $ref: allContentsRef,
         },
         minItems: 1,
+      },
+      representative: {
+        allOf: [{
+          $ref: representativeRef,
+        }],
+        example: {
+          name: 'Sender Name',
+        },
       },
     },
   }],

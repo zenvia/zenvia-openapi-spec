@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as fileRef } from './bases/file';
+import { ref as contactRef } from './email/recipient';
 import { createComponentRef } from '../../../../utils/ref';
 
 const file: SchemaObject = {
@@ -21,13 +22,11 @@ const file: SchemaObject = {
       },
       html: {
         type: 'string',
-        description: 'HTML version of the e-mail. This is the normally shown version.',
-        example: '<b>Hello!</b>',
-      },
-      text: {
-        type: 'string',
-        description: 'Text version of the e-mail.',
-        example: 'Hello!',
+        maxLength: 32768,
+        description: `The e-mail content in HTML format.
+                      <br>Inline attachment *is supported*. The *cid* of the content is the *fileName*.
+                      <br>Ex: \`<img src="cid:example2.jpeg">\`.`,
+        example: '<b>Hi!</b><br><img src="cid:example2.jpeg">',
       },
       attachments: {
         type: 'array',
@@ -35,30 +34,47 @@ const file: SchemaObject = {
           $ref: fileRef,
         },
         description: 'E-mail attachments.',
-        example: [{ fileUrl: 'https://zenvia.com/example1.pdf' }, { fileUrl: 'https://zenvia.com/example2.pdf' }],
+        example: [{ fileUrl: 'https://zenvia.com/example1.pdf' }, { fileUrl: 'https://zenvia.com/example2.jpg', fileName: 'example2.jpeg' }],
       },
       cc: {
         type: 'array',
         items: {
-          type: 'string',
+          $ref: contactRef,
         },
         title: 'Courtesy Copy',
         description: 'List of e-mails addresses to be copied on the e-mail.',
-        example: ['example1@zenvia.com', 'example2@zenvia.com'],
+        example: [
+          { email: 'cc1@zenvia.com' },
+          { email: 'cc2@zenvia.com', name: 'CC2' },
+        ],
       },
       bcc: {
         type: 'array',
         items: {
-          type: 'string',
+          $ref: contactRef,
         },
         title: 'Blind Courtesy Copy',
         description: 'List of e-mails addresses to be secretly copied on the e-mail.',
-        example: ['example3@zenvia.com', 'example4@zenvia.com'],
+        example: [
+          { email: 'bcc1@zenvia.com' },
+          { email: 'bcc2@zenvia.com', name: 'BCC2' },
+        ],
+      },
+      replyTo: {
+        allOf: [{
+          type: 'object',
+          title: 'Reply To',
+          description: 'E-mail that will be set as recipient when a e-mail response is initiated.',
+        }, {
+          $ref: contactRef,
+        }],
+        example: { email: 'reply-to@zenvia.com', name: 'Service Care' },
       },
     },
     required: [
       'type',
       'subject',
+      'html',
     ],
   }],
 };

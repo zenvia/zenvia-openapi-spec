@@ -33,21 +33,21 @@ const get: OperationObject = {
       headers: {
         'x-total': {
           schema: {
-            description: 'The number of results',
+            description: 'The total number of results available.',
             type: 'string',
             example: '100',
           },
         },
         'x-page-size': {
           schema: {
-            description: 'The number of results per page',
+            description: 'The number of results per page.',
             type: 'string',
             example: '10',
           },
         },
         'x-page': {
           schema: {
-            description: 'The current page',
+            description: 'The current page.',
             type: 'string',
             example: '5',
           },

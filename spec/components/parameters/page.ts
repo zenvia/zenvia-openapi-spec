@@ -5,10 +5,11 @@ const page: ParameterObject = {
   name: 'page',
   in: 'query',
   required: false,
-  description: 'This is the page number. Default is 0.',
+  description: 'This is the page number.',
   schema: {
     title: 'page',
     type: 'number',
+    default: 0,
   },
   example: 5,
 };

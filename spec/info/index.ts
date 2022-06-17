@@ -10,12 +10,12 @@ const info: InfoObject = {
   termsOfService: 'https://zenvia.com/',
   contact: {
     name: 'API Support',
-    email: 'atendimento@zenvia.com',
+    email: undefined,
     url: 'https://zenapi.zenvia.com/',
   },
   license: {
     name: 'MIT',
-    url:  'https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE.md',
+    url: 'https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE.md',
   },
   'x-logo': {
     url: 'https://zenvia-static.s3.amazonaws.com/brand/zenvia-brand-mark-regular.svg',

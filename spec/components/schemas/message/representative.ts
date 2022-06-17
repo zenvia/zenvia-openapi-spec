@@ -16,18 +16,21 @@ const representative: SchemaObject = {
       type: 'string',
       enum: ['BOT', 'HUMAN'],
       default: 'BOT',
+      example: 'HUMAN',
     },
     name: {
       title: 'Name',
       description: `Representative's name shown on the message.
                     <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) and [E-Mail](#tag/E-Mail) channels.*`,
       type: 'string',
+      example: 'Agent name',
     },
     picture: {
       title: 'Picture',
       description: `URL for the avatar picture of the representative message.
                     <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*`,
       type: 'string',
+      example: 'https://zenvia.com/favicon.ico',
     },
 
   },

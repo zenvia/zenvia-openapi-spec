@@ -5,10 +5,11 @@ const size: ParameterObject = {
   name: 'size',
   in: 'query',
   required: false,
-  description: 'This is the page size. Default is 20.',
+  description: 'This is the page size.',
   schema: {
     title: 'size',
     type: 'number',
+    default: 20,
   },
   example: 10,
 };
