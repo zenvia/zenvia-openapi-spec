@@ -21,7 +21,9 @@ Before using this API you need the following:
 * **Zenvia Account**: create an account on [Zenvia platform's site](https://app.zenvia.com/)
 * **Integrations**: configure desired channels to send and/or receive messages on the [integrations page](https://app.zenvia.com/home/credentials)
 * **API Token**: create an API token on the [API console](https://app.zenvia.com/home/api)
-* **Webhook** (optional): receive messages by subscribing to events using [subscriptions API resources](#tag/Subscriptions)
+* **Webhook**: subscribe to events using [subscriptions API resources](#tag/Subscriptions)
+    * _Status Webhook_ **(important)**: Since our messaging API is asynchronous, it is necessary to register a webhook in order to know whether the message sending was successful or not.
+    * _Status Message_ (optional): receive message responses by subscribing to message events.
 
 You can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.
 
