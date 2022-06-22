@@ -8,6 +8,7 @@ import { contacts as contactsExample } from '../../resources/examples/contacts';
 import { location as locationExample } from '../../resources/examples/location';
 import { button as buttonExample } from '../../resources/examples/button';
 import { list as listExample } from '../../resources/examples/list';
+import { product as product } from '../../resources/examples/product';
 import { productList as productList } from '../../resources/examples/product-list';
 
 const post: OperationObject = {
@@ -41,6 +42,9 @@ const post: OperationObject = {
           },
           list: {
             value: listExample(),
+          },
+          product: {
+            value: product(),
           },
           product_list: {
             value: productList(),

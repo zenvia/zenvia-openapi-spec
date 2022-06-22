@@ -7,6 +7,7 @@ import { ref as locationRef } from '../location';
 import { ref as buttonRef } from './button';
 import { ref as listRef } from './list';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as productRef } from './product';
 import { ref as productListRef } from './product-list';
 
 const mtContent: SchemaObject = {
@@ -26,6 +27,8 @@ const mtContent: SchemaObject = {
   }, {
     $ref: listRef,
   }, {
+    $ref: productRef,
+  }, {
     $ref: productListRef,
   }],
   discriminator: {
@@ -38,6 +41,7 @@ const mtContent: SchemaObject = {
       location: locationRef,
       button: buttonRef,
       list: listRef,
+      product: productRef,
       product_list: productListRef,
     },
   },
