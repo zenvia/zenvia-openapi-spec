@@ -1312,6 +1312,16 @@ paths:
                             - id: row3
                               title: Item Three
                               description: Item three description.
+              product:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: product
+                      body: Your message body text here
+                      footer: Your message footer text here
+                      catalogId: CATALOG_ID
+                      productId: product-SKU-in-catalog
               product_list:
                 value:
                   from: '5510999999999'
@@ -3518,6 +3528,7 @@ components:
         - $ref: '#/components/schemas/content.location'
         - $ref: '#/components/schemas/content.whatsapp.button.index'
         - $ref: '#/components/schemas/content.whatsapp.list'
+        - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
         - $ref: '#/components/schemas/content.whatsapp.product-list-order'
       discriminator:
@@ -3530,6 +3541,7 @@ components:
           location: '#/components/schemas/content.location'
           button: '#/components/schemas/content.whatsapp.button.index'
           list: '#/components/schemas/content.whatsapp.list'
+          product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
           product_list_order: '#/components/schemas/content.whatsapp.product-list-order'
     content.whatsapp.list:
@@ -3612,6 +3624,7 @@ components:
         - $ref: '#/components/schemas/content.location'
         - $ref: '#/components/schemas/content.whatsapp.button.index'
         - $ref: '#/components/schemas/content.whatsapp.list'
+        - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
       discriminator:
         propertyName: type
@@ -3623,6 +3636,7 @@ components:
           location: '#/components/schemas/content.location'
           button: '#/components/schemas/content.whatsapp.button.index'
           list: '#/components/schemas/content.whatsapp.list'
+          product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
     content.whatsapp.product-list-order:
       type: object
@@ -3640,7 +3654,6 @@ components:
             catalogId:
               type: string
               description: The catalog identifier.
-              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             productItems:
               type: array
               description: The available fields to be used in this product list order.
@@ -3687,7 +3700,6 @@ components:
             catalogId:
               type: string
               description: 'The catalog identifier. Click <a href="https://business.facebook.com/commerce" target="_blank">here</a> to go to the catalogs page.'
-              example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             sections:
               type: array
               description: The available fields to be used in this product list.
@@ -3711,6 +3723,33 @@ components:
             - catalogId
             - body
             - sections
+    content.whatsapp.product:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: product
+            body:
+              type: string
+              description: Body content
+              example: Text body content
+            footer:
+              type: string
+              description: Footer content
+              example: Text footer content
+            catalogId:
+              type: string
+              description: 'The catalog identifier. Click <a href="https://business.facebook.com/commerce" target="_blank">here</a> to go to the catalogs page.'
+            productId:
+              type: string
+              description: The product identifier.
+          required:
+            - type
+            - catalogId
+            - productId
     content.whatsapp.button.index:
       type: object
       allOf:
@@ -5682,6 +5721,7 @@ tags:
       | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
       | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | product        |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
       _*GBM stands for Google Business Messages_
 
@@ -5764,8 +5804,13 @@ tags:
 
       <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
 
+      ## Product
+      Single product message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product" showReadOnly={false} showWriteOnly={true} />
+
       ## Product list
-      This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+      Product list message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
   - name: SMS
