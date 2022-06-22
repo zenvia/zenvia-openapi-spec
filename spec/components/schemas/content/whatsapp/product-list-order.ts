@@ -21,7 +21,6 @@ const productListOrder: SchemaObject = {
       catalogId: {
         type: 'string',
         description: 'The catalog identifier.',
-        example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
       },
       productItems: {
         type: 'array',
