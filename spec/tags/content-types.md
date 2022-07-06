@@ -86,12 +86,12 @@ This type of content is used to send location messages represented as a point on
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
 
 ## Call
-This is the [Voice channel](#tag/Voice) channel content.
+This is the [Voice](#tag/Voice) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.call" showReadOnly={false} showWriteOnly={true} />
 
 ## E-Mail
-This is the [E-Mail channel](#tag/E-Mail) content.
+This is the [E-Mail](#tag/E-Mail) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
 
@@ -101,11 +101,11 @@ This the SMS version of the [text](#section/Text) content. It has additional par
 <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
 
 ## Product
-Single product message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product" showReadOnly={false} showWriteOnly={true} />
 
 ## Product list
-Product list message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
