@@ -14,6 +14,10 @@ const all: SchemaObject = {
     $ref: fileRef,
   }, {
     $ref: quickRepliesRef,
+  }, {
+    $ref: cardRef,
+  }, {
+    $ref: carouselRef,
   }],
   discriminator: {
     propertyName: 'type',
