@@ -156,7 +156,7 @@ info:
 
     The JWT token is primarily used by front-end applications for user interactions.
 
-    For server-to-server integrations use the [token authentication](/#section/Authentication/TOKEN) approach.
+    For server-to-server integrations use the [token authentication](#section/Authentication/Token) approach.
   termsOfService: 'https://zenvia.com/'
   contact:
     name: API Support
@@ -2665,8 +2665,9 @@ components:
                     disposition:
                       type: string
                       description: |-
-                        Defines the position that the media will be shown inside the card. Some of the values influence the media height.<br>
-                                                    <br>*`ON_THE_LEFT` and `ON_THE_RIGHT` are only supported by RCS channel.*
+                        Defines the position that the media will be shown inside the card. Some of the values influence the media height.
+                                        <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
+                                        <br>*`ON_THE_LEFT` and `ON_THE_RIGHT` are only supported by [RCS](#tag/RCS) channel.*
                       enum:
                         - ON_THE_LEFT
                         - ON_THE_RIGHT
@@ -2687,13 +2688,16 @@ components:
               example: carousel
             cardWidth:
               type: string
-              description: 'The card width, which is always smaller than the width of the standalone card. The standard card width would be the equivalent of *LARGE* if it were available for use for the cards of the carousel.'
+              description: |-
+                The card width, which is always smaller than the width of the standalone card. The standard card width would be the equivalent of `LARGE` if it were available for use for the cards of the carousel.
+                          <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
               enum:
                 - SMALL
                 - MEDIUM
               default: MEDIUM
             cards:
-              description: The sequence of cards to be shown in the carousel
+              title: Card
+              description: The sequence of cards to be shown in the carousel.
               type: array
               minItems: 1
               maxItems: 10
@@ -2711,7 +2715,9 @@ components:
                             properties:
                               disposition:
                                 type: string
-                                description: Defines the position that the media will be shown inside the card. Some of the values influence the media height.
+                                description: |-
+                                  Defines the position that the media will be shown inside the card. The values influence the media height.
+                                                          <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
                                 enum:
                                   - ON_THE_TOP_SHORT_HEIGHT
                                   - ON_THE_TOP_MEDIUM_HEIGHT
@@ -3085,7 +3091,7 @@ components:
             text:
               description: |-
                 Text to be sent. When a URL is sent in the text, a URL preview will be added to the message, if the channel supports it.
-                          <br>*URL preview only applicable to [WhatsApp channel](#tag/WhatsApp).*
+                          <br>*URL preview only applicable to [WhatsApp](#tag/WhatsApp) channel.*
               type: string
               example: This is a text.
             payload:
@@ -3163,10 +3169,11 @@ components:
       type: array
       title: Buttons
       description: |-
-        Vertical list of buttons displayed inside a card. These will *not* fade away once one a button is clicked.<br>
+        Vertical list of buttons displayed inside a card. These will *not* fade away once a button is clicked.<br>
             <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*
             <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: `text`, `link` and `dial`.*
-            <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: `text` and `link`.*
+            <br>*[Instagram](#tag/Instagram): A maximum of 3 buttons is supported. Supported types: `text` and `link`.*
+            <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: `text`, `link` and `dial`.*
       maxItems: 4
       items:
         $ref: '#/components/schemas/content.bases.buttons.all'
@@ -3175,11 +3182,15 @@ components:
       properties:
         title:
           type: string
-          description: A title in bold shown above the text of the card
+          description: |-
+            A title in bold shown above the text of the card.
+                    <br>*[Instagram](#tag/Instagram): A maximum of 80 characters is supported.*
           example: Hello
         text:
           type: string
-          description: A text to be displayed inside the card
+          description: |-
+            A text to be displayed inside the card.
+                    <br>*[Instagram](#tag/Instagram): A maximum of 80 characters is supported.*
           example: This is the best thing you will see today!
         media:
           type: object
@@ -3187,19 +3198,24 @@ components:
           $ref: '#/components/schemas/content.bases.buttons-list'
     content.bases.card-media-base:
       type: object
+      title: Media
+      description: An image or a video to be displayed inside the card.
       properties:
         url:
           type: string
           description: |-
             Public URL of media file, which can be an image, a GIF, or a video. The media will be displayed inside the card.
-                    <br><br>*Videos will display a play button instead of a preview of the content sent.*
+                    <br><br>*Videos usually will display a play button instead of a preview of the content sent.*
+                    <br>*Some channels do not support videos or GIFs.*
           example: 'https://zenvia.br/zenvia-team.png'
         disposition:
           type: string
           default: ON_THE_TOP_SHORT_HEIGHT
         caption:
           type: string
-          description: Media content description used by screen readers to aid users with disability understand the context
+          description: |-
+            Media content description used by screen readers to aid users with disability understand the context.
+                    <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
           example: Zenvia's team picture
       required:
         - url
@@ -3214,11 +3230,11 @@ components:
         fileMimeType:
           type: string
           description: |-
-            MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.
-                                <br>*For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)*
-                                <br>*For [Instagram channel](#tag/Instagram), see [supported contents and sizes.](#section/Instagram-limitations)*
-                                <br>*For [Telegram channel](#tag/Telegram), see [supported contents and sizes.](#section/Telegram-limitations)*
-                                <br>*For [E-Mail channel](#tag/E-Mail), see [supported contents and sizes.](#section/E-Mail-limitations)*
+            MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.<br>
+                                <br>*[WhatsApp](#tag/WhatsApp): see [supported contents and sizes.](#section/WhatsApp-limitations)*
+                                <br>*[Instagram](#tag/Instagram): see [supported contents and sizes.](#section/Instagram-limitations)*
+                                <br>*[Telegram](#tag/Telegram): see [supported contents and sizes.](#section/Telegram-limitations)*
+                                <br>*[E-Mail](#tag/E-Mail): see [supported contents and sizes.](#section/E-Mail-limitations)*
                                 <br>*For the rest of the channels, the limitations are currently undocumented.*
           example: application/pdf
         fileName:
@@ -3235,9 +3251,10 @@ components:
       description: |-
         Horizontal list of buttons displayed after the content. These *will* fade away once one is clicked.<br>
             <br>*[RCS](#tag/RCS): A maximum of 11 buttons is supported.*
-            <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 13 buttons of 25 characters is supported. Supported types: `text`, `link` and `dial`.*
-            <br>*[Instagram](#tag/Instagram): Only `text` buttons are supported.*
-            <br>*[Facebook](#tag/Facebook): Only `text` buttons are supported.*
+            <br>*[Google Business Messages](#tag/Google-Business-Messages): Supported types: `text`, `link` and `dial`. A maximum of 25 characters is supported in each button.*
+            <br>*[Instagram](#tag/Instagram): Supported type: `text`. A maximum of 20 characters is supported in each button.*
+            <br>*[Facebook](#tag/Facebook): Supported type: `text`.*
+            <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels for [Cards](#section/Card) and [Carousels](#section/Carousel).*
       maxItems: 13
       items:
         $ref: '#/components/schemas/content.bases.buttons.all'
@@ -3265,16 +3282,21 @@ components:
       properties:
         type:
           title: Button type
-          description: Button type discriminator
+          description: Button type discriminator.
           type: string
         text:
           type: string
-          description: Text to be displayed inside the button
+          description: Text to be displayed inside the button.
           example: Click me!
         payload:
           type: string
-          description: 'Content to be sent back as a message event when the user clicks the button. By default, the text of the button will be used as payload.'
-          example: clicked
+          description: |-
+            Content to be sent back as a message or a status event when the user clicks the button.
+                    <br>By default, the text of the button will be used as payload.
+                    <br><br>*Only applicable to `text` buttons on most channels, because there is no click feedback for the other button types.
+                    Applicable to all button types on [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
+                    <br>*`text` buttons clicks are sent back as [message events](#section/MESSAGE), while clicks from the other button types are sent back as [status events](#section/MESSAGE_STATUS).*
+          example: clicked-on-button-1
     content.bases.buttons.calendar-event:
       type: object
       description: Opens the standard calendar application on the user's device and creates a new event with the sent data.
@@ -3446,12 +3468,16 @@ components:
         - $ref: '#/components/schemas/content.text'
         - $ref: '#/components/schemas/content.file'
         - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.carousel'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
           replyable_text: '#/components/schemas/content.replyable-text'
+          card: '#/components/schemas/content.card'
+          carousel: '#/components/schemas/content.carousel'
     content.rcs.all:
       title: RCS
       oneOf:
@@ -3498,7 +3524,7 @@ components:
                           <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary
                           if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**
                           if you have any trouble with **AUTO**.
-                          <br>*Only applicable to [SMS channel](#tag/SMS).*
+                          <br>*Only applicable to [SMS](#tag/SMS) channel.*
               example: AUTO
     content.telegram.all:
       title: Telegram
@@ -3813,7 +3839,7 @@ components:
               example: 'https://example.com/document.pdf'
             fileMimeType:
               type: string
-              description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp channel](#tag/WhatsApp), see [supported contents and sizes.](#section/WhatsApp-limitations)'
+              description: 'MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header. For [WhatsApp](#tag/WhatsApp) channel, see [supported contents and sizes.](#section/WhatsApp-limitations)'
               example: application/pdf
             fileName:
               type: string
@@ -4447,7 +4473,7 @@ components:
               description: |-
                 When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here. Also:
                 * On reply button clicks (see [replyable text](#section/Replyable-Text) and [card](#section/Card) sections), this will refer to the ID of the clicked message.
-                * On [SMS channel](#tag/SMS), this will refer to the ID of the last message sent to the contact.
+                * On [SMS](#tag/SMS) channel, this will refer to the ID of the last message sent to the contact.
 
                 *Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
               type: string
@@ -4604,14 +4630,14 @@ components:
           title: Headline
           description: |-
             Headline used in the ad that generated the message.
-                                <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
           type: string
           example: This is a headline
         body:
           title: Body
           description: |-
             Body from the ad that generated the message.
-                                <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
           type: string
           example: This is a body
         source:
@@ -4644,19 +4670,19 @@ components:
               title: Text
               description: |-
                 The content of the quoted text message.
-                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+                                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*
               type: string
             user:
               title: User
               description: |-
                 The user who sent the quoted text message.
-                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+                                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*
               type: string
             timestamp:
               title: Timestamp
               description: |-
                 The timestamp of the quoted text message.
-                                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+                                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*
               type: string
     message.representative:
       title: Representative Object
@@ -4689,7 +4715,7 @@ components:
           title: Picture
           description: |-
             URL for the avatar picture of the representative message.
-                                <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*
+                                <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) channel.*
           type: string
           example: 'https://zenvia.com/favicon.ico'
     message.sms:
@@ -4748,7 +4774,7 @@ components:
           title: User name
           description: |-
             User name of the contact.
-                                <br>*Only applicable to [Instagram channel](#tag/Instagram).*
+                                <br>*Only applicable to [Instagram](#tag/Instagram) channel.*
           type: string
         picture:
           title: Picture
@@ -5711,15 +5737,15 @@ tags:
       | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+      | button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | product        |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
@@ -5743,16 +5769,6 @@ tags:
       This is the same as [text](#section/Text) content, but is followed by buttons for quick replying.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.replyable-text" showReadOnly={false} />
-
-      ## Contacts
-      This type of content is used to send contact information to the user.
-
-      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
-
-      ## Location
-      This type of content is used to send location messages represented as a point on the map to the user.
-
-      <SchemaDefinition schemaRef="#/components/schemas/content.location" />
 
       ## Template
       This type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.
@@ -5783,6 +5799,16 @@ tags:
 
       <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
 
+      ## Contacts
+      This type of content is used to send contact information to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
+      ## Location
+      This type of content is used to send location messages represented as a point on the map to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.location" />
+
       ## WhatsApp buttons
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.button.index" />
 
@@ -5790,12 +5816,12 @@ tags:
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
 
       ## Call
-      This is the [Voice channel](#tag/Voice) channel content.
+      This is the [Voice](#tag/Voice) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.call" showReadOnly={false} showWriteOnly={true} />
 
       ## E-Mail
-      This is the [E-Mail channel](#tag/E-Mail) content.
+      This is the [E-Mail](#tag/E-Mail) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
 
@@ -5805,12 +5831,12 @@ tags:
       <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
 
       ## Product
-      Single product message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+      Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product" showReadOnly={false} showWriteOnly={true} />
 
       ## Product list
-      Product list message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+      Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
   - name: SMS
