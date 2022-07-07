@@ -28,7 +28,7 @@ const representative: SchemaObject = {
     picture: {
       title: 'Picture',
       description: `URL for the avatar picture of the representative message.
-                    <br>*Only applicable to [Google Business Messages channel](#tag/Google-Business-Messages).*`,
+                    <br>*Only applicable to [Google Business Messages](#tag/Google-Business-Messages) channel.*`,
       type: 'string',
       example: 'https://zenvia.com/favicon.ico',
     },

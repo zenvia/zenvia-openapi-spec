@@ -15,14 +15,14 @@ const referral: SchemaObject = {
     headline: {
       title: 'Headline',
       description: `Headline used in the ad that generated the message.
-                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
+                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
       type: 'string',
       example: 'This is a headline',
     },
     body: {
       title: 'Body',
       description: `Body from the ad that generated the message.
-                    <br>*Only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
+                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
       type: 'string',
       example: 'This is a body',
     },
@@ -51,19 +51,19 @@ const referral: SchemaObject = {
         text: {
           title: 'Text',
           description: `The content of the quoted text message.
-                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*`,
           type: 'string',
         },
         user: {
           title: 'User',
           description: `The user who sent the quoted text message.
-                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*`,
           type: 'string',
         },
         timestamp: {
           title: 'Timestamp',
           description: `The timestamp of the quoted text message.
-                        <br>*Only applicable to [Instagram channel](#tag/Instagram).*`,
+                        <br>*Only applicable to [Instagram](#tag/Instagram) channel.*`,
           type: 'string',
         },
       },

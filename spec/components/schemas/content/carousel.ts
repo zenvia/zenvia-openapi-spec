@@ -18,7 +18,8 @@ const carousel: SchemaObject = {
       },
       cardWidth: {
         type: 'string',
-        description: 'The card width, which is always smaller than the width of the standalone card. The standard card width would be the equivalent of *LARGE* if it were available for use for the cards of the carousel.',
+        description: `The card width, which is always smaller than the width of the standalone card. The standard card width would be the equivalent of \`LARGE\` if it were available for use for the cards of the carousel.
+          <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*`,
         enum: [
           'SMALL',
           'MEDIUM',
@@ -26,7 +27,8 @@ const carousel: SchemaObject = {
         default: 'MEDIUM',
       },
       cards: {
-        description: 'The sequence of cards to be shown in the carousel',
+        title: 'Card',
+        description: 'The sequence of cards to be shown in the carousel.',
         type: 'array',
         minItems: 1,
         maxItems: 10,
@@ -46,7 +48,8 @@ const carousel: SchemaObject = {
                   properties: {
                     disposition: {
                       type: 'string',
-                      description: 'Defines the position that the media will be shown inside the card. Some of the values influence the media height.',
+                      description: `Defines the position that the media will be shown inside the card. The values influence the media height.
+                        <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*`,
                       enum: [
                         'ON_THE_TOP_SHORT_HEIGHT',
                         'ON_THE_TOP_MEDIUM_HEIGHT',

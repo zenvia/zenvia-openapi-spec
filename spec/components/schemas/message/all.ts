@@ -29,7 +29,7 @@ const all: SchemaObject = {
         title: 'Referenced Message ID',
         description: `When a user sends a message quoting a previous message, the identifier of the quoted message will be provided here. Also:
 * On reply button clicks (see [replyable text](#section/Replyable-Text) and [card](#section/Card) sections), this will refer to the ID of the clicked message.
-* On [SMS channel](#tag/SMS), this will refer to the ID of the last message sent to the contact.
+* On [SMS](#tag/SMS) channel, this will refer to the ID of the last message sent to the contact.
 
 *Only applicable to [WhatsApp](#tag/WhatsApp), [Instagram](#tag/Instagram), [SMS](#tag/SMS), [Facebook](#tag/Facebook), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*`,
         type: 'string',

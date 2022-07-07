@@ -7,15 +7,15 @@ For each content type covered in the next section, the following table reflects 
 | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+| template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+| carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | call           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | email          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+| button         |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | product        |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
@@ -39,16 +39,6 @@ This type of content is used to send a file to the user. Depending on the file t
 This is the same as [text](#section/Text) content, but is followed by buttons for quick replying.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.replyable-text" showReadOnly={false} />
-
-## Contacts
-This type of content is used to send contact information to the user.
-
-<SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
-
-## Location
-This type of content is used to send location messages represented as a point on the map to the user.
-
-<SchemaDefinition schemaRef="#/components/schemas/content.location" />
 
 ## Template
 This type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.
@@ -79,6 +69,16 @@ More details may be found below.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.carousel" />
 
+## Contacts
+This type of content is used to send contact information to the user.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
+## Location
+This type of content is used to send location messages represented as a point on the map to the user.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.location" />
+
 ## WhatsApp buttons
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.button.index" />
 
@@ -86,12 +86,12 @@ More details may be found below.
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.list" />
 
 ## Call
-This is the [Voice channel](#tag/Voice) channel content.
+This is the [Voice](#tag/Voice) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.call" showReadOnly={false} showWriteOnly={true} />
 
 ## E-Mail
-This is the [E-Mail channel](#tag/E-Mail) content.
+This is the [E-Mail](#tag/E-Mail) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
 
@@ -101,11 +101,11 @@ This the SMS version of the [text](#section/Text) content. It has additional par
 <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
 
 ## Product
-Single product message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product" showReadOnly={false} showWriteOnly={true} />
 
 ## Product list
-Product list message. This is the [WhatsApp channel](#tag/WhatsApp) channel content.
+Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
