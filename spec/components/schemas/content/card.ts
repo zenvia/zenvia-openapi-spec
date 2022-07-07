@@ -27,8 +27,9 @@ const card: SchemaObject = {
           properties: {
             disposition: {
               type: 'string',
-              description: `Defines the position that the media will be shown inside the card. Some of the values influence the media height.<br>
-                            <br>*\`ON_THE_LEFT\` and \`ON_THE_RIGHT\` are only supported by RCS channel.*`,
+              description: `Defines the position that the media will be shown inside the card. Some of the values influence the media height.
+                <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels.*
+                <br>*\`ON_THE_LEFT\` and \`ON_THE_RIGHT\` are only supported by [RCS](#tag/RCS) channel.*`,
               enum: [
                 'ON_THE_LEFT',
                 'ON_THE_RIGHT',

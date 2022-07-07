@@ -15,7 +15,7 @@ const text: SchemaObject = {
       },
       text: {
         description: `Text to be sent. When a URL is sent in the text, a URL preview will be added to the message, if the channel supports it.
-          <br>*URL preview only applicable to [WhatsApp channel](#tag/WhatsApp).*`,
+          <br>*URL preview only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
         type: 'string',
         example: 'This is a text.',
       },

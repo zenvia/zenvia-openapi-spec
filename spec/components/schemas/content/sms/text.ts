@@ -21,7 +21,7 @@ const text: SchemaObject = {
           <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary
           if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**
           if you have any trouble with **AUTO**.
-          <br>*Only applicable to [SMS channel](#tag/SMS).*`,
+          <br>*Only applicable to [SMS](#tag/SMS) channel.*`,
         example: 'AUTO',
       },
       reportId: {
@@ -29,7 +29,7 @@ const text: SchemaObject = {
         deprecated: true,
         type: 'number',
         description: `An ID used for report purposes only (also known as aggregate id). It must be setup before use.
-          <br>*Only applicable to [SMS channel](#tag/SMS).*`,
+          <br>*Only applicable to [SMS](#tag/SMS) channel.*`,
         example: 12345,
         minimum: -2147483648,
         maximum: 2147483647,
@@ -40,7 +40,7 @@ const text: SchemaObject = {
         type: 'boolean',
         default: false,
         description: `When **true**, the message will pop up on screen (also known as flash message).
-          <br>*Only applicable to [SMS channel](#tag/SMS).*`,
+          <br>*Only applicable to [SMS](#tag/SMS) channel.*`,
         example: true,
       },
     },

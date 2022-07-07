@@ -151,4 +151,4 @@ Generate your token on the [API console](https://app.zenvia.com/home/api) on Zen
 
 The JWT token is primarily used by front-end applications for user interactions.
 
-For server-to-server integrations use the [token authentication](/#section/Authentication/TOKEN) approach.
+For server-to-server integrations use the [token authentication](#section/Authentication/Token) approach.
