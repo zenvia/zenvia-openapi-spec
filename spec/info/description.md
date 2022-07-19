@@ -42,12 +42,12 @@ You are allowed to send test messages to phone numbers you've connected during a
 
 # API versions
 
-All notable changes to ZenAPI will be documented here.
+All notable changes to Zenvia APIs will be documented here.
 
 <!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->
 <!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->
 
-Currently, the ZenAPI is on version v2.
+Currently, the Zenvia APIs is on version v2.
 
 ## v2 (current)
 
