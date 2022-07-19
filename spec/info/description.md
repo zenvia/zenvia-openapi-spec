@@ -1,3 +1,6 @@
+API Support: https://atendimento.zenvia.com/<span class="link-content">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>
+
+
 # Overview
 
 This is the reference documentation for the Zenvia *REST-like* API.
