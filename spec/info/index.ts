@@ -5,13 +5,13 @@ const description = rawLoad(__dirname, './description.md');
 
 const info: InfoObject = {
   version: '2.0.0',
-  title: 'ZenAPI',
+  title: 'Zenvia APIs',
   description,
   termsOfService: 'https://zenvia.com/',
   contact: {
     name: 'API Support',
     email: undefined,
-    url: 'https://zenapi.zenvia.com/',
+    url: 'https://devs.zenvia.com/',
   },
   license: {
     name: 'MIT',
