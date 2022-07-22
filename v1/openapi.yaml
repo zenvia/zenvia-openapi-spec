@@ -1,8 +1,11 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: ZenAPI
+  title: Zenvia APIs
   description: |
+    API Support: https://atendimento.zenvia.com/<span class="link-content">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>
+
+
     # Overview
 
     This is the reference documentation for the Zenvia *REST-like* API.
@@ -109,8 +112,7 @@ info:
   termsOfService: 'https://zenvia.com/'
   contact:
     name: API Support
-    email: atendimento@zenvia.com
-    url: 'https://zenapi.zenvia.com/'
+    url: 'https://devs.zenvia.com/'
   license:
     name: MIT
     url: 'https://raw.githubusercontent.com/zenvia/zenvia-openapi-spec/master/LICENSE.md'
