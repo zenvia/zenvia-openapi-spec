@@ -9,7 +9,8 @@ export const buttonsList: SchemaObject = {
     <br>*[RCS](#tag/RCS): A maximum of 4 buttons is supported, but they might not be shown if they do not fit in the available space.*
     <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: \`text\`, \`link\` and \`dial\`.*
     <br>*[Instagram](#tag/Instagram): A maximum of 3 buttons is supported. Supported types: \`text\` and \`link\`.*
-    <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: \`text\`, \`link\` and \`dial\`.*`,
+    <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: \`text\`, \`link\` and \`dial\`.*
+    <br>*[Telegram](#tag/Telegram): The \`link\` type cannot be used with \`text\` or \`share_location\`. Supported types: \`text\`, \`link\` and \`share_location\`.*`,
   maxItems: 4,
   items: {
     $ref: buttonsRef,
