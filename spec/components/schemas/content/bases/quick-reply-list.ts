@@ -10,7 +10,7 @@ export const quickReplyList: SchemaObject = {
     <br>*[Google Business Messages](#tag/Google-Business-Messages): Supported types: \`text\`, \`link\` and \`dial\`. A maximum of 25 characters is supported in each button.*
     <br>*[Instagram](#tag/Instagram): Supported type: \`text\`. A maximum of 20 characters is supported in each button.*
     <br>*[Facebook](#tag/Facebook): Supported type: \`text\`.*
-    <br>*[Telegram](#tag/Telegram): Supported types: \`text\` and \`share_location\`.*
+    <br>*[Telegram](#tag/Telegram): Supported types: \`text\` and \`share_location\`. Card only supports buttons*
     <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels for [Cards](#section/Card) and [Carousels](#section/Carousel).*`,
   maxItems: 13,
   items: {

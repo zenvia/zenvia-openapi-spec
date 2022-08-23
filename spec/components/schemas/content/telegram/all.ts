@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as textRef } from '../text';
 import { ref as fileRef } from '../file';
-import { ref as cardRef } from './card-telegram';
+import { ref as cardRef } from '../card';
 import { ref as quickReplyRef } from '../replyable-text';
 import { ref as buttonref } from './button';
 import { createComponentRef } from '../../../../../utils/ref';
