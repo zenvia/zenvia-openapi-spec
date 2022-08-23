@@ -10,7 +10,7 @@ export const buttonsList: SchemaObject = {
     <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: \`text\`, \`link\` and \`dial\`.*
     <br>*[Instagram](#tag/Instagram): A maximum of 3 buttons is supported. Supported types: \`text\` and \`link\`.*
     <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: \`text\`, \`link\` and \`dial\`.*
-    <br>*[Telegram](#tag/Telegram): Supported types: \`link\`. Card only supports buttons*`,
+    <br>*[Telegram](#tag/Telegram): Supported types: \`link\`.*`,
   maxItems: 4,
   items: {
     $ref: buttonsRef,
