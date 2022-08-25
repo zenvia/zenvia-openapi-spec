@@ -928,6 +928,37 @@ paths:
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
+              card:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: card
+                      title: Card from Zenvia
+                      text: This is our products
+                      media:
+                        url: 'https://zenvia.br/zenvia-office.png'
+                        disposition: ON_THE_TOP_MEDIUM_HEIGHT
+                        caption: Our amazing office!
+                      buttons:
+                        - type: link
+                          text: Site
+                          url: 'https://www.zenvia.com/'
+                      quickReplyButtons:
+                        - type: text
+                          text: Click here
+                          payload: success
+              replyable_text:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: replyable_text
+                      text: Hi Zenvia!
+                      quickReplyButtons:
+                        - type: text
+                          text: Click here
+                          payload: success
       responses:
         '200':
           description: Created message
@@ -3174,6 +3205,7 @@ components:
             <br>*[Google Business Messages](#tag/Google-Business-Messages): A maximum of 4 buttons is supported. Supported types: `text`, `link` and `dial`.*
             <br>*[Instagram](#tag/Instagram): A maximum of 3 buttons is supported. Supported types: `text` and `link`.*
             <br>*[Facebook](#tag/Facebook): A maximum of 3 buttons is supported. Supported types: `text`, `link` and `dial`.*
+            <br>*[Telegram](#tag/Telegram): Supported types: `link`.*
       maxItems: 4
       items:
         $ref: '#/components/schemas/content.bases.buttons.all'
@@ -3254,6 +3286,7 @@ components:
             <br>*[Google Business Messages](#tag/Google-Business-Messages): Supported types: `text`, `link` and `dial`. A maximum of 25 characters is supported in each button.*
             <br>*[Instagram](#tag/Instagram): Supported type: `text`. A maximum of 20 characters is supported in each button.*
             <br>*[Facebook](#tag/Facebook): Supported type: `text`.*
+            <br>*[Telegram](#tag/Telegram): Supported types: `text` and `share_location`.*
             <br><br>*Only applicable to [RCS](#tag/RCS) and [Google Business Messages](#tag/Google-Business-Messages) channels for [Cards](#section/Card) and [Carousels](#section/Carousel).*
       maxItems: 13
       items:
@@ -3531,11 +3564,15 @@ components:
       oneOf:
         - $ref: '#/components/schemas/content.text'
         - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.replyable-text'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+          card: '#/components/schemas/content.card'
+          replyable_text: '#/components/schemas/content.replyable-text'
     content.voice.all:
       title: Voice
       oneOf:
@@ -5736,9 +5773,9 @@ tags:
       |:---------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
       | text           |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | file           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
-      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | replyable_text |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | template       |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | card           |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | carousel       |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | contacts       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | location       |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
