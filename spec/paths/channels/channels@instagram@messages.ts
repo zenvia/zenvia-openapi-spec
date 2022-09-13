@@ -3,6 +3,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as instagramMessageRef } from '../../components/schemas/message/instagram';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
+import { notificationOptIn as notificationOptInExample } from '../../resources/examples/notificationOptIn';
 import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
 
 const post: OperationObject = {
@@ -24,6 +25,9 @@ const post: OperationObject = {
           },
           replyable_text: {
             value: replyableTextExample(),
+          },
+          notification_optIn: {
+            value: notificationOptInExample(),
           },
         },
       },

@@ -4,6 +4,7 @@ import { ref as fileRef } from '../file';
 import { ref as quickRepliesRef } from '../replyable-text';
 import { ref as cardRef } from '../card';
 import { ref as carouselRef } from '../carousel';
+import { ref as notificationOptIn } from '../notification-optin';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -18,6 +19,8 @@ const all: SchemaObject = {
     $ref: cardRef,
   }, {
     $ref: carouselRef,
+  }, {
+    $ref: notificationOptIn,
   }],
   discriminator: {
     propertyName: 'type',
@@ -27,6 +30,7 @@ const all: SchemaObject = {
       replyable_text: quickRepliesRef,
       card: cardRef,
       carousel: carouselRef,
+      notification_optIn: notificationOptIn,
     },
   },
 };
