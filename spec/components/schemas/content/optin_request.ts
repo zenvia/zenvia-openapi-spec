@@ -10,8 +10,8 @@ const notificationOptIn: SchemaObject = {
     type: 'object',
     properties: {
       type: {
-        type: 'object',
-        example: 'notification_optIn',
+        type: 'string',
+        example: 'optin_request',
       },
       medialUrl: {
         description: 'URL for the thumbnail the user will see.',
@@ -19,7 +19,7 @@ const notificationOptIn: SchemaObject = {
         example: 'https://cdn.zenvia.com/main-picture.jpg',
       },
       title: {
-        description: 'The topic of the recurring subscription.',
+        description: 'The topic of the recurring notification subscription.',
         type: 'string',
         example: 'Weekly Sale'
       },
@@ -33,7 +33,7 @@ const notificationOptIn: SchemaObject = {
         ]
       },
       reOptIn: {
-        description: 'Allow user to opt-in back again after opted-out.',
+        description: 'Allow user to opt-in back again after opting-out.',
         type: 'string',
         enum: [
           'ENABLED',
@@ -42,11 +42,11 @@ const notificationOptIn: SchemaObject = {
         default: 'ENABLED',
       },
       payload: {
-        description: 'Content to be sent back as a message or a status event when the user clicks the button. By default, the `title` of the request will be used as payload.',
+        description: 'Content to be sent back as a message when the user clicks the button. By default, the `title` of the request will be used as payload.',
         type: 'string',
       },
       timezone: {
-        description: `Determine when to send a recurring notification after user opted-in. If no timezone is provided, UTC will be used as default.<br>
+        description: `Indicates the timezone that will be used for scheduling the notifications.<br>
         <br>Example: 'America/Sao_Paulo'`,
         type: 'string',
       }
