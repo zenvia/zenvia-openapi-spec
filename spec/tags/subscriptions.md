@@ -8,6 +8,62 @@ When you are subscribed to this type of event, your webhook will receive a reque
 
 <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
 
+## Content Types for IN direction
+The following table shows the contents supported by each channel **IN** direction.
+
+For **OUT** direction, check the [Out direction content-type](#section/Supported-Channels)
+
+|Content Type         |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |
+|:--------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
+| text                |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+| file                |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+| contacts            |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| location            |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| email               |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+| product_list_order  |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| optin_response      |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+
+_*GBM stands for Google Business Messages_
+
+## Text
+This type of content is the most used one and is composed of plain text.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.text" showReadOnly={false} />
+
+## File
+This type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:
+* Image
+* Video
+* Audio
+* Document
+
+<SchemaDefinition schemaRef="#/components/schemas/content.file" />
+
+## Contacts
+This type of content is used to send contact information to the user.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
+## Location
+This type of content is used to send location messages represented as a point on the map to the user.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.location" />
+
+## E-Mail
+This is the [E-Mail](#tag/E-Mail) channel content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
+
+## Product List Order
+This is [Whatsapp](#tag/Whatsapp) Product List Order content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list-order" showReadOnly={false} showWriteOnly={true} />
+
+## OptIn_Response
+This is [Instagram](#tag/Instagram) Recurring Message content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.optin_request" showReadOnly={false} showWriteOnly={true} />
+
 ## MESSAGE_STATUS
 
 The event type MESSAGE_STATUS refers to a status update related to a previously sent message.
