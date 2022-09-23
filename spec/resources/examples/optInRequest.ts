@@ -2,7 +2,6 @@ export function optInRequest() {
   return {
     from: "5510999999999",
     to: "55108888888888",
-    type: "",
     contents: [{
       type: 'optin_request',
       mediaUrl: 'https://zenvia.br/zenvia-office.png',
