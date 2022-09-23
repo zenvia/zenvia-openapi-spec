@@ -62,7 +62,7 @@ This is [Whatsapp](#tag/Whatsapp) Product List Order content.
 ## OptIn_Response
 This is [Instagram](#tag/Instagram) Recurring Message content.
 
-<SchemaDefinition schemaRef="#/components/schemas/content.optin_request" showReadOnly={false} showWriteOnly={true} />
+<SchemaDefinition schemaRef="#/components/schemas/content.instagram.optin_response" showReadOnly={false} showWriteOnly={true} />
 
 ## MESSAGE_STATUS
 
