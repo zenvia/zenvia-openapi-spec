@@ -21,7 +21,7 @@ For **OUT** direction, check the [Out direction content-type](#section/Supported
 | location            |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | email               |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
 | product_list_order  |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
-| optin_response      |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+| optin_response      |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 
 _*GBM stands for Google Business Messages_
 
@@ -60,7 +60,7 @@ This is [Whatsapp](#tag/Whatsapp) Product List Order content.
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list-order" showReadOnly={false} showWriteOnly={true} />
 
 ## OptIn_Response
-This is [Instagram](#tag/Instagram) Recurring Message content.
+This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) Recurring Message content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={false} showWriteOnly={true} />
 
