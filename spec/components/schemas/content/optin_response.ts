@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as baseRef } from '../base';
-import { createComponentRef } from '../../../../../utils/ref';
+import { ref as baseRef } from './base';
+import { createComponentRef } from '../../../../utils/ref';
 
 const optInResponse: SchemaObject = {
   type: 'object',
