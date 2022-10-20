@@ -42,7 +42,7 @@ const notificationOptIn: SchemaObject = {
         default: 'ENABLED',
       },
       payload: {
-        description: 'Content to be sent back as an [opt-in response](#section/OptIn-Response) message event when the contact accepts to receive recurring messages.<br>By default, the `title` of the request will be used as payload.',
+        description: 'Content to be sent back as an [notification opt-in](#section/Notification-OptIn) message event when the contact accepts to receive recurring messages.<br>By default, the `title` of the request will be used as payload.',
         type: 'string',
       },
       timezone: {
