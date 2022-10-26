@@ -109,3 +109,17 @@ Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
+
+## Two factor authentication
+
+The content type two factor authentication offers messages through sms and e-mail to add a security layer to authenticate users.
+
+**1. Two factor authentication Configuration**
+
+<SchemaDefinition schemaRef="#/components/schemas/two-fa.configuration.token-config" showReadOnly={false} showWriteOnly={true} />
+
+**2. Two factor authentication Token Sender**
+
+The two factor authentication token verification is used to check if the user who made the request of authentication can be verified.
+
+<SchemaDefinition schemaRef="#/components/schemas/two-fa.token.token" showReadOnly={false} showWriteOnly={true} />
