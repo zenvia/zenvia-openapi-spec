@@ -29,8 +29,8 @@ const optInResponse: SchemaObject = {
         enum: [
           'OPTIN',
           'OPTOUT',
-          'REOPTIN'
-        ]
+          'REOPTIN',
+        ],
       },
       frequency: {
         type: 'string',
@@ -39,7 +39,7 @@ const optInResponse: SchemaObject = {
         enum: [
           'DAILY',
           'WEEKLY',
-          'MONTHLY'
+          'MONTHLY',
         ],
       },
       payload: {

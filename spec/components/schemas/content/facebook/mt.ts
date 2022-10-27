@@ -20,7 +20,7 @@ const all: SchemaObject = {
   }, {
     $ref: quickRepliesRef,
   }, {
-    $ref: optinRequestRef
+    $ref: optinRequestRef,
   }],
   discriminator: {
     propertyName: 'type',

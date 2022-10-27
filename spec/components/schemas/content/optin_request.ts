@@ -21,7 +21,7 @@ const notificationOptIn: SchemaObject = {
       title: {
         description: 'The topic of the recurring messages subscription. This will be displayed in the opt-in request.<br>You can send up to 10 opt-in requests for **different** titles per user over a 7 days period. A sub-limit of up to 5 opt-in requests may be sent to a contact in a day.',
         type: 'string',
-        example: 'Weekly Sale'
+        example: 'Weekly Sale',
       },
       frequency: {
         description: 'How often the messages will be sent after the contact opted-in.',
@@ -29,15 +29,15 @@ const notificationOptIn: SchemaObject = {
         enum: [
           'DAILY',
           'WEEKLY',
-          'MONTHLY'
-        ]
+          'MONTHLY',
+        ],
       },
       reOptIn: {
         description: 'Allow the contact to opt-in back again after opting-out.',
         type: 'string',
         enum: [
           'ENABLED',
-          'DISABLED'
+          'DISABLED',
         ],
         default: 'ENABLED',
       },
@@ -50,14 +50,14 @@ const notificationOptIn: SchemaObject = {
         example: 'America/Sao_Paulo',
         default: 'UTC',
         type: 'string',
-      }
+      },
     },
     required: [
       'title',
       'frequency',
-    ]
-  }]
-}
+    ],
+  }],
+};
 
 export const ref = createComponentRef(__filename);
 export default notificationOptIn;
