@@ -11,7 +11,7 @@ const optInResponse: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'optin_response',
+        example: 'notification_optin',
       },
       recurringMessagesRecipient: {
         type: 'string',
@@ -19,7 +19,7 @@ const optInResponse: SchemaObject = {
       },
       optInExpiration: {
         type: 'string',
-        description: 'The timestamp when the opt-in will expire and no longer be usable, unless renewed.<br>Just before this expiration, the user will have the option to renew this topic opt-in. When the user makes a choice, a new [webhook](#section/MESSAGE) with a new [OptIn Response](#section/OptIn-Response) will be sent.',
+        description: 'The timestamp when the opt-in will expire and no longer be usable, unless renewed.<br>Just before this expiration, the user will have the option to renew this topic opt-in. When the user makes a choice, a new [webhook](#section/MESSAGE) with a new [Notification OptIn](#section/Notification_OptIn) will be sent.',
       },
       optInStatus: {
         title: 'OptIn Status',
