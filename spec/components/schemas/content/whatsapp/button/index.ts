@@ -21,11 +21,15 @@ const button: SchemaObject = {
         type: 'string',
         title: 'Body text',
         example: 'Body text.',
+        minLength: 1,
+        maxLength: 1024,
       },
       footer: {
         type: 'string',
         title: 'Footer text',
         example: 'Footer text.',
+        minLength: 1,
+        maxLength: 60,
       },
       buttons: {
         type: 'array',
@@ -38,10 +42,14 @@ const button: SchemaObject = {
             id: {
               type: 'string',
               example: 'Button ID',
+              minLength: 1,
+              maxLength: 256,
             },
             title: {
               type: 'string',
               example: 'Button text',
+              minLength: 1,
+              maxLength: 20,
             },
           },
           required: [

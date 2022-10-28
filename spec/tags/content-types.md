@@ -18,6 +18,7 @@ For each content type covered in the next section, the following table reflects 
 | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 | product        |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+| optin_request  |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red">&#10005;</font>  |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 
 _*GBM stands for Google Business Messages_
 
@@ -109,3 +110,8 @@ Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
+
+## OptIn Request
+This is [Instagram](#tag/Instagram) Recurring Message content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.optin_request" showReadOnly={false} showWriteOnly={true} />

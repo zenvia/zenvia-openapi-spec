@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as allContentsRef } from '../content/instagram/all';
+import { ref as mtContentRef } from '../content/instagram/mt';
 import { ref as representativeRef } from './representative';
 import { createComponentRef } from '../../../../utils/ref';
 
@@ -16,7 +16,7 @@ const all: SchemaObject = {
         description: 'A list of content to be sent',
         type: 'array',
         items: {
-          $ref: allContentsRef,
+          $ref: mtContentRef,
         },
         minItems: 1,
       },
