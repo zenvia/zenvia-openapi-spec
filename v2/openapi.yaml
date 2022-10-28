@@ -324,6 +324,18 @@ paths:
                         - type: text
                           text: Click here
                           payload: success
+              optin_request:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: optin_request
+                      mediaUrl: 'https://zenvia.br/zenvia-office.png'
+                      title: Weekly Amazing Deals
+                      frequency: WEEKLY
+                      reOptIn: ENABLED
+                      payload: weekly-deals
+                      timezone: America/Sao_Paulo
       responses:
         '200':
           description: Created message
@@ -662,6 +674,18 @@ paths:
                         - type: text
                           text: Click here
                           payload: success
+              optin_request:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: optin_request
+                      mediaUrl: 'https://zenvia.br/zenvia-office.png'
+                      title: Weekly Amazing Deals
+                      frequency: WEEKLY
+                      reOptIn: ENABLED
+                      payload: weekly-deals
+                      timezone: America/Sao_Paulo
       responses:
         '200':
           description: Created message
@@ -3077,6 +3101,83 @@ components:
             - type
             - longitude
             - latitude
+    content.optin_request:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: optin_request
+            mediaUrl:
+              description: URL of an image to be displayed inside the opt-in request.
+              type: string
+              example: 'https://cdn.zenvia.com/main-picture.jpg'
+            title:
+              description: The topic of the recurring messages subscription. This will be displayed in the opt-in request.<br>You can send up to 10 opt-in requests for **different** titles per user over a 7 days period. A sub-limit of up to 5 opt-in requests may be sent to a contact in a day.
+              type: string
+              example: Weekly Sale
+            frequency:
+              description: How often the messages will be sent after the contact opted-in.
+              type: string
+              enum:
+                - DAILY
+                - WEEKLY
+                - MONTHLY
+            reOptIn:
+              description: Allow the contact to opt-in back again after opting-out.
+              type: string
+              enum:
+                - ENABLED
+                - DISABLED
+              default: ENABLED
+            payload:
+              description: 'Content to be sent back as an [opt-in response](#section/OptIn-Response) message event when the contact accepts to receive recurring messages.<br>By default, the `title` of the request will be used as payload.'
+              type: string
+            timezone:
+              description: Indicates the timezone that will be used for scheduling the recurring messages.<br>
+              example: America/Sao_Paulo
+              default: UTC
+              type: string
+          required:
+            - title
+            - frequency
+    content.optin_response:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: notification_optin
+            recurringMessagesRecipient:
+              type: string
+              description: 'The contact id that needs to be used to send the recurring messages for the topic the user has opted-in. You will receive a unique contact id for each topic the user opts-in. Therefore, this needs to be used the recipient (`to` attribute) when sending a recurring message. This contact id has an expiration timestamp.'
+            optInExpiration:
+              type: string
+              description: 'The timestamp when the opt-in will expire and no longer be usable, unless renewed.<br>Just before this expiration, the user will have the option to renew this topic opt-in. When the user makes a choice, a new [webhook](#section/MESSAGE) with a new [Notification OptIn](#section/Notification_OptIn) will be sent.'
+            optInStatus:
+              title: OptIn Status
+              description: 'Indicates whether this is a new opt-in, an opt-out, or a reopt-in.'
+              type: string
+              example: OPTIN
+              enum:
+                - OPTIN
+                - OPTOUT
+                - REOPTIN
+            frequency:
+              type: string
+              description: How often the recurring messages may be sent.
+              example: DAILY
+              enum:
+                - DAILY
+                - WEEKLY
+                - MONTHLY
+            payload:
+              type: string
+              description: 'The payload set in the [opt-in request](#section/OptIn-Request) message of this opt-in response.'
     content.replyable-text:
       type: object
       allOf:
@@ -3471,6 +3572,8 @@ components:
         - $ref: '#/components/schemas/content.card'
         - $ref: '#/components/schemas/content.carousel'
         - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.optin_request'
+        - $ref: '#/components/schemas/content.optin_response'
       discriminator:
         propertyName: type
         mapping:
@@ -3479,6 +3582,26 @@ components:
           card: '#/components/schemas/content.card'
           carousel: '#/components/schemas/content.carousel'
           replyable_text: '#/components/schemas/content.replyable-text'
+          optin_request: '#/components/schemas/content.optin_request'
+          optin_response: '#/components/schemas/content.optin_response'
+    content.facebook.mt:
+      title: Facebook
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.carousel'
+        - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.optin_request'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
+          card: '#/components/schemas/content.card'
+          carousel: '#/components/schemas/content.carousel'
+          replyable_text: '#/components/schemas/content.replyable-text'
+          optin_request: '#/components/schemas/content.optin_request'
     content.gbm.all:
       title: Google Business Messages
       oneOf:
@@ -3503,6 +3626,8 @@ components:
         - $ref: '#/components/schemas/content.replyable-text'
         - $ref: '#/components/schemas/content.card'
         - $ref: '#/components/schemas/content.carousel'
+        - $ref: '#/components/schemas/content.optin_request'
+        - $ref: '#/components/schemas/content.optin_response'
       discriminator:
         propertyName: type
         mapping:
@@ -3511,6 +3636,26 @@ components:
           replyable_text: '#/components/schemas/content.replyable-text'
           card: '#/components/schemas/content.card'
           carousel: '#/components/schemas/content.carousel'
+          optin_request: '#/components/schemas/content.optin_request'
+          optin_response: '#/components/schemas/content.optin_response'
+    content.instagram.mt:
+      title: Instagram
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.carousel'
+        - $ref: '#/components/schemas/content.optin_request'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          file: '#/components/schemas/content.file'
+          replyable_text: '#/components/schemas/content.replyable-text'
+          card: '#/components/schemas/content.card'
+          carousel: '#/components/schemas/content.carousel'
+          optin_request: '#/components/schemas/content.optin_request'
     content.rcs.all:
       title: RCS
       oneOf:
@@ -3620,14 +3765,20 @@ components:
               type: string
               title: Header text
               example: Header text.
+              minLength: 1
+              maxLength: 60
             body:
               type: string
               title: Body text
               example: Body text.
+              minLength: 1
+              maxLength: 1024
             footer:
               type: string
               title: Footer text
               example: Footer text.
+              minLength: 1
+              maxLength: 60
             button:
               type: string
               title: List button
@@ -3646,6 +3797,8 @@ components:
                     type: string
                     title: Section title
                     example: Section name
+                    minLength: 1
+                    maxLength: 24
                   rows:
                     type: array
                     description: Max of 10 rows considering all sections together.
@@ -3658,14 +3811,20 @@ components:
                           type: string
                           title: Row id
                           example: Row id
+                          minLength: 1
+                          maxLength: 200
                         title:
                           type: string
                           title: Row title
                           example: Row title
+                          minLength: 1
+                          maxLength: 24
                         description:
                           type: string
                           title: Row description
                           example: Row description
+                          minLength: 1
+                          maxLength: 72
                       required:
                         - id
                         - title
@@ -3828,10 +3987,14 @@ components:
               type: string
               title: Body text
               example: Body text.
+              minLength: 1
+              maxLength: 1024
             footer:
               type: string
               title: Footer text
               example: Footer text.
+              minLength: 1
+              maxLength: 60
             buttons:
               type: array
               title: List of buttons
@@ -3843,9 +4006,13 @@ components:
                   id:
                     type: string
                     example: Button ID
+                    minLength: 1
+                    maxLength: 256
                   title:
                     type: string
                     example: Button text
+                    minLength: 1
+                    maxLength: 20
                 required:
                   - id
                   - title
@@ -3908,6 +4075,8 @@ components:
               type: string
               title: Header text
               example: Header text
+              minLength: 1
+              maxLength: 60
           required:
             - type
             - text
@@ -4603,7 +4772,7 @@ components:
               description: A list of content to be sent
               type: array
               items:
-                $ref: '#/components/schemas/content.facebook.all'
+                $ref: '#/components/schemas/content.facebook.mt'
               minItems: 1
     message.gbm:
       type: object
@@ -4631,7 +4800,7 @@ components:
               description: A list of content to be sent
               type: array
               items:
-                $ref: '#/components/schemas/content.instagram.all'
+                $ref: '#/components/schemas/content.instagram.mt'
               minItems: 1
             representative:
               allOf:
@@ -5785,6 +5954,7 @@ tags:
       | list           |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | product_list   |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | product        |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | optin_request  |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red">&#10005;</font>  |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
 
       _*GBM stands for Google Business Messages_
 
@@ -5876,6 +6046,11 @@ tags:
       Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
 
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
+
+      ## OptIn Request
+      This is [Instagram](#tag/Instagram) Recurring Message content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.optin_request" showReadOnly={false} showWriteOnly={true} />
   - name: SMS
     description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
@@ -6235,6 +6410,62 @@ tags:
       When you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
 
       <SchemaDefinition schemaRef="#/components/schemas/events.message-event" />
+
+      ## Content Types for IN direction
+      The following table shows the contents supported by each channel **IN** direction.
+
+      For **OUT** direction, check the [Out direction content-type](#section/Supported-Channels)
+
+      |Content Type         |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |
+      |:--------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|
+      | text                |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | file                |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | contacts            |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | location            |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | email               |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
+      | product_list_order  |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | optin_response      |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+
+      _*GBM stands for Google Business Messages_
+
+      ## Text
+      This type of content is the most used one and is composed of plain text.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.text" showReadOnly={false} />
+
+      ## File
+      This type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:
+      * Image
+      * Video
+      * Audio
+      * Document
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.file" />
+
+      ## Contacts
+      This type of content is used to send contact information to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.contacts" />
+
+      ## Location
+      This type of content is used to send location messages represented as a point on the map to the user.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.location" />
+
+      ## E-Mail
+      This is the [E-Mail](#tag/E-Mail) channel content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.email" showReadOnly={false} showWriteOnly={true} />
+
+      ## Product List Order
+      This is [Whatsapp](#tag/Whatsapp) Product List Order content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list-order" showReadOnly={false} showWriteOnly={true} />
+
+      ## OptIn Response
+      This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) Recurring Message content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={false} showWriteOnly={true} />
 
       ## MESSAGE_STATUS
 
