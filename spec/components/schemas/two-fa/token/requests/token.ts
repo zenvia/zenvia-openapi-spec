@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 
 const token: SchemaObject = {
   type: 'object',
@@ -7,7 +7,7 @@ const token: SchemaObject = {
     configurationId: {
       type: 'string',
       description: 'Unique configuration Id',
-      format: 'UUID',
+      format: 'UUID v4',
       example: '0f25c816-478d-4729-a600-b6b0124b4b9e',
     },
     to: {
@@ -37,6 +37,7 @@ const token: SchemaObject = {
       },
     },
   },
+  required: ['configurationId', 'to', 'channel', 'fields']
 };
 
 export const ref = createComponentRef(__filename);

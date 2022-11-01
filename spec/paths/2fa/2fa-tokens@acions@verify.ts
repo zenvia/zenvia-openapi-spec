@@ -1,10 +1,11 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
-import { ref as toCodeRef } from '../../components/schemas/two-fa/token/code-verifiaction';
+import { ref as toCodeRef } from '../../components/schemas/two-fa/token/requests/code-verifiaction';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as tokenResponseRef } from '../../components/schemas/two-fa/token/responses/token'
 
 const post: OperationObject = {
   description: 'Verify a token',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
     content: {
@@ -17,7 +18,15 @@ const post: OperationObject = {
   },
   responses:{
     200: {
-    } as ResponseObject,
+      description: 'Returns Information about the configuration staus after sending a code to the user',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: tokenResponseRef,
+          },
+        },
+      },
+    }  as ResponseObject,
     default: {
       $ref: errorResponseRef,
     },

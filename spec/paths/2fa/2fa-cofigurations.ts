@@ -5,7 +5,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
   description: 'Create a configuration',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
     content: {
@@ -35,7 +35,7 @@ const post: OperationObject = {
 
 const get: OperationObject = {
   description: 'List all configurations',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   responses:{
     200: {
       description: 'Return all tokens configurations',

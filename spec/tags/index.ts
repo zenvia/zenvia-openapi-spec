@@ -57,7 +57,7 @@ const tags: TagObject[] = [{
   name: 'Message Batches',
   description: batchesDescription,
 }, {
-  name: 'Two factor Authentication',
+  name: 'Two Factor Authentication',
   description: twoFactorAuthentication,
 }, {
   name: 'Webhooks',

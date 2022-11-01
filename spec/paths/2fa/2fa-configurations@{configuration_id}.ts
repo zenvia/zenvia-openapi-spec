@@ -4,7 +4,7 @@ import { ref as tokenConfigRef } from '../../components/schemas/two-fa/configura
 
 const del: OperationObject = {
   description: 'Delete a configuration given the configuration id',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   responses:{
     200: {
     } as ResponseObject,
@@ -16,7 +16,7 @@ const del: OperationObject = {
 
 const get: OperationObject = {
   description: 'List configuration given the configuration id',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   responses:{
     200: {
       description: 'Return the specific configuration by id',

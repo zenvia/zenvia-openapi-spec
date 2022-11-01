@@ -14,7 +14,7 @@ const groups: TagGroupObject[] = [{
     'Voice',
     'E-Mail',
     'Message Batches',
-    'Two factor authentication',
+    'Two Factor Authentication',
   ],
 }, {
   name: 'Webhooks',

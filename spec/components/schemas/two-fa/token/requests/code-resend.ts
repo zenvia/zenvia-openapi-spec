@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 
 const recipient: SchemaObject = {
   type: 'object',
@@ -15,6 +15,7 @@ const recipient: SchemaObject = {
       example: 'email',
     },
   },
+  required: ['to', 'channel'],
 };
 
 export const ref = createComponentRef(__filename);

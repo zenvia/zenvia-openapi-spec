@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../../utils/ref';
+import { createComponentRef } from '../../../../../../utils/ref';
 
 const verification: SchemaObject = {
   type: 'object',
@@ -20,6 +20,7 @@ const verification: SchemaObject = {
       example: '269878',
     },
   },
+  required: ['to', 'channel', 'code'],
 };
 
 export const ref = createComponentRef(__filename);

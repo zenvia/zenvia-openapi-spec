@@ -3,9 +3,9 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
   description: 'Resend the code using the configuration id',
-  tags: ['Two factor authentication'],
+  tags: ['Two Factor Authentication'],
   responses:{
-    200: {
+    204: {
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
