@@ -18,7 +18,7 @@ const gbmDescription = rawLoad(__dirname, './gbm.md');
 const instagramDescription = rawLoad(__dirname, './instagram.md');
 const emailDescription = rawLoad(__dirname, './email.md');
 const filesDescription = rawLoad(__dirname, './files.md');
-const twoFactorAuthentication = rawLoad(__dirname, './2fa.md');
+const twoFactorAuthentication = rawLoad(__dirname, './two-fa.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',

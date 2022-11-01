@@ -1,0 +1,32 @@
+import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
+import { ref as recipientRef } from '../../components/schemas/two-fa/token/code-resend';
+import { ref as errorResponseRef } from '../../components/responses/error';
+
+const post: OperationObject = {
+  title: 'Resend code',
+  description: 'Resend the code to the user',
+  tags: ['Two factor authentication'],
+  requestBody: {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          $ref: recipientRef,
+        },
+      },
+    },
+  },
+  responses:{
+    200: {
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  },
+};
+
+const path: PathItemObject = {
+  post,
+};
+
+export default path;
