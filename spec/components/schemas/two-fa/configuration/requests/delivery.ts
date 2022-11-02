@@ -7,6 +7,7 @@ const delivery: SchemaObject = {
   description: 'Delivery properties',
   properties: {
     maxAttempts: {
+      title: 'Max Attempts',
       type: 'number',
       description: 'Max attempts to deliver a token',
       default: 1,
@@ -14,6 +15,7 @@ const delivery: SchemaObject = {
       maximum: 5,
     },
     minIntervalSeconds: {
+      title: 'Min Interval In Seconds',
       type: 'number',
       description: 'Interval in seconds to deliver a token',
       default: 60,

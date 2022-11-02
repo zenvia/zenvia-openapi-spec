@@ -7,11 +7,14 @@ import { ref as contentref } from '../requests/content';
 import { ref as websiteref } from '../requests/website';
 
 const tokenConfigResponse: SchemaObject = {
+  title: 'Token Configuration Creation',
   type: 'object',
   description: 'Token configuration created response',
   properties: {
     id: {
+      title: 'Token Configuration Id',
       type: 'string',
+      description: 'The configuration unique id',
       example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
     },
     token: {
@@ -45,10 +48,13 @@ const tokenConfigResponse: SchemaObject = {
       $ref: websiteref,
     },
     createdAt: {
+      title: 'Creation Timestamp',
+      description: 'Timestamp of the configuration token creation',
       type: 'string',
       example: '2022-10-27T13:25:11.354Z',
     },
     updatedAt: {
+      title: 'Update timestamp',
       type: 'string',
       example: '2022-10-27T13:25:11.354Z',
     },

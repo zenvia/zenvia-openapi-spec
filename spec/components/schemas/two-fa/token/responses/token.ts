@@ -3,35 +3,44 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as deliveryRef } from '../../configuration/requests/delivery';
 import { ref as verifyRef } from '../../configuration/requests/verify';
 
-const sendToken: SchemaObject = {
-  type: 'object',
+const sendToken: SchemaObject = {  type: 'object',
+ 
   properties: {
     id: {
       type: 'string',
+      description: 'UUID',
       example: '7388c68e-675e-435b-b2ec-f72677798678',
     },
     from: {
       type: 'string',
+      description: 'Contact of origin',
       example: 'email@email.com',
     },
     to: {
       type: 'string',
+      description: 'Contact receiver',
       example: 'received_email@email.com',
     },
     channel: {
       type: 'string',
+      description: 'Channel used',
+      enum: ['sms', 'email'],
       example: 'email',
     },
     locale: {
       type: 'string',
+      description: 'Location configured used',
       example: 'pt_BR',
     },
     code: {
       type: 'string',
+      description: 'The code generated',
+      example: '100569',
     },
     configurationId: {
       type: 'string',
-      example: '88ff8743-22ba-44db-850b-5f54d6442cdd'
+      description: 'Token Configuration Creation',
+      example: '88ff8743-22ba-44db-850b-5f54d6442cdd',
     },
     fields: {
       type: 'object',
@@ -50,26 +59,35 @@ const sendToken: SchemaObject = {
     },
     remoteip: {
       type: 'string',
+      description: '',
       example: '127.0.0.1:80'
     },
     verify: {
       type: 'string',
+      description: '',
       $ref: verifyRef,
     },
     delivery: {
       type: 'string',
+      description: '',
       $ref: deliveryRef,
     },
     expiresAt: {
+      title: 'Expiration timestamp',
       type: 'string',
+      description: 'Timestamp of the expiration date',
       example: '2022-10-27T13:26:11.354Z',
     },
     createdAt: {
+      title: 'Creation timestamp',
       type: 'string',
+      description: 'Timestamp of token creation.',
       example: '2022-10-27T13:25:11.354Z',
     },
     updatedAt: {
+      title: 'Update timestamp',
       type: 'string',
+      description: 'Timestamp of updates',
       example: '2022-10-27T13:25:11.354Z',
     },
   },  

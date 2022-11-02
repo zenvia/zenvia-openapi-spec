@@ -3,6 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const email: SchemaObject = {
   title: 'Email configuration',
+  description: 'Email configuration information',
   type: 'object',
   properties: {
     from: {

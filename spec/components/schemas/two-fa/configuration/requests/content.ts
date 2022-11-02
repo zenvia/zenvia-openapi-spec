@@ -8,11 +8,12 @@ const content: SchemaObject = {
   description: 'Content with SMS and e-mail information',
   properties: {
     pt_br: {
-      type: 'object',
       title: 'SMS and E-mail configuration',
+      type: 'object',      
       $ref: languageref,
     },
     en_us: {
+      title: 'SMS and E-mail configuration',
       type: 'object',
     },
   },
