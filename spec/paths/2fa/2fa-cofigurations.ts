@@ -1,6 +1,6 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
-import { ref as tokenConfigRef } from '../../components/schemas/two-fa/configuration/requests/all';
-import { ref as tokenConfigResponseRef } from '../../components/schemas/two-fa/configuration/responses/config-token-created';
+import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
+import { ref as tokenConfigResponseRef } from '../../components/schemas/2fa/configuration/responses/base';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {

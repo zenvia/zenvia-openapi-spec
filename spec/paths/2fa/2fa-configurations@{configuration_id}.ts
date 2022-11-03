@@ -1,6 +1,6 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as tokenConfigRef } from '../../components/schemas/two-fa/configuration/requests/all';
+import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
 
 const del: OperationObject = {
   description: 'Delete a configuration given the configuration id',
