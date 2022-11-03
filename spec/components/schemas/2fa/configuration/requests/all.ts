@@ -31,7 +31,7 @@ const tokenConfig: SchemaObject = {
     },
     content: {
       title: 'Message contents',
-      description: 'It has the language and sender information',
+      description: 'Location and and sender information',
       type: 'string',
       $ref: contentref,
     },
