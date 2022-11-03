@@ -17,6 +17,8 @@ const textHeader: SchemaObject = {
         type: 'string',
         title: 'Header text',
         example: 'Header text',
+        minLength: 1,
+        maxLength: 60,
       },
     },
     required: [
