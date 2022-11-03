@@ -9,7 +9,7 @@ const content: SchemaObject = {
   properties: {
     pt_br: {
       title: 'SMS and E-mail configuration',
-      type: 'object',      
+      type: 'object',
       $ref: languageref,
     },
     en_us: {

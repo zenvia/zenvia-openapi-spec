@@ -4,7 +4,7 @@ import { ref as deliveryRef } from '../../configuration/requests/delivery';
 import { ref as verifyRef } from '../../configuration/requests/verify';
 
 const sendToken: SchemaObject = {  type: 'object',
- 
+
   properties: {
     id: {
       type: 'string',
@@ -62,7 +62,7 @@ const sendToken: SchemaObject = {  type: 'object',
     remoteip: {
       type: 'string',
       description: 'Ip of the user making the request to be authenticated',
-      example: '127.0.0.1:80'
+      example: '127.0.0.1:80',
     },
     verify: {
       type: 'string',
@@ -92,7 +92,7 @@ const sendToken: SchemaObject = {  type: 'object',
       description: 'Timestamp of updates',
       example: '2022-10-27T13:25:11.354Z',
     },
-  },  
+  },
 };
 
 export const ref = createComponentRef(__filename);

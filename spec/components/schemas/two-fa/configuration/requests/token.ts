@@ -31,7 +31,7 @@ const token: SchemaObject = {
       example: 'UPPER_ONLY',
     },
   },
-  required: ['size', 'mode', 'case']
+  required: ['size', 'mode', 'case'],
 };
 
 export const ref = createComponentRef(__filename);

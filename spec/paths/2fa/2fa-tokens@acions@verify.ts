@@ -1,7 +1,7 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as toCodeRef } from '../../components/schemas/two-fa/token/requests/code-verifiaction';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as tokenResponseRef } from '../../components/schemas/two-fa/token/responses/token'
+import { ref as tokenResponseRef } from '../../components/schemas/two-fa/token/responses/token';
 
 const post: OperationObject = {
   description: 'Verify a token',

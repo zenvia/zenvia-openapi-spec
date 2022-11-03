@@ -18,7 +18,7 @@ const post: OperationObject = {
   },
   responses:{
     204: {
-      description: 'Return the code status to indicate success'
+      description: 'Return the code status to indicate success',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,

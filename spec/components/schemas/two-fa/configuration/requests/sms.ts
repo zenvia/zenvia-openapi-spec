@@ -19,7 +19,7 @@ const sms: SchemaObject = {
       default: 'Olá {{nome}}! Seu código de verificação é {{code}}',
     },
   },
-  required: ['from']
+  required: ['from'],
 };
 
 export const ref = createComponentRef(__filename);

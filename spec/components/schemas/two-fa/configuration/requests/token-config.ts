@@ -46,8 +46,8 @@ const tokenConfig: SchemaObject = {
     'token',
     'verify',
     'delivery',
-    'content'
-  ]
+    'content',
+  ],
 };
 
 export const ref = createComponentRef(__filename);

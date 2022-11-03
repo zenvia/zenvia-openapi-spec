@@ -18,7 +18,7 @@ const email: SchemaObject = {
     subject: {
       type: 'string',
       description: 'The E-mail subject',
-      example: 'Authentication code'
+      example: 'Authentication code',
     },
     html: {
       type: 'string',

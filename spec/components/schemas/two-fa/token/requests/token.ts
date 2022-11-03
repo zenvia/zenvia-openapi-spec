@@ -37,7 +37,7 @@ const token: SchemaObject = {
       },
     },
   },
-  required: ['configurationId', 'to', 'channel', 'fields']
+  required: ['configurationId', 'to', 'channel', 'fields'],
 };
 
 export const ref = createComponentRef(__filename);
