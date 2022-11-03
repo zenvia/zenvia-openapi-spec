@@ -1,10 +1,10 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
-import { ref as tokenref } from '../requests/token';
-import { ref as verifyref } from '../requests/verify';
-import { ref as deliveryref } from '../requests/delivery';
-import { ref as contentref } from '../requests/content';
-import { ref as websiteref } from '../requests/website';
+import { ref as tokenRef } from '../requests/token';
+import { ref as verifyRef } from '../requests/verify';
+import { ref as deliveryRef } from '../requests/delivery';
+import { ref as contentRef } from '../requests/content';
+import { ref as websiteRef } from '../requests/website';
 
 const tokenConfigResponse: SchemaObject = {
   title: 'Token Configuration Creation',
@@ -21,31 +21,31 @@ const tokenConfigResponse: SchemaObject = {
       title: 'Token Properties',
       description: 'The token properties like size, mode and case',
       type: 'object',
-      $ref: tokenref,
+      $ref: tokenRef,
     },
     verify: {
       title: 'Verification properties',
       description: 'Configuration properties to verify a token',
       type: 'object',
-      $ref: verifyref,
+      $ref: verifyRef,
     },
     delivery: {
       title: 'Delivery properties',
       description: 'Configuration properties to deliver a token to the user',
       type: 'object',
-      $ref: deliveryref,
+      $ref: deliveryRef,
     },
     content: {
       title: 'Message contents',
       description: 'It has the language and sender information',
       type: 'string',
-      $ref: contentref,
+      $ref: contentRef,
     },
     website: {
       title: 'Site and app domains',
       description: 'Allowed domains',
       type: 'object',
-      $ref: websiteref,
+      $ref: websiteRef,
     },
     createdAt: {
       title: 'Creation Timestamp',

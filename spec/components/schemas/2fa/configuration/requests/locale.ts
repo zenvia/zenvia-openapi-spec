@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as smsref } from './sms';
-import { ref as emailref } from './email';
+import { ref as smsRef } from './sms';
+import { ref as emailRef } from './email';
 import { createComponentRef } from '../../../../../../utils/ref';
 
 const language: SchemaObject = {
@@ -17,13 +17,13 @@ const language: SchemaObject = {
       title: 'SMS config',
       description: 'SMS configuration details',
       type: 'object',
-      $ref: smsref,
+      $ref: smsRef,
     },
     email: {
       title: 'E-mail config',
       description: 'Email configuration details',
       type: 'object',
-      $ref: emailref,
+      $ref: emailRef,
     },
   },
   required: ['sms', 'email'],
