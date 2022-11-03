@@ -8,7 +8,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const tokenConfig: SchemaObject = {
   title: 'Token configuration',
-  description: 'Token configuration object model',
+  description: 'Token configuration to generate and deliver tokens',
   type: 'object',
   properties: {
     token: {
