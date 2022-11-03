@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
-import { ref as languageref } from './language';
+import { ref as localeref } from './locale';
 
 const content: SchemaObject = {
   title: 'SMS and E-mail Content',
@@ -10,7 +10,7 @@ const content: SchemaObject = {
     pt_br: {
       title: 'SMS and E-mail configuration',
       type: 'object',
-      $ref: languageref,
+      $ref: localeref,
     },
     en_us: {
       title: 'SMS and E-mail configuration',

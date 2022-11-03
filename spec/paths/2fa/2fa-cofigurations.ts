@@ -1,5 +1,5 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
-import { ref as tokenConfigRef } from '../../components/schemas/two-fa/configuration/requests/token-config';
+import { ref as tokenConfigRef } from '../../components/schemas/two-fa/configuration/requests/all';
 import { ref as tokenConfigResponseRef } from '../../components/schemas/two-fa/configuration/responses/config-token-created';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
