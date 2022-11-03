@@ -5,7 +5,6 @@ const verification: SchemaObject = {
   type: 'object',
   properties: {
     to: {
-
       type: 'string',
       description: 'User recipient',
       example: 'email@email.com',

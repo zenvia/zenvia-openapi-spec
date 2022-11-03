@@ -8,24 +8,24 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const tokenConfig: SchemaObject = {
   title: 'Token configuration object',
-  description: 'This a token configuration object model',
+  description: 'Token configuration object model',
   type: 'object',
   properties: {
     token: {
       title: 'Token Properties',
-      description: 'Holds the token properties like size, mode and case',
+      description: 'The token properties like size, mode and case',
       type: 'object',
       $ref: tokenref,
     },
     verify: {
       title: 'Verification properties',
-      description: 'Holds the maxAttempts of trying to check the token and the expire time',
+      description: 'Configuration properties to verify a token',
       type: 'object',
       $ref: verifyref,
     },
     delivery: {
       title: 'Delivery properties',
-      description: 'Holds the maxAttempts and the time to send the user response',
+      description: 'Configuration properties to deliver a token to the user',
       type: 'object',
       $ref: deliveryref,
     },
