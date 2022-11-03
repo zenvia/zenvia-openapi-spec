@@ -1,5 +1,5 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
-import { ref as recipientRef } from '../../components/schemas/2fa/token/requests/code-resend';
+import { ref as recipientRef } from '../../components/schemas/2fa/token/requests/to-channel';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {

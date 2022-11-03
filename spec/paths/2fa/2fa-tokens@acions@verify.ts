@@ -1,5 +1,5 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
-import { ref as toCodeRef } from '../../components/schemas/2fa/token/requests/code-verifiaction';
+import { ref as toCodeRef } from '../../components/schemas/2fa/token/requests/recipient';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/responses/token';
 
