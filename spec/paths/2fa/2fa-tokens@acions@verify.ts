@@ -18,7 +18,7 @@ const post: OperationObject = {
   },
   responses:{
     200: {
-      description: 'Returns Information about the configuration staus after sending a code to the user',
+      description: 'Returns Information about the configuration status after sending a code to the user',
       content: {
         'application/json': {
           schema: {

@@ -55,6 +55,7 @@ const tokenConfigResponse: SchemaObject = {
     },
     updatedAt: {
       title: 'Update timestamp',
+      description: 'Timestamp of the token updates',
       type: 'string',
       example: '2022-10-27T13:25:11.354Z',
     },

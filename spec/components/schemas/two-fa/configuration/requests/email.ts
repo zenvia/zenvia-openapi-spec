@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const email: SchemaObject = {
   title: 'Email configuration',
-  description: 'Email configuration information',
+  description: 'Information to send the token using E-mail',
   type: 'object',
   properties: {
     from: {
@@ -12,15 +12,17 @@ const email: SchemaObject = {
     },
     type: {
       default: 'email',
+      description: 'Channel used to send the token',
       enum: ['sms', 'email'],
     },
     subject: {
       type: 'string',
-      description: 'email subject',
-
+      description: 'The E-mail subject',
+      example: 'Authentication code'
     },
     html: {
       type: 'string',
+      description: 'Default text to be sent',
       default: 'Olá {{name}}! Seu código de verificação é {{code}}',
     },
   },

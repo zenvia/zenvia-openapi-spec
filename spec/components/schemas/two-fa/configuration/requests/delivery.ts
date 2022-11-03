@@ -17,7 +17,7 @@ const delivery: SchemaObject = {
     minIntervalSeconds: {
       title: 'Min Interval In Seconds',
       type: 'number',
-      description: 'Interval in seconds to deliver a token',
+      description: 'Minimum interval in seconds to deliver a token',
       default: 60,
       minimum: 60,
       maximum: 120,

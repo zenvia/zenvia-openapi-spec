@@ -6,12 +6,12 @@ const recipient: SchemaObject = {
   properties: {
     to: {
       type: 'string',
-      description: 'user',
+      description: 'User recipient',
       example: 'email@email.com',
     },
     channel: {
       type: 'string',
-      description: 'channel used',
+      description: 'Channel used to send the token',
       example: 'email',
     },
   },

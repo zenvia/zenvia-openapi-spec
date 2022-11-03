@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const sms: SchemaObject = {
   title: 'SMS configuration',
-  description: 'Information to send code',
+  description: 'Information to send the token using SMS',
   type: 'object',
   properties: {
     from: {

@@ -8,7 +8,7 @@ const sendToken: SchemaObject = {  type: 'object',
   properties: {
     id: {
       type: 'string',
-      description: 'UUID',
+      description: 'Verification UUID',
       example: '7388c68e-675e-435b-b2ec-f72677798678',
     },
     from: {
@@ -44,6 +44,7 @@ const sendToken: SchemaObject = {  type: 'object',
     },
     fields: {
       type: 'object',
+      description: 'Fields with key words of the text that will be sent to the user',
       properties: {
         name: {
           type: 'string',
@@ -54,12 +55,13 @@ const sendToken: SchemaObject = {  type: 'object',
     },
     status: {
       type: 'string',
-      enum: ['PENDING', 'CANCELLED', 'VERIFIED'],
+      description: 'Status of the generated token',
+      enum: ['PENDING', 'CANCELED', 'VERIFIED'],
       example: 'PENDING',
     },
     remoteip: {
       type: 'string',
-      description: '',
+      description: 'Ip of the user making the request to be authenticated',
       example: '127.0.0.1:80'
     },
     verify: {

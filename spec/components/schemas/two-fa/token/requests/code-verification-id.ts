@@ -8,7 +8,7 @@ const code: SchemaObject = {
   properties: {
     code: {
       type: 'string',
-      description: 'code sended by the user',
+      description: 'Code sended by the user',
       example: '269878',
     },
   },
