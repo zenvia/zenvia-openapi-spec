@@ -7,7 +7,7 @@ import { ref as websiteref } from './website';
 import { createComponentRef } from '../../../../../../utils/ref';
 
 const tokenConfig: SchemaObject = {
-  title: 'Token configuration object',
+  title: 'Token configuration',
   description: 'Token configuration object model',
   type: 'object',
   properties: {
