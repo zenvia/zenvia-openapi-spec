@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const website: SchemaObject = {
   title: 'Website domains',
-  description: 'Needded information to use this API two factor authentication service using a website or a mobile app',
+  description: 'Information needed to use this two factor authentication API service on a website or on a mobile app',
   type: 'object',
   properties: {
     domains: {

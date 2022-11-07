@@ -8,14 +8,16 @@ const sms: SchemaObject = {
   properties: {
     from: {
       type: 'string',
-      description: 'Account alias',
+      description: 'Contact of origin',
     },
     type: {
-      type: 'string',
-      default: 'text',
+      default: 'email',
+      description: 'Channel used to send the token',
+      enum: ['sms', 'email'],
     },
     text: {
       type: 'string',
+      description: 'Default text to be sent',
       default: 'Olá {{nome}}! Seu código de verificação é {{code}}',
     },
   },
