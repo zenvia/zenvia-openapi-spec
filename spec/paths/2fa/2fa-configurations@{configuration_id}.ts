@@ -7,6 +7,7 @@ const del: OperationObject = {
   tags: ['Two Factor Authentication'],
   responses:{
     200: {
+      description: 'Returns success'
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,

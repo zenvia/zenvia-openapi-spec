@@ -3,8 +3,8 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as deliveryRef } from '../../configuration/requests/delivery';
 import { ref as verifyRef } from '../../configuration/requests/verify';
 
-const sendToken: SchemaObject = {  type: 'object',
-
+const sendToken: SchemaObject = {  
+  type: 'object',
   properties: {
     id: {
       type: 'string',
@@ -65,13 +65,9 @@ const sendToken: SchemaObject = {  type: 'object',
       example: '127.0.0.1:80',
     },
     verify: {
-      type: 'string',
-      description: '',
       $ref: verifyRef,
     },
     delivery: {
-      type: 'string',
-      description: '',
       $ref: deliveryRef,
     },
     expiresAt: {
