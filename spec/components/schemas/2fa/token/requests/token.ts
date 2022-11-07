@@ -7,7 +7,6 @@ const token: SchemaObject = {
     configurationId: {
       type: 'string',
       description: 'Unique configuration Id',
-      format: 'UUID v4',
       example: '0f25c816-478d-4729-a600-b6b0124b4b9e',
     },
     to: {

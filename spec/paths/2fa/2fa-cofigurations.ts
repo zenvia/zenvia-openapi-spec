@@ -19,6 +19,14 @@ const post: OperationObject = {
   responses:{
     201: {
       description: 'Returns the created configuration',
+      headers: {
+        Location: {
+          description: 'The URL for created file object.',
+          schema: {
+            type: 'string',
+          },
+        },
+      },
       content: {
         'application/json': {
           schema: {

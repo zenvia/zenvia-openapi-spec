@@ -10,7 +10,7 @@ const token: SchemaObject = {
       title: 'Token size',
       type: 'number',
       description: 'Size of the token to be sent to the user',
-      example: '6',
+      example: 6,
       maximum: 12,
       minimum: 6,
     },

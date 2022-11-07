@@ -2,6 +2,7 @@ import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as tokenVerifyRef } from '../../components/schemas/2fa/token/requests/code';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/responses/token';
+import { ref as configurationIdRef } from '../../components/parameters/configurationId'
 
 const post: OperationObject = {
   description: 'Verify a token using the configuration id',
@@ -35,6 +36,9 @@ const post: OperationObject = {
 
 const path: PathItemObject = {
   post,
+  parameters: [{
+    $ref: configurationIdRef,
+  }],
 };
 
 export default path;

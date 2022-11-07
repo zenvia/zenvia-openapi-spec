@@ -12,7 +12,7 @@ const website: SchemaObject = {
       description: 'List of clients domains allowed to use the two factor authentication service',
       items: {
         type: 'string',
-        example: ['app.zenvia.com'],
+        example: 'app.zenvia.com',
       },
     },
     appPackages: {
