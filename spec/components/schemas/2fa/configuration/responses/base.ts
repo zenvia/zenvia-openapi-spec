@@ -18,33 +18,18 @@ const tokenConfigResponse: SchemaObject = {
       example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
     },
     token: {
-      title: 'Token Properties',
-      description: 'The token properties like size, mode and case',
-      type: 'object',
       $ref: tokenRef,
     },
     verify: {
-      title: 'Verification properties',
-      description: 'Configuration properties to verify a token',
-      type: 'object',
       $ref: verifyRef,
     },
     delivery: {
-      title: 'Delivery properties',
-      description: 'Configuration properties to deliver a token to the user',
-      type: 'object',
       $ref: deliveryRef,
     },
     content: {
-      title: 'Message contents',
-      description: 'It has the language and sender information',
-      type: 'string',
       $ref: contentRef,
     },
     website: {
-      title: 'Site and app domains',
-      description: 'Allowed domains',
-      type: 'object',
       $ref: websiteRef,
     },
     createdAt: {
