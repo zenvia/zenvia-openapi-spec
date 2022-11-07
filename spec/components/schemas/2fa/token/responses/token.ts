@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as deliveryRef } from '../../configuration/requests/delivery';
 import { ref as verifyRef } from '../../configuration/requests/verify';
 
-const sendToken: SchemaObject = {  
+const sendToken: SchemaObject = {
   type: 'object',
   properties: {
     id: {

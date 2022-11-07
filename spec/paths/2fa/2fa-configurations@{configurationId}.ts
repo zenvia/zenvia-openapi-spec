@@ -1,14 +1,14 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
-import { ref as configurationIdRef } from '../../components/parameters/configurationId'
+import { ref as configurationIdRef } from '../../components/parameters/configurationId';
 
 const del: OperationObject = {
   description: 'Delete a configuration given the configuration id',
   tags: ['Two Factor Authentication'],
   responses:{
     200: {
-      description: 'Returns success'
+      description: 'Returns success',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,

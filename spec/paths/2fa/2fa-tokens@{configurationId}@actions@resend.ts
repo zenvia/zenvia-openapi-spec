@@ -1,6 +1,6 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as configurationIdRef } from '../../components/parameters/configurationId'
+import { ref as configurationIdRef } from '../../components/parameters/configurationId';
 
 const post: OperationObject = {
   description: 'Resend the code using the configuration id',
