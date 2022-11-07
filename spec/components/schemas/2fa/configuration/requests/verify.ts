@@ -8,7 +8,7 @@ const verify: SchemaObject = {
   properties: {
     maxAttempts: {
       type: 'number',
-      description: 'Number of attempts to try to verify a token',
+      description: 'Possible number of attempts for user to verify a token',
       default: 3,
       minimum: 3,
     },

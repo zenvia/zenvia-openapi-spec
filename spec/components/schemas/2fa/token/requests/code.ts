@@ -4,11 +4,11 @@ import { createComponentRef } from '../../../../../../utils/ref';
 const code: SchemaObject = {
   title: 'code',
   type: 'object',
-  description: 'Code sended by the user',
+  description: 'Code sent by the user',
   properties: {
     code: {
       type: 'string',
-      description: 'Code sended by the user',
+      description: 'Code sent by the user',
       example: '269878',
     },
   },

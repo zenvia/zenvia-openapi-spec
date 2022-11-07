@@ -9,7 +9,7 @@ const delivery: SchemaObject = {
     maxAttempts: {
       title: 'Max Attempts',
       type: 'number',
-      description: 'Max attempts to deliver a token',
+      description: 'Max attempts a user can request to receive a token',
       default: 1,
       minimum: 1,
       maximum: 5,
@@ -17,7 +17,7 @@ const delivery: SchemaObject = {
     minIntervalSeconds: {
       title: 'Min Interval In Seconds',
       type: 'number',
-      description: 'Minimum interval in seconds to deliver a token',
+      description: 'Minimum interval in seconds that a user is required to wait to be able to request a resend of the token',
       default: 60,
       minimum: 60,
       maximum: 120,

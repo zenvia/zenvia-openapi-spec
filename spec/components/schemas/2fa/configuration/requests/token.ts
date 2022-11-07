@@ -9,7 +9,7 @@ const token: SchemaObject = {
     size: {
       title: 'Token size',
       type: 'number',
-      description: 'Size of the token to be sent to the user',
+      description: 'Number of characters of the token to be sent to the user',
       example: 6,
       maximum: 12,
       minimum: 6,
@@ -17,7 +17,7 @@ const token: SchemaObject = {
     mode: {
       title: 'Token mode',
       type: 'string',
-      description: 'Indicates the type of the token to be sent',
+      description: 'The type of the token to be sent',
       enum: ['NUMBER', 'ALPHANUMERIC', 'ALPHANUMERIC_SUBSET'],
       default: 'NUMBER',
       example: 'NUMBER',

@@ -29,7 +29,7 @@ const sendToken: SchemaObject = {
     },
     locale: {
       type: 'string',
-      description: 'Location configured used',
+      description: 'Location configured',
       example: 'pt_BR',
     },
     code: {

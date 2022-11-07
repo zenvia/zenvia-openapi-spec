@@ -18,7 +18,7 @@ const website: SchemaObject = {
     appPackages: {
       title: 'List of apps',
       type: 'array',
-      description: 'List of android apps allowed to use the two factor authentication service',
+      description: 'List of Android apps allowed to use the two factor authentication service',
       items: {
         type: 'string',
       },
