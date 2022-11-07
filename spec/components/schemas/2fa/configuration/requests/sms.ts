@@ -13,7 +13,7 @@ const sms: SchemaObject = {
     type: {
       default: 'email',
       description: 'Channel used to send the token',
-      enum: ['sms', 'email'],
+      enum: ['text', 'email'],
     },
     text: {
       type: 'string',
