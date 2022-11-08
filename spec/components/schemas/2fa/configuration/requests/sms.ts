@@ -12,9 +12,9 @@ const sms: SchemaObject = {
       description: 'Contact of origin',
     },
     type: {
-      default: 'sms',
+      default: 'text',
       description: 'Channel used to send the token',
-      example: 'sms' ,
+      example: 'text' ,
     },
     text: {
       type: 'string',
