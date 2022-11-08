@@ -8,12 +8,13 @@ const sms: SchemaObject = {
   properties: {
     from: {
       type: 'string',
+      example: '559999999999',
       description: 'Contact of origin',
     },
     type: {
-      default: 'email',
+      default: 'sms',
       description: 'Channel used to send the token',
-      enum: ['text', 'email'],
+      example: 'sms' ,
     },
     text: {
       type: 'string',

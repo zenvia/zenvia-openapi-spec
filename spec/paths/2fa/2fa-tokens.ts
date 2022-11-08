@@ -21,7 +21,7 @@ const post: OperationObject = {
       description: 'Returns Information about the configuration status after sending a code to the user',
       headers: {
         Location: {
-          description: 'The URL for created file object.',
+          description: 'The URL for created configuration object.',
           schema: {
             type: 'string',
           },
