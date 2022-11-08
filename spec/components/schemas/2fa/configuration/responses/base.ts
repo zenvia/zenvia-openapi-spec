@@ -8,43 +8,47 @@ import { ref as websiteRef } from '../requests/website';
 
 const tokenConfigResponse: SchemaObject = {
   title: 'Token Configuration Creation',
-  type: 'object',
+  type: 'array',
   description: 'Token configuration created response',
-  properties: {
-    id: {
-      title: 'Token Configuration Id',
-      type: 'string',
-      description: 'The configuration unique id',
-      example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
-    },
-    token: {
-      $ref: tokenRef,
-    },
-    verify: {
-      $ref: verifyRef,
-    },
-    delivery: {
-      $ref: deliveryRef,
-    },
-    content: {
-      $ref: contentRef,
-    },
-    website: {
-      $ref: websiteRef,
-    },
-    createdAt: {
-      title: 'Creation Timestamp',
-      description: 'Timestamp of the configuration token creation',
-      type: 'string',
-      example: '2022-10-27T13:25:11.354Z',
-    },
-    updatedAt: {
-      title: 'Update timestamp',
-      description: 'Timestamp of the token updates',
-      type: 'string',
-      example: '2022-10-27T13:25:11.354Z',
-    },
+  items: {
+    type: 'object',
+    properties: {
+      id: {
+        title: 'Token Configuration Id',
+        type: 'string',
+        description: 'The configuration unique id',
+        example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
+      },
+      token: {
+        $ref: tokenRef,
+      },
+      verify: {
+        $ref: verifyRef,
+      },
+      delivery: {
+        $ref: deliveryRef,
+      },
+      content: {
+        $ref: contentRef,
+      },
+      website: {
+        $ref: websiteRef,
+      },
+      createdAt: {
+        title: 'Creation Timestamp',
+        description: 'Timestamp of the configuration token creation',
+        type: 'string',
+        example: '2022-10-27T13:25:11.354Z',
+      },
+      updatedAt: {
+        title: 'Update timestamp',
+        description: 'Timestamp of the token updates',
+        type: 'string',
+        example: '2022-10-27T13:25:11.354Z',
+      },
+    },    
   },
+
 };
 
 export const ref = createComponentRef(__filename);
