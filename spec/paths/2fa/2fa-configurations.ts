@@ -1,6 +1,7 @@
 import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
 import { ref as tokenConfigResponseRef } from '../../components/schemas/2fa/configuration/responses/base';
+import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/configuration/responses/token-created';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
@@ -30,7 +31,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: tokenConfigResponseRef,
+            $ref: tokenConfigCreatedRef,
           },
         },
       },
