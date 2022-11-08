@@ -46,7 +46,7 @@ const tokenConfigResponse: SchemaObject = {
         type: 'string',
         example: '2022-10-27T13:25:11.354Z',
       },
-    },    
+    },
   },
 
 };
