@@ -17,16 +17,8 @@ const post: OperationObject = {
     },
   },
   responses:{
-    201: {
+    200: {
       description: 'Returns Information about the configuration status after sending a code to the user',
-      headers: {
-        Location: {
-          description: 'The URL for created configuration object.',
-          schema: {
-            type: 'string',
-          },
-        },
-      },
       content: {
         'application/json': {
           schema: {

@@ -22,7 +22,7 @@ const post: OperationObject = {
       description: 'Returns the created configuration',
       headers: {
         Location: {
-          description: 'The URL for created file object.',
+          description: 'Resource created: https://api.zenvia.com/v2/2fa-configurations/{configurationId}',
           schema: {
             type: 'string',
           },
