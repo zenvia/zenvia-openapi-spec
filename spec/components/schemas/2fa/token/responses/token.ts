@@ -59,6 +59,16 @@ const sendToken: SchemaObject = {
       enum: ['PENDING', 'CANCELED', 'VERIFIED'],
       example: 'PENDING',
     },
+    hostname: { 
+      type: "string",
+      description: "Website hostname",
+      example: "app.zenvia.com",
+    },
+    apk_package_name: {
+      type: "string",
+      description: "Apk Pakage name",
+      example: "com.zenvia.android.app",
+    },
     remoteip: {
       type: 'string',
       description: 'Ip of the user making the request to be authenticated',
