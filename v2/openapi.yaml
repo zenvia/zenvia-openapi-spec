@@ -3151,13 +3151,13 @@ components:
           properties:
             type:
               type: string
-              example: notification_optin
+              example: optin_response
             recurringMessagesRecipient:
               type: string
               description: 'The contact id that needs to be used to send the recurring messages for the topic the user has opted-in. You will receive a unique contact id for each topic the user opts-in. Therefore, this needs to be used the recipient (`to` attribute) when sending a recurring message. This contact id has an expiration timestamp.'
             optInExpiration:
               type: string
-              description: 'The timestamp when the opt-in will expire and no longer be usable, unless renewed.<br>Just before this expiration, the user will have the option to renew this topic opt-in. When the user makes a choice, a new [webhook](#section/MESSAGE) with a new [Notification OptIn](#section/Notification_OptIn) will be sent.'
+              description: 'The timestamp when the opt-in will expire and no longer be usable, unless renewed.<br>Just before this expiration, the user will have the option to renew this topic opt-in. When the user makes a choice, a new [webhook](#section/MESSAGE) with a new [OptIn Response](#section/OptIn-Response) will be sent.'
             optInStatus:
               title: OptIn Status
               description: 'Indicates whether this is a new opt-in, an opt-out, or a reopt-in.'
