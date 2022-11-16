@@ -169,6 +169,159 @@ info:
 servers:
   - url: 'https://api.zenvia.com/v2'
 paths:
+  /2fa-configurations:
+    post:
+      description: Create a configuration
+      tags:
+        - Two Factor Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.configuration.requests.all'
+      responses:
+        '201':
+          description: Returns the created configuration
+          headers:
+            Location:
+              description: 'Resource created: https://api.zenvia.com/v2/2fa-configurations/{configurationId}'
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.configuration.responses.token-created'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      description: List all configurations
+      tags:
+        - Two Factor Authentication
+      responses:
+        '200':
+          description: Return all tokens configurations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.configuration.responses.base'
+        default:
+          $ref: '#/components/responses/error'
+  '/2fa-configurations/{configurationId}':
+    get:
+      description: List configuration given the configuration id
+      tags:
+        - Two Factor Authentication
+      responses:
+        '200':
+          description: Return the specific configuration by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.configuration.requests.all'
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      description: Delete a configuration given the configuration id
+      tags:
+        - Two Factor Authentication
+      responses:
+        '200':
+          description: Returns success
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/configurationId'
+  /2fa-tokens:
+    post:
+      description: Send the generated code
+      tags:
+        - Two Factor authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.token.requests.token'
+      responses:
+        '200':
+          description: Returns Information about the configuration status after sending a code to the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.token.responses.token'
+        default:
+          $ref: '#/components/responses/error'
+  /2fa-tokens/actions/resend:
+    post:
+      description: Resend the code to the user
+      tags:
+        - Two Factor Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.token.requests.to-channel'
+      responses:
+        '204':
+          description: Return the code status to indicate success
+        default:
+          $ref: '#/components/responses/error'
+  /2fa-tokens/actions/verify:
+    post:
+      description: Verify a token
+      tags:
+        - Two Factor Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.token.requests.recipient'
+      responses:
+        '200':
+          description: Returns information about the configuration status after verifying a code sent by the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.token.responses.token'
+        default:
+          $ref: '#/components/responses/error'
+  '/2fa-tokens/{configurationId}/actions/resend':
+    post:
+      description: Resend the code using the configuration id
+      tags:
+        - Two Factor Authentication
+      responses:
+        '204':
+          description: Return the code status to indicate success
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/configurationId'
+  '/2fa-tokens/{configurationId}/actions/verify':
+    post:
+      description: Verify a token using the configuration id
+      tags:
+        - Two Factor Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.token.requests.code'
+      responses:
+        '200':
+          description: Returns information about the configuration status after verifying a code sent by the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.token.responses.token'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/configurationId'
   /message-batches:
     post:
       description: Create batch
@@ -2306,6 +2459,418 @@ paths:
       - $ref: '#/components/parameters/templateCommentId'
 components:
   schemas:
+    2fa.configuration.requests.all:
+      title: Token configuration
+      description: Token configuration to generate and deliver tokens
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/2fa.configuration.requests.token'
+        verify:
+          $ref: '#/components/schemas/2fa.configuration.requests.verify'
+        delivery:
+          $ref: '#/components/schemas/2fa.configuration.requests.delivery'
+        content:
+          $ref: '#/components/schemas/2fa.configuration.requests.content'
+        website:
+          $ref: '#/components/schemas/2fa.configuration.requests.website'
+      required:
+        - token
+        - verify
+        - delivery
+        - content
+    2fa.configuration.requests.content:
+      title: SMS and E-mail Content
+      type: object
+      description: Content with SMS and e-mail information
+      properties:
+        pt_br:
+          title: SMS and E-mail configuration
+          type: object
+          $ref: '#/components/schemas/2fa.configuration.requests.locale'
+        en_us:
+          title: SMS and E-mail configuration
+          type: object
+    2fa.configuration.requests.delivery:
+      title: Delivery properties
+      type: object
+      description: Delivery properties
+      properties:
+        maxAttempts:
+          title: Max Attempts
+          type: number
+          description: Max attempts a user can request to receive a token
+          default: 1
+          minimum: 1
+          maximum: 5
+        minIntervalSeconds:
+          title: Min Interval In Seconds
+          type: number
+          description: Minimum interval in seconds that a user is required to wait to be able to request a resend of the token
+          default: 60
+          minimum: 60
+          maximum: 120
+    2fa.configuration.requests.email:
+      title: Email configuration
+      description: Information to send the token using E-mail
+      type: object
+      properties:
+        from:
+          description: Email sender id
+          type: string
+        type:
+          default: email
+          description: Channel used to send the token
+          example: email
+        subject:
+          type: string
+          description: The E-mail subject
+          example: Authentication code
+        html:
+          type: string
+          description: Default text to be sent
+          default: 'Olá {{name}}! Seu código de verificação é {{code}}'
+      required:
+        - from
+        - type
+        - subject
+    2fa.configuration.requests.locale:
+      title: Configurations by locales
+      description: Configuration for different localizations
+      type: object
+      properties:
+        default:
+          title: Default locale
+          type: boolean
+          description: The default localization configuration
+        sms:
+          title: SMS config
+          description: SMS configuration details
+          type: object
+          $ref: '#/components/schemas/2fa.configuration.requests.sms'
+        email:
+          title: E-mail config
+          description: Email configuration details
+          type: object
+          $ref: '#/components/schemas/2fa.configuration.requests.email'
+      required:
+        - sms
+        - email
+    2fa.configuration.requests.sms:
+      title: SMS configuration
+      description: Information to send the token using SMS
+      type: object
+      properties:
+        from:
+          type: string
+          example: '559999999999'
+          description: Contact of origin
+        type:
+          default: text
+          description: Channel used to send the token
+          example: text
+        text:
+          type: string
+          description: Default text to be sent
+          default: 'Olá {{nome}}! Seu código de verificação é {{code}}'
+      required:
+        - from
+    2fa.configuration.requests.token:
+      title: Token properties
+      description: Information about the token properties
+      type: object
+      properties:
+        size:
+          title: Token size
+          type: number
+          description: Number of characters of the token to be sent to the user
+          example: 6
+          maximum: 12
+          minimum: 6
+        mode:
+          title: Token mode
+          type: string
+          description: The type of the token to be sent
+          enum:
+            - NUMBER
+            - ALPHANUMERIC
+            - ALPHANUMERIC_SUBSET
+          default: NUMBER
+          example: NUMBER
+        case:
+          title: String case type
+          description: Type of the token case
+          type: string
+          enum:
+            - UPPER_ONLY
+            - LOWER_ONLY
+            - MIXED
+          default: UPPER_ONLY
+          example: UPPER_ONLY
+      required:
+        - size
+        - mode
+        - case
+    2fa.configuration.requests.verify:
+      title: Verification properties
+      type: object
+      description: Verification properties
+      properties:
+        maxAttempts:
+          type: number
+          description: Possible number of attempts for user to verify a token
+          default: 3
+          minimum: 3
+        expireMinutes:
+          type: number
+          description: Time to expire token in minutes
+          default: 1
+          minimum: 1
+          maximum: 10
+    2fa.configuration.requests.website:
+      title: Website domains
+      description: Information needed to use this two factor authentication API service on a website or on a mobile app
+      type: object
+      properties:
+        domains:
+          title: List of Domains
+          type: array
+          description: List of clients domains allowed to use the two factor authentication service
+          items:
+            type: string
+            example: app.zenvia.com
+        appPackages:
+          title: List of apps
+          type: array
+          description: List of Android apps allowed to use the two factor authentication service
+          items:
+            type: string
+          example:
+            - com.zenvia.android.app
+        websiteKey:
+          type: string
+          description: Key generated by the platform that the client's frontend must use to identify itself
+          readOnly: true
+          example: XXXXXXXXXXXXXX
+    2fa.configuration.responses.base:
+      title: Token Configuration Creation
+      type: array
+      description: Token configuration created response
+      items:
+        type: object
+        properties:
+          id:
+            title: Token Configuration Id
+            type: string
+            description: The configuration unique id
+            example: 11401560-bffb-4ef3-a08e-989a15ed3c32
+          token:
+            $ref: '#/components/schemas/2fa.configuration.requests.token'
+          verify:
+            $ref: '#/components/schemas/2fa.configuration.requests.verify'
+          delivery:
+            $ref: '#/components/schemas/2fa.configuration.requests.delivery'
+          content:
+            $ref: '#/components/schemas/2fa.configuration.requests.content'
+          website:
+            $ref: '#/components/schemas/2fa.configuration.requests.website'
+          createdAt:
+            title: Creation Timestamp
+            description: Timestamp of the configuration token creation
+            type: string
+            example: '2022-10-27T13:25:11.354Z'
+          updatedAt:
+            title: Update timestamp
+            description: Timestamp of the token updates
+            type: string
+            example: '2022-10-27T13:25:11.354Z'
+    2fa.configuration.responses.token-created:
+      title: Token Configuration Creation
+      type: object
+      description: Token configuration created response
+      properties:
+        id:
+          title: Token Configuration Id
+          type: string
+          description: The configuration unique id
+          example: 11401560-bffb-4ef3-a08e-989a15ed3c32
+        token:
+          $ref: '#/components/schemas/2fa.configuration.requests.token'
+        verify:
+          $ref: '#/components/schemas/2fa.configuration.requests.verify'
+        delivery:
+          $ref: '#/components/schemas/2fa.configuration.requests.delivery'
+        content:
+          $ref: '#/components/schemas/2fa.configuration.requests.content'
+        website:
+          $ref: '#/components/schemas/2fa.configuration.requests.website'
+        createdAt:
+          title: Creation Timestamp
+          description: Timestamp of the configuration token creation
+          type: string
+          example: '2022-10-27T13:25:11.354Z'
+        updatedAt:
+          title: Update timestamp
+          description: Timestamp of the token updates
+          type: string
+          example: '2022-10-27T13:25:11.354Z'
+    2fa.token.requests.code:
+      title: code
+      type: object
+      description: Code sent by the user
+      properties:
+        code:
+          type: string
+          description: Code sent by the user
+          example: '269878'
+    2fa.token.requests.recipient:
+      type: object
+      properties:
+        to:
+          type: string
+          description: User recipient
+          example: email@email.com
+        channel:
+          type: string
+          description: Channel used
+          example: email
+        code:
+          type: string
+          description: Code sended by the user
+          example: '269878'
+      required:
+        - to
+        - channel
+        - code
+    2fa.token.requests.to-channel:
+      type: object
+      properties:
+        to:
+          type: string
+          description: User recipient
+          example: email@email.com
+        channel:
+          type: string
+          description: Channel used to send the token
+          example: email
+      required:
+        - to
+        - channel
+    2fa.token.requests.token:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Unique configuration Id
+          example: 0f25c816-478d-4729-a600-b6b0124b4b9e
+        to:
+          description: Contact number or e-mail to send the token
+          type: string
+          example: '5511999999999'
+        channel:
+          description: Channel to be used to send the token
+          type: string
+          enum:
+            - sms
+            - email
+          example: sms
+        locale:
+          description: Language configuration
+          type: string
+          example: pt_br
+        fields:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the user who will receive the code
+              example: Josh Doe
+      required:
+        - configurationId
+        - to
+        - channel
+        - fields
+    2fa.token.responses.token:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Verification UUID
+          example: 7388c68e-675e-435b-b2ec-f72677798678
+        from:
+          type: string
+          description: Contact of origin
+          example: email@email.com
+        to:
+          type: string
+          description: Contact receiver
+          example: received_email@email.com
+        channel:
+          type: string
+          description: Channel used
+          enum:
+            - sms
+            - email
+          example: email
+        locale:
+          type: string
+          description: Location configured
+          example: pt_BR
+        code:
+          type: string
+          description: The code generated
+          example: '100569'
+        configurationId:
+          type: string
+          description: Token Configuration Creation
+          example: 88ff8743-22ba-44db-850b-5f54d6442cdd
+        fields:
+          type: object
+          description: Fields with key words of the text that will be sent to the user
+          properties:
+            name:
+              type: string
+              description: Name of the user who will receive the code
+              example: Josh Doe
+        status:
+          type: string
+          description: Status of the generated token
+          enum:
+            - PENDING
+            - CANCELED
+            - VERIFIED
+          example: PENDING
+        hostname:
+          type: string
+          description: Website hostname
+          example: app.zenvia.com
+        apk_package_name:
+          type: string
+          description: Apk Pakage name
+          example: com.zenvia.android.app
+        remoteip:
+          type: string
+          description: Ip of the user making the request to be authenticated
+          example: '127.0.0.1:80'
+        verify:
+          $ref: '#/components/schemas/2fa.configuration.requests.verify'
+        delivery:
+          $ref: '#/components/schemas/2fa.configuration.requests.delivery'
+        expiresAt:
+          title: Expiration timestamp
+          type: string
+          description: Timestamp of the expiration date
+          example: '2022-10-27T13:26:11.354Z'
+        createdAt:
+          title: Creation timestamp
+          type: string
+          description: Timestamp of token creation.
+          example: '2022-10-27T13:25:11.354Z'
+        updatedAt:
+          title: Update timestamp
+          type: string
+          description: Timestamp of updates
+          example: '2022-10-27T13:25:11.354Z'
     batches.base:
       title: Batch Object
       description: This is a Batch object model
@@ -5672,6 +6237,13 @@ components:
       description: the chatbot identifier
       schema:
         type: string
+    configurationId:
+      name: configurationId
+      in: path
+      required: true
+      description: The configuration identifier
+      schema:
+        type: string
     flowBatchId:
       name: flowBatchId
       in: path
@@ -6399,6 +6971,11 @@ tags:
       * The maximum file size is **50MB**;
       * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
       * The first line of the file is dedicated to the header. There must be a column that contains the recipients' phone numbers. If your content has variables, there must be corresponding columns.
+  - name: Two Factor Authentication
+    description: |
+      The two factor authentication service offers the possibility to identify through the user request and device origin IP that the access is being made from a verified device, bringing more security to transactions.
+
+      It's possible to create a variety of configurations of tokens that can be sent through one of two channels: SMS or E-mail.
   - name: Webhooks
     description: |
       Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
@@ -6619,6 +7196,7 @@ x-tagGroups:
       - Voice
       - E-Mail
       - Message Batches
+      - Two Factor Authentication
   - name: Webhooks
     tags:
       - Webhooks
