@@ -18,6 +18,7 @@ const gbmDescription = rawLoad(__dirname, './gbm.md');
 const instagramDescription = rawLoad(__dirname, './instagram.md');
 const emailDescription = rawLoad(__dirname, './email.md');
 const filesDescription = rawLoad(__dirname, './files.md');
+const twoFactorAuthentication = rawLoad(__dirname, './2fa.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -55,6 +56,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Message Batches',
   description: batchesDescription,
+}, {
+  name: 'Two Factor Authentication',
+  description: twoFactorAuthentication,
 }, {
   name: 'Webhooks',
   description: subscriptionsDescription,
