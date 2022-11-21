@@ -5,7 +5,7 @@ import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/resp
 
 const post: OperationObject = {
   description: 'Send the generated code',
-  tags: ['Two Factor authentication'],
+  tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
     content: {
