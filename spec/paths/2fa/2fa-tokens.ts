@@ -4,7 +4,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/responses/token';
 
 const post: OperationObject = {
-  description: 'Send the generated code',
+  description: 'Send token',
   tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
