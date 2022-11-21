@@ -2594,7 +2594,6 @@ components:
           enum:
             - NUMBER
             - ALPHANUMERIC
-            - ALPHANUMERIC_SUBSET
           default: NUMBER
           example: NUMBER
         case:
