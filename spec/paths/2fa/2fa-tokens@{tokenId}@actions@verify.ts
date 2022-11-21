@@ -5,7 +5,7 @@ import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/resp
 import { ref as tokenIdRef } from '../../components/parameters/tokenId';
 
 const post: OperationObject = {
-  description: 'Verify a token using the configuration id',
+  description: 'Verify a token using the token id',
   tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
