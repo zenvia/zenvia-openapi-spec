@@ -12,10 +12,6 @@ const content: SchemaObject = {
       type: 'object',
       $ref: localeRef,
     },
-    en_us: {
-      title: 'SMS and E-mail configuration',
-      type: 'object',
-    },
   },
 };
 
