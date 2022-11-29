@@ -5,14 +5,9 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const language: SchemaObject = {
   title: 'Configurations by locales',
-  description: 'Configuration for different localizations',
+  description: 'It\'s possible to configure different settings to different locations. It\'s required to configure at least one channel \`(sms or email)\`',
   type: 'object',
   properties: {
-    default: {
-      title: 'Default locale',
-      type: 'boolean',
-      description: 'The default localization configuration',
-    },
     sms: {
       title: 'SMS config',
       description: 'SMS configuration details',
@@ -26,7 +21,6 @@ const language: SchemaObject = {
       $ref: emailRef,
     },
   },
-  required: ['sms', 'email'],
 };
 
 export const ref = createComponentRef(__filename);
