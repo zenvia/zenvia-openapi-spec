@@ -21,7 +21,7 @@ const token: SchemaObject = {
       example: 'sms',
     },
     locale: {
-      description: 'Language configuration',
+      description: 'Choose one configured locale, if left blank the default locale will be used',
       type: 'string',
       example: 'pt_br',
     },

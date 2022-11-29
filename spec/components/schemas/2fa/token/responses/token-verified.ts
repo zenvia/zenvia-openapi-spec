@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as deliveryRef } from '../../configuration/requests/delivery';
 import { ref as verifyRef } from '../../configuration/requests/verify';
 
-const sendToken: SchemaObject = {
+const tokenVerified: SchemaObject = {
   type: 'object',
   properties: {
     id: {
@@ -29,12 +29,12 @@ const sendToken: SchemaObject = {
     },
     locale: {
       type: 'string',
-      description: 'Configured locale',
+      description: 'Location configured',
       example: 'pt_br',
     },
     code: {
       type: 'string',
-      description: 'The generated token',
+      description: 'The code generated',
       example: '100569',
     },
     configurationId: {
@@ -57,7 +57,7 @@ const sendToken: SchemaObject = {
       type: 'string',
       description: 'Status of the generated token',
       enum: ['PENDING', 'CANCELED', 'VERIFIED'],
-      example: 'PENDING',
+      example: 'VERIFIED',
     },
     // hostname: {
     //   type: 'string',
@@ -102,4 +102,4 @@ const sendToken: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default sendToken;
+export default tokenVerified;
