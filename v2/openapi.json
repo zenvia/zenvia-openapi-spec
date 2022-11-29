@@ -129,9 +129,9 @@
     },
     "/2fa-tokens": {
       "post": {
-        "description": "Send the generated code",
+        "description": "Send token",
         "tags": [
-          "Two Factor authentication"
+          "Two Factor Authentication"
         ],
         "requestBody": {
           "required": true,
@@ -208,7 +208,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/2fa.token.responses.token"
+                  "$ref": "#/components/schemas/2fa.token.responses.token-verified"
                 }
               }
             }
@@ -219,9 +219,9 @@
         }
       }
     },
-    "/2fa-tokens/{configurationId}/actions/resend": {
+    "/2fa-tokens/{tokenId}/actions/resend": {
       "post": {
-        "description": "Resend the code using the configuration id",
+        "description": "Resend the code using the token id",
         "tags": [
           "Two Factor Authentication"
         ],
@@ -236,13 +236,13 @@
       },
       "parameters": [
         {
-          "$ref": "#/components/parameters/configurationId"
+          "$ref": "#/components/parameters/tokenId"
         }
       ]
     },
-    "/2fa-tokens/{configurationId}/actions/verify": {
+    "/2fa-tokens/{tokenId}/actions/verify": {
       "post": {
-        "description": "Verify a token using the configuration id",
+        "description": "Verify a token using the token id",
         "tags": [
           "Two Factor Authentication"
         ],
@@ -262,7 +262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/2fa.token.responses.token"
+                  "$ref": "#/components/schemas/2fa.token.responses.token-verified"
                 }
               }
             }
@@ -274,7 +274,7 @@
       },
       "parameters": [
         {
-          "$ref": "#/components/parameters/configurationId"
+          "$ref": "#/components/parameters/tokenId"
         }
       ]
     },
@@ -2962,9 +2962,6 @@
           },
           "content": {
             "$ref": "#/components/schemas/2fa.configuration.requests.content"
-          },
-          "website": {
-            "$ref": "#/components/schemas/2fa.configuration.requests.website"
           }
         },
         "required": [
@@ -2977,18 +2974,72 @@
       "2fa.configuration.requests.content": {
         "title": "SMS and E-mail Content",
         "type": "object",
-        "description": "Content with SMS and e-mail information",
+        "description": "Content with SMS and e-mail information and default locale, it's necessary to create configuration to at least one locale",
         "properties": {
+          "default": {
+            "title": "Locale",
+            "type": "string",
+            "example": "pt_br",
+            "description": "The default locale of the configuration",
+            "enum": [
+              "be",
+              "be_by",
+              "bn",
+              "bg",
+              "bg_bg",
+              "ca",
+              "ca_es",
+              "cs",
+              "cs_cz",
+              "da",
+              "da_dk",
+              "de",
+              "de_ch",
+              "de_de",
+              "el",
+              "el_gr",
+              "en",
+              "en_au",
+              "en_be",
+              "en_gb",
+              "en_jp",
+              "en_us",
+              "en_za",
+              "es",
+              "es_ar",
+              "es_es",
+              "es_mx",
+              "fr",
+              "fr_ca",
+              "fr_fr",
+              "hi",
+              "it",
+              "it_it",
+              "nl",
+              "nl_be",
+              "nl_nl",
+              "pl",
+              "pl_pl",
+              "pt",
+              "pt_br",
+              "pt_pt",
+              "sh",
+              "sh_sp",
+              "sk",
+              "sk_sk",
+              "sv",
+              "sv_se"
+            ]
+          },
           "pt_br": {
             "title": "SMS and E-mail configuration",
             "type": "object",
             "$ref": "#/components/schemas/2fa.configuration.requests.locale"
-          },
-          "en_us": {
-            "title": "SMS and E-mail configuration",
-            "type": "object"
           }
-        }
+        },
+        "required": [
+          "default"
+        ]
       },
       "2fa.configuration.requests.delivery": {
         "title": "Delivery properties",
@@ -3024,7 +3075,7 @@
           },
           "type": {
             "default": "email",
-            "description": "Channel used to send the token",
+            "description": "Type of message to be sent",
             "example": "email"
           },
           "subject": {
@@ -3035,25 +3086,19 @@
           "html": {
             "type": "string",
             "description": "Default text to be sent",
-            "default": "Olá {{name}}! Seu código de verificação é {{code}}"
+            "default": "Hello {{name}}! Your code is {{code}}"
           }
         },
         "required": [
           "from",
-          "type",
           "subject"
         ]
       },
       "2fa.configuration.requests.locale": {
         "title": "Configurations by locales",
-        "description": "Configuration for different localizations",
+        "description": "It's possible to configure different settings to different locations. It's required to configure at least one channel `(sms or email)`",
         "type": "object",
         "properties": {
-          "default": {
-            "title": "Default locale",
-            "type": "boolean",
-            "description": "The default localization configuration"
-          },
           "sms": {
             "title": "SMS config",
             "description": "SMS configuration details",
@@ -3066,11 +3111,7 @@
             "type": "object",
             "$ref": "#/components/schemas/2fa.configuration.requests.email"
           }
-        },
-        "required": [
-          "sms",
-          "email"
-        ]
+        }
       },
       "2fa.configuration.requests.sms": {
         "title": "SMS configuration",
@@ -3080,17 +3121,18 @@
           "from": {
             "type": "string",
             "example": "559999999999",
-            "description": "Contact of origin"
+            "description": "SMS sender id"
           },
           "type": {
             "default": "text",
-            "description": "Channel used to send the token",
+            "type": "string",
+            "description": "Type of message to be sent",
             "example": "text"
           },
           "text": {
             "type": "string",
             "description": "Default text to be sent",
-            "default": "Olá {{nome}}! Seu código de verificação é {{code}}"
+            "default": "Hello {{name}}! Your code is {{code}}"
           }
         },
         "required": [
@@ -3184,6 +3226,12 @@
             "example": [
               "com.zenvia.android.app"
             ]
+          },
+          "websiteKey": {
+            "type": "string",
+            "description": "Key generated by the platform that the client's frontend must use to identify itself",
+            "readOnly": true,
+            "example": "XXXXXXXXXXXXXX"
           }
         }
       },
@@ -3211,9 +3259,6 @@
             },
             "content": {
               "$ref": "#/components/schemas/2fa.configuration.requests.content"
-            },
-            "website": {
-              "$ref": "#/components/schemas/2fa.configuration.requests.website"
             },
             "createdAt": {
               "title": "Creation Timestamp",
@@ -3252,9 +3297,6 @@
           },
           "content": {
             "$ref": "#/components/schemas/2fa.configuration.requests.content"
-          },
-          "website": {
-            "$ref": "#/components/schemas/2fa.configuration.requests.website"
           },
           "createdAt": {
             "title": "Creation Timestamp",
@@ -3349,7 +3391,7 @@
             "example": "sms"
           },
           "locale": {
-            "description": "Language configuration",
+            "description": "Choose one configured locale, if left blank the default locale will be used",
             "type": "string",
             "example": "pt_br"
           },
@@ -3371,12 +3413,12 @@
           "fields"
         ]
       },
-      "2fa.token.responses.token": {
+      "2fa.token.responses.token-verified": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "Verification UUID",
+            "description": "Token Id",
             "example": "7388c68e-675e-435b-b2ec-f72677798678"
           },
           "from": {
@@ -3386,7 +3428,7 @@
           },
           "to": {
             "type": "string",
-            "description": "Contact receiver",
+            "description": "Recipient contact",
             "example": "received_email@email.com"
           },
           "channel": {
@@ -3401,7 +3443,7 @@
           "locale": {
             "type": "string",
             "description": "Location configured",
-            "example": "pt_BR"
+            "example": "pt_br"
           },
           "code": {
             "type": "string",
@@ -3410,7 +3452,101 @@
           },
           "configurationId": {
             "type": "string",
-            "description": "Token Configuration Creation",
+            "description": "Token Configuration Id",
+            "example": "88ff8743-22ba-44db-850b-5f54d6442cdd"
+          },
+          "fields": {
+            "type": "object",
+            "description": "Fields with key words of the text that will be sent to the user",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the user who will receive the code",
+                "example": "Josh Doe"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the generated token",
+            "enum": [
+              "PENDING",
+              "CANCELED",
+              "VERIFIED"
+            ],
+            "example": "VERIFIED"
+          },
+          "remoteip": {
+            "type": "string",
+            "description": "Ip of the user making the request to be authenticated",
+            "example": "127.0.0.1:80"
+          },
+          "verify": {
+            "$ref": "#/components/schemas/2fa.configuration.requests.verify"
+          },
+          "delivery": {
+            "$ref": "#/components/schemas/2fa.configuration.requests.delivery"
+          },
+          "expiresAt": {
+            "title": "Expiration timestamp",
+            "type": "string",
+            "description": "Timestamp of the expiration date",
+            "example": "2022-10-27T13:26:11.354Z"
+          },
+          "createdAt": {
+            "title": "Creation timestamp",
+            "type": "string",
+            "description": "Timestamp of token creation.",
+            "example": "2022-10-27T13:25:11.354Z"
+          },
+          "updatedAt": {
+            "title": "Update timestamp",
+            "type": "string",
+            "description": "Timestamp of updates",
+            "example": "2022-10-27T13:25:11.354Z"
+          }
+        }
+      },
+      "2fa.token.responses.token": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Token Id",
+            "example": "7388c68e-675e-435b-b2ec-f72677798678"
+          },
+          "from": {
+            "type": "string",
+            "description": "Contact of origin",
+            "example": "email@email.com"
+          },
+          "to": {
+            "type": "string",
+            "description": "Recipient contact",
+            "example": "received_email@email.com"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel used",
+            "enum": [
+              "sms",
+              "email"
+            ],
+            "example": "email"
+          },
+          "locale": {
+            "type": "string",
+            "description": "Configured locale",
+            "example": "pt_br"
+          },
+          "code": {
+            "type": "string",
+            "description": "The generated token",
+            "example": "100569"
+          },
+          "configurationId": {
+            "type": "string",
+            "description": "Token Configuration Id",
             "example": "88ff8743-22ba-44db-850b-5f54d6442cdd"
           },
           "fields": {
@@ -3433,16 +3569,6 @@
               "VERIFIED"
             ],
             "example": "PENDING"
-          },
-          "hostname": {
-            "type": "string",
-            "description": "Website hostname",
-            "example": "app.zenvia.com"
-          },
-          "apk_package_name": {
-            "type": "string",
-            "description": "Apk Pakage name",
-            "example": "com.zenvia.android.app"
           },
           "remoteip": {
             "type": "string",
@@ -8266,6 +8392,15 @@
         "in": "path",
         "required": true,
         "description": "The <a href=\"https://app.zenvia.com/home/templates\">template identifier</a>",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "tokenId": {
+        "name": "tokenId",
+        "in": "path",
+        "required": true,
+        "description": "The token identifier",
         "schema": {
           "type": "string"
         }
