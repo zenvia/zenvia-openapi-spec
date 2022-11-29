@@ -9,17 +9,18 @@ const sms: SchemaObject = {
     from: {
       type: 'string',
       example: '559999999999',
-      description: 'Contact of origin',
+      description: 'SMS sender id',
     },
     type: {
       default: 'text',
-      description: 'Channel used to send the token',
+      type: 'string',
+      description: 'Type of message to be sent',
       example: 'text' ,
     },
     text: {
       type: 'string',
       description: 'Default text to be sent',
-      default: 'Olá {{nome}}! Seu código de verificação é {{code}}',
+      default: 'Hello {{name}}! Your code is {{code}}',
     },
   },
   required: ['from'],

@@ -12,7 +12,7 @@ const email: SchemaObject = {
     },
     type: {
       default: 'email',
-      description: 'Channel used to send the token',
+      description: 'Type of message to be sent',
       example: 'email',
     },
     subject: {
@@ -23,12 +23,11 @@ const email: SchemaObject = {
     html: {
       type: 'string',
       description: 'Default text to be sent',
-      default: 'Olá {{name}}! Seu código de verificação é {{code}}',
+      default: 'Hello {{name}}! Your code is {{code}}',
     },
   },
   required: [
     'from',
-    'type',
     'subject',
   ],
 };
