@@ -7,7 +7,7 @@ const del: OperationObject = {
   description: 'Delete a configuration given the configuration id',
   tags: ['Two Factor Authentication'],
   responses:{
-    200: {
+    204: {
       description: 'Returns success',
     } as ResponseObject,
     default: {

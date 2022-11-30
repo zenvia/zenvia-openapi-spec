@@ -103,4 +103,11 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('batches');
   });
 
+  describe('2fa configurations', () => {
+    loadTestCases('2fa/configurations');
+  })
+  describe('2fa tokens', () => {
+    loadTestCases('2fa/tokens');
+  })
+
 });

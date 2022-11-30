@@ -1,0 +1,58 @@
+{
+  "name": "send token to user",
+  "request": {
+    "method": "POST",
+    "path": "/2fa-tokens",
+    "query": {},
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "configurationId": "CONFIGURATION_ID",
+      "to": "email@gmail.com",
+      "channel": "email",
+      "locale": "pt_br",
+      "fields": {
+        "name": "John Doe"
+      }
+    }
+  },
+  "response": {
+    "status": 200
+  },
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "name": "TOKEN NAME",
+    "standardAnswer": "STANDARD_ANSWER",
+    "columnMapper": {
+      "recipient_header_name": "recipient_number_column"
+    },
+    "message": {
+      "id": "TOKEN_ID",
+      "from": "SENDER_ID",
+      "to": "553599999999",
+      "channel": "sms",
+      "locale": "pt_br",
+      "code": "000000",
+      "configurationId": "CONFIGURATION_ID",
+      "fields": {
+        "name": "John Doe"
+      },
+      "status": "PENDING",
+      "remoteip": "172.17.29.9",
+      "verify": {
+        "quantityAttempts": 0,
+        "maxAttempts": 3
+      },
+      "delivery": {
+        "quantityAttempts": 0,
+        "maxAttempts": 5
+      },
+      "expiresAt": "2022-11-30T13:29:39.000Z",
+      "createdAt": "2022-11-30T13:19:39.991Z",
+      "updatedAt": "2022-11-30T13:19:39.991Z"
+    }
+  }
+}

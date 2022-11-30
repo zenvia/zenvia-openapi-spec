@@ -1,0 +1,89 @@
+{
+  "name": "create token configuration",
+  "request": {
+    "method": "POST",
+    "path": "/2fa-configurations",
+    "query": {},
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "token": {
+        "size": 6,
+        "mode": "NUMBER",
+        "case": "UPPER_ONLY"
+      },
+      "verify": {
+        "maxAttempts": 3,
+        "expireMinutes": 10
+      },
+      "delivery": {
+        "maxAttempts": 5,
+        "minIntervalSeconds": 60
+      },
+      "content": {
+        "default": "pt_br",
+        "pt_br": {
+          "sms": {
+            "from": "zenvia_sp_for_devs",
+            "type": "text",
+            "text": "Olá {{name}}! Seu código de verificação é {{code}}"
+          },
+          "email": {
+            "from": "teste.zenvia@zenvia.chat",
+            "type": "email",
+            "subject": "email subject",
+            "html": "Olá {{name}}! Seu código de verificação é {{code}}"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 201
+  },
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "name": "TOKEN NAME",
+    "standardAnswer": "STANDARD_ANSWER",
+    "columnMapper": {
+      "recipient_header_name": "recipient_number_column"
+    },
+    "message": {
+      "id": "CONFIGURATION ID",
+      "token": {
+        "size": 6,
+        "mode": "NUMBER",
+        "case": "UPPER_ONLY"
+      },
+      "verify": {
+        "maxAttempts": 3,
+        "expireMinutes": 10
+      },
+      "delivery": {
+        "maxAttempts": 5,
+        "minIntervalSeconds": 60
+      },
+      "content": {
+        "pt_br": {
+          "default": true,
+          "sms": {
+            "from": "zenvia_sp_for_devs",
+            "type": "text",
+            "text": "Olá {{name}}! Seu código de verificação é {{code}}"
+          },
+          "email": {
+            "from": "teste.zenvia@zenvia.chat",
+            "type": "email",
+            "subject": "email subject",
+            "html": "Olá {{name}}! Seu código de verificação é {{code}}"
+          }
+        }
+      },
+      "createdAt": "2022-11-08T14:41:28.508Z",
+      "updatedAt": "2022-11-08T14:41:28.508Z"
+    }    
+  }
+}

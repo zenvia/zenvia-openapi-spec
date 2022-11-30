@@ -1,0 +1,48 @@
+{
+  "name": "Verify token",
+  "request": {
+    "method": "POST",
+    "path": "/2fa-tokens/actions/verify",
+    "query": {},
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "to": "email@email.com",
+      "channel": "email",
+      "code": "671586"
+    }
+  },
+  "response": {
+    "status": 200
+  },
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "status": "VERIFIED",
+    "configurationId": "CONFIGURATION_ID",
+    "to": "5535999999999",
+    "channel": "email",
+    "fields": {
+      "name": "John Doe"
+    },
+    "remoteip": "127.0.0.1",
+    "organizationId": "ORGANIZATION_ID",
+    "code": "146190",
+    "expiresAt": "2022-11-30T13:53:48.000Z",
+    "from": "SENDER_ID",
+    "locale": "pt_br",
+    "verify": {
+      "quantityAttempts": 1,
+      "maxAttempts": 3
+    },
+    "delivery": {
+      "quantityAttempts": 0,
+      "maxAttempts": 5
+    },
+    "id": "ID",
+    "createdAt": "2022-11-30T13:43:48.466Z",
+    "updatedAt": "2022-11-30T13:43:48.466Z"
+  }
+}

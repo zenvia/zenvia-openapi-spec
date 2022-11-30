@@ -1,0 +1,17 @@
+{
+    "name": "resend the token to the user",
+    "request": {
+      "method": "POST",
+      "path": "/2fa-tokens/ID/actions/resend",
+      "query": {},
+      "headers": {
+        "content-type": "application/json"
+      }
+    },
+    "response": {
+      "status": 204
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  }

@@ -1,0 +1,17 @@
+{
+  "name": "delete configuration using a configuration id",
+  "request": {
+    "method": "DELETE",
+    "path": "/2fa-configurations/ID",
+    "query": {},
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  "response": {
+    "status": 204
+  },
+  "headers": {
+    "content-type": "application/json"
+  }
+}
