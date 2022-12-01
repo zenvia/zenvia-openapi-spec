@@ -29,8 +29,6 @@ const tokenConfig: SchemaObject = {
   },
   required: [
     'token',
-    'verify',
-    'delivery',
     'content',
   ],
 };
