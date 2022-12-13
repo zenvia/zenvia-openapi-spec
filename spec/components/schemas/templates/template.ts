@@ -91,6 +91,8 @@ const template: SchemaObject = {
         'REJECTED',
         'WAITING_APPROVAL',
         'APPROVED',
+        'PAUSED',
+        'DISABLED',
       ],
     },
     createdAt: {

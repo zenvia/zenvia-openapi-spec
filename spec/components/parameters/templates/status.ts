@@ -13,6 +13,8 @@ const status: ParameterObject = {
       'REJECTED',
       'WAITING_APPROVAL',
       'APPROVED',
+      'PAUSED',
+      'DISABLED',
     ],
   },
   example: 'APPROVED',
