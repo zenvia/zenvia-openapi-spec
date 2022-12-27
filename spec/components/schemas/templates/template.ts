@@ -38,7 +38,7 @@ const template: SchemaObject = {
       title: 'Channel',
       description: 'Channel for template use. Currently, only Whatsapp, SMS and RCS channels is allowed.',
       type: 'string',
-      enum: ['WHATSAPP', 'SMS', 'RCS'],
+      enum: ['WHATSAPP', 'SMS', 'RCS', 'EMAIL'],
     },
     senderId: {
       title: 'Sender ID',
