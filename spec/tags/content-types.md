@@ -100,21 +100,26 @@ This the SMS version of the [text](#section/Text) content. It has additional par
 <SchemaDefinition schemaRef="#/components/schemas/content.sms.text" showReadOnly={false} showWriteOnly={true} />
 
 ## Product
-Single product message. This is the [WhatsApp](#tag/WhatsApp) channel content.
+Single product message. This is a [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product" showReadOnly={false} showWriteOnly={true} />
 
 ## Product List
-Product list message. This is the [WhatsApp](#tag/WhatsApp) channel content.
+Product list message. This is a [WhatsApp](#tag/WhatsApp) channel content.
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list" showReadOnly={false} showWriteOnly={true} />
+
+## OptIn Request
+This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin request content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.optin_request" showReadOnly={false} showWriteOnly={true} />
 
 ## Product List Order
 This is [Whatsapp](#tag/Whatsapp) Product List Order content. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
-<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list-order" showReadOnly={false} showWriteOnly={true} />
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.product-list-order" showReadOnly={true} showWriteOnly={true} />
 
 ## OptIn Response
-This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) Recurring Message content. This is supported only in the [webhook content](#section/Webhook-supported-channels).
+This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin response content. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
-<SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={false} showWriteOnly={true} />
+<SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={true} showWriteOnly={true} />
