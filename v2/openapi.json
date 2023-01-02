@@ -5619,6 +5619,13 @@
                 "default": "AUTO",
                 "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>*Only applicable to [SMS](#tag/SMS) channel.*",
                 "example": "AUTO"
+              },
+              "reportId": {
+                "type": "number",
+                "description": "An ID used for report purposes only (also known as aggregate id). It must be setup before use.\n          <br>*Only applicable to [SMS](#tag/SMS) channel.*",
+                "example": 12345,
+                "minimum": -2147483648,
+                "maximum": 2147483647
               }
             }
           }
@@ -7916,7 +7923,9 @@
               "WAITING_REVIEW",
               "REJECTED",
               "WAITING_APPROVAL",
-              "APPROVED"
+              "APPROVED",
+              "PAUSED",
+              "DISABLED"
             ]
           },
           "createdAt": {
@@ -8611,7 +8620,9 @@
             "WAITING_REVIEW",
             "REJECTED",
             "WAITING_APPROVAL",
-            "APPROVED"
+            "APPROVED",
+            "PAUSED",
+            "DISABLED"
           ]
         },
         "example": "APPROVED"
