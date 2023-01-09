@@ -39,3 +39,13 @@ You can learn more about it on the [subscriptions section](#section/MESSAGE).
 ### MIXED
 
 Allows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.
+
+## E-Mail templates
+
+E-mail templates allows sending content up to 30MB to multiple contacts using a small payload.
+
+Email templates have the following components:
+* Header
+* Body
+* Attachments
+* Email
