@@ -2,9 +2,10 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as fileRef } from './bases/file';
 import { ref as contactRef } from './email/recipient';
+import { ref as replyToRef } from './email/reply-to';
 import { createComponentRef } from '../../../../utils/ref';
 
-const file: SchemaObject = {
+const email: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
@@ -62,13 +63,8 @@ const file: SchemaObject = {
       },
       replyTo: {
         allOf: [{
-          type: 'object',
-          title: 'Reply To',
-          description: 'E-mail that will be set as recipient when a e-mail response is initiated.',
-        }, {
-          $ref: contactRef,
+          $ref: replyToRef,
         }],
-        example: { email: 'reply-to@zenvia.com', name: 'Service Care' },
       },
     },
     required: [
@@ -80,4 +76,4 @@ const file: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default file;
+export default email;
