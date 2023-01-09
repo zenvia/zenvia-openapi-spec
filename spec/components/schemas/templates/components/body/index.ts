@@ -15,8 +15,9 @@ const body: SchemaObject = {
       enum: ['TEXT_FIXED', 'TEXT_TEMPLATE'],
     },
     text: {
-      title: 'Body text',
       type: 'string',
+      title: 'Body text',
+      description: 'Body content. In the [E-Mail](#tag/E-Mail) channel this is handled as a *HTML*, while for most channels this is handled as *markdown*.',
     },
   },
 };

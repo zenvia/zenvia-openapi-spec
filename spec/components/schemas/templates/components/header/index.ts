@@ -18,7 +18,7 @@ export const header: SchemaObject = {
     text: {
       type: 'string',
       title: 'Header text',
-      description: 'Content header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.<br>In other channels it will be a bold text above the body.',
+      description: 'Body header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.<br>In other channels it will be a title above the body.',
     },
   },
 };
