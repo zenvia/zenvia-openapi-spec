@@ -4,9 +4,8 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const footer: SchemaObject = {
   title: 'Footer',
-  description: `Template footer
-
-*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
+  description: `Template footer.
+                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
   type: 'object',
   required: ['type', 'text'],
   properties: {

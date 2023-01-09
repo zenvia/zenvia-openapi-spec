@@ -6,9 +6,8 @@ import { ref as mixedRef } from './mixed';
 
 export const buttons: SchemaObject = {
   title: 'Buttons',
-  description: `Template buttons
-
-*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
+  description: `Template buttons.
+                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*`,
   type: 'object',
   oneOf: [{
     $ref: actionsRef,
