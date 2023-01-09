@@ -28,12 +28,12 @@ const header: SchemaObject = {
     buttons: {
       $ref: buttonsRef,
     },
+    attachments: {
+      $ref: attachmentsRef,
+    },
     email: {
       $ref: emailRef,
     },
-    attachments: {
-      $ref: attachmentsRef,
-    }
   },
 };
 
