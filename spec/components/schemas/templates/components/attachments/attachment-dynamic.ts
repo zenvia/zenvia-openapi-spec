@@ -1,20 +1,25 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
+import { ref as baseRef } from './attachment-base';
 
-const disposition: SchemaObject = {
+const attachmentDynamic: SchemaObject = {
   type: 'object',
-  properties: {
-    type: {
-      title: 'Type',
-      description: 'Type desc',
-      type: 'string',
+  allOf: [{
+    $ref: baseRef,
+  }, {
+    type: 'object',
+    properties: {
+      fieldName: {
+        type: 'string',
+        description: 'The name of the field from where the URL of the file to be sent will be obtained.',
+        example: 'catalogURL',
+      },
     },
-    fieldName: {
-      title: 'Content ID',
-      type: 'string',
-    },
-  },
+    required: [
+      'fieldName',
+    ],
+  }],
 };
 
 export const ref = createComponentRef(__filename);
-export default disposition;
+export default attachmentDynamic;

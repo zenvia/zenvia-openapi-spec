@@ -1,13 +1,17 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
+import { ref as replyToRef } from '../../../content/email/reply-to';
 
 const email: SchemaObject = {
   type: 'object',
+  title: 'Email',
+  description: `E-mail specific fields.
+                <br>*Only applicable to [E-Mail](#tag/E-Mail) channel.*`,
   properties: {
     replyTo: {
-      title: 'Email type',
-      description: 'Address the reply will be sent. Variable text can have variables using format _{{var_name}}_',
-      type: 'string',
+      allOf: [{
+        $ref: replyToRef,
+      }],
     },
   },
 };

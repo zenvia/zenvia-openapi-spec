@@ -1,20 +1,16 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
+import { ref as baseRef } from './attachment-base';
+import { ref as fileRef } from '../../../content/bases/file';
 
-const disposition: SchemaObject = {
+const attachmentFixed: SchemaObject = {
   type: 'object',
-  properties: {
-    type: {
-      title: 'Type',
-      description: 'Type desc',
-      type: 'string',
-    },
-    fileUrl: {
-      title: 'Content ID',
-      type: 'string',
-    },
-  },
+  allOf: [{
+    $ref: baseRef,
+  }, {
+    $ref: fileRef,
+  }],
 };
 
 export const ref = createComponentRef(__filename);
-export default disposition;
+export default attachmentFixed;
