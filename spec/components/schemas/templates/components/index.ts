@@ -7,6 +7,7 @@ import { ref as footerRef } from './footer';
 import { ref as buttonsRef } from './buttons';
 import { ref as emailRef } from './email';
 import { ref as attachmentsRef } from './attachments';
+import { ref as metadataRef } from './metadata';
 
 const header: SchemaObject = {
   title: 'Components',
@@ -33,6 +34,9 @@ const header: SchemaObject = {
     },
     email: {
       $ref: emailRef,
+    },
+    metadata: {
+      $ref: metadataRef,
     },
   },
 };

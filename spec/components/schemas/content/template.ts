@@ -20,10 +20,15 @@ const template: SchemaObject = {
       },
       fields: {
         type: 'object',
-        description: 'The available fields to be used in this template',
+        description: 'The available fields to be used in this template.',
         example: {
           user: 'John Smith',
           protocol: '34534252',
+        },
+        additionalProperties: {
+          title: 'Field Name',
+          description: 'Value provided to fill the variable named after the property name.',
+          type: 'string',
         },
       },
     },
