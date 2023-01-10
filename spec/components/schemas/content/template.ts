@@ -26,9 +26,8 @@ const template: SchemaObject = {
           protocol: '34534252',
         },
         additionalProperties: {
-          title: 'Field Name',
+          title: 'Field Value',
           description: 'Value provided to fill the variable named after the property name.',
-          type: 'string',
         },
       },
     },
