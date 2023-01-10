@@ -7,6 +7,7 @@ import { ref as commentSchemaRef } from './template-comment';
 import { ref as componentsSchemaRef } from './components';
 import { ref as examplesSchemaRef } from './template-example';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
+import { ref as metadataRef } from './template-metadata';
 
 const template: SchemaObject = {
   title: 'Template Object',
@@ -50,6 +51,9 @@ const template: SchemaObject = {
     },
     components: {
       $ref: componentsSchemaRef,
+    },
+    metadata: {
+      $ref: metadataRef,
     },
     examples: {
       $ref:examplesSchemaRef,
