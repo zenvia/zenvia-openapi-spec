@@ -3,17 +3,17 @@ const { post } = require('request-promise');
 post({
   uri: 'https://api.zenvia.com/v2/channels/whatsapp/messages',
   headers: {
-    'X-API-TOKEN': 'YOUR_API_TOKEN'
+    'X-API-TOKEN': 'YOUR_API_TOKEN',
   },
   body: {
     from: 'sender-identifier',
     to: 'recipient-identifier',
     contents: [{
       type: 'text',
-      text: 'Some text message'
-    }]
+      text: 'Some text message',
+    }],
   },
-  json: true
+  json: true,
 })
 .then((response) => {
   console.log('Response:', response);
