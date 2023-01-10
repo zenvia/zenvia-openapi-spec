@@ -6,9 +6,8 @@ const metadata: SchemaObject = {
   title: 'Metadata',
   description: 'Additional values related to the template but not used for messaging.',
   additionalProperties: {
-    title: 'Metadata Name',
+    title: 'Metadata',
     description: 'These values are *not* evaluated as variables in the template.',
-    type: 'string',
   },
 };
 
