@@ -1,4 +1,4 @@
-export function email(): any {
+export function email() {
   return {
     from: 'sac@brand.domain',
     to: 'user@zenvia.com',
