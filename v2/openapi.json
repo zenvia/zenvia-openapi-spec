@@ -398,7 +398,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -416,7 +416,7 @@
                         "title": "Card from Zenvia",
                         "text": "This is our products",
                         "media": {
-                          "url": "https://zenvia.br/zenvia-office.png",
+                          "url": "https://zenvia.com/zenvia-office.png",
                           "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                           "caption": "Our amazing office!"
                         },
@@ -451,7 +451,7 @@
                             "title": "Card from Zenvia",
                             "text": "This is our products",
                             "media": {
-                              "url": "https://zenvia.br/zenvia-office.png",
+                              "url": "https://zenvia.com/zenvia-office.png",
                               "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                               "caption": "Our amazing office!"
                             },
@@ -501,7 +501,7 @@
                     "contents": [
                       {
                         "type": "optin_request",
-                        "mediaUrl": "https://zenvia.br/zenvia-office.png",
+                        "mediaUrl": "https://zenvia.com/zenvia-office.png",
                         "title": "Weekly Amazing Deals",
                         "frequency": "WEEKLY",
                         "reOptIn": "ENABLED",
@@ -539,7 +539,7 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/facebook/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/facebook/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
@@ -592,7 +592,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -615,7 +615,7 @@
                         "title": "Card from Zenvia",
                         "text": "This is our products",
                         "media": {
-                          "url": "https://zenvia.br/zenvia-office.png",
+                          "url": "https://zenvia.com/zenvia-office.png",
                           "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                           "caption": "Our amazing office!"
                         },
@@ -655,7 +655,7 @@
                             "title": "Card from Zenvia",
                             "text": "This is our products",
                             "media": {
-                              "url": "https://zenvia.br/zenvia-office.png",
+                              "url": "https://zenvia.com/zenvia-office.png",
                               "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                               "caption": "Our amazing office!"
                             },
@@ -736,12 +736,12 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/gbm/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/gbm/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
             "label": "Node.js SDK",
-            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/gbm-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst gbm = client.getChannel('gbm');\n\nconst content = new TextContent('Some text message');\n\nfacebook.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "/**\n * Example: https://github.com/zenvia/zenvia-sdk-node/blob/master/examples/gbm-send-text-message.js\n */\n\nimport { Client, TextContent } from '@zenvia/sdk';\n\nconst client = new Client('YOUR_API_TOKEN');\n\nconst gbm = client.getChannel('gbm');\n\nconst content = new TextContent('Some text message');\n\ngbm.sendMessage('sender-identifier', 'recipient-identifier', content)\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "Java",
@@ -784,7 +784,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -818,7 +818,7 @@
                     "contents": [
                       {
                         "type": "optin_request",
-                        "mediaUrl": "https://zenvia.br/zenvia-office.png",
+                        "mediaUrl": "https://zenvia.com/zenvia-office.png",
                         "title": "Weekly Amazing Deals",
                         "frequency": "WEEKLY",
                         "reOptIn": "ENABLED",
@@ -898,7 +898,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -916,7 +916,7 @@
                         "title": "Card from Zenvia",
                         "text": "This is our products",
                         "media": {
-                          "url": "https://zenvia.br/zenvia-office.png",
+                          "url": "https://zenvia.com/zenvia-office.png",
                           "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                           "caption": "Our amazing office!"
                         },
@@ -951,7 +951,7 @@
                             "title": "Card from Zenvia",
                             "text": "This is our products",
                             "media": {
-                              "url": "https://zenvia.br/zenvia-office.png",
+                              "url": "https://zenvia.com/zenvia-office.png",
                               "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                               "caption": "Our amazing office!"
                             },
@@ -1085,7 +1085,7 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/sms/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/sms/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
@@ -1133,7 +1133,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -1151,7 +1151,7 @@
                         "title": "Card from Zenvia",
                         "text": "This is our products",
                         "media": {
-                          "url": "https://zenvia.br/zenvia-office.png",
+                          "url": "https://zenvia.com/zenvia-office.png",
                           "disposition": "ON_THE_TOP_MEDIUM_HEIGHT",
                           "caption": "Our amazing office!"
                         },
@@ -1220,7 +1220,7 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/telegram/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/telegram/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
@@ -1359,7 +1359,7 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/voice/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/voice/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
@@ -1407,7 +1407,7 @@
                     "contents": [
                       {
                         "type": "file",
-                        "fileUrl": "https://zenvia.br/zenvia-team.png",
+                        "fileUrl": "https://zenvia.com/zenvia-team.png",
                         "fileMimeType": "image/png",
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
@@ -1516,7 +1516,7 @@
                         "type": "button",
                         "header": {
                           "type": "file",
-                          "fileUrl": "https://zenvia.br/zenvia-team.png"
+                          "fileUrl": "https://zenvia.com/zenvia-team.png"
                         },
                         "body": "Your message body text here",
                         "footer": "Your message footer text here",
@@ -1642,7 +1642,7 @@
           {
             "lang": "JavaScript",
             "label": "Node.js",
-            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/whatsapp/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN'\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message'\n    }]\n  },\n  json: true\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
+            "source": "const { post } = require('request-promise');\n\npost({\n  uri: 'https://api.zenvia.com/v2/channels/whatsapp/messages',\n  headers: {\n    'X-API-TOKEN': 'YOUR_API_TOKEN',\n  },\n  body: {\n    from: 'sender-identifier',\n    to: 'recipient-identifier',\n    contents: [{\n      type: 'text',\n      text: 'Some text message',\n    }],\n  },\n  json: true,\n})\n.then((response) => {\n  console.log('Response:', response);\n})\n.catch((error) => {\n  console.log('Error:', error);\n});\n"
           },
           {
             "lang": "JavaScript",
@@ -3075,6 +3075,7 @@
           },
           "type": {
             "default": "email",
+            "type": "string",
             "description": "Type of message to be sent",
             "example": "email"
           },
@@ -4618,18 +4619,9 @@
               "replyTo": {
                 "allOf": [
                   {
-                    "type": "object",
-                    "title": "Reply To",
-                    "description": "E-mail that will be set as recipient when a e-mail response is initiated."
-                  },
-                  {
-                    "$ref": "#/components/schemas/content.email.recipient"
+                    "$ref": "#/components/schemas/content.email.reply-to"
                   }
-                ],
-                "example": {
-                  "email": "reply-to@zenvia.com",
-                  "name": "Service Care"
-                }
+                ]
               }
             },
             "required": [
@@ -4893,10 +4885,31 @@
               },
               "fields": {
                 "type": "object",
-                "description": "The available fields to be used in this template",
+                "description": "The available fields to be used in this template.",
                 "example": {
                   "user": "John Smith",
                   "protocol": "34534252"
+                },
+                "additionalProperties": {
+                  "title": "Field Value",
+                  "description": "Value provided to fill the variable named after the property name.",
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "title": "String",
+                      "example": "Zenvia"
+                    },
+                    {
+                      "type": "number",
+                      "title": "Number",
+                      "example": 1
+                    },
+                    {
+                      "type": "boolean",
+                      "title": "Boolean",
+                      "example": true
+                    }
+                  ]
                 }
               }
             },
@@ -5061,7 +5074,7 @@
           "url": {
             "type": "string",
             "description": "Public URL of media file, which can be an image, a GIF, or a video. The media will be displayed inside the card.\n        <br><br>*Videos usually will display a play button instead of a preview of the content sent.*\n        <br>*Some channels do not support videos or GIFs.*",
-            "example": "https://zenvia.br/zenvia-team.png"
+            "example": "https://zenvia.com/zenvia-team.png"
           },
           "disposition": {
             "type": "string",
@@ -5083,8 +5096,8 @@
         "properties": {
           "fileUrl": {
             "type": "string",
-            "description": "URL of the file to be sent",
-            "example": "https://example.com/document.pdf"
+            "description": "URL of the file to be sent.",
+            "example": "https://zenvia.com/document.pdf"
           },
           "fileMimeType": {
             "type": "string",
@@ -5373,6 +5386,22 @@
         "required": [
           "email"
         ]
+      },
+      "content.email.reply-to": {
+        "title": "Reply To",
+        "allOf": [
+          {
+            "type": "object",
+            "description": "E-mail that will be set as recipient when a e-mail response is initiated."
+          },
+          {
+            "$ref": "#/components/schemas/content.email.recipient"
+          }
+        ],
+        "example": {
+          "email": "reply-to@zenvia.com",
+          "name": "Service Care"
+        }
       },
       "content.facebook.all": {
         "title": "Facebook",
@@ -7698,7 +7727,8 @@
           "TRANSPORTATION_UPDATE",
           "TICKET_UPDATE",
           "ALERT_UPDATE",
-          "AUTO_REPLY"
+          "AUTO_REPLY",
+          "OTHER"
         ]
       },
       "templates.template-comment": {
@@ -7832,6 +7862,37 @@
           "zu"
         ]
       },
+      "templates.template-metadata": {
+        "type": "object",
+        "title": "Metadata",
+        "description": "Additional values related to the template but not used for messaging.",
+        "additionalProperties": {
+          "title": "Metadata",
+          "description": "These values are *not* evaluated as variables in the template.",
+          "oneOf": [
+            {
+              "type": "string",
+              "title": "String",
+              "example": "Zenvia"
+            },
+            {
+              "type": "number",
+              "title": "Number",
+              "example": 1
+            },
+            {
+              "type": "boolean",
+              "title": "Boolean",
+              "example": true
+            },
+            {
+              "type": "object",
+              "title": "Object",
+              "example": {}
+            }
+          ]
+        }
+      },
       "templates.template-notification-email": {
         "title": "Notification e-mail",
         "description": "E-mail list (comma-separated) to send notifications about the message template approving process",
@@ -7870,7 +7931,8 @@
             "enum": [
               "WHATSAPP",
               "SMS",
-              "RCS"
+              "RCS",
+              "EMAIL"
             ]
           },
           "senderId": {
@@ -7883,6 +7945,9 @@
           },
           "components": {
             "$ref": "#/components/schemas/templates.components.index"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/templates.template-metadata"
           },
           "examples": {
             "$ref": "#/components/schemas/templates.template-example"
@@ -7961,8 +8026,100 @@
           },
           "buttons": {
             "$ref": "#/components/schemas/templates.components.buttons.index"
+          },
+          "attachments": {
+            "$ref": "#/components/schemas/templates.components.attachments.index"
+          },
+          "email": {
+            "$ref": "#/components/schemas/templates.components.email.index"
           }
         }
+      },
+      "templates.components.attachments.attachment-base": {
+        "properties": {
+          "type": {
+            "title": "Type",
+            "description": "Attachment type discriminator",
+            "type": "string"
+          },
+          "cid": {
+            "type": "string",
+            "description": "<br>Allows support for inline attachments. The *cid* may be used in the body to show the attachment inline in the e-mail.\n                    <br>\n                    <br>For example, using `promotion.jpeg` as *cid* is possible to refer it in the body like this:\n                    <br>`<img src=\"cid:promotion.jpeg\">`.",
+            "example": "promotion.jpeg"
+          }
+        }
+      },
+      "templates.components.attachments.attachment-dynamic": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.attachments.attachment-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string",
+                "description": "The name of the field from where the URL of the file to be sent will be obtained.",
+                "example": "catalogURL"
+              }
+            },
+            "required": [
+              "fieldName"
+            ]
+          }
+        ]
+      },
+      "templates.components.attachments.attachment-fixed": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.attachments.attachment-base"
+          },
+          {
+            "$ref": "#/components/schemas/content.bases.file"
+          }
+        ]
+      },
+      "templates.components.attachments.index": {
+        "title": "Attachments",
+        "description": "List of files to be sent along with the content.\n                <br>*Only applicable to [E-Mail](#tag/E-Mail) channel.*",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/templates.components.attachments.attachment-fixed"
+            },
+            {
+              "$ref": "#/components/schemas/templates.components.attachments.attachment-dynamic"
+            }
+          ],
+          "discriminator": {
+            "propertyName": "type",
+            "mapping": {
+              "ATTACHMENT_FIXED": "#/components/schemas/templates.components.attachments.attachment-fixed",
+              "ATTACHMENT_DYNAMIC": "#/components/schemas/templates.components.attachments.attachment-dynamic"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "example": [
+          {
+            "type": "ATTACHMENT_FIXED",
+            "cid": "promotion.jpeg",
+            "fileUrl": "https://zenvia.com/promo.jpg",
+            "fileMimeType": "image/jpeg",
+            "fileName": "attachment-name.jpeg"
+          },
+          {
+            "type": "ATTACHMENT_DYNAMIC",
+            "cid": "personalized-promo.jpeg",
+            "fieldName": "promoURL"
+          }
+        ]
       },
       "templates.components.body.index": {
         "title": "Body",
@@ -7975,7 +8132,7 @@
         "properties": {
           "type": {
             "title": "Body type",
-            "description": "The body should have a fixed or variable text. Variable text can have variables using format _{{var_name}}_",
+            "description": "The body should have a fixed or variable text.<br>Variable text can have variables using format `{{var_name}}`.",
             "type": "string",
             "enum": [
               "TEXT_FIXED",
@@ -7983,8 +8140,9 @@
             ]
           },
           "text": {
+            "type": "string",
             "title": "Body text",
-            "type": "string"
+            "description": "Body content. In the [E-Mail](#tag/E-Mail) channel this is handled as a *HTML*, while for most channels this is handled as *markdown*."
           }
         }
       },
@@ -8136,7 +8294,7 @@
       },
       "templates.components.buttons.index": {
         "title": "Buttons",
-        "description": "Template buttons\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
+        "description": "Template buttons.\n                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
         "type": "object",
         "oneOf": [
           {
@@ -8247,9 +8405,23 @@
           }
         ]
       },
+      "templates.components.email.index": {
+        "type": "object",
+        "title": "Email",
+        "description": "E-mail specific fields.\n                <br>*Only applicable to [E-Mail](#tag/E-Mail) channel.*",
+        "properties": {
+          "replyTo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/content.email.reply-to"
+              }
+            ]
+          }
+        }
+      },
       "templates.components.footer.index": {
         "title": "Footer",
-        "description": "Template footer\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
+        "description": "Template footer.\n                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
         "type": "object",
         "required": [
           "type",
@@ -8272,16 +8444,16 @@
       },
       "templates.components.header.index": {
         "title": "Header",
-        "description": "Template header\n\n*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*",
+        "description": "Template header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.\n                <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*",
         "type": "object",
         "required": [
           "type"
         ],
         "properties": {
           "type": {
-            "title": "Header type",
-            "description": "The header can have an image, document or text.",
             "type": "string",
+            "title": "Header type",
+            "description": "The header can have an image, document or text.\n                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*",
             "enum": [
               "MEDIA_DOCUMENT",
               "MEDIA_IMAGE",
@@ -8291,8 +8463,9 @@
             ]
           },
           "text": {
+            "type": "string",
             "title": "Header text",
-            "type": "string"
+            "description": "Body header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.<br>In other channels it will be a title above the body."
           }
         }
       }
@@ -8736,7 +8909,7 @@
     },
     {
       "name": "Templates",
-      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n"
+      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n\n## E-Mail templates\n\nE-mail templates allows sending content up to 30MB to multiple contacts using a small payload.\n\nEmail templates have the following components:\n* Header\n* Body\n* Attachments\n* Email\n"
     },
     {
       "name": "Message Report",

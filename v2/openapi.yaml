@@ -420,7 +420,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -433,7 +433,7 @@ paths:
                       title: Card from Zenvia
                       text: This is our products
                       media:
-                        url: 'https://zenvia.br/zenvia-office.png'
+                        url: 'https://zenvia.com/zenvia-office.png'
                         disposition: ON_THE_TOP_MEDIUM_HEIGHT
                         caption: Our amazing office!
                       buttons:
@@ -455,7 +455,7 @@ paths:
                         - title: Card from Zenvia
                           text: This is our products
                           media:
-                            url: 'https://zenvia.br/zenvia-office.png'
+                            url: 'https://zenvia.com/zenvia-office.png'
                             disposition: ON_THE_TOP_MEDIUM_HEIGHT
                             caption: Our amazing office!
                           buttons:
@@ -483,7 +483,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: optin_request
-                      mediaUrl: 'https://zenvia.br/zenvia-office.png'
+                      mediaUrl: 'https://zenvia.com/zenvia-office.png'
                       title: Weekly Amazing Deals
                       frequency: WEEKLY
                       reOptIn: ENABLED
@@ -521,17 +521,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/facebook/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -616,7 +616,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -633,7 +633,7 @@ paths:
                       title: Card from Zenvia
                       text: This is our products
                       media:
-                        url: 'https://zenvia.br/zenvia-office.png'
+                        url: 'https://zenvia.com/zenvia-office.png'
                         disposition: ON_THE_TOP_MEDIUM_HEIGHT
                         caption: Our amazing office!
                       buttons:
@@ -659,7 +659,7 @@ paths:
                         - title: Card from Zenvia
                           text: This is our products
                           media:
-                            url: 'https://zenvia.br/zenvia-office.png'
+                            url: 'https://zenvia.com/zenvia-office.png'
                             disposition: ON_THE_TOP_MEDIUM_HEIGHT
                             caption: Our amazing office!
                           buttons:
@@ -721,17 +721,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/gbm/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -754,7 +754,7 @@ paths:
 
             const content = new TextContent('Some text message');
 
-            facebook.sendMessage('sender-identifier', 'recipient-identifier', content)
+            gbm.sendMessage('sender-identifier', 'recipient-identifier', content)
             .then((response) => {
               console.log('Response:', response);
             })
@@ -812,7 +812,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -833,7 +833,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: optin_request
-                      mediaUrl: 'https://zenvia.br/zenvia-office.png'
+                      mediaUrl: 'https://zenvia.com/zenvia-office.png'
                       title: Weekly Amazing Deals
                       frequency: WEEKLY
                       reOptIn: ENABLED
@@ -883,7 +883,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -896,7 +896,7 @@ paths:
                       title: Card from Zenvia
                       text: This is our products
                       media:
-                        url: 'https://zenvia.br/zenvia-office.png'
+                        url: 'https://zenvia.com/zenvia-office.png'
                         disposition: ON_THE_TOP_MEDIUM_HEIGHT
                         caption: Our amazing office!
                       buttons:
@@ -918,7 +918,7 @@ paths:
                         - title: Card from Zenvia
                           text: This is our products
                           media:
-                            url: 'https://zenvia.br/zenvia-office.png'
+                            url: 'https://zenvia.com/zenvia-office.png'
                             disposition: ON_THE_TOP_MEDIUM_HEIGHT
                             caption: Our amazing office!
                           buttons:
@@ -1010,17 +1010,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/sms/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -1101,7 +1101,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -1114,7 +1114,7 @@ paths:
                       title: Card from Zenvia
                       text: This is our products
                       media:
-                        url: 'https://zenvia.br/zenvia-office.png'
+                        url: 'https://zenvia.com/zenvia-office.png'
                         disposition: ON_THE_TOP_MEDIUM_HEIGHT
                         caption: Our amazing office!
                       buttons:
@@ -1168,17 +1168,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/telegram/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -1328,17 +1328,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/voice/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -1419,7 +1419,7 @@ paths:
                   to: '55108888888888'
                   contents:
                     - type: file
-                      fileUrl: 'https://zenvia.br/zenvia-team.png'
+                      fileUrl: 'https://zenvia.com/zenvia-team.png'
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
@@ -1490,7 +1490,7 @@ paths:
                     - type: button
                       header:
                         type: file
-                        fileUrl: 'https://zenvia.br/zenvia-team.png'
+                        fileUrl: 'https://zenvia.com/zenvia-team.png'
                       body: Your message body text here
                       footer: Your message footer text here
                       buttons:
@@ -1577,17 +1577,17 @@ paths:
             post({
               uri: 'https://api.zenvia.com/v2/channels/whatsapp/messages',
               headers: {
-                'X-API-TOKEN': 'YOUR_API_TOKEN'
+                'X-API-TOKEN': 'YOUR_API_TOKEN',
               },
               body: {
                 from: 'sender-identifier',
                 to: 'recipient-identifier',
                 contents: [{
                   type: 'text',
-                  text: 'Some text message'
-                }]
+                  text: 'Some text message',
+                }],
               },
-              json: true
+              json: true,
             })
             .then((response) => {
               console.log('Response:', response);
@@ -2570,6 +2570,7 @@ components:
           type: string
         type:
           default: email
+          type: string
           description: Type of message to be sent
           example: email
         subject:
@@ -3686,13 +3687,7 @@ components:
                   name: BCC2
             replyTo:
               allOf:
-                - type: object
-                  title: Reply To
-                  description: E-mail that will be set as recipient when a e-mail response is initiated.
-                - $ref: '#/components/schemas/content.email.recipient'
-              example:
-                email: reply-to@zenvia.com
-                name: Service Care
+                - $ref: '#/components/schemas/content.email.reply-to'
           required:
             - type
             - subject
@@ -3867,10 +3862,23 @@ components:
               example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             fields:
               type: object
-              description: The available fields to be used in this template
+              description: The available fields to be used in this template.
               example:
                 user: John Smith
                 protocol: '34534252'
+              additionalProperties:
+                title: Field Value
+                description: Value provided to fill the variable named after the property name.
+                oneOf:
+                  - type: string
+                    title: String
+                    example: Zenvia
+                  - type: number
+                    title: Number
+                    example: 1
+                  - type: boolean
+                    title: Boolean
+                    example: true
           required:
             - type
             - templateId
@@ -4003,7 +4011,7 @@ components:
             Public URL of media file, which can be an image, a GIF, or a video. The media will be displayed inside the card.
                     <br><br>*Videos usually will display a play button instead of a preview of the content sent.*
                     <br>*Some channels do not support videos or GIFs.*
-          example: 'https://zenvia.br/zenvia-team.png'
+          example: 'https://zenvia.com/zenvia-team.png'
         disposition:
           type: string
           default: ON_THE_TOP_SHORT_HEIGHT
@@ -4021,8 +4029,8 @@ components:
       properties:
         fileUrl:
           type: string
-          description: URL of the file to be sent
-          example: 'https://example.com/document.pdf'
+          description: URL of the file to be sent.
+          example: 'https://zenvia.com/document.pdf'
         fileMimeType:
           type: string
           description: |-
@@ -4227,6 +4235,15 @@ components:
           description: Name shown along the e-mail address.
       required:
         - email
+    content.email.reply-to:
+      title: Reply To
+      allOf:
+        - type: object
+          description: E-mail that will be set as recipient when a e-mail response is initiated.
+        - $ref: '#/components/schemas/content.email.recipient'
+      example:
+        email: reply-to@zenvia.com
+        name: Service Care
     content.facebook.all:
       title: Facebook
       oneOf:
@@ -5885,6 +5902,7 @@ components:
         - TICKET_UPDATE
         - ALERT_UPDATE
         - AUTO_REPLY
+        - OTHER
     templates.template-comment:
       type: object
       required:
@@ -6007,6 +6025,26 @@ components:
         - uz
         - vi
         - zu
+    templates.template-metadata:
+      type: object
+      title: Metadata
+      description: Additional values related to the template but not used for messaging.
+      additionalProperties:
+        title: Metadata
+        description: These values are *not* evaluated as variables in the template.
+        oneOf:
+          - type: string
+            title: String
+            example: Zenvia
+          - type: number
+            title: Number
+            example: 1
+          - type: boolean
+            title: Boolean
+            example: true
+          - type: object
+            title: Object
+            example: {}
     templates.template-notification-email:
       title: Notification e-mail
       description: E-mail list (comma-separated) to send notifications about the message template approving process
@@ -6041,6 +6079,7 @@ components:
             - WHATSAPP
             - SMS
             - RCS
+            - EMAIL
         senderId:
           title: Sender ID
           description: The identifier of the sender of the template. The sender should be created with a credential.
@@ -6049,6 +6088,8 @@ components:
           $ref: '#/components/schemas/templates.template-category'
         components:
           $ref: '#/components/schemas/templates.components.index'
+        metadata:
+          $ref: '#/components/schemas/templates.template-metadata'
         examples:
           $ref: '#/components/schemas/templates.template-example'
         notificationEmail:
@@ -6109,6 +6150,68 @@ components:
           $ref: '#/components/schemas/templates.components.footer.index'
         buttons:
           $ref: '#/components/schemas/templates.components.buttons.index'
+        attachments:
+          $ref: '#/components/schemas/templates.components.attachments.index'
+        email:
+          $ref: '#/components/schemas/templates.components.email.index'
+    templates.components.attachments.attachment-base:
+      properties:
+        type:
+          title: Type
+          description: Attachment type discriminator
+          type: string
+        cid:
+          type: string
+          description: |-
+            <br>Allows support for inline attachments. The *cid* may be used in the body to show the attachment inline in the e-mail.
+                                <br>
+                                <br>For example, using `promotion.jpeg` as *cid* is possible to refer it in the body like this:
+                                <br>`<img src="cid:promotion.jpeg">`.
+          example: promotion.jpeg
+    templates.components.attachments.attachment-dynamic:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.attachments.attachment-base'
+        - type: object
+          properties:
+            fieldName:
+              type: string
+              description: The name of the field from where the URL of the file to be sent will be obtained.
+              example: catalogURL
+          required:
+            - fieldName
+    templates.components.attachments.attachment-fixed:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.attachments.attachment-base'
+        - $ref: '#/components/schemas/content.bases.file'
+    templates.components.attachments.index:
+      title: Attachments
+      description: |-
+        List of files to be sent along with the content.
+                        <br>*Only applicable to [E-Mail](#tag/E-Mail) channel.*
+      type: array
+      items:
+        type: object
+        oneOf:
+          - $ref: '#/components/schemas/templates.components.attachments.attachment-fixed'
+          - $ref: '#/components/schemas/templates.components.attachments.attachment-dynamic'
+        discriminator:
+          propertyName: type
+          mapping:
+            ATTACHMENT_FIXED: '#/components/schemas/templates.components.attachments.attachment-fixed'
+            ATTACHMENT_DYNAMIC: '#/components/schemas/templates.components.attachments.attachment-dynamic'
+        required:
+          - type
+      example:
+        - type: ATTACHMENT_FIXED
+          cid: promotion.jpeg
+          fileUrl: 'https://zenvia.com/promo.jpg'
+          fileMimeType: image/jpeg
+          fileName: attachment-name.jpeg
+        - type: ATTACHMENT_DYNAMIC
+          cid: personalized-promo.jpeg
+          fieldName: promoURL
     templates.components.body.index:
       title: Body
       description: Template body
@@ -6119,14 +6222,15 @@ components:
       properties:
         type:
           title: Body type
-          description: 'The body should have a fixed or variable text. Variable text can have variables using format _{{var_name}}_'
+          description: 'The body should have a fixed or variable text.<br>Variable text can have variables using format `{{var_name}}`.'
           type: string
           enum:
             - TEXT_FIXED
             - TEXT_TEMPLATE
         text:
-          title: Body text
           type: string
+          title: Body text
+          description: 'Body content. In the [E-Mail](#tag/E-Mail) channel this is handled as a *HTML*, while for most channels this is handled as *markdown*.'
     templates.components.buttons.actions:
       type: object
       allOf:
@@ -6221,9 +6325,8 @@ components:
     templates.components.buttons.index:
       title: Buttons
       description: |-
-        Template buttons
-
-        *Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+        Template buttons.
+                        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
       type: object
       oneOf:
         - $ref: '#/components/schemas/templates.components.buttons.actions'
@@ -6287,12 +6390,21 @@ components:
                     QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
           required:
             - items
+    templates.components.email.index:
+      type: object
+      title: Email
+      description: |-
+        E-mail specific fields.
+                        <br>*Only applicable to [E-Mail](#tag/E-Mail) channel.*
+      properties:
+        replyTo:
+          allOf:
+            - $ref: '#/components/schemas/content.email.reply-to'
     templates.components.footer.index:
       title: Footer
       description: |-
-        Template footer
-
-        *Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+        Template footer.
+                        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
       type: object
       required:
         - type
@@ -6310,17 +6422,18 @@ components:
     templates.components.header.index:
       title: Header
       description: |-
-        Template header
-
-        *Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+        Template header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.
+                        <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
       type: object
       required:
         - type
       properties:
         type:
-          title: Header type
-          description: 'The header can have an image, document or text.'
           type: string
+          title: Header type
+          description: |-
+            The header can have an image, document or text.
+                                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
           enum:
             - MEDIA_DOCUMENT
             - MEDIA_IMAGE
@@ -6328,8 +6441,9 @@ components:
             - TEXT_FIXED
             - TEXT_TEMPLATE
         text:
-          title: Header text
           type: string
+          title: Header text
+          description: 'Body header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.<br>In other channels it will be a title above the body.'
   responses:
     error:
       description: 'Error response. See the [Error Handling](#section/Error-Handling) section for details.'
@@ -7259,6 +7373,16 @@ tags:
       ### MIXED
 
       Allows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.
+
+      ## E-Mail templates
+
+      E-mail templates allows sending content up to 30MB to multiple contacts using a small payload.
+
+      Email templates have the following components:
+      * Header
+      * Body
+      * Attachments
+      * Email
   - name: Message Report
     description: |
       A report that shows all messages sent and received during a period. It may also be filtered by channel or type.
