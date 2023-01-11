@@ -5,7 +5,9 @@ import { assert } from 'chai';
 import * as Enforcer from 'openapi-enforcer';
 import spec from '../../spec';
 
-describe('Loading OpenAPI specification by Enforcer', () => {
+describe('Loading OpenAPI specification by Enforcer', function() {
+
+  this.timeout(5000);
 
   before(async () => {
     delete spec.paths['/files'].post.requestBody.content['multipart/form-data'].examples.multipart;
@@ -103,4 +105,4 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('batches');
   });
 
-}).timeout(5000);
+});
