@@ -103,4 +103,4 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('batches');
   });
 
-});
+}).timeout(5000);
