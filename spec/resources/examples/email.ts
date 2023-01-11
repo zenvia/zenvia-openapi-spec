@@ -6,7 +6,7 @@ export function email(): any {
       {
         type: 'email',
         subject: 'Re: Ticket 12345',
-        html: '<b>Hi!</b><br><img src=\cid:example2.jpeg\>',
+        html: '<b>Hi!</b><br><img src="cid:example2.jpeg">',
         attachments: [
           {
             fileUrl: 'https://zenvia.com/example1.pdf',
