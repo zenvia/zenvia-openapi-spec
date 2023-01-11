@@ -1,7 +1,7 @@
 export function facebookExamples(example) {
   return {
     ...example,
-    from: 'fb-account-id',
+    from: 'fb-page-id',
     to: 'fb-contact-id',
   };
 }
