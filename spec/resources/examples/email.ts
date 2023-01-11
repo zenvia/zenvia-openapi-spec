@@ -14,7 +14,7 @@ export function email(): any {
           {
             fileUrl: 'https://zenvia.com/example2.jpg',
             fileName: 'example2.jpeg',
-          }
+          },
         ],
         cc: [
           {
@@ -23,7 +23,7 @@ export function email(): any {
           {
             email: 'cc2@zenvia.com',
             name: 'CC2',
-          }
+          },
         ],
         bcc: [
           {
@@ -32,16 +32,16 @@ export function email(): any {
           {
             email: 'bcc2@zenvia.com',
             name: 'BCC2',
-          }
+          },
         ],
         replyTo: {
           email: 'reply-to@zenvia.com',
           name: 'Service Care',
-        }
-      }
+        },
+      },
     ],
     representative: {
       name: 'Sender Name',
-    }
+    },
   };
 }
