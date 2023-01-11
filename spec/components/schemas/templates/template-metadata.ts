@@ -8,6 +8,23 @@ const metadata: SchemaObject = {
   additionalProperties: {
     title: 'Metadata',
     description: 'These values are *not* evaluated as variables in the template.',
+    oneOf: [{
+      type: 'string',
+      title: 'String',
+      example: 'Zenvia',
+    }, {
+      type: 'number',
+      title: 'Number',
+      example: 1,
+    }, {
+      type: 'boolean',
+      title: 'Boolean',
+      example: true,
+    }, {
+      type: 'object',
+      title: 'Object',
+      example: {},
+    }],
   },
 };
 
