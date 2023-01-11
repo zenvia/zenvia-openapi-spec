@@ -2,8 +2,7 @@
   "ignoreDefinitionFiles": true,
   "defaultSeverity": "error",
   "extends": [
-    "tslint:recommended",
-    "tslint-config-airbnb"
+    "tslint:recommended"
   ],
   "jsRules": {},
   "rules": {

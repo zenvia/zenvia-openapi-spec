@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as smsMessageRef } from '../../components/schemas/message/sms';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { smsExamples } from '../../resources/examples/from-to/sms';
 import { text as textExample } from '../../resources/examples/text';
 import { template as templateExample } from '../../resources/examples/template';
 
@@ -16,10 +17,10 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: smsExamples(textExample()),
           },
           template: {
-            value: templateExample(),
+            value: smsExamples(templateExample()),
           },
         },
       },

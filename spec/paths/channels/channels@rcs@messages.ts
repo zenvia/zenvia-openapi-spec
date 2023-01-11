@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as rcsMessageRef } from '../../components/schemas/message/rcs';
+import { rcsExamples } from '../../resources/examples/from-to/rcs';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 import { card as cardExample } from '../../resources/examples/card';
@@ -20,22 +21,22 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: rcsExamples(textExample()),
           },
           template: {
-            value: templateExample(),
+            value: rcsExamples(templateExample()),
           },
           file: {
-            value: fileExample(),
+            value: rcsExamples(fileExample()),
           },
           card: {
-            value: cardExample(),
+            value: rcsExamples(cardExample()),
           },
           carousel: {
-            value: carouselExample(),
+            value: rcsExamples(carouselExample()),
           },
           replyable_text: {
-            value: replyableTextExample(),
+            value: rcsExamples(replyableTextExample()),
           },
         },
       },
