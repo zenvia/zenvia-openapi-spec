@@ -449,7 +449,7 @@
               "examples": {
                 "text": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {
@@ -461,7 +461,7 @@
                 },
                 "file": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {
@@ -476,7 +476,7 @@
                 },
                 "card": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {
@@ -508,7 +508,7 @@
                 },
                 "carousel": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {
@@ -545,7 +545,7 @@
                 },
                 "replyable_text": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {
@@ -564,7 +564,7 @@
                 },
                 "optin_request": {
                   "value": {
-                    "from": "fb-account-id",
+                    "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
                       {

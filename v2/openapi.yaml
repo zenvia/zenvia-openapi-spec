@@ -447,14 +447,14 @@ paths:
             examples:
               text:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: text
                       text: Hi Zenvia!
               file:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: file
@@ -464,7 +464,7 @@ paths:
                       fileName: team.png
               card:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: card
@@ -484,7 +484,7 @@ paths:
                           payload: success
               carousel:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: carousel
@@ -506,7 +506,7 @@ paths:
                               payload: success
               replyable_text:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: replyable_text
@@ -517,7 +517,7 @@ paths:
                           payload: success
               optin_request:
                 value:
-                  from: fb-account-id
+                  from: fb-page-id
                   to: fb-contact-id
                   contents:
                     - type: optin_request
