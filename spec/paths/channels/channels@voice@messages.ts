@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as voiceMessageRef } from '../../components/schemas/message/voice';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { voiceExamples } from '../../resources/examples/from-to/voice';
 import { tts as ttsExample } from '../../resources/examples/tts';
 import { tts_transferTo as ttsTransferToExample } from '../../resources/examples/ttsTransferto';
 import { audiofile as audiofileExample } from '../../resources/examples/audiofile';
@@ -18,16 +19,16 @@ const post: OperationObject = {
         },
         examples: {
           call_tts: {
-            value: ttsExample(),
+            value: voiceExamples(ttsExample()),
           },
           call_tts_transferTo: {
-            value: ttsTransferToExample(),
+            value: voiceExamples(ttsTransferToExample()),
           },
           call_file: {
-            value: audiofileExample(),
+            value: voiceExamples(audiofileExample()),
           },
           call_file_transferTo: {
-            value: audiofileTransferToExample(),
+            value: voiceExamples(audiofileTransferToExample()),
           },
         },
       },

@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as whatsappMessageRef } from '../../components/schemas/message/whatsapp';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { whatsappExamples } from '../../resources/examples/from-to/whatsapp';
 import { file as fileExample } from '../../resources/examples/file';
 import { text as textExample } from '../../resources/examples/text';
 import { template as templateExample } from '../../resources/examples/template';
@@ -23,31 +24,31 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: whatsappExamples(textExample()),
           },
           file: {
-            value: fileExample(),
+            value: whatsappExamples(fileExample()),
           },
           template: {
-            value: templateExample(),
+            value: whatsappExamples(templateExample()),
           },
           contacts: {
-            value: contactsExample(),
+            value: whatsappExamples(contactsExample()),
           },
           location: {
-            value: locationExample(),
+            value: whatsappExamples(locationExample()),
           },
           button: {
-            value: buttonExample(),
+            value: whatsappExamples(buttonExample()),
           },
           list: {
-            value: listExample(),
+            value: whatsappExamples(listExample()),
           },
           product: {
-            value: product(),
+            value: whatsappExamples(product()),
           },
           product_list: {
-            value: productList(),
+            value: whatsappExamples(productList()),
           },
         },
       },

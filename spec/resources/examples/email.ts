@@ -40,8 +40,5 @@ export function email(): any {
         },
       },
     ],
-    representative: {
-      name: 'Sender Name',
-    },
   };
 }
