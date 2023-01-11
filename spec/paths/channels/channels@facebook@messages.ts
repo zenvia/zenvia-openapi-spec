@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as facebookMessageRef } from '../../components/schemas/message/facebook';
+import { facebookExamples } from '../../resources/examples/from-to/facebook';
 import { text as textExample } from '../../resources/examples/text';
 import { file as fileExample } from '../../resources/examples/file';
 import { card as cardExample } from '../../resources/examples/card';
@@ -20,22 +21,22 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: facebookExamples(textExample()),
           },
           file: {
-            value: fileExample(),
+            value: facebookExamples(fileExample()),
           },
           card: {
-            value: cardExample(),
+            value: facebookExamples(cardExample()),
           },
           carousel: {
-            value: carouselExample(),
+            value: facebookExamples(carouselExample()),
           },
           replyable_text: {
-            value: replyableTextExample(),
+            value: facebookExamples(replyableTextExample()),
           },
           optin_request: {
-            value: optInRequestExample(),
+            value: facebookExamples(optInRequestExample()),
           },
         },
       },

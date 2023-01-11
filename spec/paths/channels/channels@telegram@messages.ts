@@ -1,6 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as telegramMessageRef } from '../../components/schemas/message/telegram';
+import { telegramExamples } from '../../resources/examples/from-to/telegram';
 import { file as fileExample } from '../../resources/examples/file';
 import { card as cardExample } from '../../resources/examples/card';
 import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
@@ -18,16 +19,16 @@ const post: OperationObject = {
         },
         examples: {
           text: {
-            value: textExample(),
+            value: telegramExamples(textExample()),
           },
           file: {
-            value: fileExample(),
+            value: telegramExamples(fileExample()),
           },
           card: {
-            value: cardExample(),
+            value: telegramExamples(cardExample()),
           },
           replyable_text: {
-            value: replyableTextExample(),
+            value: telegramExamples(replyableTextExample()),
           },
         },
       },
