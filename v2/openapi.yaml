@@ -386,6 +386,44 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/message.email'
+            examples:
+              email:
+                value:
+                  from: sac@brand.domain
+                  to: user@zenvia.com
+                  contents:
+                    - type: email
+                      subject: 'Re: Ticket 12345'
+                      html: '<b>Hi!</b><br><img src="cid:example2.jpeg">'
+                      attachments:
+                        - fileUrl: 'https://zenvia.com/example1.pdf'
+                        - fileUrl: 'https://zenvia.com/example2.jpg'
+                          fileName: example2.jpeg
+                      cc:
+                        - email: cc1@zenvia.com
+                        - email: cc2@zenvia.com
+                          name: CC2
+                      bcc:
+                        - email: bcc1@zenvia.com
+                        - email: bcc2@zenvia.com
+                          name: BCC2
+                      replyTo:
+                        email: reply-to@zenvia.com
+                        name: Service Care
+                  representative:
+                    name: Sender Name
+              template:
+                value:
+                  from: sac@brand.domain
+                  to: user@zenvia.com
+                  contents:
+                    - type: template
+                      templateId: template_id
+                      fields:
+                        name: Jhon
+                        product: Zenvia Chat
+                  representative:
+                    name: Sender Name
       responses:
         '200':
           description: Created message
@@ -409,15 +447,15 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: text
                       text: Hi Zenvia!
               file:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: file
                       fileUrl: 'https://zenvia.com/zenvia-team.png'
@@ -426,8 +464,8 @@ paths:
                       fileName: team.png
               card:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: card
                       title: Card from Zenvia
@@ -446,8 +484,8 @@ paths:
                           payload: success
               carousel:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: carousel
                       cardWidth: MEDIUM
@@ -468,8 +506,8 @@ paths:
                               payload: success
               replyable_text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: replyable_text
                       text: Hi Zenvia!
@@ -479,8 +517,8 @@ paths:
                           payload: success
               optin_request:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: fb-account-id
+                  to: fb-contact-id
                   contents:
                     - type: optin_request
                       mediaUrl: 'https://zenvia.com/zenvia-office.png'
@@ -601,8 +639,8 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: gbm-agent-id
+                  to: gbm-contact-id
                   contents:
                     - type: text
                       text: Hi Zenvia!
@@ -612,8 +650,8 @@ paths:
                     avatar: 'https://zenvia.com/favicon.ico'
               file:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: gbm-agent-id
+                  to: gbm-contact-id
                   contents:
                     - type: file
                       fileUrl: 'https://zenvia.com/zenvia-team.png'
@@ -626,8 +664,8 @@ paths:
                     avatar: 'https://zenvia.com/favicon.ico'
               card:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: gbm-agent-id
+                  to: gbm-contact-id
                   contents:
                     - type: card
                       title: Card from Zenvia
@@ -650,8 +688,8 @@ paths:
                     avatar: 'https://zenvia.com/favicon.ico'
               carousel:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: gbm-agent-id
+                  to: gbm-contact-id
                   contents:
                     - type: carousel
                       cardWidth: MEDIUM
@@ -676,8 +714,8 @@ paths:
                     avatar: 'https://zenvia.com/favicon.ico'
               replyable_text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: gbm-agent-id
+                  to: gbm-contact-id
                   contents:
                     - type: replyable_text
                       text: Hi Zenvia!
@@ -801,15 +839,15 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: ig-account-id
+                  to: ig-contact-id
                   contents:
                     - type: text
                       text: Hi Zenvia!
               file:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: ig-account-id
+                  to: ig-contact-id
                   contents:
                     - type: file
                       fileUrl: 'https://zenvia.com/zenvia-team.png'
@@ -818,8 +856,8 @@ paths:
                       fileName: team.png
               replyable_text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: ig-account-id
+                  to: ig-contact-id
                   contents:
                     - type: replyable_text
                       text: Hi Zenvia!
@@ -827,10 +865,52 @@ paths:
                         - type: text
                           text: Click here
                           payload: success
+              card:
+                value:
+                  from: ig-account-id
+                  to: ig-contact-id
+                  contents:
+                    - type: card
+                      title: Card from Zenvia
+                      text: This is our products
+                      media:
+                        url: 'https://zenvia.com/zenvia-office.png'
+                        disposition: ON_THE_TOP_MEDIUM_HEIGHT
+                        caption: Our amazing office!
+                      buttons:
+                        - type: link
+                          text: Site
+                          url: 'https://www.zenvia.com/'
+                      quickReplyButtons:
+                        - type: text
+                          text: Click here
+                          payload: success
+              carousel:
+                value:
+                  from: ig-account-id
+                  to: ig-contact-id
+                  contents:
+                    - type: carousel
+                      cardWidth: MEDIUM
+                      cards:
+                        - title: Card from Zenvia
+                          text: This is our products
+                          media:
+                            url: 'https://zenvia.com/zenvia-office.png'
+                            disposition: ON_THE_TOP_MEDIUM_HEIGHT
+                            caption: Our amazing office!
+                          buttons:
+                            - type: link
+                              text: Site
+                              url: 'https://www.zenvia.com/'
+                          quickReplyButtons:
+                            - type: text
+                              text: Click here
+                              payload: success
               optin_request:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: ig-account-id
+                  to: ig-contact-id
                   contents:
                     - type: optin_request
                       mediaUrl: 'https://zenvia.com/zenvia-office.png'
@@ -862,14 +942,14 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: text
                       text: Hi Zenvia!
               template:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: template
@@ -879,7 +959,7 @@ paths:
                         product: Zenvia Chat
               file:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: file
@@ -889,7 +969,7 @@ paths:
                       fileName: team.png
               card:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: card
@@ -909,7 +989,7 @@ paths:
                           payload: success
               carousel:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: carousel
@@ -931,7 +1011,7 @@ paths:
                               payload: success
               replyable_text:
                 value:
-                  from: '5510999999999'
+                  from: rcs-agent-id
                   to: '55108888888888'
                   contents:
                     - type: replyable_text
@@ -963,14 +1043,14 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
+                  from: sms-account
                   to: '55108888888888'
                   contents:
                     - type: text
                       text: Hi Zenvia!
               template:
                 value:
-                  from: '5510999999999'
+                  from: sms-account
                   to: '55108888888888'
                   contents:
                     - type: template
@@ -1090,15 +1170,15 @@ paths:
             examples:
               text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: YourBot
+                  to: tg-chat-id
                   contents:
                     - type: text
                       text: Hi Zenvia!
               file:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: YourBot
+                  to: tg-chat-id
                   contents:
                     - type: file
                       fileUrl: 'https://zenvia.com/zenvia-team.png'
@@ -1107,8 +1187,8 @@ paths:
                       fileName: team.png
               card:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: YourBot
+                  to: tg-chat-id
                   contents:
                     - type: card
                       title: Card from Zenvia
@@ -1127,8 +1207,8 @@ paths:
                           payload: success
               replyable_text:
                 value:
-                  from: '5510999999999'
-                  to: '55108888888888'
+                  from: YourBot
+                  to: tg-chat-id
                   contents:
                     - type: replyable_text
                       text: Hi Zenvia!
@@ -1248,7 +1328,7 @@ paths:
             examples:
               call_tts:
                 value:
-                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  from: sender-id
                   to: '55108888888888'
                   contents:
                     - type: call
@@ -1261,7 +1341,7 @@ paths:
                   hangUpOnVoiceMail: true
               call_tts_transferTo:
                 value:
-                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  from: sender-id
                   to: '55108888888888'
                   contents:
                     - type: call
@@ -1275,7 +1355,7 @@ paths:
                   hangUpOnVoiceMail: true
               call_file:
                 value:
-                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  from: sender-id
                   to: '55108888888888'
                   contents:
                     - type: call
@@ -1286,7 +1366,7 @@ paths:
                   hangUpOnVoiceMail: true
               call_file_transferTo:
                 value:
-                  from: 12345a123a1234a1a2a123a1234ab1ab
+                  from: sender-id
                   to: '55108888888888'
                   contents:
                     - type: call
@@ -4214,10 +4294,12 @@ components:
       title: E-Mail
       oneOf:
         - $ref: '#/components/schemas/content.email'
+        - $ref: '#/components/schemas/content.template'
       discriminator:
         propertyName: type
         mapping:
           email: '#/components/schemas/content.email'
+          template: '#/components/schemas/content.template'
     content.email.recipient:
       type: object
       properties:
@@ -6736,7 +6818,7 @@ tags:
       | [text](#section/Text)                     |<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | [file](#section/File)                     |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | [replyable_text](#section/Replyable-Text) |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green"  >&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
-      | [template](#section/Template)             |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
+      | [template](#section/Template)             |<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green"  >&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
       | [card](#section/Card)                     |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | [carousel](#section/Carousel)             |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
       | [contacts](#section/Contacts)             |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
