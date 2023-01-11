@@ -4,7 +4,7 @@ export function file() {
     to: '55108888888888',
     contents: [{
       type: 'file',
-      fileUrl: 'https://zenvia.br/zenvia-team.png',
+      fileUrl: 'https://zenvia.com/zenvia-team.png',
       fileMimeType: 'image/png',
       fileCaption: 'Our pic :)',
       fileName: 'team.png',

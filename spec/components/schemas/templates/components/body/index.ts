@@ -10,13 +10,14 @@ const body: SchemaObject = {
   properties: {
     type: {
       title: 'Body type',
-      description: 'The body should have a fixed or variable text. Variable text can have variables using format _{{var_name}}_',
+      description: 'The body should have a fixed or variable text.<br>Variable text can have variables using format `{{var_name}}`.',
       type: 'string',
       enum: ['TEXT_FIXED', 'TEXT_TEMPLATE'],
     },
     text: {
-      title: 'Body text',
       type: 'string',
+      title: 'Body text',
+      description: 'Body content. In the [E-Mail](#tag/E-Mail) channel this is handled as a *HTML*, while for most channels this is handled as *markdown*.',
     },
   },
 };

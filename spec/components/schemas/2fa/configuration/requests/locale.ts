@@ -5,7 +5,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const language: SchemaObject = {
   title: 'Configurations by locales',
-  description: 'It\'s possible to configure different settings to different locations. It\'s required to configure at least one channel \`(sms or email)\`',
+  description: "It's possible to configure different settings to different locations. It's required to configure at least one channel `(sms or email)`",
   type: 'object',
   properties: {
     sms: {

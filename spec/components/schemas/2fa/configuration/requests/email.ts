@@ -12,6 +12,7 @@ const email: SchemaObject = {
     },
     type: {
       default: 'email',
+      type: 'string',
       description: 'Type of message to be sent',
       example: 'email',
     },

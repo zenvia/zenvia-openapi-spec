@@ -40,7 +40,7 @@ export function loadPathsObject(pathBase: string): PathsObject {
   const paths: PathsObject = {};
   fileSearch(`${pathBase}/*/**/*.ts`, { nosort: true })
   .forEach((file) => {
-    const path = basename(file, '.ts').replace(/\@/g, '/');
+    const path = basename(file, '.ts').replace(/@/g, '/');
     const pathModule = require(file).default;
     const endpoint = `/${path}`;
     injectSamples(pathModule, samplesByPath[endpoint]);
@@ -102,6 +102,6 @@ export function loadComponentsObject(pathBase: string): ComponentsObject {
     'callbacks',
   ];
   const components: ComponentsObject = {};
-  types.forEach(type => components[type] = loadComponentTypeObject(pathBase, type));
+  types.forEach(type => { components[type] = loadComponentTypeObject(pathBase, type); });
   return components;
 }

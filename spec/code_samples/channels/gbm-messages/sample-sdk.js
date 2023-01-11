@@ -10,7 +10,7 @@ const gbm = client.getChannel('gbm');
 
 const content = new TextContent('Some text message');
 
-facebook.sendMessage('sender-identifier', 'recipient-identifier', content)
+gbm.sendMessage('sender-identifier', 'recipient-identifier', content)
 .then((response) => {
   console.log('Response:', response);
 })

@@ -1,6 +1,6 @@
 import { safeDump, safeLoad } from 'js-yaml';
-import spec from '../spec';
 import { readFileSync } from 'fs';
+import spec from '../spec';
 
 export function generateJSON(): string {
   return JSON.stringify(spec, null, 2);

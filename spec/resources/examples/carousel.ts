@@ -9,7 +9,7 @@ export function carousel() {
         title: 'Card from Zenvia',
         text: 'This is our products',
         media: {
-          url: 'https://zenvia.br/zenvia-office.png',
+          url: 'https://zenvia.com/zenvia-office.png',
           disposition: 'ON_THE_TOP_MEDIUM_HEIGHT',
           caption: 'Our amazing office!',
         },
