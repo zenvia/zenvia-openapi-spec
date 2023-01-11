@@ -28,6 +28,19 @@ const template: SchemaObject = {
         additionalProperties: {
           title: 'Field Value',
           description: 'Value provided to fill the variable named after the property name.',
+          oneOf: [{
+            type: 'string',
+            title: 'String',
+            example: 'Zenvia',
+          }, {
+            type: 'number',
+            title: 'Number',
+            example: 1,
+          }, {
+            type: 'boolean',
+            title: 'Boolean',
+            example: true,
+          }],
         },
       },
     },
