@@ -15,7 +15,7 @@ export function telegramFile() {
     to: 'string',
     contents: [{
       type: 'file',
-      fileUrl: 'https://zenvia.br/zenvia-team.png',
+      fileUrl: 'https://zenvia.com/zenvia-team.png',
       fileMimeType: 'image/png',
       fileCaption: 'Our pic :)',
       fileName: 'team.png',

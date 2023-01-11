@@ -11,7 +11,7 @@ const mediaBase: SchemaObject = {
       description: `Public URL of media file, which can be an image, a GIF, or a video. The media will be displayed inside the card.
         <br><br>*Videos usually will display a play button instead of a preview of the content sent.*
         <br>*Some channels do not support videos or GIFs.*`,
-      example: 'https://zenvia.br/zenvia-team.png',
+      example: 'https://zenvia.com/zenvia-team.png',
     },
     disposition: {
       type: 'string',

@@ -6,7 +6,7 @@ export function button() {
       type: 'button',
       header: {
         type: 'file',
-        fileUrl: 'https://zenvia.br/zenvia-team.png',
+        fileUrl: 'https://zenvia.com/zenvia-team.png',
       },
       body: 'Your message body text here',
       footer: 'Your message footer text here',

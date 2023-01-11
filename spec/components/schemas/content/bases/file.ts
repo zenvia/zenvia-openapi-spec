@@ -7,8 +7,8 @@ const fileBase: SchemaObject = {
   properties: {
     fileUrl: {
       type: 'string',
-      description: 'URL of the file to be sent',
-      example: 'https://example.com/document.pdf',
+      description: 'URL of the file to be sent.',
+      example: 'https://zenvia.com/document.pdf',
     },
     fileMimeType: {
       type: 'string',
