@@ -42,31 +42,11 @@ You are allowed to send test messages to phone numbers you've connected during a
 
 # API versions
 
-All notable changes to Zenvia APIs will be documented here.
+All breaking changes to Zenvia APIs will be documented here.
 
-<!-- The format is based on Keep a Changelog: http://keepachangelog.com/en/1.0.0/ -->
-<!-- and this project adheres to Semantic Versioning: http://semver.org/spec/v2.0.0.html -->
-
-Currently, the Zenvia APIs is on version v2.
+Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/").
 
 ## v2 (current)
-
-### 2021-05-24
-
-* Added
-    * Added the referral section that indicates an advertisement was clicked by the user to the [message event](#section/MESSAGE) received by the webhook
-
-### 2020-10-27
-
-* Added
-    * Added RCS Channels sections.
-
-### 2020-09-24
-
-* Added
-    * Added message-batches: API to send messages in batch.
-
-### 2020-09-01
 
 * Breaking Changes
     * Visitor not sent as a JSON within contents block. Instead, it's sent directly under the message object.
@@ -75,20 +55,7 @@ Currently, the Zenvia APIs is on version v2.
 
 ## v1 (deprecated)
 
-You can still check v1 version clicking <a target="_blank" href="https://zenvia.github.io/zenvia-openapi-spec/v1/">here</a>.
-
-
-### 2020-02-01
-
-* Added
-    * Added templates.
-    * Added reporting API.
-
-### 2020-01-01
-
-* Added
-    * Added Subscription section.
-    * Added WhatsApp, SMS, and Facebook Channels sections.
+You can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/").
 
 # SDKs
 
