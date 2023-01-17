@@ -3909,7 +3909,7 @@ components:
               example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             fields:
               type: object
-              description: The available fields to be used in this template.
+              description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` based on the template used.'
               example:
                 user: John Smith
                 protocol: '34534252'
