@@ -20,7 +20,7 @@ const template: SchemaObject = {
       },
       fields: {
         type: 'object',
-        description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` based on the template used.',
+        description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.',
         example: {
           user: 'John Smith',
           protocol: '34534252',
