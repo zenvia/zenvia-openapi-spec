@@ -3,7 +3,7 @@ import { ref as tokenRef } from './token';
 import { ref as verifyRef } from './verify';
 import { ref as deliveryRef } from './delivery';
 import { ref as contentRef } from './content';
-// import { ref as websiteRef } from './website';
+import { ref as websiteRef } from './website';
 import { createComponentRef } from '../../../../../../utils/ref';
 
 const tokenConfig: SchemaObject = {
@@ -23,14 +23,12 @@ const tokenConfig: SchemaObject = {
     content: {
       $ref: contentRef,
     },
-    // website: {
-    //   $ref: websiteRef,
-    // },
+    website: {
+      $ref: websiteRef,
+    },
   },
   required: [
     'token',
-    'verify',
-    'delivery',
     'content',
   ],
 };
