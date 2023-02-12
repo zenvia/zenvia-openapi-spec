@@ -161,7 +161,7 @@ The components of each line are the following:
     - Timestamps older than *3 minutes* will be refused.
 
 5. The request hostname. It probably will always be *api.zenvia.com*.
-<br>*Ex: `api.zenvia.com`*
+<br>*Ex: `api.zenvia.com`.*
 
 6. The request resource, including the query string when present.
 <br>*Ex: `/v2/channels/whatsapp/messages`, `/v2/files?limit=5`.*
