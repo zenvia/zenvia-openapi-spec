@@ -120,12 +120,12 @@ Generate your token on the [API console](https://app.zenvia.com/home/api) on Zen
 This is an advanced version of the [token authentication](#section/Authentication/Token).
 
 In this approach, alongside the `X-API-TOKEN` http header, it is necessary to send a request signature.
-The signature is expected in the `X-API-Signature` http header.
+<br>The signature is expected in the `X-API-Signature` http header.
 
 This signature needs to be generated at each request, since it is unique to the request.
 
 Although similar, the standard token do not support signature, and the signature token always requires a signature.
-Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform..
+<br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform..
 
 #### Example:
 ```
@@ -201,7 +201,7 @@ const payload = JSON.stringfy({
     type: 'text',
     text: 'Hi Zenvia!',
   }],
-};
+});
 
 const date = new Date().toUTCString();
 const contentType = 'application/json';
