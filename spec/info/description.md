@@ -119,7 +119,7 @@ Generate your token on the [API console](https://app.zenvia.com/home/api) on Zen
 ## Signature
 This is an advanced version of the [token authentication](#section/Authentication/Token).
 
-In this approach, alongside the `X-API-TOKEN` http header, it is necessary to send a request signature.
+In this approach, alongside the `X-API-Token` http header, it is necessary to send a request signature.
 <br>The signature is expected in the `X-API-Signature` http header.
 
 This signature needs to be generated at each request, since it is unique to the request.
