@@ -107,12 +107,126 @@ Responses error codes are detailed below.
 ## Token
 To use this API you need to send the API token in every request.
 
-The token needs to be sent in the HTTP header 'X-API-TOKEN'.
+The token needs to be sent in the HTTP header `X-API-TOKEN`.
 
-Example:
-```X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt```
+#### Example:
+```
+X-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt
+```
 
 Generate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
+
+## Signature
+This is an advanced version of the [token authentication](#section/Authentication/Token).
+
+In this approach, alongside the `X-API-TOKEN` http header, it is necessary to send a request signature.
+The signature is expected in the `X-API-Signature` http header.
+
+This signature needs to be generated at each request, since it is unique to the request.
+
+Although similar, the standard token do not support signature, and the signature token always requires a signature.
+Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform..
+
+#### Example:
+```
+X-API-Token: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt
+X-API-Signature: rtHTyAfsJFD5UFpPDeztUI3JE0Guea5pqG9iJqrT2EY=
+```
+<br>
+
+### Signature generation
+
+The signature is a *HMAC-SHA256* hash, calculated using the *token secret* obtained at the creation of the *signature token*
+in the [API console](https://app.zenvia.com/home/api).
+
+The input for the hash generation is a *multiline* string, composed by six lines separated by *unix* line breaks: `\n`, **without** an empty line in the end.
+
+The components of each line are the following:
+1. The request method.
+<br>*Ex: `POST`, `GET`.*
+
+2. The MD5 hash of the request body.
+<br>*Ex: `d98bd30dcb3c03d166eee84efba1e3d7`*
+    - For request without body, this line must be **empty**.
+    - For `multipart/form-data`, only the file content from the request is expected for the hash calculation.
+
+3. The request `Content-Type` header.
+<br>*Ex: `application/json`.*
+    - For request without body, this line must be **empty**.
+    - For `multipart/form-data`, the file content type is to be used.
+
+4. The request `Date` header, formatted following the RFC2616.
+<br>*Ex: `Sun, 12 Feb 2023 07:40:32 GMT`.*
+    - Timestamps in the future will not be considered valid.
+    - Timestamps older than *3 minutes* will be refused.
+
+5. The request hostname. It probably will always be *api.zenvia.com*.
+<br>*Ex: `api.zenvia.com`*
+
+6. The request resource, including the query string when present.
+<br>*Ex: `/v2/channels/whatsapp/messages`, `/v2/files?limit=5`.*
+
+<br>
+
+#### Signature input examples
+```
+POST
+d98bd30dcb3c03d166eee84efba1e3d7
+application/json
+Sun, 12 Feb 2023 07:40:32 GMT
+api.zenvia.com
+/v2/channels/whatsapp/messages
+
+```
+
+```
+GET
+
+
+Sun, 12 Feb 2023 07:40:32 GMT
+api.zenvia.com
+/v2/files?limit=5
+```
+
+<br>
+
+#### Signature generation example in JavaScript
+```javascript
+const crypto = require('crypto');
+
+const payload = JSON.stringfy({
+  from: 'sms-account',
+  to: '55108888888888',
+  contents: [{
+    type: 'text',
+    text: 'Hi Zenvia!',
+  }],
+};
+
+const date = new Date().toUTCString();
+const contentType = 'application/json';
+
+const stringToSign = `POST
+${crypto.createHash('md5').update(payload).digest('hex')}
+${contentType}
+${date}
+api.zenvia.com
+/v2/channels/sms/messages`;
+
+const token = '123456';
+const secret = 'ABCDEF';
+
+const signature = crypto.createHmac('sha256', secret).update(stringToSign).digest('base64');
+
+const headers = {
+  Date: date,
+  'Content-Type': contentType,
+  'X-API-Token': token,
+  'X-API-Signature': signature,
+}
+
+console.log(headers);
+```
 
 ## JWT
 
