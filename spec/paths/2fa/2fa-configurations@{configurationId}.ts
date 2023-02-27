@@ -87,8 +87,7 @@ const patch: OperationObject = {
       $ref: errorResponseRef,
     },
   },
-}
-
+};
 
 const path: PathItemObject = {
   get,

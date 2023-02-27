@@ -21,11 +21,11 @@ const patchConfig: SchemaObject = {
       type: 'object',
       description: 'The value to replace, add or remove',
       example: {
-        "size": 10,
-        "case": "UPPER_ONLY",
-        "mode": "ALPHANUMERIC"
+        'size': 10,
+        'case': 'UPPER_ONLY',
+        'mode': 'ALPHANUMERIC',
       },
-    }
+    },
   },
 };
 
