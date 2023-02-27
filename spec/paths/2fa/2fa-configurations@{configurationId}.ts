@@ -3,15 +3,15 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
 import { ref as configurationIdRef } from '../../components/parameters/configurationId';
 import { ref as websiteKeyRecreatedRef } from '../../components/schemas/2fa/configuration/responses/websitekey-recreated';
-import { ref as tokenConfigUpdatedRef } from '../../components/schemas/2fa/configuration/responses/update-config';
+import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/configuration/responses/token-created';
 import { ref as patchConfigRef } from '../../components/schemas/2fa/configuration/requests/patch-config';
 
 const del: OperationObject = {
   description: 'Delete a configuration given the configuration id',
   tags: ['Two Factor Authentication'],
   responses: {
-    200: {
-      description: 'Returns success',
+    204: {
+      description: 'No content',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
@@ -78,7 +78,7 @@ const patch: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: tokenConfigUpdatedRef,
+            $ref: tokenConfigCreatedRef,
           },
         },
       },

@@ -7,7 +7,7 @@ const post: OperationObject = {
   tags: ['Two Factor Authentication'],
   responses:{
     204: {
-      description: 'Return the code status to indicate success',
+      description: 'No content',
     } as ResponseObject,
     default: {
       $ref: errorResponseRef,
