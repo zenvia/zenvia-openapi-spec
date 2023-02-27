@@ -20,7 +20,7 @@ const del: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List configuration given the configuration id',
+  description: 'Given the configuration id, list the configurations',
   tags: ['Two Factor Authentication'],
   responses: {
     200: {

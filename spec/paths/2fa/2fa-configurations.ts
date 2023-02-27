@@ -55,7 +55,7 @@ const get: OperationObject = {
   }],
   responses:{
     200: {
-      description: 'Return all tokens configurations',
+      description: 'Return all token configurations.',
       content: {
         'application/json': {
           schema: {
