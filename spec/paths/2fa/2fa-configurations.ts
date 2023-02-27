@@ -3,6 +3,8 @@ import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuratio
 import { ref as tokenConfigResponseRef } from '../../components/schemas/2fa/configuration/responses/base';
 import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/configuration/responses/token-created';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as pageRef } from '../../components/parameters/page';
+import { ref as limitRef } from '../../components/parameters/limit';
 
 const post: OperationObject = {
   description: 'Create a configuration',
@@ -45,6 +47,12 @@ const post: OperationObject = {
 const get: OperationObject = {
   description: 'List all configurations',
   tags: ['Two Factor Authentication'],
+  parameters: [{
+    $ref: pageRef,
+  },
+  {
+    $ref: limitRef,
+  }],
   responses:{
     200: {
       description: 'Return all tokens configurations',
