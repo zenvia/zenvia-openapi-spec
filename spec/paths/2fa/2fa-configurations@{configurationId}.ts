@@ -7,7 +7,7 @@ import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/confi
 import { ref as patchConfigRef } from '../../components/schemas/2fa/configuration/requests/patch-config';
 
 const del: OperationObject = {
-  description: 'Delete a configuration given the configuration id',
+  description: 'Delete a configuration by configuration id',
   tags: ['Two Factor Authentication'],
   responses: {
     204: {
@@ -20,7 +20,7 @@ const del: OperationObject = {
 };
 
 const get: OperationObject = {
-  description: 'List the configurations, given the configuration id',
+  description: 'List a configuration by id',
   tags: ['Two Factor Authentication'],
   responses: {
     200: {

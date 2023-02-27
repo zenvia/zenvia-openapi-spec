@@ -3,7 +3,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenIdRef } from '../../components/parameters/tokenId';
 
 const post: OperationObject = {
-  description: 'Resend the token using the token id',
+  description: 'Resend the token by token id',
   tags: ['Two Factor Authentication'],
   responses:{
     204: {
