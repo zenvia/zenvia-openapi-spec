@@ -3,7 +3,7 @@ import { ref as recipientRef } from '../../components/schemas/2fa/token/requests
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
-  description: 'Resend the code to the user',
+  description: 'Resend the token to the user',
   tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,

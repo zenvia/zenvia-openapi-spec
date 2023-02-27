@@ -16,7 +16,7 @@ const tokenConfigResponse: SchemaObject = {
       id: {
         title: 'Token Configuration Id',
         type: 'string',
-        description: 'The configuration unique id',
+        description: 'The configuration\'s unique Id',
         example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
       },
       token: {

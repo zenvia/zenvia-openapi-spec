@@ -8,7 +8,7 @@ const patchConfig: SchemaObject = {
   properties: {
     op: {
       type: 'string',
-      description: 'Operation type to update the token configuration',
+      description: 'Token configuration update operation type',
       enum: ['replace', 'add', 'remove'],
       example: 'replace',
     },
@@ -19,7 +19,7 @@ const patchConfig: SchemaObject = {
     },
     value: {
       type: 'object',
-      description: 'The value to replace, add or remove',
+      description: 'The value to replace, add, or remove',
       example: {
         'size': 6,
         'mode': 'NUMBER',
