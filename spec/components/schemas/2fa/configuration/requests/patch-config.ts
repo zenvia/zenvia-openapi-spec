@@ -27,6 +27,7 @@ const patchConfig: SchemaObject = {
       },
     },
   },
+  required: ['op', 'path', 'value'],
 };
 
 export const ref = createComponentRef(__filename);
