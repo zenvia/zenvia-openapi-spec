@@ -4,7 +4,7 @@ import { ref as tokenRef } from '../requests/token';
 import { ref as verifyRef } from '../requests/verify';
 import { ref as deliveryRef } from '../requests/delivery';
 import { ref as contentRef } from '../requests/content';
-// import { ref as websiteRef } from '../requests/website';
+import { ref as websiteRef } from '../requests/website';
 
 const tokenConfigResponse: SchemaObject = {
   title: 'Token Configuration Creation',
@@ -14,7 +14,7 @@ const tokenConfigResponse: SchemaObject = {
     id: {
       title: 'Token Configuration Id',
       type: 'string',
-      description: 'The configuration unique id',
+      description: 'The configuration\'s unique Id',
       example: '11401560-bffb-4ef3-a08e-989a15ed3c32',
     },
     token: {
@@ -29,9 +29,9 @@ const tokenConfigResponse: SchemaObject = {
     content: {
       $ref: contentRef,
     },
-    // website: {
-    //   $ref: websiteRef,
-    // },
+    website: {
+      $ref: websiteRef,
+    },
     createdAt: {
       title: 'Creation Timestamp',
       description: 'Timestamp of the configuration token creation',

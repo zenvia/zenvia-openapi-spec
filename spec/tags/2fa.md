@@ -1,3 +1,3 @@
-The two factor authentication service offers the possibility to identify through the user request and device origin IP that the access is being made from a verified device, bringing more security to transactions.
+The two-factor authentication service ensures that access requests are made by trusted users by identifying the user's request token.
 
-It's possible to create a variety of configurations of tokens that can be sent through one of two channels: SMS or E-mail.
+Tokens can be configured in a variety of ways and sent via one of two channels: SMS or E-mail.

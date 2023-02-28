@@ -4,7 +4,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenResponseRef } from '../../components/schemas/2fa/token/responses/token-verified';
 
 const post: OperationObject = {
-  description: 'Verify a token',
+  description: 'Verify token',
   tags: ['Two Factor Authentication'],
   requestBody: {
     required: true,
