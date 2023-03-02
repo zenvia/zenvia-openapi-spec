@@ -39,26 +39,6 @@ const get: OperationObject = {
   },
 };
 
-const post: OperationObject = {
-  description: 'Recreate websitekey',
-  tags: ['Two Factor Authentication'],
-  responses: {
-    200: {
-      description: 'Returns success',
-      content: {
-        'application/json': {
-          schema: {
-            $ref: websiteKeyRecreatedRef,
-          },
-        },
-      },
-    } as ResponseObject,
-    default: {
-      $ref: errorResponseRef,
-    },
-  },
-};
-
 const patch: OperationObject = {
   description: 'Patch configuration',
   tags: ['Two Factor Authentication'],
@@ -92,7 +72,6 @@ const patch: OperationObject = {
 const path: PathItemObject = {
   get,
   delete: del,
-  post,
   patch,
   parameters: [{
     $ref: configurationIdRef,
