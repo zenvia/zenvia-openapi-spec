@@ -2,7 +2,6 @@ import { OperationObject, PathItemObject, ResponseObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuration/requests/all';
 import { ref as configurationIdRef } from '../../components/parameters/configurationId';
-import { ref as websiteKeyRecreatedRef } from '../../components/schemas/2fa/configuration/responses/websitekey-recreated';
 import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/configuration/responses/token-created';
 import { ref as patchConfigRef } from '../../components/schemas/2fa/configuration/requests/patch-config';
 
