@@ -18,7 +18,7 @@ const token: SchemaObject = {
       title: 'Token mode',
       type: 'string',
       description: 'The type of the token to be sent',
-      enum: ['NUMBER', 'ALPHANUMERIC'],
+      enum: ['NUMBER', 'ALPHANUMERIC', 'ALPHANUMERIC_SUBSET'],
       default: 'NUMBER',
       example: 'NUMBER',
     },
