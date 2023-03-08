@@ -5,7 +5,7 @@ import { ref as localeRef } from './locale';
 const content: SchemaObject = {
   title: 'SMS and E-mail Content',
   type: 'object',
-  description: 'Content with SMS and e-mail information and default locale, it\'s necessary to create configuration to at least one locale',
+  description: 'Content with SMS and e-mail information and default locale, it\'s necessary to create configuration for at least one locale',
   properties: {
     default: {
       title: 'Locale',

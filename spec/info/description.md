@@ -122,10 +122,10 @@ This is an advanced version of the [token authentication](#section/Authenticatio
 In this approach, alongside the `X-API-Token` http header, it is necessary to send a request signature.
 <br>The signature is expected in the `X-API-Signature` http header.
 
-This signature needs to be generated at each request, since it is unique to the request.
+This signature needs to be generated for each request, since it is unique to the request.
 
 Although similar, the standard token do not support signature, and the signature token always requires a signature.
-<br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform..
+<br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
 
 #### Example:
 ```
@@ -137,7 +137,7 @@ X-API-Signature: rtHTyAfsJFD5UFpPDeztUI3JE0Guea5pqG9iJqrT2EY=
 ### Signature generation
 
 The signature is a *HMAC-SHA256* hash, calculated using the *token secret* obtained at the creation of the *signature token*
-in the [API console](https://app.zenvia.com/home/api).
+in the [API console](https://app.zenvia.com/home/api), encoded as a *base64* string.
 
 The input for the hash generation is a *multiline* string, composed by six lines separated by *unix* line breaks: `\n`, **without** an empty line in the end.
 
@@ -153,7 +153,7 @@ The components of each line are the following:
 3. The request `Content-Type` header.
 <br>*Ex: `application/json`.*
     - For request without body, this line must be **empty**.
-    - For `multipart/form-data`, the file content type is to be used.
+    - For `multipart/form-data`, the file content type should be used.
 
 4. The request `Date` header, formatted following the RFC2616.
 <br>*Ex: `Sun, 12 Feb 2023 07:40:32 GMT`.*
