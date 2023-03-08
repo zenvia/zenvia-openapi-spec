@@ -18,6 +18,9 @@ const category: SchemaObject = {
     'TICKET_UPDATE',
     'ALERT_UPDATE',
     'AUTO_REPLY',
+    'AUTHENTICATION',
+    'MARKETING',
+    'UTILITY',
     'OTHER',
   ],
 };
