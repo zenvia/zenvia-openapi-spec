@@ -127,10 +127,10 @@ info:
     In this approach, alongside the `X-API-Token` http header, it is necessary to send a request signature.
     <br>The signature is expected in the `X-API-Signature` http header.
 
-    This signature needs to be generated at each request, since it is unique to the request.
+    This signature needs to be generated for each request, since it is unique to the request.
 
     Although similar, the standard token do not support signature, and the signature token always requires a signature.
-    <br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform..
+    <br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform.
 
     #### Example:
     ```
@@ -142,7 +142,7 @@ info:
     ### Signature generation
 
     The signature is a *HMAC-SHA256* hash, calculated using the *token secret* obtained at the creation of the *signature token*
-    in the [API console](https://app.zenvia.com/home/api).
+    in the [API console](https://app.zenvia.com/home/api), encoded as a *base64* string.
 
     The input for the hash generation is a *multiline* string, composed by six lines separated by *unix* line breaks: `\n`, **without** an empty line in the end.
 
@@ -158,7 +158,7 @@ info:
     3. The request `Content-Type` header.
     <br>*Ex: `application/json`.*
         - For request without body, this line must be **empty**.
-        - For `multipart/form-data`, the file content type is to be used.
+        - For `multipart/form-data`, the file content type should be used.
 
     4. The request `Date` header, formatted following the RFC2616.
     <br>*Ex: `Sun, 12 Feb 2023 07:40:32 GMT`.*
@@ -279,9 +279,12 @@ paths:
       description: List all configurations
       tags:
         - Two Factor Authentication
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
         '200':
-          description: Return all tokens configurations
+          description: Return all token configurations.
           content:
             application/json:
               schema:
@@ -290,7 +293,7 @@ paths:
           $ref: '#/components/responses/error'
   '/2fa-configurations/{configurationId}':
     get:
-      description: List configuration given the configuration id
+      description: List a configuration by id
       tags:
         - Two Factor Authentication
       responses:
@@ -303,12 +306,47 @@ paths:
         default:
           $ref: '#/components/responses/error'
     delete:
-      description: Delete a configuration given the configuration id
+      description: Delete a configuration by configuration id
+      tags:
+        - Two Factor Authentication
+      responses:
+        '204':
+          description: No content
+        default:
+          $ref: '#/components/responses/error'
+    patch:
+      description: Patch configuration
+      tags:
+        - Two Factor Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2fa.configuration.requests.patch-config'
+      responses:
+        '200':
+          description: Returns success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.configuration.responses.token-created'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/configurationId'
+  '/2fa-configurations/{configurationId}/actions/website-key-recreate':
+    post:
+      description: Recreate websitekey
       tags:
         - Two Factor Authentication
       responses:
         '200':
           description: Returns success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/2fa.configuration.responses.websitekey-recreated'
         default:
           $ref: '#/components/responses/error'
     parameters:
@@ -335,7 +373,7 @@ paths:
           $ref: '#/components/responses/error'
   /2fa-tokens/actions/resend:
     post:
-      description: Resend the code to the user
+      description: Resend token
       tags:
         - Two Factor Authentication
       requestBody:
@@ -346,12 +384,12 @@ paths:
               $ref: '#/components/schemas/2fa.token.requests.to-channel'
       responses:
         '204':
-          description: Return the code status to indicate success
+          description: No content
         default:
           $ref: '#/components/responses/error'
   /2fa-tokens/actions/verify:
     post:
-      description: Verify a token
+      description: Verify token
       tags:
         - Two Factor Authentication
       requestBody:
@@ -371,19 +409,19 @@ paths:
           $ref: '#/components/responses/error'
   '/2fa-tokens/{tokenId}/actions/resend':
     post:
-      description: Resend the code using the token id
+      description: Resend the token by token id
       tags:
         - Two Factor Authentication
       responses:
         '204':
-          description: Return the code status to indicate success
+          description: No content
         default:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/tokenId'
   '/2fa-tokens/{tokenId}/actions/verify':
     post:
-      description: Verify a token using the token id
+      description: Verify a token by token id
       tags:
         - Two Factor Authentication
       requestBody:
@@ -2633,15 +2671,15 @@ components:
           $ref: '#/components/schemas/2fa.configuration.requests.delivery'
         content:
           $ref: '#/components/schemas/2fa.configuration.requests.content'
+        website:
+          $ref: '#/components/schemas/2fa.configuration.requests.website'
       required:
         - token
-        - verify
-        - delivery
         - content
     2fa.configuration.requests.content:
       title: SMS and E-mail Content
       type: object
-      description: 'Content with SMS and e-mail information and default locale, it''s necessary to create configuration to at least one locale'
+      description: 'Content with SMS and e-mail information and default locale, it''s necessary to create configuration for at least one locale'
       properties:
         default:
           title: Locale
@@ -2760,6 +2798,34 @@ components:
           description: Email configuration details
           type: object
           $ref: '#/components/schemas/2fa.configuration.requests.email'
+    2fa.configuration.requests.patch-config:
+      title: Patch configuration
+      type: object
+      description: Patch configuration
+      properties:
+        op:
+          type: string
+          description: Token configuration update operation type
+          enum:
+            - replace
+            - add
+            - remove
+          example: replace
+        path:
+          type: string
+          description: The path inside the token configuration object
+          example: /token
+        value:
+          type: object
+          description: 'The value to replace, add, or remove'
+          example:
+            size: 6
+            mode: NUMBER
+            case: UPPER_ONLY
+      required:
+        - op
+        - path
+        - value
     2fa.configuration.requests.sms:
       title: SMS configuration
       description: Information to send the token using SMS
@@ -2799,6 +2865,7 @@ components:
           enum:
             - NUMBER
             - ALPHANUMERIC
+            - ALPHANUMERIC_SUBSET
           default: NUMBER
           example: NUMBER
         case:
@@ -2813,8 +2880,6 @@ components:
           example: UPPER_ONLY
       required:
         - size
-        - mode
-        - case
     2fa.configuration.requests.verify:
       title: Verification properties
       type: object
@@ -2833,24 +2898,22 @@ components:
           maximum: 10
     2fa.configuration.requests.website:
       title: Website domains
-      description: Information needed to use this two factor authentication API service on a website or on a mobile app
+      description: Information needed to use this two factor authentication API service on a website
       type: object
       properties:
         domains:
           title: List of Domains
           type: array
-          description: List of clients domains allowed to use the two factor authentication service
-          items:
-            type: string
-            example: app.zenvia.com
-        appPackages:
-          title: List of apps
-          type: array
-          description: List of Android apps allowed to use the two factor authentication service
+          description: List of client domains allowed to use the two-factor authentication service
           items:
             type: string
           example:
-            - com.zenvia.android.app
+            - app.zenvia.com
+        websiteKey:
+          type: string
+          description: The platform generates a key that the client's frontend must use to identify itself
+          readOnly: true
+          example: XXXXXXXXXXXXXX
     2fa.configuration.responses.base:
       title: Token Configuration Creation
       type: array
@@ -2861,7 +2924,7 @@ components:
           id:
             title: Token Configuration Id
             type: string
-            description: The configuration unique id
+            description: The configuration's unique Id
             example: 11401560-bffb-4ef3-a08e-989a15ed3c32
           token:
             $ref: '#/components/schemas/2fa.configuration.requests.token'
@@ -2871,6 +2934,8 @@ components:
             $ref: '#/components/schemas/2fa.configuration.requests.delivery'
           content:
             $ref: '#/components/schemas/2fa.configuration.requests.content'
+          website:
+            $ref: '#/components/schemas/2fa.configuration.requests.website'
           createdAt:
             title: Creation Timestamp
             description: Timestamp of the configuration token creation
@@ -2889,7 +2954,7 @@ components:
         id:
           title: Token Configuration Id
           type: string
-          description: The configuration unique id
+          description: The configuration's unique Id
           example: 11401560-bffb-4ef3-a08e-989a15ed3c32
         token:
           $ref: '#/components/schemas/2fa.configuration.requests.token'
@@ -2899,6 +2964,8 @@ components:
           $ref: '#/components/schemas/2fa.configuration.requests.delivery'
         content:
           $ref: '#/components/schemas/2fa.configuration.requests.content'
+        website:
+          $ref: '#/components/schemas/2fa.configuration.requests.website'
         createdAt:
           title: Creation Timestamp
           description: Timestamp of the configuration token creation
@@ -2909,6 +2976,16 @@ components:
           description: Timestamp of the token updates
           type: string
           example: '2022-10-27T13:25:11.354Z'
+    2fa.configuration.responses.websitekey-recreated:
+      title: Token Configuration Creation
+      type: object
+      description: Token configuration created response
+      properties:
+        websiteKey:
+          type: string
+          description: The platform generates a key that the client's frontend must use to identify itself
+          readOnly: true
+          example: XXXXXXXXXXXXXX
     2fa.token.requests.code:
       title: code
       type: object
@@ -6636,6 +6713,15 @@ components:
       schema:
         type: string
       example: b5agf1-y237-11e8-b127-1230f6c2d98m
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: 'Number of elements on a page. If not filled, the default size is the total number of records'
+      schema:
+        title: size
+        type: number
+      example: 10
     page:
       name: page
       in: query
@@ -7366,9 +7452,9 @@ tags:
       * The first line of the file is dedicated to the header. There must be a column that contains the recipients' phone numbers. If your content has variables, there must be corresponding columns.
   - name: Two Factor Authentication
     description: |
-      The two factor authentication service offers the possibility to identify through the user request and device origin IP that the access is being made from a verified device, bringing more security to transactions.
+      The two-factor authentication service ensures that access requests are made by trusted users by identifying the user's request token.
 
-      It's possible to create a variety of configurations of tokens that can be sent through one of two channels: SMS or E-mail.
+      Tokens can be configured in a variety of ways and sent via one of two channels: SMS or E-mail.
   - name: Webhooks
     description: |
       Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
