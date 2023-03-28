@@ -1472,6 +1472,9 @@ components:
         - TICKET_UPDATE
         - ALERT_UPDATE
         - AUTO_REPLY
+        - AUTHENTICATION
+        - MARKETING
+        - UTILITY
     templates.template-comment:
       type: object
       required:

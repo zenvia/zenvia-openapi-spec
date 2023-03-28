@@ -1757,7 +1757,10 @@
           "TRANSPORTATION_UPDATE",
           "TICKET_UPDATE",
           "ALERT_UPDATE",
-          "AUTO_REPLY"
+          "AUTO_REPLY",
+          "AUTHENTICATION",
+          "MARKETING",
+          "UTILITY"
         ]
       },
       "templates.template-comment": {
