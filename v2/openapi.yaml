@@ -6923,6 +6923,7 @@ components:
           - WHATSAPP
           - SMS
           - RCS
+          - EMAIL
       example: WHATSAPP
     templates.senderId:
       name: senderId

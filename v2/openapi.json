@@ -9032,7 +9032,8 @@
           "enum": [
             "WHATSAPP",
             "SMS",
-            "RCS"
+            "RCS",
+            "EMAIL"
           ]
         },
         "example": "WHATSAPP"
