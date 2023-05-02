@@ -35,7 +35,7 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *DELIVERED: "**The message has been delivered by the provider**".*
 * *READ: "**The message has been read by the recipient**".*
 * *REJECTED: "**The message was rejected by the provider**".*
-* *NOT_DELIVERED: "**The provider was unable to deliver the message.**"*
+* *NOT_DELIVERED: "**The provider was unable to deliver the message**".*
 * *DELETED: "**The message has been deleted by the contact**".*
 * *CLICKED: "**An action item in the message has been clicked by the contact**".*
 * *VERIFIED: "**The message has been verified by the device app/provider**".*
