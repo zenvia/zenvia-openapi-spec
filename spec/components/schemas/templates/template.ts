@@ -20,6 +20,7 @@ const template: SchemaObject = {
     'senderId',
     'category',
     'components',
+    'examples',
   ],
   properties: {
     id: {
