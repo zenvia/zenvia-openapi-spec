@@ -5,7 +5,7 @@ import { ref as copyCodeRef } from './copy-code';
 
 export const otp: SchemaObject = {
   title: 'OTP',
-  description: `Template OTP button. A copy code button copies the one-time password or code to the user\'s clipboard. The user can then manually switch to your app and paste the password or code into your app\'s interface. A one-tap autofill button automatically loads and passes your app the one-time password or code.
+  description: `Template OTP button. A copy code button copies the one-time password or code to the user's clipboard. The user can then manually switch to your app and paste the password or code into your app's interface. A one-tap autofill button automatically loads and passes your app the one-time password or code.
                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
   oneOf: [{
@@ -28,8 +28,8 @@ export const otp: SchemaObject = {
     codeExpirationMinutes: 5,
     autofillText: 'autofill',
     packageName: 'com.example.myapplication',
-    signatureHash: 'K8a%2FAINcGX7'
-  }
+    signatureHash: 'K8a%2FAINcGX7',
+  },
 };
 
 export const ref = createComponentRef(__filename);
