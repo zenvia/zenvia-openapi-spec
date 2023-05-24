@@ -5,7 +5,7 @@ const contentBase: SchemaObject = {
   type: 'object',
   properties: {
     type: {
-      title: 'Content type',
+      title:  'OTP is an authentication button. Set to COPY_CODE if you want the template to use a copy code button, or ONE_TAP to have it use a one-tap autofill button',
       type: 'string',
     },
   },

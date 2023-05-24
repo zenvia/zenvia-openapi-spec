@@ -5,7 +5,7 @@ import { ref as copyCodeRef } from './copy-code';
 
 export const otp: SchemaObject = {
   title: 'OTP',
-  description: `Template OTP button. OTP is an authentication button. Set to COPY_CODE if you want the template to use a copy code button, or ONE_TAP to have it use a one-tap autofill button.
+  description: `Template OTP button. A copy code button copies the one-time password or code to the user\'s clipboard. The user can then manually switch to your app and paste the password or code into your app\'s interface. A one-tap autofill button automatically loads and passes your app the one-time password or code.
                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
   oneOf: [{

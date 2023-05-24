@@ -9,7 +9,6 @@ const otp: SchemaObject = {
     $ref: baseRef,
   }, {
     type: 'object',
-    // AQUI NÃO PEGOU description: 'A copy code button copies the one-time password or code to the user\'s clipboard. The user can then manually switch to your app and paste the password or code into your app\'s interface.',
     properties: {
       copyButtonText: {
         description: 'Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.',

@@ -9,7 +9,6 @@ const otp: SchemaObject = {
     $ref: baseRef,
   }, {
     type: 'object',
-    // AQUI NÃO PEGOU description: 'A one-tap autofill button automatically loads and passes your app the one-time password or code.', // AQUI NÃO PEGOU
     properties: {
       copyButtonText: {
         description: 'Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.',
