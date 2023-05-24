@@ -23,7 +23,6 @@ const otp: SchemaObject = {
         type: 'number',
       },
     },
-    maxItems: 1,
     required: [
       'type',
       'copyButtonText',
