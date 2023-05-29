@@ -8039,7 +8039,7 @@
       },
       "templates.template-example": {
         "title": "Examples",
-        "description": "Provides an example of possible model data. This helps during the review and approval process so that Facebook can understand what\n                kind of messages you plan to send. Ensure these are examples and do not include personal or confidential information.\n                In case you decide to include variables and examples, provide them with the same number.\n                <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,\n                being assigned the example URL.",
+        "description": "Provides an example of possible model data. This helps during the review and approval process so that Facebook can understand what\n                kind of messages you plan to send. Ensure these are examples and do not include personal or confidential information.\n                In case you decide to include variables and examples, provide them with the same number.\n                <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,\n                being assigned the example URL.\n                <br>This field is mandatory only for the WhatsApp channel.",
         "type": "object",
         "example": {
           "imageUrl": "https://example.com/image.jpeg",
