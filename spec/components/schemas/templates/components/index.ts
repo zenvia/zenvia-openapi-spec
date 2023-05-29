@@ -13,9 +13,6 @@ const header: SchemaObject = {
   title: 'Components',
   description: 'Message content of this template',
   type: 'object',
-  required: [
-    'body',
-  ],
   properties: {
     header: {
       $ref: headerRef,

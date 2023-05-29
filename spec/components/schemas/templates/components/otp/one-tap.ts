@@ -38,6 +38,9 @@ const otp: SchemaObject = {
     required: [
       'type',
       'copyButtonText',
+      'autofillText',
+      'packageName',
+      'signatureHash',
     ],
   }],
 };
