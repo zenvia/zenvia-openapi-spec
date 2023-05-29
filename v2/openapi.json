@@ -5141,7 +5141,7 @@
               },
               "fields": {
                 "type": "object",
-                "description": "The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.",
+                "description": "The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.",
                 "example": {
                   "user": "John Smith",
                   "protocol": "34534252"
@@ -8265,9 +8265,6 @@
         "title": "Components",
         "description": "Message content of this template",
         "type": "object",
-        "required": [
-          "body"
-        ],
         "properties": {
           "header": {
             "$ref": "#/components/schemas/templates.components.header.index"
@@ -8280,6 +8277,9 @@
           },
           "buttons": {
             "$ref": "#/components/schemas/templates.components.buttons.index"
+          },
+          "otp": {
+            "$ref": "#/components/schemas/templates.components.otp.index"
           },
           "attachments": {
             "$ref": "#/components/schemas/templates.components.attachments.index"
@@ -8377,7 +8377,7 @@
       },
       "templates.components.body.index": {
         "title": "Body",
-        "description": "Template body",
+        "description": "Template body. The `body` is only not required when the template is from WhatsApp and the authentication category. For all other cases it is required.",
         "type": "object",
         "required": [
           "type",
@@ -8722,6 +8722,123 @@
             "description": "Body header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.<br>In other channels it will be a title above the body."
           }
         }
+      },
+      "templates.components.otp.base": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "OTP is an authentication button. Set to COPY_CODE if you want the template to use a copy code button, or ONE_TAP to have it use a one-tap autofill button",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "templates.components.otp.copy-code": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.otp.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "copyButtonText": {
+                "description": "Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.",
+                "type": "string"
+              },
+              "addSecurityRecommendation": {
+                "description": "Set to true if you want the template to include the string: \"For your security, do not share this code\". Set to false to exclude the string.",
+                "type": "boolean"
+              },
+              "codeExpirationMinutes": {
+                "description": "Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message. You can use a number between 1-90",
+                "type": "number"
+              }
+            },
+            "required": [
+              "type",
+              "copyButtonText"
+            ]
+          }
+        ]
+      },
+      "templates.components.otp.index": {
+        "title": "OTP",
+        "description": "Template OTP button. A copy code button copies the one-time password or code to the user's clipboard. The user can then manually switch to your app and paste the password or code into your app's interface. A one-tap autofill button automatically loads and passes your app the one-time password or code. Currently, ONE_TAP buttons only work for Android. On IOS systems it will work as a COPY_CODE button.\n                <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.otp.one-tap"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.otp.copy-code"
+          }
+        ],
+        "required": [
+          "type"
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ONE_TAP": "#/components/schemas/templates.components.otp.one-tap",
+            "COPY_CODE": "#/components/schemas/templates.components.otp.copy-code"
+          }
+        },
+        "example": {
+          "type": "ONE_TAP",
+          "copyButtonText": "Copy the code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5,
+          "autofillText": "autofill",
+          "packageName": "com.example.myapplication",
+          "signatureHash": "K8a%2FAINcGX7"
+        }
+      },
+      "templates.components.otp.one-tap": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.otp.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "copyButtonText": {
+                "description": "Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.",
+                "type": "string"
+              },
+              "addSecurityRecommendation": {
+                "description": "Set to true if you want the template to include the string: \"For your security, do not share this code\". Set to false to exclude the string.",
+                "type": "boolean"
+              },
+              "codeExpirationMinutes": {
+                "description": "Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message. You can use a number between 1-90",
+                "type": "number"
+              },
+              "autofillText": {
+                "description": "One-tap button text. Maximum 25 characters.",
+                "type": "string"
+              },
+              "packageName": {
+                "description": "Your Android app's package name.",
+                "type": "string"
+              },
+              "signatureHash": {
+                "description": "Your app signing key hash.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "copyButtonText",
+              "autofillText",
+              "packageName",
+              "signatureHash"
+            ]
+          }
+        ]
       }
     },
     "responses": {
