@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "description": "",
   "main": "spec/index.js",
+  "engines": {
+    "node": ">= 16",
+    "npm": ">= 8"
+  },
   "scripts": {
     "start": "ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
     "start:public": "PUBLIC=true ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
