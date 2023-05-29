@@ -11,7 +11,6 @@ const whatsappComponents: SchemaObject = {
   title: 'Components',
   description: 'Message content of this template',
   type: 'object',
-  required: [],
   properties: {
     header: {
       $ref: headerRef,
