@@ -16,7 +16,7 @@
   "compileOnSave": true,
   "buildOnSave": true,
   "include": [
-    "bin/**/*", "spec", "utils"
+    "bin/**/*", "spec/**/*", "utils"
   ],
   "exclude": [
     "node_modules",

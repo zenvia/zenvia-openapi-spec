@@ -2,7 +2,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as localeSchemaRef } from './template-locale';
-import { ref as categorySchemaRef } from './template-category';
+import { ref as categorySchemaRef } from './category/all';
 import { ref as componentsSchemaRef } from './components';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
 import { ref as examplesSchemaRef } from './template-example';
