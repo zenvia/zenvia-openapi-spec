@@ -20,7 +20,7 @@ const template: SchemaObject = {
       },
       fields: {
         type: 'object',
-        description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.',
+        description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.',
         example: {
           user: 'John Smith',
           protocol: '34534252',

@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 
 const body: SchemaObject = {
   title: 'Body',
-  description: 'Template body',
+  description: 'Template body. The `body` is only not required when the template is from WhatsApp and the authentication category. For all other cases it is required.',
   type: 'object',
   required: ['type', 'text'],
   properties: {
