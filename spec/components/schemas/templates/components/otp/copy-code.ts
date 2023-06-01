@@ -8,6 +8,12 @@ const otp: SchemaObject = {
   allOf: [{
     $ref: baseRef,
   }],
+  example: {
+    type: 'COPY_CODE',
+    copyButtonText: 'Copy the code',
+    addSecurityRecommendation: true,
+    codeExpirationMinutes: 5,
+  },
 };
 
 export const ref = createComponentRef(__filename);

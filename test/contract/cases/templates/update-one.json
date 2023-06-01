@@ -11,7 +11,7 @@
     },
     "body": {
       "locale": "pt_BR",
-      "category": "ACCOUNT_UPDATE",
+      "category": "UTILITY",
       "components": {
         "body": {
           "type": "TEXT_FIXED",
@@ -32,7 +32,7 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "ACCOUNT_UPDATE",
+      "category": "UTILITY",
       "components": {
         "body": {
           "type": "TEXT_FIXED",

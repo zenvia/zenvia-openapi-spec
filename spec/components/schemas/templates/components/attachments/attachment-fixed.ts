@@ -10,6 +10,13 @@ const attachmentFixed: SchemaObject = {
   }, {
     $ref: fileRef,
   }],
+  example: {
+    type: 'ATTACHMENT_FIXED',
+    cid: 'promotion.jpeg',
+    fileUrl: 'https://zenvia.com/promo.jpg',
+    fileMimeType: 'image/jpeg',
+    fileName: 'attachment-name.jpeg',
+  },
 };
 
 export const ref = createComponentRef(__filename);
