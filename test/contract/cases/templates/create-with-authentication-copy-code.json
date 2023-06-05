@@ -1,0 +1,50 @@
+{
+  "name": "create simple template authentication [copy-code]",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "AUTHENTICATION",
+      "components": {
+        "otp": {
+          "type": "COPY_CODE",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "AUTHENTICATION",
+      "components": {
+        "otp": {
+          "type": "COPY_CODE",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5
+        }
+      }
+    }
+  }
+}
