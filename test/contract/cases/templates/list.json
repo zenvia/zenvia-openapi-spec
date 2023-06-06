@@ -20,7 +20,7 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "UTILITY",
+      "category": "ALERT_UPDATE",
       "components": {
         "body": {
           "type": "TEXT_FIXED",
