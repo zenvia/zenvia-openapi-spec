@@ -2933,7 +2933,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/templates.template"
+                "$ref": "#/components/schemas/templates.create.all"
               }
             }
           }
@@ -2944,7 +2944,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/templates.template"
+                  "$ref": "#/components/schemas/templates.create.all"
                 }
               }
             }
@@ -7955,7 +7955,7 @@
             "$ref": "#/components/schemas/templates.template-locale"
           },
           "category": {
-            "$ref": "#/components/schemas/templates.template-category"
+            "$ref": "#/components/schemas/templates.category.all"
           },
           "components": {
             "$ref": "#/components/schemas/templates.components.index"
@@ -8261,6 +8261,65 @@
           }
         }
       },
+      "templates.category.all": {
+        "title": "Category",
+        "description": "Category of use for this template",
+        "type": "string",
+        "enum": [
+          "AUTHENTICATION",
+          "MARKETING",
+          "UTILITY",
+          "ACCOUNT_UPDATE",
+          "PAYMENT_UPDATE",
+          "PERSONAL_FINANCE_UPDATE",
+          "SHIPPING_UPDATE",
+          "RESERVATION_UPDATE",
+          "ISSUE_RESOLUTION",
+          "APPOINTMENT_UPDATE",
+          "TRANSPORTATION_UPDATE",
+          "TICKET_UPDATE",
+          "ALERT_UPDATE",
+          "AUTO_REPLY",
+          "OTHER"
+        ]
+      },
+      "templates.category.base": {
+        "title": "Category",
+        "description": "Category of use for this template",
+        "type": "string",
+        "enum": [
+          "AUTHENTICATION",
+          "MARKETING",
+          "UTILITY"
+        ]
+      },
+      "templates.components.base": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object"
+      },
+      "templates.components.email-components": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "required": [
+          "body"
+        ],
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/templates.components.header.index"
+          },
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
+          },
+          "attachments": {
+            "$ref": "#/components/schemas/templates.components.attachments.index"
+          },
+          "email": {
+            "$ref": "#/components/schemas/templates.components.email.index"
+          }
+        }
+      },
       "templates.components.index": {
         "title": "Components",
         "description": "Message content of this template",
@@ -8286,6 +8345,63 @@
           },
           "email": {
             "$ref": "#/components/schemas/templates.components.email.index"
+          }
+        }
+      },
+      "templates.components.rcs": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "required": [
+          "body"
+        ],
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/templates.components.header.index"
+          },
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
+          },
+          "footer": {
+            "$ref": "#/components/schemas/templates.components.footer.index"
+          },
+          "buttons": {
+            "$ref": "#/components/schemas/templates.components.buttons.index"
+          }
+        }
+      },
+      "templates.components.sms": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "required": [
+          "body"
+        ],
+        "properties": {
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
+          }
+        }
+      },
+      "templates.components.whatsapp": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/templates.components.header.index"
+          },
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
+          },
+          "footer": {
+            "$ref": "#/components/schemas/templates.components.footer.index"
+          },
+          "buttons": {
+            "$ref": "#/components/schemas/templates.components.buttons.index"
+          },
+          "otp": {
+            "$ref": "#/components/schemas/templates.components.otp.index"
           }
         }
       },
@@ -8322,7 +8438,12 @@
               "fieldName"
             ]
           }
-        ]
+        ],
+        "example": {
+          "type": "ATTACHMENT_DYNAMIC",
+          "cid": "personalized-promo.jpeg",
+          "fieldName": "promoURL"
+        }
       },
       "templates.components.attachments.attachment-fixed": {
         "type": "object",
@@ -8333,7 +8454,14 @@
           {
             "$ref": "#/components/schemas/content.bases.file"
           }
-        ]
+        ],
+        "example": {
+          "type": "ATTACHMENT_FIXED",
+          "cid": "promotion.jpeg",
+          "fileUrl": "https://zenvia.com/promo.jpg",
+          "fileMimeType": "image/jpeg",
+          "fileName": "attachment-name.jpeg"
+        }
       },
       "templates.components.attachments.index": {
         "title": "Attachments",
@@ -8359,25 +8487,11 @@
           "required": [
             "type"
           ]
-        },
-        "example": [
-          {
-            "type": "ATTACHMENT_FIXED",
-            "cid": "promotion.jpeg",
-            "fileUrl": "https://zenvia.com/promo.jpg",
-            "fileMimeType": "image/jpeg",
-            "fileName": "attachment-name.jpeg"
-          },
-          {
-            "type": "ATTACHMENT_DYNAMIC",
-            "cid": "personalized-promo.jpeg",
-            "fieldName": "promoURL"
-          }
-        ]
+        }
       },
       "templates.components.body.index": {
         "title": "Body",
-        "description": "Template body. The `body` is only not required when the template is from WhatsApp and the authentication category. For all other cases it is required.",
+        "description": "Template body.\n  <br>*Just not required when [WhatsApp](#tag/WhatsApp) channel and AUTHENTICATION category. For all other cases it is required.*",
         "type": "object",
         "required": [
           "type",
@@ -8727,12 +8841,30 @@
         "type": "object",
         "properties": {
           "type": {
-            "title": "OTP is an authentication button. Set to COPY_CODE if you want the template to use a copy code button, or ONE_TAP to have it use a one-tap autofill button",
+            "title": "Content type",
+            "description": "Set to COPY_CODE if you want the template to use a copy code button, or ONE_TAP to use an one-tap autofill button",
             "type": "string"
+          },
+          "copyButtonText": {
+            "description": "Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 25
+          },
+          "addSecurityRecommendation": {
+            "description": "Set to true if you want the template to include the text: \"For your security, do not share this code\". Set to false to exclude the text.",
+            "type": "boolean"
+          },
+          "codeExpirationMinutes": {
+            "description": "Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 90
           }
         },
         "required": [
-          "type"
+          "type",
+          "copyButtonText"
         ]
       },
       "templates.components.otp.copy-code": {
@@ -8740,29 +8872,14 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/templates.components.otp.base"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "copyButtonText": {
-                "description": "Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.",
-                "type": "string"
-              },
-              "addSecurityRecommendation": {
-                "description": "Set to true if you want the template to include the string: \"For your security, do not share this code\". Set to false to exclude the string.",
-                "type": "boolean"
-              },
-              "codeExpirationMinutes": {
-                "description": "Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message. You can use a number between 1-90",
-                "type": "number"
-              }
-            },
-            "required": [
-              "type",
-              "copyButtonText"
-            ]
           }
-        ]
+        ],
+        "example": {
+          "type": "COPY_CODE",
+          "copyButtonText": "Copy the code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5
+        }
       },
       "templates.components.otp.index": {
         "title": "OTP",
@@ -8785,15 +8902,6 @@
             "ONE_TAP": "#/components/schemas/templates.components.otp.one-tap",
             "COPY_CODE": "#/components/schemas/templates.components.otp.copy-code"
           }
-        },
-        "example": {
-          "type": "ONE_TAP",
-          "copyButtonText": "Copy the code",
-          "addSecurityRecommendation": true,
-          "codeExpirationMinutes": 5,
-          "autofillText": "autofill",
-          "packageName": "com.example.myapplication",
-          "signatureHash": "K8a%2FAINcGX7"
         }
       },
       "templates.components.otp.one-tap": {
@@ -8805,21 +8913,11 @@
           {
             "type": "object",
             "properties": {
-              "copyButtonText": {
-                "description": "Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.",
-                "type": "string"
-              },
-              "addSecurityRecommendation": {
-                "description": "Set to true if you want the template to include the string: \"For your security, do not share this code\". Set to false to exclude the string.",
-                "type": "boolean"
-              },
-              "codeExpirationMinutes": {
-                "description": "Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message. You can use a number between 1-90",
-                "type": "number"
-              },
               "autofillText": {
-                "description": "One-tap button text. Maximum 25 characters.",
-                "type": "string"
+                "description": "One-tap button text.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 25
               },
               "packageName": {
                 "description": "Your Android app's package name.",
@@ -8837,6 +8935,216 @@
               "packageName",
               "signatureHash"
             ]
+          }
+        ],
+        "example": {
+          "type": "ONE_TAP",
+          "copyButtonText": "Copy the code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5,
+          "autofillText": "autofill",
+          "packageName": "com.example.myapplication",
+          "signatureHash": "K8a%2FAINcGX7"
+        }
+      },
+      "templates.create.all": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/templates.create.whatsapp"
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.sms"
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.rcs"
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.email"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "channel",
+          "mapping": {
+            "WHATSAPP": "#/components/schemas/templates.create.whatsapp",
+            "SMS": "#/components/schemas/templates.create.sms",
+            "RCS": "#/components/schemas/templates.create.rcs",
+            "EMAIL": "#/components/schemas/templates.create.email"
+          }
+        }
+      },
+      "templates.create.base": {
+        "title": "Template Object",
+        "description": "This is a Template object model",
+        "type": "object",
+        "required": [
+          "name",
+          "locale",
+          "channel",
+          "senderId",
+          "category",
+          "components"
+        ],
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "description": "Channel where the template will be made available.",
+            "type": "string",
+            "enum": [
+              "WHATSAPP",
+              "SMS",
+              "RCS",
+              "EMAIL"
+            ]
+          },
+          "id": {
+            "title": "Template ID",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Template name",
+            "description": "The name of the template",
+            "type": "string"
+          },
+          "locale": {
+            "$ref": "#/components/schemas/templates.template-locale"
+          },
+          "senderId": {
+            "title": "Sender ID",
+            "description": "The identifier of the sender of the template. The sender should be created with a credential.",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/templates.template-metadata"
+          },
+          "notificationEmail": {
+            "$ref": "#/components/schemas/templates.template-notification-email"
+          },
+          "text": {
+            "title": "Template text",
+            "description": "A text reference for the template. This field encompasses all content components.",
+            "type": "string",
+            "readOnly": true
+          },
+          "fields": {
+            "title": "Fields",
+            "description": "The available fields to be used in this template",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "readOnly": true
+          },
+          "comments": {
+            "title": "Comments",
+            "description": "Comments added to the template during the approval process",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/templates.template-comment"
+            }
+          },
+          "status": {
+            "title": "Status of template",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "WAITING_REVIEW",
+              "REJECTED",
+              "WAITING_APPROVAL",
+              "APPROVED",
+              "PAUSED",
+              "DISABLED"
+            ]
+          },
+          "createdAt": {
+            "title": "Creation timestamp",
+            "description": "Creation timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "title": "Update timestamp",
+            "description": "Update timestamp in ISO format",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "templates.create.email": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "components": {
+                "$ref": "#/components/schemas/templates.components.email-components"
+              },
+              "category": {
+                "$ref": "#/components/schemas/templates.category.all"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.base"
+          }
+        ]
+      },
+      "templates.create.rcs": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "components": {
+                "$ref": "#/components/schemas/templates.components.rcs"
+              },
+              "category": {
+                "$ref": "#/components/schemas/templates.category.all"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.base"
+          }
+        ]
+      },
+      "templates.create.sms": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "components": {
+                "$ref": "#/components/schemas/templates.components.sms"
+              },
+              "category": {
+                "$ref": "#/components/schemas/templates.category.all"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.base"
+          }
+        ]
+      },
+      "templates.create.whatsapp": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "components": {
+                "$ref": "#/components/schemas/templates.components.whatsapp"
+              },
+              "category": {
+                "$ref": "#/components/schemas/templates.category.base"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.base"
           }
         ]
       }
