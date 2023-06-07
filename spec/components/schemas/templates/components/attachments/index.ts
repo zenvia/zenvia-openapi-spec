@@ -26,17 +26,6 @@ export const attachments: SchemaObject = {
       'type',
     ],
   },
-  example: [{
-    type: 'ATTACHMENT_FIXED',
-    cid: 'promotion.jpeg',
-    fileUrl: 'https://zenvia.com/promo.jpg',
-    fileMimeType: 'image/jpeg',
-    fileName: 'attachment-name.jpeg',
-  }, {
-    type: 'ATTACHMENT_DYNAMIC',
-    cid: 'personalized-promo.jpeg',
-    fieldName: 'promoURL',
-  }],
 };
 
 export const ref = createComponentRef(__filename);

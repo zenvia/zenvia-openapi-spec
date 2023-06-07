@@ -1,5 +1,5 @@
 {
-  "name": "create simple template",
+  "name": "create simple template authentication [copy-code]",
   "request": {
     "method": "POST",
     "path": "/templates",
@@ -14,11 +14,13 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "UTILITY",
+      "category": "AUTHENTICATION",
       "components": {
-        "body": {
-          "type": "TEXT_FIXED",
-          "text": "some text"
+        "otp": {
+          "type": "COPY_CODE",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5
         }
       }
     }
@@ -34,11 +36,13 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "UTILITY",
+      "category": "AUTHENTICATION",
       "components": {
-        "body": {
-          "type": "TEXT_FIXED",
-          "text": "some text"
+        "otp": {
+          "type": "COPY_CODE",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5
         }
       }
     }

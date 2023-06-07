@@ -6,10 +6,8 @@ import { ref as bodyRef } from './body';
 import { ref as footerRef } from './footer';
 import { ref as buttonsRef } from './buttons';
 import { ref as otpRef } from './otp';
-import { ref as emailRef } from './email';
-import { ref as attachmentsRef } from './attachments';
 
-const components: SchemaObject = {
+const whatsappComponents: SchemaObject = {
   title: 'Components',
   description: 'Message content of this template',
   type: 'object',
@@ -29,14 +27,8 @@ const components: SchemaObject = {
     otp: {
       $ref: otpRef,
     },
-    attachments: {
-      $ref: attachmentsRef,
-    },
-    email: {
-      $ref: emailRef,
-    },
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default components;
+export default whatsappComponents;

@@ -6,6 +6,7 @@ import {
   ResponsesObject,
 } from 'openapi3-ts';
 import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
+import { ref as templateCreateSchemaRef } from '../../components/schemas/templates/create/all';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as channel } from '../../components/parameters/templates/channel';
 import { ref as senderId } from '../../components/parameters/templates/senderId';
@@ -18,7 +19,7 @@ const post: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: templateSchemaRef,
+          $ref: templateCreateSchemaRef,
         },
       },
     },
@@ -29,7 +30,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: templateSchemaRef,
+            $ref: templateCreateSchemaRef,
           } as SchemaObject,
         },
       },

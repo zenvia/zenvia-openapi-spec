@@ -19,6 +19,11 @@ const attachmentDynamic: SchemaObject = {
       'fieldName',
     ],
   }],
+  example: {
+    type: 'ATTACHMENT_DYNAMIC',
+    cid: 'personalized-promo.jpeg',
+    fieldName: 'promoURL',
+  },
 };
 
 export const ref = createComponentRef(__filename);

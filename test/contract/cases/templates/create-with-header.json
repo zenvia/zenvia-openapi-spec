@@ -14,7 +14,7 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "ACCOUNT_UPDATE",
+      "category": "UTILITY",
       "components": {
         "header": {
           "type": "MEDIA_DOCUMENT"
@@ -37,7 +37,7 @@
       "locale": "pt_BR",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
-      "category": "ACCOUNT_UPDATE",
+      "category": "UTILITY",
       "components": {
         "header": {
           "type": "MEDIA_DOCUMENT"
