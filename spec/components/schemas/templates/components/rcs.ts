@@ -5,14 +5,12 @@ import { ref as headerRef } from './header';
 import { ref as bodyRef } from './body';
 import { ref as footerRef } from './footer';
 import { ref as buttonsRef } from './buttons';
-import { ref as otpRef } from './otp';
-import { ref as emailRef } from './email';
-import { ref as attachmentsRef } from './attachments';
 
-const components: SchemaObject = {
+const rcsComponents: SchemaObject = {
   title: 'Components',
   description: 'Message content of this template',
   type: 'object',
+  required: ['body'],
   properties: {
     header: {
       $ref: headerRef,
@@ -26,17 +24,8 @@ const components: SchemaObject = {
     buttons: {
       $ref: buttonsRef,
     },
-    otp: {
-      $ref: otpRef,
-    },
-    attachments: {
-      $ref: attachmentsRef,
-    },
-    email: {
-      $ref: emailRef,
-    },
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default components;
+export default rcsComponents;

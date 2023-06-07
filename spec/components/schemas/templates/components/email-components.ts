@@ -3,31 +3,20 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as headerRef } from './header';
 import { ref as bodyRef } from './body';
-import { ref as footerRef } from './footer';
-import { ref as buttonsRef } from './buttons';
-import { ref as otpRef } from './otp';
-import { ref as emailRef } from './email';
 import { ref as attachmentsRef } from './attachments';
+import { ref as emailRef } from './email';
 
-const components: SchemaObject = {
+const emailComponents: SchemaObject = {
   title: 'Components',
   description: 'Message content of this template',
   type: 'object',
+  required: ['body'],
   properties: {
     header: {
       $ref: headerRef,
     },
     body: {
       $ref: bodyRef,
-    },
-    footer: {
-      $ref: footerRef,
-    },
-    buttons: {
-      $ref: buttonsRef,
-    },
-    otp: {
-      $ref: otpRef,
     },
     attachments: {
       $ref: attachmentsRef,
@@ -39,4 +28,4 @@ const components: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default components;
+export default emailComponents;

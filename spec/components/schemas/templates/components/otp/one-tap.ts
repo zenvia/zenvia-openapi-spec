@@ -10,24 +10,14 @@ const otp: SchemaObject = {
   }, {
     type: 'object',
     properties: {
-      copyButtonText: {
-        description: 'Note that even if your template is using a one-tap autofill button, this value must still be supplied. If we are unable to validate your handshake the authentication template message will display a copy code button with this text instead. Maximum 25 characters.',
-        type: 'string',
-      },
-      addSecurityRecommendation: {
-        description: 'Set to true if you want the template to include the string: "For your security, do not share this code". Set to false to exclude the string.',
-        type: 'boolean',
-      },
-      codeExpirationMinutes: {
-        description: 'Indicates number of minutes the password or code is valid. If omitted, the code expiration warning will not be displayed in the delivered message. You can use a number between 1-90',
-        type: 'number',
-      },
       autofillText: {
-        description: 'One-tap button text. Maximum 25 characters.',
+        description: 'One-tap button text.',
         type: 'string',
+        minLength: 1,
+        maxLength: 25,
       },
       packageName: {
-        description: 'Your Android app\'s package name.',
+        description: "Your Android app's package name.",
         type: 'string',
       },
       signatureHash: {
@@ -43,6 +33,15 @@ const otp: SchemaObject = {
       'signatureHash',
     ],
   }],
+  example: {
+    type: 'ONE_TAP',
+    copyButtonText: 'Copy the code',
+    addSecurityRecommendation: true,
+    codeExpirationMinutes: 5,
+    autofillText: 'autofill',
+    packageName: 'com.example.myapplication',
+    signatureHash: 'K8a%2FAINcGX7',
+  },
 };
 
 export const ref = createComponentRef(__filename);

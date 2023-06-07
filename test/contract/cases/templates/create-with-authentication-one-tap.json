@@ -1,0 +1,56 @@
+{
+  "name": "create simple template authentication [one-tap]",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "AUTHENTICATION",
+      "components": {
+        "otp": {
+          "type": "ONE_TAP",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5,
+          "autofillText": "Autofill",
+          "packageName": "packageName",
+          "signatureHash": "signatureHash"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "AUTHENTICATION",
+      "components": {
+        "otp": {
+          "type": "ONE_TAP",
+          "copyButtonText": "Copy code",
+          "addSecurityRecommendation": true,
+          "codeExpirationMinutes": 5,
+          "autofillText": "Autofill",
+          "packageName": "packageName",
+          "signatureHash": "signatureHash"
+        }
+      }
+    }
+  }
+}
