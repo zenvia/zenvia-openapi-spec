@@ -5,7 +5,7 @@ const replyTo: SchemaObject = {
   type: 'object',
   properties: {
     replyTo: {
-      description: 'Contextual information replying to some previous message. It may include references to the message sent or received on WhatsApp and the content of the content sent or received.',
+      description: 'Contextual information replying to some previous message. It may include references to the message sent or received on WhatsApp and the content sent or received.',
       type: 'object',
       properties: {
         messageId: {
