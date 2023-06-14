@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from '../../base';
 import { ref as headerRef } from './header';
 import { createComponentRef } from '../../../../../../utils/ref';
-import { ref as replyToRef } from '../../reply-to'
+import { ref as replyToRef } from '../../reply-to';
 
 const button: SchemaObject = {
   type: 'object',

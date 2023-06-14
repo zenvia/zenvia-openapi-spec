@@ -1,15 +1,15 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as textRef } from '../text';
-import { ref as replyToRef } from '../reply-to'
+import { ref as replyToRef } from '../reply-to';
 
 const text: SchemaObject = {
   type: 'object',
   allOf: [{
-    $ref: textRef
+    $ref: textRef,
   },
   {
-    $ref: replyToRef
+    $ref: replyToRef,
   }],
 };
 

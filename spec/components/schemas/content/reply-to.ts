@@ -24,8 +24,8 @@ const replyTo: SchemaObject = {
         'contentIndex',
       ],
     },
-  }
-}
+  },
+};
 
 export const ref = createComponentRef(__filename);
 export default replyTo;
