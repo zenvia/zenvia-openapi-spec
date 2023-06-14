@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from '../base';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as replyToRef } from '../reply-to'
 
 const productList: SchemaObject = {
   type: 'object',
@@ -65,6 +66,8 @@ const productList: SchemaObject = {
       'body',
       'sections',
     ],
+  }, {
+    $ref: replyToRef,
   }],
 };
 

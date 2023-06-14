@@ -19,24 +19,6 @@ const text: SchemaObject = {
         type: 'string',
         example: 'This is a text.',
       },
-      context: {
-        description: 'Contextual information related to the message. It can include references to the sent or received message in WhatsApp and the index of the sent or received content.',
-        type: 'object',
-        messageId: {
-          type: 'string',
-          description: 'Reference to the sent or received message in WhatsApp',
-          example: 'wamid.Zy3x2Yz1Z2Xz3yzxxyZZZ3zxxYZZXyZZ1Z3yzxy2Yxz==',
-        },
-        contentIndex: {
-          type: 'number',
-          description: 'Reference to the index of the sent or received content',
-          example: 1,
-        },
-        required: [
-          'messageId',
-          'contentIndex',
-        ],
-      },
       payload: {
         description: 'Payload of selected button',
         type: 'string',

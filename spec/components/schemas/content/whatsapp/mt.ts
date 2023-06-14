@@ -1,9 +1,9 @@
 import { SchemaObject } from 'openapi3-ts';
-import { ref as textRef } from '../text';
-import { ref as fileRef } from '../file';
-import { ref as templateRef } from '../template';
-import { ref as contactsRef } from '../contacts';
-import { ref as locationRef } from '../location';
+import { ref as textRef } from './text';
+import { ref as fileRef } from './file';
+import { ref as templateRef } from './template';
+import { ref as contactsRef } from './contacts';
+import { ref as locationRef } from './location';
 import { ref as buttonRef } from './button';
 import { ref as listRef } from './list';
 import { createComponentRef } from '../../../../../utils/ref';
