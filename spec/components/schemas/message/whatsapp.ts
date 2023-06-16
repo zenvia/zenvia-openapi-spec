@@ -19,6 +19,16 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
+      idRef: {
+        type: 'string',
+        description: 'Reference to the sent or received message in WhatsApp',
+        example: 'ZYYxZz1xzzz-xXzz-xzXz-Zy3x-ZYYxZz1xzzz',
+      },
+      contentRef: {
+        type: 'number',
+        description: 'Reference to the index of the sent or received content. If ommited, the reference will be made to the first content of the message',
+        example: 1,
+      },
     },
   }],
 };
