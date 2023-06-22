@@ -21,12 +21,16 @@ const all: SchemaObject = {
       },
       idRef: {
         type: 'string',
-        description: 'Reference to the sent or received message in WhatsApp',
+        description: `Id of the message sent or received in the conversation channel to reference as a message reply.
+        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
         example: 'ZYYxZz1xzzz-xXzz-xzXz-Zy3x-ZYYxZz1xzzz',
       },
       contentRef: {
         type: 'number',
-        description: 'Reference to the index of the sent or received content. If ommited, the reference will be made to the first content of the message',
+        description: `Index of the content in the message sent or received in the conversation channel to reference as a message reply.
+        <br>If ommited, the index to reference will be \`0\` (the first content of the message).
+        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
+        default: 0,
         example: 1,
       },
     },
