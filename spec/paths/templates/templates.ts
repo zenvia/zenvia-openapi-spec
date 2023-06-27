@@ -11,6 +11,7 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as channel } from '../../components/parameters/templates/channel';
 import { ref as senderId } from '../../components/parameters/templates/senderId';
 import { ref as status } from '../../components/parameters/templates/status';
+import { ref as size } from '../../components/parameters/templates/size';
 
 const post: OperationObject = {
   description: 'Create a new template',
@@ -53,6 +54,9 @@ const get: OperationObject = {
     },
     {
       $ref: status,
+    },
+    {
+      $ref: size,
     },
   ],
   responses: {
