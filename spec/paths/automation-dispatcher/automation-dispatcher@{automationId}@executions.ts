@@ -39,8 +39,8 @@ const post: OperationObject = {
 const path: PathItemObject = {
   post,
   parameters: [{
-    $ref: automationIdRef
-  }]
+    $ref: automationIdRef,
+  }],
 };
 
 export default path;

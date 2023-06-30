@@ -30,7 +30,7 @@ const automationDispatcher: SchemaObject = {
             example: '5510888883333',
           },
         },
-      }
+      },
     },
     variables: {
       title: 'Variables',
@@ -41,8 +41,8 @@ const automationDispatcher: SchemaObject = {
       },
       example: {
         'name': 'John Doe',
-        'birthdate': '01/01/1979'
-      }
+        'birthdate': '01/01/1979',
+      },
     },
   },
 };

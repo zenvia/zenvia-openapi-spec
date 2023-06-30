@@ -1,5 +1,5 @@
-import { SchemaObject } from "openapi3-ts";
-import { createComponentRef } from "../../../../utils/ref";
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../utils/ref';
 
 const automationDispatcherResponse: SchemaObject = {
   title: 'Automation Dispatcher Response Object',
@@ -15,9 +15,9 @@ const automationDispatcherResponse: SchemaObject = {
       type: 'string',
       description: 'Response message',
       example: 'Automation executed successfully',
-    }
-  }
-}
+    },
+  },
+};
 
 export const ref = createComponentRef(__filename);
 export default automationDispatcherResponse;
