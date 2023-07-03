@@ -5,7 +5,7 @@ const automationId: ParameterObject = {
   name: 'automationId',
   in: 'path',
   required: true,
-  description: 'The automation identifier',
+  description: 'The marketing automation identifier',
   schema: {
     type: 'string',
   },

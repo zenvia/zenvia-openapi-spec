@@ -1,9 +1,9 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const automationDispatcherResponse: SchemaObject = {
-  title: 'Automation Dispatcher Response Object',
-  description: 'Response from an automation run',
+const marketingAutomationResponse: SchemaObject = {
+  title: 'Marketing Automation Response Object',
+  description: 'Response from an marketing automation run',
   type: 'object',
   properties: {
     code: {
@@ -20,4 +20,4 @@ const automationDispatcherResponse: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default automationDispatcherResponse;
+export default marketingAutomationResponse;

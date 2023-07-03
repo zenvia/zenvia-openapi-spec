@@ -1,19 +1,19 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as automationIdRef } from '../../components/parameters/automationId';
-import { ref as automationDispatcherSchema } from '../../components/schemas/automation-dispatcher/automation-dispatcher';
-import { ref as automationDispatcherResponseSchema } from '../../components/schemas/automation-dispatcher/automation-dispatcher-response';
+import { ref as marketingAutomationSchema } from '../../components/schemas/marketing-automations/marketing-automation';
+import { ref as marketingAutomationResponseSchema } from '../../components/schemas/marketing-automations/marketing-automation-response';
 
 const post: OperationObject = {
-  summary: 'Trigger an automation',
-  description: 'Allows the execution of an automation',
-  tags: ['Automation Dispatcher'],
+  summary: 'Dispatch a marketing automation',
+  description: 'Allows the execution of a marketing automation',
+  tags: ['Marketing Automations'],
   requestBody: {
     required: true,
     content: {
       'application/json': {
         schema: {
-          $ref: automationDispatcherSchema,
+          $ref: marketingAutomationSchema,
         },
       },
     },
@@ -24,7 +24,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: automationDispatcherResponseSchema,
+            $ref: marketingAutomationResponseSchema,
           },
         },
       },

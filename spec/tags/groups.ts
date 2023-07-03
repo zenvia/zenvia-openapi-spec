@@ -15,7 +15,6 @@ const groups: TagGroupObject[] = [{
     'E-Mail',
     'Message Batches',
     'Two Factor Authentication',
-    'Automation Dispatcher',
   ],
 }, {
   name: 'Webhooks',
@@ -51,9 +50,9 @@ const groups: TagGroupObject[] = [{
     'Flow Report',
   ],
 }, {
-  name: 'Automation Dispatcher',
+  name: 'Marketing Automations',
   tags: [
-    'Automation Dispatcher',
+    'Marketing Automations',
   ],
 }];
 
