@@ -10,23 +10,25 @@ const marketingAutomation: SchemaObject = {
     recipientChannels: {
       title: 'Recipient\'s channels',
       description: 'List of recipient\'s channels. All channels registered in marketing automation must be provided',
-      minItems: 1,
       type: 'object',
-      additionalProperties: {
-        type: 'object',
-        properties: {
-          code: {
-            type: 'string',
-            enum: ['sms', 'whatsapp', 'email', 'rcs'],
-          },
-          text: {
-            type: 'string',
-          },
+      properties: {
+        sms: {
+          type: 'string',
+        },
+        whatsapp: {
+          type: 'string',
+        },
+        email: {
+          type: 'string',
+        },
+        rcs: {
+          type: 'string',
         },
       },
+      additionalProperties: false,
       example: {
-        'sms': '5511999999999',
-        'email': 'email@email.com',
+        sms: '5511999999999',
+        email: 'email@email.com',
       },
     },
     variables: {
