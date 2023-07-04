@@ -23,7 +23,7 @@ const all: SchemaObject = {
         type: 'string',
         description: `Id of the message sent or received in the conversation channel to reference as a message reply.
         <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
-        example: 'ZYYxZz1xzzz-xXzz-xzXz-Zy3x-ZYYxZz1xzzz',
+        example: '7390113b-e120-41b5-8a07-c4567726abc2',
       },
       contentRef: {
         type: 'number',
