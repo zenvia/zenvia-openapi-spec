@@ -11,6 +11,7 @@ const marketingAutomation: SchemaObject = {
       title: 'Recipient\'s channels',
       description: 'List of recipient\'s channels. All channels registered in marketing automation must be provided',
       type: 'object',
+      minProperties: 1,
       properties: {
         sms: {
           type: 'string',
@@ -44,6 +45,9 @@ const marketingAutomation: SchemaObject = {
       },
     },
   },
+  required: [
+    'recipientChannels',
+  ],
 };
 
 export const ref = createComponentRef(__filename);
