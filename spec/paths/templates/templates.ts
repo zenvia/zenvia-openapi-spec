@@ -11,6 +11,8 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as channel } from '../../components/parameters/templates/channel';
 import { ref as senderId } from '../../components/parameters/templates/senderId';
 import { ref as status } from '../../components/parameters/templates/status';
+import { ref as size } from '../../components/parameters/templates/size';
+import { ref as page } from '../../components/parameters/templates/page';
 
 const post: OperationObject = {
   description: 'Create a new template',
@@ -54,6 +56,12 @@ const get: OperationObject = {
     {
       $ref: status,
     },
+    {
+      $ref: page,
+    },
+    {
+      $ref: size,
+    },
   ],
   responses: {
     200: {
@@ -66,6 +74,29 @@ const get: OperationObject = {
               $ref: templateSchemaRef,
             },
           } as SchemaObject,
+        },
+      },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The total number of results available.',
+            type: 'string',
+            example: '100',
+          },
+        },
+        'x-page-size': {
+          schema: {
+            description: 'The number of results per page.',
+            type: 'string',
+            example: '10',
+          },
+        },
+        'x-page': {
+          schema: {
+            description: 'The current page.',
+            type: 'string',
+            example: '5',
+          },
         },
       },
     } as ResponseObject,

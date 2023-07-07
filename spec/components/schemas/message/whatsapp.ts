@@ -19,6 +19,20 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
+      idRef: {
+        type: 'string',
+        description: `Id of the message sent or received in the conversation channel to reference as a message reply.
+        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
+        example: '7390113b-e120-41b5-8a07-c4567726abc2',
+      },
+      contentRef: {
+        type: 'number',
+        description: `Index of the content in the message sent or received in the conversation channel to reference as a message reply.
+        <br>If ommited, the index to reference will be \`0\` (the first content of the message).
+        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
+        default: 0,
+        example: 1,
+      },
     },
   }],
 };
