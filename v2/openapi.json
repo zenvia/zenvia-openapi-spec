@@ -2968,6 +2968,12 @@
           },
           {
             "$ref": "#/components/parameters/templates.status"
+          },
+          {
+            "$ref": "#/components/parameters/templates.page"
+          },
+          {
+            "$ref": "#/components/parameters/templates.size"
           }
         ],
         "responses": {
@@ -2980,6 +2986,29 @@
                   "items": {
                     "$ref": "#/components/schemas/templates.template"
                   }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
                 }
               }
             }
@@ -7695,6 +7724,17 @@
                   "$ref": "#/components/schemas/content.whatsapp.mt"
                 },
                 "minItems": 1
+              },
+              "idRef": {
+                "type": "string",
+                "description": "Id of the message sent or received in the conversation channel to reference as a message reply.\n        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+                "example": "7390113b-e120-41b5-8a07-c4567726abc2"
+              },
+              "contentRef": {
+                "type": "number",
+                "description": "Index of the content in the message sent or received in the conversation channel to reference as a message reply.\n        <br>If ommited, the index to reference will be `0` (the first content of the message).\n        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+                "default": 0,
+                "example": 1
               }
             }
           }
@@ -9463,6 +9503,18 @@
         },
         "example": "WHATSAPP"
       },
+      "templates.page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "description": "This is the page number.",
+        "schema": {
+          "title": "page",
+          "type": "number",
+          "default": 1
+        },
+        "example": 5
+      },
       "templates.senderId": {
         "name": "senderId",
         "in": "query",
@@ -9472,6 +9524,18 @@
           "type": "string"
         },
         "example": "b5agf1-y237-11e8-b127-1230f6c2d98m"
+      },
+      "templates.size": {
+        "name": "size",
+        "in": "query",
+        "required": false,
+        "description": "This is the page size.",
+        "schema": {
+          "title": "size",
+          "type": "number",
+          "default": 500
+        },
+        "example": 10
       },
       "templates.status": {
         "name": "status",
