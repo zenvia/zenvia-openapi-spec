@@ -2707,6 +2707,45 @@
         }
       ]
     },
+    "/marketing-automations/{automationId}/dispatches": {
+      "post": {
+        "summary": "Dispatch a marketing automation",
+        "description": "Allows the execution of a marketing automation",
+        "tags": [
+          "Marketing Automations"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/marketing-automations.marketing-automation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Automation successfully executed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/marketing-automations.marketing-automation-response"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/automationId"
+        }
+      ]
+    },
     "/reports/flow/entries": {
       "get": {
         "description": "Retrieve all entries applying the given filters",
@@ -7281,6 +7320,75 @@
           }
         }
       },
+      "marketing-automations.marketing-automation-response": {
+        "title": "Marketing Automation Response Object",
+        "description": "Response from an marketing automation run",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The dispatch identifier",
+            "example": "7388c68e-675e-435b-b2ec-f72677798678"
+          },
+          "status": {
+            "type": "string",
+            "description": "The dispatch status",
+            "example": "SENT"
+          },
+          "marketingAutomationId": {
+            "type": "string",
+            "description": "The marketing automation identifier",
+            "example": "5c408dd6-a39a-4eb1-b3b0-bf6f2f34ea39"
+          }
+        }
+      },
+      "marketing-automations.marketing-automation": {
+        "title": "Marketing Automation Object",
+        "description": "This is a marketing automation object",
+        "type": "object",
+        "properties": {
+          "recipientChannels": {
+            "title": "Recipient's channels",
+            "description": "List of recipient's channels. All channels registered in marketing automation must be provided",
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "sms": {
+                "type": "string"
+              },
+              "whatsapp": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "rcs": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "example": {
+              "sms": "5511999999999",
+              "email": "email@email.com"
+            }
+          },
+          "variables": {
+            "title": "Variables",
+            "description": "Variables list registered in automation steps. All variables registered in marketing automation must be provided",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "name": "John Doe",
+              "birthdate": "01/01/1979"
+            }
+          }
+        },
+        "required": [
+          "recipientChannels"
+        ]
+      },
       "message.all": {
         "type": "object",
         "title": "Message",
@@ -9202,6 +9310,15 @@
       }
     },
     "parameters": {
+      "automationId": {
+        "name": "automationId",
+        "in": "path",
+        "required": true,
+        "description": "The marketing automation identifier",
+        "schema": {
+          "type": "string"
+        }
+      },
       "chatbotId": {
         "name": "chatbotId",
         "in": "path",
@@ -9677,6 +9794,10 @@
     {
       "name": "Files",
       "description": "This allows the storage files for later use elsewhere, usually for sending messages.\n"
+    },
+    {
+      "name": "Marketing Automations",
+      "description": "The marketing-automations API makes it possible to trigger an automation for a contact that is outside of the contacts manager.\n\nTo perform these operations, you will need an automationId that you can find it <a href=\"https://app.zenvia.com/attraction/dispatches\" target=\"_blank\">here</a>.\n"
     }
   ],
   "x-tagGroups": [
@@ -9734,6 +9855,12 @@
       "tags": [
         "Message Report",
         "Flow Report"
+      ]
+    },
+    {
+      "name": "Marketing Automations",
+      "tags": [
+        "Marketing Automations"
       ]
     }
   ]
