@@ -19,6 +19,7 @@ const instagramDescription = rawLoad(__dirname, './instagram.md');
 const emailDescription = rawLoad(__dirname, './email.md');
 const filesDescription = rawLoad(__dirname, './files.md');
 const twoFactorAuthentication = rawLoad(__dirname, './2fa.md');
+const marketingAutomationDescription = rawLoad(__dirname, './marketing-automations.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -74,6 +75,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'Files',
   description: filesDescription,
+}, {
+  name: 'Marketing Automations',
+  description: marketingAutomationDescription,
 }];
 
 export default tags;
