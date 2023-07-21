@@ -6390,6 +6390,15 @@ components:
       title: Notification e-mail
       description: E-mail list (comma-separated) to send notifications about the message template approving process
       type: string
+    templates.template-quality-score:
+      title: Quality Score
+      description: 'Quality score of the template while active,  specific for WhatsApp templates, this field is based on the end client feedback and there are four possible scores: Pending (not enough feedback to classify the template quality, this template can be sent to clients), High (few or no negative feedback, this template can be sent to clients), Medium (has received negative feedback from several clients, this template can be sent to clients, but there is a risk of it being paused or disabled soon unless the problems reported by the clients are resolved) and Low (has received negative feedback from several clients, templates of this status can still be sent to clients, but there is a risk of it being suspended or disabled soon, so it is recommended that the problems reported by the clients are resolved as soon as possible).'
+      type: string
+      enum:
+        - UNKNOWN
+        - GREEN
+        - YELLOW
+        - RED
     templates.template:
       title: Template Object
       description: This is a Template object model
@@ -6427,6 +6436,8 @@ components:
           type: string
         category:
           $ref: '#/components/schemas/templates.template-category'
+        qualityScore:
+          $ref: '#/components/schemas/templates.template-quality-score'
         components:
           $ref: '#/components/schemas/templates.components.index'
         metadata:
