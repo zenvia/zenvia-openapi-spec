@@ -3,6 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as localeSchemaRef } from './template-locale';
 import { ref as categorySchemaRef } from './template-category';
+import { ref as qualityScoreSchemaRef } from './template-quality-score';
 import { ref as commentSchemaRef } from './template-comment';
 import { ref as componentsSchemaRef } from './components';
 import { ref as examplesSchemaRef } from './template-example';
@@ -48,6 +49,9 @@ const template: SchemaObject = {
     },
     category: {
       $ref: categorySchemaRef,
+    },
+    qualityScore: {
+      $ref: qualityScoreSchemaRef,
     },
     components: {
       $ref: componentsSchemaRef,
