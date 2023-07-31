@@ -18,7 +18,7 @@ const whatsappTemplate: SchemaObject = {
       },
       examples: {
         $ref: examplesSchemaRef,
-      }
+      },
     },
   }, {
     $ref: baseRef,
