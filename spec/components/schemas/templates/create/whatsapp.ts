@@ -3,6 +3,7 @@ import { ref as baseRef } from './base';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as categorySchemaRef } from '../category/base';
 import { ref as whatsappComponents } from '../components/whatsapp';
+import { ref as examplesSchemaRef } from '../template-example';
 
 const whatsappTemplate: SchemaObject = {
   type: 'object',
@@ -15,6 +16,9 @@ const whatsappTemplate: SchemaObject = {
       category: {
         $ref: categorySchemaRef,
       },
+      examples: {
+        $ref: examplesSchemaRef,
+      }
     },
   }, {
     $ref: baseRef,

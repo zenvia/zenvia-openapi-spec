@@ -8,7 +8,8 @@ const example: SchemaObject = {
                 In case you decide to include variables and examples, provide them with the same number.
                 <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
                 being assigned the example URL.
-                <br>This field is mandatory only for the WhatsApp channel.`,
+                <br>This field is mandatory only for the WhatsApp channel, in this channel each example must have the same name as each existing variable and it
+                 must not be composed of empty spaces only.`,
   type: 'object',
   example: {
     imageUrl: 'https://example.com/image.jpeg',
