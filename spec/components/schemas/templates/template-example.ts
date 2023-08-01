@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const example: SchemaObject = {
   title: 'Examples',
-  description: `Provides an example of possible model data. This helps during the review and approval process so that Facebook can understand what
+  description: `Provides an example of possible model data. This helps during the review and approval process so that the provider (e.g. Meta) can understand what
                 kind of messages you plan to send. Ensure these are examples and do not include personal or confidential information.
                 In case you decide to include variables and examples, provide them with the same number.
                 <br>In case you are creating a template with media, the key must be <code>imageUrl</code>, <code>documentUrl</code> or <code>videoUrl</code>,
