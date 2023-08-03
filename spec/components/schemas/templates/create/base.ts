@@ -2,6 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as localeSchemaRef } from '../template-locale';
 import { ref as commentSchemaRef } from '../template-comment';
+import { ref as examplesSchemaRef } from '../template-example';
 import { ref as notificationEmailSchemaRef } from '../template-notification-email';
 import { ref as metadataRef } from '../template-metadata';
 
@@ -36,6 +37,9 @@ const templateBase: SchemaObject = {
     },
     locale: {
       $ref: localeSchemaRef,
+    },
+    examples: {
+      $ref: examplesSchemaRef,
     },
     senderId: {
       title: 'Sender ID',
