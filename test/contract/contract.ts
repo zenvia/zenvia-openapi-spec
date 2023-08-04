@@ -74,34 +74,34 @@ describe('API contract test against OpenAPI specification', () => {
     enforcer = await Enforcer(spec, { componentOptions: {} });
   });
 
-  describe('whatsapp messages', () => {
+  describe('whatsapp messages', async () => {
     loadTestCases('channels/whatsapp');
   });
 
-  describe('telegram messages', () => {
+  describe('telegram messages', async () => {
     loadTestCases('channels/telegram');
   });
 
-  describe('gbm messages', () => {
+  describe('gbm messages', async () => {
     loadTestCases('channels/gbm');
   });
 
-  describe('instagram messages', () => {
+  describe('instagram messages', async () => {
     loadTestCases('channels/instagram');
   });
 
-  describe('templates collection', () => {
+  describe('templates collection', async () => {
     loadTestCases('templates');
-    describe('template comments', () => {
+    describe('template comments', async () => {
       loadTestCases('templates/comments');
     });
   });
 
-  describe('subscriptions collection', () => {
+  describe('subscriptions collection', async () => {
     loadTestCases('subscriptions');
   });
 
-  describe('batches', () => {
+  describe('batches', async () => {
     loadTestCases('batches');
   });
 
