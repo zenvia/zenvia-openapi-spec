@@ -11,5 +11,8 @@ export function replyableText() {
         payload: 'success',
       }],
     }],
+    conversation:{
+      solution: 'livechat',
+    },
   };
 }

@@ -25,5 +25,8 @@ export function carousel() {
         }],
       }],
     }],
+    conversation:{
+      solution: 'livechat',
+    },
   };
 }

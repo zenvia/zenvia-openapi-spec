@@ -9,5 +9,8 @@ export function file() {
       fileCaption: 'Our pic :)',
       fileName: 'team.png',
     }],
+    conversation:{
+      solution: 'livechat',
+    },
   };
 }

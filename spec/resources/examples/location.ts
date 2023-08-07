@@ -10,5 +10,8 @@ export function location() {
       address: 'Av. Paulista, 2300 - 18º Andar - Bela Vista, São Paulo - SP, 01310-300',
       url: 'https://www.zenvia.com/',
     }],
+    conversation:{
+      solution: 'livechat',
+    },
   };
 }
