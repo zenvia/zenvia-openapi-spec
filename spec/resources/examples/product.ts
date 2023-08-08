@@ -10,7 +10,7 @@ export function product() {
       productId: 'product-SKU-in-catalog',
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

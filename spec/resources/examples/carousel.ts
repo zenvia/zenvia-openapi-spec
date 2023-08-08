@@ -26,7 +26,7 @@ export function carousel() {
       }],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

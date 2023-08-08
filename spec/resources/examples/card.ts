@@ -23,7 +23,7 @@ export function card() {
       }],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

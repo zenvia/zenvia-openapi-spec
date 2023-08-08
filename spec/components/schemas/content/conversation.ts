@@ -10,9 +10,9 @@ const all: SchemaObject = {
       solution: {
         title: 'Solution Name',
         type: 'string',
-        description: 'If the user replies to the API message, the conversation will be redirected to the chosen solution.',
-        example: 'livechat',
-        enum: ['conversion', 'livechat', 'nlu'],
+        description: 'If the contact replies to the API message, the conversation will be redirected to the chosen solution.',
+        example: 'conversion',
+        enum: ['conversion', 'zenvia-chat', 'nlu'],
       },
     },
   }],

@@ -32,7 +32,7 @@ export function list() {
       ],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

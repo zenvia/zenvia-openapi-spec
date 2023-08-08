@@ -22,7 +22,7 @@ export function button() {
       ],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

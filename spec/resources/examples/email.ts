@@ -41,7 +41,7 @@ export function email() {
       },
     ],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

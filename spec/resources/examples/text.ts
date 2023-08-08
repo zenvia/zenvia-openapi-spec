@@ -7,7 +7,7 @@ export function text() {
       text: 'Hi Zenvia!',
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

@@ -45,7 +45,7 @@ export function contacts() {
       }],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

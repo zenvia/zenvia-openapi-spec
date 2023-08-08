@@ -11,7 +11,7 @@ export function template() {
       },
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

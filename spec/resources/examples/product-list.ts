@@ -23,7 +23,7 @@ export function productList() {
       ],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

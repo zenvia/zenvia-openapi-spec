@@ -12,7 +12,7 @@ export function replyableText() {
       }],
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

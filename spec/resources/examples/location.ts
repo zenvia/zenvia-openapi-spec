@@ -11,7 +11,7 @@ export function location() {
       url: 'https://www.zenvia.com/',
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }

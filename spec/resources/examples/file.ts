@@ -10,7 +10,7 @@ export function file() {
       fileName: 'team.png',
     }],
     conversation:{
-      solution: 'livechat',
+      solution: 'conversion',
     },
   };
 }
