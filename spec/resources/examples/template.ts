@@ -10,5 +10,8 @@ export function template() {
         product: 'Zenvia Chat',
       },
     }],
+    conversation:{
+      solution: 'conversion',
+    },
   };
 }

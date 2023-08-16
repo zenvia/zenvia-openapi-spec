@@ -40,5 +40,8 @@ export function email() {
         },
       },
     ],
+    conversation:{
+      solution: 'conversion',
+    },
   };
 }

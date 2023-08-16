@@ -2,6 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/facebook/mt';
 import { createComponentRef } from '../../../../utils/ref';
+import {ref as conversationRef} from '../content/conversation';
 
 const all: SchemaObject = {
   type: 'object',
@@ -19,6 +20,9 @@ const all: SchemaObject = {
         },
         minItems: 1,
       },
+      conversation: {
+        $ref: conversationRef,
+       },
     },
   }],
 };

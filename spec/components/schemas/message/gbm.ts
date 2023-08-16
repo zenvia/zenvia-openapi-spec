@@ -3,6 +3,7 @@ import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/gbm/all';
 import { ref as representativeRef } from './representative';
 import { createComponentRef } from '../../../../utils/ref';
+import {ref as conversationRef} from '../content/conversation';
 
 const all: SchemaObject = {
   type: 'object',
@@ -23,6 +24,9 @@ const all: SchemaObject = {
       representative: {
         $ref: representativeRef,
       },
+      conversation: {
+        $ref: conversationRef,
+       },
     },
   }],
 };

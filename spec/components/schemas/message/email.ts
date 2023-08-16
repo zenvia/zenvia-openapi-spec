@@ -3,6 +3,7 @@ import { ref as baseRef } from './base';
 import { ref as allContentsRef } from '../content/email/all';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as representativeRef } from './representative';
+import {ref as conversationRef } from '../content/conversation';
 
 const all: SchemaObject = {
   type: 'object',
@@ -28,6 +29,9 @@ const all: SchemaObject = {
           name: 'Sender Name',
         },
       },
+      conversation: {
+        $ref: conversationRef,
+       },
     },
   }],
 };
