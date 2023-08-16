@@ -12,7 +12,7 @@ const all: SchemaObject = {
         type: 'string',
         description: 'If the contact replies to the API message, the conversation will be redirected to the chosen solution.',
         example: 'conversion',
-        enum: ['conversion', 'zenvia-chat', 'nlu'],
+        enum: ['conversion', 'zenvia_chat', 'nlu'],
       },
     },
   }],
