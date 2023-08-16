@@ -22,5 +22,8 @@ export function card() {
         payload: 'success',
       }],
     }],
+    conversation:{
+      solution: 'conversion',
+    },
   };
 }

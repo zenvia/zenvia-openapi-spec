@@ -9,5 +9,8 @@ export function product() {
       catalogId: 'CATALOG_ID',
       productId: 'product-SKU-in-catalog',
     }],
+    conversation:{
+      solution: 'conversion',
+    },
   };
 }

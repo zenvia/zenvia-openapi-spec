@@ -44,5 +44,8 @@ export function contacts() {
         }],
       }],
     }],
+    conversation:{
+      solution: 'conversion',
+    },
   };
 }
