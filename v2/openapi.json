@@ -4998,7 +4998,10 @@
                   "nlu"
                 ]
               }
-            }
+            },
+            "required": [
+              "solution"
+            ]
           }
         ]
       },
