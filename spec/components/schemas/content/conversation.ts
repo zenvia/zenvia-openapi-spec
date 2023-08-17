@@ -15,6 +15,9 @@ const all: SchemaObject = {
         enum: ['conversion', 'zenvia_chat', 'nlu'],
       },
     },
+    required: [
+      'solution',
+    ],
   }],
 };
 
