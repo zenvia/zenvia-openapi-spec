@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
-import base from './base';
+import base from './whatsapp';
 
 const all: SchemaObject = _.cloneDeep(base);
 
