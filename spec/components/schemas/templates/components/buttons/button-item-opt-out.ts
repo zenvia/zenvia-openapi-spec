@@ -9,18 +9,9 @@ const optOutButton: SchemaObject = {
     $ref: baseRef,
   }, {
     type: 'object',
-    properties: {
-      payload: {
-        type: 'string',
-        title: 'Payload of button',
-        description: 'This payload is used for identify the click in the callback',
-        default: 'OPTOUT_ZENVIA_WHATSAPP_MARKETING',
-      },
-    },
     required: [
       'type',
       'text',
-      'payload',
     ],
   }],
 };
