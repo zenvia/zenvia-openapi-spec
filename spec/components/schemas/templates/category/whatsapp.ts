@@ -2,7 +2,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 
-const base: SchemaObject = {
+const category: SchemaObject = {
   title: 'Category',
   description: 'Category of use for this template',
   type: 'string',
@@ -14,4 +14,4 @@ const base: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default base;
+export default category;
