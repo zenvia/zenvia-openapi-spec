@@ -32,6 +32,7 @@ Important things to keep in mind:
 * To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:
   * Up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding.
   * The cut point currently is always a space, so some pieces might be smaller than this.
+  * Combine the previous limitations, and words longer than the maximum characters in a message piece are not supported (152 characters in the standard encoding and 66 characters in the unicode encoding).
 * Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.
 * Double spaces and tabs will always be replaced by a single space.
 * To send long messages, it might be necessary to contact our service team and request that this feature be enabled on your account.
