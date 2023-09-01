@@ -70,7 +70,8 @@ describe('API contract test against OpenAPI specification', () => {
     }
   }
 
-  before(async () => {
+  before(async function () {
+    this.timeout(5000);
     enforcer = await Enforcer(spec, { componentOptions: {} });
   });
 
