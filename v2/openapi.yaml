@@ -4749,9 +4749,13 @@ components:
               default: AUTO
               description: |-
                 The method used for selecting the message encoding used to dispatch the message to the provider.
+                          <br>
                           <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary
                           if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**
                           if you have any trouble with **AUTO**.
+                          <br>
+                          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-Limitations) section.
+                          <br>
                           <br>*Only applicable to [SMS](#tag/SMS) channel.*
               example: AUTO
             reportId:
@@ -5514,17 +5518,17 @@ components:
           example: Sales campaing
         status:
           description: |-
-            The batch status:         
-             `LOADING`:  Loading the batch         
-             `READY`: Batch loaded and ready to be dispatched         
-             `QUEUED`: Batch sent to dispatch queue         
-             `PROCESSING`: Batch dispatch in progress         
-             `WAITING`: Waiting confirmation of the batch status         
-             `COMPLETED`: Batch completed         
-             `CANCELING`: Batch being canceled         
-             `CANCELED`: Batch canceled         
-             `TIMEOUT`: Timeout to process the batch         
-             `ERROR`: Error to proceed with the batch
+            The batch status:
+                    <br>`LOADING`: Loading the batch
+                    <br>`READY`: Batch loaded and ready to be dispatched
+                    <br>`QUEUED`: Batch sent to dispatch queue
+                    <br>`PROCESSING`: Batch dispatch in progress
+                    <br>`WAITING`: Waiting confirmation of the batch status
+                    <br>`COMPLETED`: Batch completed
+                    <br>`CANCELING`: Batch being canceled
+                    <br>`CANCELED`: Batch canceled
+                    <br>`TIMEOUT`: Timeout to process the batch
+                    <br>`ERROR`: Error to proceed with the batch
           enum:
             - LOADING
             - READY
@@ -6617,7 +6621,14 @@ components:
         - ALERT_UPDATE
         - AUTO_REPLY
         - OTHER
-    templates.category.base:
+    templates.category.email:
+      title: Category
+      description: Category of use for this template
+      type: string
+      enum:
+        - MARKETING
+        - OTHER
+    templates.category.whatsapp:
       title: Category
       description: Category of use for this template
       type: string
@@ -7177,7 +7188,7 @@ components:
             components:
               $ref: '#/components/schemas/templates.components.email-components'
             category:
-              $ref: '#/components/schemas/templates.category.all'
+              $ref: '#/components/schemas/templates.category.email'
         - $ref: '#/components/schemas/templates.create.base'
     templates.create.rcs:
       type: object
@@ -7207,7 +7218,7 @@ components:
             components:
               $ref: '#/components/schemas/templates.components.whatsapp'
             category:
-              $ref: '#/components/schemas/templates.category.base'
+              $ref: '#/components/schemas/templates.category.whatsapp'
         - $ref: '#/components/schemas/templates.create.base'
   responses:
     error:
@@ -7692,18 +7703,19 @@ tags:
       To overcome the SMS size limitation, cellphone manufacturers developed a feature called `concatenated SMS`.
       <br>This allows a long message to be break down into multiple SMS messages for delivery, which are joined back together by the cellphone SMS application.
 
-      Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will
-      automatically be applied.
+      Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will be applied
+      automatically.
 
       Important things to keep in mind:
       * Longer messages means more cost, because they actually are multiple messages.
       * To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:
-      up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point currently is always a space,
-      so some pieces might be smaller than this.
+        * Up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding.
+        * The cut point currently is always a space, so some pieces might be smaller than this.
+        * Combine the previous limitations, and words longer than the maximum characters in a message piece are not supported (152 characters in the standard encoding and 66 characters in the unicode encoding).
       * Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.
       * Double spaces and tabs will always be replaced by a single space.
       * To send long messages, it might be necessary to contact our service team and request that this feature be enabled on your account.
-      * The maximum length currently supported is 1520 characters
+      * The maximum length currently supported is 1520 characters.
 
       ## SMS sender and recipient
 
