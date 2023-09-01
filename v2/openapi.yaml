@@ -7686,8 +7686,8 @@ tags:
 
       ## SMS limitations
 
-      ### SMS lenght
-      A SMS has a maximum lenght of 140 bytes, which can be used either with the standard encoding, which supports 160 characters (7 bits each),
+      ### SMS length
+      A SMS has a maximum length of 140 bytes, which can be used either with the standard encoding, which supports 160 characters (7 bits each),
       or using an unicode encoding, which supports 70 characters (16 bits each).
 
       ### Character support
