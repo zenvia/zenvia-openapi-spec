@@ -24,18 +24,18 @@ By default, our API selects automatically the SMS encoding based on the message 
 To overcome the SMS size limitation, cellphone manufacturers developed a feature called `concatenated SMS`.
 <br>This allows a long message to be break down into multiple SMS messages for delivery, which are joined back together by the cellphone SMS application.
 
-Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will
-automatically be applied.
+Therefore, when a message is longer than 160 characters in the standard encoding or 70 characters in the unicode encoding, this feature will be applied
+automatically.
 
 Important things to keep in mind:
 * Longer messages means more cost, because they actually are multiple messages.
 * To identify each piece of the message, some bytes are used as a header in this feature, so each message piece is shorter than a single short message:
-up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding. And the cut point currently is always a space,
-so some pieces might be smaller than this.
+  * Up to 152 characters in the standard encoding and up to 66 characters in the unicode encoding.
+  * The cut point currently is always a space, so some pieces might be smaller than this.
 * Not all carriers support this feature. The bigest carriers support it, namely: Vivo, Claro, Tim and Oi.
 * Double spaces and tabs will always be replaced by a single space.
 * To send long messages, it might be necessary to contact our service team and request that this feature be enabled on your account.
-* The maximum length currently supported is 1520 characters
+* The maximum length currently supported is 1520 characters.
 
 ## SMS sender and recipient
 
