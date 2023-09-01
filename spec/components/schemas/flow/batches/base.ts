@@ -25,17 +25,17 @@ const base: SchemaObject = {
       example: 'Sales campaing',
     },
     status: {
-      description: 'The batch status: \
-        \n `LOADING`:  Loading the batch \
-        \n `READY`: Batch loaded and ready to be dispatched \
-        \n `QUEUED`: Batch sent to dispatch queue \
-        \n `PROCESSING`: Batch dispatch in progress \
-        \n `WAITING`: Waiting confirmation of the batch status \
-        \n `COMPLETED`: Batch completed \
-        \n `CANCELING`: Batch being canceled \
-        \n `CANCELED`: Batch canceled \
-        \n `TIMEOUT`: Timeout to process the batch \
-        \n `ERROR`: Error to proceed with the batch',
+      description: `The batch status:
+        <br>\`LOADING\`: Loading the batch
+        <br>\`READY\`: Batch loaded and ready to be dispatched
+        <br>\`QUEUED\`: Batch sent to dispatch queue
+        <br>\`PROCESSING\`: Batch dispatch in progress
+        <br>\`WAITING\`: Waiting confirmation of the batch status
+        <br>\`COMPLETED\`: Batch completed
+        <br>\`CANCELING\`: Batch being canceled
+        <br>\`CANCELED\`: Batch canceled
+        <br>\`TIMEOUT\`: Timeout to process the batch
+        <br>\`ERROR\`: Error to proceed with the batch`,
       enum: [
         'LOADING',
         'READY',
