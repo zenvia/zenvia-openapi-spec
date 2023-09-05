@@ -4754,7 +4754,7 @@ components:
                           if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**
                           if you have any trouble with **AUTO**.
                           <br>
-                          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-Limitations) section.
+                          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-limitations) section.
                           <br>
                           <br>*Only applicable to [SMS](#tag/SMS) channel.*
               example: AUTO
@@ -6835,6 +6835,7 @@ components:
             - URL
             - PHONE_NUMBER
             - QUICK_REPLY
+            - OPT_OUT
           type: string
         text:
           title: Button text
@@ -6842,6 +6843,14 @@ components:
       required:
         - type
         - text
+    templates.components.buttons.button-item-opt-out:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - type: object
+          required:
+            - type
+            - text
     templates.components.buttons.button-item-phone-number:
       type: object
       allOf:
@@ -6944,12 +6953,14 @@ components:
                 type: object
                 oneOf:
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-opt-out'
                 required:
                   - type
                 discriminator:
                   propertyName: type
                   mapping:
                     QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
+                    OPT_OUT: '#/components/schemas/templates.components.buttons.button-item-opt-out'
           required:
             - items
     templates.components.email.index:
@@ -8183,6 +8194,8 @@ tags:
       When a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.
 
       You can learn more about it on the [subscriptions section](#section/MESSAGE).
+
+      Quick reply buttons also have the `OPT_OUT` type, a exclusive button for marketing template. Button that Meta recommends using in marketing templates to increase its approval chances. With it, the final contact has the option to request not to receive messages of this type from the company.
 
       ### MIXED
 

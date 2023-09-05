@@ -6109,7 +6109,7 @@
                   "MORE_CHARACTERS_PER_MESSAGE"
                 ],
                 "default": "AUTO",
-                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>\n          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-Limitations) section.\n          <br>\n          <br>*Only applicable to [SMS](#tag/SMS) channel.*",
+                "description": "The method used for selecting the message encoding used to dispatch the message to the provider.\n          <br>\n          <br>The default value **AUTO** will select the encoding method based on the text content, so this is only necessary\n          if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**\n          if you have any trouble with **AUTO**.\n          <br>\n          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-limitations) section.\n          <br>\n          <br>*Only applicable to [SMS](#tag/SMS) channel.*",
                 "example": "AUTO"
               },
               "reportId": {
@@ -8911,7 +8911,8 @@
             "enum": [
               "URL",
               "PHONE_NUMBER",
-              "QUICK_REPLY"
+              "QUICK_REPLY",
+              "OPT_OUT"
             ],
             "type": "string"
           },
@@ -8923,6 +8924,21 @@
         "required": [
           "type",
           "text"
+        ]
+      },
+      "templates.components.buttons.button-item-opt-out": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "text"
+            ]
+          }
         ]
       },
       "templates.components.buttons.button-item-phone-number": {
@@ -9087,6 +9103,9 @@
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                    },
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-opt-out"
                     }
                   ],
                   "required": [
@@ -9095,7 +9114,8 @@
                   "discriminator": {
                     "propertyName": "type",
                     "mapping": {
-                      "QUICK_REPLY": "#/components/schemas/templates.components.buttons.button-item-quick-reply"
+                      "QUICK_REPLY": "#/components/schemas/templates.components.buttons.button-item-quick-reply",
+                      "OPT_OUT": "#/components/schemas/templates.components.buttons.button-item-opt-out"
                     }
                   }
                 }
@@ -9970,7 +9990,7 @@
     },
     {
       "name": "Templates",
-      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n\n## E-Mail templates\n\nE-mail templates allows sending content up to 30MB to multiple contacts using a small payload.\n\nEmail templates have the following components:\n* Header\n* Body\n* Attachments\n* Email\n"
+      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\nQuick reply buttons also have the `OPT_OUT` type, a exclusive button for marketing template. Button that Meta recommends using in marketing templates to increase its approval chances. With it, the final contact has the option to request not to receive messages of this type from the company.\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n\n## E-Mail templates\n\nE-mail templates allows sending content up to 30MB to multiple contacts using a small payload.\n\nEmail templates have the following components:\n* Header\n* Body\n* Attachments\n* Email\n"
     },
     {
       "name": "Message Report",
