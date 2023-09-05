@@ -23,7 +23,7 @@ const text: SchemaObject = {
           if you need to enforce **MORE_CHARACTERS_PER_MESSAGE** method (not recommended regarding readability), or to enforce **MORE_CHARACTER_SUPPORT**
           if you have any trouble with **AUTO**.
           <br>
-          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-Limitations) section.
+          <br>More information about SMS encoding can be found in the [SMS limitations](#section/SMS-limitations) section.
           <br>
           <br>*Only applicable to [SMS](#tag/SMS) channel.*`,
         example: 'AUTO',

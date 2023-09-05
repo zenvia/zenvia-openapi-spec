@@ -36,6 +36,8 @@ When a quick reply message is sent, and the customer clicks one of the options, 
 
 You can learn more about it on the [subscriptions section](#section/MESSAGE).
 
+Quick reply buttons also have the `OPT_OUT` type, a exclusive button for marketing template. Button that Meta recommends using in marketing templates to increase its approval chances. With it, the final contact has the option to request not to receive messages of this type from the company.
+
 ### MIXED
 
 Allows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.
