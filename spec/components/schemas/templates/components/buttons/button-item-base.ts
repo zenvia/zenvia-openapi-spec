@@ -7,7 +7,7 @@ const buttonItemBase: SchemaObject = {
     type: {
       title: 'Button type',
       enum: [
-        'URL', 'PHONE_NUMBER', 'QUICK_REPLY',
+        'URL', 'PHONE_NUMBER', 'QUICK_REPLY', 'OPT_OUT',
       ],
       type: 'string',
     },
