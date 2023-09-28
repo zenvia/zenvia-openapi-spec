@@ -57,7 +57,7 @@ const statusGroups: SchemaObject = {
         seconds: {
           title: 'Seconds',
           description: 'Size of the time window.',
-          type: 'number',
+          type: 'string',
           example: '60',
         },
         timestamp: {
@@ -69,7 +69,7 @@ const statusGroups: SchemaObject = {
         id: {
           title: 'Id',
           description: 'Identifier of the time window.',
-          type: 'number',
+          type: 'string',
           example: '27929555',
         },
       },

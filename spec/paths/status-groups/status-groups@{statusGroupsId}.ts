@@ -1,11 +1,15 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as statusGroupsRef } from '../../components/schemas/status-groups/status-groups';
+import { ref as statusGroupsIdRef } from '../../components/parameters/statusGroupsId';
 
 const get: OperationObject = {
   summary: 'Check groups status by id',
   description: 'Allows monitoring of the status of a single Zenvia platform and solution.',
   tags: ['Status Groups'],
+  parameters: [{
+    $ref: statusGroupsIdRef,
+  }],
   responses: {
     200: {
       description: 'Status Groups object',
