@@ -24,7 +24,7 @@ const get: OperationObject = {
 };
 
 const path: PathItemObject = {
-  get
+  get,
 };
 
 export default path;

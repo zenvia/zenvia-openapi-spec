@@ -12,7 +12,7 @@ const statusGroups: SchemaObject = {
       description: 'ID of the Zenvia plataform/service.',
       type: 'string',
       readOnly: true,
-      example: 'whatsapp'
+      example: 'whatsapp',
     },
     name: {
       title: 'Name',
