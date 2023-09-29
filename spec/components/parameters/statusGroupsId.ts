@@ -2,7 +2,7 @@ import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../utils/ref';
 
 const statusGroupsId: ParameterObject = {
-  name: 'statusGroupsId',
+  name: 'componentId',
   in: 'path',
   required: true,
   description: 'The component of the status groups identifier',

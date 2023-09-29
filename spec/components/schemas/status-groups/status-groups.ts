@@ -22,7 +22,7 @@ const statusGroups: SchemaObject = {
     },
     type: {
       title: 'Type',
-      description: 'Type of the Status Group.',
+      description: 'Type of the Status Group. The configured type will only appear if available and if the user uses a valid [authentication](#section/Authentication)',
       type: 'string',
       enum: [
         'system',
@@ -95,18 +95,6 @@ const statusGroups: SchemaObject = {
             type: 'string',
             example: 'Platform',
           },
-          phone: {
-            title: 'Phone',
-            description: 'Phone of a component of the status groups. Specific for configured type components.',
-            type: 'string',
-            example: '01310-300',
-          },
-          uri: {
-            title: 'Uri',
-            description: 'Uri of a component of the status groups. Specific for configured type components.',
-            type: 'string',
-            example: 'http://webhook.com/',
-          },
           status: {
             title: 'Status',
             description: 'Status of a component of the status groups.',
@@ -119,6 +107,19 @@ const statusGroups: SchemaObject = {
             ],
             example: 'UP',
           },
+        },
+        additionalProperties: {
+          description: 'Value provided to fill the variable named after the property name.',
+          oneOf: [{
+            type: 'string',
+            example: 'Zenvia',
+          }, {
+            type: 'number',
+            example: 1,
+          }, {
+            type: 'boolean',
+            example: true,
+          }],
         },
       },
     },
