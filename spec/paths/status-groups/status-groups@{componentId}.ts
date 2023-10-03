@@ -7,6 +7,7 @@ const get: OperationObject = {
   summary: 'Check groups status by id',
   description: 'Allows monitoring of the status of a single Zenvia platform and solution.',
   tags: ['Status Groups'],
+  security: [],
   parameters: [{
     $ref: statusGroupsIdRef,
   }],
