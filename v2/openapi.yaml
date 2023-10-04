@@ -2569,6 +2569,7 @@ paths:
       description: Allows monitoring of the status of a single Zenvia platform and solution.
       tags:
         - Status Groups
+      security: []
       parameters:
         - $ref: '#/components/parameters/statusGroupsId'
       responses:

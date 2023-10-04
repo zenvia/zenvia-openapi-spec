@@ -2978,6 +2978,7 @@
         "tags": [
           "Status Groups"
         ],
+        "security": [],
         "parameters": [
           {
             "$ref": "#/components/parameters/statusGroupsId"
