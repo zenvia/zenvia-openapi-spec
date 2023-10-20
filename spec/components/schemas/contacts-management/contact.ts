@@ -79,6 +79,7 @@ const base: SchemaObject = {
           title: 'Boolean',
           example: true,
         }],
+        nullable: true,
       },
     },
     addresses: {
