@@ -26,7 +26,7 @@ There are three types of predefined buttons offered: actions, quick replies and 
 
 ### ACTIONS
 
-Allows your customer to call a phone number and visit a website.
+Allows your customer to visit a website, call a phone number or send a product catalog.
 
 ### QUICK REPLIES
 
