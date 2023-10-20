@@ -53,6 +53,12 @@ const base: SchemaObject = {
       type: 'string',
       example: 'Souza',
     },
+    birthdate: {
+      title: 'Birthdate',
+      description: 'Contact\'s birthdate',
+      type: 'string',
+      example: '1970-06-13',
+    },
     customData: {
       title: 'Custom Data',
       description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
