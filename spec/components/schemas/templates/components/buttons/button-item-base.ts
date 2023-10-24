@@ -18,7 +18,6 @@ const buttonItemBase: SchemaObject = {
   },
   required: [
     'type',
-    'text',
   ],
 };
 
