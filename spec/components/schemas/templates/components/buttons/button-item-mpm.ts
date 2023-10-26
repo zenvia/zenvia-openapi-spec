@@ -7,18 +7,6 @@ const mpmButton: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
-  }, {
-    type: 'object',
-    properties: {
-      text: {
-        title: 'Text of button',
-        description: 'This field is static with the value of "view items"',
-        type: 'string',
-      },
-    },
-    required: [
-      'type',
-    ],
   }],
 };
 

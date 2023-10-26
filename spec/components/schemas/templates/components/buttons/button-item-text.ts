@@ -4,16 +4,13 @@ import { createComponentRef } from '../../../../../../utils/ref';
 const buttonItemBase: SchemaObject = {
   type: 'object',
   properties: {
-    type: {
-      title: 'Button type',
-      enum: [
-        'URL', 'PHONE_NUMBER', 'QUICK_REPLY', 'OPT_OUT', 'MPM',
-      ],
+    text: {
+      title: 'Button text',
       type: 'string',
     },
   },
   required: [
-    'type',
+    'text',
   ],
 };
 
