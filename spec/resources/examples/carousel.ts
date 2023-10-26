@@ -25,8 +25,5 @@ export function carousel() {
         }],
       }],
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }

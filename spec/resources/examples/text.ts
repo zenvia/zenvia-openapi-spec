@@ -6,8 +6,5 @@ export function text() {
       type: 'text',
       text: 'Hi Zenvia!',
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }
