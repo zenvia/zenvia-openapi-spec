@@ -76,10 +76,7 @@ const template: SchemaObject = {
       description: 'The available fields to be used in this template',
       type: 'array',
       items: {
-        oneOf: [
-          { type: 'string' },
-          { type: 'object' },
-        ],
+        type: 'string',
       },
       minItems: 0,
       readOnly: true,
