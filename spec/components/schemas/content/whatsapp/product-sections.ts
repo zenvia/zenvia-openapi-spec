@@ -26,11 +26,11 @@ const productSections: SchemaObject = {
         },
       },
     },
-    example: [{
-      title: 'title',
-      productItems: [{ productId: 'MY_PRODUCT_ID' }],
-    }],
   },
+  example: [{
+    title: 'title',
+    productItems: [{ productId: 'MY_PRODUCT_ID' }],
+  }],
 };
 
 export const ref = createComponentRef(__filename);
