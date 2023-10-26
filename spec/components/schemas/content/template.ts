@@ -1,6 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as productSections } from './whatsapp/product-sections';
 
 const template: SchemaObject = {
   type: 'object',
@@ -20,10 +21,15 @@ const template: SchemaObject = {
       },
       fields: {
         type: 'object',
-        description: 'The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.',
+        description: 'The available fields to be used in this template.<br><br>\
+        For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>\
+        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.',
         example: {
           user: 'John Smith',
           protocol: '34534252',
+        },
+        properties: {
+          sections: { $ref: productSections },
         },
         additionalProperties: {
           description: 'Value provided to fill the variable named after the property name.',
