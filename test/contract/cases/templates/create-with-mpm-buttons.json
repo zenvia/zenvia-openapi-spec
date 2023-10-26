@@ -16,16 +16,17 @@
       "senderId": "SENDER_ID",
       "category": "MARKETING",
       "components": {
+        "header": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
         "body": {
           "type": "TEXT_FIXED",
           "text": "some text"
         },
         "buttons": {
           "type": "ACTIONS",
-          "items": [{
-            "type": "MPM",
-            "text": "view items"
-          }]
+          "items": [{ "type": "MPM" }]
         }
       }
     }
@@ -42,6 +43,10 @@
       "senderId": "SENDER_ID",
       "category": "MARKETING",
       "components": {
+        "header": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
         "body": {
           "type": "TEXT_FIXED",
           "text": "some text"
@@ -49,8 +54,7 @@
         "buttons": {
           "type": "ACTIONS",
           "items": [{
-            "type": "MPM",
-            "text": "view items"
+            "type": "MPM"
           }]
         }
       }
