@@ -4467,6 +4467,12 @@
             "type": "string",
             "example": "Souza"
           },
+          "birthdate": {
+            "title": "Birthdate",
+            "description": "Contact's birthdate",
+            "type": "string",
+            "example": "1970-06-13"
+          },
           "customData": {
             "title": "Custom Data",
             "description": "Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).",
@@ -5406,10 +5412,15 @@
               },
               "fields": {
                 "type": "object",
-                "description": "The available fields to be used in this template.<br><br>For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.",
+                "description": "The available fields to be used in this template.<br><br>        For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.",
                 "example": {
                   "user": "John Smith",
                   "protocol": "34534252"
+                },
+                "properties": {
+                  "sections": {
+                    "$ref": "#/components/schemas/content.whatsapp.product-sections"
+                  }
                 },
                 "additionalProperties": {
                   "description": "Value provided to fill the variable named after the property name.",
@@ -6515,30 +6526,7 @@
                 "description": "The catalog identifier. Click <a href=\"https://business.facebook.com/commerce\" target=\"_blank\">here</a> to go to the catalogs page."
               },
               "sections": {
-                "type": "array",
-                "description": "The available fields to be used in this product list.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "title": {
-                      "type": "string",
-                      "description": "The section title."
-                    },
-                    "productItems": {
-                      "type": "array",
-                      "description": "A list of products.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "productId": {
-                            "type": "string",
-                            "description": "The product identifier."
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/content.whatsapp.product-sections"
               }
             },
             "required": [
@@ -6546,6 +6534,43 @@
               "catalogId",
               "body",
               "sections"
+            ]
+          }
+        ]
+      },
+      "content.whatsapp.product-sections": {
+        "type": "array",
+        "title": "Product Sections",
+        "description": "The available fields to be used in a product list. Only applicable to [WhatsApp](#tag/WhatsApp) channel.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The section title."
+            },
+            "productItems": {
+              "type": "array",
+              "description": "A list of products.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "string",
+                    "description": "The product identifier."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": [
+          {
+            "title": "title",
+            "productItems": [
+              {
+                "productId": "MY_PRODUCT_ID"
+              }
             ]
           }
         ]
@@ -9044,7 +9069,7 @@
             "properties": {
               "items": {
                 "title": "Buttons",
-                "description": "List of buttons. Only one URL and phone number can be sent",
+                "description": "List of buttons. Only one of the following can be included: URL, MPM, or PHONE_NUMBER. MPM buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
                 "maxItems": 2,
                 "type": "array",
                 "items": {
@@ -9055,6 +9080,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/templates.components.buttons.button-item-phone-number"
+                    },
+                    {
+                      "$ref": "#/components/schemas/templates.components.buttons.button-item-mpm"
                     }
                   ],
                   "required": [
@@ -9064,7 +9092,8 @@
                     "propertyName": "type",
                     "mapping": {
                       "URL": "#/components/schemas/templates.components.buttons.button-item-url",
-                      "PHONE_NUMBER": "#/components/schemas/templates.components.buttons.button-item-phone-number"
+                      "PHONE_NUMBER": "#/components/schemas/templates.components.buttons.button-item-phone-number",
+                      "MPM": "#/components/schemas/templates.components.buttons.button-item-mpm"
                     }
                   }
                 }
@@ -9097,18 +9126,22 @@
               "URL",
               "PHONE_NUMBER",
               "QUICK_REPLY",
-              "OPT_OUT"
+              "OPT_OUT",
+              "MPM"
             ],
-            "type": "string"
-          },
-          "text": {
-            "title": "Button text",
             "type": "string"
           }
         },
         "required": [
-          "type",
-          "text"
+          "type"
+        ]
+      },
+      "templates.components.buttons.button-item-mpm": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          }
         ]
       },
       "templates.components.buttons.button-item-opt-out": {
@@ -9116,6 +9149,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-text"
           },
           {
             "type": "object",
@@ -9131,6 +9167,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-text"
           },
           {
             "type": "object",
@@ -9156,6 +9195,9 @@
             "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
           },
           {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-text"
+          },
+          {
             "type": "object",
             "properties": {
               "payload": {
@@ -9172,11 +9214,26 @@
           }
         ]
       },
+      "templates.components.buttons.button-item-text": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Button text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
       "templates.components.buttons.button-item-url": {
         "type": "object",
         "allOf": [
           {
             "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
+          },
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-text"
           },
           {
             "type": "object",
@@ -10184,7 +10241,7 @@
     },
     {
       "name": "Templates",
-      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to call a phone number and visit a website.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\nQuick reply buttons also have the `OPT_OUT` type, a exclusive button for marketing template. Button that Meta recommends using in marketing templates to increase its approval chances. With it, the final contact has the option to request not to receive messages of this type from the company.\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n\n## E-Mail templates\n\nE-mail templates allows sending content up to 30MB to multiple contacts using a small payload.\n\nEmail templates have the following components:\n* Header\n* Body\n* Attachments\n* Email\n"
+      "description": "Message Templates are message formats used for common reusable messages a business may want to send. Businesses must use Message Templates for sending notifications to customers.\n\nThis allows a business to send just the template identifier along with the appropriate parameters instead of the whole message content.\n\nTemplates have the following components:\n* Header\n* Body\n* Footer\n* Buttons\n\nThe components object allows you to indicate the type of message and the message's parameters.\n\n## Standard message templates\n\nThe standard message templates allows you to send plain text-only messages using a <code>body</code> components object.\n\n## Media message templates\n\nMedia message templates expand the outgoing content beyond the standard message template type to include media, headers, and footers using a <code>header</code> and <code>footer</code> components object.\n\n## Interactive message templates\n\nInteractive message templates expand the outgoing content beyond the standard message template and media messages template types to include interactive buttons using the <code>button</code> components object.\n\nThere are three types of predefined buttons offered: actions, quick replies and mixed.\n\n### ACTIONS\n\nAllows your customer to visit a website, call a phone number or send a product catalog.\n\n### QUICK REPLIES\n\nAllows your customer to return a simple text message.\n\nWhen a quick reply message is sent, and the customer clicks one of the options, your webhook will receive a `MESSAGE_EVENT`, provided you've subscribed to that kind of event. The `MESSAGE_EVENT` itself will contain one content of type `text` with the <code>text</code> and <code>payload</code> fields defined in the creation of interactive templates.\n\nYou can learn more about it on the [subscriptions section](#section/MESSAGE).\n\nQuick reply buttons also have the `OPT_OUT` type, a exclusive button for marketing template. Button that Meta recommends using in marketing templates to increase its approval chances. With it, the final contact has the option to request not to receive messages of this type from the company.\n\n### MIXED\n\nAllows that in RCS messages you can mix buttons like ACTIONS and QUICK REPLIES.\n\n## E-Mail templates\n\nE-mail templates allows sending content up to 30MB to multiple contacts using a small payload.\n\nEmail templates have the following components:\n* Header\n* Body\n* Attachments\n* Email\n"
     },
     {
       "name": "Message Report",
