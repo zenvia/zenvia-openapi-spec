@@ -4,6 +4,7 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as baseRef } from './base';
 import { ref as urlRef } from './button-item-url';
 import { ref as phoneNumberRef } from './button-item-phone-number';
+import { ref as mpmRef } from './button-item-mpm';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -14,7 +15,7 @@ const buttons: SchemaObject = {
     properties: {
       items: {
         title: 'Buttons',
-        description: 'List of buttons. Only one URL and phone number can be sent',
+        description: 'List of buttons. Only one of the following can be included: URL, MPM, or PHONE_NUMBER. MPM buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
         maxItems: 2,
         type: 'array',
         items: {
@@ -23,6 +24,9 @@ const buttons: SchemaObject = {
             $ref: urlRef,
           }, {
             $ref: phoneNumberRef,
+          },
+          {
+            $ref: mpmRef,
           }],
           required: [
             'type',
@@ -32,6 +36,7 @@ const buttons: SchemaObject = {
             mapping: {
               URL: urlRef,
               PHONE_NUMBER: phoneNumberRef,
+              MPM: mpmRef,
             },
           },
         },

@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from '../base';
+import { ref as productSections } from './product-sections';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const productList: SchemaObject = {
@@ -32,32 +33,7 @@ const productList: SchemaObject = {
         type: 'string',
         description: 'The catalog identifier. Click <a href="https://business.facebook.com/commerce" target="_blank">here</a> to go to the catalogs page.',
       },
-      sections: {
-        type: 'array',
-        description: 'The available fields to be used in this product list.',
-        items: {
-          type: 'object',
-          properties: {
-            title: {
-              type: 'string',
-              description: 'The section title.',
-            },
-            productItems: {
-              type: 'array',
-              description: 'A list of products.',
-              items: {
-                type: 'object',
-                properties: {
-                  productId: {
-                    type: 'string',
-                    description: 'The product identifier.',
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+      sections: { $ref: productSections },
     },
     required: [
       'type',
