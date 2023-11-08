@@ -20,6 +20,7 @@ const email: SchemaObject = {
         type: 'string',
         description: 'The e-mail subject',
         example: 'Re: Ticket 12345',
+        minLength: 1,
       },
       html: {
         type: 'string',
