@@ -18,6 +18,7 @@ const text: SchemaObject = {
           <br>*URL preview only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
         type: 'string',
         example: 'This is a text.',
+        minLength: 1,
       },
       payload: {
         description: 'Payload of selected button',
