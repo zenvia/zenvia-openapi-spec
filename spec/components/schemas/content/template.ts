@@ -23,7 +23,8 @@ const template: SchemaObject = {
         type: 'object',
         description: 'The available fields to be used in this template.<br><br>\
         For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>\
-        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.',
+        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.<br><br>\
+        For WhatsApp coupon templates, pass the `code` parameter and its value. It is required.',
         example: {
           user: 'John Smith',
           protocol: '34534252',
