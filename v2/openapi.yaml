@@ -2929,6 +2929,7 @@ components:
           type: string
           description: The E-mail subject
           example: Authentication code
+          minLength: 1
         html:
           type: string
           description: Default text to be sent
@@ -4061,6 +4062,7 @@ components:
               type: string
               description: The e-mail subject
               example: 'Re: Ticket 12345'
+              minLength: 1
             html:
               type: string
               maxLength: 32768
@@ -4275,7 +4277,7 @@ components:
               example: c2c3e42d-6fb7-4ad6-897a-dd7613469f58
             fields:
               type: object
-              description: 'The available fields to be used in this template.<br><br>        For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.'
+              description: 'The available fields to be used in this template.<br><br>        For media templates, the media URL is obtained from `imageUrl`, `videoUrl` or `documentUrl` depending on the template used.<br><br>        For WhatsApp authentication templates, pass the `token` parameter and its value. It is required.<br><br>        For WhatsApp coupon templates, pass the `code` parameter and its value. It is required.'
               example:
                 user: John Smith
                 protocol: '34534252'
@@ -4309,6 +4311,7 @@ components:
                           <br>*URL preview only applicable to [WhatsApp](#tag/WhatsApp) channel.*
               type: string
               example: This is a text.
+              minLength: 1
             payload:
               description: Payload of selected button
               type: string
@@ -4336,6 +4339,7 @@ components:
           description: URL of audio
           type: string
           example: 'http://fooooo.bar/audio.mp3'
+          minLength: 1
       required:
         - type
         - fileUrl
@@ -6950,7 +6954,7 @@ components:
           properties:
             items:
               title: Buttons
-              description: 'List of buttons. Only one of the following can be included: URL, MPM, or PHONE_NUMBER. MPM buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).'
+              description: 'List of buttons. Only one of the following can be included: URL, MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).'
               maxItems: 2
               type: array
               items:
@@ -6959,6 +6963,7 @@ components:
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-url'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-mpm'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-coupon'
                 required:
                   - type
                 discriminator:
@@ -6967,6 +6972,7 @@ components:
                     URL: '#/components/schemas/templates.components.buttons.button-item-url'
                     PHONE_NUMBER: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                     MPM: '#/components/schemas/templates.components.buttons.button-item-mpm'
+                    COPY_CODE: '#/components/schemas/templates.components.buttons.button-item-coupon'
           required:
             - items
     templates.components.buttons.base:
@@ -6988,9 +6994,14 @@ components:
             - QUICK_REPLY
             - OPT_OUT
             - MPM
+            - COPY_CODE
           type: string
       required:
         - type
+    templates.components.buttons.button-item-coupon:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
     templates.components.buttons.button-item-mpm:
       type: object
       allOf:
