@@ -13,6 +13,7 @@ const text: SchemaObject = {
       description: 'URL of audio',
       type: 'string',
       example: 'http://fooooo.bar/audio.mp3',
+      minLength: 1,
     },
   },
   required: [
