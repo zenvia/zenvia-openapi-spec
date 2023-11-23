@@ -48,7 +48,7 @@
     "mocha": "^10.2.0",
     "ncp": "^2.0.0",
     "oas-validator": "^5.0.2",
-    "openapi-enforcer": "^1.13.3",
+    "openapi-enforcer": "^1.22.3",
     "openapi3-ts": "^2.0.0",
     "reload": "^3.2.0",
     "ts-node": "^9.0.0",
