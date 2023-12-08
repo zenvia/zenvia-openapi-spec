@@ -11,8 +11,5 @@ export function replyableText() {
         payload: 'success',
       }],
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }

@@ -21,8 +21,5 @@ export function button() {
         },
       ],
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }
