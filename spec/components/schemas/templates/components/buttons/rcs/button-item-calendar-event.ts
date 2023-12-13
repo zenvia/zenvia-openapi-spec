@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../../utils/ref';
 import { ref as baseRef } from '../button-item-base';
 import { ref as btnTextRef } from '../button-item-text';
-import { ref as btnPayloadRef } from './button-item-payload'
+import { ref as btnPayloadRef } from './button-item-payload';
 
 const calendarEventButton: SchemaObject = {
   type: 'object',
@@ -25,12 +25,12 @@ const calendarEventButton: SchemaObject = {
         },
         startTime: {
           title: 'Event start time',
-          description: "Start date and time of the event. Usage of ISO standard for the date is highly recommended.",
+          description: 'Start date and time of the event. Usage of ISO standard for the date is highly recommended.',
           type: 'string',
         },
         endTime: {
           title: 'Event end time',
-          description: "End date and time of the event. Usage of ISO standard for the date is highly recommended.",
+          description: 'End date and time of the event. Usage of ISO standard for the date is highly recommended.',
           type: 'string',
         },
       },

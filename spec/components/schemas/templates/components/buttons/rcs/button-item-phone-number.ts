@@ -25,7 +25,7 @@ const phoneNumberButton: SchemaObject = {
         'text',
         'phoneNumber',
       ],
-    }
+    },
   ],
 };
 

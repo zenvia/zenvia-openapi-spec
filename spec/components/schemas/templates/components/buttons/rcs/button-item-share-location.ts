@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../../utils/ref';
 import { ref as baseRef } from '../button-item-base';
 import { ref as btnTextRef } from '../button-item-text';
-import { ref as btnPayloadRef } from './button-item-payload'
+import { ref as btnPayloadRef } from './button-item-payload';
 
 const shareLocationButton: SchemaObject = {
   type: 'object',
@@ -17,7 +17,7 @@ const shareLocationButton: SchemaObject = {
         'type',
         'text',
       ],
-    }
+    },
   ],
 };
 
