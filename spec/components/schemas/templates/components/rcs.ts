@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../../utils/ref';
 import { ref as headerRef } from './header';
 import { ref as bodyRef } from './body';
 import { ref as footerRef } from './footer';
-import { ref as buttonsRef } from './buttons';
+import { ref as rcsButtonsRef } from './buttons/rcs/all';
 
 const rcsComponents: SchemaObject = {
   title: 'Components',
@@ -22,7 +22,7 @@ const rcsComponents: SchemaObject = {
       $ref: footerRef,
     },
     buttons: {
-      $ref: buttonsRef,
+      $ref: rcsButtonsRef,
     },
   },
 };
