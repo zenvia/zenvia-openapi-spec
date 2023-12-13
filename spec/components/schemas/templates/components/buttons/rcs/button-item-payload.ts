@@ -10,9 +10,6 @@ const buttonItemPayload: SchemaObject = {
       type: 'string',
     },
   },
-  required: [
-    'payload',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
