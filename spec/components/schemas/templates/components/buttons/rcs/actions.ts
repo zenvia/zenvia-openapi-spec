@@ -19,7 +19,7 @@ const buttons: SchemaObject = {
       items: {
         title: 'Buttons',
         description: 'List of buttons.',
-        maxItems: 2,
+        maxItems: 4,
         type: 'array',
         items: {
           type: 'object',
