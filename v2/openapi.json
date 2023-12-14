@@ -455,9 +455,6 @@
                         }
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "name": "Sender Name"
                     }
@@ -477,9 +474,6 @@
                         }
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "name": "Sender Name"
                     }
@@ -529,10 +523,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "file": {
@@ -547,10 +538,7 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "card": {
@@ -582,10 +570,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "carousel": {
@@ -622,10 +607,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "replyable_text": {
@@ -644,10 +626,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "optin_request": {
@@ -734,9 +713,6 @@
                         "text": "Hi Zenvia!"
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "type": "HUMAN",
                       "name": "Agent Name",
@@ -757,9 +733,6 @@
                         "fileName": "team.png"
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "type": "HUMAN",
                       "name": "Agent Name",
@@ -797,9 +770,6 @@
                         ]
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "type": "HUMAN",
                       "name": "Agent Name",
@@ -842,9 +812,6 @@
                         ]
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "type": "HUMAN",
                       "name": "Agent Name",
@@ -869,9 +836,6 @@
                         ]
                       }
                     ],
-                    "conversation": {
-                      "solution": "conversion"
-                    },
                     "representative": {
                       "type": "HUMAN",
                       "name": "Agent Name",
@@ -945,10 +909,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "file": {
@@ -963,10 +924,7 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "replyable_text": {
@@ -985,10 +943,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "card": {
@@ -1020,10 +975,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "carousel": {
@@ -1060,10 +1012,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "optin_request": {
@@ -1127,10 +1076,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "template": {
@@ -1146,10 +1092,7 @@
                           "product": "Zenvia Chat"
                         }
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "file": {
@@ -1164,10 +1107,7 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "card": {
@@ -1199,10 +1139,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "carousel": {
@@ -1239,10 +1176,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "replyable_text": {
@@ -1261,10 +1195,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 }
               }
@@ -1311,10 +1242,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "template": {
@@ -1330,10 +1258,7 @@
                           "product": "Zenvia Chat"
                         }
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 }
               }
@@ -1402,10 +1327,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "file": {
@@ -1420,10 +1342,7 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "card": {
@@ -1455,10 +1374,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "replyable_text": {
@@ -1477,10 +1393,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 }
               }
@@ -1688,10 +1601,7 @@
                         "type": "text",
                         "text": "Hi Zenvia!"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "file": {
@@ -1706,10 +1616,7 @@
                         "fileCaption": "Our pic :)",
                         "fileName": "team.png"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "template": {
@@ -1725,10 +1632,7 @@
                           "product": "Zenvia Chat"
                         }
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "contacts": {
@@ -1788,10 +1692,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "location": {
@@ -1807,10 +1708,7 @@
                         "address": "Av. Paulista, 2300 - 18º Andar - Bela Vista, São Paulo - SP, 01310-300",
                         "url": "https://www.zenvia.com/"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "button": {
@@ -1837,10 +1735,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "list": {
@@ -1877,10 +1772,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "product": {
@@ -1895,10 +1787,7 @@
                         "catalogId": "CATALOG_ID",
                         "productId": "product-SKU-in-catalog"
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 },
                 "product_list": {
@@ -1926,10 +1815,7 @@
                           }
                         ]
                       }
-                    ],
-                    "conversation": {
-                      "solution": "conversion"
-                    }
+                    ]
                   }
                 }
               }
@@ -5056,7 +4942,6 @@
                 "title": "Solution Name",
                 "type": "string",
                 "description": "If the contact replies to the API message, the conversation will be redirected to the chosen solution.",
-                "example": "conversion",
                 "enum": [
                   "conversion",
                   "zenvia_chat",
@@ -9074,7 +8959,7 @@
               "items": {
                 "title": "Buttons",
                 "description": "List of buttons. Only one of the following can be included: URL, MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
-                "maxItems": 2,
+                "maxItems": 3,
                 "type": "array",
                 "items": {
                   "type": "object",
