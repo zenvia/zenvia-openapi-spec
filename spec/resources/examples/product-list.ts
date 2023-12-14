@@ -22,8 +22,5 @@ export function productList() {
         },
       ],
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }

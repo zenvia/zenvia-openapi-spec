@@ -31,8 +31,5 @@ export function list() {
         },
       ],
     }],
-    conversation:{
-      solution: 'conversion',
-    },
   };
 }
