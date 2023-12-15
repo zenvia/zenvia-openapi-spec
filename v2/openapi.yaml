@@ -6764,7 +6764,7 @@ components:
         footer:
           $ref: '#/components/schemas/templates.components.footer.index'
         buttons:
-          $ref: '#/components/schemas/templates.components.buttons.index'
+          $ref: '#/components/schemas/templates.components.buttons.rcs.all'
     templates.components.sms:
       title: Components
       description: Message content of this template
@@ -6918,6 +6918,10 @@ components:
             - OPT_OUT
             - MPM
             - COPY_CODE
+            - VIEW_LOCATION
+            - SEARCH_LOCATION
+            - SHARE_LOCATION
+            - CALENDAR_EVENT
           type: string
       required:
         - type
@@ -7059,6 +7063,240 @@ components:
                   mapping:
                     QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
                     OPT_OUT: '#/components/schemas/templates.components.buttons.button-item-opt-out'
+          required:
+            - items
+    templates.components.buttons.rcs.actions:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.base'
+        - type: object
+          properties:
+            items:
+              title: Buttons
+              description: List of buttons.
+              maxItems: 4
+              type: array
+              items:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-url'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-phone-number'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-view-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-search-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-share-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-calendar-event'
+                required:
+                  - type
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    URL: '#/components/schemas/templates.components.buttons.button-item-url'
+                    PHONE_NUMBER: '#/components/schemas/templates.components.buttons.button-item-phone-number'
+                    VIEW_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-view-location'
+                    SEARCH_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-search-location'
+                    SHARE_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-share-location'
+                    CALENDAR_EVENT: '#/components/schemas/templates.components.buttons.rcs.button-item-calendar-event'
+          required:
+            - items
+    templates.components.buttons.rcs.all:
+      title: Buttons
+      description: |-
+        Template buttons.
+                        <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.actions'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.quick-replies'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.mixed'
+      required:
+        - type
+      discriminator:
+        propertyName: type
+        mapping:
+          ACTIONS: '#/components/schemas/templates.components.buttons.rcs.actions'
+          QUICK_REPLIES: '#/components/schemas/templates.components.buttons.rcs.quick-replies'
+          MIXED: '#/components/schemas/templates.components.buttons.rcs.mixed'
+    templates.components.buttons.rcs.button-item-calendar-event:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - properties:
+            description:
+              title: Event description
+              description: A description of the calendar event to be sent inside the card.
+              type: string
+            title:
+              title: Event title
+              description: A title for the calendar event to be sent inside the card.
+              type: string
+            startTime:
+              title: Event start time
+              description: Start date and time of the event. Usage of ISO standard for the date is highly recommended.
+              type: string
+            endTime:
+              title: Event end time
+              description: End date and time of the event. Usage of ISO standard for the date is highly recommended.
+              type: string
+          type: object
+          required:
+            - type
+            - text
+            - description
+            - title
+            - startTime
+            - endTime
+    templates.components.buttons.rcs.button-item-payload:
+      type: object
+      properties:
+        payload:
+          title: Return payload
+          description: Content to be sent back on button click.
+          type: string
+    templates.components.buttons.rcs.button-item-phone-number:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - type: object
+          properties:
+            phoneNumber:
+              title: Phone number of button
+              description: Phone number to be sent in the button
+              type: string
+          required:
+            - type
+            - text
+            - phoneNumber
+    templates.components.buttons.rcs.button-item-search-location:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - type: object
+          properties:
+            query:
+              title: Location query
+              description: 'For default map apps, button click results in a location search centered around the user''s current location'
+              type: string
+          required:
+            - type
+            - text
+            - query
+    templates.components.buttons.rcs.button-item-share-location:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - type: object
+          required:
+            - type
+            - text
+    templates.components.buttons.rcs.button-item-url:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - type: object
+          properties:
+            url:
+              title: URL of button
+              description: URL to be sent in the button. It can be dynamic
+              type: string
+          required:
+            - type
+            - text
+            - url
+    templates.components.buttons.rcs.button-item-view-location:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-text'
+        - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-payload'
+        - type: object
+          properties:
+            latitude:
+              title: Latitude of coordinates
+              description: 'The latitude in degrees. It must be in the range [-90.0, +90.0].'
+              minimum: -90
+              maximum: 90
+              type: number
+            longitude:
+              title: Longitude of coordinates
+              description: 'The longitude in degrees. It must be in the range [-180.0, +180.0].'
+              minimum: -180
+              maximum: 180
+              type: number
+            label:
+              title: Location label
+              description: The label of the pin dropped on the map of the user.
+              type: string
+          required:
+            - type
+            - text
+            - latitude
+            - longitude
+    templates.components.buttons.rcs.mixed:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.base'
+        - type: object
+          properties:
+            items:
+              title: Buttons
+              description: 'List of buttons. Currently, only [RCS](#tag/RCS) channel is allowed. It is possible to combine 3 types of buttons, with a limit of up to 11 buttons.'
+              maxItems: 11
+              type: array
+              items:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-url'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-phone-number'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-view-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-search-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-share-location'
+                  - $ref: '#/components/schemas/templates.components.buttons.rcs.button-item-calendar-event'
+                required:
+                  - type
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    URL: '#/components/schemas/templates.components.buttons.button-item-url'
+                    PHONE_NUMBER: '#/components/schemas/templates.components.buttons.button-item-phone-number'
+                    QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
+                    VIEW_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-view-location'
+                    SEARCH_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-search-location'
+                    SHARE_LOCATION: '#/components/schemas/templates.components.buttons.rcs.button-item-share-location'
+                    CALENDAR_EVENT: '#/components/schemas/templates.components.buttons.rcs.button-item-calendar-event'
+          required:
+            - items
+    templates.components.buttons.rcs.quick-replies:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.base'
+        - type: object
+          properties:
+            items:
+              title: Buttons
+              description: List of buttons
+              maxItems: 3
+              type: array
+              items:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
+                required:
+                  - type
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
           required:
             - items
     templates.components.email.index:
