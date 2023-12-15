@@ -1,0 +1,78 @@
+{
+  "name": "create template with action buttons",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "RCS",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "type": "ACTIONS",
+          "items": [
+            {
+                "type": "SHARE_LOCATION",
+                "text": "Some text for the card"
+            }, {
+                "type": "CALENDAR_EVENT",
+                "text": "Some text for the card",
+                "title": "Event title",
+                "description": "A feast to be had before the battle. Have your fill!",
+                "startTime": "2023-12-01",
+                "endTime": "2024-01-31"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "RCS",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "type": "ACTIONS",
+          "items": [
+            {
+                "type": "SHARE_LOCATION",
+                "text": "Some text for the card"
+            }, {
+                "type": "CALENDAR_EVENT",
+                "text": "Some text for the card",
+                "title": "Event title",
+                "description": "A feast to be had before the battle. Have your fill!",
+                "startTime": "2023-12-01",
+                "endTime": "2024-01-31"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
