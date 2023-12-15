@@ -93,6 +93,12 @@ describe('API contract test against OpenAPI specification', () => {
 
   describe('templates collection', async () => {
     loadTestCases('templates');
+    describe('whatsapp templates', async () => {
+      loadTestCases('templates/whatsapp');
+    });
+    describe('rcs templates', async () => {
+      loadTestCases('templates/rcs');
+    });
     describe('template comments', async () => {
       loadTestCases('templates/comments');
     });

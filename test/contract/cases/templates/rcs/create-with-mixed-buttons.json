@@ -1,0 +1,120 @@
+{
+  "name": "create template with mixed buttons",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "RCS",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "type": "MIXED",
+          "items": [
+            {
+              "type": "QUICK_REPLY",
+              "text": "Some Button",
+              "payload": "quick-reply-payload"
+            }, {
+              "type": "SHARE_LOCATION",
+              "text": "Some text for the card"
+            }, {
+              "type": "CALENDAR_EVENT",
+              "text": "Some text for the card",
+              "title": "Event title",
+              "description": "A feast to be had before the battle. Have your fill!",
+              "startTime": "2023-12-01",
+              "endTime": "2024-01-31"
+            }, {
+              "type": "VIEW_LOCATION",
+              "text": "Some text for the card",
+              "latitude": 81.34,
+              "longitude": -135
+            }, {
+              "type": "SEARCH_LOCATION",
+              "text": "Some text for the card",
+              "query": "Gas station"
+            }, {
+              "type": "URL",
+              "text": "Some Link",
+              "url": "https://link-domain.com/path"
+            }, {
+              "type": "PHONE_NUMBER",
+              "text": "Some phone number",
+              "phoneNumber": "+5551988884444"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "RCS",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "type": "MIXED",
+          "items": [
+            {
+              "type": "QUICK_REPLY",
+              "text": "Some Button",
+              "payload": "quick-reply-payload"
+            }, {
+              "type": "SHARE_LOCATION",
+              "text": "Some text for the card"
+            }, {
+              "type": "CALENDAR_EVENT",
+              "text": "Some text for the card",
+              "title": "Event title",
+              "description": "A feast to be had before the battle. Have your fill!",
+              "startTime": "2023-12-01",
+              "endTime": "2024-01-31"
+            }, {
+              "type": "VIEW_LOCATION",
+              "text": "Some text for the card",
+              "latitude": 81.34,
+              "longitude": -135
+            }, {
+              "type": "SEARCH_LOCATION",
+              "text": "Some text for the card",
+              "query": "Gas station"
+            }, {
+              "type": "URL",
+              "text": "Some Link",
+              "url": "https://link-domain.com/path"
+            }, {
+              "type": "PHONE_NUMBER",
+              "text": "Some phone number",
+              "phoneNumber": "+5551988884444"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
