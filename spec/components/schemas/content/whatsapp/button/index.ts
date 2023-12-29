@@ -35,7 +35,7 @@ const button: SchemaObject = {
         type: 'array',
         title: 'List of buttons',
         minItems: 1,
-        maxItems: 3,
+        maxItems: 10,
         items: {
           type: 'object',
           properties: {
