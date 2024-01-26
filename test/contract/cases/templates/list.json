@@ -18,7 +18,7 @@
       "id": "UUID",
       "name": "template name",
       "locale": "pt_BR",
-      "channel": "WHATSAPP",
+      "channel": "RCS",
       "senderId": "SENDER_ID",
       "category": "ALERT_UPDATE",
       "components": {
@@ -31,6 +31,7 @@
       "id": "UUID",
       "name": "template name",
       "locale": "pt_BR",
+      "qualityScore": "GREEN",
       "channel": "WHATSAPP",
       "senderId": "SENDER_ID",
       "category": "UTILITY",
@@ -90,6 +91,60 @@
       "status": "APPROVED",
       "createdAt": "2020-07-15T18:00:00.000Z",
       "updatedAt": "2020-07-15T18:00:00.000Z"
+    }, {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "UTILITY",
+      "components": {
+        "header": {
+          "type": "MEDIA_IMAGE"
+        },
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "items": [{
+            "type": "OPT_OUT",
+            "text": "Stop"
+          }, {
+            "type": "URL",
+            "text": "Learn more",
+            "url": "https://www.website.com"
+          }],
+          "type": "MIXED"
+        }
+      }
+    }, {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "RCS",
+      "senderId": "SENDER_ID",
+      "category": "UTILITY",
+      "components": {
+        "header": {
+          "type": "MEDIA_IMAGE"
+        },
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "buttons": {
+          "items": [{
+            "type": "SHARE_LOCATION",
+            "text": "Share location"
+          }, {
+            "type": "URL",
+            "text": "Learn more",
+            "url": "https://www.website.com"
+          }],
+          "type": "MIXED"
+        }
+      }
     }]
   }
 }

@@ -5,6 +5,9 @@ import { ref as baseRef } from './base';
 import { ref as urlRef } from './button-item-url';
 import { ref as phoneNumberRef } from './button-item-phone-number';
 import { ref as quickReplyRef } from './button-item-quick-reply';
+import { ref as optOutRef } from './button-item-opt-out';
+import { ref as mpmRef } from './button-item-mpm';
+import { ref as copyCodeRef } from './button-item-coupon';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -20,22 +23,26 @@ const buttons: SchemaObject = {
         type: 'array',
         items: {
           type: 'object',
-          oneOf: [{
-            $ref: urlRef,
-          }, {
-            $ref: phoneNumberRef,
-          }, {
-            $ref: quickReplyRef,
-          }],
+          oneOf: [
+            { $ref: copyCodeRef },
+            { $ref: mpmRef },
+            { $ref: optOutRef },
+            { $ref: phoneNumberRef },
+            { $ref: quickReplyRef },
+            { $ref: urlRef },
+          ],
           required: [
             'type',
           ],
           discriminator: {
             propertyName: 'type',
             mapping: {
-              URL: urlRef,
+              COPY_CODE: copyCodeRef,
+              MPM: mpmRef,
+              OPT_OUT: optOutRef,
               PHONE_NUMBER: phoneNumberRef,
               QUICK_REPLY: quickReplyRef,
+              URL: urlRef,
             },
           },
         },
