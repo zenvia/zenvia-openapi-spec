@@ -5,7 +5,6 @@ import {
   ResponseObject,
   ResponsesObject,
 } from 'openapi3-ts';
-import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
 import { ref as templateCreateSchemaRef } from '../../components/schemas/templates/create/all';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as channel } from '../../components/parameters/templates/channel';
@@ -47,21 +46,11 @@ const get: OperationObject = {
   description: 'List all templates',
   tags: ['Templates'],
   parameters: [
-    {
-      $ref: channel,
-    },
-    {
-      $ref: senderId,
-    },
-    {
-      $ref: status,
-    },
-    {
-      $ref: page,
-    },
-    {
-      $ref: size,
-    },
+    { $ref: channel },
+    { $ref: senderId },
+    { $ref: status },
+    { $ref: page },
+    { $ref: size },
   ],
   responses: {
     200: {
@@ -71,7 +60,7 @@ const get: OperationObject = {
           schema: {
             type: 'array',
             items: {
-              $ref: templateSchemaRef,
+              $ref: templateCreateSchemaRef,
             },
           } as SchemaObject,
         },

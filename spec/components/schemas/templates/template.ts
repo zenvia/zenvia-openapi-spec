@@ -10,6 +10,7 @@ import { ref as examplesSchemaRef } from './template-example';
 import { ref as notificationEmailSchemaRef } from './template-notification-email';
 import { ref as metadataRef } from './template-metadata';
 
+// TODO: remove
 const template: SchemaObject = {
   title: 'Template Object',
   description: 'This is a Template object model',

@@ -29,6 +29,17 @@
         "body": {
           "type": "TEXT_TEMPLATE",
           "text": "some text with {{variable}}"
+        },
+        "buttons": {
+          "items": [{
+            "type": "OPT_OUT",
+            "text": "Exit"
+          }, {
+            "type": "URL",
+            "text": "Learn more",
+            "url": "https://www.mywebsite.com/"
+          }],
+          "type": "MIXED"
         }
       },
       "notificationEmail": "notification@mail.com",
