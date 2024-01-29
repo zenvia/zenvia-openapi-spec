@@ -50,7 +50,8 @@ describe('API contract test against OpenAPI specification', () => {
   function loadTestCases(group: string): void {
     const cases = readdirSync(join(__dirname, 'cases', group)).filter(f => /^.*\.json$/.test(f));
     for (const caseFile of cases) {
-      const caseFileContent = readFileSync(join(__dirname, 'cases', group, caseFile), 'utf-8');
+      const path = join(__dirname, 'cases', group, caseFile);
+      const caseFileContent = readFileSync(path, 'utf-8');
       const testCase = JSON.parse(caseFileContent);
       it(testCase.name, () => {
         // check request
@@ -63,8 +64,8 @@ describe('API contract test against OpenAPI specification', () => {
 
           // check response
           const [, responseErr, responseWarn] = request.operation.response(testCase.response.status, testCase.response.body, testCase.response.headers);
-          assert.isUndefined(responseErr, `Server response was rejected: [${formatErrorMessage(responseErr)}]`);
-          assert.isUndefined(responseWarn, `Server response have warnings: [${formatErrorMessage(responseWarn)}]`);
+          assert.isUndefined(responseErr, `Server response was rejected at ${path}: [${formatErrorMessage(responseErr)}]`);
+          assert.isUndefined(responseWarn, `Server response have warnings at ${path}: [${formatErrorMessage(responseWarn)}]`);
         }
       });
     }

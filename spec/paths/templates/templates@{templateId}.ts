@@ -1,5 +1,5 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
-import { ref as templateSchemaRef } from '../../components/schemas/templates/template';
+import { ref as templateCreateSchemaRef } from '../../components/schemas/templates/create/all';
 import { ref as partialTemplateSchemaRef } from '../../components/schemas/templates/partial-template';
 import { ref as templateIdRef } from '../../components/parameters/templateId';
 import { ref as errorResponseRef } from '../../components/responses/error';
@@ -13,7 +13,7 @@ const getOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: templateSchemaRef,
+            $ref: templateCreateSchemaRef,
           },
         },
       },
@@ -55,7 +55,7 @@ const updateOperation: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: templateSchemaRef,
+            $ref: templateCreateSchemaRef,
           },
         },
       },

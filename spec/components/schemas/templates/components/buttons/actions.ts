@@ -16,8 +16,8 @@ const buttons: SchemaObject = {
     properties: {
       items: {
         title: 'Buttons',
-        description: 'List of buttons. Only one of the following can be included: URL, MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
-        maxItems: 3,
+        description: 'List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
+        maxItems: 10,
         type: 'array',
         items: {
           type: 'object',

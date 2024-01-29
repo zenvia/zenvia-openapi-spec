@@ -19,7 +19,7 @@ const buttons: SchemaObject = {
     properties: {
       items: {
         title: 'Buttons',
-        description: 'List of buttons. Currently, only [RCS](#tag/RCS) channel is allowed. It is possible to combine 3 types of buttons, with a limit of up to 11 buttons.',
+        description: 'List of buttons. Currently it is possible to combine 3 types of buttons, with a limit of up to 11 buttons for the [RCS](#tag/RCS) channel.',
         maxItems: 11,
         type: 'array',
         items: {
