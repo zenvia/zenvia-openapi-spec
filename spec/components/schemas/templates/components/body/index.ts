@@ -19,6 +19,7 @@ const body: SchemaObject = {
       type: 'string',
       title: 'Body text',
       description: 'Body content. In the [E-Mail](#tag/E-Mail) channel this is handled as a *HTML*, while for most channels this is handled as *markdown*.',
+      minLength: 1,
     },
   },
 };
