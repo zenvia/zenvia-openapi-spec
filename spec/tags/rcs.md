@@ -4,6 +4,17 @@ The RCS channel may be used after its activation on [Zenvia platform](https://ap
 
 Webhooks allow you to receive events in the configured URL. [Learn more here](#tag/Webhooks).
 
+## Introduction to RCS messaging
+
+_Rich Communcation Services_, or RCS for short, is a messaging protocol similar to SMS, where it's used by telecommunications providers as a standard of messaging. In practical terms, the messaging process is similar to SMS:
+
+
+![RCS messaging diagram](/assets/rcs/rcs-messaging-diagram.png)
+
+
+Unlike the traditional text messaging format (SMS), RCS significantly introduces a range of dynamic features. Suggested actions and replies enable users to engage in conversations more efficiently, offering contextually relevant options based on the message content. With the integration of cards and carousels, users can share interactive content, such as location maps, images, and links, seamlessly within the chat interface. The protocol also supports read receipts, delivery receipts, and typing indicators, providing users with real-time visibility into the status of their messages. 
+
+Check out visually how these RCS features look [here](#section/RCS-features).
 
 ## RCS limitations
 
@@ -29,7 +40,8 @@ When you receive a message from a contact, the sender and recipient are inverted
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
 
 
-## Add to this
+## RCS features 
 
-* Unlike other channels, RCS cannot be initiated by the mobile end-user, but it can be stopped at any time by them using specific keywords. Guy called RBM agent sends message. Message status can include SENT, DELIVERED, READ, CLICKED, among others. Link stuff here.
-* Flow of RCS. Take a look at it: ![RCS messaging diagram](/assets/rcs/rcs-messaging-diagram.png)
+* Add a sentence introducing this section.
+* Four sections ### separating file, replyable_text, card and carrousel. Each section will talk about specific point, like card being a calendar or a simple button.
+
