@@ -27,3 +27,9 @@ When you receive a message from a contact, the sender and recipient are inverted
 * Sender: the phone number of the contact
 
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
+
+
+## Add to this
+
+* Unlike other channels, RCS cannot be initiated by the mobile end-user, but it can be stopped at any time by them using specific keywords. Guy called RBM agent sends message. Message status can include SENT, DELIVERED, READ, CLICKED, among others. Link stuff here.
+* Flow of RCS. Take a look at it: ![RCS messaging diagram](/assets/rcs/rcs-messaging-diagram.png)
