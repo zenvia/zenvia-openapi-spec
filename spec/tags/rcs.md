@@ -18,9 +18,7 @@ Check out visually how these RCS features look [here](#section/RCS-features).
 
 ## RCS limitations
 
-The RCS channel is compatible only with Android smartphones with 8.0 version (Oreo) or above.
-
-To enable RCS on an Android device, you can configure it with pre-release versions of the Messages and Carrier Services apps that connect it to an RCS backend.
+The RCS channel is compatible only with Android smartphones with 8.0 version (Oreo) or above. Most Android devices already come with RCS enabled.
 
 The use of RCS channel follows Google's content policies, available through this link: https://developers.google.com/business-communications/rcs-business-messaging/support/tos.
 
@@ -40,7 +38,13 @@ When you receive a message from a contact, the sender and recipient are inverted
 The sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.
 
 
-## RCS features 
+## RCS features
+
+RCS business messaging (or RBM for short) allows a business with a Google-provided RBM agent to send RCS messages to mobile end-users. Along with a *Verified Badge* of your brand that can be trusted by users with Google's clearance, there are some additional features that an RBM agent can send to a mobile end-user in comparison to traditional text messaging.
+
+![RCS verified badge example](/assets/rcs/rcs-features-verified-sender.png)
+
+https://developers.google.com/business-communications/rcs-business-messaging/guides/learn/what-can-rbm-do
 
 * Add a sentence introducing this section.
 * Four sections ### separating file, replyable_text, card and carrousel. Each section will talk about specific point, like card being a calendar or a simple button.
