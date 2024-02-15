@@ -40,12 +40,23 @@ The sender goes in the attribute `from` and the receiver goes in the attribute `
 
 ## RCS features
 
-RCS business messaging (or RBM for short) allows a business with a Google-provided RBM agent to send RCS messages to mobile end-users. Along with a *Verified Badge* of your brand that can be trusted by users with Google's clearance, there are some additional features that an RBM agent can send to a mobile end-user in comparison to traditional text messaging.
+### RCS Verfied Senders
+
+RCS business messaging (or RBM for short) allows a business with a Google-provided RBM agent to send RCS messages to mobile end-users. This agent is associated with branding and business information, such as a logo, description, webistes, brand name, and more.
+The *Verified Sender Badge* of your brand tells mobile end-users that they can trust that sender given Google's clearance. Along with the badge, there are some additional features that an RBM agent can send to a mobile end-user in comparison to traditional text messaging.
 
 ![RCS verified badge example](/assets/rcs/rcs-features-verified-sender.png)
 
-https://developers.google.com/business-communications/rcs-business-messaging/guides/learn/what-can-rbm-do
+### RCS Events Receipts
+Within RCS, both agents and users can send and receive delivery receipts, read receipts, typing indicators and clicked receipts. These *Events* are automaticallys sent to the RBM agent, while 
+
+### RCS Suggested Actions and (replies here? or text? Want to let replyable_text and the remaining RCS content here)
+
+### RCS Rich Cards
+
+### RCS Rich Card Carrousel
+
 
 * Add a sentence introducing this section.
 * Four sections ### separating file, replyable_text, card and carrousel. Each section will talk about specific point, like card being a calendar or a simple button.
-
+https://developers.google.com/business-communications/rcs-business-messaging/guides/learn/what-can-rbm-do
