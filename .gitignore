@@ -2,3 +2,4 @@ node_modules
 web_deploy
 .vscode
 /nbproject/
+/tmp/
