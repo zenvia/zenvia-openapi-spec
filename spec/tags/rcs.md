@@ -45,18 +45,25 @@ The sender goes in the attribute `from` and the receiver goes in the attribute `
 RCS business messaging (or RBM for short) allows a business with a Google-provided RBM agent to send RCS messages to mobile end-users. This agent is associated with branding and business information, such as a logo, description, webistes, brand name, and more.
 The *Verified Sender Badge* of your brand tells mobile end-users that they can trust that sender given Google's clearance. Along with the badge, there are some additional features that an RBM agent can send to a mobile end-user in comparison to traditional text messaging.
 
-![RCS verified badge example](/assets/rcs/rcs-features-verified-sender.png)
+![RCS Verified Badge example](/assets/rcs/rcs-features-verified-sender.png)
 
 ### RCS Events Receipts
-Within RCS, both agents and users can send and receive delivery receipts, read receipts, typing indicators and clicked receipts. These *Events* are automaticallys sent to the RBM agent, while 
+RCS enables instantaneous interaction through real-time event handling. Agents and users exchange delivery receipts, read receipts, and typing indicators, ensuring prompt acknowledgment and response tracking. User activities automatically trigger events, while agents can actively send updates, keeping users informed about message acknowledgment and response progress. This real-time engagement elevates the responsiveness and overall user experience within RCS conversations.
 
-### RCS Suggested Actions and (replies here? or text? Want to let replyable_text and the remaining RCS content here)
+### RCS Suggested Actions and Suggested Replies
+Within RCS, diverse messaging formats contribute to a rich and adaptable communication landscape. From conventional text messages to multimedia-rich content like images and videos, RCS caters to a variety of communication needs. Suggested replies, suggested actions, and interactive suggestion chip lists further enhance the conversational experience. These versatile messaging formats provide the flexibility needed to craft engaging and natural conversations.
+
+![RCS Suggested Actions and Suggested Replies](/assets/rcs/rcs-features-suggested-actions-and-replies.png)
+
+We've separated the specific attributes of Rich Cards and Carousels in distinct sections below, highlighting their unique functionalities and how they add to the overall versatility of RCS messaging.
 
 ### RCS Rich Cards
+Rich Cards in RCS provide a straightforward way to convey information, media, or suggestions in a unified format. These cards, which can be presented individually or in a carousel, offer a practical means of sharing content. With the ability to include various elements such as media, text, and interactive options, Rich Cards serve as a functional tool for delivering diverse content without unnecessary complexity.
 
-### RCS Rich Card Carrousel
+![RCS Rich Cards](/assets/rcs/rcs-features-rich-card.png)
 
+### RCS Carousel
 
-* Add a sentence introducing this section.
-* Four sections ### separating file, replyable_text, card and carrousel. Each section will talk about specific point, like card being a calendar or a simple button.
-https://developers.google.com/business-communications/rcs-business-messaging/guides/learn/what-can-rbm-do
+Carousels in RCS offer a dynamic way to present a sequence of rich cards, enhancing the user experience with visual appeal. Each card within the carousel can be customized to display different content, providing a simple and interactive method for sharing information. Carousels are designed for practicality, offering a user-friendly approach to conveying a series of related messages or content pieces.
+
+![RCS Carousel](/assets/rcs/rcs-features-carousel.png)
