@@ -11,7 +11,7 @@ const buttonBase: SchemaObject = {
     },
     text: {
       type: 'string',
-      description: 'Text to be displayed inside the button.',
+      description: 'Text to be displayed inside the button.<br><br>*[RCS](#tag/RCS): Maximum of 25 characters.*',
       example: 'Click me!',
     },
     payload: {
