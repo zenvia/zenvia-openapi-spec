@@ -41,7 +41,7 @@ const template: SchemaObject = {
       title: 'Channel',
       description: 'Channel where the template will be made available.',
       type: 'string',
-      enum: ['WHATSAPP', 'SMS', 'RCS', 'EMAIL'],
+      enum: ['WHATSAPP', 'SMS', 'RCS', 'EMAIL', 'FACEBOOK'],
     },
     senderId: {
       title: 'Sender ID',
