@@ -80,6 +80,10 @@ describe('API contract test against OpenAPI specification', () => {
     loadTestCases('channels/whatsapp');
   });
 
+  describe('facebook messages', async () => {
+    loadTestCases('channels/facebook');
+  });
+
   describe('telegram messages', async () => {
     loadTestCases('channels/telegram');
   });
