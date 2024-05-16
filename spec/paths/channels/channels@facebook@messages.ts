@@ -8,6 +8,7 @@ import { card as cardExample } from '../../resources/examples/card';
 import { carousel as carouselExample } from '../../resources/examples/carousel';
 import { replyableText as replyableTextExample } from '../../resources/examples/replyable-text';
 import { optInRequest as optInRequestExample } from '../../resources/examples/optInRequest';
+import { template as templateExample } from '../../resources/examples/template';
 
 const post: OperationObject = {
   description: 'Send a Facebook message',
@@ -25,6 +26,9 @@ const post: OperationObject = {
           },
           file: {
             value: facebookExamples(fileExample()),
+          },
+          template: {
+            value: facebookExamples(templateExample()),
           },
           card: {
             value: facebookExamples(cardExample()),
