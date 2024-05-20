@@ -49,7 +49,7 @@ info:
 
     All breaking changes to Zenvia APIs will be documented here.
 
-    Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/").
+    Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/).
 
     ## v2 (current)
 
@@ -60,7 +60,7 @@ info:
 
     ## v1 (deprecated)
 
-    You can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/").
+    You can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/).
 
     # SDKs
 
@@ -4430,7 +4430,7 @@ components:
           type: string
         text:
           type: string
-          description: Text to be displayed inside the button.
+          description: 'Text to be displayed inside the button.<br><br>*[RCS](#tag/RCS): Maximum of 25 characters.*'
           example: Click me!
         payload:
           type: string
