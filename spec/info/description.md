@@ -44,7 +44,7 @@ You are allowed to send test messages to phone numbers you've connected during a
 
 All breaking changes to Zenvia APIs will be documented here.
 
-Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/").
+Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/).
 
 ## v2 (current)
 
@@ -55,7 +55,7 @@ Currently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-op
 
 ## v1 (deprecated)
 
-You can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/").
+You can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/).
 
 # SDKs
 
