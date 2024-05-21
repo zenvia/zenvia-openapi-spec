@@ -19,6 +19,7 @@ const base: SchemaObject = {
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel's *sender and recipient* section.`,
       type: 'string',
+      minLength: 1,
       maxLength: 64,
     },
     to: {
@@ -26,6 +27,7 @@ const base: SchemaObject = {
       description: `The identifier of the recipient (varies according to the channel) of the message.
         <br>More details on the channel's *sender and recipient* section.`,
       type: 'string',
+      minLength: 1,
       maxLength: 64,
     },
     direction: {
