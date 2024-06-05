@@ -6,6 +6,7 @@ import { ref as cardRef } from '../card';
 import { ref as carouselRef } from '../carousel';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as optinRequestRef } from '../optin_request';
+import { ref as templateRef } from '../template';
 
 const all: SchemaObject = {
   title: 'Facebook',
@@ -13,6 +14,8 @@ const all: SchemaObject = {
     $ref: textRef,
   }, {
     $ref: fileRef,
+  },{
+    $ref: templateRef,
   }, {
     $ref: cardRef,
   }, {
@@ -27,6 +30,7 @@ const all: SchemaObject = {
     mapping: {
       text: textRef,
       file: fileRef,
+      template: templateRef,
       card: cardRef,
       carousel: carouselRef,
       replyable_text: quickRepliesRef,
