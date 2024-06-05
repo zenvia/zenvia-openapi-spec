@@ -581,6 +581,16 @@ paths:
                       fileMimeType: image/png
                       fileCaption: 'Our pic :)'
                       fileName: team.png
+              template:
+                value:
+                  from: fb-page-id
+                  to: fb-contact-id
+                  contents:
+                    - type: template
+                      templateId: template_id
+                      fields:
+                        name: Jhon
+                        product: Zenvia Chat
               card:
                 value:
                   from: fb-page-id
@@ -4590,6 +4600,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/content.text'
         - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.template'
         - $ref: '#/components/schemas/content.card'
         - $ref: '#/components/schemas/content.carousel'
         - $ref: '#/components/schemas/content.replyable-text'
@@ -4600,6 +4611,7 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+          template: '#/components/schemas/content.template'
           card: '#/components/schemas/content.card'
           carousel: '#/components/schemas/content.carousel'
           replyable_text: '#/components/schemas/content.replyable-text'
@@ -4610,6 +4622,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/content.text'
         - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.template'
         - $ref: '#/components/schemas/content.card'
         - $ref: '#/components/schemas/content.carousel'
         - $ref: '#/components/schemas/content.replyable-text'
@@ -4619,6 +4632,7 @@ components:
         mapping:
           text: '#/components/schemas/content.text'
           file: '#/components/schemas/content.file'
+          template: '#/components/schemas/content.template'
           card: '#/components/schemas/content.card'
           carousel: '#/components/schemas/content.carousel'
           replyable_text: '#/components/schemas/content.replyable-text'
@@ -5792,6 +5806,7 @@ components:
                     on the [integrations console](https://app.zenvia.com/home/credentials).
                     <br>More details on the channel's *sender and recipient* section.
           type: string
+          minLength: 1
           maxLength: 64
         to:
           title: Recipient ID
@@ -5799,6 +5814,7 @@ components:
             The identifier of the recipient (varies according to the channel) of the message.
                     <br>More details on the channel's *sender and recipient* section.
           type: string
+          minLength: 1
           maxLength: 64
         direction:
           title: Message direction
@@ -6627,6 +6643,7 @@ components:
             - SMS
             - RCS
             - EMAIL
+            - FACEBOOK
         senderId:
           title: Sender ID
           description: The identifier of the sender of the template. The sender should be created with a credential.
@@ -6711,6 +6728,15 @@ components:
       enum:
         - MARKETING
         - OTHER
+    templates.category.facebook:
+      title: Category
+      description: Category of use for this template
+      type: string
+      enum:
+        - ACCOUNT_UPDATE
+        - CUSTOMER_FEEDBACK
+        - CONFIRMED_EVENT_UPDATE
+        - POST_PURCHASE_UPDATE
     templates.category.whatsapp:
       title: Category
       description: Category of use for this template
@@ -6738,6 +6764,15 @@ components:
           $ref: '#/components/schemas/templates.components.attachments.index'
         email:
           $ref: '#/components/schemas/templates.components.email.index'
+    templates.components.facebook:
+      title: Components
+      description: Message content of this template
+      type: object
+      required:
+        - body
+      properties:
+        body:
+          $ref: '#/components/schemas/templates.components.body.index'
     templates.components.index:
       title: Components
       description: Message content of this template
@@ -7450,6 +7485,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/templates.create.whatsapp'
         - $ref: '#/components/schemas/templates.create.sms'
+        - $ref: '#/components/schemas/templates.create.facebook'
         - $ref: '#/components/schemas/templates.create.rcs'
         - $ref: '#/components/schemas/templates.create.email'
       discriminator:
@@ -7459,6 +7495,7 @@ components:
           SMS: '#/components/schemas/templates.create.sms'
           RCS: '#/components/schemas/templates.create.rcs'
           EMAIL: '#/components/schemas/templates.create.email'
+          FACEBOOK: '#/components/schemas/templates.create.facebook'
     templates.create.base:
       title: Template Object
       description: This is a Template object model
@@ -7480,6 +7517,7 @@ components:
             - SMS
             - RCS
             - EMAIL
+            - FACEBOOK
         id:
           title: Template ID
           type: string
@@ -7550,6 +7588,16 @@ components:
               $ref: '#/components/schemas/templates.components.email-components'
             category:
               $ref: '#/components/schemas/templates.category.email'
+        - $ref: '#/components/schemas/templates.create.base'
+    templates.create.facebook:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            components:
+              $ref: '#/components/schemas/templates.components.facebook'
+            category:
+              $ref: '#/components/schemas/templates.category.facebook'
         - $ref: '#/components/schemas/templates.create.base'
     templates.create.rcs:
       type: object
@@ -7851,6 +7899,7 @@ components:
           - SMS
           - RCS
           - EMAIL
+          - FACEBOOK
       example: WHATSAPP
     templates.page:
       name: page

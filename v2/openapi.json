@@ -541,6 +541,22 @@
                     ]
                   }
                 },
+                "template": {
+                  "value": {
+                    "from": "fb-page-id",
+                    "to": "fb-contact-id",
+                    "contents": [
+                      {
+                        "type": "template",
+                        "templateId": "template_id",
+                        "fields": {
+                          "name": "Jhon",
+                          "product": "Zenvia Chat"
+                        }
+                      }
+                    ]
+                  }
+                },
                 "card": {
                   "value": {
                     "from": "fb-page-id",
@@ -5834,6 +5850,9 @@
             "$ref": "#/components/schemas/content.file"
           },
           {
+            "$ref": "#/components/schemas/content.template"
+          },
+          {
             "$ref": "#/components/schemas/content.card"
           },
           {
@@ -5854,6 +5873,7 @@
           "mapping": {
             "text": "#/components/schemas/content.text",
             "file": "#/components/schemas/content.file",
+            "template": "#/components/schemas/content.template",
             "card": "#/components/schemas/content.card",
             "carousel": "#/components/schemas/content.carousel",
             "replyable_text": "#/components/schemas/content.replyable-text",
@@ -5870,6 +5890,9 @@
           },
           {
             "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.template"
           },
           {
             "$ref": "#/components/schemas/content.card"
@@ -5889,6 +5912,7 @@
           "mapping": {
             "text": "#/components/schemas/content.text",
             "file": "#/components/schemas/content.file",
+            "template": "#/components/schemas/content.template",
             "card": "#/components/schemas/content.card",
             "carousel": "#/components/schemas/content.carousel",
             "replyable_text": "#/components/schemas/content.replyable-text",
@@ -7547,12 +7571,14 @@
             "title": "Sender ID",
             "description": "The identifier of the sender of the message. The sender is created when an integration for the channel is connected\n        on the [integrations console](https://app.zenvia.com/home/credentials).\n        <br>More details on the channel's *sender and recipient* section.",
             "type": "string",
+            "minLength": 1,
             "maxLength": 64
           },
           "to": {
             "title": "Recipient ID",
             "description": "The identifier of the recipient (varies according to the channel) of the message.\n        <br>More details on the channel's *sender and recipient* section.",
             "type": "string",
+            "minLength": 1,
             "maxLength": 64
           },
           "direction": {
@@ -8613,7 +8639,8 @@
               "WHATSAPP",
               "SMS",
               "RCS",
-              "EMAIL"
+              "EMAIL",
+              "FACEBOOK"
             ]
           },
           "senderId": {
@@ -8722,6 +8749,17 @@
           "OTHER"
         ]
       },
+      "templates.category.facebook": {
+        "title": "Category",
+        "description": "Category of use for this template",
+        "type": "string",
+        "enum": [
+          "ACCOUNT_UPDATE",
+          "CUSTOMER_FEEDBACK",
+          "CONFIRMED_EVENT_UPDATE",
+          "POST_PURCHASE_UPDATE"
+        ]
+      },
       "templates.category.whatsapp": {
         "title": "Category",
         "description": "Category of use for this template",
@@ -8756,6 +8794,19 @@
           },
           "email": {
             "$ref": "#/components/schemas/templates.components.email.index"
+          }
+        }
+      },
+      "templates.components.facebook": {
+        "title": "Components",
+        "description": "Message content of this template",
+        "type": "object",
+        "required": [
+          "body"
+        ],
+        "properties": {
+          "body": {
+            "$ref": "#/components/schemas/templates.components.body.index"
           }
         }
       },
@@ -9874,6 +9925,9 @@
             "$ref": "#/components/schemas/templates.create.sms"
           },
           {
+            "$ref": "#/components/schemas/templates.create.facebook"
+          },
+          {
             "$ref": "#/components/schemas/templates.create.rcs"
           },
           {
@@ -9886,7 +9940,8 @@
             "WHATSAPP": "#/components/schemas/templates.create.whatsapp",
             "SMS": "#/components/schemas/templates.create.sms",
             "RCS": "#/components/schemas/templates.create.rcs",
-            "EMAIL": "#/components/schemas/templates.create.email"
+            "EMAIL": "#/components/schemas/templates.create.email",
+            "FACEBOOK": "#/components/schemas/templates.create.facebook"
           }
         }
       },
@@ -9911,7 +9966,8 @@
               "WHATSAPP",
               "SMS",
               "RCS",
-              "EMAIL"
+              "EMAIL",
+              "FACEBOOK"
             ]
           },
           "id": {
@@ -10004,6 +10060,25 @@
               },
               "category": {
                 "$ref": "#/components/schemas/templates.category.email"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/templates.create.base"
+          }
+        ]
+      },
+      "templates.create.facebook": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "components": {
+                "$ref": "#/components/schemas/templates.components.facebook"
+              },
+              "category": {
+                "$ref": "#/components/schemas/templates.category.facebook"
               }
             }
           },
@@ -10409,7 +10484,8 @@
             "WHATSAPP",
             "SMS",
             "RCS",
-            "EMAIL"
+            "EMAIL",
+            "FACEBOOK"
           ]
         },
         "example": "WHATSAPP"
