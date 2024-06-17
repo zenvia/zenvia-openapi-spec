@@ -3,6 +3,7 @@ import { ref as allWhatsContentsRef } from './whatsapp';
 import { ref as allSmsContentsRef } from './sms';
 import { ref as allRcsContentsRef } from './rcs';
 import { ref as allEmailContentsRef } from './email';
+import { ref as allFacebookContentsRef } from './facebook';
 import { createComponentRef } from '../../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -10,6 +11,8 @@ const all: SchemaObject = {
     $ref: allWhatsContentsRef,
   },{
     $ref: allSmsContentsRef,
+  },{
+    $ref: allFacebookContentsRef,
   },{
     $ref: allRcsContentsRef,
   },{
@@ -22,6 +25,7 @@ const all: SchemaObject = {
       SMS: allSmsContentsRef,
       RCS: allRcsContentsRef,
       EMAIL: allEmailContentsRef,
+      FACEBOOK: allFacebookContentsRef,
     },
   },
 };
