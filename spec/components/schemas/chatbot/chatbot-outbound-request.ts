@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Chatbot Outbound',
-  description: 'Chatbot outbound information.',
+  description: 'The customer can use this API to send communications to customers and, when the customer interacts, it must follow a specific flow, according to the Chatbot programming.',
   type: 'object',
   properties: {
     from: {
