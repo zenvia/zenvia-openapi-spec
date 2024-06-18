@@ -145,6 +145,24 @@ const base: SchemaObject = {
         identification_number2: '',
       },
     },
+    restartContact: {
+      title: 'restartContact',
+      description: 'Parameter to reset context variables and create a new service in NLU',
+      type: 'boolean',
+      example: true,
+    },
+    externalId: {
+      title: 'externalId',
+      description: 'Unique identifier for the message. this identifier is useful in tracking the outbound triggered',
+      type: 'string',
+      example: '828d8b1f-9df3-4b94-a0c7-5a74803cc25e',
+    },
+    inactivityTime: {
+      title: 'inactivityTime',
+      description: 'Time in minutes that must pass since the user\'s last interaction with the assistant for the message to be sent. Example: If the user is interacting or interacted with the assistant 1 minute ago and the inactivity time required for the message to be sent is 2 minutes `"inactivityTime": 2`, the message would not be sent. If the interaction had occurred 3 minutes ago, the message would be sent.',
+      type: 'number',
+      example: 2,
+    },
   },
 };
 
