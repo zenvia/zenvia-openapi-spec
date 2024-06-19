@@ -7,33 +7,30 @@ const base: SchemaObject = {
   title: 'Chatbot Outbound',
   description: 'The customer can use this API to send communications to customers and, when the customer interacts, it must follow a specific flow, according to the Chatbot programming.',
   type: 'object',
+  required: ['from', 'to', 'channel', 'content'],
   properties: {
     from: {
       title: 'From',
       description: 'Identifier of the channel to be triggered.',
       type: 'string',
-      minProperties: 1,
       example: '551130309090',
     },
     to: {
       title: 'To',
       description: 'User identifier according to the channel.',
       type: 'string',
-      minProperties: 1,
       example: '44988776655',
     },
     channel: {
       title: 'Channel',
       description: 'The channel name to be trigerred.',
       type: 'string',
-      minProperties: 1,
       example: 'whatsapp',
     },
     content: {
       title: 'Content',
       description: 'Content of outbound.',
       type: 'array',
-      minProperties: 1,
       items: template,
     },
     nodeId: {
