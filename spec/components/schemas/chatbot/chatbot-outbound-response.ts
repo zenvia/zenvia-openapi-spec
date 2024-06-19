@@ -5,25 +5,31 @@ import { createComponentRef } from '../../../../utils/ref';
 const chatbotSucessfulOutboundJsonRef: SchemaObject = {
     type: 'object',
     properties: {
-        status: {
-            type: 'string',
-            description: 'Status of sent outbound',
-            example: 'pending',
-        },
-        externalId: {
-            type: 'string',
-            description: 'UUID identifier of outbound processing',
-            example: '828d8b1f-9df3-4b94-a0c7-5a74803cc25e',
-        },
-        messageId: {
+        id: {
             type: 'number',
-            description: 'Message identifier in NLU',
+            description: 'Outbound message identifier in NLU',
             example: 1293,
+        },
+        channelId: {
+            type: 'number',
+            description: 'Channel identifier in NLU',
+            example: 2,
         },
         contactId: {
             type: 'number',
             description: 'Contact identifier in NLU',
             example: 9752,
+        },
+        status: {
+            type: 'string',
+            description: 'Status of outbound trigger',
+            example: 'pending',
+        },
+        createdAt: {
+            title: 'Creation Timestamp',
+            description: 'Timestamp of the outbound message trigger',
+            type: 'string',
+            example: '2022-10-27T13:25:11.354Z',
         },
     },
 };
