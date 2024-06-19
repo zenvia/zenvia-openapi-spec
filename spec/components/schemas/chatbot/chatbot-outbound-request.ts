@@ -1,6 +1,7 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
+import template from '../content/template';
 
 const base: SchemaObject = {
   title: 'Chatbot Outbound',
@@ -33,23 +34,7 @@ const base: SchemaObject = {
       description: 'Content of outbound.',
       type: 'array',
       minProperties: 1,
-      items: {
-        properties: {
-          templateId: {
-            type: 'string',
-            description: 'The template identifier. If the channel is WhatsApp this will be mandatory',
-            example: 'c2c3e42d-6fb7-4ad6-897a-dd7613469f58',
-          },
-          fields: {
-            type: 'object',
-            description: 'The available fields to be used in this template.',
-            example: {
-              user: 'John Smith',
-              protocol: '34534252',
-            },
-          },
-        },
-      },
+      items: template,
     },
     nodeId: {
       title: 'Node Id',
