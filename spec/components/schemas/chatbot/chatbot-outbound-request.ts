@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import template from '../content/template';
+import { ref as templateRef } from '../content/template';
 
 const base: SchemaObject = {
   title: 'Chatbot Outbound',
@@ -27,11 +27,19 @@ const base: SchemaObject = {
       type: 'string',
       example: 'whatsapp',
     },
-    content: {
-      title: 'Content',
-      description: 'Content of outbound.',
+    contents: {
+      title: 'Contents',
+      description: 'Contents of template to trigger outbound.',
       type: 'array',
-      items: template,
+      oneOf: [{
+        $ref: templateRef,
+      }],
+      discriminator: {
+        propertyName: 'type',
+        mapping: { template: templateRef },
+      },
+      items: { type: 'object' },
+      minItems: 1,
     },
     nodeId: {
       title: 'Node Id',
