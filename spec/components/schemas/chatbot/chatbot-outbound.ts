@@ -103,7 +103,7 @@ const base: SchemaObject = {
           type: 'string',
           example: '11122233344',
         },
-        birthDate: {
+        birthdate: {
           title: 'Contact\'s birth date',
           description: 'Contact\'s birthdate',
           type: 'string',
