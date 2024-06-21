@@ -65,12 +65,14 @@ const base: SchemaObject = {
       title: 'Contents',
       description: 'Contents of template to trigger outbound.',
       type: 'array',
-      oneOf: [{
-        $ref: templateRef,
-      }],
-      discriminator: {
-        propertyName: 'type',
-        mapping: { template: templateRef },
+      items: {
+        oneOf: [{
+          $ref: templateRef,
+        }],
+        discriminator: {
+          propertyName: 'type',
+          mapping: { template: templateRef },
+        },
       },
       minItems: 1,
     },
