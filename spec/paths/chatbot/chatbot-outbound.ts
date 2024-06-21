@@ -1,7 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as chatbotOutboundJsonRef } from '../../components/schemas/chatbot/chatbot-outbound-request';
-import { ref as chatbotSucessfulOutboundJsonRef } from '../../components/schemas/chatbot/chatbot-outbound-response';
+import { ref as chatbotOutboundJsonRef } from '../../components/schemas/chatbot/chatbot-outbound';
 
 const post: OperationObject = {
     description: 'Send outbound message to Chatbot',
@@ -22,7 +21,7 @@ const post: OperationObject = {
             content: {
                 'application/json': {
                     schema: {
-                        $ref: chatbotSucessfulOutboundJsonRef,
+                        $ref: chatbotOutboundJsonRef,
                     },
                 },
             },

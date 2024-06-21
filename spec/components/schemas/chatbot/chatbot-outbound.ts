@@ -7,25 +7,59 @@ const base: SchemaObject = {
   title: 'Chatbot Outbound',
   description: 'The customer can use this API to send communications to customers and, when the customer interacts, it must follow a specific flow, according to the Chatbot programming.',
   type: 'object',
-  required: ['from', 'to', 'channel', 'content'],
+  required: ['from', 'to', 'channel', 'contents'],
   properties: {
+    id: {
+      type: 'number',
+      description: 'Outbound message identifier in NLU',
+      example: 1293,
+      readOnly: true,
+    },
+    channelId: {
+      type: 'number',
+      description: 'Channel identifier in NLU',
+      example: 2,
+      readOnly: true,
+    },
+    contactId: {
+      type: 'number',
+      description: 'Contact identifier in NLU',
+      example: 9752,
+      readOnly: true,
+    },
+    status: {
+      type: 'string',
+      description: 'Status of outbound trigger',
+      example: 'pending',
+      readOnly: true,
+    },
+    createdAt: {
+      title: 'Creation Timestamp',
+      description: 'Timestamp of the outbound message trigger',
+      type: 'string',
+      example: '2022-10-27T13:25:11.354Z',
+      readOnly: true,
+    },
     from: {
       title: 'From',
       description: 'Identifier of the channel to be triggered.',
       type: 'string',
       example: '551130309090',
+      minLength: 1,
     },
     to: {
       title: 'To',
       description: 'User identifier according to the channel.',
       type: 'string',
       example: '44988776655',
+      minLength: 1,
     },
     channel: {
       title: 'Channel',
       description: 'The channel name to be trigerred.',
       type: 'string',
       example: 'whatsapp',
+      minLength: 1,
     },
     contents: {
       title: 'Contents',
@@ -38,7 +72,6 @@ const base: SchemaObject = {
         propertyName: 'type',
         mapping: { template: templateRef },
       },
-      items: { type: 'object' },
       minItems: 1,
     },
     nodeId: {
@@ -70,7 +103,7 @@ const base: SchemaObject = {
           type: 'string',
           example: '11122233344',
         },
-        birth_date: {
+        birthDate: {
           title: 'Contact\'s birth date',
           description: 'Contact\'s birthdate',
           type: 'string',
@@ -87,7 +120,7 @@ const base: SchemaObject = {
           description: 'Contact\'s address fields',
           type: 'object',
           properties: {
-            postal_code: {
+            postalCode: {
               description: 'Postal code',
               type: 'string',
               example: '11222-000',
