@@ -10,6 +10,21 @@ const channelData: SchemaObject = {
     sms: {
       $ref: smsRef,
     },
+    rcs: {
+      type: 'object',
+      title: 'RCS',
+      description: 'RCS specific details about the message',
+      properties: {
+        realChannel: {
+          title: 'Channel that sent the message on fallback.',
+          type: 'string',
+          enum: [
+            'sms',
+            'rcs',
+          ],
+        },
+      },
+    },
   },
 };
 
