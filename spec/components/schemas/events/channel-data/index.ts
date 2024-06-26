@@ -19,8 +19,8 @@ const channelData: SchemaObject = {
           title: 'Channel that sent the message on fallback.',
           type: 'string',
           enum: [
-            'SMS',
-            'RCS',
+            'sms',
+            'rcs',
           ],
         },
       },
