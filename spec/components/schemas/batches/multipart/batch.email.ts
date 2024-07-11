@@ -31,7 +31,7 @@ const emailBatch: SchemaObject = {
       },
     },
   }],
-}
+};
 
 export const ref = createComponentRef(__filename);
 export default emailBatch;

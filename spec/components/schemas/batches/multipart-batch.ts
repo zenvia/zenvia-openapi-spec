@@ -26,7 +26,7 @@ const base: SchemaObject = {
       sms: multipartSmsBatchRef,
       whatsapp: multipartWhatsAppBatchRef,
       rcs: multipartRcsBatchRef,
-      email: multipartEmailBatchRef
+      email: multipartEmailBatchRef,
     },
   },
 };
