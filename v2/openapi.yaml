@@ -3345,11 +3345,15 @@ components:
       oneOf:
         - $ref: '#/components/schemas/batches.multipart.batch.sms'
         - $ref: '#/components/schemas/batches.multipart.batch.whatsapp'
+        - $ref: '#/components/schemas/batches.multipart.batch.rcs'
+        - $ref: '#/components/schemas/batches.multipart.batch.email'
       discriminator:
         propertyName: channel
         mapping:
           sms: '#/components/schemas/batches.multipart.batch.sms'
           whatsapp: '#/components/schemas/batches.multipart.batch.whatsapp'
+          rcs: '#/components/schemas/batches.multipart.batch.rcs'
+          email: '#/components/schemas/batches.multipart.batch.email'
     batches.multipart.base:
       title: Batch Object
       description: This is a Batch object model
@@ -3365,6 +3369,54 @@ components:
           required:
             - message
             - columnMapper
+    batches.multipart.batch.email:
+      allOf:
+        - $ref: '#/components/schemas/batches.multipart.base'
+        - type: object
+          properties:
+            message:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: '#/components/schemas/batches.multipart.content.template'
+                    discriminator:
+                      propertyName: type
+                      mapping:
+                        template: '#/components/schemas/batches.multipart.content.template'
+    batches.multipart.batch.rcs:
+      anyOf:
+        - $ref: '#/components/schemas/batches.multipart.base'
+        - type: object
+          properties:
+            message:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: '#/components/schemas/batches.multipart.content.text'
+                    discriminator:
+                      propertyName: type
+                      mapping:
+                        text: '#/components/schemas/batches.multipart.content.text'
+        - type: object
+          properties:
+            message:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: '#/components/schemas/batches.multipart.content.template'
+                    discriminator:
+                      propertyName: type
+                      mapping:
+                        template: '#/components/schemas/batches.multipart.content.template'
     batches.multipart.batch.sms:
       allOf:
         - $ref: '#/components/schemas/batches.multipart.base'
@@ -8658,14 +8710,17 @@ tags:
     description: |
       The batch API makes it possible to send a message with one or more contents to multiple contacts at once. The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).
 
-      The supported channels are SMS and WhatsApp.
+      The supported channels are SMS, WhatsApp, RCS(Basic) and E-mail.
 
-      | Content Type | SMS | WhatsApp |
-      |---|:---:|:---:|
-      | text | &#10004; | &#10005; |
-      | template | &#10005; | &#10004; |
+      | Content Type | SMS | WhatsApp | RCS Basic | E-mail
+      |---|:---:|:---:|:---:|:---:|
+      | text | &#10004; | &#10005; | &#10004; | &#10005;
+      | template | &#10005; | &#10004; | &#10004; | &#10004;
+
 
       > To send batch through WhatsApp channel, you must have a template message, which needs an approval before being used.
+
+      > Only **Basic** RCS messages can be sent in batches.
 
       ### What you need to know about the contacts file
 
