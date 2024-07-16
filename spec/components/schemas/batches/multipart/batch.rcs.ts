@@ -5,7 +5,7 @@ import { ref as textContentRef } from './content/text';
 import { ref as templateContentRef } from './content/template';
 
 const rcsBatch: SchemaObject = {
-  oneOf: [{
+  anyOf: [{
     $ref: multipartBaseRef,
   }, {
     type: 'object',
