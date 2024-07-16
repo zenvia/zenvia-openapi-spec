@@ -1,13 +1,16 @@
 The batch API makes it possible to send a message with one or more contents to multiple contacts at once. The channels can be used after activation on the [Zenvia platform](https://app.zenvia.com/home/credentials).
 
-The supported channels are SMS and WhatsApp.
+The supported channels are SMS, WhatsApp, RCS(Basic) and E-mail.
 
-| Content Type | SMS | WhatsApp |
-|---|:---:|:---:|
-| text | &#10004; | &#10005; |
-| template | &#10005; | &#10004; |
+| Content Type | SMS | WhatsApp | RCS Basic | E-mail
+|---|:---:|:---:|:---:|:---:|
+| text | &#10004; | &#10005; | &#10004; | &#10005;
+| template | &#10005; | &#10004; | &#10004; | &#10004;
+
 
 > To send batch through WhatsApp channel, you must have a template message, which needs an approval before being used.
+
+> Only **Basic** RCS messages can be sent in batches.
 
 ### What you need to know about the contacts file
 
