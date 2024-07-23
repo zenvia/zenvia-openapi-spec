@@ -5,7 +5,6 @@ Two-Factor Authentication (2FA) adds an extra layer of security by requiring two
 Before sending tokens, you need to configure the token settings. This includes:
 
 - Token size
-- Language (e.g., English, Spanish)
 - Number of verifications required
 - Token type (numeric, alphanumeric)
 - And more
