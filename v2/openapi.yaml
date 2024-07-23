@@ -8729,10 +8729,40 @@ tags:
       * The mandatory delimiter to be used between the values ​​is the **semicolon (";")**;
       * The first line of the file is dedicated to the header. There must be a column that contains the recipients' phone numbers. If your content has variables, there must be corresponding columns.
   - name: Two Factor Authentication
-    description: |
-      The two-factor authentication service ensures that access requests are made by trusted users by identifying the user's request token.
+    description: |-
+      Two-Factor Authentication (2FA) is a security measure that adds an extra layer to account access by requiring two distinct forms of verification. The aim is to prevent unauthorized access even if one form of identification is compromised.
 
-      Tokens can be configured in a variety of ways and sent via one of two channels: SMS or E-mail.
+      ### Token Configuration
+
+      Before sending tokens, you need to configure the token settings. This includes:
+
+      - Token size
+      - Number of verifications
+      - Token type (numeric, alphanumeric)
+      - And more
+
+      Note that you only need to create a new configuration if you want to have different rules for sending tokens. Once created, these configurations are identified by an ID and can be used for multiple token sends.
+
+      ### Token Verification
+
+      Our 2FA service ensures that access requests are made by trusted users by identifying the user's request token. The channels used for sending tokens are:
+
+      - **SMS**
+      - **Email**
+
+      ### Remote IP Address Verification
+
+      When verifying tokens, it is essential to ensure that both the original IP address from which the token was sent and the remote IP address from which the verification request originates are the same. This means that the request to create or send the token must match the request used for verification, ensuring that only authorized users can access your system.
+
+      ### How it Works
+
+      Here's how our 2FA service works:
+
+      1. The user requests a token, and we generate a unique token for them.
+      2. When verifying the token, we check that the IP address from which the request was made matches the original IP address of the token creation request.
+      3. If the IP addresses match, we allow access to your system.
+
+      By ensuring that the IP address of the token creation request is the same as the IP address of the token verification request, we can prevent unauthorized access attempts and maintain the integrity of our 2FA system.
   - name: Webhooks
     description: |
       Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
