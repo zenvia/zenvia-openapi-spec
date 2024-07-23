@@ -1,4 +1,4 @@
-Two-Factor Authentication (2FA) adds an extra layer of security by requiring two forms of verification: something you know (like a password) and something you have (like a phone or email account).
+Two-Factor Authentication (2FA) is a security measure that adds an extra layer to account access by requiring two distinct forms of verification. The aim is to prevent unauthorized access even if one form of identification is compromised.
 
 ### Token Configuration
 
