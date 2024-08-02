@@ -9,6 +9,8 @@ import { ref as listRef } from './list';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as productRef } from './product';
 import { ref as productListRef } from './product-list';
+import { ref as orderDetailsRef } from './order-details';
+import { ref as orderStatusRef } from './order-status';
 
 const mtContent: SchemaObject = {
   title: 'WhatsApp',
@@ -30,6 +32,10 @@ const mtContent: SchemaObject = {
     $ref: productRef,
   }, {
     $ref: productListRef,
+  }, {
+    $ref: orderDetailsRef,
+  }, {
+    $ref: orderStatusRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -43,6 +49,8 @@ const mtContent: SchemaObject = {
       list: listRef,
       product: productRef,
       product_list: productListRef,
+      order_details: orderDetailsRef,
+      order_status: orderStatusRef,
     },
   },
 };
