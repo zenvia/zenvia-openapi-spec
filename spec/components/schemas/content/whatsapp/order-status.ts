@@ -26,7 +26,6 @@ const orderStatus: SchemaObject = {
         maxLength: 60,
       },
       parameters: {
-        'x-unpublished': true,
         type: 'object',
         properties: {
           referenceId: {

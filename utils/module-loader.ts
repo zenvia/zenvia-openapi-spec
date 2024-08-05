@@ -49,21 +49,39 @@ export function loadPathsObject(pathBase: string): PathsObject {
   return paths;
 }
 
-function removeUnpublishedSchemas(items: any) {
+function removeUnpublishedSchemas(items: any): any {
   if (Array.isArray(items)) {
-    items.forEach(item => removeUnpublishedSchemas(item));
-  } else if (typeof(items) === 'object') {
-    for (const propertyName of Object.keys(items)) {
-      if (items[propertyName] !== null) {
-        if (items[propertyName]['x-unpublished']) {
-          delete items[propertyName];
-        } else {
-          removeUnpublishedSchemas(items[propertyName]);
-        }
-      }
-    }
+    return items.map(removeUnpublishedSchemas).filter(n => !n['x-unpublished']);
   }
 
+  if (typeof items === 'object' && items !== null) {
+    const result = Object.entries(items).reduce((acc, [key, value]) => {
+      if (value && typeof value === 'object') {
+        if ('x-unpublished' in value) { return acc; }
+
+        acc[key] = removeUnpublishedSchemas(value);
+      } else {
+        acc[key] = value;
+      }
+      return acc;
+    }, {} as Record<string, any>);
+
+    if (items.discriminator?.mapping) {
+      const validRefs = new Set([
+        ...result.oneOf?.map((item: any) => item.$ref) ?? [],
+        ...result.anyOf?.map((item: any) => item.$ref) ?? [],
+      ]);
+      result.discriminator.mapping = Object.entries(result.discriminator.mapping)
+        .reduce((acc, [key, ref]) => {
+          if (validRefs.has(ref)) {
+            acc[key] = ref;
+          }
+          return acc;
+        }, {});
+    }
+
+    return result;
+  }
   return items;
 }
 
