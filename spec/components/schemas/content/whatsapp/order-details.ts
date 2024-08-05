@@ -216,7 +216,7 @@ const orderDetails: SchemaObject = {
             required: ['items', 'subtotal', 'tax'],
           },
         },
-        required: ['referenceId', 'type', 'paymentSettings', 'totalAmount', 'order'],
+        required: ['type', 'paymentSettings', 'totalAmount', 'order'],
       },
     },
     required: ['type', 'body', 'parameters'],
