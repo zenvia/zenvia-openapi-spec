@@ -21,13 +21,18 @@ const rcsBatch: SchemaObject = {
                 anyOf: [
                   {
                     $ref: textContentRef,
-                    required: ['text'],
                   },
                   {
                     $ref: templateContentRef,
-                    required: ['template'],
                   },
                 ],
+                discriminator: {
+                  propertyName: 'type',
+                  mapping: {
+                    template: templateContentRef,
+                    text: textContentRef,
+                  },
+                },
               },
             },
           },
