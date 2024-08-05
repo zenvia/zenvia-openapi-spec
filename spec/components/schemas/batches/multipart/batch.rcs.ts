@@ -5,57 +5,36 @@ import { ref as textContentRef } from './content/text';
 import { ref as templateContentRef } from './content/template';
 
 const rcsBatch: SchemaObject = {
-  anyOf: [{
-    $ref: multipartBaseRef,
-  }, {
-    type: 'object',
-    properties: {
-      message: {
-        type: 'object',
-        properties: {
-          contents: {
-            type: 'array',
-            items: {
-              anyOf: [{
-                $ref: textContentRef,
-              }],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  text: textContentRef,
-                },
+  allOf: [
+    {
+      $ref: multipartBaseRef,
+    },
+    {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'object',
+          properties: {
+            contents: {
+              type: 'array',
+              items: {
+                anyOf: [
+                  {
+                    $ref: textContentRef,
+                    required: ['text'],
+                  },
+                  {
+                    $ref: templateContentRef,
+                    required: ['template'],
+                  },
+                ],
               },
             },
           },
         },
       },
     },
-  },
-  {
-    type: 'object',
-    properties: {
-      message: {
-        type: 'object',
-        properties: {
-          contents: {
-            type: 'array',
-            items: {
-              anyOf: [{
-                $ref: templateContentRef,
-              }],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  template: templateContentRef,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-],
+  ],
 };
 
 export const ref = createComponentRef(__filename);
