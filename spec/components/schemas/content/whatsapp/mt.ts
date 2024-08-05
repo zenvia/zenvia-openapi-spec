@@ -34,10 +34,10 @@ const mtContent: SchemaObject = {
     $ref: productListRef,
   }, {
     $ref: orderDetailsRef,
-   'x-unpublished': true,
+    'x-unpublished': true,
   }, {
     $ref: orderStatusRef,
-   'x-unpublished': true,
+    'x-unpublished': true,
   }],
   discriminator: {
     propertyName: 'type',
