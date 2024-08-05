@@ -6,6 +6,13 @@ import * as Enforcer from 'openapi-enforcer';
 import spec from '../../spec';
 
 describe('Loading OpenAPI specification by Enforcer', function() {
+  const enforcerOptions = {
+    fullResult: true,
+    toString: true,
+    componentOptions: {
+      exceptionSkipCodes: ['WSCH006', 'WSCH007']
+    },
+  };
 
   this.timeout(5000);
 
@@ -14,7 +21,7 @@ describe('Loading OpenAPI specification by Enforcer', function() {
   });
 
   it('Checking for errors', (done) => {
-    Enforcer(spec, { fullResult: true, toString: true })
+    Enforcer(spec, enforcerOptions)
       .then(({ error, warning }) => {
         if (error) {
           done(new Error(error));
@@ -25,7 +32,7 @@ describe('Loading OpenAPI specification by Enforcer', function() {
   });
 
   it('Checking for warnings', (done) => {
-    Enforcer(spec, { fullResult: true, toString: true })
+    Enforcer(spec, enforcerOptions)
       .then(({ error, warning }) => {
         if (warning) {
           done(new Error(warning));

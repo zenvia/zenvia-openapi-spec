@@ -1,0 +1,54 @@
+{
+  "name": "send order details",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "order_status",
+          "body": "text-body-content",
+          "footer": "text-footer-content",
+          "parameters": {
+            "referenceId": "UNIQUE_REFERENCE_ID_123",
+            "order": {
+              "status": "completed"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "order_status",
+          "body": "text-body-content",
+          "footer": "text-footer-content",
+          "parameters": {
+            "referenceId": "UNIQUE_REFERENCE_ID_123",
+            "order": {
+              "status": "completed"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
