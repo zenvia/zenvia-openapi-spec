@@ -5,24 +5,33 @@ import { ref as textContentRef } from './content/text';
 import { ref as templateContentRef } from './content/template';
 
 const rcsBatch: SchemaObject = {
-  anyOf: [{
-    $ref: multipartBaseRef,
-  }, {
-    type: 'object',
-    properties: {
-      message: {
-        type: 'object',
-        properties: {
-          contents: {
-            type: 'array',
-            items: {
-              anyOf: [{
-                $ref: textContentRef,
-              }],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  text: textContentRef,
+  allOf: [
+    {
+      $ref: multipartBaseRef,
+    },
+    {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'object',
+          properties: {
+            contents: {
+              type: 'array',
+              items: {
+                anyOf: [
+                  {
+                    $ref: textContentRef,
+                  },
+                  {
+                    $ref: templateContentRef,
+                  },
+                ],
+                discriminator: {
+                  propertyName: 'type',
+                  mapping: {
+                    template: templateContentRef,
+                    text: textContentRef,
+                  },
                 },
               },
             },
@@ -30,32 +39,7 @@ const rcsBatch: SchemaObject = {
         },
       },
     },
-  },
-  {
-    type: 'object',
-    properties: {
-      message: {
-        type: 'object',
-        properties: {
-          contents: {
-            type: 'array',
-            items: {
-              anyOf: [{
-                $ref: templateContentRef,
-              }],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  template: templateContentRef,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-],
+  ],
 };
 
 export const ref = createComponentRef(__filename);
