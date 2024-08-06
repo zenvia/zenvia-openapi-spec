@@ -38,9 +38,7 @@
               "tax": {
                 "value": 0
               },
-              "subtotal": {
-                "value": 500.00
-              }
+              "subtotal":500.00
             }
           }
         }
@@ -84,9 +82,7 @@
               "tax": {
                 "value": 0
               },
-              "subtotal": {
-                "value": 500.00
-              }
+              "subtotal": 500.00
             }
           }
         }
