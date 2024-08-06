@@ -78,7 +78,6 @@ const orderDetails: SchemaObject = {
             description: 'The total amount of the order in BRL with up to two decimal places.',
             example: 12.34,
             minimum: 0.01,
-            multipleOf: 0.01,
           },
           order: {
             type: 'object',
@@ -125,7 +124,6 @@ const orderDetails: SchemaObject = {
                       description: 'The price per item in BRL with up to two decimal places.',
                       example: 12.34,
                       minimum: 0.01,
-                      multipleOf: 0.01,
                     },
                     quantity: {
                       type: 'number',
@@ -142,17 +140,10 @@ const orderDetails: SchemaObject = {
                 },
               },
               subtotal: {
-                type: 'object',
-                properties: {
-                  value: {
-                    type: 'number',
-                    description: 'The total value of the order in BRL with up to two decimal places.',
-                    example: 12.34,
-                    minimum: 0.01,
-                    multipleOf: 0.01,
-                  },
-                },
-                required: ['value'],
+                type: 'number',
+                description: 'The total value of the order in BRL with up to two decimal places.',
+                example: 12.34,
+                minimum: 0.01,
               },
               tax: {
                 type: 'object',
@@ -162,7 +153,6 @@ const orderDetails: SchemaObject = {
                     description: 'The total value of the tax in BRL with up to two decimal places.',
                     example: 12.34,
                     minimum: 0,
-                    multipleOf: 0.01,
                   },
                   description: {
                     type: 'string',
@@ -180,7 +170,6 @@ const orderDetails: SchemaObject = {
                     description: 'The total value of the shipping cost in BRL with up to two decimal places.',
                     example: 12.34,
                     minimum: 0.01,
-                    multipleOf: 0.01,
                   },
                   description: {
                     type: 'string',
@@ -197,7 +186,6 @@ const orderDetails: SchemaObject = {
                     description: 'The total value of the discount in BRL with up to two decimal places.',
                     example: 12.34,
                     minimum: 0.01,
-                    multipleOf: 0.01,
                   },
                   description: {
                     type: 'string',
