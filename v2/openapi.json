@@ -4143,7 +4143,7 @@
         ]
       },
       "batches.multipart.batch.rcs": {
-        "anyOf": [
+        "allOf": [
           {
             "$ref": "#/components/schemas/batches.multipart.base"
           },
@@ -4159,30 +4159,7 @@
                       "anyOf": [
                         {
                           "$ref": "#/components/schemas/batches.multipart.content.text"
-                        }
-                      ],
-                      "discriminator": {
-                        "propertyName": "type",
-                        "mapping": {
-                          "text": "#/components/schemas/batches.multipart.content.text"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "object",
-                "properties": {
-                  "contents": {
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
+                        },
                         {
                           "$ref": "#/components/schemas/batches.multipart.content.template"
                         }
@@ -4190,7 +4167,8 @@
                       "discriminator": {
                         "propertyName": "type",
                         "mapping": {
-                          "template": "#/components/schemas/batches.multipart.content.template"
+                          "template": "#/components/schemas/batches.multipart.content.template",
+                          "text": "#/components/schemas/batches.multipart.content.text"
                         }
                       }
                     }
@@ -4539,7 +4517,7 @@
           },
           "extra": {
             "title": "Extra",
-            "description": "Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced.",
+            "description": "Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.",
             "type": "object",
             "example": {
               "new_property": "some_value",
@@ -4548,7 +4526,7 @@
           },
           "restartContact": {
             "title": "restartContact",
-            "description": "Parameter to reset context variables and create a new service in NLU",
+            "description": "Parameter to reset context variables and create a new service in NLU.",
             "type": "boolean",
             "example": true
           },
@@ -6672,6 +6650,335 @@
             "product_list": "#/components/schemas/content.whatsapp.product-list"
           }
         }
+      },
+      "content.whatsapp.order-details": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "order_details"
+              },
+              "body": {
+                "type": "string",
+                "description": "Body content",
+                "example": "Text body content",
+                "maxLength": 1024
+              },
+              "footer": {
+                "type": "string",
+                "description": "Footer content",
+                "example": "Text footer content",
+                "maxLength": 60
+              },
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "referenceId": {
+                    "type": "string",
+                    "description": "The unique identifier of the order. This cannot be an empty string and can only contain English letters, numbers, underscores, dashes, or dots. If not specified, we will generate a random identifier and return it in the request response.",
+                    "maxLength": 35,
+                    "pattern": "^[A-Za-z0-9_\\-\\.]+$"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "The type of the order item.",
+                    "enum": [
+                      "digital_goods",
+                      "physical_goods"
+                    ]
+                  },
+                  "paymentSettings": {
+                    "type": "array",
+                    "description": "List of payment configuration objects.",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "The type of the payment method. For 'pix_dynamic_code', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp.",
+                          "enum": [
+                            "pix_dynamic_code"
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "description": "The dynamic Pix code to be sent to the buyer."
+                        },
+                        "merchantName": {
+                          "type": "string",
+                          "description": "The name of account holder. Displayed in-app for the buyer for informational purposes."
+                        },
+                        "key": {
+                          "type": "string",
+                          "description": "The Pix key."
+                        },
+                        "keyType": {
+                          "type": "string",
+                          "description": "The type of the Pix key.",
+                          "enum": [
+                            "CPF",
+                            "CNPJ",
+                            "EMAIL",
+                            "PHONE",
+                            "EVP"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "code",
+                        "merchantName",
+                        "key",
+                        "keyType"
+                      ]
+                    }
+                  },
+                  "totalAmount": {
+                    "type": "number",
+                    "description": "The total amount of the order in BRL with up to two decimal places.",
+                    "example": 12.34,
+                    "minimum": 0.01
+                  },
+                  "order": {
+                    "type": "object",
+                    "properties": {
+                      "catalogId": {
+                        "type": "string",
+                        "description": "The catalog identifier. Click <a href=\"https://business.facebook.com/commerce\" target=\"_blank\">here</a> to go to the catalogs page."
+                      },
+                      "expiration": {
+                        "type": "object",
+                        "description": "The expiration for that order. The CTA for payment will be disabled after expiry on the user end.",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "The timestamp UTC time in seconds. Minimum threshold is 300 seconds.",
+                            "pattern": "^\\d+$"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description explaining when the order will expire.",
+                            "maxLength": 120
+                          }
+                        },
+                        "required": [
+                          "timestamp",
+                          "description"
+                        ]
+                      },
+                      "items": {
+                        "type": "array",
+                        "description": "The list of items that will be ordered.",
+                        "minItems": 1,
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "productId": {
+                              "type": "string",
+                              "description": "The product item catalog identifier."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the item to be displayed to the user.",
+                              "maxLength": 60
+                            },
+                            "amount": {
+                              "type": "number",
+                              "description": "The price per item in BRL with up to two decimal places.",
+                              "example": 12.34,
+                              "minimum": 0.01
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "description": "The quantity of the item in this order.",
+                              "minimum": 0
+                            },
+                            "saleAmount": {
+                              "type": "number",
+                              "description": "The discounted price per item.",
+                              "minimum": 0
+                            }
+                          },
+                          "required": [
+                            "productId",
+                            "name",
+                            "amount",
+                            "quantity"
+                          ]
+                        }
+                      },
+                      "subtotal": {
+                        "type": "number",
+                        "description": "The total value of the order in BRL with up to two decimal places.",
+                        "example": 12.34,
+                        "minimum": 0.01
+                      },
+                      "tax": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "number",
+                            "description": "The total value of the tax in BRL with up to two decimal places.",
+                            "example": 12.34,
+                            "minimum": 0
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The optional description of the tax.",
+                            "maxLength": 60
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "shipping": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "number",
+                            "description": "The total value of the shipping cost in BRL with up to two decimal places.",
+                            "example": 12.34,
+                            "minimum": 0.01
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The optional description of the shipping cost."
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "discount": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "number",
+                            "description": "The total value of the discount in BRL with up to two decimal places.",
+                            "example": 12.34,
+                            "minimum": 0.01
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The optional description of the discount.",
+                            "maxLength": 60
+                          },
+                          "discountProgramName": {
+                            "type": "string",
+                            "description": "The text used for defining incentivised orders. If order is incentivised, the merchant needs to define this information",
+                            "maxLength": 60
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "items",
+                      "subtotal",
+                      "tax"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "paymentSettings",
+                  "totalAmount",
+                  "order"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "body",
+              "parameters"
+            ]
+          }
+        ]
+      },
+      "content.whatsapp.order-status": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "order_status"
+              },
+              "body": {
+                "type": "string",
+                "description": "Body content",
+                "example": "Text body content",
+                "maxLength": 1024
+              },
+              "footer": {
+                "type": "string",
+                "description": "Footer content",
+                "example": "Text footer content",
+                "maxLength": 60
+              },
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "referenceId": {
+                    "type": "string",
+                    "description": "The unique identifier of the order provided in the order_details message. This cannot be an empty string and can only contain English letters, numbers, underscores, dashes, or dots.",
+                    "maxLength": 35,
+                    "pattern": "^[A-Za-z0-9_\\-\\.]+$"
+                  },
+                  "order": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "description": "The status of the order.",
+                        "enum": [
+                          "pending",
+                          "processing",
+                          "partially-shipped",
+                          "shipped",
+                          "completed",
+                          "canceled"
+                        ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The optional description of the order status.",
+                        "maxLength": 120
+                      }
+                    },
+                    "required": [
+                      "status"
+                    ]
+                  }
+                },
+                "required": [
+                  "referenceId",
+                  "order"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "body",
+              "parameters"
+            ]
+          }
+        ]
       },
       "content.whatsapp.product-list-order": {
         "type": "object",
