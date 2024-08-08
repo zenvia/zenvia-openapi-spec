@@ -1,0 +1,92 @@
+{
+  "name": "send order details",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "order_details",
+          "header": "text-header-content",
+          "body": "text-body-content",
+          "footer": "text-footer-content",
+          "parameters": {
+            "referenceId": "OPTIONAL_UNIQUE_REFERENCE_ID_123",
+            "type": "digital_goods",
+            "paymentSettings": [{
+              "type": "pix_dynamic_code",
+              "code": "00000101021226000014br.gov.bcb.pix2548pix.example.com",
+              "merchantName": "Zenvia Brazil",
+              "key": "39580525000189",
+              "keyType": "CNPJ"
+            }],
+            "totalAmount": 500.00,
+            "order": {
+              "items": [{
+                "productId": "1234567890",
+                "name": "Zenvia Brazil",
+                "amount": 500.00,
+                "quantity": 1
+              }],
+              "tax": {
+                "value": 0
+              },
+              "subtotal":500.00
+            }
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [
+        {
+          "type": "order_details",
+          "header": "text-header-content",
+          "body": "text-body-content",
+          "footer": "text-footer-content",
+          "parameters": {
+            "referenceId": "OPTIONAL_UNIQUE_REFERENCE_ID_123",
+            "type": "digital_goods",
+            "paymentSettings": [{
+              "type": "pix_dynamic_code",
+              "code": "00000101021226000014br.gov.bcb.pix2548pix.example.com",
+              "merchantName": "Zenvia Brazil",
+              "key": "39580525000189",
+              "keyType": "CNPJ"
+            }],
+            "totalAmount": 500.00,
+            "order": {
+              "items": [{
+                "productId": "1234567890",
+                "name": "Zenvia Brazil",
+                "amount": 500.00,
+                "quantity": 1
+              }],
+              "tax": {
+                "value": 0
+              },
+              "subtotal": 500.00
+            }
+          }
+        }
+      ]
+    }
+  }
+}
