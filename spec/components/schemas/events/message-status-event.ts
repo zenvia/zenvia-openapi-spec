@@ -20,9 +20,24 @@ const messageEvent: SchemaObject = {
         ],
         example: 'MESSAGE_STATUS',
       },
+      from: {
+        type: 'string',
+        description: 'Contact of origin',
+        example: 'email@email.com',
+      },
+      to: {
+        type: 'string',
+        description: 'Recipient contact',
+        example: 'received_email@email.com',
+      },
       messageId: {
         title: 'Message ID',
         description: 'ID of the message whose status is being delivered',
+        type: 'string',
+      },
+      externalId: {
+        title: 'Message External ID',
+        description: 'A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API',
         type: 'string',
       },
       contentIndex: {
