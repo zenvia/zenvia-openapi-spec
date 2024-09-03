@@ -22,13 +22,15 @@ const messageEvent: SchemaObject = {
       },
       messageId: {
         title: 'Message ID',
-        description: 'ID of the message whose status is being delivered (deprecated)',
+        description: 'ID of the message whose status is being delivered',
         type: 'string',
+        deprecated: true,
       },
       contentIndex: {
         title: 'Content Index',
-        description: 'Index of content that is receiving the status update (deprecated)',
+        description: 'Index of content that is receiving the status update',
         type: 'number',
+        deprecated: true,
       },
       message: {
         properties: {
