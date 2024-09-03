@@ -5830,8 +5830,18 @@
         "properties": {
           "fileUrl": {
             "type": "string",
-            "description": "URL of the file to be sent.",
+            "description": "URL of the file to be sent. The image at this URL should be publicly accessible and downloadable.",
             "example": "https://zenvia.com/document.pdf"
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "description": "Image URL to be used as a thumbnail for **media** files. Accepted formats are PNG, JPEG and GIF. The image at this URL should be publicly accessible and downloadable..\n                      <br> Only applicable to *[RCS](#tag/RCS)*",
+            "example": "https://storage.com/image.png"
+          },
+          "thumbnailMimeType": {
+            "type": "string",
+            "description": "MIME type of the file to be sent. If not sent, the MIME type will be identified using the content type sent in the request header.<br>\n                      <br> Only applicable to *[RCS](#tag/RCS)*",
+            "example": "image/png"
           },
           "fileMimeType": {
             "type": "string",
