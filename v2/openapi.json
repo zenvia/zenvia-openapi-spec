@@ -516,6 +516,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "fb-page-id",
                     "to": "fb-contact-id",
                     "contents": [
@@ -721,6 +722,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "gbm-agent-id",
                     "to": "gbm-contact-id",
                     "contents": [
@@ -918,6 +920,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "ig-account-id",
                     "to": "ig-contact-id",
                     "contents": [
@@ -1085,6 +1088,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "rcs-agent-id",
                     "to": "55108888888888",
                     "contents": [
@@ -1251,6 +1255,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "sms-account",
                     "to": "55108888888888",
                     "contents": [
@@ -1336,6 +1341,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "YourBot",
                     "to": "tg-chat-id",
                     "contents": [
@@ -1610,6 +1616,7 @@
               "examples": {
                 "text": {
                   "value": {
+                    "externalId": "my-campaign-name",
                     "from": "5510999999999",
                     "to": "55108888888888",
                     "contents": [
@@ -7516,12 +7523,43 @@
               "messageId": {
                 "title": "Message ID",
                 "description": "ID of the message whose status is being delivered",
-                "type": "string"
+                "type": "string",
+                "deprecated": true
               },
               "contentIndex": {
                 "title": "Content Index",
                 "description": "Index of content that is receiving the status update",
-                "type": "number"
+                "type": "number",
+                "deprecated": true
+              },
+              "message": {
+                "properties": {
+                  "id": {
+                    "title": "Message ID",
+                    "description": "ID of the message whose status is being delivered",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "Message External ID",
+                    "description": "A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API",
+                    "type": "string"
+                  },
+                  "contentIndex": {
+                    "title": "Content Index",
+                    "description": "Index of content that is receiving the status update",
+                    "type": "number"
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "Contact of origin",
+                    "example": "email@email.com"
+                  },
+                  "to": {
+                    "type": "string",
+                    "description": "Recipient contact",
+                    "example": "received_email@email.com"
+                  }
+                }
               },
               "messageStatus": {
                 "$ref": "#/components/schemas/events.message-status"
@@ -8221,6 +8259,11 @@
             "description": "An ID for the message. It can be used for future message consulting or callback notifications.",
             "type": "string",
             "readOnly": true
+          },
+          "externalId": {
+            "title": "Message External ID",
+            "description": "A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API",
+            "type": "string"
           },
           "from": {
             "title": "Sender ID",
