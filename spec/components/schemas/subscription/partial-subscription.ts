@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as webhookSchemaRef } from './webhook';
-import { ref as statusRef } from './status';
+import { ref as statusRef } from './partial-status/status';
 
 const partialSubscription: SchemaObject = {
   type: 'object',
