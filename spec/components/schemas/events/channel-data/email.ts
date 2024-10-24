@@ -11,9 +11,11 @@ const email: SchemaObject = {
       description: 'Information about the client that interacted with the message',
       type: 'object',
       properties: {
-        sgMachineOpen: {
-          title: 'Sendgrid Machine Open',
-          description: 'Indicates whether SendGrid has received signals indicating that a recipient with MPP enabled has triggered an open event or if the message was conventionally opened',
+        machineOpen: {
+          title: 'Machine Open',
+          description: `Indicates whether the provider received signals indicating that a recipient with MPP (Apple's Mail Privacy Protection) enabled has triggered an open event or if the message was conventionally opened. This does not ensure a human recipient has opened a message, it infers it. Also, the recipient does not to be related to Apple; Apple's MPP is the name of the mechanism, not the attribution to a particular provider's inbox.
+            <br>*Applicable only to messages that were sent using Sendgrid provider.*
+`,
           type: 'boolean',
         },
         userAgent: {
@@ -37,6 +39,7 @@ const email: SchemaObject = {
       required: [ 'sourceIp' ],
     },
   },
+  required: [ 'clientInfo' ],
 };
 
 export const ref = createComponentRef(__filename);
