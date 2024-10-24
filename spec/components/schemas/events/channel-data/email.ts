@@ -34,7 +34,7 @@ const email: SchemaObject = {
           example: 'https://example.com/clicked-link',
         },
       },
-      required: [ 'sourceIp' ]
+      required: [ 'sourceIp' ],
     },
   },
 };
