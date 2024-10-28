@@ -91,7 +91,7 @@ The criteria which trigger status changes consist of the following:
   * Successful requests on retry attempts also count toward status promotion
   * Responses slower than *1 second* do not count either as a success or as a fail
 * Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically
-promote either a *DEGRADED* webhook back to *ACTIVE*.
+promote a *DEGRADED* webhook back to *ACTIVE*.
 
 Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
 
