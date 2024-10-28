@@ -13,11 +13,6 @@ const base: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
-    externalId: {
-      title: 'Message External ID',
-      description: 'A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API',
-      type: 'string',
-    },
     from: {
       title: 'Sender ID',
       description: `The identifier of the sender of the message. The sender is created when an integration for the channel is connected
