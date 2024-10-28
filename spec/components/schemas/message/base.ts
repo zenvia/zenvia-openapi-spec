@@ -8,13 +8,18 @@ const base: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Message ID',
+      title: 'Message Id',
       description: 'An ID for the message. It can be used for future message consulting or callback notifications.',
       type: 'string',
       readOnly: true,
     },
+    externalId: {
+      title: 'Message External ID',
+      description: 'A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API',
+      type: 'string',
+    },
     from: {
-      title: 'Sender ID',
+      title: 'Sender Id',
       description: `The identifier of the sender of the message. The sender is created when an integration for the channel is connected
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel's *sender and recipient* section.`,
