@@ -8,7 +8,7 @@ const base: SchemaObject = {
   type: 'object',
   properties: {
     id: {
-      title: 'Message Id',
+      title: 'Message ID',
       description: 'An ID for the message. It can be used for future message consulting or callback notifications.',
       type: 'string',
       readOnly: true,
@@ -19,7 +19,7 @@ const base: SchemaObject = {
       type: 'string',
     },
     from: {
-      title: 'Sender Id',
+      title: 'Sender ID',
       description: `The identifier of the sender of the message. The sender is created when an integration for the channel is connected
         on the [integrations console](https://app.zenvia.com/home/credentials).
         <br>More details on the channel's *sender and recipient* section.`,
