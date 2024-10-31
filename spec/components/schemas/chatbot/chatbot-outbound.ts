@@ -24,7 +24,7 @@ const base: SchemaObject = {
     contactId: {
       type: 'number',
       description: 'Contact identifier in NLU',
-      example: '',
+      example: 9752,
       readOnly: true,
     },
     messageId: {
