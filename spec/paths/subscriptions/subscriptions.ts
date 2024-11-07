@@ -6,6 +6,7 @@ import {
   ResponsesObject,
 } from 'openapi3-ts';
 import { ref as subscriptionSchemaRef } from '../../components/schemas/subscription/all';
+import { ref as subscriptionPartialStatusSchemaRef } from '../../components/schemas/subscription/partial-status/all';
 import { ref as notificationCallbackRef } from '../../components/callbacks/subscription-event';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
@@ -18,7 +19,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: subscriptionSchemaRef,
+            $ref: subscriptionPartialStatusSchemaRef,
           },
         },
       },
@@ -31,7 +32,7 @@ const post: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: subscriptionSchemaRef,
+          $ref: subscriptionPartialStatusSchemaRef,
         },
       },
     },
