@@ -2553,14 +2553,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subscription.all'
+                $ref: '#/components/schemas/subscription.partial-status.all'
         default:
           $ref: '#/components/responses/error'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/subscription.all'
+              $ref: '#/components/schemas/subscription.partial-status.all'
       callbacks:
         onEvent:
           $ref: '#/components/callbacks/subscription-event'
@@ -3541,6 +3541,11 @@ components:
           type: number
           description: Contact identifier in NLU
           example: 9752
+          readOnly: true
+        messageId:
+          type: string
+          title: Message ID
+          description: An ID for the message. It can be used for future message consulting or callback notifications.
           readOnly: true
         status:
           type: string
@@ -7040,7 +7045,7 @@ components:
         webhook:
           $ref: '#/components/schemas/subscription.webhook'
         status:
-          $ref: '#/components/schemas/subscription.status'
+          $ref: '#/components/schemas/subscription.partial-status.status'
     subscription.status:
       title: Status of subscription
       type: string
@@ -7049,6 +7054,109 @@ components:
         - DEGRADED
         - INACTIVE
     subscription.webhook:
+      type: object
+      properties:
+        url:
+          title: Webhook URL
+          description: URL to post events
+          type: string
+        headers:
+          title: Request headers
+          type: object
+    subscription.partial-status.all:
+      oneOf:
+        - $ref: '#/components/schemas/subscription.partial-status.message-subscription'
+        - $ref: '#/components/schemas/subscription.partial-status.message-status-subscription'
+      discriminator:
+        propertyName: eventType
+        mapping:
+          MESSAGE: '#/components/schemas/subscription.partial-status.message-subscription'
+          MESSAGE_STATUS: '#/components/schemas/subscription.partial-status.message-status-subscription'
+    subscription.partial-status.base:
+      type: object
+      properties:
+        id:
+          title: Subscription Id
+          type: string
+          readOnly: true
+        eventType:
+          title: Event type to subscribe
+          type: string
+          enum:
+            - MESSAGE
+            - MESSAGE_STATUS
+        webhook:
+          allOf:
+            - $ref: '#/components/schemas/subscription.partial-status.webhook'
+            - type: object
+              required:
+                - url
+        status:
+          $ref: '#/components/schemas/subscription.partial-status.status'
+        version:
+          title: Version of subscription
+          type: string
+          enum:
+            - v1
+            - v2
+          default: v2
+        createdAt:
+          title: Creation timestamp
+          description: Creation timestamp in ISO format
+          type: string
+          readOnly: true
+        updatedAt:
+          title: Update timestamp
+          description: Update timestamp in ISO format
+          type: string
+          readOnly: true
+      required:
+        - eventType
+        - webhook
+    subscription.partial-status.message-status-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.partial-status.base'
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                channel:
+                  $ref: '#/components/schemas/message.channel'
+              required:
+                - channel
+          required:
+            - criteria
+    subscription.partial-status.message-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.partial-status.base'
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                channel:
+                  $ref: '#/components/schemas/message.channel'
+                direction:
+                  title: Message direction
+                  description: Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)
+                  type: string
+                  enum:
+                    - IN
+                    - OUT
+              required:
+                - channel
+          required:
+            - criteria
+    subscription.partial-status.status:
+      title: Status of subscription
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    subscription.partial-status.webhook:
       type: object
       properties:
         url:
@@ -9256,8 +9364,8 @@ tags:
       * 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*
         * Successful requests on retry attempts also count toward status promotion
         * Responses slower than *1 second* do not count either as a success or as a fail
-      * Any manual update done to the webhook on the [API console](https://app.zenvia.com/home/api) will automatically
-      promote either a *DEGRADED* or an *INACTIVE* webhook back to *ACTIVE*.
+      * Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically
+      promote a *DEGRADED* webhook back to *ACTIVE*.
 
       Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
 
