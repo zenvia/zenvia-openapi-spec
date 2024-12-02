@@ -32,11 +32,6 @@ const tokenVerified: SchemaObject = {
       description: 'Location configured',
       example: 'pt_br',
     },
-    code: {
-      type: 'string',
-      description: 'The code generated',
-      example: '100569',
-    },
     configurationId: {
       type: 'string',
       description: 'Token Configuration Id',

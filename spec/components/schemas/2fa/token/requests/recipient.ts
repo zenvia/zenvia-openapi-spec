@@ -16,7 +16,7 @@ const verification: SchemaObject = {
     },
     code: {
       type: 'string',
-      description: 'Code sended by the user',
+      description: 'Code sent by the user',
       example: '269878',
     },
   },
