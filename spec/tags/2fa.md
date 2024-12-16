@@ -18,16 +18,9 @@ Our 2FA service ensures that access requests are made by trusted users by identi
 - **SMS**
 - **Email**
 
-### Remote IP Address Verification
-
-When verifying tokens, it is essential to ensure that both the original IP address from which the token was sent and the remote IP address from which the verification request originates are the same. This means that the request to create or send the token must match the request used for verification, ensuring that only authorized users can access your system.
-
 ### How it Works
 
 Here's how our 2FA service works:
 
-1. The user requests a token, and we generate a unique token for them.
-2. When verifying the token, we check that the IP address from which the request was made matches the original IP address of the token creation request.
-3. If the IP addresses match, we allow access to your system.
-
-By ensuring that the IP address of the token creation request is the same as the IP address of the token verification request, we can prevent unauthorized access attempts and maintain the integrity of our 2FA system.
+1. The user requests a token and we generate a unique token for them.
+2. Upon verification of said token we ensure that the generated one and the incoming one match, and only then we allow access to your system.
