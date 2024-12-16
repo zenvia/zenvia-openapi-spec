@@ -32,11 +32,6 @@ const sendToken: SchemaObject = {
       description: 'Configured locale',
       example: 'pt_br',
     },
-    code: {
-      type: 'string',
-      description: 'The generated token',
-      example: '100569',
-    },
     configurationId: {
       type: 'string',
       description: 'Token Configuration Id',
