@@ -68,6 +68,14 @@ const carousel: SchemaObject = {
                 { $ref: buttonPhoneNumberRef },
                 { $ref: buttonQuickReplyRef },
               ],
+              discriminator: {
+                propertyName: 'type',
+                mapping: {
+                  URL: buttonURLRef,
+                  PHONE_NUMBER: buttonPhoneNumberRef,
+                  QUICK_REPLY: buttonQuickReplyRef,
+                },
+              },
             },
           },
         },
