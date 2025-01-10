@@ -63,12 +63,12 @@ const carousel: SchemaObject = {
             minItems: 1,
             maxItems: 2,
             items: {
-                oneOf: [
-                  { $ref: buttonURLRef },
-                  { $ref: buttonPhoneNumberRef },
-                  { $ref: buttonQuickReplyRef },
-                ]
-            }
+              oneOf: [
+                { $ref: buttonURLRef },
+                { $ref: buttonPhoneNumberRef },
+                { $ref: buttonQuickReplyRef },
+              ],
+            },
           },
         },
       },
