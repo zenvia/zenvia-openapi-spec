@@ -29,22 +29,56 @@ const template: SchemaObject = {
           user: 'John Smith',
           protocol: '34534252',
         },
-        properties: {
-          sections: { $ref: productSections },
-        },
-        additionalProperties: {
-          description: 'Value provided to fill the variable named after the property name.',
-          oneOf: [{
-            type: 'string',
-            example: 'Zenvia',
-          }, {
-            type: 'number',
-            example: 1,
-          }, {
-            type: 'boolean',
-            example: true,
-          }],
-        },
+        oneOf: [
+          {
+            title: 'Cards',
+            additionalProperties: false,
+            required: ['cards'],
+            properties: {
+              cards: {
+                type: 'array',
+                description: 'The properties of the cards in a template. Only applicable to [WhatsApp](#tag/WhatsApp) channel.',
+                minItems: 2,
+                maxItems: 10,
+                items: {
+                  type: 'object',
+                  properties: {
+                    orderPosition: {
+                      description: 'Defines the final position of the card in the outcome. The array index indicates which card is being referenced, and the value of `orderPosition` determines its final position.',
+                      type: 'number',
+                    },
+                    imageUrl: {
+                      type: 'string',
+                      description: 'URL of the image',
+                    },
+                  },
+                  required: ['orderPosition', 'imageUrl'],
+                },
+              },
+            },
+          },
+          {
+            title: 'Product Sections',
+            additionalProperties: false,
+            required: ['sections'],
+            properties: {
+              sections: { $ref: productSections },
+              additionalProperties: {
+                description: 'Value provided to fill the variable named after the property name.',
+                oneOf: [{
+                  type: 'string',
+                  example: 'Zenvia',
+                }, {
+                  type: 'number',
+                  example: 1,
+                }, {
+                  type: 'boolean',
+                  example: true,
+                }],
+              },
+            },
+          },
+        ],
       },
     },
     required: [
