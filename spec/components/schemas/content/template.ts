@@ -42,6 +42,7 @@ const template: SchemaObject = {
                 maxItems: 10,
                 items: {
                   type: 'object',
+                  required: ['orderPosition', 'imageUrl'],
                   properties: {
                     orderPosition: {
                       description: 'Defines the final position of the card in the outcome. The array index indicates which card is being referenced, and the value of `orderPosition` determines its final position.',
@@ -52,30 +53,27 @@ const template: SchemaObject = {
                       description: 'URL of the image',
                     },
                   },
-                  required: ['orderPosition', 'imageUrl'],
                 },
               },
             },
           },
           {
             title: 'Product Sections',
-            additionalProperties: false,
-            required: ['sections'],
+            additionalProperties: {
+              description: 'Value provided to fill the variable named after the property name.',
+              oneOf: [{
+                type: 'string',
+                example: 'Zenvia',
+              }, {
+                type: 'number',
+                example: 1,
+              }, {
+                type: 'boolean',
+                example: true,
+              }],
+            },
             properties: {
               sections: { $ref: productSections },
-              additionalProperties: {
-                description: 'Value provided to fill the variable named after the property name.',
-                oneOf: [{
-                  type: 'string',
-                  example: 'Zenvia',
-                }, {
-                  type: 'number',
-                  example: 1,
-                }, {
-                  type: 'boolean',
-                  example: true,
-                }],
-              },
             },
           },
         ],
