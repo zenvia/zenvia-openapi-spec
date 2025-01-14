@@ -59,21 +59,30 @@ const carousel: SchemaObject = {
           buttons: {
             title: 'Card buttons',
             description: 'Where one or two buttons of type URL, Quick Reply or Phone Number shall be included',
-            type: 'array',
-            minItems: 1,
-            maxItems: 2,
-            items: {
-              oneOf: [
-                { $ref: buttonURLRef },
-                { $ref: buttonPhoneNumberRef },
-                { $ref: buttonQuickReplyRef },
-              ],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  URL: buttonURLRef,
-                  PHONE_NUMBER: buttonPhoneNumberRef,
-                  QUICK_REPLY: buttonQuickReplyRef,
+            properties: {
+              type: {
+                type: 'string',
+                description: 'Button types',
+                example: 'QUICK_REPLIES',
+              },
+              items: {
+                type: 'array',
+                minItems: 1,
+                maxItems: 2,
+                items: {
+                  oneOf: [
+                    { $ref: buttonURLRef },
+                    { $ref: buttonPhoneNumberRef },
+                    { $ref: buttonQuickReplyRef },
+                  ],
+                  discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                      URL: buttonURLRef,
+                      PHONE_NUMBER: buttonPhoneNumberRef,
+                      QUICK_REPLY: buttonQuickReplyRef,
+                    },
+                  },
                 },
               },
             },
