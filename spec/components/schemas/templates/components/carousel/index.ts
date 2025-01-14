@@ -14,7 +14,7 @@ const carousel: SchemaObject = {
   properties: {
     type: {
       title: 'Cards type',
-      description: 'The cards can beither fixed or unordered. An order for the unordered cards is defined upon dispatch of the template.',
+      description: 'The cards can either have their position fixed or defined upon dispatch.',
       type: 'string',
       enum: ['CARD_FIXED','CARD_TEMPLATE'],
     },
@@ -58,31 +58,22 @@ const carousel: SchemaObject = {
           },
           buttons: {
             title: 'Card buttons',
-            description: 'Where one or two buttons of type URL, Quick Reply or Phone Number shall be included',
-            properties: {
-              type: {
-                type: 'string',
-                description: 'Button types',
-                example: 'QUICK_REPLIES',
-              },
-              items: {
-                type: 'array',
-                minItems: 1,
-                maxItems: 2,
-                items: {
-                  oneOf: [
-                    { $ref: buttonURLRef },
-                    { $ref: buttonPhoneNumberRef },
-                    { $ref: buttonQuickReplyRef },
-                  ],
-                  discriminator: {
-                    propertyName: 'type',
-                    mapping: {
-                      URL: buttonURLRef,
-                      PHONE_NUMBER: buttonPhoneNumberRef,
-                      QUICK_REPLY: buttonQuickReplyRef,
-                    },
-                  },
+            description: 'Buttons of type URL, Quick Reply and Phone Number',
+            type: 'array',
+            minItems: 1,
+            maxItems: 2,
+            items: {
+              oneOf: [
+                { $ref: buttonURLRef },
+                { $ref: buttonPhoneNumberRef },
+                { $ref: buttonQuickReplyRef },
+              ],
+              discriminator: {
+                propertyName: 'type',
+                mapping: {
+                  URL: buttonURLRef,
+                  PHONE_NUMBER: buttonPhoneNumberRef,
+                  QUICK_REPLY: buttonQuickReplyRef,
                 },
               },
             },

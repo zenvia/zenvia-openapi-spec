@@ -31,9 +31,8 @@
                 "type": "TEXT_FIXED",
                 "text": "some text"
               },
-              "buttons": {
-                "type": "QUICK_REPLIES",
-                "items": [{
+              "buttons": [
+                {
                   "type": "QUICK_REPLY",
                   "text": "Some Button",
                   "payload": "quick-reply-payload"
@@ -41,8 +40,8 @@
                   "type": "URL",
                   "text": "Other Button",
                   "url": "https://example.com/endpoint"
-                }]
-              }
+                }
+              ]
             },
             {
               "header": {
@@ -52,14 +51,13 @@
                 "type": "TEXT_FIXED",
                 "text": "some other text"
               },
-              "buttons": {
-                "type": "ACTION",
-                "items": [{
+              "buttons": [
+                {
                   "type": "PHONE_NUMBER",
                   "text": "text",
                   "phoneNumber": "+5511991992993"
-                }]
-              }
+                }
+              ]
             }
           ]
         }
@@ -94,9 +92,8 @@
                 "type": "TEXT_FIXED",
                 "text": "some text"
               },
-              "buttons": {
-                "type": "QUICK_REPLIES",
-                "items": [{
+              "buttons": [
+                {
                   "type": "QUICK_REPLY",
                   "text": "Some Button",
                   "payload": "quick-reply-payload"
@@ -104,8 +101,8 @@
                   "type": "URL",
                   "text": "Other Button",
                   "url": "https://example.com/endpoint"
-                }]
-              }
+                }
+              ]
             },
             {
               "header": {
@@ -115,14 +112,13 @@
                 "type": "TEXT_FIXED",
                 "text": "some other text"
               },
-              "buttons": {
-                "type": "ACTION",
-                "items": [{
+              "buttons": [
+                {
                   "type": "PHONE_NUMBER",
                   "text": "text",
                   "phoneNumber": "+5511991992993"
-                }]
-              }
+                }
+              ]
             }
           ]
         }
