@@ -1,9 +1,9 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../../utils/ref';
 
-import { ref as buttonURLRef } from '../buttons/button-item-url';
-import { ref as buttonPhoneNumberRef } from '../buttons/button-item-phone-number';
-import { ref as buttonQuickReplyRef } from '../buttons/button-item-quick-reply';
+import { ref as actionsRef } from './buttons/actions';
+import { ref as quickRepliesRef } from './buttons/quick-replies';
+import { ref as mixedRef } from './buttons/mixed';
 
 const carousel: SchemaObject = {
   title: 'Carousel',
@@ -12,12 +12,6 @@ const carousel: SchemaObject = {
   type: 'object',
   required: ['type', 'cards'],
   properties: {
-    type: {
-      title: 'Cards type',
-      description: 'The cards can either have their position fixed or defined upon dispatch.',
-      type: 'string',
-      enum: ['CARD_FIXED','CARD_TEMPLATE'],
-    },
     cards: {
       title: 'Cards',
       description: 'A boxed media that contains text, buttons and an image.',
@@ -59,22 +53,21 @@ const carousel: SchemaObject = {
           buttons: {
             title: 'Card buttons',
             description: 'Buttons of type URL, Quick Reply and Phone Number',
-            type: 'array',
-            minItems: 1,
-            maxItems: 2,
-            items: {
-              oneOf: [
-                { $ref: buttonURLRef },
-                { $ref: buttonPhoneNumberRef },
-                { $ref: buttonQuickReplyRef },
-              ],
-              discriminator: {
-                propertyName: 'type',
-                mapping: {
-                  URL: buttonURLRef,
-                  PHONE_NUMBER: buttonPhoneNumberRef,
-                  QUICK_REPLY: buttonQuickReplyRef,
-                },
+            type: 'object',
+            oneOf: [{
+              $ref: actionsRef,
+            }, {
+              $ref: quickRepliesRef,
+            }, {
+              $ref: mixedRef,
+            }],
+            required: ['type'],
+            discriminator: {
+              propertyName: 'type',
+              mapping: {
+                ACTIONS: actionsRef,
+                QUICK_REPLIES: quickRepliesRef,
+                MIXED: mixedRef,
               },
             },
           },

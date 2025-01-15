@@ -31,17 +31,20 @@
                 "type": "TEXT_FIXED",
                 "text": "some text"
               },
-              "buttons": [
-                {
-                  "type": "QUICK_REPLY",
-                  "text": "Some Button",
-                  "payload": "quick-reply-payload"
-                }, {
-                  "type": "URL",
-                  "text": "Other Button",
-                  "url": "https://example.com/endpoint"
-                }
-              ]
+              "buttons": {
+                "type": "MIXED",
+                "items": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "Some Button",
+                    "payload": "quick-reply-payload"
+                  }, {
+                    "type": "URL",
+                    "text": "Other Button",
+                    "url": "https://example.com/endpoint"
+                  }
+                ]
+              }
             },
             {
               "header": {
@@ -51,13 +54,16 @@
                 "type": "TEXT_FIXED",
                 "text": "some other text"
               },
-              "buttons": [
-                {
-                  "type": "PHONE_NUMBER",
-                  "text": "text",
-                  "phoneNumber": "+5511991992993"
-                }
-              ]
+              "buttons": {
+                "type": "ACTIONS",
+                "items": [
+                  {
+                    "type": "PHONE_NUMBER",
+                    "text": "text",
+                    "phoneNumber": "+5511991992993"
+                  }
+                ]
+              }
             }
           ]
         }
@@ -92,17 +98,20 @@
                 "type": "TEXT_FIXED",
                 "text": "some text"
               },
-              "buttons": [
-                {
-                  "type": "QUICK_REPLY",
-                  "text": "Some Button",
-                  "payload": "quick-reply-payload"
-                }, {
-                  "type": "URL",
-                  "text": "Other Button",
-                  "url": "https://example.com/endpoint"
-                }
-              ]
+              "buttons": {
+                "type": "MIXED",
+                "items": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "Some Button",
+                    "payload": "quick-reply-payload"
+                  }, {
+                    "type": "URL",
+                    "text": "Other Button",
+                    "url": "https://example.com/endpoint"
+                  }
+                ]
+              }
             },
             {
               "header": {
@@ -112,13 +121,16 @@
                 "type": "TEXT_FIXED",
                 "text": "some other text"
               },
-              "buttons": [
-                {
-                  "type": "PHONE_NUMBER",
-                  "text": "text",
-                  "phoneNumber": "+5511991992993"
-                }
-              ]
+              "buttons": {
+                "type": "ACTIONS",
+                "items": [
+                  {
+                    "type": "PHONE_NUMBER",
+                    "text": "text",
+                    "phoneNumber": "+5511991992993"
+                  }
+                ]
+              }
             }
           ]
         }
