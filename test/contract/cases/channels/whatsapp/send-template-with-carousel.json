@@ -1,0 +1,55 @@
+{
+  "name": "send template with carousel content",
+  "request": {
+    "method": "POST",
+    "path": "/channels/whatsapp/messages",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "template",
+        "templateId": "some template id",
+        "fields": {
+          "cards": [{
+            "orderPosition": 0,
+            "imageUrl": "0"
+          }, {
+            "orderPosition": 1,
+            "imageUrl": "http"
+          }]
+        }
+      }]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "CREATED MESSAGE ID",
+      "direction": "OUT",
+      "from": "SENDER ID",
+      "to": "RECIPIENT ID",
+      "contents": [{
+        "type": "template",
+        "templateId": "some template id",
+        "fields": {
+          "cards": [{
+            "orderPosition": 0,
+            "imageUrl": "0"
+          }, {
+            "orderPosition": 1,
+            "imageUrl": "http"
+          }]
+        }
+      }]
+    }
+  }
+}

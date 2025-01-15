@@ -6,6 +6,7 @@ import { ref as bodyRef } from './body';
 import { ref as footerRef } from './footer';
 import { ref as buttonsRef } from './buttons';
 import { ref as otpRef } from './otp';
+import { ref as carouselRef } from './carousel';
 
 const whatsappComponents: SchemaObject = {
   title: 'Components',
@@ -26,6 +27,9 @@ const whatsappComponents: SchemaObject = {
     },
     otp: {
       $ref: otpRef,
+    },
+    carousel: {
+      $ref: carouselRef,
     },
   },
 };

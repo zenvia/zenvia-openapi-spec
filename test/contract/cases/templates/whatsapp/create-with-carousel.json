@@ -1,0 +1,141 @@
+{
+  "name": "create whatsapp template with carousel",
+  "request": {
+    "method": "POST",
+    "path": "/templates",
+    "query": {
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "carousel": {
+          "type": "CARD_FIXED",
+          "cards": [
+            {
+              "header": {
+                "type": "MEDIA_IMAGE"
+              },
+              "body": {
+                "type": "TEXT_FIXED",
+                "text": "some text"
+              },
+              "buttons": {
+                "type": "MIXED",
+                "items": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "Some Button",
+                    "payload": "quick-reply-payload"
+                  }, {
+                    "type": "URL",
+                    "text": "Other Button",
+                    "url": "https://example.com/endpoint"
+                  }
+                ]
+              }
+            },
+            {
+              "header": {
+                "type": "MEDIA_IMAGE"
+              },
+              "body": {
+                "type": "TEXT_FIXED",
+                "text": "some other text"
+              },
+              "buttons": {
+                "type": "ACTIONS",
+                "items": [
+                  {
+                    "type": "PHONE_NUMBER",
+                    "text": "text",
+                    "phoneNumber": "+5511991992993"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "UUID",
+      "name": "template name",
+      "locale": "pt_BR",
+      "channel": "WHATSAPP",
+      "senderId": "SENDER_ID",
+      "category": "MARKETING",
+      "components": {
+        "body": {
+          "type": "TEXT_FIXED",
+          "text": "some text"
+        },
+        "carousel": {
+          "type": "CARD_FIXED",
+          "cards": [
+            {
+              "header": {
+                "type": "MEDIA_IMAGE"
+              },
+              "body": {
+                "type": "TEXT_FIXED",
+                "text": "some text"
+              },
+              "buttons": {
+                "type": "MIXED",
+                "items": [
+                  {
+                    "type": "QUICK_REPLY",
+                    "text": "Some Button",
+                    "payload": "quick-reply-payload"
+                  }, {
+                    "type": "URL",
+                    "text": "Other Button",
+                    "url": "https://example.com/endpoint"
+                  }
+                ]
+              }
+            },
+            {
+              "header": {
+                "type": "MEDIA_IMAGE"
+              },
+              "body": {
+                "type": "TEXT_FIXED",
+                "text": "some other text"
+              },
+              "buttons": {
+                "type": "ACTIONS",
+                "items": [
+                  {
+                    "type": "PHONE_NUMBER",
+                    "text": "text",
+                    "phoneNumber": "+5511991992993"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
