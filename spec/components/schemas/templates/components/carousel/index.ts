@@ -10,7 +10,7 @@ const carousel: SchemaObject = {
   description: `A collection of cards horizontally scrollable.
         <br><br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*`,
   type: 'object',
-  required: ['type', 'cards'],
+  required: ['cards'],
   properties: {
     cards: {
       title: 'Cards',
