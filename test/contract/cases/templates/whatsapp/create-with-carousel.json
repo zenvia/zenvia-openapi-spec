@@ -21,7 +21,6 @@
           "text": "some text"
         },
         "carousel": {
-          "type": "CARD_FIXED",
           "cards": [
             {
               "header": {
@@ -40,7 +39,7 @@
                     "payload": "quick-reply-payload"
                   }, {
                     "type": "URL",
-                    "text": "Other Button",
+                    "text": "URL Button",
                     "url": "https://example.com/endpoint"
                   }
                 ]
@@ -55,12 +54,16 @@
                 "text": "some other text"
               },
               "buttons": {
-                "type": "ACTIONS",
+                "type": "MIXED",
                 "items": [
                   {
-                    "type": "PHONE_NUMBER",
-                    "text": "text",
-                    "phoneNumber": "+5511991992993"
+                    "type": "URL",
+                    "text": "Other URL Button",
+                    "url": "https://example.com/endpoint2"
+                  }, {
+                    "type": "QUICK_REPLY",
+                    "text": "Some Other Button",
+                    "payload": "quick-reply-payload-2"
                   }
                 ]
               }
@@ -88,7 +91,6 @@
           "text": "some text"
         },
         "carousel": {
-          "type": "CARD_FIXED",
           "cards": [
             {
               "header": {
