@@ -52,7 +52,7 @@ const carousel: SchemaObject = {
           },
           buttons: {
             title: 'Card buttons',
-            description: 'Buttons of type URL, Quick Reply and Phone Number',
+            description: 'Buttons that will appear inside the card at the bottom.<br>_For [WhatsApp](#tag/WhatsApp) carousel template, the quantity and types of button items must be the same for each card. Plus, the button category (ACTIONS, MIXED, QUICK_REPLIES) must be the same._',
             type: 'object',
             oneOf: [{
               $ref: actionsRef,
