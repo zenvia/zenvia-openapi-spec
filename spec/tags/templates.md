@@ -7,6 +7,8 @@ Templates have the following components:
 * Body
 * Footer
 * Buttons
+* OTP
+* Carousel
 
 The components object allows you to indicate the type of message and the message's parameters.
 
