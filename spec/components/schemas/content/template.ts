@@ -56,7 +56,7 @@ const template: SchemaObject = {
                   type: 'object',
                   oneOf: [
                     {
-                      title: 'Cards with dynamic ordering',
+                      title: 'Cards with dynamic ordering and image as background',
                       required: ['orderPosition', 'imageUrl'],
                       properties: {
                         orderPosition: {
@@ -70,13 +70,38 @@ const template: SchemaObject = {
                       },
                     },
                     {
-                      title: 'Cards with predefined order',
+                      title: 'Cards with dynamic ordering and video as background',
+                      required: ['orderPosition', 'videoUrl'],
+                      properties: {
+                        orderPosition: {
+                          description: 'Defines the final position of the card in the outcome. The array index indicates which card is being referenced, and the value of `orderPosition` determines its final position.',
+                          type: 'number',
+                        },
+                        videoUrl: {
+                          type: 'string',
+                          description: 'URL of the video',
+                        },
+                      },
+                    },
+                    {
+                      title: 'Cards with predefined order and image as background',
                       required: ['imageUrl'],
                       additionalProperties: false,
                       properties: {
                         imageUrl: {
                           type: 'string',
                           description: 'URL of the image',
+                        },
+                      },
+                    },
+                    {
+                      title: 'Cards with predefined order and video as background',
+                      required: ['videoUrl'],
+                      additionalProperties: false,
+                      properties: {
+                        videoUrl: {
+                          type: 'string',
+                          description: 'URL of the video',
                         },
                       },
                     },
