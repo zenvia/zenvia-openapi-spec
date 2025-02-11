@@ -56,7 +56,7 @@ const orderDetails: SchemaObject = {
                   $ref: boleto,
                 },
                 {
-                  $ref: paymentLink
+                  $ref: paymentLink,
                 },
               ],
             },

@@ -30,7 +30,7 @@ const pix: SchemaObject = {
     },
   },
   required: ['type', 'code', 'merchantName', 'key', 'keyType'],
-}
+};
 
 export const ref = createComponentRef(__filename);
 export default pix;

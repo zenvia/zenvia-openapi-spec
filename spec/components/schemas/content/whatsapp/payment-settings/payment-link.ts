@@ -16,7 +16,7 @@ const paymentLink: SchemaObject = {
     },
   },
   required: ['type', 'paymentLink'],
-}
+};
 
 export const ref = createComponentRef(__filename);
 export default paymentLink;

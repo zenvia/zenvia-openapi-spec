@@ -18,7 +18,7 @@ const boleto: SchemaObject = {
     },
   },
   required: ['type', 'digitableLine'],
-}
+};
 
 export const ref = createComponentRef(__filename);
 export default boleto;
