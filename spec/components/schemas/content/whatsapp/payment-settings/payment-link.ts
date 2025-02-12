@@ -13,7 +13,7 @@ const paymentLink: SchemaObject = {
     paymentLink: {
       type: 'string',
       description: 'A valid payment URL.',
-      pattern: `^(https):\/\/[^\s/$.?#].[^\s]*$`,
+      pattern: '^(https)://[^\\s/$.?#].[^\\s]*$',
     },
   },
   required: ['type', 'paymentLink'],
