@@ -15,7 +15,7 @@
     "validate": "ts-node --files ./bin/validate.ts",
     "test-unit": "mocha",
     "test": "npm run validate && npm run test-unit",
-    "build": "ts-node --files ./bin/build.ts",
+    "build": "npm run lint && ts-node --files ./bin/build.ts",
     "build:public": "PUBLIC=true ts-node --files ./bin/build.ts"
   },
   "author": "Henrique Magarotto <henrique.magarotto@zenvia.com> (https://github.com/hmagarotto)",
