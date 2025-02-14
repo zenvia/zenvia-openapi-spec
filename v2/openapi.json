@@ -6811,47 +6811,18 @@
                     "type": "array",
                     "description": "List of payment configuration objects.",
                     "minItems": 1,
-                    "maxItems": 1,
+                    "maxItems": 2,
                     "items": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "description": "The type of the payment method. For 'pix_dynamic_code', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp.",
-                          "enum": [
-                            "pix_dynamic_code"
-                          ]
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/content.whatsapp.payment-settings.pix"
                         },
-                        "code": {
-                          "type": "string",
-                          "description": "The dynamic Pix code to be sent to the buyer."
+                        {
+                          "$ref": "#/components/schemas/content.whatsapp.payment-settings.boleto"
                         },
-                        "merchantName": {
-                          "type": "string",
-                          "description": "The name of account holder. Displayed in-app for the buyer for informational purposes."
-                        },
-                        "key": {
-                          "type": "string",
-                          "description": "The Pix key."
-                        },
-                        "keyType": {
-                          "type": "string",
-                          "description": "The type of the Pix key.",
-                          "enum": [
-                            "CPF",
-                            "CNPJ",
-                            "EMAIL",
-                            "PHONE",
-                            "EVP"
-                          ]
+                        {
+                          "$ref": "#/components/schemas/content.whatsapp.payment-settings.payment-link"
                         }
-                      },
-                      "required": [
-                        "type",
-                        "code",
-                        "merchantName",
-                        "key",
-                        "keyType"
                       ]
                     }
                   },
@@ -7430,6 +7401,95 @@
               "text"
             ]
           }
+        ]
+      },
+      "content.whatsapp.payment-settings.boleto": {
+        "type": "object",
+        "title": "boleto",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the payment method.",
+            "enum": [
+              "boleto"
+            ]
+          },
+          "digitableLine": {
+            "type": "string",
+            "description": "The Boleto digitable line / code which will be copied to the clipboard, when user taps on the Boleto CTA button.",
+            "minLength": 47,
+            "maxLength": 48
+          }
+        },
+        "required": [
+          "type",
+          "digitableLine"
+        ]
+      },
+      "content.whatsapp.payment-settings.payment-link": {
+        "type": "object",
+        "title": "payment_link",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the payment method.",
+            "enum": [
+              "payment_link"
+            ]
+          },
+          "paymentLink": {
+            "type": "string",
+            "description": "A valid payment URL.",
+            "pattern": "^(https)://[^\\s/$.?#].[^\\s]*$"
+          }
+        },
+        "required": [
+          "type",
+          "paymentLink"
+        ]
+      },
+      "content.whatsapp.payment-settings.pix": {
+        "title": "pix",
+        "description": "The type of the payment method",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the payment method. For 'pix_dynamic_code', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp.",
+            "enum": [
+              "pix_dynamic_code"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "description": "The dynamic Pix code to be sent to the buyer."
+          },
+          "merchantName": {
+            "type": "string",
+            "description": "The name of account holder. Displayed in-app for the buyer for informational purposes."
+          },
+          "key": {
+            "type": "string",
+            "description": "The Pix key."
+          },
+          "keyType": {
+            "type": "string",
+            "description": "The type of the Pix key.",
+            "enum": [
+              "CPF",
+              "CNPJ",
+              "EMAIL",
+              "PHONE",
+              "EVP"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "code",
+          "merchantName",
+          "key",
+          "keyType"
         ]
       },
       "error.base": {
