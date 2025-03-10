@@ -13,6 +13,12 @@ const subscription: SchemaObject = {
       title: 'Request headers',
       type: 'object',
     },
+    isMTLS: {
+      title: 'Mutual Transport Layer Security Protocol',
+      description: 'Indicates whether or not this webhook should use MTLS communication.',
+      type: 'boolean',
+      default: false,
+    },
   },
 };
 
