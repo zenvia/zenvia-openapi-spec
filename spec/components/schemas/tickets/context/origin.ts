@@ -35,7 +35,7 @@ const origin: SchemaObject = {
     'WhatsappNLU',
     'ActiveWhatsappNLU',
     'ChatZccServe',
-    'ChatZccServeSimulator'
+    'ChatZccServeSimulator',
   ],
   readOnly: true,
 };

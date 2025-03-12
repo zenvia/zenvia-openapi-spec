@@ -15,6 +15,7 @@ const base: SchemaObject = {
     name: {
       title: 'Tag name',
       description: 'Name of the tag',
+      type: 'string',
     },
   },
 };

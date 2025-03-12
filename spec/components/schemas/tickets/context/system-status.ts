@@ -6,7 +6,7 @@ const systemStatus: SchemaObject = {
   description: 'System status linked with the status of the ticket',
   type: 'string',
   enum: [
-    'New', 'InAttendance', 'Stopped', 'Canceled', 'Resolved', 'Closed'
+    'New', 'InAttendance', 'Stopped', 'Canceled', 'Resolved', 'Closed',
   ],
   readOnly: true,
 };

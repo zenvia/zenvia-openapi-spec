@@ -35,7 +35,7 @@ const base: SchemaObject = {
     visibleTo: {
       title: 'Visible To',
       description: 'Defines who can view the service',
-      type: 'string'
+      type: 'string',
     },
     allowSelection: {
       title: 'Allow Selection',
