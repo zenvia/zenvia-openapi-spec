@@ -1,0 +1,36 @@
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../../utils/ref';
+
+const subscription: SchemaObject = {
+  title: 'Fields to OAUTH2 authentication request',
+  type: 'object',
+  required: ['grantType', 'clientSecret', 'clientId'],
+  properties: {
+    grantType: {
+      title: 'GranType',
+      type: 'string',
+      enum: [
+        'client_credentials',
+      ],
+    },
+    clientSecret: {
+      title: 'Client Secret',
+      type: 'string',
+    },
+    clientId: {
+      title: 'Client Id',
+      type: 'string',
+    },
+    refreshToken: {
+      title: 'Refresh Token',
+      type: 'string',
+    },
+    expiresIn: {
+      title: 'Default time expiration',
+      type: 'string',
+    },
+  },
+};
+
+export const ref = createComponentRef(__filename);
+export default subscription;

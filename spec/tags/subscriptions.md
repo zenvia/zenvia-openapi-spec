@@ -95,6 +95,9 @@ promote a *DEGRADED* webhook back to *ACTIVE*.
 
 Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
 
+### Webhook Authentication
+
+
 ## Webhook supported channels
 The following table shows the content types supported by each channel for the **IN** direction.
 
