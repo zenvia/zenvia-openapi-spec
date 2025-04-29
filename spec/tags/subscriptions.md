@@ -148,6 +148,9 @@ Initially, webhooks only support authentication via [OAuth](https://www.oauth.co
 It's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.
 <br/><br/>
 
+### Webhook Authentication
+
+
 ## Webhook supported channels
 The following table shows the content types supported by each channel for the **IN** direction.
 
