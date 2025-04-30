@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
+import { ref as authRef } from '../webhook-auth/webhook-auth';
 
 const subscription: SchemaObject = {
   type: 'object',
@@ -12,6 +13,14 @@ const subscription: SchemaObject = {
     headers: {
       title: 'Request headers',
       type: 'object',
+    },
+    auth: {
+      allOf: [{
+        $ref: authRef,
+      }, {
+        type: 'object',
+        required: ['type', 'url', 'oauth'],
+      }],
     },
   },
 };
