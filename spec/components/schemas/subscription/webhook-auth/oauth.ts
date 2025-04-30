@@ -3,8 +3,6 @@ import { createComponentRef } from '../../../../../utils/ref';
 
 const subscription: SchemaObject = {
   title: 'Fields to OAUTH2 authentication request',
-  type: 'object',
-  required: ['grantType', 'clientSecret', 'clientId'],
   properties: {
     grantType: {
       title: 'GranType',
@@ -12,6 +10,7 @@ const subscription: SchemaObject = {
       enum: [
         'client_credentials',
       ],
+      default: 'client_credentials',
     },
     clientSecret: {
       title: 'Client Secret',
