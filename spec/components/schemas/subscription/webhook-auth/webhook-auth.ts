@@ -1,10 +1,9 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
-import { ref as oauthRef } from './auth/oauth';
+import { createComponentRef } from '../../../../../utils/ref';
+import { ref as oauthRef } from './oauth';
 
 const subscription: SchemaObject = {
   type: 'object',
-  required: ['type', 'url', 'oauth'],
   properties: {
     type: {
       title: 'Type of authentication',
@@ -12,6 +11,7 @@ const subscription: SchemaObject = {
       enum: [
         'OAUTH',
       ],
+      default: 'OAUTH',
     },
     url: {
       title: 'Webhook Auth URL',
@@ -27,7 +27,12 @@ const subscription: SchemaObject = {
       type: 'object',
     },
     oauth: {
-      $ref: oauthRef,
+      allOf: [{
+        $ref: oauthRef,
+      }, {
+        type: 'object',
+        required: ['grantType', 'clientSecret', 'clientId'],
+      }],
     },
   },
 };
