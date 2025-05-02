@@ -29,22 +29,107 @@ const template: SchemaObject = {
           user: 'John Smith',
           protocol: '34534252',
         },
-        properties: {
-          sections: { $ref: productSections },
-        },
-        additionalProperties: {
-          description: 'Value provided to fill the variable named after the property name.',
-          oneOf: [{
-            type: 'string',
-            example: 'Zenvia',
-          }, {
-            type: 'number',
-            example: 1,
-          }, {
-            type: 'boolean',
-            example: true,
-          }],
-        },
+        oneOf: [
+          {
+            title: 'Cards',
+            required: ['cards'],
+            additionalProperties: {
+              description: 'Value provided to fill the variable named after the property name.',
+              oneOf: [{
+                type: 'string',
+                example: 'Zenvia',
+              }, {
+                type: 'number',
+                example: 1,
+              }, {
+                type: 'boolean',
+                example: true,
+              }],
+            },
+            properties: {
+              cards: {
+                type: 'array',
+                description: 'The properties of the cards in a template.\nIn cards with a predefined order, each card will be rendered following its order at the time of the creation of the template.\n\n Only applicable to [WhatsApp](#tag/WhatsApp) channel.',
+                minItems: 2,
+                maxItems: 10,
+                items: {
+                  type: 'object',
+                  oneOf: [
+                    {
+                      title: 'Cards with dynamic ordering and image as background',
+                      required: ['orderPosition', 'imageUrl'],
+                      properties: {
+                        orderPosition: {
+                          description: 'Defines the final position of the card in the outcome. The array index indicates which card is being referenced, and the value of `orderPosition` determines its final position.',
+                          type: 'number',
+                        },
+                        imageUrl: {
+                          type: 'string',
+                          description: 'URL of the image',
+                        },
+                      },
+                    },
+                    {
+                      title: 'Cards with dynamic ordering and video as background',
+                      required: ['orderPosition', 'videoUrl'],
+                      properties: {
+                        orderPosition: {
+                          description: 'Defines the final position of the card in the outcome. The array index indicates which card is being referenced, and the value of `orderPosition` determines its final position.',
+                          type: 'number',
+                        },
+                        videoUrl: {
+                          type: 'string',
+                          description: 'URL of the video',
+                        },
+                      },
+                    },
+                    {
+                      title: 'Cards with predefined order and image as background',
+                      required: ['imageUrl'],
+                      additionalProperties: false,
+                      properties: {
+                        imageUrl: {
+                          type: 'string',
+                          description: 'URL of the image',
+                        },
+                      },
+                    },
+                    {
+                      title: 'Cards with predefined order and video as background',
+                      required: ['videoUrl'],
+                      additionalProperties: false,
+                      properties: {
+                        videoUrl: {
+                          type: 'string',
+                          description: 'URL of the video',
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          {
+            title: 'Product Sections',
+            additionalProperties: {
+              description: 'Value provided to fill the variable named after the property name.',
+              oneOf: [{
+                type: 'string',
+                example: 'Zenvia',
+              }, {
+                type: 'number',
+                example: 1,
+              }, {
+                type: 'boolean',
+                example: true,
+              }],
+            },
+            properties: {
+              sections: { $ref: productSections },
+            },
+          },
+        ],
       },
     },
     required: [
