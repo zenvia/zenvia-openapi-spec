@@ -17,14 +17,40 @@ const subscription: SchemaObject = {
       title: 'Webhook Auth URL',
       description: 'URL to authenticate webhook',
       type: 'string',
+      minLength: 1,
+      pattern: '/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/',
     },
     headers: {
       title: 'Authentication request headers',
       type: 'object',
+      additionalProperties: {
+        oneOf: [{
+          type: 'string',
+          example: 'Zenvia',
+        }, {
+          type: 'number',
+          example: 1,
+        }, {
+          type: 'boolean',
+          example: true,
+        }],
+      },
     },
     queryParams: {
       title: 'Authentication request query params',
       type: 'object',
+      additionalProperties: {
+        oneOf: [{
+          type: 'string',
+          example: 'Zenvia',
+        }, {
+          type: 'number',
+          example: 1,
+        }, {
+          type: 'boolean',
+          example: true,
+        }],
+      },
     },
     oauth: {
       allOf: [{
