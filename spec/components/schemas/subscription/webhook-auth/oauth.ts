@@ -15,14 +15,17 @@ const subscription: SchemaObject = {
     clientSecret: {
       title: 'Client Secret',
       type: 'string',
+      minLength: 1,
     },
     clientId: {
       title: 'Client Id',
       type: 'string',
+      minLength: 1,
     },
     refreshToken: {
       title: 'Refresh Token',
       type: 'string',
+      minLength: 1,
     },
     expiresIn: {
       title: 'Default time expiration (in seconds)',
