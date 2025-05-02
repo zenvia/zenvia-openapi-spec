@@ -94,9 +94,12 @@ The criteria which trigger status changes consist of the following:
 promote a *DEGRADED* webhook back to *ACTIVE*.
 
 Both the success and fail counters automatically reset themselves *8 hours* after the first increment.
+<br/><br/>
 
-### Webhook Authentication
-
+## Webhook Authentication
+Initially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>
+It's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.
+<br/><br/>
 
 ## Webhook supported channels
 The following table shows the content types supported by each channel for the **IN** direction.
