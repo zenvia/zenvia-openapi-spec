@@ -25,7 +25,7 @@ const subscription: SchemaObject = {
       type: 'string',
     },
     expiresIn: {
-      title: 'Default time expiration (in milliseconds)',
+      title: 'Default time expiration (in seconds)',
       type: 'number',
     },
   },
