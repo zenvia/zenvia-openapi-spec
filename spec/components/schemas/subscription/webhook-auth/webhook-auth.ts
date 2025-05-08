@@ -18,8 +18,7 @@ const subscription: SchemaObject = {
       description: 'URL to authenticate webhook',
       type: 'string',
       minLength: 1,
-      // eslint-disable-next-line no-useless-escape
-      pattern: '^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$',
+      pattern: '^(https)://[^\\s/$.?#].[^\\s]*$',
     },
     headers: {
       title: 'Authentication request headers',
