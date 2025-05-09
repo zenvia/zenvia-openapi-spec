@@ -1,13 +1,13 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ticketStatusHistoryDataFieldRef } from '../../components/schemas/support-service/ticket-status-histories';
+import { ref as ticketStatusChangeDataFieldRef } from '../../components/schemas/support-service/ticket-status-changes';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/support-service/size';
 import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';
 
 const get: OperationObject = {
-  summary: 'List ticket status histories',
-  description: 'Lists all ticket status histories available.',
+  summary: 'List ticket status changes',
+  description: 'Lists all ticket status changes.',
   tags: ['Tickets'],
   security: [{
     TOKEN: [],
@@ -19,13 +19,13 @@ const get: OperationObject = {
   }],
   responses: {
     200: {
-      description: 'Ticket status histories available',
+      description: 'Ticket status changes',
       content: {
         'application/json': {
           schema: {
             type: 'array',
             items: {
-              $ref: ticketStatusHistoryDataFieldRef,
+              $ref: ticketStatusChangeDataFieldRef,
             },
           },
         },

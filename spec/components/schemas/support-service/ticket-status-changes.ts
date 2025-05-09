@@ -4,7 +4,7 @@ import { ref as justificationRef } from './context/justification';
 import { ref as statusRef } from './context/status';
 
 const base: SchemaObject = {
-  title: 'Ticket Status History',
+  title: 'Ticket Status Change',
   type: 'object',
   properties: {
     status: {

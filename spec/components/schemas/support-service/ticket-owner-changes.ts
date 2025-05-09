@@ -4,7 +4,7 @@ import { createComponentRef } from '../../../../utils/ref';
 import { ref as ownerTeamRef } from './context/owner-team';
 
 const base: SchemaObject = {
-  title: 'Ticket Owner History',
+  title: 'Ticket Owner Change',
   type: 'object',
   properties: {
     ownerId: {
