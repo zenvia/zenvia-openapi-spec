@@ -60,6 +60,11 @@ const groups: TagGroupObject[] = [{
     'Marketing Automations',
   ],
 }, {
+  name: 'Support Service',
+  tags: [
+    'Tickets',
+  ],
+}, {
   name: 'Status',
   tags: [
     'Status Groups',
