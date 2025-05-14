@@ -4,7 +4,8 @@ import { createComponentRef } from '../../../../../utils/ref';
 
 const category: SchemaObject = {
   title: 'Category',
-  description: 'Category of use for this template',
+  description: `Category of use for this template.
+  <br>Payment templates can only belong to the MARKETING or UTILITY category`,
   type: 'string',
   enum: [
     'AUTHENTICATION',

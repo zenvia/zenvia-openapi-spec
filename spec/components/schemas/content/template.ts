@@ -111,6 +111,147 @@ const template: SchemaObject = {
             },
           },
           {
+            title: 'Order Details',
+            required: ['orderDetailsParameters'],
+            additionalProperties: {
+              description: 'Value provided to fill the variable named after the property name.',
+              oneOf: [{
+                type: 'string',
+                example: 'Zenvia',
+              }, {
+                type: 'number',
+                example: 1,
+              }, {
+                type: 'boolean',
+                example: true,
+              }],
+            },
+            properties: {
+              orderDetailsParameters: {
+                type: 'object',
+                description: 'Details of a payment template.\n\n *Only applicable to [WhatsApp](#tag/WhatsApp) channel.*',
+                required: ['order', 'totalAmount', 'type', 'paymentSettings'],
+                properties: {
+                  referenceId: {
+                    type: 'string',
+                    description: 'An optional unique id to reference the order.',
+                  },
+                  type: {
+                    type: 'string',
+                    enum: ['digital-goods', 'physical-goods'],
+                    description: 'Type of product being purchased',
+                  },
+                  paymentSettings: {
+                    type: 'array',
+                    description: 'List of supported payment configurations presented to the user during checkout.',
+                    minItems: 1,
+                    maxItems: 2,
+                    items: {
+                      type: 'object',
+                      anyOf: [
+                        {
+                          title: 'Payment link',
+                          required: ['paymentLink'],
+                          properties: {
+                            paymentLink: {
+                              description: 'URL to the hosted payment page the buyer will use to complete the transaction.',
+                              type: 'string',
+                            },
+                          },
+                        },
+                        {
+                          title: 'Boleto',
+                          required: ['digitableLine'],
+                          properties: {
+                            digitableLine: {
+                              description: 'The digitable line of the Boleto, used for payment processing.',
+                              type: 'string',
+                            },
+                          },
+                        },
+                        {
+                          title: 'Pix',
+                          required: ['code', 'merchantName', 'key', 'keyType'],
+                          properties: {
+                            code: {
+                              description: 'The dynamic Pix code to be used for payment.',
+                              type: 'string',
+                            },
+                            merchantName: {
+                              description: 'The registered name of the business receiving the payment.',
+                              type: 'string',
+                            },
+                            key: {
+                              description: 'The pix key of the business receiving the payment.',
+                              type: 'string',
+                            },
+                            keyType: {
+                              enum: ['CPF', 'CNPJ', 'EMAIL', 'PHONE', 'EVP'],
+                              description: 'The pix key type.',
+                              type: 'string',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  totalAmount: {
+                    type: 'number',
+                    description: 'Total cost of items, including tax and any additional charges.',
+                  },
+                  order: {
+                    type: 'object',
+                    required: ['items', 'tax', 'subtotal'],
+                    description: 'Details of the purchase order containing items purchased, subtotal amount, and tax details.',
+                    properties: {
+                      items: {
+                        type: 'array',
+                        description: 'List of products included in the order, with details for each item.',
+                        items: {
+                          type: 'object',
+                          required: ['productId', 'name', 'amount', 'quantity'],
+                          properties: {
+                            productId: {
+                              type: 'string',
+                              description: 'The product identifier.',
+                            },
+                            name: {
+                              type: 'string',
+                              description: 'The name of the product.',
+                            },
+                            amount: {
+                              type: 'number',
+                              description: 'The unit price of the product.',
+                            },
+                            quantity: {
+                              type: 'number',
+                              description: 'The number of products being purchased.',
+                            },
+                          },
+                        },
+                      },
+                      tax: {
+                        type: 'object',
+                        description: 'Tax details applied to the purchase.',
+                        required: ['value'],
+                        properties: {
+                          value: {
+                            type: 'number',
+                            description: 'Monetary value of the tax applied.',
+                          },
+                        },
+                      },
+                      subtotal: {
+                        type: 'number',
+                        description: 'Total cost of items before tax and additional charges (calculated as product price x quantity).',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
             title: 'Product Sections',
             additionalProperties: {
               description: 'Value provided to fill the variable named after the property name.',
