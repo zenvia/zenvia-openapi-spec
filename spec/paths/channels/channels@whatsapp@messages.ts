@@ -11,6 +11,7 @@ import { button as buttonExample } from '../../resources/examples/button';
 import { list as listExample } from '../../resources/examples/list';
 import { product } from '../../resources/examples/product';
 import { productList } from '../../resources/examples/product-list';
+import { orderDetailsTemplate } from '../../resources/examples/order-details-template';
 
 const post: OperationObject = {
   description: 'Send a WhatsApp message',
@@ -30,7 +31,7 @@ const post: OperationObject = {
             value: whatsappExamples(fileExample()),
           },
           template: {
-            value: whatsappExamples(templateExample()),
+            value: whatsappExamples(templateExample(orderDetailsTemplate())),
           },
           contacts: {
             value: whatsappExamples(contactsExample()),

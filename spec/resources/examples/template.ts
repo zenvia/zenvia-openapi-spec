@@ -1,4 +1,4 @@
-export function template() {
+export function template(fields?) {
   return {
     from: '5510999999999',
     to: '55108888888888',
@@ -8,6 +8,7 @@ export function template() {
       fields: {
         name: 'Jhon',
         product: 'Zenvia Chat',
+        ...fields,
       },
     }],
   };
