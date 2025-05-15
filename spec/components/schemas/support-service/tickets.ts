@@ -17,14 +17,7 @@ const base: SchemaObject = {
     id: {
       title: 'ID',
       description: 'ID of the ticket.',
-      type: 'integer',
-      readOnly: true,
-      nullable: false,
-    },
-    protocol: {
-      title: 'Protocol',
       type: 'string',
-      description: 'Protocol identifier that clients can use to track the ticket.',
       readOnly: true,
       nullable: false,
     },
