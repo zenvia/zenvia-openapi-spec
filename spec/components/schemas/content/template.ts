@@ -134,16 +134,18 @@ const template: SchemaObject = {
                 properties: {
                   referenceId: {
                     type: 'string',
-                    description: 'An optional unique id to reference the order.',
+                    description: 'An optional unique identifier of the order. This can only contain English letters, numbers, underscores, dashes, or dots.',
+                    maxLength: 35,
+                    pattern: '^[A-Za-z0-9_\\-\\.]+$',
                   },
                   type: {
                     type: 'string',
                     enum: ['digital-goods', 'physical-goods'],
-                    description: 'Type of product being purchased',
+                    description: 'The type of the order item.',
                   },
                   paymentSettings: {
                     type: 'array',
-                    description: 'List of supported payment configurations presented to the user during checkout.',
+                    description: 'List of payment configuration objects.',
                     minItems: 1,
                     maxItems: 2,
                     items: {
@@ -151,44 +153,59 @@ const template: SchemaObject = {
                       anyOf: [
                         {
                           title: 'Payment link',
-                          required: ['paymentLink'],
+                          required: ['paymentLink', 'type'],
                           properties: {
+                            type: {
+                              description: 'The type of the payment method.',
+                              const: 'payment_link',
+                            },
                             paymentLink: {
-                              description: 'URL to the hosted payment page the buyer will use to complete the transaction.',
+                              description: 'A valid payment URL.',
+                              pattern: '^(https)://[^\\s/$.?#].[^\\s]*$',
                               type: 'string',
                             },
                           },
                         },
                         {
                           title: 'Boleto',
-                          required: ['digitableLine'],
+                          required: ['digitableLine', 'type'],
                           properties: {
+                            type: {
+                              description: 'The type of the payment method.',
+                              const: 'boleto',
+                            },
                             digitableLine: {
-                              description: 'The digitable line of the Boleto, used for payment processing.',
+                              description: 'The Boleto digitable line / code which will be copied to the clipboard, when user taps on the Boleto CTA button.',
+                              minLength: 47,
+                              maxLength: 48,
                               type: 'string',
                             },
                           },
                         },
                         {
                           title: 'Pix',
-                          required: ['code', 'merchantName', 'key', 'keyType'],
+                          required: ['code', 'merchantName', 'key', 'keyType', 'type'],
                           properties: {
+                            type: {
+                              const: 'pix_dynamic_code',
+                              description: 'The type of the payment method. For \'pix_dynamic_code\', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp.',
+                            },
                             code: {
-                              description: 'The dynamic Pix code to be used for payment.',
                               type: 'string',
+                              description: 'The dynamic Pix code to be sent to the buyer.',
                             },
                             merchantName: {
-                              description: 'The registered name of the business receiving the payment.',
                               type: 'string',
+                              description: 'The name of account holder. Displayed in-app for the buyer for informational purposes.',
                             },
                             key: {
-                              description: 'The pix key of the business receiving the payment.',
                               type: 'string',
+                              description: 'The Pix key.',
                             },
                             keyType: {
-                              enum: ['CPF', 'CNPJ', 'EMAIL', 'PHONE', 'EVP'],
-                              description: 'The pix key type.',
                               type: 'string',
+                              description: 'The type of the Pix key.',
+                              enum: ['CPF', 'CNPJ', 'EMAIL', 'PHONE', 'EVP'],
                             },
                           },
                         },
@@ -197,7 +214,9 @@ const template: SchemaObject = {
                   },
                   totalAmount: {
                     type: 'number',
-                    description: 'Total cost of items, including tax and any additional charges.',
+                    description: 'The total amount of the order in BRL with up to two decimal places.',
+                    example: 12.34,
+                    minimum: 0.01,
                   },
                   order: {
                     type: 'object',
@@ -213,19 +232,23 @@ const template: SchemaObject = {
                           properties: {
                             productId: {
                               type: 'string',
-                              description: 'The product identifier.',
+                              description: 'The product item catalog identifier.',
                             },
                             name: {
                               type: 'string',
-                              description: 'The name of the product.',
+                              description: 'The name of the item to be displayed to the user.',
+                              maxLength: 60,
                             },
                             amount: {
                               type: 'number',
-                              description: 'The unit price of the product.',
+                              description: 'The price per item in BRL with up to two decimal places.',
+                              example: 12.34,
+                              minimum: 0.01,
                             },
                             quantity: {
                               type: 'number',
-                              description: 'The number of products being purchased.',
+                              description: 'The quantity of the item in this order.',
+                              minimum: 0,
                             },
                           },
                         },
@@ -237,13 +260,17 @@ const template: SchemaObject = {
                         properties: {
                           value: {
                             type: 'number',
-                            description: 'Monetary value of the tax applied.',
+                            description: 'The total value of the tax in BRL with up to two decimal places.',
+                            example: 12.34,
+                            minimum: 0,
                           },
                         },
                       },
                       subtotal: {
                         type: 'number',
-                        description: 'Total cost of items before tax and additional charges (calculated as product price x quantity).',
+                        description: 'The total value of the order in BRL with up to two decimal places.',
+                        example: 12.34,
+                        minimum: 0.01,
                       },
                     },
                   },
