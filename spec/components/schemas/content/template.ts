@@ -157,7 +157,8 @@ const template: SchemaObject = {
                           properties: {
                             type: {
                               description: 'The type of the payment method.',
-                              const: 'payment_link',
+                              enum: ['payment_link'],
+                              type: 'string',
                             },
                             paymentLink: {
                               description: 'A valid payment URL.',
@@ -172,7 +173,8 @@ const template: SchemaObject = {
                           properties: {
                             type: {
                               description: 'The type of the payment method.',
-                              const: 'boleto',
+                              enum: ['boleto'],
+                              type: 'string',
                             },
                             digitableLine: {
                               description: 'The Boleto digitable line / code which will be copied to the clipboard, when user taps on the Boleto CTA button.',
@@ -187,7 +189,8 @@ const template: SchemaObject = {
                           required: ['code', 'merchantName', 'key', 'keyType', 'type'],
                           properties: {
                             type: {
-                              const: 'pix_dynamic_code',
+                              enum: ['pix_dynamic_code'],
+                              type: 'string',
                               description: 'The type of the payment method. For \'pix_dynamic_code\', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp.',
                             },
                             code: {
