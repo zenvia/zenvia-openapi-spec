@@ -16,6 +16,7 @@ export const buttons: SchemaObject = {
     $ref: quickRepliesRef,
   }, {
     $ref: orderDetailsRef,
+    'x-unpublished': true,
   }, {
     $ref: mixedRef,
   }],
