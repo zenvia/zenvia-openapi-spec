@@ -3,7 +3,6 @@ import { createComponentRef } from '../../../../../../utils/ref';
 import { ref as actionsRef } from './actions';
 import { ref as quickRepliesRef } from './quick-replies';
 import { ref as mixedRef } from './mixed';
-import { ref as orderDetailsRef } from './order-details';
 
 export const buttons: SchemaObject = {
   title: 'Buttons',
@@ -16,8 +15,6 @@ export const buttons: SchemaObject = {
   }, {
     $ref: quickRepliesRef,
   }, {
-    $ref: orderDetailsRef,
-  }, {
     $ref: mixedRef,
   }],
   required: ['type'],
@@ -27,7 +24,6 @@ export const buttons: SchemaObject = {
       ACTIONS: actionsRef,
       QUICK_REPLIES: quickRepliesRef,
       MIXED: mixedRef,
-      ORDER_DETAILS: orderDetailsRef,
     },
   },
 };
