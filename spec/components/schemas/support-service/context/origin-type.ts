@@ -6,12 +6,12 @@ const origin: SchemaObject = {
   description: 'The creation origin',
   type: 'string',
   enum: [
-    "OTHER",
-    "AGENT_IN_SYSTEM",
-    "IMPORTED_EMAIL",
-    "SYSTEM_TRIGGER",
-    "TICKETS_API",
-    "CHAT",
+    'OTHER',
+    'AGENT_IN_SYSTEM',
+    'IMPORTED_EMAIL',
+    'SYSTEM_TRIGGER',
+    'TICKETS_API',
+    'CHAT',
   ],
   readOnly: true,
 };
