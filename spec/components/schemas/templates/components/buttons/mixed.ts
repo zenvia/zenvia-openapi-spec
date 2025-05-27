@@ -8,6 +8,7 @@ import { ref as quickReplyRef } from './button-item-quick-reply';
 import { ref as optOutRef } from './button-item-opt-out';
 import { ref as mpmRef } from './button-item-mpm';
 import { ref as copyCodeRef } from './button-item-coupon';
+import { ref as orderDetailsRef } from './button-item-order-details';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -30,6 +31,10 @@ const buttons: SchemaObject = {
             { $ref: phoneNumberRef },
             { $ref: quickReplyRef },
             { $ref: urlRef },
+            {
+              $ref: orderDetailsRef,
+              'x-unpublished': true,
+            }
           ],
           required: [
             'type',
@@ -43,6 +48,7 @@ const buttons: SchemaObject = {
               PHONE_NUMBER: phoneNumberRef,
               QUICK_REPLY: quickReplyRef,
               URL: urlRef,
+              ORDER_DETAILS: orderDetailsRef,
             },
           },
         },
