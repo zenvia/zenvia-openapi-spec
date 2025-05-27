@@ -6,6 +6,7 @@ import { ref as urlRef } from './button-item-url';
 import { ref as phoneNumberRef } from './button-item-phone-number';
 import { ref as mpmRef } from './button-item-mpm';
 import { ref as copyCodeRef } from './button-item-coupon';
+import { ref as orderDetailsRef } from './button-item-order-details';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -16,7 +17,7 @@ const buttons: SchemaObject = {
     properties: {
       items: {
         title: 'Buttons',
-        description: 'List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
+        description: 'List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER, COPY_CODE or ORDER_DETAILS. MPM, ORDER_DETAILS and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
         maxItems: 10,
         type: 'array',
         items: {
@@ -31,6 +32,10 @@ const buttons: SchemaObject = {
           },
           {
             $ref: copyCodeRef,
+          },
+          {
+            $ref: orderDetailsRef,
+            'x-unpublished': true,
           }],
           required: [
             'type',
@@ -42,6 +47,7 @@ const buttons: SchemaObject = {
               PHONE_NUMBER: phoneNumberRef,
               MPM: mpmRef,
               COPY_CODE: copyCodeRef,
+              ORDER_DETAILS: orderDetailsRef,
             },
           },
         },
