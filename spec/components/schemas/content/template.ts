@@ -54,7 +54,7 @@ const template: SchemaObject = {
                 maxItems: 10,
                 items: {
                   type: 'object',
-                  oneOf: [
+                  anyOf: [
                     {
                       title: 'Cards with dynamic ordering and image as background',
                       required: ['orderPosition', 'imageUrl'],
