@@ -68,6 +68,19 @@ const template: SchemaObject = {
                           description: 'URL of the image',
                         },
                       },
+                      additionalProperties: {
+                        description: 'Value provided to fill the variable named after the property name.',
+                        oneOf: [{
+                          type: 'string',
+                          example: 'Zenvia',
+                        }, {
+                          type: 'number',
+                          example: 1,
+                        }, {
+                          type: 'boolean',
+                          example: true,
+                        }],
+                      },
                     },
                     {
                       title: 'Cards with dynamic ordering and video as background',
@@ -82,27 +95,64 @@ const template: SchemaObject = {
                           description: 'URL of the video',
                         },
                       },
+                      additionalProperties: {
+                        description: 'Value provided to fill the variable named after the property name.',
+                        oneOf: [{
+                          type: 'string',
+                          example: 'Zenvia',
+                        }, {
+                          type: 'number',
+                          example: 1,
+                        }, {
+                          type: 'boolean',
+                          example: true,
+                        }],
+                      },
                     },
                     {
                       title: 'Cards with predefined order and image as background',
                       required: ['imageUrl'],
-                      additionalProperties: false,
                       properties: {
                         imageUrl: {
                           type: 'string',
                           description: 'URL of the image',
                         },
                       },
+                      additionalProperties: {
+                        description: 'Value provided to fill the variable named after the property name.',
+                        oneOf: [{
+                          type: 'string',
+                          example: 'Zenvia',
+                        }, {
+                          type: 'number',
+                          example: 1,
+                        }, {
+                          type: 'boolean',
+                          example: true,
+                        }],
+                      },
                     },
                     {
                       title: 'Cards with predefined order and video as background',
                       required: ['videoUrl'],
-                      additionalProperties: false,
                       properties: {
                         videoUrl: {
                           type: 'string',
                           description: 'URL of the video',
                         },
+                      },
+                      additionalProperties: {
+                        description: 'Value provided to fill the variable named after the property name.',
+                        oneOf: [{
+                          type: 'string',
+                          example: 'Zenvia',
+                        }, {
+                          type: 'number',
+                          example: 1,
+                        }, {
+                          type: 'boolean',
+                          example: true,
+                        }],
                       },
                     },
                   ],
