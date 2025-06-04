@@ -2,7 +2,7 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
 import { ref as listIdsRef } from '../../components/parameters/contacts-management/listIds';
-import { ref as pageRef } from '../../components/parameters/page';
+import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as sizeRef } from '../../components/parameters/size';
 
 const post: OperationObject = {

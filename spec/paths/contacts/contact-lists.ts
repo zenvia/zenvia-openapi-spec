@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactListRef } from '../../components/schemas/contacts-management/contact-list';
-import { ref as pageRef } from '../../components/parameters/page';
+import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as sizeRef } from '../../components/parameters/size';
 
 const post: OperationObject = {
