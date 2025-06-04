@@ -3,7 +3,7 @@ import { ref as tokenConfigRef } from '../../components/schemas/2fa/configuratio
 import { ref as tokenConfigResponseRef } from '../../components/schemas/2fa/configuration/responses/base';
 import { ref as tokenConfigCreatedRef } from '../../components/schemas/2fa/configuration/responses/token-created';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as pageRef } from '../../components/parameters/page';
+import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as limitRef } from '../../components/parameters/limit';
 
 const post: OperationObject = {
