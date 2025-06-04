@@ -70,7 +70,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/limit"
@@ -1652,7 +1652,39 @@
                         "templateId": "template_id",
                         "fields": {
                           "name": "Jhon",
-                          "product": "Zenvia Chat"
+                          "product": "Zenvia Chat",
+                          "orderDetailsParameters": {
+                            "referenceId": "OPTIONAL_UNIQUE_REFERENCE_ID_123",
+                            "type": "digital_goods",
+                            "paymentSettings": [
+                              {
+                                "type": "boleto",
+                                "digitableLine": "03399026944140000002628346101018898510000008848"
+                              },
+                              {
+                                "type": "pix_dynamic_code",
+                                "code": "00020101021226700014br.gov.bcb.pix2548pix.example.com",
+                                "merchantName": "Zenvia Brazil",
+                                "key": "01234567890",
+                                "keyType": "CPF"
+                              }
+                            ],
+                            "totalAmount": 500,
+                            "order": {
+                              "items": [
+                                {
+                                  "productId": "1234567890",
+                                  "name": "Zenvia Brazil",
+                                  "amount": 500,
+                                  "quantity": 1
+                                }
+                              ],
+                              "tax": {
+                                "value": 0
+                              },
+                              "subtotal": 500
+                            }
+                          }
                         }
                       }
                     ]
@@ -1958,7 +1990,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/size"
@@ -2044,7 +2076,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/size"
@@ -2163,7 +2195,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/size"
@@ -2257,7 +2289,7 @@
             "$ref": "#/components/parameters/contacts-management.listIds"
           },
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/size"
@@ -2623,7 +2655,7 @@
             "$ref": "#/components/parameters/flowId"
           },
           {
-            "$ref": "#/components/parameters/page"
+            "$ref": "#/components/parameters/page-legacy"
           },
           {
             "$ref": "#/components/parameters/size"
@@ -3073,6 +3105,317 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/subscriptionId"
+        }
+      ]
+    },
+    "/tickets": {
+      "get": {
+        "summary": "List tickets",
+        "description": "Lists all tickets available.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.size"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.createdAt"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.updatedAt"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.statusId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tickets available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/support-service.tickets"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/tickets/{ticketId}": {
+      "get": {
+        "summary": "Retrieve ticket by id",
+        "description": "Retrieve all ticket information by id.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Ticket object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.tickets"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/actions": {
+      "get": {
+        "summary": "List ticket actions",
+        "description": "Lists all ticket actions available.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket actions available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/support-service.ticket-actions"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/owner-changes": {
+      "get": {
+        "summary": "List ticket owner changes",
+        "description": "Lists all ticket owner changes available.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket owner changes available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/support-service.ticket-owner-changes"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/status-changes": {
+      "get": {
+        "summary": "List ticket status changes",
+        "description": "Lists all ticket status changes.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket status changes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/support-service.ticket-status-changes"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
         }
       ]
     },
@@ -5655,7 +5998,7 @@
                         "maxItems": 10,
                         "items": {
                           "type": "object",
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "title": "Cards with dynamic ordering and image as background",
                               "required": [
@@ -5671,6 +6014,23 @@
                                   "type": "string",
                                   "description": "URL of the image"
                                 }
+                              },
+                              "additionalProperties": {
+                                "description": "Value provided to fill the variable named after the property name.",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "Zenvia"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  {
+                                    "type": "boolean",
+                                    "example": true
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5688,6 +6048,23 @@
                                   "type": "string",
                                   "description": "URL of the video"
                                 }
+                              },
+                              "additionalProperties": {
+                                "description": "Value provided to fill the variable named after the property name.",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "Zenvia"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  {
+                                    "type": "boolean",
+                                    "example": true
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5695,12 +6072,28 @@
                               "required": [
                                 "imageUrl"
                               ],
-                              "additionalProperties": false,
                               "properties": {
                                 "imageUrl": {
                                   "type": "string",
                                   "description": "URL of the image"
                                 }
+                              },
+                              "additionalProperties": {
+                                "description": "Value provided to fill the variable named after the property name.",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "Zenvia"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  {
+                                    "type": "boolean",
+                                    "example": true
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5708,12 +6101,28 @@
                               "required": [
                                 "videoUrl"
                               ],
-                              "additionalProperties": false,
                               "properties": {
                                 "videoUrl": {
                                   "type": "string",
                                   "description": "URL of the video"
                                 }
+                              },
+                              "additionalProperties": {
+                                "description": "Value provided to fill the variable named after the property name.",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "Zenvia"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  {
+                                    "type": "boolean",
+                                    "example": true
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -6762,6 +7171,226 @@
             "list": "#/components/schemas/content.whatsapp.list",
             "product": "#/components/schemas/content.whatsapp.product",
             "product_list": "#/components/schemas/content.whatsapp.product-list"
+          }
+        }
+      },
+      "content.whatsapp.order-details-template": {
+        "title": "Order Details",
+        "required": [
+          "orderDetailsParameters"
+        ],
+        "additionalProperties": {
+          "description": "Value provided to fill the variable named after the property name.",
+          "oneOf": [
+            {
+              "type": "string",
+              "example": "Zenvia"
+            },
+            {
+              "type": "number",
+              "example": 1
+            },
+            {
+              "type": "boolean",
+              "example": true
+            }
+          ]
+        },
+        "properties": {
+          "orderDetailsParameters": {
+            "type": "object",
+            "description": "Details of a payment template.\n\n *Only applicable to [WhatsApp](#tag/WhatsApp) channel.*",
+            "required": [
+              "order",
+              "totalAmount",
+              "type",
+              "paymentSettings"
+            ],
+            "properties": {
+              "referenceId": {
+                "type": "string",
+                "description": "An optional unique identifier of the order. This can only contain English letters, numbers, underscores, dashes, or dots.",
+                "maxLength": 35,
+                "pattern": "^[A-Za-z0-9_\\-\\.]+$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "digital-goods",
+                  "physical-goods"
+                ],
+                "description": "The type of the order item."
+              },
+              "paymentSettings": {
+                "type": "array",
+                "description": "List of payment configuration objects.",
+                "minItems": 1,
+                "maxItems": 2,
+                "items": {
+                  "type": "object",
+                  "anyOf": [
+                    {
+                      "title": "Payment link",
+                      "required": [
+                        "paymentLink",
+                        "type"
+                      ],
+                      "properties": {
+                        "type": {
+                          "description": "The type of the payment method.",
+                          "enum": [
+                            "payment_link"
+                          ],
+                          "type": "string"
+                        },
+                        "paymentLink": {
+                          "description": "A valid payment URL.",
+                          "pattern": "^(https)://[^\\s/$.?#].[^\\s]*$",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Boleto",
+                      "required": [
+                        "digitableLine",
+                        "type"
+                      ],
+                      "properties": {
+                        "type": {
+                          "description": "The type of the payment method.",
+                          "enum": [
+                            "boleto"
+                          ],
+                          "type": "string"
+                        },
+                        "digitableLine": {
+                          "description": "The Boleto digitable line / code which will be copied to the clipboard, when user taps on the Boleto CTA button.",
+                          "minLength": 47,
+                          "maxLength": 48,
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Pix",
+                      "required": [
+                        "code",
+                        "merchantName",
+                        "key",
+                        "keyType",
+                        "type"
+                      ],
+                      "properties": {
+                        "type": {
+                          "enum": [
+                            "pix_dynamic_code"
+                          ],
+                          "type": "string",
+                          "description": "The type of the payment method. For 'pix_dynamic_code', Pix payment instructions that will be displayed to buyers during the checkout process if they decide to pay outside of WhatsApp."
+                        },
+                        "code": {
+                          "type": "string",
+                          "description": "The dynamic Pix code to be sent to the buyer."
+                        },
+                        "merchantName": {
+                          "type": "string",
+                          "description": "The name of account holder. Displayed in-app for the buyer for informational purposes."
+                        },
+                        "key": {
+                          "type": "string",
+                          "description": "The Pix key."
+                        },
+                        "keyType": {
+                          "type": "string",
+                          "description": "The type of the Pix key.",
+                          "enum": [
+                            "CPF",
+                            "CNPJ",
+                            "EMAIL",
+                            "PHONE",
+                            "EVP"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "totalAmount": {
+                "type": "number",
+                "description": "The total amount of the order in BRL with up to two decimal places.",
+                "example": 12.34,
+                "minimum": 0.01
+              },
+              "order": {
+                "type": "object",
+                "required": [
+                  "items",
+                  "tax",
+                  "subtotal"
+                ],
+                "description": "Details of the purchase order containing items purchased, subtotal amount, and tax details.",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "description": "List of products included in the order, with details for each item.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "productId",
+                        "name",
+                        "amount",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "productId": {
+                          "type": "string",
+                          "description": "The product item catalog identifier."
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the item to be displayed to the user.",
+                          "maxLength": 60
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "The price per item in BRL with up to two decimal places.",
+                          "example": 12.34,
+                          "minimum": 0.01
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "description": "The quantity of the item in this order.",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  },
+                  "tax": {
+                    "type": "object",
+                    "description": "Tax details applied to the purchase.",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "number",
+                        "description": "The total value of the tax in BRL with up to two decimal places.",
+                        "example": 12.34,
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "subtotal": {
+                    "type": "number",
+                    "description": "The total value of the order in BRL with up to two decimal places.",
+                    "example": 12.34,
+                    "minimum": 0.01
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -9384,6 +10013,21 @@
           "headers": {
             "title": "Request headers",
             "type": "object"
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/subscription.webhook-auth.webhook-auth"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "url",
+                  "oauth"
+                ]
+              }
+            ]
           }
         }
       },
@@ -9545,6 +10189,617 @@
           "headers": {
             "title": "Request headers",
             "type": "object"
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/subscription.webhook-auth.webhook-auth"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "url",
+                  "oauth"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "subscription.webhook-auth.oauth": {
+        "title": "Fields to OAUTH2 authentication request",
+        "properties": {
+          "grantType": {
+            "title": "GranType",
+            "type": "string",
+            "enum": [
+              "client_credentials"
+            ],
+            "default": "client_credentials"
+          },
+          "clientSecret": {
+            "title": "Client Secret",
+            "type": "string",
+            "minLength": 1
+          },
+          "clientId": {
+            "title": "Client Id",
+            "type": "string",
+            "minLength": 1
+          },
+          "refreshToken": {
+            "title": "Refresh Token",
+            "type": "string",
+            "minLength": 1
+          },
+          "expiresIn": {
+            "title": "Default time expiration (in seconds)",
+            "type": "number"
+          }
+        }
+      },
+      "subscription.webhook-auth.webhook-auth": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type of authentication",
+            "type": "string",
+            "enum": [
+              "OAUTH"
+            ],
+            "default": "OAUTH"
+          },
+          "url": {
+            "title": "Webhook Auth URL",
+            "description": "URL to authenticate webhook",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(https)://[^\\s/$.?#].[^\\s]*$"
+          },
+          "headers": {
+            "title": "Authentication request headers",
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "Zenvia"
+                },
+                {
+                  "type": "number",
+                  "example": 1
+                },
+                {
+                  "type": "boolean",
+                  "example": true
+                }
+              ]
+            }
+          },
+          "queryParams": {
+            "title": "Authentication request query params",
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "Zenvia"
+                },
+                {
+                  "type": "number",
+                  "example": 1
+                },
+                {
+                  "type": "boolean",
+                  "example": true
+                }
+              ]
+            }
+          },
+          "oauth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/subscription.webhook-auth.oauth"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "grantType",
+                  "clientSecret",
+                  "clientId"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "support-service.ticket-actions": {
+        "title": "Ticket Actions",
+        "description": "Ticket actions information.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "description": "ID of the ticket action.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.ticket-type"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/support-service.context.origin-type"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/support-service.context.status"
+          },
+          "justification": {
+            "$ref": "#/components/schemas/support-service.context.justification"
+          },
+          "createdAt": {
+            "title": "Created At",
+            "description": "Timestamp of the action creation.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z"
+          },
+          "createdById": {
+            "title": "Created By ID",
+            "description": "Created by identifier",
+            "type": "string",
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
+            "nullable": true
+          }
+        }
+      },
+      "support-service.ticket-owner-changes": {
+        "title": "Ticket Owner Change",
+        "type": "object",
+        "properties": {
+          "ownerId": {
+            "title": "Owner ID",
+            "description": "Agent that was previously assigned to ticket.",
+            "type": "string",
+            "readOnly": true,
+            "nullable": true,
+            "example": "5404ed19-2994-4831-bb33-627e27b18ab1"
+          },
+          "ownerTeam": {
+            "$ref": "#/components/schemas/support-service.context.owner-team"
+          },
+          "permanencyTimeFullTime": {
+            "title": "Permanency Full Time",
+            "description": "Duration of the agent’s assignment in calendar hours. Returns the total time in seconds.",
+            "type": "number",
+            "readOnly": true
+          },
+          "permanencyTimeWorkingTime": {
+            "title": "Permanency Working Time",
+            "description": "Duration of the agent’s assignment in business hours. Returns the total time in seconds.",
+            "type": "number",
+            "readOnly": true
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that re-assigned the ticket.",
+            "type": "string",
+            "readOnly": true,
+            "nullable": true,
+            "example": "5404ed19-2994-4831-bb33-627e27b18ab1"
+          },
+          "updatedAt": {
+            "description": "Timestamp of the update.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "readOnly": true
+          }
+        }
+      },
+      "support-service.ticket-status-changes": {
+        "title": "Ticket Status Change",
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/support-service.context.status"
+          },
+          "justification": {
+            "$ref": "#/components/schemas/support-service.context.justification"
+          },
+          "permanencyTimeFullTime": {
+            "title": "Permanency Full Time",
+            "description": "Duration of the status in calendar hours. Returns the total time in seconds.",
+            "type": "number",
+            "readOnly": true
+          },
+          "permanencyTimeWorkingTime": {
+            "title": "Permanency Working Time",
+            "description": "Duration of the status in business hours. Returns the total time in seconds.",
+            "type": "number",
+            "readOnly": true
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that changed the ticket status.",
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "updatedAt": {
+            "description": "Timestamp of the update.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "readOnly": true
+          }
+        }
+      },
+      "support-service.tickets": {
+        "title": "Tickets",
+        "description": "Ticket information.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "description": "ID of the ticket.",
+            "type": "string",
+            "readOnly": true,
+            "nullable": false
+          },
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.ticket-type"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/support-service.context.origin-type"
+          },
+          "originEmailAccount": {
+            "title": "Origin Account Email",
+            "description": "Support email account that received the email which created the ticket.",
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          },
+          "subject": {
+            "title": "Subject",
+            "description": "Subject of the ticket.",
+            "type": "string",
+            "nullable": false
+          },
+          "cc": {
+            "title": "Cc",
+            "description": "List of email addresses in the ticket’s CC.",
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "cc1@zenvia.com"
+            ]
+          },
+          "clients": {
+            "title": "Clients",
+            "description": "List of client identifiers of the ticket.",
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "a4a4bc53-8396-4190-92e3-7edb6826e3dc"
+            ]
+          },
+          "ownerId": {
+            "title": "Owner Id",
+            "description": "Owner identification if ticket owner is an agent.",
+            "type": "string",
+            "example": "5404ed19-2994-4831-bb33-627e27b18ab1",
+            "nullable": true
+          },
+          "ownerTeam": {
+            "$ref": "#/components/schemas/support-service.context.owner-team"
+          },
+          "category": {
+            "$ref": "#/components/schemas/support-service.context.category"
+          },
+          "urgency": {
+            "$ref": "#/components/schemas/support-service.context.urgency"
+          },
+          "status": {
+            "$ref": "#/components/schemas/support-service.context.status"
+          },
+          "service": {
+            "$ref": "#/components/schemas/support-service.context.service"
+          },
+          "justification": {
+            "$ref": "#/components/schemas/support-service.context.justification"
+          },
+          "resolvedAt": {
+            "title": "Resolved At",
+            "description": "Resolved ticket timestamp.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": true
+          },
+          "reopenedAt": {
+            "title": "Reopened At",
+            "description": "Reopened ticket timestamp.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": true
+          },
+          "closedAt": {
+            "title": "Closed At",
+            "description": "Closed ticket timestamp.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": true
+          },
+          "createdAt": {
+            "title": "Created At",
+            "description": "Timestamp of the ticket creation.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": false
+          },
+          "createdById": {
+            "title": "Created By Id",
+            "description": "Created by identifier.",
+            "type": "string",
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
+            "nullable": true
+          },
+          "updatedAt": {
+            "title": "Updated At",
+            "description": "Timestamp of the ticket update.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "readOnly": true,
+            "nullable": true
+          },
+          "solutionTime": {
+            "title": "Solution Time",
+            "description": "SLA resolution time. Returns a numeric value in minutes. If there are no SLA policies applied to this ticket, this property will be blank.",
+            "type": "integer",
+            "readOnly": true,
+            "nullable": true
+          },
+          "responseTime": {
+            "title": "Response Time",
+            "description": "SLA first-response time. Returns a numeric value in minutes. If there are no SLA policies applied to this ticket, this property will be blank.",
+            "type": "integer",
+            "readOnly": true,
+            "nullable": true
+          },
+          "solutionAt": {
+            "title": "Solution At",
+            "description": "Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket note.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": true
+          },
+          "responseAt": {
+            "title": "Response At",
+            "description": "Ticket first-response due date.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "readOnly": true,
+            "nullable": true
+          },
+          "realResponseAt": {
+            "title": "Real Response At",
+            "description": "Actual first-response date.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "readOnly": true,
+            "nullable": true
+          },
+          "solutionDateIsPaused": {
+            "title": "Solution Date Is Paused",
+            "description": "Returns true if the SLA time for ticket resolution is paused, and false if it is not paused.",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "solutionChangedByUser": {
+            "title": "Solution Changed By User",
+            "description": "Returns true if the current ticket resolution due date was set manually, and false if it was calculated by the system.",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "solutionChangedById": {
+            "title": "Solution Changed By User Id",
+            "description": "User that manually set the resolution due date on the ticket.",
+            "type": "string",
+            "readOnly": true,
+            "nullable": true,
+            "example": "5404ed19-2994-4831-bb33-627e27b18ab1"
+          },
+          "agreement": {
+            "title": "Agreement",
+            "description": "SLA policy applied to the ticket.",
+            "readOnly": true,
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "id": {
+                "title": "Agreement Id",
+                "description": "Identifier of the SLA policy.",
+                "type": "integer",
+                "readOnly": true
+              },
+              "name": {
+                "title": "Agreement",
+                "description": "Name of the SLA policy.",
+                "type": "string",
+                "readOnly": true
+              },
+              "rule": {
+                "title": "Agreement Rule",
+                "description": "SLA rule applied to the ticket.",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      },
+      "support-service.context.category": {
+        "title": "Category",
+        "type": "object",
+        "readOnly": true,
+        "nullable": true,
+        "properties": {
+          "id": {
+            "title": "Category ID",
+            "description": "Category identifier.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Category Name",
+            "description": "Name of the category.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "support-service.context.justification": {
+        "title": "Justification",
+        "type": "object",
+        "readOnly": true,
+        "nullable": true,
+        "properties": {
+          "id": {
+            "title": "Justification ID",
+            "description": "Justification identifier.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Justification Name",
+            "description": "Name of the justification.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "support-service.context.origin-type": {
+        "title": "Origin",
+        "description": "The creation origin",
+        "type": "string",
+        "enum": [
+          "OTHER",
+          "AGENT_IN_SYSTEM",
+          "IMPORTED_EMAIL",
+          "SYSTEM_TRIGGER",
+          "TICKETS_API",
+          "CHAT"
+        ],
+        "readOnly": true
+      },
+      "support-service.context.owner-team": {
+        "title": "Owner Team",
+        "description": "Owner team if ticket owner is a team.",
+        "type": "object",
+        "readOnly": true,
+        "nullable": true,
+        "properties": {
+          "id": {
+            "title": "Owner Team Id",
+            "description": "Owner Team identifier.",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Owner Team Name",
+            "description": "Name of the team.",
+            "type": "string"
+          }
+        }
+      },
+      "support-service.context.service": {
+        "title": "Service",
+        "type": "object",
+        "readOnly": true,
+        "nullable": true,
+        "properties": {
+          "id": {
+            "title": "Service ID",
+            "description": "Service identifier.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Service Name",
+            "description": "Name of the service.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "support-service.context.status": {
+        "title": "Status",
+        "type": "object",
+        "readOnly": true,
+        "properties": {
+          "id": {
+            "title": "Status ID",
+            "description": "Status identifier.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Status Name",
+            "description": "Name of the status.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.system-status-type"
+          }
+        }
+      },
+      "support-service.context.system-status-type": {
+        "title": "Status Type",
+        "description": "System status type.",
+        "type": "string",
+        "enum": [
+          "NEW",
+          "IN_ATTENDANCE",
+          "STOPPED",
+          "CANCELED",
+          "RESOLVED",
+          "CLOSED"
+        ],
+        "readOnly": true
+      },
+      "support-service.context.ticket-type": {
+        "title": "Ticket Type",
+        "type": "string",
+        "nullable": false,
+        "enum": [
+          "INTERNAL",
+          "PUBLIC"
+        ]
+      },
+      "support-service.context.urgency": {
+        "title": "Urgency",
+        "type": "object",
+        "readOnly": true,
+        "nullable": true,
+        "properties": {
+          "id": {
+            "title": "Urgency ID",
+            "description": "Urgency identifier.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Urgency Name",
+            "description": "Name of the urgency.",
+            "type": "string",
+            "readOnly": true
           }
         }
       },
@@ -9880,7 +11135,7 @@
       },
       "templates.category.all": {
         "title": "Category",
-        "description": "Category of use for this template",
+        "description": "Category of use for this template.\n  <br>Payment templates can only belong to the MARKETING or UTILITY category",
         "type": "string",
         "enum": [
           "AUTHENTICATION",
@@ -9922,7 +11177,7 @@
       },
       "templates.category.whatsapp": {
         "title": "Category",
-        "description": "Category of use for this template",
+        "description": "Category of use for this template.\n  <br>Payment templates can only belong to the MARKETING or UTILITY category",
         "type": "string",
         "enum": [
           "AUTHENTICATION",
@@ -10179,7 +11434,7 @@
             "properties": {
               "items": {
                 "title": "Buttons",
-                "description": "List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
+                "description": "List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER, COPY_CODE or ORDER_DETAILS. MPM, ORDER_DETAILS and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
                 "maxItems": 10,
                 "type": "array",
                 "items": {
@@ -10246,7 +11501,8 @@
               "VIEW_LOCATION",
               "SEARCH_LOCATION",
               "SHARE_LOCATION",
-              "CALENDAR_EVENT"
+              "CALENDAR_EVENT",
+              "ORDER_DETAILS"
             ],
             "type": "string"
           }
@@ -10286,6 +11542,14 @@
               "type",
               "text"
             ]
+          }
+        ]
+      },
+      "templates.components.buttons.button-item-order-details": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.button-item-base"
           }
         ]
       },
@@ -10462,6 +11726,15 @@
             "required": [
               "items"
             ]
+          }
+        ]
+      },
+      "templates.components.buttons.order-details": {
+        "type": "object",
+        "description": "*Only applicable to [WhatsApp](#tag/WhatsApp) channel*",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/templates.components.buttons.base"
           }
         ]
       },
@@ -11742,7 +13015,7 @@
         },
         "example": 10
       },
-      "page": {
+      "page-legacy": {
         "name": "page",
         "in": "query",
         "required": false,
@@ -11751,6 +13024,18 @@
           "title": "page",
           "type": "number",
           "default": 0
+        },
+        "example": 5
+      },
+      "page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "description": "This is the page number.",
+        "schema": {
+          "title": "page",
+          "type": "number",
+          "default": 1
         },
         "example": 5
       },
@@ -11987,6 +13272,68 @@
           ]
         }
       },
+      "support-service.createdAt": {
+        "name": "createdAt",
+        "in": "query",
+        "required": false,
+        "description": "The date that the ticket was created.",
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "example": "2024-01-31"
+        }
+      },
+      "support-service.size": {
+        "name": "size",
+        "in": "query",
+        "required": false,
+        "description": "This is the page size.",
+        "schema": {
+          "title": "size",
+          "type": "number",
+          "default": 20,
+          "maximum": 100
+        },
+        "example": 10
+      },
+      "support-service.statusId": {
+        "name": "statusId",
+        "in": "query",
+        "required": false,
+        "description": "The status id of the ticket.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "support-service.teamId": {
+        "name": "teamId",
+        "in": "path",
+        "required": true,
+        "description": "The team identifier.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "support-service.ticketId": {
+        "name": "ticketId",
+        "in": "path",
+        "required": true,
+        "description": "The ticket identifier.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "support-service.updatedAt": {
+        "name": "updatedAt",
+        "in": "query",
+        "required": false,
+        "description": "The date that the ticket was updated.",
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "example": "2024-01-31"
+        }
+      },
       "templates.channel": {
         "name": "channel",
         "in": "query",
@@ -12161,7 +13508,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*\n* 500 consecutive request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *8 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *8 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
     },
     {
       "name": "Templates",
@@ -12255,6 +13602,12 @@
       "name": "Marketing Automations",
       "tags": [
         "Marketing Automations"
+      ]
+    },
+    {
+      "name": "Support Service",
+      "tags": [
+        "Tickets"
       ]
     },
     {
