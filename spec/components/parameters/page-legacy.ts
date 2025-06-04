@@ -9,7 +9,7 @@ const page: ParameterObject = {
   schema: {
     title: 'page',
     type: 'number',
-    default: 1,
+    default: 0,
   },
   example: 5,
 };

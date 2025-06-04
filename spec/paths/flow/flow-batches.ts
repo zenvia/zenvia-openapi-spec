@@ -4,7 +4,7 @@ import { ref as flowBatchesJsonRef } from '../../components/schemas/flow/batches
 import { ref as flowBatchesMultipartRef } from '../../components/schemas/flow/batches/multipart';
 import { ref as flowBatchesItemRef } from '../../components/schemas/flow/batches/item';
 import { ref as flowIdRef } from '../../components/parameters/flowId';
-import { ref as pageRef } from '../../components/parameters/page';
+import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as sizeRef } from '../../components/parameters/size';
 
 const get: OperationObject = {
