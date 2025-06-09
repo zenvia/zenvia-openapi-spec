@@ -31,7 +31,7 @@ const orderDetailsTemplate: SchemaObject = {
       },
       type: {
         type: 'string',
-        enum: ['digital-goods', 'physical-goods'],
+        enum: ['digital_goods', 'physical_goods'],
         description: 'The type of the order item.',
       },
       paymentSettings: {
