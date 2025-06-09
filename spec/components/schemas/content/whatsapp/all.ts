@@ -6,7 +6,7 @@ import { ref as unsupportedRef } from './unsupported';
 import mt from './mt';
 
 const all: SchemaObject = _.cloneDeep(mt);
-all.oneOf.push({ $ref: productListOrderRef }, { $ref: unsupportedRef, 'x-unpublished': true });
+all.oneOf.push({ $ref: productListOrderRef }, { $ref: unsupportedRef });
 all.discriminator.mapping.product_list_order = productListOrderRef;
 all.discriminator.mapping.unsupported = unsupportedRef;
 

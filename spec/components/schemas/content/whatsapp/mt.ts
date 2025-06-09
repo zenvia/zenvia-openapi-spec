@@ -11,7 +11,6 @@ import { ref as productRef } from './product';
 import { ref as productListRef } from './product-list';
 import { ref as orderDetailsRef } from './order-details';
 import { ref as orderStatusRef } from './order-status';
-import { ref as unsupportedRef } from './unsupported';
 
 const mtContent: SchemaObject = {
   title: 'WhatsApp',
@@ -39,8 +38,6 @@ const mtContent: SchemaObject = {
   }, {
     $ref: orderStatusRef,
     'x-unpublished': true,
-  }, {
-    $ref: unsupportedRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -56,7 +53,6 @@ const mtContent: SchemaObject = {
       product_list: productListRef,
       order_details: orderDetailsRef,
       order_status: orderStatusRef,
-      unsupported: unsupportedRef,
     },
   },
 };
