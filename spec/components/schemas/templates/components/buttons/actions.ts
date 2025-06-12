@@ -7,6 +7,7 @@ import { ref as phoneNumberRef } from './button-item-phone-number';
 import { ref as mpmRef } from './button-item-mpm';
 import { ref as copyCodeRef } from './button-item-coupon';
 import { ref as orderDetailsRef } from './button-item-order-details';
+import { buttonsDescription } from '../../../../../../utils/buttons-description-generator';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -17,7 +18,7 @@ const buttons: SchemaObject = {
     properties: {
       items: {
         title: 'Buttons',
-        description: 'List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER, COPY_CODE or ORDER_DETAILS. MPM, ORDER_DETAILS and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).',
+        description: `List of buttons. You can have two URL buttons and only one of the following can be included: ${buttonsDescription.exclusive}. ${buttonsDescription.whatsappOnly} buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).`,
         maxItems: 10,
         type: 'array',
         items: {
