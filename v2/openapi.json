@@ -7216,8 +7216,8 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "digital-goods",
-                  "physical-goods"
+                  "digital_goods",
+                  "physical_goods"
                 ],
                 "description": "The type of the order item."
               },
@@ -11434,7 +11434,7 @@
             "properties": {
               "items": {
                 "title": "Buttons",
-                "description": "List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER, COPY_CODE or ORDER_DETAILS. MPM, ORDER_DETAILS and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
+                "description": "List of buttons. You can have two URL buttons and only one of the following can be included: MPM, PHONE_NUMBER or COPY_CODE. MPM and COPY_CODE buttons are exclusively for use in [WHATSAPP](tag#WHATSAPP).",
                 "maxItems": 10,
                 "type": "array",
                 "items": {
