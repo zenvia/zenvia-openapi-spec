@@ -9,6 +9,7 @@ import { ref as templateCreateSchemaRef } from '../../components/schemas/templat
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as channel } from '../../components/parameters/templates/channel';
 import { ref as senderId } from '../../components/parameters/templates/senderId';
+import { ref as category } from '../../components/parameters/templates/category';
 import { ref as status } from '../../components/parameters/templates/status';
 import { ref as size } from '../../components/parameters/templates/size';
 import { ref as page } from '../../components/parameters/templates/page';
@@ -48,6 +49,7 @@ const get: OperationObject = {
   parameters: [
     { $ref: channel },
     { $ref: senderId },
+    { $ref: category },
     { $ref: status },
     { $ref: page },
     { $ref: size },
