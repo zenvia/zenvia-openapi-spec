@@ -41,6 +41,16 @@
       },
       "createdAt": "2020-07-15T18:00:00.000Z",
       "updatedAt": "2020-07-15T18:00:00.000Z"
+    }, {
+      "id": "subscription id 3",
+      "status": "ACTIVE",
+      "eventType": "CONVERSION_EVENT",
+      "version": "v2",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "createdAt": "2025-07-08T18:00:00.000Z",
+      "updatedAt": "2025-07-08T18:00:00.000Z"
     }]
   }
 }

@@ -40,7 +40,16 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *CLICKED: "**An action item in the message has been clicked by the contact**".*
 * *VERIFIED: "**The message has been verified by the device app/provider**".*
 
+## CONVERSION_EVENT
 
+The event type CONVERSATION_EVENT refers to the lifecycle progression of a conversation.
+
+A conversation has a finite lifecycle — it has a beginning, a middle, and an end.
+
+If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+<SchemaDefinition schemaRef="#/components/schemas/events.conversion-event" />
+<br>
 
 ## Zenvia outbound IP addresses
 
