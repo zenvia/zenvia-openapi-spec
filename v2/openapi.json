@@ -3463,6 +3463,9 @@
             "$ref": "#/components/parameters/templates.senderId"
           },
           {
+            "$ref": "#/components/parameters/templates.category"
+          },
+          {
             "$ref": "#/components/parameters/templates.status"
           },
           {
@@ -7868,6 +7871,27 @@
               "type",
               "catalogId",
               "productId"
+            ]
+          }
+        ]
+      },
+      "content.whatsapp.unsupported": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "unsupported",
+                "description": "Refers to a type of communication that is not supported by Meta."
+              }
+            },
+            "required": [
+              "type"
             ]
           }
         ]
@@ -13333,6 +13357,36 @@
           "format": "date",
           "example": "2024-01-31"
         }
+      },
+      "templates.category": {
+        "name": "category",
+        "in": "query",
+        "required": false,
+        "description": "Filter by category",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "ACCOUNT_UPDATE",
+            "PAYMENT_UPDATE",
+            "PERSONAL_FINANCE_UPDATE",
+            "SHIPPING_UPDATE",
+            "RESERVATION_UPDATE",
+            "ISSUE_RESOLUTION",
+            "APPOINTMENT_UPDATE",
+            "TRANSPORTATION_UPDATE",
+            "TICKET_UPDATE",
+            "ALERT_UPDATE",
+            "AUTO_REPLY",
+            "AUTHENTICATION",
+            "MARKETING",
+            "UTILITY",
+            "OTHER",
+            "CUSTOMER_FEEDBACK",
+            "CONFIRMED_EVENT_UPDATE",
+            "POST_PURCHASE_UPDATE"
+          ]
+        },
+        "example": "UTILITY"
       },
       "templates.channel": {
         "name": "channel",
