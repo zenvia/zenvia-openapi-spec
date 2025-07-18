@@ -1,10 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-<<<<<<< HEAD
 import { ref as baseConversationRef } from './conversation-status-base';
-=======
-import { ref as baseConversationRef } from './conversation-base';
->>>>>>> afd8253 (new conversion event subscription)
 
 const claimed: SchemaObject = {
   type: 'object',

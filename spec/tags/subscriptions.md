@@ -41,6 +41,7 @@ The <code>description</code> field is directly tied to the <code>code</code> fie
 * *VERIFIED: "**The message has been verified by the device app/provider**".*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## CONVERSATION_STATUS
 
 The event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.
@@ -49,6 +50,11 @@ The event type CONVERSATION_STATUS refers to the lifecycle progression of a conv
 
 The event type CONVERSATION_EVENT refers to the lifecycle progression of a conversation.
 >>>>>>> afd8253 (new conversion event subscription)
+=======
+## CONVERSATION_STATUS
+
+The event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.
+>>>>>>> d387a5e (CONVERSATION_MESSAGE)
 
 A conversation has a finite lifecycle — it has a beginning, a middle, and an end.
 
