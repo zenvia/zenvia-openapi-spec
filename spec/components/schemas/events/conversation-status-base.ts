@@ -15,7 +15,6 @@ const conversationBase: SchemaObject = {
     from: { type: 'string', description: 'Sender identifier' },
     to: { type: 'string', description: 'Receiver identifier' },
     contactId: { type: 'string' },
-    source: { type: 'string', description: 'Source of the conversation, e.g., message/contact' },
     groupId: { type: 'string' },
     createdAt: { type: 'string', format: 'date-time' }
   },

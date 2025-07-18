@@ -7,7 +7,7 @@ import { ref as distributedRef } from './distributed';
 import { ref as snoozedRef } from './snoozed';
 import { ref as closedRef } from './closed';
 
-const conversationEvent: SchemaObject = {
+const conversationStatus: SchemaObject = {
   additionalProperties: true,
   oneOf: [
     { $ref: createdRef },
@@ -34,4 +34,4 @@ const conversationEvent: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default conversationEvent;
+export default conversationStatus;
