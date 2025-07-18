@@ -49,12 +49,6 @@ The event type CONVERSATION_STATUS refers to the lifecycle progression of a conv
 ## CONVERSION_EVENT
 
 The event type CONVERSATION_EVENT refers to the lifecycle progression of a conversation.
->>>>>>> afd8253 (new conversion event subscription)
-=======
-## CONVERSATION_STATUS
-
-The event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.
->>>>>>> d387a5e (CONVERSATION_MESSAGE)
 
 A conversation has a finite lifecycle — it has a beginning, a middle, and an end.
 
