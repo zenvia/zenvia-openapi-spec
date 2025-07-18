@@ -97,16 +97,17 @@ Multiple errors on a single webhook may change its (quality) status. The possibl
 Events no longer will be posted on webhooks with an *INACTIVE* status.
 
 The criteria which trigger status changes consist of the following:
-* 10 consecutive request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*
-* 500 consecutive request fails will result in demotion to *INACTIVE*.
+* 1 request timeout is equivalent to 10 regular request fails.
+* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.
+* 500 consecutive regular request fails will result in demotion to *INACTIVE*.
   * Responses slower than *1 second* also count as a fail and may result in status demotion
     * Only slow responses on the initial request count as a fail
     * Only slow responses on an *ACTIVE* webhook count as a fail.
      <br>Therefore, slow responses should never result in demotion to *INACTIVE*.
   * All connection timeouts count as fail and may result in status demotion.
-    <br>The connection timeout is *8 seconds*.
+    <br>The connection timeout is *5 seconds*.
   * All response (read) timeouts count as a fail and may result in status demotion.
-    <br>The response timeout is *8 seconds*.
+    <br>The response timeout is *5 seconds*.
 * 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*
   * Successful requests on retry attempts also count toward status promotion
   * Responses slower than *1 second* do not count either as a success or as a fail
