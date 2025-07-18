@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as baseConversationRef } from './conversation-base';
+import { ref as baseConversationRef } from './conversation-status-base';
 
 const created: SchemaObject = {
   type: 'object',
