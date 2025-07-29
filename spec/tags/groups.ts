@@ -1,6 +1,12 @@
 import { TagGroupObject } from 'openapi3-ts';
 
-const groups: TagGroupObject[] = [{
+const groups: TagGroupObject[] = [
+  {
+  name: 'Customer Data Platform',
+  tags: [
+    'Contacts API',
+  ],
+},{
   name: 'Messaging',
   tags: [
     'Content types',

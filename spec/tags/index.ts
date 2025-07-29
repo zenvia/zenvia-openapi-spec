@@ -21,7 +21,6 @@ const filesDescription = rawLoad(__dirname, './files.md');
 const twoFactorAuthentication = rawLoad(__dirname, './2fa.md');
 const marketingAutomationDescription = rawLoad(__dirname, './marketing-automations.md');
 const statusGroupsDescription = rawLoad(__dirname, './status-groups.md');
-
 const tags: TagObject[] = [{
   name: 'Content types',
   description: contentTypesDescription,
