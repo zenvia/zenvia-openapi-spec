@@ -165,14 +165,14 @@ const base: SchemaObject = {
             },
           },
         },
-      },
-      extra: {
-        title: 'Extra',
-        description: 'Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.',
-        type: 'object',
-        example: {
-          new_property: 'some_value',
-          identification_number2: '',
+        extra: {
+          title: 'Extra',
+          description: 'Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.',
+          type: 'object',
+          example: {
+            new_property: 'some_value',
+            identification_number2: '',
+          },
         },
       },
     },
