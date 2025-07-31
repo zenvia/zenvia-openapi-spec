@@ -4,8 +4,8 @@ import { ref as errorResponseRef } from '../../components/responses/error';
 
 const get: OperationObject = {
   summary: 'Retrieve batch by id',
-  description: 'Retrieve a contact batch by its id.',
-  tags: ['Contact Batches'],
+  description: 'Retrieve a invoice batch by its id.',
+  tags: ['Invoice Batches'],
   responses: {
     200: {
       description: 'Batch retrieved successfully.',

@@ -10,9 +10,9 @@ import { ref as batchListResponseRef } from '../../components/schemas/partners-b
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const post: OperationObject = {
-  summary: 'Import a batch of contacts',
-  description: 'Import a batch of contacts to be processed.',
-  tags: ['Contact Batches'],
+  summary: 'Import a batch of invoices',
+  description: 'Import a batch of invoices to be processed.',
+  tags: ['Invoice Batches'],
   requestBody: {
     required: true,
     content: {
@@ -49,9 +49,9 @@ const post: OperationObject = {
 };
 
 const get: OperationObject = {
-  summary: 'List all batches of contacts',
-  description: 'List all created batches of contacts.',
-  tags: ['Contact Batches'],
+  summary: 'List all batches of invoices',
+  description: 'List all created batches of invoices.',
+  tags: ['Invoice Batches'],
   responses: {
     200: {
       description: 'Batches listed successfully.',
