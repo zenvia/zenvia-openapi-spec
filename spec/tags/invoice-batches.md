@@ -1,0 +1,174 @@
+Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like?
+
+<!-- TODO: Add a link to the other 3 APIs when doc is done. -->
+- Contact Batches API
+- Product Batches API
+- Order Batches API
+
+## Building the CSV File
+
+To use the Invoice Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
+
+### CSV File Structure
+
+The CSV file must follow the structure below:
+
+- The first line must contain the table header.
+- The columns must be in the predefined order, listed below.
+- Columns must be separated by a semicolon (`;`).
+
+The predefined order must be:
+
+- `externalPlatform` - Source ERP identification
+  - **required**: `true`
+  - **type**: `string (uppercase and lowercase)`
+  - **ENUM**: `(OMIE, BLING TINY, MICROVIX, WBUY, OTHER)`
+- `externalId` - Internal code from the source system
+  - **required**: `true`
+  - **type**: `string`
+  - **max**: `255`
+- `customerExternalId` - Internal contact code in the source system
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `issueTimestamp` - Date and time of the fiscal note issuance
+  - **required**: `true`
+  - **type**: `string`
+  - **format**: `YYYY-MM-DD HH:MM:SS`
+- `invoiceKey` - Fiscal note key
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `invoiceNumber` - Fiscal note number
+  - **required**: `true`
+  - **type**: `string`
+  - **max**: `500`
+- `invoiceSerie` - Fiscal note series
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `orderNumber` - Related order number
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `255`
+- `orderExternalId` - Unique order ID
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `legalCode` - Issuing company's legal code
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `legalName` - Issuing company's legal name
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `primaryPhone` - Customer's main phone number
+  - **required**: `false`
+  - **type**: `string`
+  - **format**: validate if there will be more than one contact number
+  - **requirements**:
+    - **DDD** - must be a valid Brazilian area code
+    - **max_size**: `9` (counting only the phone number)
+    - **min_size**: `8` (counting only the phone number)
+    - If the above requirements are met, add DDI - add `55` to the phones.
+    - Parentheses and hyphens will be accepted and replaced with an empty string
+    - Other special characters will not be accepted
+    - Letters will not be accepted
+- `email` - Customer's email
+  - **required**: `false`
+  - **type**: `string`
+  - **format**: `youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com`
+  - **requirements**:
+    - Existing domain;
+    - Spaces will be replaced by an empty string; → change to data mapping
+    - Uppercase characters will be replaced by lowercase; → change to data mapping
+    - Must start with at least one letter or number;
+    - No accents;
+    - No special characters except for `_`, `.`, `@`, `-`;
+    - Must contain `@`;
+    - **Example**: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')`
+- `totalAmount` - Total value of the fiscal note
+  - **required**: `true`
+  - **type**: `string or number`
+    - Maintain decimal precision, do not round
+  - **max**: `30` characters
+  - **format**:
+    - Must only accept positive numbers;
+    - Numbers should not have a thousand separator;
+    - Must accept integers and decimals with `,` as a separator;
+    - Must not accept `.` as a decimal separator;
+    - Accepts a maximum of two decimal places;
+    - **Example of valid formats**: `15236,15` | `458`
+- `productExternalId` - Product's source code
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `sku` - Product's SKU
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `255`
+- `ean` - Product's EAN code
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `name` - Product's name/description
+  - **required**: `true`
+  - **type**: `string`
+  - **max**: `500`
+- `quantity` - Item quantity
+  - **required**: `true`
+  - **type**: `string or number`
+  - **max**: `30` characters
+  - **format**:
+    - Must only accept positive numbers;
+    - Numbers should not have a thousand separator;
+    - Must accept integers and decimals with `,` as a separator;
+    - Must not accept `.` as a decimal separator;
+    - Accepts a maximum of two decimal places;
+    - **Example of valid formats**: `15236,15` | `458`
+- `measurementUnit` - Unit of measurement
+  - **required**: `false`
+  - **type**: `string`
+  - **allowed_units**: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+  - Accept uppercase and lowercase
+- `priceUnit` - Unit price (decimal with precision 19,2)
+  - **required**: `true`
+  - **type**: `string or number`
+  - maintain decimal precision, do not round
+  - **max**: `30` characters
+  - **format**:
+    - Must only accept positive numbers;
+    - Numbers should not have a thousand separator;
+    - Must accept integers and decimals with `,` as a separator;
+    - Must not accept `.` as a decimal separator;
+    - Accepts a maximum of two decimal places;
+    - **Example of valid formats**: `15236,15` | `458`
+- `totalValue` - Total value of the item
+  - **required**: `false`
+  - **type**: `string | string[] / number | number[]`
+- `fiscalOperationCode` - Fiscal operation code
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `500`
+- `ncm` - Product's NCM code
+  - **required**: `false`
+  - **type**: `string`
+  - **max**: `255`
+- `currency` - Currency
+  - **Required**: `true`
+  - **type**: `string`
+  - Only accept standard ISO Code values (accept uppercase and lowercase characters and transform them into uppercase)
+
+### Batch lifecycle
+
+The invoice batch will have the following lifecycle:
+
+1. The batch is imported and saved on our database
+2. The batch is processed in our infrastructure
+3. After this, the batch will have two statuses:
+
+- `SUCCESS`: The process of the batch was successful and the data was sent to the Data Lake and the feedback was saved
+- `FAILED`: The process of the batch was unsuccessful and the data was not sent to the Data Lake and the feedback was saved
+
+4. You can acess the feedback through and endpoint that you'll read further in this documentation.
