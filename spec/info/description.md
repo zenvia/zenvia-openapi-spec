@@ -190,13 +190,14 @@ api.zenvia.com
 
 <br>
 
-#### Signature generation example in JavaScript
+#### Signature generation example in NodeJS
 ```javascript
 const crypto = require('crypto');
+const axios = require('axios');
 
-const payload = JSON.stringfy({
-  from: 'sms-account',
-  to: '55108888888888',
+const payload = JSON.stringify({
+  from: 'sender',
+  to: 'recipient',
   contents: [{
     type: 'text',
     text: 'Hi Zenvia!',
@@ -211,7 +212,7 @@ ${crypto.createHash('md5').update(payload).digest('hex')}
 ${contentType}
 ${date}
 api.zenvia.com
-/v2/channels/sms/messages`;
+/v2/channels/whatsapp/messages`;
 
 const token = '123456';
 const secret = 'ABCDEF';
@@ -225,7 +226,9 @@ const headers = {
   'X-API-Signature': signature,
 }
 
-console.log(headers);
+const response = await axios.post('https://api.zenvia.com/v2/channels/whatsapp/messages', payload, { headers });
+
+console.log(response.data);
 ```
 
 ## JWT
