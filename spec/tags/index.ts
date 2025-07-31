@@ -21,6 +21,7 @@ const filesDescription = rawLoad(__dirname, './files.md');
 const twoFactorAuthentication = rawLoad(__dirname, './2fa.md');
 const marketingAutomationDescription = rawLoad(__dirname, './marketing-automations.md');
 const statusGroupsDescription = rawLoad(__dirname, './status-groups.md');
+const partnersDescription = rawLoad(__dirname, './product-batches.md');
 
 const tags: TagObject[] = [{
   name: 'Content types',
@@ -28,6 +29,9 @@ const tags: TagObject[] = [{
 }, {
   name: 'SMS',
   description: smsDescription,
+}, {
+  name: 'PARTNERS',
+  description: partnersDescription,
 }, {
   name: 'WhatsApp',
   description: whatsappDescription,

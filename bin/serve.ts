@@ -41,7 +41,7 @@ const watchFilesByPattern = (... patterns: string[]) => {
 async function main() {
   const app = express();
   app.use(cors());
-  const port = process.env.PORT || '8080';
+  const port = process.env.PORT || '8082';
   await reload(app, { port: parseInt(port, 10) + 1 });
   app.get('/', sendIndex);
   app.get('/openapi.json', sendJsonSpec);
