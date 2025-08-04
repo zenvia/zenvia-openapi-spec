@@ -26,58 +26,58 @@ The predefined order must be:
   - **Type**: `string`
   - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
 
-- **`externalId`**: ID do produto na plataforma externa
+- **`externalId`**: Product ID on external platform
   - **Required**: `true`
   - **Type**: `string`
   - **Max Size**: `255`
 
-- **`name`**: Nome do produto
+- **`name`**: Product name
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `500`
 
-- **`sku`**: SKU (Stock Keeping Unit) do produto
+- **`sku`**: SKU (Stock Keeping Unit) on product
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `255`
 
-- **`ean`**: EAN (European Article Number) do produto
+- **`ean`**: EAN (European Article Number) on product
   - **Required**: `false`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `500`
 
-- **`brand`**: Marca do produto
+- **`brand`**: Product brand
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `500`
 
-- **`description`**: Descrição detalhada do produto
+- **`description`**: Detailed Product Description
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `500`
 
-- **`measurementUnit`**: Unidade de medida do produto
+- **`measurementUnit`**: Product unit of measurement
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `255`
-  - **Format**: Produtos | Unidades de Medidas
+  - **Format**: Products | Units of Measurement
 
-- **`priceUnit`**: Preço unitário do produto
+- **`priceUnit`**: Unit price of the product
   - **Required**: `true`
   - **Type**: `string` || `number`
   - **Max Size**: `30`
   - **Format**:
-    - Deve aceitar apenas números positivos;
-    - Os números não deverão ter separador de milhar;
-    - Deve aceitar números inteiros e decimais com separador de `,` (vírgula);
-    - Não deve aceitar separador decimal de `.`;
-    - Exemplo de formatos válidos: `15236,15` | `458`
+    - Must accept only positive numbers;
+    - Numbers should not have thousands separators;
+    - Must accept integers and decimals with `,` (comma) separator;
+    - Must not accept decimal separator of `.`;
+    - Example of valid formats: `15236,15` | `458`
 
 - **`currency`**: Moeda
   - **Required**: `true`
@@ -86,7 +86,7 @@ The predefined order must be:
   - **Max Size**: `3`
   - **Format**: Produtos | Moedas
 
-- **`ncm`**: NCM (Nomenclatura Comum do Mercosul)
+- **`ncm`**: NCM (Mercosur Common Nomenclature)
   - **Required**: `false`
   - **Type**: `string`
   - **Min Size**: `1`

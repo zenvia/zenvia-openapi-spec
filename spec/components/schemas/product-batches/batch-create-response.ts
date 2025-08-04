@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
   type: 'object',
-  description: 'Represents a batch of contacts for processing.',
+  description: 'Represents a batch of products for processing.',
   properties: {
     id: {
       type: 'string',
@@ -18,7 +18,7 @@ const base: SchemaObject = {
     fileName: {
       type: 'string',
       description: 'The original name of the uploaded file.',
-      example: 'contacts_q3_2025.csv',
+      example: 'products_q3_2025.csv',
     },
     fileExpireTime: {
       type: 'string',

@@ -53,6 +53,7 @@ const groups: TagGroupObject[] = [{
   name: 'Partners',
   tags: [
     'Product Batches',
+    'Order Batches'
   ],
 },{
   name: 'Reports',
