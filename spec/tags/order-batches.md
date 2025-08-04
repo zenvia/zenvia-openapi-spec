@@ -1,25 +1,22 @@
-Import Order Batches, the data will be added to the **Order Manager Database** in ZENVIA Customer Cloud. Once imported, these orders can be used to trigger campaigns, personalize offers, and serve as a data source for insights and reports provided by the system. They will also help power the **_RFV Calculation_**.
+Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like
 
+- [Product Batches API](#tag/Product-Batches)
+- [Order Batches API](#tag/Order-Batches)
+- [Invoice Batches API](#tag/Invoice-Batches)
 
 ## Building the CSV File
 
-
 To use the Order Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
-
 
 ### CSV File Structure
 
-
 The CSV file must follow the structure below:
-
 
 - The first line must contain the table header.
 - The columns must be in the predefined order, listed below.
 - Columns must be separated by a semicolon (`;`).
 
-
 The predefined order must be:
-
 
 - **`externalPlatform`**: ERP identifier
   - **Required**: `true`
@@ -99,7 +96,6 @@ The predefined order must be:
   - **Min Size**: `1`
   - **Max Size**: `255`
 
-
 - **`items`**: Order items
   - **Item**:
     - The item is included within the order.
@@ -130,7 +126,7 @@ The predefined order must be:
       - **Required**: `false`
       - **Type**: `string`
       - **Max Size**: `10`
-      - **Format**: Orders | Units of Measurement (Must accept both uppercase and lowercase).
+      - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
     - **`priceUnit`**: Unit price of the item
       - **Required**: `true`
       - **Type**: `string` || `number`
@@ -147,22 +143,17 @@ The predefined order must be:
       - **Type**: `string`
       - **Min Size**: `1`
       - **Max Size**: `3`
-      - **Format**: Products | Currencies
-
+      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
 
 ### Batch lifecycle
 
-
 The order batch will have the following lifecycle:
-
 
 1. The batch is imported and saved on our database.
 2. The batch is processed in our infrastructure.
 3. After this, the batch will have two statuses:
 
-
 - `SUCCESS`: The batch process was successful, and the data was sent to the Order Manager, and feedback was saved.
 - `FAILED`: The batch process was unsuccessful, and the data was not sent to the Order Manager, and feedback was saved.
-
 
 4. You can access the feedback through an endpoint that you'll read further in this documentation.

@@ -1,5 +1,9 @@
 Import Contact Batches, the data will be added to the **Contact Manager Database** in ZENVIA Customer Cloud. Once imported, these contacts can be used to trigger campaigns through the platform’s active and integrated channels. They will also serve as a data source for insights and reports provided by the system. And also will help power the **_RFV Calculation_**.
 
+- [Product Batches API](#tag/Product-Batches)
+- [Order Batches API](#tag/Order-Batches)
+- [Invoice Batches API](#tag/Invoice-Batches)
+
 ## Building the CSV File
 
 To use the Contact Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:

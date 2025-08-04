@@ -1,9 +1,8 @@
-Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like?
+Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like:
 
-<!-- TODO: Add a link to the other 3 APIs when doc is done. -->
-- Contact Batches API
-- Product Batches API
-- Order Batches API
+- [Contact Batches API](#tag/Contact-Batches)
+- [Product Batches API](#tag/Product-Batches)
+- [Order Batches API](#tag/Order-Batches)
 
 ## Building the CSV File
 
@@ -130,7 +129,7 @@ The predefined order must be:
 - `measurementUnit` - Unit of measurement
   - **required**: `false`
   - **type**: `string`
-  - **allowed_units**: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+  - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
   - Accept uppercase and lowercase
 - `priceUnit` - Unit price (decimal with precision 19,2)
   - **required**: `true`
@@ -158,7 +157,7 @@ The predefined order must be:
 - `currency` - Currency
   - **Required**: `true`
   - **type**: `string`
-  - Only accept standard ISO Code values (accept uppercase and lowercase characters and transform them into uppercase)
+  - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
 
 ### Batch lifecycle
 

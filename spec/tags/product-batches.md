@@ -1,27 +1,24 @@
 Import Product Batches, the data will be added to the **Product Catalog Database** in ZENVIA Customer Cloud. Once imported, these products can be used to trigger campaigns, personalize offers, and serve as a data source for insights and reports provided by the system. They will also help integrate with other platform functionalities.
 
+- [Contact Batches API](#tag/Contact-Batches)
+- [Order Batches API](#tag/Order-Batches)
+- [Invoice Batches API](#tag/Invoice-Batches)
 
 ## Building the CSV File
 
-
 To use the Product Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
-
 
 ### CSV File Structure
 
-
 The CSV file must follow the structure below:
-
 
 - The first line must contain the table header.
 - The columns must be in the predefined order, listed below.
 - Columns must be separated by a semicolon (`;`).
 
-
 The predefined order must be:
 
-
-- **`externalPlatform`**: Identificador do ERP
+- **`externalPlatform`**: ERP identifier
   - **Required**: `true`
   - **Type**: `string`
   - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
@@ -66,7 +63,7 @@ The predefined order must be:
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `255`
-  - **Format**: Products | Units of Measurement
+  - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
 
 - **`priceUnit`**: Unit price of the product
   - **Required**: `true`
@@ -79,12 +76,12 @@ The predefined order must be:
     - Must not accept decimal separator of `.`;
     - Example of valid formats: `15236,15` | `458`
 
-- **`currency`**: Moeda
+- **`currency`**: Currency
   - **Required**: `true`
   - **Type**: `string`
   - **Min Size**: `1`
   - **Max Size**: `3`
-  - **Format**: Produtos | Moedas
+  - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
 
 - **`ncm`**: NCM (Mercosur Common Nomenclature)
   - **Required**: `false`
@@ -92,22 +89,15 @@ The predefined order must be:
   - **Min Size**: `1`
   - **Max Size**: `255`
 
-
 ### Batch lifecycle
 
-
 The product batch will have the following lifecycle:
-
 
 1. The batch is imported and saved on our database.
 2. The batch is processed in our infrastructure.
 3. After this, the batch will have two statuses:
 
-
 - `SUCCESS`: The batch process was successful, and the data was sent to the Product Catalog, and feedback was saved.
 - `FAILED`: The batch process was unsuccessful, and the data was not sent to the Product Catalog, and feedback was saved.
 
-
 4. You can access the feedback through an endpoint that you'll read further in this documentation.
-
----

@@ -1,6 +1,14 @@
 import { TagGroupObject } from 'openapi3-ts';
 
 const groups: TagGroupObject[] = [{
+  name: 'Customer Data Platform',
+  tags: [
+    'Contact Batches',
+    'Product Batches',
+    'Order Batches',
+    'Invoice Batches',
+  ],
+},{
   name: 'Messaging',
   tags: [
     'Content types',
@@ -47,14 +55,6 @@ const groups: TagGroupObject[] = [{
     'Contacts',
     'Contact Lists',
     'Contact Custom Data Fields',
-    'Contact Batches',
-  ],
-}, {
-  name: 'Customer Data Platform',
-  tags: [
-    'Invoice Batches',
-    'Product Batches',
-    'Order Batches',
   ],
 },{
   name: 'Reports',

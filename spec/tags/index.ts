@@ -26,8 +26,9 @@ const tagDefinitions: {
   { name: 'Marketing Automations', file: 'marketing-automations' },
   { name: 'Status Groups', file: 'status-groups' },
   { name: 'Contact Batches', file: 'contact-batches' },
-  { name: 'Invoice Batches', file: 'invoice-batches' },
   { name: 'Product Batches', file: 'product-batches' },
+  { name: 'Order Batches', file: 'order-batches' },
+  { name: 'Invoice Batches', file: 'invoice-batches' },
 ];
 
 const tags: TagObject[] = tagDefinitions.map(tag  => ({
