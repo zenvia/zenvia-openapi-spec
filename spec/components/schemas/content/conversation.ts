@@ -13,6 +13,11 @@ const all: SchemaObject = {
         description: 'If the contact replies to the API message, the conversation will be redirected to the chosen solution.',
         enum: ['conversion', 'zenvia_chat', 'nlu'],
       },
+      properties: {
+        title: 'Properties',
+        type: 'object',
+        description: 'If the contact replies to the API message, these properties will be available for querying in the chosen solution.',
+      },
     },
     required: [
       'solution',
