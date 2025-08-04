@@ -27,6 +27,7 @@ const base: SchemaObject = {
       enum: [
         'IN',
         'OUT',
+        'INTERNAL'
       ],
     },
     channel: {
