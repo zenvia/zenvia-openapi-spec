@@ -47,8 +47,15 @@ const groups: TagGroupObject[] = [{
     'Contacts',
     'Contact Lists',
     'Contact Custom Data Fields',
+    'Contact Batches',
   ],
 }, {
+  name: 'Partners',
+  tags: [
+    'Product Batches',
+    'Order Batches'
+  ],
+},{
   name: 'Reports',
   tags: [
     'Message Report',
