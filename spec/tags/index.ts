@@ -26,6 +26,7 @@ const tagDefinitions: {
   { name: 'Marketing Automations', file: 'marketing-automations' },
   { name: 'Status Groups', file: 'status-groups' },
   { name: 'Contact Batches', file: 'contact-batches' },
+  { name: 'Invoice Batches', file: 'invoice-batches' },
   { name: 'Product Batches', file: 'product-batches' },
 ];
 
