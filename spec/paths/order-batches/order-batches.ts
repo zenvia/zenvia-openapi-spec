@@ -8,6 +8,8 @@ import {
 import { ref as batchCreateResponseRef } from '../../components/schemas/order-batches/batch-create-response';
 import { ref as batchListResponseRef } from '../../components/schemas/order-batches/batch-list-response';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as size } from '../../components/parameters/size';
+import { ref as page } from '../../components/parameters/page';
 
 const post: OperationObject = {
   summary: 'Import a batch of orders',
@@ -52,6 +54,10 @@ const get: OperationObject = {
   summary: 'List all batches of orders',
   description: 'List all created batches of orders.',
   tags: ['Order Batches'],
+  parameters: [
+    { $ref: size },
+    { $ref: page },
+  ],
   responses: {
     200: {
       description: 'Batches listed successfully.',
@@ -63,6 +69,29 @@ const get: OperationObject = {
               $ref: batchListResponseRef,
             },
           } as SchemaObject,
+        },
+      },
+      headers: {
+        'x-total': {
+          schema: {
+            description: 'The total number of results available.',
+            type: 'string',
+            example: '100',
+          },
+        },
+        'x-page-size': {
+          schema: {
+            description: 'The number of results per page.',
+            type: 'string',
+            example: '10',
+          },
+        },
+        'x-page': {
+          schema: {
+            description: 'The current page.',
+            type: 'string',
+            example: '5',
+          },
         },
       },
     } as ResponseObject,
