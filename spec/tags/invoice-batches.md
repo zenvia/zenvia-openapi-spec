@@ -171,3 +171,5 @@ The invoice batch will have the following lifecycle:
 - `FAILED`: The process of the batch was unsuccessful and the data was not sent to the Data Lake and the feedback was saved
 
 4. You can acess the feedback through and endpoint that you'll read further in this documentation.
+
+All CSV files stored in our infrastructure (sended CSV and feedback CSV) have an expiration date of 10 days, counting by the day of it's creation.
