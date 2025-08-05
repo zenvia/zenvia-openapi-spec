@@ -20,7 +20,6 @@ const base: SchemaObject = {
       description: 'The original name of the uploaded file.',
       example: 'contacts_q3_2025.csv',
     },
-    // /storage/folders/57b522ad8ec67804dc8552097d12a896bf70580bbd396bee8cf501fc99a83d81/files/bd060518994f7209ef2dc3549d8db0dabca38ca0d1ba9194cda465c9142a58d4.bin
     fileUrl: {
       type: 'string',
       format: 'url',
