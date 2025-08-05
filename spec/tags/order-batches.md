@@ -145,17 +145,45 @@ The predefined order must be:
       - **Max Size**: `3`
       - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
 
+#### CSV Lifecycle
+
+All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
+
+This 10 days will start couting by the day of it's creation.
+
+#### The Feedback CSV
+
+After your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.
+
+You can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.
+
+This feedback file is the same as the file you sent to us, but with a few changes:
+
+Three new fields are created in it:
+
+- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.
+- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.
+- `errorMessages`: Will display the errors that prevented the row in question from being validated.
+
+The fields will be updated as follows:
+
+- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.
+- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.
+
 ### Batch lifecycle
 
-The order batch will have the following lifecycle:
+The contact batch will have the following lifecycle:
 
-1. The batch is imported and saved on our database.
-2. The batch is processed in our infrastructure.
-3. After this, the batch will have two statuses:
+1. The batch is imported and saved on our database
+2. The batch is processed in our infrastructure
+3. After this, the batch can have one of these two statuses:
 
-- `SUCCESS`: The batch process was successful, and the data was sent to the Order Manager, and feedback was saved.
-- `FAILED`: The batch process was unsuccessful, and the data was not sent to the Order Manager, and feedback was saved.
+#### `SUCCESS`
 
-4. You can access the feedback through an endpoint that you'll read further in this documentation.
+The processment of the batch was successful. The data was send to the Contact Manager Database.
 
-All CSV files stored in our infrastructure (sended CSV and feedback CSV) have an expiration date of 10 days, counting by the day of it's creation.
+#### `FAILED`
+
+The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+
+On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
