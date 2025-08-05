@@ -11,6 +11,9 @@ const get: OperationObject = {
   summary: 'Retrieve batch items by id',
   description: 'Retrieve a invoice batch items by its id as a CSV file.',
   tags: ['Invoice Batches'],
+  security: [{
+    TOKEN: [],
+  }],
   responses: {
     200: {
       description: 'Batch items retrieved successfully in CSV format.',

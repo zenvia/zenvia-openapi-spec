@@ -11,6 +11,9 @@ const get: OperationObject = {
   summary: 'Retrieve batch feedback by id',
   description: 'Retrieve a contact batch feedback by its id as a CSV file.',
   tags: ['Contact Batches'],
+  security: [{
+    TOKEN: [],
+  }],
   responses: {
     200: {
       description: 'Batch feedback retrieved successfully in CSV format.',

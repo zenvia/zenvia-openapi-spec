@@ -6,6 +6,9 @@ const get: OperationObject = {
   summary: 'Retrieve batch by id',
   description: 'Retrieve a product batch by its id.',
   tags: ['Product Batches'],
+  security: [{
+    TOKEN: [],
+  }],
   responses: {
     200: {
       description: 'Batch retrieved successfully.',

@@ -15,6 +15,9 @@ const post: OperationObject = {
   summary: 'Import a batch of products',
   description: 'Import a batch of products to be processed.',
   tags: ['Product Batches'],
+  security: [{
+    TOKEN: [],
+  }],
   requestBody: {
     required: true,
     content: {
@@ -58,6 +61,9 @@ const get: OperationObject = {
     { $ref: size },
     { $ref: page },
   ],
+  security: [{
+    TOKEN: [],
+  }],
   responses: {
     200: {
       description: 'Batches listed successfully.',
