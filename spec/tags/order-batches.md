@@ -1,4 +1,4 @@
-Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like
+Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:
 
 - [Product Batches API](#tag/Product-Batches)
 - [Order Batches API](#tag/Order-Batches)
@@ -21,7 +21,7 @@ The predefined order must be:
 - **`externalPlatform`**: ERP identifier
   - **Required**: `true`
   - **Type**: `string`
-  - **Format**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
 
 - **`externalId`**: Order ID on external platform
   - **Required**: `true`
@@ -70,16 +70,18 @@ The predefined order must be:
   - **Type**: `string`
   - **Max Size**: `500`
 
-- **`primaryPhone`**: Customer's primary phone number
+- **`primaryPhone`** - Customer's main phone number
   - **Required**: `false`
   - **Type**: `string`
-  - **Max Size**: `15`
-  - **Format**:
-    - DDD is mandatory;
-    - Must be a valid DDD in Brazil (BR);
-    - Between 8 and 9 digits (counting only the phone number);
-    - If checks pass, add `+55`;
-    - Example: `+5551987659650`
+  - **Format**: validate if there will be more than one contact number
+  - **Requirements**:
+    - **DDD** - must be a valid Brazilian area code
+    - **max_size**: `9` (counting only the phone number)
+    - **min_size**: `8` (counting only the phone number)
+    - If the above requirements are met, add DDI - add `55` to the phones.
+    - Parentheses and hyphens will be accepted and replaced with an empty string
+    - Other special characters will not be accepted
+    - Letters will not be accepted
 
 - **`email`**: Customer's email
   - **Required**: `false`
@@ -99,6 +101,7 @@ The predefined order must be:
 - **`items`**: Order items
   - **Item**:
     - The item is included within the order.
+    - **Multiple items per order**: Item fields can contain multiple values separated by commas to represent various products in a single order.
     - **`productExternalId`**: Product ID on external platform
       - **Required**: `false`
       - **Type**: `string`
@@ -144,6 +147,16 @@ The predefined order must be:
       - **Min Size**: `1`
       - **Max Size**: `3`
       - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+
+#### Working with multiple items
+
+To include multiple products in a single order, use the comma-separated list format in each item-related field. For example:
+
+- `productExternalId`: `PROD001, PROD002, PROD003`
+- `name`: `Product A, Product B, Product C`
+- `quantity`: `2, 1, 5`
+
+The API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.
 
 #### CSV Lifecycle
 

@@ -1,4 +1,4 @@
-Import Product Batches, the data will be added to the **Product Catalog Database** in ZENVIA Customer Cloud. Once imported, these products can be used to trigger campaigns, personalize offers, and serve as a data source for insights and reports provided by the system. They will also help integrate with other platform functionalities.
+Import batches of product-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation** and the **Product Catalog Database**, alongside other features that are used alongside other APIs like:
 
 - [Contact Batches API](#tag/Contact-Batches)
 - [Order Batches API](#tag/Order-Batches)

@@ -1,4 +1,4 @@
-Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will support platform features like RFV Calculation and other features that are used alongside other APIs like:
+Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:
 
 - [Contact Batches API](#tag/Contact-Batches)
 - [Product Batches API](#tag/Product-Batches)
@@ -19,54 +19,56 @@ The CSV file must follow the structure below:
 The predefined order must be:
 
 - `externalPlatform` - Source ERP identification
-  - **required**: `true`
-  - **type**: `string (uppercase and lowercase)`
-  - **ENUM**: `(OMIE, BLING TINY, MICROVIX, WBUY, OTHER)`
+- **Required**: `true`
+  - **Type**: `string (uppercase and lowercase)`
+  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
 - `externalId` - Internal code from the source system
-  - **required**: `true`
-  - **type**: `string`
-  - **max**: `255`
+  - **Required**: `true`
+  - **Type**: `string`
+  - **Max Size**: `255`
+  - **Min Size**: `1`
 - `customerExternalId` - Internal contact code in the source system
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `issueTimestamp` - Date and time of the fiscal note issuance
-  - **required**: `true`
-  - **type**: `string`
-  - **format**: `YYYY-MM-DD HH:MM:SS`
+  - **Required**: `true`
+  - **Type**: `string`
+  - **Format**: `YYYY-MM-DD HH:MM:SS`
 - `invoiceKey` - Fiscal note key
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `invoiceNumber` - Fiscal note number
-  - **required**: `true`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `true`
+  - **Type**: `string`
+  - **Max Size**: `500`
+  - **Min Size**: `1`
 - `invoiceSerie` - Fiscal note series
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `orderNumber` - Related order number
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `255`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `255`
 - `orderExternalId` - Unique order ID
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `legalCode` - Issuing company's legal code
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `legalName` - Issuing company's legal name
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `500`
 - `primaryPhone` - Customer's main phone number
-  - **required**: `false`
-  - **type**: `string`
-  - **format**: validate if there will be more than one contact number
-  - **requirements**:
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Format**: validate if there will be more than one contact number
+  - **Requirements**:
     - **DDD** - must be a valid Brazilian area code
     - **max_size**: `9` (counting only the phone number)
     - **min_size**: `8` (counting only the phone number)
@@ -74,90 +76,102 @@ The predefined order must be:
     - Parentheses and hyphens will be accepted and replaced with an empty string
     - Other special characters will not be accepted
     - Letters will not be accepted
-- `email` - Customer's email
-  - **required**: `false`
-  - **type**: `string`
-  - **format**: `youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com`
-  - **requirements**:
-    - Existing domain;
-    - Spaces will be replaced by an empty string; → change to data mapping
-    - Uppercase characters will be replaced by lowercase; → change to data mapping
-    - Must start with at least one letter or number;
-    - No accents;
-    - No special characters except for `_`, `.`, `@`, `-`;
+- **`email`**: Customer's email
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Max Size**: `255`
+  - **Format**:
     - Must contain `@`;
-    - **Example**: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')`
+    - No special characters except for `_`, `.`, `@`, `-`;
+    - Example: `isaac.hermel@zenvia.com`
 - `totalAmount` - Total value of the fiscal note
-  - **required**: `true`
-  - **type**: `string or number`
-    - Maintain decimal precision, do not round
-  - **max**: `30` characters
-  - **format**:
-    - Must only accept positive numbers;
-    - Numbers should not have a thousand separator;
-    - Must accept integers and decimals with `,` as a separator;
-    - Must not accept `.` as a decimal separator;
-    - Accepts a maximum of two decimal places;
-    - **Example of valid formats**: `15236,15` | `458`
-- `productExternalId` - Product's source code
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
-- `sku` - Product's SKU
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `255`
-- `ean` - Product's EAN code
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
-- `name` - Product's name/description
-  - **required**: `true`
-  - **type**: `string`
-  - **max**: `500`
-- `quantity` - Item quantity
-  - **required**: `true`
-  - **type**: `string or number`
-  - **max**: `30` characters
-  - **format**:
-    - Must only accept positive numbers;
-    - Numbers should not have a thousand separator;
-    - Must accept integers and decimals with `,` as a separator;
-    - Must not accept `.` as a decimal separator;
-    - Accepts a maximum of two decimal places;
-    - **Example of valid formats**: `15236,15` | `458`
-- `measurementUnit` - Unit of measurement
-  - **required**: `false`
-  - **type**: `string`
-  - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
-  - Accept uppercase and lowercase
-- `priceUnit` - Unit price (decimal with precision 19,2)
-  - **required**: `true`
-  - **type**: `string or number`
-  - maintain decimal precision, do not round
-  - **max**: `30` characters
-  - **format**:
-    - Must only accept positive numbers;
-    - Numbers should not have a thousand separator;
-    - Must accept integers and decimals with `,` as a separator;
-    - Must not accept `.` as a decimal separator;
-    - Accepts a maximum of two decimal places;
-    - **Example of valid formats**: `15236,15` | `458`
-- `totalValue` - Total value of the item
-  - **required**: `false`
-  - **type**: `string | string[] / number | number[]`
-- `fiscalOperationCode` - Fiscal operation code
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `500`
-- `ncm` - Product's NCM code
-  - **required**: `false`
-  - **type**: `string`
-  - **max**: `255`
-- `currency` - Currency
   - **Required**: `true`
-  - **type**: `string`
-  - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+  - **Type**: `string or number`
+    - Maintain decimal precision, do not round
+  - **Max Size**: `30` characters
+  - **Format**:
+    - Must only accept positive numbers;
+    - Numbers should not have a thousand separator;
+    - Must accept integers and decimals with `,` as a separator;
+    - Must not accept `.` as a decimal separator;
+    - Accepts a maximum of two decimal places;
+    - **Example of valid formats**: `15236,15` | `458`
+  - **Precision**: `19,2` in case of number.
+
+- `items`: Invoice items
+  - **Item**:
+    - The item is included within the invoice.
+    - **Multiple items per invoice**: Item fields can contain multiple values separated by commas to represent various products in a single invoice.
+    - `productExternalId` - Product's source code
+      - **Required**: `false`
+      - **Type**: `string`
+      - **Max Size**: `500`
+    - `sku` - Product's SKU
+      - **Required**: `false`
+      - **Type**: `string`
+      - **Max Size**: `255`
+    - `ean` - Product's EAN code
+      - **Required**: `false`
+      - **Type**: `string`
+      - **Max Size**: `500`
+    - `name` - Product's name/description
+      - **Required**: `true`
+      - **Type**: `string`
+      - **Max Size**: `500`
+      - **Min Size**: `1`
+    - `quantity` - Item quantity
+      - **Required**: `true`
+      - **Type**: `string or number`
+      - **Max Size**: `30` characters
+      - **Format**:
+        - Must only accept positive numbers;
+        - Numbers should not have a thousand separator;
+        - Must accept integers and decimals with `,` as a separator;
+        - Must not accept `.` as a decimal separator;
+        - Accepts a maximum of two decimal places;
+        - **Example of valid formats**: `15236,15` | `458`
+    - `measurementUnit` - Unit of measurement
+      - **Required**: `false`
+      - **Type**: `string`
+      - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+      - Accept uppercase and lowercase
+    - `priceUnit` - Unit price (decimal with precision 19,2)
+      - **Required**: `true`
+      - **Type**: `string or number`
+      - maintain decimal precision, do not round
+      - **Max Size**: `30` characters
+      - **Format**:
+        - Must only accept positive numbers;
+        - Numbers should not have a thousand separator;
+        - Must accept integers and decimals with `,` as a separator;
+        - Must not accept `.` as a decimal separator;
+        - Accepts a maximum of two decimal places;
+        - **Example of valid formats**: `15236,15` | `458`
+    - `totalValue` - Total value of the item
+      - **Required**: `false`
+      - **Type**: `string | string[] / number | number[]`
+    - `fiscalOperationCode` - Fiscal operation code
+      - **Required**: `false`
+      - **Type**: `string`
+      - **Max Size**: `500`
+    - `ncm` - Product's NCM code
+      - **Required**: `false`
+      - **Type**: `string`
+      - **Max Size**: `255`
+    - `currency` - Currency
+      - **Required**: `true`
+      - **Type**: `string`
+      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+
+#### Working with multiple items
+
+To include multiple products in a single invoice, use the comma-separated list format in each item-related field. For example:
+
+- `productExternalId`: `PROD001, PROD002, PROD003`
+- `name`: `Product A, Product B, Product C`
+- `quantity`: `2, 1, 5`
+
+The API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.
 
 #### CSV Lifecycle
 

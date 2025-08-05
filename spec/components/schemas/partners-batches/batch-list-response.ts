@@ -29,7 +29,7 @@ const base: SchemaObject = {
     fileExpireTime: {
       type: 'string',
       format: 'date-time',
-      description: 'The expiration date and time for file access.',
+      description: 'The expiration date and time for file access. (Default of 10 days.)',
       example: '2025-08-06T23:59:59.000Z',
     },
     feedbackUrl: {
