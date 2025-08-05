@@ -15,7 +15,7 @@ const conversationStatus: SchemaObject = {
     { $ref: transferredRef },
     { $ref: distributedRef },
     { $ref: snoozedRef },
-    { $ref: closedRef }
+    { $ref: closedRef },
   ],
   discriminator: {
     propertyName: 'type',
@@ -28,9 +28,9 @@ const conversationStatus: SchemaObject = {
       CONVERSATION_TRANSFERRED: transferredRef,
       CONVERSATION_DISTRIBUTED_TO_USER: distributedRef,
       CONVERSATION_SNOOZED: snoozedRef,
-      CONVERSATION_CLOSED: closedRef
-    }
-  }
+      CONVERSATION_CLOSED: closedRef,
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);

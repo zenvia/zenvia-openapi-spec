@@ -19,22 +19,22 @@ const closed: SchemaObject = {
               type: 'object',
               properties: {
                 id: { type: 'string' },
-                type: { type: 'string' }
-              }
+                type: { type: 'string' },
+              },
             },
             closeReason: {
               type: 'object',
               properties: {
                 key: { type: 'string' },
-                name: { type: 'string' }
-              }
-            }
-          }
-        }
+                name: { type: 'string' },
+              },
+            },
+          },
+        },
       ],
-      required: ['id', 'status', 'statusTimestamp']
-    }
-  }
+      required: ['id', 'status', 'statusTimestamp'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);

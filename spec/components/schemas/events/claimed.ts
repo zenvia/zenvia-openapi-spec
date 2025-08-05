@@ -15,14 +15,14 @@ const claimed: SchemaObject = {
         {
           type: 'object',
           properties: {
-            userId: { type: 'string' }
+            userId: { type: 'string' },
           },
-          required: ['userId']
-        }
+          required: ['userId'],
+        },
       ],
-      required: ['id', 'status', 'statusTimestamp']
-    }
-  }
+      required: ['id', 'status', 'statusTimestamp'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);

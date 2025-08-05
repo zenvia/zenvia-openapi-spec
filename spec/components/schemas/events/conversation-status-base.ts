@@ -8,7 +8,7 @@ const conversationBase: SchemaObject = {
     id: { type: 'string' },
     status: {
       type: 'string',
-      description: 'Current status of the conversation'
+      description: 'Current status of the conversation',
     },
     statusTimestamp: { type: 'string', format: 'date-time' },
     channel: { type: 'string', description: 'Channel where the conversation took place' },
@@ -16,9 +16,9 @@ const conversationBase: SchemaObject = {
     to: { type: 'string', description: 'Receiver identifier' },
     contactId: { type: 'string' },
     groupId: { type: 'string' },
-    createdAt: { type: 'string', format: 'date-time' }
+    createdAt: { type: 'string', format: 'date-time' },
   },
-  required: ['id', 'status', 'statusTimestamp']
+  required: ['id', 'status', 'statusTimestamp'],
 };
 
 export const ref = createComponentRef(__filename);
