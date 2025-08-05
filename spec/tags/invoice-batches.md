@@ -135,10 +135,10 @@ The predefined order must be:
       - **Type**: `string`
       - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
       - Accept uppercase and lowercase
-    - `priceUnit` - Unit price (decimal with precision 19,2)
+    - `priceUnit` - Unit price
       - **Required**: `true`
       - **Type**: `string or number`
-      - maintain decimal precision, do not round
+        - Maintain decimal precision, do not round
       - **Max Size**: `30` characters
       - **Format**:
         - Must only accept positive numbers;
@@ -147,6 +147,7 @@ The predefined order must be:
         - Must not accept `.` as a decimal separator;
         - Accepts a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
+      - **Precision**: `19,2` in case of number.
     - `totalValue` - Total value of the item
       - **Required**: `false`
       - **Type**: `string | string[] / number | number[]`
