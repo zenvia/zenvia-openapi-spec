@@ -178,12 +178,8 @@ The contact batch will have the following lifecycle:
 2. The batch is processed in our infrastructure
 3. After this, the batch can have one of these two statuses:
 
-#### `SUCCESS`
+`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.
 
-The processment of the batch was successful. The data was send to the Contact Manager Database.
-
-#### `FAILED`
-
-The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
 
 On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
