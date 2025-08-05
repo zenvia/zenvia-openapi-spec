@@ -20,11 +20,24 @@ const base: SchemaObject = {
       description: 'The original name of the uploaded file.',
       example: 'contacts_q3_2025.csv',
     },
+    // /storage/folders/57b522ad8ec67804dc8552097d12a896bf70580bbd396bee8cf501fc99a83d81/files/bd060518994f7209ef2dc3549d8db0dabca38ca0d1ba9194cda465c9142a58d4.bin
+    fileUrl: {
+      type: 'string',
+      format: 'url',
+      description: 'The uploaded file\'s url.',
+      example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin',
+    },
     fileExpireTime: {
       type: 'string',
       format: 'date-time',
       description: 'The expiration date and time for file access.',
       example: '2025-08-06T23:59:59.000Z',
+    },
+    feedbackUrl: {
+      type: 'string',
+      format: 'url',
+      description: 'The uploaded file\'s feedback url.',
+      example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin',
     },
     size: {
       type: 'string',

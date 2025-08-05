@@ -1,5 +1,5 @@
 import { OperationObject, PathItemObject, ResponseObject, ResponsesObject, SchemaObject } from 'openapi3-ts';
-import { ref as batchListResponseRef } from '../../components/schemas/order-batches/batch-list-response';
+import { ref as batchListResponseRef } from '../../components/schemas/partners-batches/batch-list-response';
 import { ref as errorResponseRef } from '../../components/responses/error';
 
 const get: OperationObject = {

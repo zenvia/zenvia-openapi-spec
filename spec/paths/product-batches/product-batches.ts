@@ -5,8 +5,8 @@ import {
   ResponsesObject,
   SchemaObject,
 } from 'openapi3-ts';
-import { ref as batchCreateResponseRef } from '../../components/schemas/product-batches/batch-create-response';
-import { ref as batchListResponseRef } from '../../components/schemas/product-batches/batch-list-response';
+import { ref as batchCreateResponseRef } from '../../components/schemas/partners-batches/batch-create-response';
+import { ref as batchListResponseRef } from '../../components/schemas/partners-batches/batch-list-response';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as size } from '../../components/parameters/size';
 import { ref as page } from '../../components/parameters/page';
