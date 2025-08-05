@@ -44,7 +44,7 @@ const base: SchemaObject = {
     },
     consolidatedStatus: {
       type: 'object',
-      description: 'Describes the consolidated status of the batch processing.',
+      description: 'Describes the consolidated status of the batch processing. (Only showed when `status` is `SUCCESS` or `FAILED`.',
       properties: {
         extractedRecords: {
           type: 'number',
