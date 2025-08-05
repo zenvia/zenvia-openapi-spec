@@ -93,13 +93,13 @@ The predefined order must be:
   - **Required**: `false`
   - **Type**: `string`
   - **Max Size**: `50`
-  - **Requirements**: Will only be valid if a valid state exists.
+  - **Requirements**: Will only be imported if a valid state exists.
 
 - **`state`**: Contact's state
   - **Required**: `false`
   - **Type**: `string`
   - **Max Size**: `100`
-  - **Requirements**: Becomes mandatory if any other address-related column exists (city, country, neighborhood, zipcode, street, or number).
+  - **Requirements**: It is a required value to import the contact's address. If it's invalid or not provided, the address-related values will be discarded.
 
 - **`city`**: Contact's city
   - **Required**: `false`
