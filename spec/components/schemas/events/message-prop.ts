@@ -9,15 +9,15 @@ const base: SchemaObject = {
   properties: {
     id: {
       title: 'ID',
-      type: 'string'
+      type: 'string',
     },
     from: {
       title: 'from',
-      type: 'string'
+      type: 'string',
     },
     to: {
       title: 'to',
-      type: 'string'
+      type: 'string',
     },
     direction: {
       title: 'Message Direction',
@@ -27,22 +27,22 @@ const base: SchemaObject = {
       enum: [
         'IN',
         'OUT',
-        'INTERNAL'
+        'INTERNAL',
       ],
     },
     channel: {
       title: 'channel',
-      type: 'string'
+      type: 'string',
     },
     contents: {
       title: 'contents',
-      type: 'array'
+      type: 'array',
     },
     timestamp: {
       title: 'timestamp',
-      type: 'string'
+      type: 'string',
     },
-  }
+  },
 };
 
 export const ref = createComponentRef(__filename);
