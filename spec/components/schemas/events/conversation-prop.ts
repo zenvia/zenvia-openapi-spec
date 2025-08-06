@@ -9,13 +9,13 @@ const base: SchemaObject = {
   properties: {
     id: {
       title: 'ID',
-      type: 'string'
+      type: 'string',
     },
     contentId: {
       title: 'contentId',
-      type: 'string'
+      type: 'string',
     },
-  }
+  },
 };
 
 export const ref = createComponentRef(__filename);

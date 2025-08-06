@@ -11,8 +11,8 @@ const conversationMessage: SchemaObject = {
     },
     conversation: {
       $ref: conversationProp,
-    }
-  }
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);

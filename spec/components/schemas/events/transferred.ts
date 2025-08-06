@@ -20,20 +20,20 @@ const transferred: SchemaObject = {
               type: 'object',
               properties: {
                 id: { type: 'string' },
-                type: { type: 'string' }
-              }
+                type: { type: 'string' },
+              },
             },
             newUserId: { type: 'string' },
             newGroupId: { type: 'string' },
             previousUserId: { type: 'string' },
-            previousGroupId: { type: 'string' }
+            previousGroupId: { type: 'string' },
           },
-          required: ['transferType']
-        }
+          required: ['transferType'],
+        },
       ],
-      required: ['id', 'status', 'statusTimestamp']
-    }
-  }
+      required: ['id', 'status', 'statusTimestamp'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);
