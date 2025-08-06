@@ -7,14 +7,10 @@ async function main() {
   try {
     valid = await validator.validate(spec, validateOptions);
   } catch (e) {
-    if (e instanceof validator.JSONSchemaError) {
-      console.error('Failed OpenAPI3 schema validation:');
-      const errors = JSON.parse(e.message.replace(/^.*\[/, '['));
-      for (const error of errors) {
-        console.error(`${error.dataPath} ${error.message}`);
-      }
-    } else {
-      console.error(`${e.name}: ${e.message}`);
+    console.error(`${e.name}: ${e.message}`);
+    const { context } = validateOptions as any;
+    if (context) {
+      console.error('Location', context.pop());
     }
     process.exit(1);
   }
