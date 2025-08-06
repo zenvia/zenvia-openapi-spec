@@ -8,7 +8,7 @@ import { ref as snoozedRef } from './snoozed';
 import { ref as closedRef } from './closed';
 
 const conversationStatus: SchemaObject = {
-  additionalProperties: true,
+  type: 'object',
   oneOf: [
     { $ref: createdRef },
     { $ref: claimedRef },
@@ -17,6 +17,7 @@ const conversationStatus: SchemaObject = {
     { $ref: snoozedRef },
     { $ref: closedRef },
   ],
+  required: ['type'],
   discriminator: {
     propertyName: 'type',
     mapping: {
@@ -31,6 +32,7 @@ const conversationStatus: SchemaObject = {
       CONVERSATION_CLOSED: closedRef,
     },
   },
+  additionalProperties: true,
 };
 
 export const ref = createComponentRef(__filename);

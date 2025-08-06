@@ -17,11 +17,13 @@ const distributed: SchemaObject = {
           properties: {
             groupId: { type: 'string' },
             userId: { type: 'string' },
+            id: { type: 'string' },
+            status: { type: 'string' },
+            statusTimestamp: { type: 'string' },
           },
-          required: ['userId'],
+          required: ['userId', 'id', 'status', 'statusTimestamp'],
         },
       ],
-      required: ['id', 'status', 'statusTimestamp'],
     },
   },
 };

@@ -34,10 +34,6 @@ const base: SchemaObject = {
       title: 'channel',
       type: 'string',
     },
-    contents: {
-      title: 'contents',
-      type: 'array',
-    },
     timestamp: {
       title: 'timestamp',
       type: 'string',

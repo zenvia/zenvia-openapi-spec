@@ -16,7 +16,6 @@ const created: SchemaObject = {
       allOf: [
         { $ref: baseConversationRef },
       ],
-      required: ['id', 'status', 'statusTimestamp'],
     },
   },
 };

@@ -5,18 +5,14 @@ const conversationBase: SchemaObject = {
   type: 'object',
   description: 'Base structure for all conversation objects',
   properties: {
-    id: { type: 'string' },
-    status: {
+    id: {
+      title: 'ID',
       type: 'string',
-      description: 'Current status of the conversation',
     },
-    statusTimestamp: { type: 'string', format: 'date-time' },
-    channel: { type: 'string', description: 'Channel where the conversation took place' },
-    from: { type: 'string', description: 'Sender identifier' },
-    to: { type: 'string', description: 'Receiver identifier' },
-    contactId: { type: 'string' },
-    groupId: { type: 'string' },
-    createdAt: { type: 'string', format: 'date-time' },
+    contentId: {
+      title: 'contentId',
+      type: 'string',
+    },
   },
   required: ['id', 'status', 'statusTimestamp'],
 };
