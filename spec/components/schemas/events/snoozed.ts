@@ -15,14 +15,14 @@ const snoozed: SchemaObject = {
         {
           type: 'object',
           properties: {
-            snoozedUntil: { type: 'string', format: 'date-time' }
+            snoozedUntil: { type: 'string', format: 'date-time' },
           },
-          required: ['snoozedUntil']
-        }
+          required: ['snoozedUntil'],
+        },
       ],
-      required: ['id', 'status', 'statusTimestamp']
-    }
-  }
+      required: ['id', 'status', 'statusTimestamp'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);
