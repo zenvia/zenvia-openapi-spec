@@ -9,16 +9,16 @@ const created: SchemaObject = {
     timestamp: { type: 'string', format: 'date-time' },
     type: {
       type: 'string',
-      enum: ['CONVERSATION_CREATED', 'CONVERSATION_QUEUED', 'CONVERSATION_STARTED', 'CONVERSATION_UNSNOOZED']
+      enum: ['CONVERSATION_CREATED', 'CONVERSATION_QUEUED', 'CONVERSATION_STARTED', 'CONVERSATION_UNSNOOZED'],
     },
     subscriptionId: { type: 'string' },
     conversation: {
       allOf: [
-        { $ref: baseConversationRef }
+        { $ref: baseConversationRef },
       ],
-      required: ['id', 'status', 'statusTimestamp']
-    }
-  }
+      required: ['id', 'status', 'statusTimestamp'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);
