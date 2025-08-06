@@ -16,11 +16,13 @@ const snoozed: SchemaObject = {
           type: 'object',
           properties: {
             snoozedUntil: { type: 'string', format: 'date-time' },
+            id: { type: 'string' },
+            status: { type: 'string' },
+            statusTimestamp: { type: 'string' },
           },
-          required: ['snoozedUntil'],
+          required: ['snoozedUntil', 'id', 'status', 'statusTimestamp'],
         },
       ],
-      required: ['id', 'status', 'statusTimestamp'],
     },
   },
 };
