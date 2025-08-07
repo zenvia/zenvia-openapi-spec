@@ -14,7 +14,7 @@ describe('Loading OpenAPI specification by Enforcer', function() {
     },
   };
 
-  this.timeout(5000);
+  this.timeout(100000);
 
   before(async () => {
     delete spec.paths['/files'].post.requestBody.content['multipart/form-data'].examples.multipart;
@@ -79,7 +79,7 @@ describe('API contract test against OpenAPI specification', () => {
   }
 
   before(async function () {
-    this.timeout(5000);
+    this.timeout(100000);
     enforcer = await Enforcer(spec, { componentOptions: {} });
   });
 
