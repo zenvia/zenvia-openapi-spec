@@ -9,8 +9,8 @@ const conversationBase: SchemaObject = {
       title: 'ID',
       type: 'string',
     },
-    contentId: {
-      title: 'contentId',
+    contactId: {
+      title: 'contactId',
       type: 'string',
     },
   },
