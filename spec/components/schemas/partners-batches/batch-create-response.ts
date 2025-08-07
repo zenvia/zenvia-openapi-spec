@@ -46,14 +46,6 @@ const base: SchemaObject = {
       example: '2025-04-23T18:42:50.325Z',
     },
   },
-  required: [
-    'id',
-    'organizationId',
-    'fileName',
-    'size',
-    'status',
-    'createAt',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
