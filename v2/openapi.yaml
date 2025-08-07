@@ -195,13 +195,14 @@ info:
 
     <br>
 
-    #### Signature generation example in JavaScript
+    #### Signature generation example in NodeJS
     ```javascript
     const crypto = require('crypto');
+    const axios = require('axios');
 
-    const payload = JSON.stringfy({
-      from: 'sms-account',
-      to: '55108888888888',
+    const payload = JSON.stringify({
+      from: 'sender',
+      to: 'recipient',
       contents: [{
         type: 'text',
         text: 'Hi Zenvia!',
@@ -216,7 +217,7 @@ info:
     ${contentType}
     ${date}
     api.zenvia.com
-    /v2/channels/sms/messages`;
+    /v2/channels/whatsapp/messages`;
 
     const token = '123456';
     const secret = 'ABCDEF';
@@ -230,7 +231,9 @@ info:
       'X-API-Signature': signature,
     }
 
-    console.log(headers);
+    const response = await axios.post('https://api.zenvia.com/v2/channels/whatsapp/messages', payload, { headers });
+
+    console.log(response.data);
     ```
 
     ## JWT
@@ -3851,13 +3854,13 @@ components:
                   description: State abbreviation
                   type: string
                   example: SP
-        extra:
-          title: Extra
-          description: 'Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.'
-          type: object
-          example:
-            new_property: some_value
-            identification_number2: ''
+            extra:
+              title: Extra
+              description: 'Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.'
+              type: object
+              example:
+                new_property: some_value
+                identification_number2: ''
         restartContact:
           title: restartContact
           description: Parameter to reset context variables and create a new service in NLU.
@@ -4398,6 +4401,10 @@ components:
                 - conversion
                 - zenvia_chat
                 - nlu
+            properties:
+              title: Properties
+              type: object
+              description: 'If the contact replies to the API message, these properties will be available for querying in the chosen solution.'
           required:
             - solution
     content.email:
@@ -6174,11 +6181,63 @@ components:
       oneOf:
         - $ref: '#/components/schemas/events.message-event'
         - $ref: '#/components/schemas/events.message-status-event'
+        - $ref: '#/components/schemas/events.conversation-message-event'
+        - $ref: '#/components/schemas/events.conversation-status-event'
       discriminator:
         propertyName: type
         mapping:
           MESSAGE: '#/components/schemas/events.message-event'
           MESSAGE_STATUS: '#/components/schemas/events.message-status-event'
+          CONVERSATION_STATUS: '#/components/schemas/events.conversation-status-event'
+          CONVERSATION_MESSAGE: '#/components/schemas/events.conversation-message-event'
+    events.base-conversation-message:
+      type: object
+      properties:
+        id:
+          title: Event Id
+          description: ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.
+          type: string
+        timestamp:
+          title: Event Timestamp
+          description: Timestamp of the webhook event
+          type: string
+          format: date-time
+        type:
+          title: Event type
+          type: string
+          enum:
+            - CONVERSATION_STATUS
+            - CONVERSATION_MESSAGE
+        subscriptionId:
+          title: Subscription ID
+          type: string
+        subscriptionStatus:
+          title: Subscription Status
+          type: string
+    events.base-conversation-status:
+      type: object
+      properties:
+        id:
+          title: Event Id
+          description: ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.
+          type: string
+        timestamp:
+          title: Event Timestamp
+          description: Timestamp of the webhook event
+          type: string
+          format: date-time
+        type:
+          title: Event type
+          type: string
+          enum:
+            - CONVERSATION_STATUS
+            - CONVERSATION_MESSAGE
+        subscriptionId:
+          title: Subscription ID
+          type: string
+        subscriptionStatus:
+          title: Subscription Status
+          type: string
     events.base:
       type: object
       properties:
@@ -6204,6 +6263,232 @@ components:
         channel:
           title: Message Channel
           type: string
+    events.claimed:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_CLAIMED
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+            - type: object
+              properties:
+                userId:
+                  type: string
+                id:
+                  type: string
+                status:
+                  type: string
+                statusTimestamp:
+                  type: string
+              required:
+                - userId
+                - id
+                - status
+                - statusTimestamp
+    events.closed:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_CLOSED
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+            - type: object
+              properties:
+                closedBy:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                closeReason:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    name:
+                      type: string
+                id:
+                  type: string
+                status:
+                  type: string
+                statusTimestamp:
+                  type: string
+              required:
+                - id
+                - status
+                - statusTimestamp
+    events.conversation-message-event:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/events.base-conversation-message'
+        - type: object
+          properties:
+            message:
+              $ref: '#/components/schemas/events.message-prop'
+            conversation:
+              $ref: '#/components/schemas/events.conversation-prop'
+    events.conversation-message:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/events.message-prop'
+        conversation:
+          $ref: '#/components/schemas/events.conversation-prop'
+    events.conversation-prop:
+      title: Message Conversation Object
+      description: This is a Message object model
+      type: object
+      properties:
+        id:
+          title: ID
+          type: string
+        contactId:
+          title: contactId
+          type: string
+    events.conversation-status-base:
+      type: object
+      description: Base structure for all conversation objects
+      properties:
+        id:
+          title: ID
+          type: string
+        contactId:
+          title: contactId
+          type: string
+      required:
+        - id
+        - status
+        - statusTimestamp
+    events.conversation-status-event:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/events.base'
+        - type: object
+          properties:
+            type:
+              title: Event type
+              type: string
+              enum:
+                - CONVERSATION_CREATED
+                - CONVERSATION_QUEUED
+                - CONVERSATION_STARTED
+                - CONVERSATION_UNSNOOZED
+                - CONVERSATION_CLAIMED
+                - CONVERSATION_TRANSFERRED
+                - CONVERSATION_DISTRIBUTED_TO_USER
+                - CONVERSATION_SNOOZED
+                - CONVERSATION_CLOSED
+              example: CONVERSATION_CREATED
+            conversation:
+              oneOf:
+                - $ref: '#/components/schemas/events.created'
+                - $ref: '#/components/schemas/events.claimed'
+                - $ref: '#/components/schemas/events.transferred'
+                - $ref: '#/components/schemas/events.distributed'
+                - $ref: '#/components/schemas/events.snoozed'
+                - $ref: '#/components/schemas/events.closed'
+          required:
+            - type
+            - conversation
+    events.conversation-status:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/events.created'
+        - $ref: '#/components/schemas/events.claimed'
+        - $ref: '#/components/schemas/events.transferred'
+        - $ref: '#/components/schemas/events.distributed'
+        - $ref: '#/components/schemas/events.snoozed'
+        - $ref: '#/components/schemas/events.closed'
+      required:
+        - type
+      discriminator:
+        propertyName: type
+        mapping:
+          CONVERSATION_CREATED: '#/components/schemas/events.created'
+          CONVERSATION_QUEUED: '#/components/schemas/events.created'
+          CONVERSATION_STARTED: '#/components/schemas/events.created'
+          CONVERSATION_UNSNOOZED: '#/components/schemas/events.created'
+          CONVERSATION_CLAIMED: '#/components/schemas/events.claimed'
+          CONVERSATION_TRANSFERRED: '#/components/schemas/events.transferred'
+          CONVERSATION_DISTRIBUTED_TO_USER: '#/components/schemas/events.distributed'
+          CONVERSATION_SNOOZED: '#/components/schemas/events.snoozed'
+          CONVERSATION_CLOSED: '#/components/schemas/events.closed'
+      additionalProperties: true
+    events.created:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_CREATED
+            - CONVERSATION_QUEUED
+            - CONVERSATION_STARTED
+            - CONVERSATION_UNSNOOZED
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+    events.distributed:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_DISTRIBUTED_TO_USER
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+            - type: object
+              properties:
+                groupId:
+                  type: string
+                userId:
+                  type: string
+                id:
+                  type: string
+                status:
+                  type: string
+                statusTimestamp:
+                  type: string
+              required:
+                - userId
+                - id
+                - status
+                - statusTimestamp
     events.error-cause:
       type: object
       properties:
@@ -6243,6 +6528,59 @@ components:
                 - OUT
             message:
               $ref: '#/components/schemas/message.allMo'
+    events.message-prop:
+      title: Message Object
+      description: This is a Message object model
+      type: object
+      properties:
+        id:
+          title: ID
+          type: string
+        from:
+          title: from
+          type: string
+        to:
+          title: to
+          type: string
+        direction:
+          title: Message Direction
+          description: |-
+            Indicates whether the message is received from a channel (IN), sent to a channel (OUT), or is internal (INTERNAL).
+                                > **Note:** The **OUT** direction is under construction.
+          type: string
+          enum:
+            - IN
+            - OUT
+            - INTERNAL
+        channel:
+          title: Channel
+          description: Channel information including type and provider
+          type: object
+          properties:
+            type:
+              type: string
+            provider:
+              type: string
+          required:
+            - type
+            - provider
+        contents:
+          title: Message contents
+          description: An array of message content objects
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        timestamp:
+          title: Timestamp
+          type: string
+          format: date-time
+      required:
+        - id
+        - to
+        - direction
+        - channel
+        - timestamp
     events.message-status-event:
       type: object
       allOf:
@@ -6329,6 +6667,86 @@ components:
       required:
         - code
         - timestamp
+    events.snoozed:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_SNOOZED
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+            - type: object
+              properties:
+                snoozedUntil:
+                  type: string
+                  format: date-time
+                id:
+                  type: string
+                status:
+                  type: string
+                statusTimestamp:
+                  type: string
+              required:
+                - snoozedUntil
+                - id
+                - status
+                - statusTimestamp
+    events.transferred:
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - CONVERSATION_TRANSFERRED
+        subscriptionId:
+          type: string
+        conversation:
+          allOf:
+            - $ref: '#/components/schemas/events.conversation-status-base'
+            - type: object
+              properties:
+                transferType:
+                  type: string
+                transferredBy:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                newUserId:
+                  type: string
+                newGroupId:
+                  type: string
+                previousUserId:
+                  type: string
+                previousGroupId:
+                  type: string
+                id:
+                  type: string
+                status:
+                  type: string
+                statusTimestamp:
+                  type: string
+              required:
+                - transferType
+                - id
+                - status
+                - statusTimestamp
     events.channel-data.email:
       type: object
       title: Email
@@ -7463,11 +7881,15 @@ components:
       oneOf:
         - $ref: '#/components/schemas/subscription.message-subscription'
         - $ref: '#/components/schemas/subscription.message-status-subscription'
+        - $ref: '#/components/schemas/subscription.conversation-status-subscription'
+        - $ref: '#/components/schemas/subscription.conversation-message-subscription'
       discriminator:
         propertyName: eventType
         mapping:
           MESSAGE: '#/components/schemas/subscription.message-subscription'
           MESSAGE_STATUS: '#/components/schemas/subscription.message-status-subscription'
+          CONVERSATION_MESSAGE: '#/components/schemas/subscription.conversation-message-subscription'
+          CONVERSATION_STATUS: '#/components/schemas/subscription.conversation-status-subscription'
     subscription.base:
       type: object
       properties:
@@ -7509,6 +7931,37 @@ components:
       required:
         - eventType
         - webhook
+    subscription.conversation-message-subscription:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                channel:
+                  $ref: '#/components/schemas/message.channel'
+                direction:
+                  title: Message direction
+                  description: 'Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL'
+                  type: string
+                  enum:
+                    - IN
+                    - OUT
+                    - INTERNAL
+              required:
+                - channel
+    subscription.conversation-status-subscription:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            id:
+              title: ID
+              type: string
+            contactId:
+              title: contactId
+              type: string
     subscription.message-status-subscription:
       type: object
       allOf:
@@ -7582,11 +8035,15 @@ components:
       oneOf:
         - $ref: '#/components/schemas/subscription.partial-status.message-subscription'
         - $ref: '#/components/schemas/subscription.partial-status.message-status-subscription'
+        - $ref: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
+        - $ref: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
       discriminator:
         propertyName: eventType
         mapping:
           MESSAGE: '#/components/schemas/subscription.partial-status.message-subscription'
           MESSAGE_STATUS: '#/components/schemas/subscription.partial-status.message-status-subscription'
+          CONVERSATION_STATUS: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
+          CONVERSATION_MESSAGE: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
     subscription.partial-status.base:
       type: object
       properties:
@@ -7600,6 +8057,8 @@ components:
           enum:
             - MESSAGE
             - MESSAGE_STATUS
+            - CONVERSATION_STATUS
+            - CONVERSATION_MESSAGE
         webhook:
           allOf:
             - $ref: '#/components/schemas/subscription.partial-status.webhook'
@@ -7628,6 +8087,37 @@ components:
       required:
         - eventType
         - webhook
+    subscription.partial-status.conversation-message-subscription:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                channel:
+                  $ref: '#/components/schemas/message.channel'
+                direction:
+                  title: Message direction
+                  description: 'Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL'
+                  type: string
+                  enum:
+                    - IN
+                    - OUT
+                    - INTERNAL
+              required:
+                - channel
+    subscription.partial-status.conversation-status-subscription:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            id:
+              title: ID
+              type: string
+            contactId:
+              title: contactId
+              type: string
     subscription.partial-status.message-status-subscription:
       type: object
       allOf:
@@ -10619,7 +11109,27 @@ tags:
       * *CLICKED: "**An action item in the message has been clicked by the contact**".*
       * *VERIFIED: "**The message has been verified by the device app/provider**".*
 
+      ## CONVERSATION_STATUS
 
+      The event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.
+
+      A conversation has a finite lifecycle — it has a beginning, a middle, and an end.
+
+      If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+      <SchemaDefinition schemaRef="#/components/schemas/events.conversation-status" />
+      <br>
+
+      ## CONVERSATION_MESSAGE
+
+      The event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.
+
+      It includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.
+
+      If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+      <SchemaDefinition schemaRef="#/components/schemas/events.conversation-message" />
+      <br>
 
       ## Zenvia outbound IP addresses
 

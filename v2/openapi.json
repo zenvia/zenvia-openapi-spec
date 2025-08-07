@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0.0",
     "title": "Zenvia APIs",
-    "description": "API Support: https://atendimento.zenvia.com/<span class=\"link-content\">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>\n\n\n# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API. The API itself is based on resources that are represented by JSON format and are manipulated using the HTTP protocol.\n\n## Features\n\nYou can send messages through the [Zenvia-supported channels](#section/Supported-Channels).\n\nYou can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:\n\n* Messages: Receive messages events for outgoing and/or incoming messages.\n* Messages status: Receive status updates for outgoing messages.\n\n## Pre-requisites\n\nBefore using this API you need the following:\n\n* **Zenvia Account**: create an account on [Zenvia platform's site](https://app.zenvia.com/)\n* **Integrations**: configure desired channels to send and/or receive messages on the [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create an API token on the [API console](https://app.zenvia.com/home/api)\n* **Webhook**: subscribe to events using [subscriptions API resources](#tag/Subscriptions)\n    * _Status Webhook_ **(important)**: Since our messaging API is asynchronous, it is necessary to register a webhook in order to know whether the message sending was successful or not.\n    * _Message Webhook_ (optional): receive message responses by subscribing to message events.\n\nYou can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.\n\n## View your Usage Report\nYou can also access Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)\n\n# Getting started with Sandbox\n\nThe fastest way to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).\n\nAs you create your new Sandbox, you'll be guided step-by-step in order to start sending and receiving messages using your desired channel.\n\n[Click here and start sending and receiving messages using RCS, WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\nYou are allowed to send test messages to phone numbers you've connected during a 24-hour period. Following that, you must reconnect your number by sending the keyword once again to continue using the Sandbox's features.\n\n# API versions\n\nAll breaking changes to Zenvia APIs will be documented here.\n\nCurrently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/).\n\n## v2 (current)\n\n* Breaking Changes\n    * Visitor not sent as a JSON within contents block. Instead, it's sent directly under the message object.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from the template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/).\n\n# SDKs\n\nMake it simpler to use our API by integrating our SDK into your software.\n\nThese helper libraries are available on [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages and located on our [GitHub](https://github.com/zenvia) page.\n\n# HTTP Methods\n\nHTTP methods are used to manipulate resources. Though, as not all resources allow all HTTP operations, observeOK the reference of each resource below.\n\nMethods used with collection endpoints:\n\n| HTTP Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - OK            |\n| POST             | Create a new item        | 200 - OK            |\n\nMethods used with item endpoints:\n\n| HTTP Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - OK            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - OK            |\n\nWhen an operation is executed successfully, the API will respond with a 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return a 4xx or 5xx HTTP status code and the payload with an Error Object.\n\nThe error object obeys the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## Token\nTo use this API you need to send the API token in every request.\n\nThe token needs to be sent in the HTTP header `X-API-TOKEN`.\n\n#### Example:\n```\nX-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt\n```\n\nGenerate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.\n\n## Signature\nThis is an advanced version of the [token authentication](#section/Authentication/Token).\n\nIn this approach, alongside the `X-API-Token` http header, it is necessary to send a request signature.\n<br>The signature is expected in the `X-API-Signature` http header.\n\nThis signature needs to be generated for each request, since it is unique to the request.\n\nAlthough similar, the standard token do not support signature, and the signature token always requires a signature.\n<br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform.\n\n#### Example:\n```\nX-API-Token: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt\nX-API-Signature: rtHTyAfsJFD5UFpPDeztUI3JE0Guea5pqG9iJqrT2EY=\n```\n<br>\n\n### Signature generation\n\nThe signature is a *HMAC-SHA256* hash, calculated using the *token secret* obtained at the creation of the *signature token*\nin the [API console](https://app.zenvia.com/home/api), encoded as a *base64* string.\n\nThe input for the hash generation is a *multiline* string, composed by six lines separated by *unix* line breaks: `\\n`, **without** an empty line in the end.\n\nThe components of each line are the following:\n1. The request method.\n<br>*Ex: `POST`, `GET`.*\n\n2. The MD5 hash of the request body.\n<br>*Ex: `d98bd30dcb3c03d166eee84efba1e3d7`*\n    - For request without body, this line must be **empty**.\n    - For `multipart/form-data`, only the file content from the request is expected for the hash calculation.\n\n3. The request `Content-Type` header.\n<br>*Ex: `application/json`.*\n    - For request without body, this line must be **empty**.\n    - For `multipart/form-data`, the file content type should be used.\n\n4. The request `Date` header, formatted following the RFC2616.\n<br>*Ex: `Sun, 12 Feb 2023 07:40:32 GMT`.*\n    - Timestamps in the future will not be considered valid.\n    - Timestamps older than *3 minutes* will be refused.\n\n5. The request hostname. It probably will always be *api.zenvia.com*.\n<br>*Ex: `api.zenvia.com`.*\n\n6. The request resource, including the query string when present.\n<br>*Ex: `/v2/channels/whatsapp/messages`, `/v2/files?limit=5`.*\n\n<br>\n\n#### Signature input examples\n```\nPOST\nd98bd30dcb3c03d166eee84efba1e3d7\napplication/json\nSun, 12 Feb 2023 07:40:32 GMT\napi.zenvia.com\n/v2/channels/whatsapp/messages\n\n```\n\n```\nGET\n\n\nSun, 12 Feb 2023 07:40:32 GMT\napi.zenvia.com\n/v2/files?limit=5\n```\n\n<br>\n\n#### Signature generation example in JavaScript\n```javascript\nconst crypto = require('crypto');\n\nconst payload = JSON.stringfy({\n  from: 'sms-account',\n  to: '55108888888888',\n  contents: [{\n    type: 'text',\n    text: 'Hi Zenvia!',\n  }],\n});\n\nconst date = new Date().toUTCString();\nconst contentType = 'application/json';\n\nconst stringToSign = `POST\n${crypto.createHash('md5').update(payload).digest('hex')}\n${contentType}\n${date}\napi.zenvia.com\n/v2/channels/sms/messages`;\n\nconst token = '123456';\nconst secret = 'ABCDEF';\n\nconst signature = crypto.createHmac('sha256', secret).update(stringToSign).digest('base64');\n\nconst headers = {\n  Date: date,\n  'Content-Type': contentType,\n  'X-API-Token': token,\n  'X-API-Signature': signature,\n}\n\nconsole.log(headers);\n```\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server-to-server integrations use the [token authentication](#section/Authentication/Token) approach.\n",
+    "description": "API Support: https://atendimento.zenvia.com/<span class=\"link-content\">[OpenAPI specification source](https://github.com/zenvia/zenvia-openapi-spec)</span>\n\n\n# Overview\n\nThis is the reference documentation for the Zenvia *REST-like* API. The API itself is based on resources that are represented by JSON format and are manipulated using the HTTP protocol.\n\n## Features\n\nYou can send messages through the [Zenvia-supported channels](#section/Supported-Channels).\n\nYou can also subscribe to events and receive them on a webhook of your choosing. The available events for each and every channel are:\n\n* Messages: Receive messages events for outgoing and/or incoming messages.\n* Messages status: Receive status updates for outgoing messages.\n\n## Pre-requisites\n\nBefore using this API you need the following:\n\n* **Zenvia Account**: create an account on [Zenvia platform's site](https://app.zenvia.com/)\n* **Integrations**: configure desired channels to send and/or receive messages on the [integrations page](https://app.zenvia.com/home/credentials)\n* **API Token**: create an API token on the [API console](https://app.zenvia.com/home/api)\n* **Webhook**: subscribe to events using [subscriptions API resources](#tag/Subscriptions)\n    * _Status Webhook_ **(important)**: Since our messaging API is asynchronous, it is necessary to register a webhook in order to know whether the message sending was successful or not.\n    * _Message Webhook_ (optional): receive message responses by subscribing to message events.\n\nYou can use the [Sandbox](#section/Getting-started-with-Sandbox) to start using and testing this API immediately.\n\n## View your Usage Report\nYou can also access Zenvia platform to view your [Usage Report](https://app.zenvia.com/notifications/dashboard/api)\n\n# Getting started with Sandbox\n\nThe fastest way to begin utilizing this API is with our [Sandbox (available on the Zenvia platform)](https://app.zenvia.com/home/sandbox).\n\nAs you create your new Sandbox, you'll be guided step-by-step in order to start sending and receiving messages using your desired channel.\n\n[Click here and start sending and receiving messages using RCS, WhatsApp or SMS using this API.](https://app.zenvia.com/home/sandbox)\n\nYou are allowed to send test messages to phone numbers you've connected during a 24-hour period. Following that, you must reconnect your number by sending the keyword once again to continue using the Sandbox's features.\n\n# API versions\n\nAll breaking changes to Zenvia APIs will be documented here.\n\nCurrently, the Zenvia APIs is on version [v2](https://zenvia.github.io/zenvia-openapi-spec/v2/).\n\n## v2 (current)\n\n* Breaking Changes\n    * Visitor not sent as a JSON within contents block. Instead, it's sent directly under the message object.\n    * Location is no longer used as JSON.\n    * Removed deprecated `channels` attribute from the template resource.\n\n## v1 (deprecated)\n\nYou can still check v1 version clicking [here](https://zenvia.github.io/zenvia-openapi-spec/v1/).\n\n# SDKs\n\nMake it simpler to use our API by integrating our SDK into your software.\n\nThese helper libraries are available on [Node](https://github.com/zenvia/zenvia-sdk-node) and [Java](https://github.com/zenvia/zenvia-sdk-java) programming languages and located on our [GitHub](https://github.com/zenvia) page.\n\n# HTTP Methods\n\nHTTP methods are used to manipulate resources. Though, as not all resources allow all HTTP operations, observeOK the reference of each resource below.\n\nMethods used with collection endpoints:\n\n| HTTP Method      | Operation                | Success HTTP status |\n|:-----------------|:-------------------------|:--------------------|\n| GET              | List collection items    | 200 - OK            |\n| POST             | Create a new item        | 200 - OK            |\n\nMethods used with item endpoints:\n\n| HTTP Method      | Operation                    | Success HTTP status |\n|:-----------------|:-----------------------------|:--------------------|\n| GET              | Retrieve one resource item   | 200 - OK            |\n| DELETE           | Delete one resource item     | 204 - No content    |\n| PATCH            | Update one resource item     | 200 - OK            |\n\nWhen an operation is executed successfully, the API will respond with a 2xx status code.\n\n# Error Handling\n\nWhen one error occurs, the API will return a 4xx or 5xx HTTP status code and the payload with an Error Object.\n\nThe error object obeys the follwing schema:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/error.base\" />\n\nResponses error codes are detailed below.\n\n| Http Status Code | Code                 | Message                          | Retry request |\n|:-----------------|:---------------------|:---------------------------------|:--------------|\n| 400              | VALIDATION_ERROR     | Validation error                 | No            |\n| 401              | AUTHENTICATION_ERROR | No authorization token was found | No            |\n| 404              | NOT_FOUND            | Not found                        | No            |\n| 409              | DUPLICATED           | Entity already exists            | No            |\n| 500              | INTERNAL_ERROR       | Internal error                   | Yes           |\n\n# Authentication\n\n## Token\nTo use this API you need to send the API token in every request.\n\nThe token needs to be sent in the HTTP header `X-API-TOKEN`.\n\n#### Example:\n```\nX-API-TOKEN: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt\n```\n\nGenerate your token on the [API console](https://app.zenvia.com/home/api) on Zenvia platform.\n\n## Signature\nThis is an advanced version of the [token authentication](#section/Authentication/Token).\n\nIn this approach, alongside the `X-API-Token` http header, it is necessary to send a request signature.\n<br>The signature is expected in the `X-API-Signature` http header.\n\nThis signature needs to be generated for each request, since it is unique to the request.\n\nAlthough similar, the standard token do not support signature, and the signature token always requires a signature.\n<br>Both types of token can be created in the [API console](https://app.zenvia.com/home/api) on Zenvia platform.\n\n#### Example:\n```\nX-API-Token: hKp94crjv9OF3UGrCpSXUJw1-UYHhRvLKNLt\nX-API-Signature: rtHTyAfsJFD5UFpPDeztUI3JE0Guea5pqG9iJqrT2EY=\n```\n<br>\n\n### Signature generation\n\nThe signature is a *HMAC-SHA256* hash, calculated using the *token secret* obtained at the creation of the *signature token*\nin the [API console](https://app.zenvia.com/home/api), encoded as a *base64* string.\n\nThe input for the hash generation is a *multiline* string, composed by six lines separated by *unix* line breaks: `\\n`, **without** an empty line in the end.\n\nThe components of each line are the following:\n1. The request method.\n<br>*Ex: `POST`, `GET`.*\n\n2. The MD5 hash of the request body.\n<br>*Ex: `d98bd30dcb3c03d166eee84efba1e3d7`*\n    - For request without body, this line must be **empty**.\n    - For `multipart/form-data`, only the file content from the request is expected for the hash calculation.\n\n3. The request `Content-Type` header.\n<br>*Ex: `application/json`.*\n    - For request without body, this line must be **empty**.\n    - For `multipart/form-data`, the file content type should be used.\n\n4. The request `Date` header, formatted following the RFC2616.\n<br>*Ex: `Sun, 12 Feb 2023 07:40:32 GMT`.*\n    - Timestamps in the future will not be considered valid.\n    - Timestamps older than *3 minutes* will be refused.\n\n5. The request hostname. It probably will always be *api.zenvia.com*.\n<br>*Ex: `api.zenvia.com`.*\n\n6. The request resource, including the query string when present.\n<br>*Ex: `/v2/channels/whatsapp/messages`, `/v2/files?limit=5`.*\n\n<br>\n\n#### Signature input examples\n```\nPOST\nd98bd30dcb3c03d166eee84efba1e3d7\napplication/json\nSun, 12 Feb 2023 07:40:32 GMT\napi.zenvia.com\n/v2/channels/whatsapp/messages\n\n```\n\n```\nGET\n\n\nSun, 12 Feb 2023 07:40:32 GMT\napi.zenvia.com\n/v2/files?limit=5\n```\n\n<br>\n\n#### Signature generation example in NodeJS\n```javascript\nconst crypto = require('crypto');\nconst axios = require('axios');\n\nconst payload = JSON.stringify({\n  from: 'sender',\n  to: 'recipient',\n  contents: [{\n    type: 'text',\n    text: 'Hi Zenvia!',\n  }],\n});\n\nconst date = new Date().toUTCString();\nconst contentType = 'application/json';\n\nconst stringToSign = `POST\n${crypto.createHash('md5').update(payload).digest('hex')}\n${contentType}\n${date}\napi.zenvia.com\n/v2/channels/whatsapp/messages`;\n\nconst token = '123456';\nconst secret = 'ABCDEF';\n\nconst signature = crypto.createHmac('sha256', secret).update(stringToSign).digest('base64');\n\nconst headers = {\n  Date: date,\n  'Content-Type': contentType,\n  'X-API-Token': token,\n  'X-API-Signature': signature,\n}\n\nconst response = await axios.post('https://api.zenvia.com/v2/channels/whatsapp/messages', payload, { headers });\n\nconsole.log(response.data);\n```\n\n## JWT\n\nThe JWT token is primarily used by front-end applications for user interactions.\n\nFor server-to-server integrations use the [token authentication](#section/Authentication/Token) approach.\n",
     "termsOfService": "https://zenvia.com/",
     "contact": {
       "name": "API Support",
@@ -4861,16 +4861,16 @@
                     "example": "SP"
                   }
                 }
+              },
+              "extra": {
+                "title": "Extra",
+                "description": "Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.",
+                "type": "object",
+                "example": {
+                  "new_property": "some_value",
+                  "identification_number2": ""
+                }
               }
-            }
-          },
-          "extra": {
-            "title": "Extra",
-            "description": "Extra attributes of NLU contact. New properties will be created that do not exist in NLU. Existing properties will have their values replaced. Only properties with letters, digits and/or underscores will be accepted. Any other character will be considered invalid and the property will not be created.",
-            "type": "object",
-            "example": {
-              "new_property": "some_value",
-              "identification_number2": ""
             }
           },
           "restartContact": {
@@ -5613,6 +5613,11 @@
                   "zenvia_chat",
                   "nlu"
                 ]
+              },
+              "properties": {
+                "title": "Properties",
+                "type": "object",
+                "description": "If the contact replies to the API message, these properties will be available for querying in the chosen solution."
               }
             },
             "required": [
@@ -8215,13 +8220,85 @@
           },
           {
             "$ref": "#/components/schemas/events.message-status-event"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-message-event"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status-event"
           }
         ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "MESSAGE": "#/components/schemas/events.message-event",
-            "MESSAGE_STATUS": "#/components/schemas/events.message-status-event"
+            "MESSAGE_STATUS": "#/components/schemas/events.message-status-event",
+            "CONVERSATION_STATUS": "#/components/schemas/events.conversation-status-event",
+            "CONVERSATION_MESSAGE": "#/components/schemas/events.conversation-message-event"
+          }
+        }
+      },
+      "events.base-conversation-message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Event Id",
+            "description": "ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.",
+            "type": "string"
+          },
+          "timestamp": {
+            "title": "Event Timestamp",
+            "description": "Timestamp of the webhook event",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "title": "Event type",
+            "type": "string",
+            "enum": [
+              "CONVERSATION_STATUS",
+              "CONVERSATION_MESSAGE"
+            ]
+          },
+          "subscriptionId": {
+            "title": "Subscription ID",
+            "type": "string"
+          },
+          "subscriptionStatus": {
+            "title": "Subscription Status",
+            "type": "string"
+          }
+        }
+      },
+      "events.base-conversation-status": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Event Id",
+            "description": "ID of the webhook event. Can be used to identify retried deliveries in case of webhook errors.",
+            "type": "string"
+          },
+          "timestamp": {
+            "title": "Event Timestamp",
+            "description": "Timestamp of the webhook event",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "title": "Event type",
+            "type": "string",
+            "enum": [
+              "CONVERSATION_STATUS",
+              "CONVERSATION_MESSAGE"
+            ]
+          },
+          "subscriptionId": {
+            "title": "Subscription ID",
+            "type": "string"
+          },
+          "subscriptionStatus": {
+            "title": "Subscription Status",
+            "type": "string"
           }
         }
       },
@@ -8255,6 +8332,371 @@
           "channel": {
             "title": "Message Channel",
             "type": "string"
+          }
+        }
+      },
+      "events.claimed": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_CLAIMED"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "statusTimestamp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "id",
+                  "status",
+                  "statusTimestamp"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "events.closed": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_CLOSED"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "closedBy": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "closeReason": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "statusTimestamp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "status",
+                  "statusTimestamp"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "events.conversation-message-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base-conversation-message"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "message": {
+                "$ref": "#/components/schemas/events.message-prop"
+              },
+              "conversation": {
+                "$ref": "#/components/schemas/events.conversation-prop"
+              }
+            }
+          }
+        ]
+      },
+      "events.conversation-message": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/events.message-prop"
+          },
+          "conversation": {
+            "$ref": "#/components/schemas/events.conversation-prop"
+          }
+        }
+      },
+      "events.conversation-prop": {
+        "title": "Message Conversation Object",
+        "description": "This is a Message object model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "string"
+          },
+          "contactId": {
+            "title": "contactId",
+            "type": "string"
+          }
+        }
+      },
+      "events.conversation-status-base": {
+        "type": "object",
+        "description": "Base structure for all conversation objects",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "string"
+          },
+          "contactId": {
+            "title": "contactId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "statusTimestamp"
+        ]
+      },
+      "events.conversation-status-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_CREATED",
+                  "CONVERSATION_QUEUED",
+                  "CONVERSATION_STARTED",
+                  "CONVERSATION_UNSNOOZED",
+                  "CONVERSATION_CLAIMED",
+                  "CONVERSATION_TRANSFERRED",
+                  "CONVERSATION_DISTRIBUTED_TO_USER",
+                  "CONVERSATION_SNOOZED",
+                  "CONVERSATION_CLOSED"
+                ],
+                "example": "CONVERSATION_CREATED"
+              },
+              "conversation": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/events.created"
+                  },
+                  {
+                    "$ref": "#/components/schemas/events.claimed"
+                  },
+                  {
+                    "$ref": "#/components/schemas/events.transferred"
+                  },
+                  {
+                    "$ref": "#/components/schemas/events.distributed"
+                  },
+                  {
+                    "$ref": "#/components/schemas/events.snoozed"
+                  },
+                  {
+                    "$ref": "#/components/schemas/events.closed"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "conversation"
+            ]
+          }
+        ]
+      },
+      "events.conversation-status": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/events.created"
+          },
+          {
+            "$ref": "#/components/schemas/events.claimed"
+          },
+          {
+            "$ref": "#/components/schemas/events.transferred"
+          },
+          {
+            "$ref": "#/components/schemas/events.distributed"
+          },
+          {
+            "$ref": "#/components/schemas/events.snoozed"
+          },
+          {
+            "$ref": "#/components/schemas/events.closed"
+          }
+        ],
+        "required": [
+          "type"
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "CONVERSATION_CREATED": "#/components/schemas/events.created",
+            "CONVERSATION_QUEUED": "#/components/schemas/events.created",
+            "CONVERSATION_STARTED": "#/components/schemas/events.created",
+            "CONVERSATION_UNSNOOZED": "#/components/schemas/events.created",
+            "CONVERSATION_CLAIMED": "#/components/schemas/events.claimed",
+            "CONVERSATION_TRANSFERRED": "#/components/schemas/events.transferred",
+            "CONVERSATION_DISTRIBUTED_TO_USER": "#/components/schemas/events.distributed",
+            "CONVERSATION_SNOOZED": "#/components/schemas/events.snoozed",
+            "CONVERSATION_CLOSED": "#/components/schemas/events.closed"
+          }
+        },
+        "additionalProperties": true
+      },
+      "events.created": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_CREATED",
+              "CONVERSATION_QUEUED",
+              "CONVERSATION_STARTED",
+              "CONVERSATION_UNSNOOZED"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              }
+            ]
+          }
+        }
+      },
+      "events.distributed": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_DISTRIBUTED_TO_USER"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "groupId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "statusTimestamp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "id",
+                  "status",
+                  "statusTimestamp"
+                ]
+              }
+            ]
           }
         }
       },
@@ -8310,6 +8752,73 @@
               }
             }
           }
+        ]
+      },
+      "events.message-prop": {
+        "title": "Message Object",
+        "description": "This is a Message object model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "string"
+          },
+          "from": {
+            "title": "from",
+            "type": "string"
+          },
+          "to": {
+            "title": "to",
+            "type": "string"
+          },
+          "direction": {
+            "title": "Message Direction",
+            "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT), or is internal (INTERNAL).\n                    > **Note:** The **OUT** direction is under construction.",
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT",
+              "INTERNAL"
+            ]
+          },
+          "channel": {
+            "title": "Channel",
+            "description": "Channel information including type and provider",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "provider"
+            ]
+          },
+          "contents": {
+            "title": "Message contents",
+            "description": "An array of message content objects",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "to",
+          "direction",
+          "channel",
+          "timestamp"
         ]
       },
       "events.message-status-event": {
@@ -8427,6 +8936,132 @@
           "code",
           "timestamp"
         ]
+      },
+      "events.snoozed": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_SNOOZED"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "snoozedUntil": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "statusTimestamp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "snoozedUntil",
+                  "id",
+                  "status",
+                  "statusTimestamp"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "events.transferred": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONVERSATION_TRANSFERRED"
+            ]
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/events.conversation-status-base"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "transferType": {
+                    "type": "string"
+                  },
+                  "transferredBy": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "newUserId": {
+                    "type": "string"
+                  },
+                  "newGroupId": {
+                    "type": "string"
+                  },
+                  "previousUserId": {
+                    "type": "string"
+                  },
+                  "previousGroupId": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "statusTimestamp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "transferType",
+                  "id",
+                  "status",
+                  "statusTimestamp"
+                ]
+              }
+            ]
+          }
+        }
       },
       "events.channel-data.email": {
         "type": "object",
@@ -9874,13 +10509,21 @@
           },
           {
             "$ref": "#/components/schemas/subscription.message-status-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.conversation-status-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.conversation-message-subscription"
           }
         ],
         "discriminator": {
           "propertyName": "eventType",
           "mapping": {
             "MESSAGE": "#/components/schemas/subscription.message-subscription",
-            "MESSAGE_STATUS": "#/components/schemas/subscription.message-status-subscription"
+            "MESSAGE_STATUS": "#/components/schemas/subscription.message-status-subscription",
+            "CONVERSATION_MESSAGE": "#/components/schemas/subscription.conversation-message-subscription",
+            "CONVERSATION_STATUS": "#/components/schemas/subscription.conversation-status-subscription"
           }
         }
       },
@@ -9941,6 +10584,55 @@
         "required": [
           "eventType",
           "webhook"
+        ]
+      },
+      "subscription.conversation-message-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "$ref": "#/components/schemas/message.channel"
+                  },
+                  "direction": {
+                    "title": "Message direction",
+                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT",
+                      "INTERNAL"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "subscription.conversation-status-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "title": "ID",
+                "type": "string"
+              },
+              "contactId": {
+                "title": "contactId",
+                "type": "string"
+              }
+            }
+          }
         ]
       },
       "subscription.message-status-subscription": {
@@ -10062,13 +10754,21 @@
           },
           {
             "$ref": "#/components/schemas/subscription.partial-status.message-status-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.conversation-status-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.conversation-message-subscription"
           }
         ],
         "discriminator": {
           "propertyName": "eventType",
           "mapping": {
             "MESSAGE": "#/components/schemas/subscription.partial-status.message-subscription",
-            "MESSAGE_STATUS": "#/components/schemas/subscription.partial-status.message-status-subscription"
+            "MESSAGE_STATUS": "#/components/schemas/subscription.partial-status.message-status-subscription",
+            "CONVERSATION_STATUS": "#/components/schemas/subscription.partial-status.conversation-status-subscription",
+            "CONVERSATION_MESSAGE": "#/components/schemas/subscription.partial-status.conversation-message-subscription"
           }
         }
       },
@@ -10085,7 +10785,9 @@
             "type": "string",
             "enum": [
               "MESSAGE",
-              "MESSAGE_STATUS"
+              "MESSAGE_STATUS",
+              "CONVERSATION_STATUS",
+              "CONVERSATION_MESSAGE"
             ]
           },
           "webhook": {
@@ -10129,6 +10831,55 @@
         "required": [
           "eventType",
           "webhook"
+        ]
+      },
+      "subscription.partial-status.conversation-message-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "$ref": "#/components/schemas/message.channel"
+                  },
+                  "direction": {
+                    "title": "Message direction",
+                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT",
+                      "INTERNAL"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "subscription.partial-status.conversation-status-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "title": "ID",
+                "type": "string"
+              },
+              "contactId": {
+                "title": "contactId",
+                "type": "string"
+              }
+            }
+          }
         ]
       },
       "subscription.partial-status.message-status-subscription": {
@@ -13562,7 +14313,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
     },
     {
       "name": "Templates",
