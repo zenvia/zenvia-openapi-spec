@@ -61,8 +61,6 @@ The predefined order must be:
 - **`measurementUnit`**: Product unit of measurement
   - **Required**: `true`
   - **Type**: `string`
-  - **Min Size**: `1`
-  - **Max Size**: `255`
   - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
 
 - **`priceUnit`**: Unit price of the product
@@ -79,14 +77,11 @@ The predefined order must be:
 - **`currency`**: Currency
   - **Required**: `true`
   - **Type**: `string`
-  - **Min Size**: `1`
-  - **Max Size**: `3`
   - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
 
 - **`ncm`**: NCM (Mercosur Common Nomenclature)
   - **Required**: `false`
   - **Type**: `string`
-  - **Min Size**: `1`
   - **Max Size**: `255`
 
 #### CSV Lifecycle
