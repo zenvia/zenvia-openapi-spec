@@ -161,6 +161,8 @@ To include multiple products in a single order, use the comma-separated list for
 - `name`: `Product A, Product B, Product C`
 - `quantity`: `2, 1, 5`
 
+If it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.
+
 The API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.
 
 #### CSV Lifecycle
