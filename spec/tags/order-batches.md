@@ -130,16 +130,18 @@ The predefined order must be:
       - **Required**: `false`
       - **Type**: `string`
       - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
-    - **`priceUnit`**: Unit price of the item
+    - `priceUnit` - Unit price
       - **Required**: `true`
-      - **Type**: `string` || `number`
-      - **Max Size**: `30`
+      - **Type**: `string or number`
+        - Maintain decimal precision, do not round
+      - **Max Size**: `30` characters
       - **Format**:
-        - Must accept only positive numbers;
-        - Numbers should not have thousands separators;
-        - Must accept integers and decimals with `,` (comma) separator;
-        - Must not accept decimal separator of `.`;
-        - Example of valid formats: `15236,15` | `458`
+        - Must only accept positive numbers;
+        - Numbers should not have a thousand separator;
+        - Must accept integers and decimals with `,` as a separator;
+        - Must not accept `.` as a decimal separator;
+        - Accepts a maximum of two decimal places;
+        - **Example of valid formats**: `15236,15` | `458`
       - **Precision**: `19,2` in case of number.
     - **`currency`**: Currency
       - **Required**: `true`

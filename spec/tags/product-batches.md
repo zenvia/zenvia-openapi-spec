@@ -72,7 +72,9 @@ The predefined order must be:
     - Numbers should not have thousands separators;
     - Must accept integers and decimals with `,` (comma) separator;
     - Must not accept decimal separator of `.`;
-    - Example of valid formats: `15236,15` | `458`
+    - Accepts a maximum of two decimal places;
+    - **Example of valid formats**: `15236,15` | `458`
+  - **Precision**: `19,2` in case of number.
 
 - **`currency`**: Currency
   - **Required**: `true`
