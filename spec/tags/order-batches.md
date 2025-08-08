@@ -84,14 +84,19 @@ The predefined order must be:
     - Other special characters will not be accepted
     - Letters will not be accepted
 
-- **`email`**: Customer's email
-  - **Required**: `false`
-  - **Type**: `string`
-  - **Max Size**: `255`
-  - **Format**:
-    - Must contain `@`;
+- **`email`**: Contact's email(s)
+  - **Required**: `true` if `mobile` is not provided
+  - **Type**: `list`
+  - **Format**: `[youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com]`
+  - **Requirements**:
+    - Existing domain;
+    - Spaces will be replaced by an empty string (→ change to data mapping);
+    - Uppercase characters will be replaced by lowercase (→ change to data mapping);
+    - Must start with at least one letter or number;
+    - No accents allowed;
     - No special characters except for `_`, `.`, `@`, `-`;
-    - Example: `isaachermel@zenvia.com`
+    - Must contain `@`;
+    - Example Regex: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')`
 
 - **`orderStatus`**: Order status
   - **Required**: `true`
