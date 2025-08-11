@@ -38,9 +38,16 @@ const post: OperationObject = {
   responses: {
     201: {
       description: 'Batch imported successfully.',
+      headers: {
+        Location: {
+          description: 'The URL where the newly created batch can be found.',
+          schema: {
+            type: 'string',
+          },
+        },
+      },
       content: {
         'application/json': {
-          type: 'object',
           schema: {
             $ref: batchCreateResponseRef,
           } as SchemaObject,

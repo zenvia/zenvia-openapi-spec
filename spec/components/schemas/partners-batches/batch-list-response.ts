@@ -22,7 +22,6 @@ const base: SchemaObject = {
     },
     fileUrl: {
       type: 'string',
-      format: 'url',
       description: 'The uploaded file\'s url.',
       example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin',
     },
@@ -34,7 +33,6 @@ const base: SchemaObject = {
     },
     feedbackUrl: {
       type: 'string',
-      format: 'url',
       description: 'The uploaded file\'s feedback url.',
       example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin',
     },
