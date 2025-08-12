@@ -1903,6 +1903,95 @@ paths:
                 $ref: '#/components/schemas/chatbot.chatbot-outbound'
         default:
           $ref: '#/components/responses/error'
+  /contact-batches:
+    post:
+      summary: Import a batch of contacts
+      description: Import a batch of contacts to be processed.
+      tags:
+        - Contact Batches
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to be imported.
+      responses:
+        '201':
+          description: Batch imported successfully.
+          headers:
+            Location:
+              description: The URL where the newly created batch can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-create-response'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List all batches of contacts
+      description: List all created batches of contacts.
+      tags:
+        - Contact Batches
+      parameters:
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/page'
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batches listed successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-batches.batch-list-response'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+            x-page-size:
+              schema:
+                description: The number of results per page.
+                type: string
+                example: '10'
+            x-page:
+              schema:
+                description: The current page.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+  '/contact-batches/{batchId}':
+    get:
+      summary: Retrieve batch by id
+      description: Retrieve a contact batch by its id.
+      tags:
+        - Contact Batches
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batch retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-list-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/batchId'
   /contact-custom-data-fields:
     post:
       summary: Create a new contact custom data field
@@ -2464,6 +2553,95 @@ paths:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/flowBatchId'
+  /invoice-batches:
+    post:
+      summary: Import a batch of invoices
+      description: Import a batch of invoices to be processed.
+      tags:
+        - Invoice Batches
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to be imported.
+      responses:
+        '201':
+          description: Batch imported successfully.
+          headers:
+            Location:
+              description: The URL where the newly created batch can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-create-response'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List all batches of invoices
+      description: List all created batches of invoices.
+      tags:
+        - Invoice Batches
+      parameters:
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/page'
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batches listed successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-batches.batch-list-response'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+            x-page-size:
+              schema:
+                description: The number of results per page.
+                type: string
+                example: '10'
+            x-page:
+              schema:
+                description: The current page.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+  '/invoice-batches/{batchId}':
+    get:
+      summary: Retrieve batch by id
+      description: Retrieve a invoice batch by its id.
+      tags:
+        - Invoice Batches
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batch retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-list-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/batchId'
   '/marketing-automations/{automationId}/dispatches':
     post:
       summary: Dispatch a marketing automation
@@ -2487,6 +2665,184 @@ paths:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/automationId'
+  /order-batches:
+    post:
+      summary: Import a batch of orders
+      description: Import a batch of orders to be processed.
+      tags:
+        - Order Batches
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to be imported.
+      responses:
+        '201':
+          description: Batch imported successfully.
+          headers:
+            Location:
+              description: The URL where the newly created batch can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-create-response'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List all batches of orders
+      description: List all created batches of orders.
+      tags:
+        - Order Batches
+      parameters:
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/page'
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batches listed successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-batches.batch-list-response'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+            x-page-size:
+              schema:
+                description: The number of results per page.
+                type: string
+                example: '10'
+            x-page:
+              schema:
+                description: The current page.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+  '/order-batches/{batchId}':
+    get:
+      summary: Retrieve batch by id
+      description: Retrieve a order batch by its id.
+      tags:
+        - Order Batches
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batch retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-list-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/batchId'
+  /product-batches:
+    post:
+      summary: Import a batch of products
+      description: Import a batch of products to be processed.
+      tags:
+        - Product Batches
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file to be imported.
+      responses:
+        '201':
+          description: Batch imported successfully.
+          headers:
+            Location:
+              description: The URL where the newly created batch can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-create-response'
+        default:
+          $ref: '#/components/responses/error'
+    get:
+      summary: List all batches of products
+      description: List all created batches of products.
+      tags:
+        - Product Batches
+      parameters:
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/page'
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batches listed successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partners-batches.batch-list-response'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+            x-page-size:
+              schema:
+                description: The number of results per page.
+                type: string
+                example: '10'
+            x-page:
+              schema:
+                description: The current page.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+  '/product-batches/{batchId}':
+    get:
+      summary: Retrieve batch by id
+      description: Retrieve a product batch by its id.
+      tags:
+        - Product Batches
+      security:
+        - TOKEN: []
+      responses:
+        '200':
+          description: Batch retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-batches.batch-list-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/batchId'
   /reports/flow/entries:
     get:
       description: Retrieve all entries applying the given filters
@@ -7721,6 +8077,118 @@ components:
               example: 1
             conversation:
               $ref: '#/components/schemas/content.conversation'
+    partners-batches.batch-create-response:
+      type: object
+      description: Represents the imported batch.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the import record.
+          example: dc514337-14c4-4f53-947b-93088b450e2e
+        organizationId:
+          type: string
+          description: The unique identifier of the organization the import belongs to.
+          example: a49c0383-57b1-4627-bfaa-6019b7e7fe53
+        fileUrl:
+          type: string
+          description: The uploaded file's url.
+          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
+        fileName:
+          type: string
+          description: The name of the imported file.
+          example: Contacts - Batch 1
+        size:
+          type: string
+          description: The size of the file.
+          example: 24 Mb
+        status:
+          type: string
+          description: The final status of the file processing.
+          enum:
+            - SUCCESS
+            - PENDING
+            - FAILED
+          example: SUCCESS
+        createdAt:
+          type: string
+          format: date-time
+          description: 'The date and time the record was created, in ISO 8601 format.'
+          example: '2025-04-23T18:42:50.325Z'
+    partners-batches.batch-list-response:
+      type: object
+      description: Represents a batch of contacts for processing.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the batch.
+          example: c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e
+        organizationId:
+          type: string
+          description: The ID of the organization the batch belongs to.
+          example: a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6
+        fileName:
+          type: string
+          description: The original name of the uploaded file.
+          example: contacts_q3_2025.csv
+        fileUrl:
+          type: string
+          description: The uploaded file's url.
+          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
+        fileExpireTime:
+          type: string
+          format: date-time
+          description: The expiration date and time for file access. (Default of 10 days.)
+          example: '2025-08-06T23:59:59.000Z'
+        feedbackUrl:
+          type: string
+          description: The uploaded file's feedback url.
+          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin'
+        size:
+          type: string
+          description: 'The size of the file (e.g., "15 Mb").'
+          example: 2.5 Mb
+        lines:
+          type: number
+          description: The number of lines or records in the file.
+          example: 1000
+        status:
+          type: string
+          description: The current processing status of the batch.
+          enum:
+            - SUCCESS
+            - PENDING
+            - FAILED
+          example: SUCCESS
+        consolidatedStatus:
+          type: object
+          description: Describes the consolidated status of the batch processing. (Only showed when `status` is `SUCCESS` or `FAILED`.)
+          properties:
+            extractedRecords:
+              type: number
+              description: The number of records extracted from the original file.
+              example: 1000
+            mappedRecords:
+              type: number
+              description: The number of records successfully mapped to the expected format.
+              example: 1000
+            successProcessedRecords:
+              type: number
+              description: The number of records that were successfully processed and saved.
+              example: 990
+            errorProcessedRecords:
+              type: number
+              description: The number of records that failed during processing.
+              example: 10
+        createdAt:
+          type: string
+          format: date-time
+          description: The creation date and time of the batch.
+          example: '2025-07-30T19:55:42.321Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time of the last update to the batch.
+          example: '2025-07-30T19:56:10.123Z'
     reports.flow.entries.base:
       title: Entry object for Flow Report
       description: The entry object model for Flow Report.
@@ -10110,6 +10578,14 @@ components:
       description: The marketing automation identifier
       schema:
         type: string
+    batchId:
+      name: batchId
+      in: path
+      required: true
+      description: Batch identifier
+      schema:
+        type: string
+      example: b5agf1-y237-11e8-b127-1230f6c2d98m
     chatbotId:
       name: chatbotId
       in: path
@@ -11281,6 +11757,726 @@ tags:
   - name: Status Groups
     description: |
       Centralized API for status and monitoring of Zenvia platforms and solutions. This API can be used by customers who need to monitor our services for better understanding.
+  - name: Contact Batches
+    description: |
+      Import batches of contact-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation** and the **Contact Manager Database**, alongside other features that are used alongside other APIs like:
+
+      - [Product Batches API](#tag/Product-Batches)
+      - [Order Batches API](#tag/Order-Batches)
+      - [Invoice Batches API](#tag/Invoice-Batches)
+
+      ## Building the CSV File
+
+      To use the Contact Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
+
+      ### CSV File Structure
+
+      The CSV file must follow the structure below:
+
+      - The first line must contain the table header.
+      - The columns must be in the predefined order, listed below.
+      - Columns must be separated by a semicolon (`;`).
+
+      The predefined order must be:
+
+      - **`externalPlatform`**: ERP identifier
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+
+      - **`externalId`**: Contact's id
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max**: `255`
+
+      - **`firstName`**: Contact's first name
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Min Size**: `1`
+
+      - **`lastName`**: Contact's last name
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+
+      - **`birthdate`**: Contact's birthdate
+        - **Required**: `false`
+        - **Type**: `date`
+        - **Format**: `YYYY-MM-DD` or `""`
+
+      - **`email`**: Contact's email(s)
+        - **Required**: `true` if `mobile` is not provided
+        - **Type**: `list`
+        - **Format**: `[youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com]`
+        - **Requirements**:
+          - Existing domain;
+          - Spaces will be replaced by an empty string (→ change to data mapping);
+          - Uppercase characters will be replaced by lowercase (→ change to data mapping);
+          - Must start with at least one letter or number;
+          - No accents allowed;
+          - No special characters except for `_`, `.`, `@`, `-`;
+          - Must contain `@`;
+          - Example Regex: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')`
+
+      - **`mobile`**: Contact's mobile number(s)
+        - **Required**: `true` if `email` is not provided
+        - **Type**: `string`
+        - **Format**: Validate if there will be more than one contact number.
+        - **Requirements**:
+          - DDD (Area Code) - must be valid in Brazil.
+          - **Max Size**: `9` (counting only the phone number).
+          - **Min Size**: `8` (counting only the phone number).
+          - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
+          - Parentheses and hyphens will be accepted and replaced by an empty string.
+          - Other special characters will not be accepted.
+          - Letters will not be accepted.
+
+      - **`landline`**: Contact's landline number(s)
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Format**: Validate if there will be more than one contact number.
+        - **Requirements**:
+          - DDD (Area Code) - must be valid in Brazil.
+          - **Max Size**: `9` (counting only the phone number).
+          - **Min Size**: `8` (counting only the phone number).
+          - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
+          - Parentheses and hyphens will be accepted and replaced by an empty string.
+          - Letters will not be accepted.
+
+      - **`country`**: Contact's country
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Requirements**: Will only be valid if a valid state exists.
+
+      - **`zipcode`**: Contact's zipcode
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `50`
+        - **Requirements**: Will only be imported if a valid state exists.
+
+      - **`state`**: Contact's state
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Requirements**: It is a required value to import the contact's address. If it's invalid or not provided, the address-related values will be discarded.
+
+      - **`city`**: Contact's city
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Requirements**: Will only be valid if a valid state exists.
+
+      - **`address`**: Contact's address
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Requirements**: Will only be valid if a valid state exists.
+
+      - **`streetNumber`**: Contact's street number
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `50`
+        - **Requirements**: Will only be valid if a valid state exists.
+
+      - **`neighborhood`**: Contact's neighborhood
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `100`
+        - **Requirements**: Will only be valid if a valid state exists.
+        
+      #### CSV Lifecycle
+
+      All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
+
+      This 10 days will start couting by the day of it's creation.
+
+      #### The Feedback CSV
+
+      After your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.
+
+      You can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.
+
+      This feedback file is the same as the file you sent to us, but with a few changes:
+
+      Three new fields are created in it:
+
+      - `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.
+      - `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.
+      - `errorMessages`: Will display the errors that prevented the row in question from being validated.
+
+      The fields will be updated as follows:
+
+      - Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.
+      - If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.
+
+      ### Batch lifecycle
+
+      The contact batch will have the following lifecycle:
+
+      1. The batch is imported and saved on our database
+      2. The batch is processed in our infrastructure
+      3. After this, the batch can have one of these two statuses:
+
+      `SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.
+
+      `FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+
+      On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
+  - name: Product Batches
+    description: |
+      Import batches of product-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation** and the **Product Catalog Database**, alongside other features that are used alongside other APIs like:
+
+      - [Contact Batches API](#tag/Contact-Batches)
+      - [Order Batches API](#tag/Order-Batches)
+      - [Invoice Batches API](#tag/Invoice-Batches)
+
+      ## Building the CSV File
+
+      To use the Product Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
+
+      ### CSV File Structure
+
+      The CSV file must follow the structure below:
+
+      - The first line must contain the table header.
+      - The columns must be in the predefined order, listed below.
+      - Columns must be separated by a semicolon (`;`).
+
+      The predefined order must be:
+
+      - **`externalPlatform`**: ERP identifier
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+
+      - **`externalId`**: Product ID on external platform
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Max Size**: `255`
+
+      - **`name`**: Product name
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `500`
+
+      - **`sku`**: SKU (Stock Keeping Unit) on product
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `255`
+
+      - **`ean`**: EAN (European Article Number) on product
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `500`
+
+      - **`brand`**: Product brand
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `500`
+
+      - **`description`**: Detailed Product Description
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `500`
+
+      - **`measurementUnit`**: Product unit of measurement
+        - **Required**: `true`
+        - **Type**: `string`
+        - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+
+      - **`priceUnit`**: Unit price of the product
+        - **Required**: `true`
+        - **Type**: `string` || `number`
+        - **Max Size**: `30`
+        - **Format**:
+          - Must accept only positive numbers;
+          - Numbers should not have thousands separators;
+          - Must accept integers and decimals with `,` (comma) separator;
+          - Must not accept decimal separator of `.`;
+          - Accepts a maximum of two decimal places;
+          - **Example of valid formats**: `15236,15` | `458`
+        - **Precision**: `19,2` in case of number.
+
+      - **`currency`**: Currency
+        - **Required**: `true`
+        - **Type**: `string`
+        - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+
+      - **`ncm`**: NCM (Mercosur Common Nomenclature)
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `255`
+
+      #### CSV Lifecycle
+
+      All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
+
+      This 10 days will start couting by the day of it's creation.
+
+      #### The Feedback CSV
+
+      After your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.
+
+      You can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.
+
+      This feedback file is the same as the file you sent to us, but with a few changes:
+
+      Three new fields are created in it:
+
+      - `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.
+      - `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.
+      - `errorMessages`: Will display the errors that prevented the row in question from being validated.
+
+      The fields will be updated as follows:
+
+      - Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.
+      - If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.
+
+      ### Batch lifecycle
+
+      The contact batch will have the following lifecycle:
+
+      1. The batch is imported and saved on our database
+      2. The batch is processed in our infrastructure
+      3. After this, the batch can have one of these two statuses:
+
+      `SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.
+
+      `FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+
+      On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
+  - name: Order Batches
+    description: |
+      Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:
+
+      - [Product Batches API](#tag/Product-Batches)
+      - [Order Batches API](#tag/Order-Batches)
+      - [Invoice Batches API](#tag/Invoice-Batches)
+
+      ## Building the CSV File
+
+      To use the Order Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
+
+      ### CSV File Structure
+
+      The CSV file must follow the structure below:
+
+      - The first line must contain the table header.
+      - The columns must be in the predefined order, listed below.
+      - Columns must be separated by a semicolon (`;`).
+
+      The predefined order must be:
+
+      - **`externalPlatform`**: ERP identifier
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+
+      - **`externalId`**: Order ID on external platform
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Max Size**: `255`
+
+      - **`invoiceExternalId`**: External ID of the invoice
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+
+      - **`customerExternalId`**: Customer ID on external platform
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `255`
+
+      - **`orderNumber`**: Order number
+        - **Required**: `true`
+        - **Type**: `string`
+        = **Min Size**: `1` 
+        - **Max Size**: `255`
+
+      - **`orderTimestamp`**: Order creation timestamp
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Format**: `YYYY-MM-DD HH:MM:SS`
+
+      - **`totalAmount`**: Total amount of the order
+        - **Required**: `true`
+        - **Type**: `string` || `number`
+        - **Max Size**: `30`
+        - **Format**:
+          - Must accept only positive numbers;
+          - Numbers should not have thousands separators;
+          - Must accept integers and decimals with `,` (comma) separator;
+          - Must not accept decimal separator of `.`;
+          - Example of valid formats: `15236,15` | `458`
+        - **Precision**: `19,2` in case of number.
+
+      - **`legalCode`**: Legal code (e.g., CNPJ, CPF)
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+
+      - **`legalName`**: Legal name of the customer
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+
+      - **`primaryPhone`** - Customer's main phone number
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Format**: validate if there will be more than one contact number
+        - **Requirements**:
+          - **DDD** - must be a valid Brazilian area code
+          - **max_size**: `9` (counting only the phone number)
+          - **min_size**: `8` (counting only the phone number)
+          - If the above requirements are met, add DDI - add `55` to the phones.
+          - Parentheses and hyphens will be accepted and replaced with an empty string
+          - Other special characters will not be accepted
+          - Letters will not be accepted
+
+      - **`email`**: Contact's email(s)
+        - **Required**: `true` if `mobile` is not provided
+        - **Type**: `list`
+        - **Format**: `[youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com]`
+        - **Requirements**:
+          - Existing domain;
+          - Spaces will be replaced by an empty string (→ change to data mapping);
+          - Uppercase characters will be replaced by lowercase (→ change to data mapping);
+          - Must start with at least one letter or number;
+          - No accents allowed;
+          - No special characters except for `_`, `.`, `@`, `-`;
+          - Must contain `@`;
+          - Example Regex: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')`
+
+      - **`orderStatus`**: Order status
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Min Size**: `1`
+        - **Max Size**: `255`
+
+      - **`items`**: Order items
+        - **Item**:
+          - The item is included within the order.
+          - **Multiple items per order**: Item fields can contain multiple values separated by commas to represent various products in a single order.
+          - **`productExternalId`**: Product ID on external platform
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `500`
+          - **`sku`**: SKU (Stock Keeping Unit)
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `255`
+          - **`ean`**: EAN (European Article Number)
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `500`
+          - **`name`**: Product name
+            - **Required**: `true`
+            - **Type**: `string`
+            - **Min Size**: `1`
+            - **Max Size**: `500`
+          - **`quantity`**: Item quantity
+            - **Required**: `true`
+            - **Type**: `string` || `number`
+            - **Format**: double
+            - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.
+            - **Max Size**: `30`
+          - **`measurementUnit`**: Product unit of measurement
+            - **Required**: `false`
+            - **Type**: `string`
+            - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+          - `priceUnit` - Unit price
+            - **Required**: `true`
+            - **Type**: `string or number`
+              - Maintain decimal precision, do not round
+            - **Max Size**: `30` characters
+            - **Format**:
+              - Must only accept positive numbers;
+              - Numbers should not have a thousand separator;
+              - Must accept integers and decimals with `,` as a separator;
+              - Must not accept `.` as a decimal separator;
+              - Accepts a maximum of two decimal places;
+              - **Example of valid formats**: `15236,15` | `458`
+            - **Precision**: `19,2` in case of number.
+          - **`currency`**: Currency
+            - **Required**: `true`
+            - **Type**: `string`
+            - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+
+      #### Working with multiple items
+
+      To include multiple products in a single order, use the comma-separated list format in each item-related field. For example:
+
+      - `productExternalId`: `PROD001, PROD002, PROD003`
+      - `name`: `Product A, Product B, Product C`
+      - `quantity`: `2, 1, 5`
+
+      If it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.
+
+      The API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.
+
+      #### CSV Lifecycle
+
+      All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
+
+      This 10 days will start couting by the day of it's creation.
+
+      #### The Feedback CSV
+
+      After your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.
+
+      You can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.
+
+      This feedback file is the same as the file you sent to us, but with a few changes:
+
+      Three new fields are created in it:
+
+      - `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.
+      - `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.
+      - `errorMessages`: Will display the errors that prevented the row in question from being validated.
+
+      The fields will be updated as follows:
+
+      - Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.
+      - If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.
+
+      ### Batch lifecycle
+
+      The contact batch will have the following lifecycle:
+
+      1. The batch is imported and saved on our database
+      2. The batch is processed in our infrastructure
+      3. After this, the batch can have one of these two statuses:
+
+      `SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.
+
+      `FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+
+      On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
+  - name: Invoice Batches
+    description: |
+      Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:
+
+      - [Contact Batches API](#tag/Contact-Batches)
+      - [Product Batches API](#tag/Product-Batches)
+      - [Order Batches API](#tag/Order-Batches)
+
+      ## Building the CSV File
+
+      To use the Invoice Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:
+
+      ### CSV File Structure
+
+      The CSV file must follow the structure below:
+
+      - The first line must contain the table header.
+      - The columns must be in the predefined order, listed below.
+      - Columns must be separated by a semicolon (`;`).
+
+      The predefined order must be:
+
+      - `externalPlatform` - Source ERP identification
+      - **Required**: `true`
+        - **Type**: `string (uppercase and lowercase)`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+      - `externalId` - Internal code from the source system
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Max Size**: `255`
+        - **Min Size**: `1`
+      - `customerExternalId` - Internal contact code in the source system
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `issueTimestamp` - Date and time of the fiscal note issuance
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Format**: `YYYY-MM-DD HH:MM:SS`
+      - `invoiceKey` - Fiscal note key
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `invoiceNumber` - Fiscal note number
+        - **Required**: `true`
+        - **Type**: `string`
+        - **Max Size**: `500`
+        - **Min Size**: `1`
+      - `invoiceSerie` - Fiscal note series
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `orderNumber` - Related order number
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `255`
+      - `orderExternalId` - Unique order ID
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `legalCode` - Issuing company's legal code
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `legalName` - Issuing company's legal name
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `500`
+      - `primaryPhone` - Customer's main phone number
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Format**: validate if there will be more than one contact number
+        - **Requirements**:
+          - **DDD** - must be a valid Brazilian area code
+          - **max_size**: `9` (counting only the phone number)
+          - **min_size**: `8` (counting only the phone number)
+          - If the above requirements are met, add DDI - add `55` to the phones.
+          - Parentheses and hyphens will be accepted and replaced with an empty string
+          - Other special characters will not be accepted
+          - Letters will not be accepted
+      - **`email`**: Customer's email
+        - **Required**: `false`
+        - **Type**: `string`
+        - **Max Size**: `255`
+        - **Format**:
+          - Must contain `@`;
+          - No special characters except for `_`, `.`, `@`, `-`;
+          - Example: `isaac.hermel@zenvia.com`
+      - `totalAmount` - Total value of the fiscal note
+        - **Required**: `true`
+        - **Type**: `string or number`
+          - Maintain decimal precision, do not round
+        - **Max Size**: `30` characters
+        - **Format**:
+          - Must only accept positive numbers;
+          - Numbers should not have a thousand separator;
+          - Must accept integers and decimals with `,` as a separator;
+          - Must not accept `.` as a decimal separator;
+          - Accepts a maximum of two decimal places;
+          - **Example of valid formats**: `15236,15` | `458`
+        - **Precision**: `19,2` in case of number.
+
+      - `items`: Invoice items
+        - **Item**:
+          - The item is included within the invoice.
+          - **Multiple items per invoice**: Item fields can contain multiple values separated by commas to represent various products in a single invoice.
+          - `productExternalId` - Product's source code
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `500`
+          - `sku` - Product's SKU
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `255`
+          - `ean` - Product's EAN code
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `500`
+          - `name` - Product's name/description
+            - **Required**: `true`
+            - **Type**: `string`
+            - **Max Size**: `500`
+            - **Min Size**: `1`
+          - `quantity` - Item quantity
+            - **Required**: `true`
+            - **Type**: `string or number`
+            - **Max Size**: `30` characters
+            - **Format**:
+              - Must only accept positive numbers;
+              - Numbers should not have a thousand separator;
+              - Must accept integers and decimals with `,` as a separator;
+              - Must not accept `.` as a decimal separator;
+              - Accepts a maximum of two decimal places;
+              - **Example of valid formats**: `15236,15` | `458`
+          - `measurementUnit` - Unit of measurement
+            - **Required**: `false`
+            - **Type**: `string`
+            - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+            - Accept uppercase and lowercase
+          - `priceUnit` - Unit price
+            - **Required**: `true`
+            - **Type**: `string or number`
+              - Maintain decimal precision, do not round
+            - **Max Size**: `30` characters
+            - **Format**:
+              - Must only accept positive numbers;
+              - Numbers should not have a thousand separator;
+              - Must accept integers and decimals with `,` as a separator;
+              - Must not accept `.` as a decimal separator;
+              - Accepts a maximum of two decimal places;
+              - **Example of valid formats**: `15236,15` | `458`
+            - **Precision**: `19,2` in case of number.
+          - `totalValue` - Total value of the item
+            - **Required**: `false`
+            - **Type**: `string | string[] / number | number[]`
+          - `fiscalOperationCode` - Fiscal operation code
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `500`
+          - `ncm` - Product's NCM code
+            - **Required**: `false`
+            - **Type**: `string`
+            - **Max Size**: `255`
+          - `currency` - Currency
+            - **Required**: `true`
+            - **Type**: `string`
+            - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)
+
+      #### Working with multiple items
+
+      To include multiple products in a single invoice, use the comma-separated list format in each item-related field. For example:
+
+      - `productExternalId`: `PROD001, PROD002, PROD003`
+      - `name`: `Product A, Product B, Product C`
+      - `quantity`: `2, 1, 5`
+
+      If it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.
+
+      The API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.
+
+      #### CSV Lifecycle
+
+      All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
+
+      This 10 days will start couting by the day of it's creation.
+
+      #### The Feedback CSV
+
+      After your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.
+
+      You can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.
+
+      This feedback file is the same as the file you sent to us, but with a few changes:
+
+      Three new fields are created in it:
+
+      - `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.
+      - `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.
+      - `errorMessages`: Will display the errors that prevented the row in question from being validated.
+
+      The fields will be updated as follows:
+
+      - Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.
+      - If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.
+
+      ### Batch lifecycle
+
+      The contact batch will have the following lifecycle:
+
+      1. The batch is imported and saved on our database
+      2. The batch is processed in our infrastructure
+      3. After this, the batch can have one of these two statuses:
+
+      `SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.
+
+      `FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
+
+      On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
 x-tagGroups:
   - name: Messaging
     tags:
@@ -11316,6 +12512,16 @@ x-tagGroups:
       - Contacts
       - Contact Lists
       - Contact Custom Data Fields
+      - Contact Batches
+  - name: Products
+    tags:
+      - Product Batches
+  - name: Orders
+    tags:
+      - Order Batches
+  - name: Invoices
+    tags:
+      - Invoice Batches
   - name: Reports
     tags:
       - Message Report
