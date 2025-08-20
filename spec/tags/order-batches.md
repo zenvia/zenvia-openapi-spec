@@ -41,7 +41,7 @@ The predefined order must be:
 - **`orderNumber`**: Order number
   - **Required**: `true`
   - **Type**: `string`
-  = **Min Size**: `1` 
+  = **Min Size**: `1`
   - **Max Size**: `255`
 
 - **`orderTimestamp`**: Order creation timestamp
@@ -101,8 +101,23 @@ The predefined order must be:
 - **`orderStatus`**: Order status
   - **Required**: `true`
   - **Type**: `string`
-  - **Min Size**: `1`
-  - **Max Size**: `255`
+  - **Enum**: `WAITING_PAYMENT`,
+  `PAYMENT_ANALYSIS`,
+  `PAYMENT_CONFIRMED`,
+  `ORDER_EXPEDITING`,
+  `ORDER_SHIPPED`,
+  `ORDER_CANCELED`,
+  `ORDER_FINISHED`,
+  `PAYMENT_DENIED`,
+  `ORDER_AVAILABLE`,
+  `ORDER_RETURNED`,
+  `ORDER_REVIEW`,
+  `INVOICE_ISSUED`,
+  `ORDER_PREPARING`,
+  `RECEIPT_ISSUED`,
+  `ON_ROUTE`,
+  `PICKUP_AVAILABLE`,
+  `DELIVERED`
 
 - **`items`**: Order items
   - **Item**:
