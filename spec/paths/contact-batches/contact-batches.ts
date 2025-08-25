@@ -32,7 +32,7 @@ const post: OperationObject = {
             },
           },
           required: [
-            'content',
+            'file',
           ],
         },
       },
