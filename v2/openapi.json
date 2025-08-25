@@ -1971,9 +1971,13 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "CSV file to be imported."
+                    "description": "CSV file to be imported.",
+                    "minLength": 8
                   }
-                }
+                },
+                "required": [
+                  "file"
+                ]
               }
             }
           }
@@ -2966,9 +2970,13 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "CSV file to be imported."
+                    "description": "CSV file to be imported.",
+                    "minLength": 8
                   }
-                }
+                },
+                "required": [
+                  "file"
+                ]
               }
             }
           }
@@ -3154,9 +3162,13 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "CSV file to be imported."
+                    "description": "CSV file to be imported.",
+                    "minLength": 8
                   }
-                }
+                },
+                "required": [
+                  "file"
+                ]
               }
             }
           }
@@ -3303,9 +3315,13 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "CSV file to be imported."
+                    "description": "CSV file to be imported.",
+                    "minLength": 8
                   }
-                }
+                },
+                "required": [
+                  "file"
+                ]
               }
             }
           }

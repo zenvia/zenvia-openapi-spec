@@ -1922,6 +1922,9 @@ paths:
                   type: string
                   format: binary
                   description: CSV file to be imported.
+                  minLength: 8
+              required:
+                - file
       responses:
         '201':
           description: Batch imported successfully.
@@ -2572,6 +2575,9 @@ paths:
                   type: string
                   format: binary
                   description: CSV file to be imported.
+                  minLength: 8
+              required:
+                - file
       responses:
         '201':
           description: Batch imported successfully.
@@ -2684,6 +2690,9 @@ paths:
                   type: string
                   format: binary
                   description: CSV file to be imported.
+                  minLength: 8
+              required:
+                - file
       responses:
         '201':
           description: Batch imported successfully.
@@ -2773,6 +2782,9 @@ paths:
                   type: string
                   format: binary
                   description: CSV file to be imported.
+                  minLength: 8
+              required:
+                - file
       responses:
         '201':
           description: Batch imported successfully.
