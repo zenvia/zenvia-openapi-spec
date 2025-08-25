@@ -31,6 +31,9 @@ const post: OperationObject = {
               description: 'CSV file to be imported.',
             },
           },
+          required: [
+            'content',
+          ],
         },
       },
     },
