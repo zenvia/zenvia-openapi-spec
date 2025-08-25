@@ -29,8 +29,12 @@ const post: OperationObject = {
               type: 'string',
               format: 'binary',
               description: 'CSV file to be imported.',
+              minLength: 8,
             },
           },
+          required: [
+            'file',
+          ],
         },
       },
     },
