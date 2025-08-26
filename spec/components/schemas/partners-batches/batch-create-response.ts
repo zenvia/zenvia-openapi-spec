@@ -38,7 +38,6 @@ const base: SchemaObject = {
     },
     createdAt: {
       type: 'string',
-      format: 'date-time',
       description: 'The date and time the record was created, in ISO 8601 format.',
       example: '2025-04-23T18:42:50.325Z',
     },
