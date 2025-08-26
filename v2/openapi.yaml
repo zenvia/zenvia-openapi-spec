@@ -8123,7 +8123,6 @@ components:
           example: SUCCESS
         createdAt:
           type: string
-          format: date-time
           description: 'The date and time the record was created, in ISO 8601 format.'
           example: '2025-04-23T18:42:50.325Z'
     partners-batches.batch-list-response:
@@ -8148,8 +8147,7 @@ components:
           example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
         fileExpireTime:
           type: string
-          format: date-time
-          description: The expiration date and time for file access. (Default of 10 days.)
+          description: 'The expiration date and time for file access, in ISO 8601 format. (Default of 10 days)'
           example: '2025-08-06T23:59:59.000Z'
         feedbackUrl:
           type: string
@@ -8193,13 +8191,11 @@ components:
               example: 10
         createdAt:
           type: string
-          format: date-time
-          description: The creation date and time of the batch.
+          description: 'The creation date and time of the batch, in ISO 8601 format.'
           example: '2025-07-30T19:55:42.321Z'
         updatedAt:
           type: string
-          format: date-time
-          description: The date and time of the last update to the batch.
+          description: 'The date and time of the last update to the batch, in ISO 8601 format.'
           example: '2025-07-30T19:56:10.123Z'
     reports.flow.entries.base:
       title: Entry object for Flow Report
