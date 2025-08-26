@@ -27,8 +27,7 @@ const base: SchemaObject = {
     },
     fileExpireTime: {
       type: 'string',
-      format: 'date-time',
-      description: 'The expiration date and time for file access. (Default of 10 days.)',
+      description: 'The expiration date and time for file access, in ISO 8601 format. (Default of 10 days)',
       example: '2025-08-06T23:59:59.000Z',
     },
     feedbackUrl: {
@@ -83,14 +82,12 @@ const base: SchemaObject = {
     },
     createdAt: {
       type: 'string',
-      format: 'date-time',
-      description: 'The creation date and time of the batch.',
+      description: 'The creation date and time of the batch, in ISO 8601 format.',
       example: '2025-07-30T19:55:42.321Z',
     },
     updatedAt: {
       type: 'string',
-      format: 'date-time',
-      description: 'The date and time of the last update to the batch.',
+      description: 'The date and time of the last update to the batch, in ISO 8601 format.',
       example: '2025-07-30T19:56:10.123Z',
     },
   },
