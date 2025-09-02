@@ -130,7 +130,7 @@ The predefined order must be:
         - Must not accept `.` as a decimal separator;
         - Accepts a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-    - **`measurementUnit`**: Product unit of measurement
+    - **`measurementUnit`**: Item unit of measurement
       - **Required**: `true`
       - **Type**: `string`
       - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)

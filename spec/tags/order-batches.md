@@ -146,7 +146,7 @@ The predefined order must be:
       - **Format**: double
       - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.
       - **Max Size**: `30`
-    - **`measurementUnit`**: Product unit of measurement
+    - **`measurementUnit`**: Item unit of measurement
       - **Required**: `true`
       - **Type**: `string`
       - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
