@@ -147,9 +147,10 @@ The predefined order must be:
       - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.
       - **Max Size**: `30`
     - **`measurementUnit`**: Product unit of measurement
-      - **Required**: `false`
+      - **Required**: `true`
       - **Type**: `string`
-      - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
+      - Accepts uppercase and lowercase
     - `priceUnit` - Unit price
       - **Required**: `true`
       - **Type**: `string or number`
