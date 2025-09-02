@@ -67,15 +67,13 @@ The predefined order must be:
 - `primaryPhone` - Customer's main phone number
   - **Required**: `false`
   - **Type**: `string`
-  - **Format**: validate if there will be more than one contact number
+  - **Format**: Phone numbers must be in E164 format.
   - **Requirements**:
-    - **DDD** - must be a valid Brazilian area code
-    - **max_size**: `9` (counting only the phone number)
-    - **min_size**: `8` (counting only the phone number)
-    - If the above requirements are met, add DDI - add `55` to the phones.
-    - Parentheses and hyphens will be accepted and replaced with an empty string
-    - Other special characters will not be accepted
-    - Letters will not be accepted
+    - Country Code - must be a valid country code.
+    - Region Code - must be valid in the current country.
+    - Must be a valid phone number.
+    - Must be in E164 format ex: `+528187654321`.
+    - Must have the `+` before the phone number.
 - **`email`**: Customer's email
   - **Required**: `false`
   - **Type**: `string`
@@ -130,11 +128,11 @@ The predefined order must be:
         - Must not accept `.` as a decimal separator;
         - Accepts a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-    - `measurementUnit` - Unit of measurement
-      - **Required**: `false`
+    - **`measurementUnit`**: Item unit of measurement
+      - **Required**: `true`
       - **Type**: `string`
-      - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
-      - Accept uppercase and lowercase
+      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
+      - Accepts uppercase and lowercase
     - `priceUnit` - Unit price
       - **Required**: `true`
       - **Type**: `string or number`
