@@ -8101,14 +8101,14 @@ components:
           type: string
           description: The unique identifier of the organization the import belongs to.
           example: a49c0383-57b1-4627-bfaa-6019b7e7fe53
-        fileUrl:
-          type: string
-          description: The uploaded file's url.
-          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
         fileName:
           type: string
           description: The name of the imported file.
           example: Contacts - Batch 1
+        fileUrl:
+          type: string
+          description: The uploaded file's url.
+          example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
         size:
           type: string
           description: The size of the file.
@@ -8144,15 +8144,11 @@ components:
         fileUrl:
           type: string
           description: The uploaded file's url.
-          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
+          example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin'
         fileExpireTime:
           type: string
           description: 'The expiration date and time for file access, in ISO 8601 format. (Default of 10 days)'
           example: '2025-08-06T23:59:59.000Z'
-        feedbackUrl:
-          type: string
-          description: The uploaded file's feedback url.
-          example: 'https://chat-hlg.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin'
         size:
           type: string
           description: 'The size of the file (e.g., "15 Mb").'
@@ -8169,6 +8165,10 @@ components:
             - PENDING
             - FAILED
           example: SUCCESS
+        feedbackUrl:
+          type: string
+          description: The uploaded file's feedback url.
+          example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin'
         consolidatedStatus:
           type: object
           description: Describes the consolidated status of the batch processing. (Only showed when `status` is `SUCCESS` or `FAILED`.)
@@ -11830,27 +11830,24 @@ tags:
       - **`mobile`**: Contact's mobile number(s)
         - **Required**: `true` if `email` is not provided
         - **Type**: `string`
-        - **Format**: Validate if there will be more than one contact number.
+        - **Format**: Phone numbers must be in E164 format.
         - **Requirements**:
-          - DDD (Area Code) - must be valid in Brazil.
-          - **Max Size**: `9` (counting only the phone number).
-          - **Min Size**: `8` (counting only the phone number).
-          - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
-          - Parentheses and hyphens will be accepted and replaced by an empty string.
-          - Other special characters will not be accepted.
-          - Letters will not be accepted.
+          - Country Code - must be a valid country code.
+          - Region Code - must be valid in the current country.
+          - Must be a valid mobile phone.
+          - Must be in E164 format ex: `+528187654321`.
+          - Must have the `+` before the phone number.
 
       - **`landline`**: Contact's landline number(s)
         - **Required**: `false`
         - **Type**: `string`
-        - **Format**: Validate if there will be more than one contact number.
+        - **Format**: Phone numbers must be in E164 format.
         - **Requirements**:
-          - DDD (Area Code) - must be valid in Brazil.
-          - **Max Size**: `9` (counting only the phone number).
-          - **Min Size**: `8` (counting only the phone number).
-          - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
-          - Parentheses and hyphens will be accepted and replaced by an empty string.
-          - Letters will not be accepted.
+          - Country Code - must be a valid country code.
+          - Region Code - must be valid in the current country.
+          - Must be a valid landline phone.
+          - Must be in E164 format ex: `+525512345677`.
+          - Must have the `+` before the phone number.
 
       - **`country`**: Contact's country
         - **Required**: `false`
@@ -11893,7 +11890,7 @@ tags:
         - **Type**: `string`
         - **Max Size**: `100`
         - **Requirements**: Will only be valid if a valid state exists.
-        
+
       #### CSV Lifecycle
 
       All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
@@ -11997,7 +11994,8 @@ tags:
       - **`measurementUnit`**: Product unit of measurement
         - **Required**: `true`
         - **Type**: `string`
-        - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+        - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
+        - Accepts uppercase and lowercase
 
       - **`priceUnit`**: Unit price of the product
         - **Required**: `true`
@@ -12138,15 +12136,13 @@ tags:
       - **`primaryPhone`** - Customer's main phone number
         - **Required**: `false`
         - **Type**: `string`
-        - **Format**: validate if there will be more than one contact number
+        - **Format**: Phone numbers must be in E164 format.
         - **Requirements**:
-          - **DDD** - must be a valid Brazilian area code
-          - **max_size**: `9` (counting only the phone number)
-          - **min_size**: `8` (counting only the phone number)
-          - If the above requirements are met, add DDI - add `55` to the phones.
-          - Parentheses and hyphens will be accepted and replaced with an empty string
-          - Other special characters will not be accepted
-          - Letters will not be accepted
+          - Country Code - must be a valid country code.
+          - Region Code - must be valid in the current country.
+          - Must be a valid phone number.
+          - Must be in E164 format ex: `+528187654321`.
+          - Must have the `+` before the phone number.
 
       - **`email`**: Contact's email(s)
         - **Required**: `true` if `mobile` is not provided
@@ -12210,10 +12206,11 @@ tags:
             - **Format**: double
             - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.
             - **Max Size**: `30`
-          - **`measurementUnit`**: Product unit of measurement
-            - **Required**: `false`
+          - **`measurementUnit`**: Item unit of measurement
+            - **Required**: `true`
             - **Type**: `string`
-            - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
+            - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
+            - Accepts uppercase and lowercase
           - `priceUnit` - Unit price
             - **Required**: `true`
             - **Type**: `string or number`
@@ -12353,15 +12350,13 @@ tags:
       - `primaryPhone` - Customer's main phone number
         - **Required**: `false`
         - **Type**: `string`
-        - **Format**: validate if there will be more than one contact number
+        - **Format**: Phone numbers must be in E164 format.
         - **Requirements**:
-          - **DDD** - must be a valid Brazilian area code
-          - **max_size**: `9` (counting only the phone number)
-          - **min_size**: `8` (counting only the phone number)
-          - If the above requirements are met, add DDI - add `55` to the phones.
-          - Parentheses and hyphens will be accepted and replaced with an empty string
-          - Other special characters will not be accepted
-          - Letters will not be accepted
+          - Country Code - must be a valid country code.
+          - Region Code - must be valid in the current country.
+          - Must be a valid phone number.
+          - Must be in E164 format ex: `+528187654321`.
+          - Must have the `+` before the phone number.
       - **`email`**: Customer's email
         - **Required**: `false`
         - **Type**: `string`
@@ -12416,11 +12411,11 @@ tags:
               - Must not accept `.` as a decimal separator;
               - Accepts a maximum of two decimal places;
               - **Example of valid formats**: `15236,15` | `458`
-          - `measurementUnit` - Unit of measurement
-            - **Required**: `false`
+          - **`measurementUnit`**: Item unit of measurement
+            - **Required**: `true`
             - **Type**: `string`
-            - Only accept the following formats: [Tabela_Unidades_de_Medida_Comercial](https://docs.google.com/spreadsheets/d/1L7GsmNp9Ft-DdGL9X3KcU7YcqZHvnWvDT6WU3f-xY4k/edit?gid=1500856119#gid=1500856119)
-            - Accept uppercase and lowercase
+            - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)
+            - Accepts uppercase and lowercase
           - `priceUnit` - Unit price
             - **Required**: `true`
             - **Type**: `string or number`
