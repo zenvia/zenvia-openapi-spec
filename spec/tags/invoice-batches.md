@@ -67,15 +67,13 @@ The predefined order must be:
 - `primaryPhone` - Customer's main phone number
   - **Required**: `false`
   - **Type**: `string`
-  - **Format**: validate if there will be more than one contact number
+  - **Format**: Phone numbers must be in E164 format.
   - **Requirements**:
-    - **DDD** - must be a valid Brazilian area code
-    - **max_size**: `9` (counting only the phone number)
-    - **min_size**: `8` (counting only the phone number)
-    - If the above requirements are met, add DDI - add `55` to the phones.
-    - Parentheses and hyphens will be accepted and replaced with an empty string
-    - Other special characters will not be accepted
-    - Letters will not be accepted
+    - Country Code - must be a valid country code.
+    - Region Code - must be valid in the current country.
+    - Must be a valid phone number.
+    - Must be in E164 format ex: `+528187654321`.
+    - Must have the `+` before the phone number.
 - **`email`**: Customer's email
   - **Required**: `false`
   - **Type**: `string`

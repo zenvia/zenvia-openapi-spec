@@ -61,27 +61,24 @@ The predefined order must be:
 - **`mobile`**: Contact's mobile number(s)
   - **Required**: `true` if `email` is not provided
   - **Type**: `string`
-  - **Format**: Validate if there will be more than one contact number.
+  - **Format**: Phone numbers must be in E164 format.
   - **Requirements**:
-    - DDD (Area Code) - must be valid in Brazil.
-    - **Max Size**: `9` (counting only the phone number).
-    - **Min Size**: `8` (counting only the phone number).
-    - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
-    - Parentheses and hyphens will be accepted and replaced by an empty string.
-    - Other special characters will not be accepted.
-    - Letters will not be accepted.
+    - Country Code - must be a valid country code.
+    - Region Code - must be valid in the current country.
+    - Must be a valid mobile phone.
+    - Must be in E164 format ex: `+528187654321`.
+    - Must have the `+` before the phone number.
 
 - **`landline`**: Contact's landline number(s)
   - **Required**: `false`
   - **Type**: `string`
-  - **Format**: Validate if there will be more than one contact number.
+  - **Format**: Phone numbers must be in E164 format.
   - **Requirements**:
-    - DDD (Area Code) - must be valid in Brazil.
-    - **Max Size**: `9` (counting only the phone number).
-    - **Min Size**: `8` (counting only the phone number).
-    - If the above requirements are met, add DDI (country code) `55` to the phone numbers.
-    - Parentheses and hyphens will be accepted and replaced by an empty string.
-    - Letters will not be accepted.
+    - Country Code - must be a valid country code.
+    - Region Code - must be valid in the current country.
+    - Must be a valid landline phone.
+    - Must be in E164 format ex: `+525512345677`.
+    - Must have the `+` before the phone number.
 
 - **`country`**: Contact's country
   - **Required**: `false`
@@ -124,7 +121,7 @@ The predefined order must be:
   - **Type**: `string`
   - **Max Size**: `100`
   - **Requirements**: Will only be valid if a valid state exists.
-  
+
 #### CSV Lifecycle
 
 All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
