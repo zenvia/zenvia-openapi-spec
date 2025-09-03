@@ -69,7 +69,11 @@ const groups: TagGroupObject[] = [
   },
   {
     name: 'Support Service',
-    tags: ['Tickets'],
+    tags: [
+      'Tickets',
+      'Ticket Actions',
+      'Ticket Tags',
+    ],
   },
   {
     name: 'Status',

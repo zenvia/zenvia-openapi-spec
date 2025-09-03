@@ -8,7 +8,7 @@ import { ref as ticketIdRef } from '../../components/parameters/support-service/
 const get: OperationObject = {
   summary: 'List ticket actions',
   description: 'Lists all ticket actions available.',
-  tags: ['Tickets'],
+  tags: ['Ticket Actions'],
   security: [{
     TOKEN: [],
   }],
@@ -60,8 +60,36 @@ const get: OperationObject = {
   } as ResponsesObject,
 };
 
+const post: OperationObject = {
+  summary: 'Create ticket action',
+  description: 'Allows creation of ticket actions.',
+  tags: ['Ticket Actions'],
+  security: [{
+    TOKEN: [],
+  }],
+  responses: {
+    201: {
+      description: 'Ticket action created',
+      content: {
+        'application/json': {
+          schema: {
+            type: 'array',
+            items: {
+              $ref: ticketActionDataFieldRef,
+            },
+          },
+        },
+      },
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  } as ResponsesObject,
+};
+
 const path: PathItemObject = {
   get,
+  post,
   parameters: [{
     $ref: ticketIdRef,
   }],
