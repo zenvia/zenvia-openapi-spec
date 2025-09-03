@@ -123,3 +123,9 @@ This is [Whatsapp](#tag/Whatsapp) Product List Order content. This is supported 
 This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin response content. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
 <SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={true} showWriteOnly={true} />
+
+## Flow
+
+Flow message. This is a [WhatsApp](#tag/WhatsApp) channel content.
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.flow" showReadOnly={true} showWriteOnly={true} />
