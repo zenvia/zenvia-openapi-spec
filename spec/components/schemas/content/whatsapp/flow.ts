@@ -49,7 +49,7 @@ const productList: SchemaObject = {
             },
             buttonText: {
                 type: 'string',
-                descrpition: 'Text for the button',
+                description: 'Text for the button',
                 example: 'Click here!',
             },
             action: {
