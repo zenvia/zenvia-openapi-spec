@@ -25,15 +25,10 @@ const base: SchemaObject = {
       description: 'The uploaded file\'s url.',
       example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin',
     },
-    fileExpireTime: {
+    fileExpireAt: {
       type: 'string',
       description: 'The expiration date and time for file access, in ISO 8601 format. (Default of 10 days)',
       example: '2025-08-06T23:59:59.000Z',
-    },
-    size: {
-      type: 'string',
-      description: 'The size of the file (e.g., "15 Mb").',
-      example: '2.5 Mb',
     },
     lines: {
       type: 'number',
@@ -50,6 +45,11 @@ const base: SchemaObject = {
       type: 'string',
       description: 'The uploaded file\'s feedback url.',
       example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/4094d16af43dea0fcba63bcb217b60b07cb9e46dfa1f22b1f965ea2b433871ea.bin',
+    },
+    feedbackExpireAt: {
+      type: 'string',
+      description: 'The expiration date and time for file access, in ISO 8601 format. (Default of 10 days)',
+      example: '2025-08-06T23:59:59.000Z',
     },
     consolidatedStatus: {
       type: 'object',

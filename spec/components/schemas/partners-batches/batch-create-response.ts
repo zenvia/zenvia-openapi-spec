@@ -25,11 +25,6 @@ const base: SchemaObject = {
       description: 'The uploaded file\'s url.',
       example: 'https://chat.zenvia.com/storage/folders/a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6/files/c4a4e9a1-2c9c-4d3a-8f7b-9b4e2e0d1f3e.bin',
     },
-    size: {
-      type: 'string',
-      description: 'The size of the file.',
-      example: '24 Mb',
-    },
     status: {
       type: 'string',
       description: 'The final status of the file processing.',
