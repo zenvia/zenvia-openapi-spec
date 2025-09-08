@@ -4,6 +4,7 @@ import { ref as systemStatusTypeRef } from './system-status-type';
 
 const base: SchemaObject = {
   title: 'Status',
+  description: 'The ticket status',
   type: 'object',
   properties: {
     id: {

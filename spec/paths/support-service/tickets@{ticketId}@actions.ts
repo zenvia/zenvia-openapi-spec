@@ -67,16 +67,23 @@ const post: OperationObject = {
   security: [{
     TOKEN: [],
   }],
+  requestBody: {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          $ref: ticketActionDataFieldRef,
+        },
+      },
+    },
+  },
   responses: {
     201: {
       description: 'Ticket action created',
       content: {
         'application/json': {
           schema: {
-            type: 'array',
-            items: {
-              $ref: ticketActionDataFieldRef,
-            },
+            $ref: ticketActionDataFieldRef,
           },
         },
       },

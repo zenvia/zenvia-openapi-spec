@@ -8,6 +8,7 @@ import { ref as categoryRef } from './context/category';
 import { ref as ownerTeamRef } from './context/owner-team';
 import { ref as serviceRef } from './context/service';
 import { ref as originTypeRef } from './context/origin-type';
+import { ref as firstActionRef } from './context/first-action';
 
 const base: SchemaObject = {
   title: 'Tickets',
@@ -211,6 +212,9 @@ const base: SchemaObject = {
           readOnly: true,
         },
       },
+    },
+    firstAction: {
+      $ref: firstActionRef,
     },
   },
 };
