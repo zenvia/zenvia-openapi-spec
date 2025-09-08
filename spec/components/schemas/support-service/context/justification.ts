@@ -3,6 +3,7 @@ import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Justification',
+  description: 'The justification for the ticket status',
   type: 'object',
   nullable: true,
   properties: {

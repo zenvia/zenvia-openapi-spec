@@ -1,36 +1,24 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
-import { ref as ticketTypeRef } from './context/ticket-type';
-import { ref as justificationRef } from './context/justification';
-import { ref as statusRef } from './context/status-action';
-import { ref as originRef } from './context/origin-type';
+import { createComponentRef } from '../../../../../utils/ref';
+import { ref as ticketTypeRef } from './ticket-type';
 
 const base: SchemaObject = {
-  title: 'Ticket Actions',
-  description: 'Ticket actions information.',
+  title: 'First Ticket Action',
   type: 'object',
+  writeOnly: true,
   properties: {
-    id: {
-      title: 'ID',
-      description: 'ID of the ticket action.',
-      type: 'integer',
-      readOnly: true,
-    },
     type: {
       $ref: ticketTypeRef,
     },
-    origin: {
-      $ref: originRef,
+    name: {
+      title: 'Category Name',
+      description: 'Name of the category.',
+      type: 'string',
+      readOnly: true,
     },
     description: {
       title: 'Description',
       type: 'string',
-    },
-    status: {
-      $ref: statusRef,
-    },
-    justification: {
-      $ref: justificationRef,
     },
     createdAt: {
       title: 'Created At',
