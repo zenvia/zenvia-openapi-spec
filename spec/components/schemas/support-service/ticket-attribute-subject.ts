@@ -10,7 +10,6 @@ const base: SchemaObject = {
       title: 'Subject',
       description: 'Subject of the ticket.',
       type: 'string',
-      readOnly: true,
       nullable: false,
     },
     updatedById: {
