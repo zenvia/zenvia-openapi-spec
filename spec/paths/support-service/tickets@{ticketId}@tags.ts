@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as ticketTagsDataFieldRef } from '../../components/schemas/support-service/context/tag';
-import { ref as ticketTagsPostDataFieldRef } from '../../components/schemas/support-service/ticket-tags';
+import { ref as ticketTagsPostDataFieldRef } from '../../components/schemas/support-service/ticket-tag';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/support-service/size';
 import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';

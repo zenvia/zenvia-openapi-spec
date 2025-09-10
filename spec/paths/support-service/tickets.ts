@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ticketDataFieldRef } from '../../components/schemas/support-service/tickets';
+import { ref as ticketDataFieldRef } from '../../components/schemas/support-service/ticket';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/support-service/size';
 import { ref as createdAtRef } from '../../components/parameters/support-service/createdAt';
