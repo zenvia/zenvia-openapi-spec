@@ -77,7 +77,7 @@ const post: OperationObject = {
   },
   responses: {
     200: {
-      description: 'Ticket tag created',
+      description: 'The tag attached to the ticket',
       content: {
         'application/json': {
           schema: {
