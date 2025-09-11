@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as ticketTypeRef } from './context/ticket-type';
 import { ref as justificationRef } from './context/justification';
-import { ref as statusRef } from './context/status';
+import { ref as statusRef } from './context/status-action';
 import { ref as originRef } from './context/origin-type';
 
 const base: SchemaObject = {

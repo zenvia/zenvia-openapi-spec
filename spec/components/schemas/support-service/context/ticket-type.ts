@@ -5,6 +5,7 @@ const ticketType: SchemaObject = {
   title: 'Ticket Type',
   type: 'string',
   nullable: false,
+  readOnly: false,
   enum: [
     'INTERNAL',
     'PUBLIC',

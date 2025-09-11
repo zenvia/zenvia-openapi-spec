@@ -4,14 +4,12 @@ import { createComponentRef } from '../../../../../utils/ref';
 const base: SchemaObject = {
   title: 'Urgency',
   type: 'object',
-  readOnly: true,
   nullable: true,
   properties: {
     id: {
       title: 'Urgency ID',
       description: 'Urgency identifier.',
       type: 'integer',
-      readOnly: true,
     },
     name: {
       title: 'Urgency Name',
