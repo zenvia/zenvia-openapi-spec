@@ -145,7 +145,7 @@ const base: SchemaObject = {
     },
     solutionAt: {
       title: 'Solution At',
-      description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket note.',
+      description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.',
       type: 'string',
       example: '2022-05-23T19:37:59.000Z',
       nullable: true,
