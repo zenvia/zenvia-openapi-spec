@@ -5,8 +5,8 @@ import { ref as tagIdRef } from '../../components/parameters/support-service/tag
 import { ref as updatedByIdRef } from '../../components/parameters/support-service/updatedById';
 
 const del: OperationObject = {
-  summary: 'Delete tag relationship from ticket',
-  description: 'Allows to delete a tag relationship from ticket.',
+  summary: 'Delete the relationship between a tag and a ticket',
+  description: 'Allows to delete the relationship between a tag and a ticket.',
   tags: ['Ticket Tags'],
   parameters: [{
       $ref: updatedByIdRef,

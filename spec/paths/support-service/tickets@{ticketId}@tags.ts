@@ -62,8 +62,8 @@ const get: OperationObject = {
 };
 
 const post: OperationObject = {
-  summary: 'Create a ticket and tag relationship',
-  description: 'Allows the creation of ticket and tag relationship.',
+  summary: 'Attach a tag to a ticket',
+  description: 'Allows the creation of a relationship between a ticket and a tag.',
   tags: ['Ticket Tags'],
   requestBody: {
     required: true,
