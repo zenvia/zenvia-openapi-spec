@@ -1,7 +1,7 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';
-import { ref as ticketSolutionAtDataFieldRef } from '../../components/schemas/support-service/ticket-attribute-solution-at';
+import { ref as ticketSolutionAtDataFieldRef } from '../../components/schemas/support-service/ticket-attribute-solution';
 
 const patch: OperationObject = {
   summary: 'Update ticket solution',
