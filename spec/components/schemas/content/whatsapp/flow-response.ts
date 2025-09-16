@@ -40,11 +40,11 @@ const flowResponse: SchemaObject = {
             example: 10,
             }],
         },
-      },      
+      },
     },
     required: [
       'type',
-      'token'
+      'token',
     ],
   }],
 };
