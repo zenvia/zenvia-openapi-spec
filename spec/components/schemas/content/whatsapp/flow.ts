@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from '../base';
 import { createComponentRef } from '../../../../../utils/ref';
 
-const productList: SchemaObject = {
+const flow: SchemaObject = {
   type: 'object',
   allOf: [{
     $ref: baseRef,
@@ -104,4 +104,4 @@ const productList: SchemaObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default productList;
+export default flow;
