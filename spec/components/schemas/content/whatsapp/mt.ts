@@ -12,6 +12,7 @@ import { ref as productListRef } from './product-list';
 import { ref as orderDetailsRef } from './order-details';
 import { ref as orderStatusRef } from './order-status';
 import { ref as flowRef } from './flow';
+import { ref as flowResponseRef} from './flow-response';
 
 const mtContent: SchemaObject = {
   title: 'WhatsApp',
@@ -41,6 +42,8 @@ const mtContent: SchemaObject = {
     'x-unpublished': true,
   }, {
     $ref: flowRef,
+  }, {
+    $ref: flowResponseRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -57,6 +60,7 @@ const mtContent: SchemaObject = {
       order_details: orderDetailsRef,
       order_status: orderStatusRef,
       flow: flowRef,
+      flow_response: flowResponseRef,
     },
   },
 };
