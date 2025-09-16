@@ -11,7 +11,7 @@ const flowResponse: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'flow',
+        example: 'flow_response',
       },
       token: {
         type: 'string',
