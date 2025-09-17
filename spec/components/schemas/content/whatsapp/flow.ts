@@ -70,23 +70,6 @@ const flow: SchemaObject = {
                         title: 'Custom Data',
                         description: 'Set values for custom data fields created.',
                         type: 'object',
-                        additionalProperties: {
-                            title: 'Value',
-                            description: 'Sets a value to a custom data field (the property name).',
-                            oneOf: [{
-                            type: 'string',
-                            title: 'String',
-                            example: '2022234324',
-                            }, {
-                            type: 'number',
-                            title: 'Number',
-                            example: 10,
-                            }, {
-                            type: 'boolean',
-                            title: 'Boolean',
-                            example: true,
-                            }],
-                        },
                     },
                 },
             },
@@ -95,9 +78,6 @@ const flow: SchemaObject = {
     },
     required: [
       'type',
-      'catalogId',
-      'body',
-      'sections',
       'flow',
     ],
   }],
