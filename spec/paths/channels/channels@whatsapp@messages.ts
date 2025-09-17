@@ -9,6 +9,7 @@ import { contacts as contactsExample } from '../../resources/examples/contacts';
 import { location as locationExample } from '../../resources/examples/location';
 import { button as buttonExample } from '../../resources/examples/button';
 import { list as listExample } from '../../resources/examples/list';
+import { flow as flowExample} from '../../resources/examples/flow';
 import { product } from '../../resources/examples/product';
 import { productList } from '../../resources/examples/product-list';
 import { orderDetailsTemplate } from '../../resources/examples/order-details-template';
@@ -50,6 +51,9 @@ const post: OperationObject = {
           },
           product_list: {
             value: whatsappExamples(productList()),
+          },
+          flow: {
+            value: whatsappExamples(flowExample()),
           },
         },
       },
