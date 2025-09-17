@@ -4,14 +4,12 @@ import { createComponentRef } from '../../../../../utils/ref';
 const base: SchemaObject = {
   title: 'Category',
   type: 'object',
-  readOnly: true,
   nullable: true,
   properties: {
     id: {
       title: 'Category ID',
       description: 'Category identifier.',
       type: 'integer',
-      readOnly: true,
     },
     name: {
       title: 'Category Name',
