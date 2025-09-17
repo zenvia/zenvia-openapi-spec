@@ -8,6 +8,7 @@ import { ref as categoryRef } from './context/category';
 import { ref as ownerTeamRef } from './context/owner-team';
 import { ref as serviceRef } from './context/service';
 import { ref as originTypeRef } from './context/origin-type';
+import { ref as firstActionRef } from './context/first-action';
 
 const base: SchemaObject = {
   title: 'Tickets',
@@ -144,7 +145,7 @@ const base: SchemaObject = {
     },
     solutionAt: {
       title: 'Solution At',
-      description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket note.',
+      description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.',
       type: 'string',
       example: '2022-05-23T19:37:59.000Z',
       nullable: true,
@@ -211,6 +212,9 @@ const base: SchemaObject = {
           readOnly: true,
         },
       },
+    },
+    firstAction: {
+      $ref: firstActionRef,
     },
   },
 };
