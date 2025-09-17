@@ -85,6 +85,14 @@ const post: OperationObject = {
   responses: {
     201: {
       description: 'Ticket created',
+      headers: {
+        Location: {
+          description: 'The URL where the newly created ticket can be found.',
+          schema: {
+            type: 'string',
+          },
+        },
+      },
       content: {
         'application/json': {
           schema: {
