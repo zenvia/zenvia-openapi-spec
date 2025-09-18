@@ -1,6 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ticketActionDataFieldRef } from '../../components/schemas/support-service/ticket-actions';
+import { ref as ticketActionDataFieldRef } from '../../components/schemas/support-service/ticket-action';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/support-service/size';
 import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';
@@ -8,7 +8,7 @@ import { ref as ticketIdRef } from '../../components/parameters/support-service/
 const get: OperationObject = {
   summary: 'List ticket actions',
   description: 'Lists all ticket actions available.',
-  tags: ['Tickets'],
+  tags: ['Ticket Actions'],
   security: [{
     TOKEN: [],
   }],
@@ -60,8 +60,51 @@ const get: OperationObject = {
   } as ResponsesObject,
 };
 
+const post: OperationObject = {
+  summary: 'Create ticket action',
+  description: 'Allows creation of ticket actions.',
+  tags: ['Ticket Actions'],
+  security: [{
+    TOKEN: [],
+  }],
+  requestBody: {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          $ref: ticketActionDataFieldRef,
+        },
+      },
+    },
+  },
+  responses: {
+    201: {
+      description: 'Ticket action created',
+      headers: {
+        Location: {
+          description: 'The URL where the newly created ticket action can be found.',
+          schema: {
+            type: 'string',
+          },
+        },
+      },
+      content: {
+        'application/json': {
+          schema: {
+            $ref: ticketActionDataFieldRef,
+          },
+        },
+      },
+    } as ResponseObject,
+    default: {
+      $ref: errorResponseRef,
+    },
+  } as ResponsesObject,
+};
+
 const path: PathItemObject = {
   get,
+  post,
   parameters: [{
     $ref: ticketIdRef,
   }],

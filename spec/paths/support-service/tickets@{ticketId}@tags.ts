@@ -1,16 +1,15 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ticketDataFieldRef } from '../../components/schemas/support-service/ticket';
+import { ref as ticketTagsDataFieldRef } from '../../components/schemas/support-service/context/tag';
+import { ref as ticketTagsPostDataFieldRef } from '../../components/schemas/support-service/ticket-tag';
 import { ref as pageRef } from '../../components/parameters/page';
 import { ref as sizeRef } from '../../components/parameters/support-service/size';
-import { ref as createdAtRef } from '../../components/parameters/support-service/createdAt';
-import { ref as updatedAtRef } from '../../components/parameters/support-service/updatedAt';
-import { ref as statusIdRef } from '../../components/parameters/support-service/statusId';
+import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';
 
 const get: OperationObject = {
-  summary: 'List tickets',
-  description: 'Lists all tickets available.',
-  tags: ['Tickets'],
+  summary: 'List ticket tags',
+  description: 'Lists all ticket tags available.',
+  tags: ['Ticket Tags'],
   security: [{
     TOKEN: [],
   }],
@@ -18,22 +17,16 @@ const get: OperationObject = {
     $ref: pageRef,
   }, {
     $ref: sizeRef,
-  }, {
-    $ref: createdAtRef,
-  }, {
-    $ref: updatedAtRef,
-  }, {
-    $ref: statusIdRef,
   }],
   responses: {
     200: {
-      description: 'Tickets available',
+      description: 'Ticket tags available',
       content: {
         'application/json': {
           schema: {
             type: 'array',
             items: {
-              $ref: ticketDataFieldRef,
+              $ref: ticketTagsDataFieldRef,
             },
           },
         },
@@ -69,34 +62,26 @@ const get: OperationObject = {
 };
 
 const post: OperationObject = {
-  summary: 'Create a new ticket',
-  description: 'Allows the creation of tickets.',
-  tags: ['Tickets'],
+  summary: 'Attach a tag to a ticket',
+  description: 'Allows the creation of a relationship between a ticket and a tag.',
+  tags: ['Ticket Tags'],
   requestBody: {
     required: true,
     content: {
       'application/json': {
         schema: {
-          $ref: ticketDataFieldRef,
+          $ref: ticketTagsPostDataFieldRef,
         },
       },
     },
   },
   responses: {
-    201: {
-      description: 'Ticket created',
-      headers: {
-        Location: {
-          description: 'The URL where the newly created ticket can be found.',
-          schema: {
-            type: 'string',
-          },
-        },
-      },
+    200: {
+      description: 'The tag attached to the ticket',
       content: {
         'application/json': {
           schema: {
-            $ref: ticketDataFieldRef,
+            $ref: ticketTagsPostDataFieldRef,
           },
         },
       },
@@ -108,8 +93,11 @@ const post: OperationObject = {
 };
 
 const path: PathItemObject = {
-  post,
   get,
+  post,
+  parameters: [{
+    $ref: ticketIdRef,
+  }],
 };
 
 export default path;

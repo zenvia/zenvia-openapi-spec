@@ -1,23 +1,32 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ticketDataFieldRef } from '../../components/schemas/support-service/ticket';
 import { ref as ticketIdRef } from '../../components/parameters/support-service/ticketId';
+import { ref as ticketSolutionAtDataFieldRef } from '../../components/schemas/support-service/ticket-attribute-solution';
 
-const get: OperationObject = {
-  summary: 'Retrieve ticket by id',
-  description: 'Retrieve all ticket information by id.',
+const patch: OperationObject = {
+  summary: 'Update ticket solution',
+  description: 'Allows to update ticket solution.',
   tags: ['Tickets'],
   security: [{
     TOKEN: [],
   }],
-  parameters: [],
+  requestBody: {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          $ref: ticketSolutionAtDataFieldRef,
+        },
+      },
+    },
+  },
   responses: {
     200: {
-      description: 'Ticket object',
+      description: 'Ticket solution at updated',
       content: {
         'application/json': {
           schema: {
-            $ref: ticketDataFieldRef,
+            $ref: ticketSolutionAtDataFieldRef,
           },
         },
       },
@@ -29,7 +38,7 @@ const get: OperationObject = {
 };
 
 const path: PathItemObject = {
-  get,
+  patch,
   parameters: [{
     $ref: ticketIdRef,
   }],
