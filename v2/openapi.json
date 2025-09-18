@@ -1872,6 +1872,34 @@
                       }
                     ]
                   }
+                },
+                "flow": {
+                  "value": {
+                    "from": "5510999999999",
+                    "to": "55108888888888",
+                    "contents": [
+                      {
+                        "type": "flow",
+                        "header": "Text header content",
+                        "body": "Text body content",
+                        "footer": "Text footer content",
+                        "flow": {
+                          "mode": "draft",
+                          "token": "TOKEN_FLOW",
+                          "id": "TOKEN_ID",
+                          "buttonText": "Click here!",
+                          "action": {
+                            "type": "navigate",
+                            "screen": "SCREEN_ID",
+                            "data": {
+                              "property1": "2022-06-13",
+                              "property2": "2022-06-13"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -3721,6 +3749,46 @@
       ]
     },
     "/tickets": {
+      "post": {
+        "summary": "Create a new ticket",
+        "description": "Allows the creation of tickets.",
+        "tags": [
+          "Tickets"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ticket created",
+            "headers": {
+              "Location": {
+                "description": "The URL where the newly created ticket can be found.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
       "get": {
         "summary": "List tickets",
         "description": "Lists all tickets available.",
@@ -3757,7 +3825,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/support-service.tickets"
+                    "$ref": "#/components/schemas/support-service.ticket"
                   }
                 }
               }
@@ -3811,7 +3879,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/support-service.tickets"
+                  "$ref": "#/components/schemas/support-service.ticket"
                 }
               }
             }
@@ -3832,7 +3900,7 @@
         "summary": "List ticket actions",
         "description": "Lists all ticket actions available.",
         "tags": [
-          "Tickets"
+          "Ticket Actions"
         ],
         "security": [
           {
@@ -3855,7 +3923,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/support-service.ticket-actions"
+                    "$ref": "#/components/schemas/support-service.ticket-action"
                   }
                 }
               }
@@ -3880,6 +3948,447 @@
                   "description": "The current page.",
                   "type": "string",
                   "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create ticket action",
+        "description": "Allows creation of ticket actions.",
+        "tags": [
+          "Ticket Actions"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-action"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ticket action created",
+            "headers": {
+              "Location": {
+                "description": "The URL where the newly created ticket action can be found.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-action"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/category": {
+      "patch": {
+        "summary": "Update ticket category",
+        "description": "Allows to update ticket category.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket category updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-category"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/clients": {
+      "patch": {
+        "summary": "Update ticket clients",
+        "description": "Allows to update ticket clients.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-clients"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket clients updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-clients"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/owner": {
+      "patch": {
+        "summary": "Update ticket owner",
+        "description": "Allows to update ticket owner.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-owner"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket owner updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-owner"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/service": {
+      "patch": {
+        "summary": "Update ticket service",
+        "description": "Allows to update ticket service.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-service"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket service updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-service"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/solution": {
+      "patch": {
+        "summary": "Update ticket solution",
+        "description": "Allows to update ticket solution.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-solution"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket solution at updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-solution"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/status": {
+      "patch": {
+        "summary": "Update ticket status",
+        "description": "Allows to update ticket status.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket status updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-status"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/subject": {
+      "patch": {
+        "summary": "Update ticket subject",
+        "description": "Allows to update ticket subject.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-subject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket subject updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-subject"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/type": {
+      "patch": {
+        "summary": "Update ticket type",
+        "description": "Allows to update ticket type.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-type"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket type updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-type"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/attributes/urgency": {
+      "patch": {
+        "summary": "Update ticket urgency",
+        "description": "Allows to update ticket urgency.",
+        "tags": [
+          "Tickets"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-attribute-urgency"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket urgency updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-attribute-urgency"
                 }
               }
             }
@@ -4028,6 +4537,136 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/tags": {
+      "get": {
+        "summary": "List ticket tags",
+        "description": "Lists all ticket tags available.",
+        "tags": [
+          "Ticket Tags"
+        ],
+        "security": [
+          {
+            "TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/support-service.size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket tags available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/support-service.context.tag"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of results available.",
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "x-page-size": {
+                "schema": {
+                  "description": "The number of results per page.",
+                  "type": "string",
+                  "example": "10"
+                }
+              },
+              "x-page": {
+                "schema": {
+                  "description": "The current page.",
+                  "type": "string",
+                  "example": "5"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Attach a tag to a ticket",
+        "description": "Allows the creation of a relationship between a ticket and a tag.",
+        "tags": [
+          "Ticket Tags"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/support-service.ticket-tag"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tag attached to the ticket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/support-service.ticket-tag"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        }
+      ]
+    },
+    "/tickets/{ticketId}/tags/{tagId}": {
+      "delete": {
+        "summary": "Delete the relationship between a tag and a ticket",
+        "description": "Allows to delete the relationship between a tag and a ticket.",
+        "tags": [
+          "Ticket Tags"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/support-service.updatedById"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/support-service.ticketId"
+        },
+        {
+          "$ref": "#/components/parameters/support-service.tagId"
         }
       ]
     },
@@ -7620,6 +8259,12 @@
             "$ref": "#/components/schemas/content.whatsapp.product-list"
           },
           {
+            "$ref": "#/components/schemas/content.whatsapp.flow"
+          },
+          {
+            "$ref": "#/components/schemas/content.whatsapp.flow-response"
+          },
+          {
             "$ref": "#/components/schemas/content.whatsapp.product-list-order"
           }
         ],
@@ -7635,9 +8280,146 @@
             "list": "#/components/schemas/content.whatsapp.list",
             "product": "#/components/schemas/content.whatsapp.product",
             "product_list": "#/components/schemas/content.whatsapp.product-list",
+            "flow": "#/components/schemas/content.whatsapp.flow",
+            "flow_response": "#/components/schemas/content.whatsapp.flow-response",
             "product_list_order": "#/components/schemas/content.whatsapp.product-list-order"
           }
         }
+      },
+      "content.whatsapp.flow-response": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "flow_response"
+              },
+              "token": {
+                "type": "string",
+                "description": "Flow token",
+                "example": "TOKEN_FLOW"
+              },
+              "body": {
+                "type": "string",
+                "description": "Body content",
+                "example": "Text body content"
+              },
+              "data": {
+                "title": "Custom Data",
+                "description": "Set values for custom data fields created.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Value",
+                  "description": "Sets a value to a custom data field (the property name).",
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "title": "String",
+                      "example": "2022234324"
+                    },
+                    {
+                      "type": "number",
+                      "title": "Number",
+                      "example": 10
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "type",
+              "token"
+            ]
+          }
+        ]
+      },
+      "content.whatsapp.flow": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/content.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "flow"
+              },
+              "header": {
+                "type": "string",
+                "description": "Header content",
+                "example": "Text header content"
+              },
+              "body": {
+                "type": "string",
+                "description": "Body content",
+                "example": "Text body content"
+              },
+              "footer": {
+                "type": "string",
+                "description": "Footer content",
+                "example": "Text footer content"
+              },
+              "flow": {
+                "type": "object",
+                "description": "The available fields to be used in a flow. Only applicable to [WhatsApp](#tag/WhatsApp) channel.",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "description": "Can be either draft or published",
+                    "example": "draft"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "Flow token",
+                    "example": "TOKEN_FLOW"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Flow id",
+                    "example": "TOKEN_ID"
+                  },
+                  "buttonText": {
+                    "type": "string",
+                    "description": "Text for the button",
+                    "example": "Click here!"
+                  },
+                  "action": {
+                    "type": "object",
+                    "description": "Details about the action of the Flow",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "Can be either \"navigate\" or \"data_exchange\"",
+                        "example": "navigate"
+                      },
+                      "screen": {
+                        "type": "string",
+                        "description": "Identification for the screen ID",
+                        "example": "SCREEN_ID"
+                      },
+                      "data": {
+                        "title": "Custom Data",
+                        "description": "Set values for custom data fields created.",
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "flow"
+            ]
+          }
+        ]
       },
       "content.whatsapp.list": {
         "type": "object",
@@ -7777,6 +8559,9 @@
           },
           {
             "$ref": "#/components/schemas/content.whatsapp.product-list"
+          },
+          {
+            "$ref": "#/components/schemas/content.whatsapp.flow"
           }
         ],
         "discriminator": {
@@ -7790,7 +8575,8 @@
             "button": "#/components/schemas/content.whatsapp.button.index",
             "list": "#/components/schemas/content.whatsapp.list",
             "product": "#/components/schemas/content.whatsapp.product",
-            "product_list": "#/components/schemas/content.whatsapp.product-list"
+            "product_list": "#/components/schemas/content.whatsapp.product-list",
+            "flow": "#/components/schemas/content.whatsapp.flow"
           }
         }
       },
@@ -11834,7 +12620,7 @@
           }
         }
       },
-      "support-service.ticket-actions": {
+      "support-service.ticket-action": {
         "title": "Ticket Actions",
         "description": "Ticket actions information.",
         "type": "object",
@@ -11856,7 +12642,7 @@
             "type": "string"
           },
           "status": {
-            "$ref": "#/components/schemas/support-service.context.status"
+            "$ref": "#/components/schemas/support-service.context.status-action"
           },
           "justification": {
             "$ref": "#/components/schemas/support-service.context.justification"
@@ -11873,6 +12659,182 @@
             "type": "string",
             "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
             "nullable": true
+          }
+        }
+      },
+      "support-service.ticket-attribute-category": {
+        "title": "Ticket category",
+        "description": "Ticket category.",
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/support-service.context.category"
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-clients": {
+        "title": "Ticket clients",
+        "description": "Ticket clients.",
+        "type": "object",
+        "properties": {
+          "clients": {
+            "title": "Clients",
+            "description": "List of client identifiers of the ticket.",
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "a4a4bc53-8396-4190-92e3-7edb6826e3dc"
+            ]
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-owner": {
+        "title": "Ticket owner",
+        "description": "Ticket owner.",
+        "type": "object",
+        "properties": {
+          "ownerId": {
+            "title": "Owner Id",
+            "description": "Owner identification.",
+            "type": "string",
+            "example": "5404ed19-2994-4831-bb33-627e27b18ab1",
+            "nullable": false
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-service": {
+        "title": "Ticket service",
+        "description": "Ticket service.",
+        "type": "object",
+        "properties": {
+          "service": {
+            "$ref": "#/components/schemas/support-service.context.service"
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-solution": {
+        "title": "Ticket solution",
+        "description": "Ticket solution.",
+        "type": "object",
+        "properties": {
+          "solutionAt": {
+            "title": "Solution At",
+            "description": "Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z",
+            "nullable": true
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-status": {
+        "title": "Ticket status",
+        "description": "Ticket status.",
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/support-service.context.status"
+          },
+          "justification": {
+            "$ref": "#/components/schemas/support-service.context.justification"
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-subject": {
+        "title": "Ticket subject",
+        "description": "Ticket subject.",
+        "type": "object",
+        "properties": {
+          "subject": {
+            "title": "Subject",
+            "description": "Subject of the ticket.",
+            "type": "string",
+            "nullable": false
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-type": {
+        "title": "Ticket type",
+        "description": "Ticket type.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.ticket-type"
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
+          }
+        }
+      },
+      "support-service.ticket-attribute-urgency": {
+        "title": "Ticket urgency",
+        "description": "Ticket urgency.",
+        "type": "object",
+        "properties": {
+          "urgency": {
+            "$ref": "#/components/schemas/support-service.context.urgency"
+          },
+          "updatedById": {
+            "title": "Updated by identification",
+            "description": "User that made the changes.",
+            "type": "string",
+            "nullable": true,
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
           }
         }
       },
@@ -11956,7 +12918,38 @@
           }
         }
       },
-      "support-service.tickets": {
+      "support-service.ticket-tag": {
+        "title": "Ticket Tags",
+        "description": "Ticket tags.",
+        "type": "object",
+        "properties": {
+          "tag": {
+            "$ref": "#/components/schemas/support-service.context.tag"
+          },
+          "updatedById": {
+            "title": "Updated By ID",
+            "description": "Updated by identifier",
+            "type": "string",
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
+            "nullable": true
+          }
+        }
+      },
+      "support-service.ticket-tags-delete": {
+        "title": "Ticket Tag removed",
+        "description": "Ticket tag removed.",
+        "type": "object",
+        "properties": {
+          "updatedById": {
+            "title": "Updated By ID",
+            "description": "Updated by identifier",
+            "type": "string",
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
+            "nullable": true
+          }
+        }
+      },
+      "support-service.ticket": {
         "title": "Tickets",
         "description": "Ticket information.",
         "type": "object",
@@ -12095,7 +13088,7 @@
           },
           "solutionAt": {
             "title": "Solution At",
-            "description": "Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket note.",
+            "description": "Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.",
             "type": "string",
             "example": "2022-05-23T19:37:59.000Z",
             "nullable": true
@@ -12162,20 +13155,21 @@
                 "readOnly": true
               }
             }
+          },
+          "firstAction": {
+            "$ref": "#/components/schemas/support-service.context.first-action"
           }
         }
       },
       "support-service.context.category": {
         "title": "Category",
         "type": "object",
-        "readOnly": true,
         "nullable": true,
         "properties": {
           "id": {
             "title": "Category ID",
             "description": "Category identifier.",
-            "type": "integer",
-            "readOnly": true
+            "type": "integer"
           },
           "name": {
             "title": "Category Name",
@@ -12185,17 +13179,49 @@
           }
         }
       },
+      "support-service.context.first-action": {
+        "title": "First Ticket Action",
+        "type": "object",
+        "writeOnly": true,
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.ticket-type"
+          },
+          "name": {
+            "title": "Category Name",
+            "description": "Name of the category.",
+            "type": "string",
+            "readOnly": true
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "createdAt": {
+            "title": "Created At",
+            "description": "Timestamp of the action creation.",
+            "type": "string",
+            "example": "2022-05-23T19:37:59.000Z"
+          },
+          "createdById": {
+            "title": "Created By ID",
+            "description": "Created by identifier",
+            "type": "string",
+            "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05",
+            "nullable": true
+          }
+        }
+      },
       "support-service.context.justification": {
         "title": "Justification",
+        "description": "The justification for the ticket status",
         "type": "object",
-        "readOnly": true,
         "nullable": true,
         "properties": {
           "id": {
             "title": "Justification ID",
             "description": "Justification identifier.",
-            "type": "integer",
-            "readOnly": true
+            "type": "integer"
           },
           "name": {
             "title": "Justification Name",
@@ -12241,14 +13267,12 @@
       "support-service.context.service": {
         "title": "Service",
         "type": "object",
-        "readOnly": true,
         "nullable": true,
         "properties": {
           "id": {
             "title": "Service ID",
             "description": "Service identifier.",
-            "type": "integer",
-            "readOnly": true
+            "type": "integer"
           },
           "name": {
             "title": "Service Name",
@@ -12258,16 +13282,37 @@
           }
         }
       },
-      "support-service.context.status": {
+      "support-service.context.status-action": {
         "title": "Status",
+        "description": "The ticket status. If no status is provided, the action defaults to the ticket's most recent status.",
         "type": "object",
-        "readOnly": true,
+        "nullable": true,
         "properties": {
           "id": {
             "title": "Status ID",
             "description": "Status identifier.",
-            "type": "integer",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Status Name",
+            "description": "Name of the status.",
+            "type": "string",
             "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/support-service.context.system-status-type"
+          }
+        }
+      },
+      "support-service.context.status": {
+        "title": "Status",
+        "description": "The ticket status",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Status ID",
+            "description": "Status identifier.",
+            "type": "integer"
           },
           "name": {
             "title": "Status Name",
@@ -12294,10 +13339,28 @@
         ],
         "readOnly": true
       },
+      "support-service.context.tag": {
+        "title": "Tag",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Tag ID",
+            "description": "Tag identifier.",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Tag Name",
+            "description": "Name of the tag.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
       "support-service.context.ticket-type": {
         "title": "Ticket Type",
         "type": "string",
         "nullable": false,
+        "readOnly": false,
         "enum": [
           "INTERNAL",
           "PUBLIC"
@@ -12306,14 +13369,12 @@
       "support-service.context.urgency": {
         "title": "Urgency",
         "type": "object",
-        "readOnly": true,
         "nullable": true,
         "properties": {
           "id": {
             "title": "Urgency ID",
             "description": "Urgency identifier.",
-            "type": "integer",
-            "readOnly": true
+            "type": "integer"
           },
           "name": {
             "title": "Urgency Name",
@@ -14835,6 +15896,15 @@
           "type": "integer"
         }
       },
+      "support-service.tagId": {
+        "name": "tagId",
+        "in": "path",
+        "required": true,
+        "description": "The ticket tag identifier.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "support-service.teamId": {
         "name": "teamId",
         "in": "path",
@@ -14862,6 +15932,16 @@
           "type": "string",
           "format": "date",
           "example": "2024-01-31"
+        }
+      },
+      "support-service.updatedById": {
+        "name": "updatedById",
+        "in": "query",
+        "required": false,
+        "description": "User that made the changes.",
+        "schema": {
+          "type": "string",
+          "example": "3525fdd7-34c7-4159-bf7c-b33e4e772c05"
         }
       },
       "templates.category": {
@@ -15016,7 +16096,7 @@
   "tags": [
     {
       "name": "Content types",
-      "description": "## Supported Channels\nFor each content type covered in the next section, the following table reflects its support for each available channel:\n\n|Content Type                               |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                     |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [replyable_text](#section/Replyable-Text) |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [template](#section/Template)             |<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [card](#section/Card)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [carousel](#section/Carousel)             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)             |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)             |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [call](#section/Call)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                  |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [button](#section/WhatsApp-Button)        |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [list](#section/WhatsApp-List)            |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [product_list](#section/Product-List)     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [product](#section/Product)               |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## WhatsApp Button\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp List\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## Call\nThis is the [Voice](#tag/Voice) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.call\" showReadOnly={false} showWriteOnly={true} />\n\n## E-Mail\nThis is the [E-Mail](#tag/E-Mail) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.email\" showReadOnly={false} showWriteOnly={true} />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n\n## Product\nSingle product message. This is a [WhatsApp](#tag/WhatsApp) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product\" showReadOnly={false} showWriteOnly={true} />\n\n## Product List\nProduct list message. This is a [WhatsApp](#tag/WhatsApp) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product-list\" showReadOnly={false} showWriteOnly={true} />\n\n## OptIn Request\nThis is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin request content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.optin_request\" showReadOnly={false} showWriteOnly={true} />\n\n## Product List Order\nThis is [Whatsapp](#tag/Whatsapp) Product List Order content. This is supported only in the [webhook content](#section/Webhook-supported-channels).\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product-list-order\" showReadOnly={true} showWriteOnly={true} />\n\n## OptIn Response\nThis is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin response content. This is supported only in the [webhook content](#section/Webhook-supported-channels).\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.optin_response\" showReadOnly={true} showWriteOnly={true} />\n"
+      "description": "## Supported Channels\nFor each content type covered in the next section, the following table reflects its support for each available channel:\n\n|Content Type                               |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                     |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [replyable_text](#section/Replyable-Text) |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [template](#section/Template)             |<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\"  >&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [card](#section/Card)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [carousel](#section/Carousel)             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)             |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)             |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [call](#section/Call)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                  |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [button](#section/WhatsApp-Button)        |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [list](#section/WhatsApp-List)            |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [product_list](#section/Product-List)     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [product](#section/Product)               |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n\n## Text\nThis type of content is the most used one and is composed of plain text.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.text\" showReadOnly={false} />\n\n## File\nThis type of content is used to send a file to the user. Depending on the file type, the file itself will be displayed with a different appearance. There are four types of presentation:\n* Image\n* Video\n* Audio\n* Document\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.file\" />\n\n## Replyable Text\nThis is the same as [text](#section/Text) content, but is followed by buttons for quick replying.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.replyable-text\" showReadOnly={false} />\n\n## Template\nThis type of content has an underlying fixed text content with some required variables. With the fields of the template properly filled, the template must be submitted for approval. This approval depends solely on WhatsApp, and the criteria are strict.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.template\" />\n\n### Submitting a template content for approval\nYou may submit templates for approval using our [template console](https://app.zenvia.com/home/templates) if you already own a WhatsApp Business account with us.\n\n## Card\nThis type of content is rich and is composed of *at least one* of the following components (none of them are mandatory):\n* Media\n* Title\n* Text\n\nAdditionally, it may include:\n* Buttons\n* Quick reply buttons (not part of the card itself, but are instead shown below it)\n\nMore information on each attribute may be found below:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.card\" />\n\n## Carousel\nThis type of content displays a horizontally scrollable sequence of [cards](#section/Card), with some differences and limitations.\n\nMore details may be found below.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.carousel\" />\n\n## Contacts\nThis type of content is used to send contact information to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.contacts\" />\n\n## Location\nThis type of content is used to send location messages represented as a point on the map to the user.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.location\" />\n\n## WhatsApp Button\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.button.index\" />\n\n## WhatsApp List\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.list\" />\n\n## Call\nThis is the [Voice](#tag/Voice) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.call\" showReadOnly={false} showWriteOnly={true} />\n\n## E-Mail\nThis is the [E-Mail](#tag/E-Mail) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.email\" showReadOnly={false} showWriteOnly={true} />\n\n## SMS Text\nThis the SMS version of the [text](#section/Text) content. It has additional parameters specific to the SMS integration.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.sms.text\" showReadOnly={false} showWriteOnly={true} />\n\n## Product\nSingle product message. This is a [WhatsApp](#tag/WhatsApp) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product\" showReadOnly={false} showWriteOnly={true} />\n\n## Product List\nProduct list message. This is a [WhatsApp](#tag/WhatsApp) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product-list\" showReadOnly={false} showWriteOnly={true} />\n\n## OptIn Request\nThis is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin request content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.optin_request\" showReadOnly={false} showWriteOnly={true} />\n\n## Product List Order\nThis is [Whatsapp](#tag/Whatsapp) Product List Order content. This is supported only in the [webhook content](#section/Webhook-supported-channels).\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.product-list-order\" showReadOnly={true} showWriteOnly={true} />\n\n## OptIn Response\nThis is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin response content. This is supported only in the [webhook content](#section/Webhook-supported-channels).\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.optin_response\" showReadOnly={true} showWriteOnly={true} />\n\n## Flow\n\nFlow message. This is a [WhatsApp](#tag/WhatsApp) channel content.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.flow\" showReadOnly={true} showWriteOnly={true} />\n\n## Flow Response\n\nFlow message response. This is supported only in the [webhook content](#section/Webhook-supported-channels).\n\n<SchemaDefinition schemaRef=\"#/components/schemas/content.whatsapp.flow-response\" showReadOnly={true} showWriteOnly{true} />"
     },
     {
       "name": "SMS",
@@ -15068,7 +16148,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
+      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [flow_response](#section/Flow-Response)          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
     },
     {
       "name": "Templates",
@@ -15202,7 +16282,9 @@
     {
       "name": "Support Service",
       "tags": [
-        "Tickets"
+        "Tickets",
+        "Ticket Actions",
+        "Ticket Tags"
       ]
     },
     {

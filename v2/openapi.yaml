@@ -1785,6 +1785,26 @@ paths:
                           productItems:
                             - productId: product-SKU-in-catalog
                             - productId: product-SKU-in-catalog
+              flow:
+                value:
+                  from: '5510999999999'
+                  to: '55108888888888'
+                  contents:
+                    - type: flow
+                      header: Text header content
+                      body: Text body content
+                      footer: Text footer content
+                      flow:
+                        mode: draft
+                        token: TOKEN_FLOW
+                        id: TOKEN_ID
+                        buttonText: Click here!
+                        action:
+                          type: navigate
+                          screen: SCREEN_ID
+                          data:
+                            property1: '2022-06-13'
+                            property2: '2022-06-13'
       responses:
         '200':
           description: Created message
@@ -3015,6 +3035,31 @@ paths:
     parameters:
       - $ref: '#/components/parameters/subscriptionId'
   /tickets:
+    post:
+      summary: Create a new ticket
+      description: Allows the creation of tickets.
+      tags:
+        - Tickets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket'
+      responses:
+        '201':
+          description: Ticket created
+          headers:
+            Location:
+              description: The URL where the newly created ticket can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket'
+        default:
+          $ref: '#/components/responses/error'
     get:
       summary: List tickets
       description: Lists all tickets available.
@@ -3036,7 +3081,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/support-service.tickets'
+                  $ref: '#/components/schemas/support-service.ticket'
           headers:
             x-total:
               schema:
@@ -3070,7 +3115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/support-service.tickets'
+                $ref: '#/components/schemas/support-service.ticket'
         default:
           $ref: '#/components/responses/error'
     parameters:
@@ -3080,7 +3125,7 @@ paths:
       summary: List ticket actions
       description: Lists all ticket actions available.
       tags:
-        - Tickets
+        - Ticket Actions
       security:
         - TOKEN: []
       parameters:
@@ -3094,7 +3139,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/support-service.ticket-actions'
+                  $ref: '#/components/schemas/support-service.ticket-action'
           headers:
             x-total:
               schema:
@@ -3111,6 +3156,258 @@ paths:
                 description: The current page.
                 type: string
                 example: '5'
+        default:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Create ticket action
+      description: Allows creation of ticket actions.
+      tags:
+        - Ticket Actions
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-action'
+      responses:
+        '201':
+          description: Ticket action created
+          headers:
+            Location:
+              description: The URL where the newly created ticket action can be found.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-action'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/category':
+    patch:
+      summary: Update ticket category
+      description: Allows to update ticket category.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-category'
+      responses:
+        '200':
+          description: Ticket category updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-category'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/clients':
+    patch:
+      summary: Update ticket clients
+      description: Allows to update ticket clients.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-clients'
+      responses:
+        '200':
+          description: Ticket clients updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-clients'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/owner':
+    patch:
+      summary: Update ticket owner
+      description: Allows to update ticket owner.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-owner'
+      responses:
+        '200':
+          description: Ticket owner updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-owner'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/service':
+    patch:
+      summary: Update ticket service
+      description: Allows to update ticket service.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-service'
+      responses:
+        '200':
+          description: Ticket service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-service'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/solution':
+    patch:
+      summary: Update ticket solution
+      description: Allows to update ticket solution.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-solution'
+      responses:
+        '200':
+          description: Ticket solution at updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-solution'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/status':
+    patch:
+      summary: Update ticket status
+      description: Allows to update ticket status.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-status'
+      responses:
+        '200':
+          description: Ticket status updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-status'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/subject':
+    patch:
+      summary: Update ticket subject
+      description: Allows to update ticket subject.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-subject'
+      responses:
+        '200':
+          description: Ticket subject updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-subject'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/type':
+    patch:
+      summary: Update ticket type
+      description: Allows to update ticket type.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-type'
+      responses:
+        '200':
+          description: Ticket type updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-type'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/attributes/urgency':
+    patch:
+      summary: Update ticket urgency
+      description: Allows to update ticket urgency.
+      tags:
+        - Tickets
+      security:
+        - TOKEN: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-attribute-urgency'
+      responses:
+        '200':
+          description: Ticket urgency updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-attribute-urgency'
         default:
           $ref: '#/components/responses/error'
     parameters:
@@ -3195,6 +3492,82 @@ paths:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/tags':
+    get:
+      summary: List ticket tags
+      description: Lists all ticket tags available.
+      tags:
+        - Ticket Tags
+      security:
+        - TOKEN: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/support-service.size'
+      responses:
+        '200':
+          description: Ticket tags available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/support-service.context.tag'
+          headers:
+            x-total:
+              schema:
+                description: The total number of results available.
+                type: string
+                example: '100'
+            x-page-size:
+              schema:
+                description: The number of results per page.
+                type: string
+                example: '10'
+            x-page:
+              schema:
+                description: The current page.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Attach a tag to a ticket
+      description: Allows the creation of a relationship between a ticket and a tag.
+      tags:
+        - Ticket Tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/support-service.ticket-tag'
+      responses:
+        '200':
+          description: The tag attached to the ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support-service.ticket-tag'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+  '/tickets/{ticketId}/tags/{tagId}':
+    delete:
+      summary: Delete the relationship between a tag and a ticket
+      description: Allows to delete the relationship between a tag and a ticket.
+      tags:
+        - Ticket Tags
+      parameters:
+        - $ref: '#/components/parameters/support-service.updatedById'
+      responses:
+        '204':
+          description: No content
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/support-service.ticketId'
+      - $ref: '#/components/parameters/support-service.tagId'
   /templates:
     post:
       description: Create a new template
@@ -5689,6 +6062,8 @@ components:
         - $ref: '#/components/schemas/content.whatsapp.list'
         - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
+        - $ref: '#/components/schemas/content.whatsapp.flow'
+        - $ref: '#/components/schemas/content.whatsapp.flow-response'
         - $ref: '#/components/schemas/content.whatsapp.product-list-order'
       discriminator:
         propertyName: type
@@ -5702,7 +6077,103 @@ components:
           list: '#/components/schemas/content.whatsapp.list'
           product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
+          flow: '#/components/schemas/content.whatsapp.flow'
+          flow_response: '#/components/schemas/content.whatsapp.flow-response'
           product_list_order: '#/components/schemas/content.whatsapp.product-list-order'
+    content.whatsapp.flow-response:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: flow_response
+            token:
+              type: string
+              description: Flow token
+              example: TOKEN_FLOW
+            body:
+              type: string
+              description: Body content
+              example: Text body content
+            data:
+              title: Custom Data
+              description: Set values for custom data fields created.
+              type: object
+              additionalProperties:
+                title: Value
+                description: Sets a value to a custom data field (the property name).
+                oneOf:
+                  - type: string
+                    title: String
+                    example: '2022234324'
+                  - type: number
+                    title: Number
+                    example: 10
+          required:
+            - type
+            - token
+    content.whatsapp.flow:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: flow
+            header:
+              type: string
+              description: Header content
+              example: Text header content
+            body:
+              type: string
+              description: Body content
+              example: Text body content
+            footer:
+              type: string
+              description: Footer content
+              example: Text footer content
+            flow:
+              type: object
+              description: 'The available fields to be used in a flow. Only applicable to [WhatsApp](#tag/WhatsApp) channel.'
+              properties:
+                mode:
+                  type: string
+                  description: Can be either draft or published
+                  example: draft
+                token:
+                  type: string
+                  description: Flow token
+                  example: TOKEN_FLOW
+                id:
+                  type: string
+                  description: Flow id
+                  example: TOKEN_ID
+                buttonText:
+                  type: string
+                  description: Text for the button
+                  example: Click here!
+                action:
+                  type: object
+                  description: Details about the action of the Flow
+                  properties:
+                    type:
+                      type: string
+                      description: Can be either "navigate" or "data_exchange"
+                      example: navigate
+                    screen:
+                      type: string
+                      description: Identification for the screen ID
+                      example: SCREEN_ID
+                    data:
+                      title: Custom Data
+                      description: Set values for custom data fields created.
+                      type: object
+          required:
+            - type
+            - flow
     content.whatsapp.list:
       type: object
       allOf:
@@ -5799,6 +6270,7 @@ components:
         - $ref: '#/components/schemas/content.whatsapp.list'
         - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
+        - $ref: '#/components/schemas/content.whatsapp.flow'
       discriminator:
         propertyName: type
         mapping:
@@ -5811,6 +6283,7 @@ components:
           list: '#/components/schemas/content.whatsapp.list'
           product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
+          flow: '#/components/schemas/content.whatsapp.flow'
     content.whatsapp.order-details-template:
       title: Order Details
       required:
@@ -8720,7 +9193,7 @@ components:
                 - grantType
                 - clientSecret
                 - clientId
-    support-service.ticket-actions:
+    support-service.ticket-action:
       title: Ticket Actions
       description: Ticket actions information.
       type: object
@@ -8738,7 +9211,7 @@ components:
           title: Description
           type: string
         status:
-          $ref: '#/components/schemas/support-service.context.status'
+          $ref: '#/components/schemas/support-service.context.status-action'
         justification:
           $ref: '#/components/schemas/support-service.context.justification'
         createdAt:
@@ -8752,6 +9225,143 @@ components:
           type: string
           example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
           nullable: true
+    support-service.ticket-attribute-category:
+      title: Ticket category
+      description: Ticket category.
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/support-service.context.category'
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-clients:
+      title: Ticket clients
+      description: Ticket clients.
+      type: object
+      properties:
+        clients:
+          title: Clients
+          description: List of client identifiers of the ticket.
+          type: array
+          nullable: false
+          items:
+            type: string
+          example:
+            - a4a4bc53-8396-4190-92e3-7edb6826e3dc
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-owner:
+      title: Ticket owner
+      description: Ticket owner.
+      type: object
+      properties:
+        ownerId:
+          title: Owner Id
+          description: Owner identification.
+          type: string
+          example: 5404ed19-2994-4831-bb33-627e27b18ab1
+          nullable: false
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-service:
+      title: Ticket service
+      description: Ticket service.
+      type: object
+      properties:
+        service:
+          $ref: '#/components/schemas/support-service.context.service'
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-solution:
+      title: Ticket solution
+      description: Ticket solution.
+      type: object
+      properties:
+        solutionAt:
+          title: Solution At
+          description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.'
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          nullable: true
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-status:
+      title: Ticket status
+      description: Ticket status.
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/support-service.context.status'
+        justification:
+          $ref: '#/components/schemas/support-service.context.justification'
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-subject:
+      title: Ticket subject
+      description: Ticket subject.
+      type: object
+      properties:
+        subject:
+          title: Subject
+          description: Subject of the ticket.
+          type: string
+          nullable: false
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-type:
+      title: Ticket type
+      description: Ticket type.
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/support-service.context.ticket-type'
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+    support-service.ticket-attribute-urgency:
+      title: Ticket urgency
+      description: Ticket urgency.
+      type: object
+      properties:
+        urgency:
+          $ref: '#/components/schemas/support-service.context.urgency'
+        updatedById:
+          title: Updated by identification
+          description: User that made the changes.
+          type: string
+          nullable: true
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
     support-service.ticket-owner-changes:
       title: Ticket Owner Change
       type: object
@@ -8816,7 +9426,31 @@ components:
           type: string
           example: '2022-05-23T19:37:59.000Z'
           readOnly: true
-    support-service.tickets:
+    support-service.ticket-tag:
+      title: Ticket Tags
+      description: Ticket tags.
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/support-service.context.tag'
+        updatedById:
+          title: Updated By ID
+          description: Updated by identifier
+          type: string
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+          nullable: true
+    support-service.ticket-tags-delete:
+      title: Ticket Tag removed
+      description: Ticket tag removed.
+      type: object
+      properties:
+        updatedById:
+          title: Updated By ID
+          description: Updated by identifier
+          type: string
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+          nullable: true
+    support-service.ticket:
       title: Tickets
       description: Ticket information.
       type: object
@@ -8929,7 +9563,7 @@ components:
           nullable: true
         solutionAt:
           title: Solution At
-          description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket note.'
+          description: 'Ticket resolution due date. If the resolution due date is updated via the API, it will be considered as having been set manually by the agent who added the last ticket action.'
           type: string
           example: '2022-05-23T19:37:59.000Z'
           nullable: true
@@ -8986,33 +9620,58 @@ components:
               description: SLA rule applied to the ticket.
               type: string
               readOnly: true
+        firstAction:
+          $ref: '#/components/schemas/support-service.context.first-action'
     support-service.context.category:
       title: Category
       type: object
-      readOnly: true
       nullable: true
       properties:
         id:
           title: Category ID
           description: Category identifier.
           type: integer
-          readOnly: true
         name:
           title: Category Name
           description: Name of the category.
           type: string
           readOnly: true
+    support-service.context.first-action:
+      title: First Ticket Action
+      type: object
+      writeOnly: true
+      properties:
+        type:
+          $ref: '#/components/schemas/support-service.context.ticket-type'
+        name:
+          title: Category Name
+          description: Name of the category.
+          type: string
+          readOnly: true
+        description:
+          title: Description
+          type: string
+        createdAt:
+          title: Created At
+          description: Timestamp of the action creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+        createdById:
+          title: Created By ID
+          description: Created by identifier
+          type: string
+          example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
+          nullable: true
     support-service.context.justification:
       title: Justification
+      description: The justification for the ticket status
       type: object
-      readOnly: true
       nullable: true
       properties:
         id:
           title: Justification ID
           description: Justification identifier.
           type: integer
-          readOnly: true
         name:
           title: Justification Name
           description: Name of the justification.
@@ -9048,29 +9707,43 @@ components:
     support-service.context.service:
       title: Service
       type: object
-      readOnly: true
       nullable: true
       properties:
         id:
           title: Service ID
           description: Service identifier.
           type: integer
-          readOnly: true
         name:
           title: Service Name
           description: Name of the service.
           type: string
           readOnly: true
-    support-service.context.status:
+    support-service.context.status-action:
       title: Status
+      description: 'The ticket status. If no status is provided, the action defaults to the ticket''s most recent status.'
       type: object
-      readOnly: true
+      nullable: true
       properties:
         id:
           title: Status ID
           description: Status identifier.
           type: integer
+        name:
+          title: Status Name
+          description: Name of the status.
+          type: string
           readOnly: true
+        type:
+          $ref: '#/components/schemas/support-service.context.system-status-type'
+    support-service.context.status:
+      title: Status
+      description: The ticket status
+      type: object
+      properties:
+        id:
+          title: Status ID
+          description: Status identifier.
+          type: integer
         name:
           title: Status Name
           description: Name of the status.
@@ -9090,24 +9763,36 @@ components:
         - RESOLVED
         - CLOSED
       readOnly: true
+    support-service.context.tag:
+      title: Tag
+      type: object
+      properties:
+        id:
+          title: Tag ID
+          description: Tag identifier.
+          type: integer
+        name:
+          title: Tag Name
+          description: Name of the tag.
+          type: string
+          readOnly: true
     support-service.context.ticket-type:
       title: Ticket Type
       type: string
       nullable: false
+      readOnly: false
       enum:
         - INTERNAL
         - PUBLIC
     support-service.context.urgency:
       title: Urgency
       type: object
-      readOnly: true
       nullable: true
       properties:
         id:
           title: Urgency ID
           description: Urgency identifier.
           type: integer
-          readOnly: true
         name:
           title: Urgency Name
           description: Name of the urgency.
@@ -10860,6 +11545,13 @@ components:
       description: The status id of the ticket.
       schema:
         type: integer
+    support-service.tagId:
+      name: tagId
+      in: path
+      required: true
+      description: The ticket tag identifier.
+      schema:
+        type: string
     support-service.teamId:
       name: teamId
       in: path
@@ -10883,6 +11575,14 @@ components:
         type: string
         format: date
         example: '2024-01-31'
+    support-service.updatedById:
+      name: updatedById
+      in: query
+      required: false
+      description: User that made the changes.
+      schema:
+        type: string
+        example: 3525fdd7-34c7-4159-bf7c-b33e4e772c05
     templates.category:
       name: category
       in: query
@@ -10999,7 +11699,7 @@ security:
   - TOKEN: []
 tags:
   - name: Content types
-    description: |
+    description: |-
       ## Supported Channels
       For each content type covered in the next section, the following table reflects its support for each available channel:
 
@@ -11125,6 +11825,18 @@ tags:
       This is [Instagram](#tag/Instagram) and [Facebook](#tag/Facebook) recurring message optin response content. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
       <SchemaDefinition schemaRef="#/components/schemas/content.optin_response" showReadOnly={true} showWriteOnly={true} />
+
+      ## Flow
+
+      Flow message. This is a [WhatsApp](#tag/WhatsApp) channel content.
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.flow" showReadOnly={true} showWriteOnly={true} />
+
+      ## Flow Response
+
+      Flow message response. This is supported only in the [webhook content](#section/Webhook-supported-channels).
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.flow-response" showReadOnly={true} showWriteOnly{true} />
   - name: SMS
     description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
@@ -11685,6 +12397,7 @@ tags:
       | [email](#section/E-Mail)                          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|
       | [product_list_order](#section/Product-List-Order) |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
       | [optin_response](#section/OptIn-Response)         |<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|
+      | [flow_response](#section/Flow-Response)          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
       _*GBM stands for Google Business Messages_
   - name: Templates
@@ -12546,6 +13259,8 @@ x-tagGroups:
   - name: Support Service
     tags:
       - Tickets
+      - Ticket Actions
+      - Ticket Tags
   - name: Status
     tags:
       - Status Groups
