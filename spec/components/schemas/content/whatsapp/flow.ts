@@ -31,6 +31,7 @@ const flow: SchemaObject = {
       flow: {
         type: 'object',
         description: 'The available fields to be used in a flow. Only applicable to [WhatsApp](#tag/WhatsApp) channel.',
+        required: ['id', 'buttonText'],
         properties: {
             mode: {
                 type: 'string',
@@ -55,6 +56,7 @@ const flow: SchemaObject = {
             action: {
                 type: 'object',
                 description: 'Details about the action of the Flow',
+                required: ['type'],
                 properties: {
                     type: {
                         type: 'string',
