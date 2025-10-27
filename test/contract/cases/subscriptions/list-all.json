@@ -61,6 +61,16 @@
       },
       "createdAt": "2025-07-08T18:00:00.000Z",
       "updatedAt": "2025-07-08T18:00:00.000Z"
+    }, {
+      "id": "subscription id 5",
+      "status": "ACTIVE",
+      "eventType": "SUPPORT_EXPERT_AGENT",
+      "version": "v2",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "createdAt": "2025-07-08T18:00:00.000Z",
+      "updatedAt": "2025-07-08T18:00:00.000Z"
     }]
   }
 }
