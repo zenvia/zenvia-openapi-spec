@@ -15,6 +15,8 @@ const all: SchemaObject = {
     $ref: conversationMessageEventRef,
   }, {
     $ref: conversationStatusEventRef,
+  }, {
+    $ref: supportExpertAgentEventRef,
   }],
   discriminator: {
     propertyName: 'type',
