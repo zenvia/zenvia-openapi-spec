@@ -3,6 +3,7 @@ import { ref as messageEventRef } from './message-event';
 import { ref as messageStatusEventRef } from './message-status-event';
 import { ref as conversationMessageEventRef } from './conversation-message-event';
 import { ref as conversationStatusEventRef } from './conversation-status-event';
+import { ref as supportExpertAgentEventRef } from './support-expert-agent-event';
 import { createComponentRef } from '../../../../utils/ref';
 
 const all: SchemaObject = {
@@ -14,6 +15,8 @@ const all: SchemaObject = {
     $ref: conversationMessageEventRef,
   }, {
     $ref: conversationStatusEventRef,
+  }, {
+    $ref: supportExpertAgentEventRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -22,6 +25,7 @@ const all: SchemaObject = {
       MESSAGE_STATUS: messageStatusEventRef,
       CONVERSATION_STATUS: conversationStatusEventRef,
       CONVERSATION_MESSAGE: conversationMessageEventRef,
+      SUPPORT_EXPERT_AGENT: supportExpertAgentEventRef,
     },
   },
 };

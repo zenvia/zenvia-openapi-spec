@@ -4,6 +4,7 @@ import { ref as messageSubscriptionRef } from './message-subscription';
 import { ref as messageStatusSubscriptionRef } from './message-status-subscription';
 import { ref as conversationStatusSubscriptionRef } from './conversation-status-subscription';
 import { ref as conversationMessageSubscriptionRef } from './conversation-message-subscription';
+import { ref as supportExpertAgentSubscriptionRef } from './support-expert-agent-subscription';
 
 const all: SchemaObject = {
   oneOf: [{
@@ -14,6 +15,8 @@ const all: SchemaObject = {
     $ref: conversationStatusSubscriptionRef,
   }, {
     $ref: conversationMessageSubscriptionRef,
+  }, {
+    $ref: supportExpertAgentSubscriptionRef,
   }],
   discriminator: {
     propertyName: 'eventType',
@@ -22,6 +25,7 @@ const all: SchemaObject = {
       MESSAGE_STATUS: messageStatusSubscriptionRef,
       CONVERSATION_STATUS: conversationStatusSubscriptionRef,
       CONVERSATION_MESSAGE: conversationMessageSubscriptionRef,
+      SUPPORT_EXPERT_AGENT: supportExpertAgentSubscriptionRef,
     },
   },
 };

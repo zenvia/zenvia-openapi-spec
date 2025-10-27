@@ -21,6 +21,7 @@ const eventBase: SchemaObject = {
       enum: [
         'MESSAGE',
         'MESSAGE_STATUS',
+        'SUPPORT_EXPERT_AGENT',
       ],
     },
     subscriptionId: {
