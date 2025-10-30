@@ -7029,6 +7029,7 @@ components:
         - $ref: '#/components/schemas/events.message-status-event'
         - $ref: '#/components/schemas/events.conversation-message-event'
         - $ref: '#/components/schemas/events.conversation-status-event'
+        - $ref: '#/components/schemas/events.support-expert-agent-event'
       discriminator:
         propertyName: type
         mapping:
@@ -7036,6 +7037,7 @@ components:
           MESSAGE_STATUS: '#/components/schemas/events.message-status-event'
           CONVERSATION_STATUS: '#/components/schemas/events.conversation-status-event'
           CONVERSATION_MESSAGE: '#/components/schemas/events.conversation-message-event'
+          SUPPORT_EXPERT_AGENT: '#/components/schemas/events.support-expert-agent-event'
     events.base-conversation-message:
       type: object
       properties:
@@ -7102,6 +7104,7 @@ components:
           enum:
             - MESSAGE
             - MESSAGE_STATUS
+            - SUPPORT_EXPERT_AGENT
         subscriptionId:
           title: Webhook ID
           description: ID of the webhook that caused this event to be delivered
@@ -7546,6 +7549,53 @@ components:
                 - id
                 - status
                 - statusTimestamp
+    events.support-expert-agent-event:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/events.base'
+        - type: object
+          properties:
+            ticket:
+              type: object
+              properties:
+                id:
+                  title: Ticket identifier
+                  type: string
+                  example: '1846867'
+            expertAgent:
+              title: Details of the expert agent
+              type: object
+              properties:
+                id:
+                  title: Expert agent identifier
+                  type: string
+                  example: '18467'
+                externalId:
+                  title: Expert agent external identifier
+                  type: string
+                  example: '184234236867'
+    events.support-expert-agent:
+      type: object
+      properties:
+        ticket:
+          type: object
+          properties:
+            id:
+              title: Ticket identifier
+              type: string
+              example: '1846867'
+        expertAgent:
+          title: Details of the expert agent
+          type: object
+          properties:
+            id:
+              title: Expert agent identifier
+              type: string
+              example: '18467'
+            externalId:
+              title: Expert agent external identifier
+              type: string
+              example: '184234236867'
     events.transferred:
       type: object
       properties:
@@ -8833,6 +8883,7 @@ components:
         - $ref: '#/components/schemas/subscription.message-status-subscription'
         - $ref: '#/components/schemas/subscription.conversation-status-subscription'
         - $ref: '#/components/schemas/subscription.conversation-message-subscription'
+        - $ref: '#/components/schemas/subscription.support-expert-agent-subscription'
       discriminator:
         propertyName: eventType
         mapping:
@@ -8840,6 +8891,7 @@ components:
           MESSAGE_STATUS: '#/components/schemas/subscription.message-status-subscription'
           CONVERSATION_MESSAGE: '#/components/schemas/subscription.conversation-message-subscription'
           CONVERSATION_STATUS: '#/components/schemas/subscription.conversation-status-subscription'
+          SUPPORT_EXPERT_AGENT: '#/components/schemas/subscription.support-expert-agent-subscription'
     subscription.base:
       type: object
       properties:
@@ -8853,6 +8905,7 @@ components:
           enum:
             - MESSAGE
             - MESSAGE_STATUS
+            - SUPPORT_EXPERT_AGENT
         webhook:
           allOf:
             - $ref: '#/components/schemas/subscription.webhook'
@@ -8963,6 +9016,31 @@ components:
         - ACTIVE
         - DEGRADED
         - INACTIVE
+    subscription.support-expert-agent-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.base'
+        - type: object
+          properties:
+            ticket:
+              type: object
+              properties:
+                id:
+                  title: Ticket identifier
+                  type: string
+                  example: '1846867'
+            expertAgent:
+              title: Details of the expert agent
+              type: object
+              properties:
+                id:
+                  title: Expert agent identifier
+                  type: string
+                  example: '18467'
+                externalId:
+                  title: Expert agent external identifier
+                  type: string
+                  example: '184234236867'
     subscription.webhook:
       type: object
       properties:
@@ -8987,6 +9065,7 @@ components:
         - $ref: '#/components/schemas/subscription.partial-status.message-status-subscription'
         - $ref: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
         - $ref: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
+        - $ref: '#/components/schemas/subscription.partial-status.support-expert-agent-subscription'
       discriminator:
         propertyName: eventType
         mapping:
@@ -8994,6 +9073,7 @@ components:
           MESSAGE_STATUS: '#/components/schemas/subscription.partial-status.message-status-subscription'
           CONVERSATION_STATUS: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
           CONVERSATION_MESSAGE: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
+          SUPPORT_EXPERT_AGENT: '#/components/schemas/subscription.partial-status.support-expert-agent-subscription'
     subscription.partial-status.base:
       type: object
       properties:
@@ -9009,6 +9089,7 @@ components:
             - MESSAGE_STATUS
             - CONVERSATION_STATUS
             - CONVERSATION_MESSAGE
+            - SUPPORT_EXPERT_AGENT
         webhook:
           allOf:
             - $ref: '#/components/schemas/subscription.partial-status.webhook'
@@ -9111,6 +9192,31 @@ components:
       enum:
         - ACTIVE
         - INACTIVE
+    subscription.partial-status.support-expert-agent-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.partial-status.base'
+        - type: object
+          properties:
+            ticket:
+              type: object
+              properties:
+                id:
+                  title: Ticket identifier
+                  type: string
+                  example: '1846867'
+            expertAgent:
+              title: Details of the expert agent
+              type: object
+              properties:
+                id:
+                  title: Expert agent identifier
+                  type: string
+                  example: '18467'
+                externalId:
+                  title: Expert agent external identifier
+                  type: string
+                  example: '184234236867'
     subscription.partial-status.webhook:
       type: object
       properties:
@@ -12326,6 +12432,14 @@ tags:
       If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
 
       <SchemaDefinition schemaRef="#/components/schemas/events.conversation-message" />
+      <br>
+
+      ## SUPPORT_EXPERT_AGENT
+
+      The event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.
+
+      Allowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.
+      <SchemaDefinition schemaRef="#/components/schemas/events.support-expert-agent" />
       <br>
 
       ## Zenvia outbound IP addresses
