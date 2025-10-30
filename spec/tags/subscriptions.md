@@ -62,6 +62,14 @@ If you are subscribed to this type of event, your webhook will receive a request
 <SchemaDefinition schemaRef="#/components/schemas/events.conversation-message" />
 <br>
 
+## SUPPORT_EXPERT_AGENT
+
+The event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.
+
+Allowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.
+<SchemaDefinition schemaRef="#/components/schemas/events.support-expert-agent" />
+<br>
+
 ## Zenvia outbound IP addresses
 
 Webhook notifications sent from Zenvia come from any of the following ranges of IP addresses:
