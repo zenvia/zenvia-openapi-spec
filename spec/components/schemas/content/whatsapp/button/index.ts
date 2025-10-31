@@ -58,6 +58,14 @@ const button: SchemaObject = {
           ],
         },
       },
+      category: {
+        type: 'string',
+        enum: [
+          'UTILITY',
+        ],
+        description: 'The category used to identify Direct Send messages',
+        'x-unpublished': true,
+      },
     },
     required: [
       'type',
