@@ -15,22 +15,9 @@ const eventBase: SchemaObject = {
       type: 'string',
       format: 'date-time',
     },
-    type: {
-      title: 'Event type',
-      type: 'string',
-      enum: [
-        'MESSAGE',
-        'MESSAGE_STATUS',
-        'SUPPORT_EXPERT_AGENT',
-      ],
-    },
     subscriptionId: {
       title: 'Webhook ID',
       description: 'ID of the webhook that caused this event to be delivered',
-      type: 'string',
-    },
-    channel: {
-      title: 'Message Channel',
       type: 'string',
     },
   },
