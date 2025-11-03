@@ -1,10 +1,14 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as channelRef } from '../../message/channel';
+import { ref as baseRef } from './base';
 
 const subscription: SchemaObject = {
     type: 'object',
     allOf: [
+        {
+          $ref: baseRef,
+        },
         {
             type: 'object',
             properties: {
