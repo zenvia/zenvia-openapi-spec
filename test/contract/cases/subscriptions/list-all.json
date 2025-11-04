@@ -59,6 +59,10 @@
       "webhook": {
         "url": "https://myhost.com/webhook/path"
       },
+      "criteria": {
+        "channel": "whatsapp",
+        "direction": "IN"
+      },
       "createdAt": "2025-07-08T18:00:00.000Z",
       "updatedAt": "2025-07-08T18:00:00.000Z"
     }, {
