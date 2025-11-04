@@ -15,6 +15,13 @@ const subscription: SchemaObject = {
           title: 'ID',
           type: 'string',
         },
+        eventType: {
+          title: 'Event type to subscribe',
+          type: 'string',
+          enum: [
+            'CONVERSATION_STATUS',
+          ],
+        },
       },
     },
   ],

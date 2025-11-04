@@ -31,6 +31,13 @@ const subscription: SchemaObject = {
                     },
                     required: ['channel'],
                 },
+                eventType: {
+                  title: 'Event type to subscribe',
+                  type: 'string',
+                  enum: [
+                    'CONVERSATION_MESSAGE',
+                  ],
+                },
             },
         },
     ],
