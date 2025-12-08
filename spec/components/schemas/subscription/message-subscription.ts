@@ -27,7 +27,7 @@ const subscription: SchemaObject = {
             ],
           },
         },
-        required: ['channel'],
+        required: ['channel', 'direction'],
       },
     },
     required: ['criteria'],
