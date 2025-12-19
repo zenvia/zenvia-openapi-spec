@@ -1,0 +1,39 @@
+{
+  "name": "subscribe to CONVERSATION_STATUS events",
+  "request": {
+    "method": "POST",
+    "path": "/subscriptions",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "eventType": "CONVERSATION_STATUS",
+      "status": "ACTIVE",
+      "version": "v2",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path",
+        "headers": {}
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "subscription id",
+      "status": "ACTIVE",
+      "eventType": "CONVERSATION_STATUS",
+      "version": "v2",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path",
+        "headers": {}
+      },
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
 import { ref as baseRef } from './base';
+import { createComponentRef } from '../../../../utils/ref';
 
 const subscription: SchemaObject = {
   type: 'object',
@@ -11,16 +11,9 @@ const subscription: SchemaObject = {
     {
       type: 'object',
       properties: {
-        id: {
-          title: 'ID',
-          type: 'string',
-        },
         eventType: {
-          title: 'Event type to subscribe',
           type: 'string',
-          enum: [
-            'CONVERSATION_STATUS',
-          ],
+          enum: ['CONVERSATION_STATUS'],
         },
       },
     },

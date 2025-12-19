@@ -1,0 +1,91 @@
+{
+  "name": "subscribe to SUPPORT_EXPERT_AGENT events",
+  "request": {
+    "method": "POST",
+    "path": "/subscriptions",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "eventType": "SUPPORT_EXPERT_AGENT",
+      "status": "ACTIVE",
+      "version": "v1",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path",
+        "headers": {},
+        "auth": {
+          "type": "OAUTH",
+          "url": "https://auth.example.com/oauth/token",
+          "headers": {
+            "property1": "Zenvia",
+            "property2": "Zenvia"
+          },
+          "queryParams": {
+            "property1": "Zenvia",
+            "property2": "Zenvia"
+          },
+          "oauth": {
+            "grantType": "client_credentials",
+            "clientSecret": "some-secret",
+            "clientId": "some-client-id",
+            "refreshToken": "some-refresh-token",
+            "expiresIn": 3600
+          }
+        }
+      },
+      "ticket": {
+        "id": "1846867"
+      },
+      "expertAgent": {
+        "id": "18467",
+        "externalId": "184234236867"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "subscription id",
+      "status": "ACTIVE",
+      "eventType": "SUPPORT_EXPERT_AGENT",
+      "version": "v1",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path",
+        "headers": {},
+        "auth": {
+          "type": "OAUTH",
+          "url": "https://auth.example.com/oauth/token",
+          "headers": {
+            "property1": "Zenvia",
+            "property2": "Zenvia"
+          },
+          "queryParams": {
+            "property1": "Zenvia",
+            "property2": "Zenvia"
+          },
+          "oauth": {
+            "grantType": "client_credentials",
+            "clientSecret": "some-secret",
+            "clientId": "some-client-id",
+            "refreshToken": "some-refresh-token",
+            "expiresIn": 3600
+          }
+        }
+      },
+      "ticket": {
+        "id": "1846867"
+      },
+      "expertAgent": {
+        "id": "18467",
+        "externalId": "184234236867"
+      },
+      "createdAt": "2020-07-15T18:00:00.000Z",
+      "updatedAt": "2020-07-15T18:00:00.000Z"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Object',
@@ -9,14 +9,17 @@ const base: SchemaObject = {
     id: {
       title: 'ID',
       type: 'string',
+      description: 'Unique identifier for the message',
     },
     from: {
       title: 'from',
       type: 'string',
+      description: 'Identifier of the sender of the message',
     },
     to: {
       title: 'to',
       type: 'string',
+      description: 'Identifier of the recipient of the message',
     },
     direction: {
       title: 'Message Direction',
@@ -50,11 +53,12 @@ const base: SchemaObject = {
     },
     timestamp: {
       title: 'Timestamp',
+      description: 'Timestamp of the message was created or sent, in ISO 8601 format',
       type: 'string',
       format: 'date-time',
     },
   },
-  required: ['id', 'to', 'direction', 'channel', 'timestamp'],
+  required: ['id', 'from', 'to', 'direction', 'channel', 'timestamp'],
 };
 
 export const ref = createComponentRef(__filename);
