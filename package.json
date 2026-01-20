@@ -4,8 +4,8 @@
   "description": "",
   "main": "spec/index.js",
   "engines": {
-    "node": ">= 16",
-    "npm": ">= 8"
+    "node": ">= 22",
+    "npm": ">= 10"
   },
   "scripts": {
     "start": "ts-node-dev --no-deps --respawn --files ./bin/serve.ts",
