@@ -14,6 +14,10 @@ const webhook: SchemaObject = {
       type: 'string',
       format: 'date-time',
     },
+    channel: {
+      title: 'Message Channel',
+      type: 'string',
+    },
     code: {
       title: 'Status code',
       description: 'Code that indicates the message status',

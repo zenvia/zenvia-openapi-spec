@@ -20,6 +20,10 @@ const messageEvent: SchemaObject = {
         ],
         example: 'MESSAGE',
       },
+      channel: {
+        title: 'Message Channel',
+        type: 'string',
+      },
       direction: {
         title: 'Message Direction',
         description: `Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)

@@ -20,6 +20,10 @@ const messageEvent: SchemaObject = {
         ],
         example: 'MESSAGE_STATUS',
       },
+      channel: {
+        title: 'Message Channel',
+        type: 'string',
+      },
       messageId: {
         title: 'Message ID',
         description: 'ID of the message whose status is being delivered',

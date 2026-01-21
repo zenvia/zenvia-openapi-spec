@@ -17,7 +17,11 @@ const subscriptionBase: SchemaObject = {
       enum: [
         'MESSAGE',
         'MESSAGE_STATUS',
+        'CONVERSATION_MESSAGE',
+        'CONVERSATION_STATUS',
         'SUPPORT_EXPERT_AGENT',
+        'CONVERSATION_MESSAGE',
+        'CONVERSATION_STATUS',
       ],
     },
     webhook: {

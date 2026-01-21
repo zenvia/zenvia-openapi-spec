@@ -3,8 +3,7 @@
   "request": {
     "method": "GET",
     "path": "/subscriptions",
-    "query": {
-    },
+    "query": {},
     "headers": {
       "x-api-token": "some-api-token"
     }
@@ -14,63 +13,73 @@
     "headers": {
       "content-type": "application/json"
     },
-    "body": [{
-      "id": "subscription id 1",
-      "status": "ACTIVE",
-      "eventType": "MESSAGE",
-      "version": "v2",
-      "webhook": {
-        "url": "https://myhost.com/webhook/path"
+    "body": [
+      {
+        "id": "subscription id 1",
+        "status": "ACTIVE",
+        "eventType": "MESSAGE",
+        "version": "v2",
+        "webhook": {
+          "url": "https://myhost.com/webhook/path"
+        },
+        "criteria": {
+          "channel": "whatsapp",
+          "direction": "IN"
+        },
+        "createdAt": "2020-07-15T18:00:00.000Z",
+        "updatedAt": "2020-07-15T18:00:00.000Z"
       },
-      "criteria": {
-        "channel": "whatsapp",
-        "direction": "IN"
+      {
+        "id": "subscription id 2",
+        "status": "ACTIVE",
+        "eventType": "MESSAGE_STATUS",
+        "version": "v2",
+        "webhook": {
+          "url": "https://myhost.com/webhook/path"
+        },
+        "criteria": {
+          "channel": "whatsapp"
+        },
+        "createdAt": "2020-07-15T18:00:00.000Z",
+        "updatedAt": "2020-07-15T18:00:00.000Z"
       },
-      "createdAt": "2020-07-15T18:00:00.000Z",
-      "updatedAt": "2020-07-15T18:00:00.000Z"
-    }, {
-      "id": "subscription id 2",
-      "status": "ACTIVE",
-      "eventType": "MESSAGE_STATUS",
-      "version": "v2",
-      "webhook": {
-        "url": "https://myhost.com/webhook/path"
+      {
+        "id": "subscription id 3",
+        "status": "ACTIVE",
+        "eventType": "CONVERSATION_STATUS",
+        "version": "v2",
+        "webhook": {
+          "url": "https://myhost.com/webhook/path"
+        },
+        "createdAt": "2025-07-08T18:00:00.000Z",
+        "updatedAt": "2025-07-08T18:00:00.000Z"
       },
-      "criteria": {
-        "channel": "whatsapp"
+      {
+        "id": "subscription id 4",
+        "status": "ACTIVE",
+        "eventType": "CONVERSATION_MESSAGE",
+        "version": "v2",
+        "webhook": {
+          "url": "https://myhost.com/webhook/path"
+        },
+        "criteria": {
+          "channel": "whatsapp",
+          "direction": "IN"
+        },
+        "createdAt": "2025-07-08T18:00:00.000Z",
+        "updatedAt": "2025-07-08T18:00:00.000Z"
       },
-      "createdAt": "2020-07-15T18:00:00.000Z",
-      "updatedAt": "2020-07-15T18:00:00.000Z"
-    }, {
-      "id": "subscription id 3",
-      "status": "ACTIVE",
-      "eventType": "CONVERSATION_STATUS",
-      "version": "v2",
-      "webhook": {
-        "url": "https://myhost.com/webhook/path"
-      },
-      "createdAt": "2025-07-08T18:00:00.000Z",
-      "updatedAt": "2025-07-08T18:00:00.000Z"
-    }, {
-      "id": "subscription id 4",
-      "status": "ACTIVE",
-      "eventType": "CONVERSATION_MESSAGE",
-      "version": "v2",
-      "webhook": {
-        "url": "https://myhost.com/webhook/path"
-      },
-      "createdAt": "2025-07-08T18:00:00.000Z",
-      "updatedAt": "2025-07-08T18:00:00.000Z"
-    }, {
-      "id": "subscription id 5",
-      "status": "ACTIVE",
-      "eventType": "SUPPORT_EXPERT_AGENT",
-      "version": "v2",
-      "webhook": {
-        "url": "https://myhost.com/webhook/path"
-      },
-      "createdAt": "2025-07-08T18:00:00.000Z",
-      "updatedAt": "2025-07-08T18:00:00.000Z"
-    }]
+      {
+        "id": "subscription id 5",
+        "status": "ACTIVE",
+        "eventType": "SUPPORT_EXPERT_AGENT",
+        "version": "v2",
+        "webhook": {
+          "url": "https://myhost.com/webhook/path"
+        },
+        "createdAt": "2025-07-08T18:00:00.000Z",
+        "updatedAt": "2025-07-08T18:00:00.000Z"
+      }
+    ]
   }
 }
