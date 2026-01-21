@@ -9665,16 +9665,12 @@
             "title": "Event type",
             "type": "string",
             "enum": [
-              "CONVERSATION_STATUS",
               "CONVERSATION_MESSAGE"
             ]
           },
           "subscriptionId": {
-            "title": "Subscription ID",
-            "type": "string"
-          },
-          "subscriptionStatus": {
-            "title": "Subscription Status",
+            "title": "Webhook ID",
+            "description": "ID of the webhook that caused this event to be delivered",
             "type": "string"
           }
         }
@@ -9697,16 +9693,12 @@
             "title": "Event type",
             "type": "string",
             "enum": [
-              "CONVERSATION_STATUS",
-              "CONVERSATION_MESSAGE"
+              "CONVERSATION_STATUS"
             ]
           },
           "subscriptionId": {
-            "title": "Subscription ID",
-            "type": "string"
-          },
-          "subscriptionStatus": {
-            "title": "Subscription Status",
+            "title": "Webhook ID",
+            "description": "ID of the webhook that caused this event to be delivered",
             "type": "string"
           }
         }
@@ -9725,143 +9717,10 @@
             "type": "string",
             "format": "date-time"
           },
-          "type": {
-            "title": "Event type",
-            "type": "string",
-            "enum": [
-              "MESSAGE",
-              "MESSAGE_STATUS",
-              "SUPPORT_EXPERT_AGENT"
-            ]
-          },
           "subscriptionId": {
             "title": "Webhook ID",
             "description": "ID of the webhook that caused this event to be delivered",
             "type": "string"
-          },
-          "channel": {
-            "title": "Message Channel",
-            "type": "string"
-          }
-        }
-      },
-      "events.claimed": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_CLAIMED"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "userId": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "statusTimestamp": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "userId",
-                  "id",
-                  "status",
-                  "statusTimestamp"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      "events.closed": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_CLOSED"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "closedBy": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "closeReason": {
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "statusTimestamp": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "id",
-                  "status",
-                  "statusTimestamp"
-                ]
-              }
-            ]
           }
         }
       },
@@ -9875,10 +9734,10 @@
             "type": "object",
             "properties": {
               "message": {
-                "$ref": "#/components/schemas/events.message-prop"
+                "$ref": "#/components/schemas/events.conversation-message.event-message-props"
               },
               "conversation": {
-                "$ref": "#/components/schemas/events.conversation-prop"
+                "$ref": "#/components/schemas/events.conversation-message.event-conversation-props"
               }
             }
           }
@@ -9886,229 +9745,58 @@
       },
       "events.conversation-message": {
         "type": "object",
-        "properties": {
-          "message": {
-            "$ref": "#/components/schemas/events.message-prop"
-          },
-          "conversation": {
-            "$ref": "#/components/schemas/events.conversation-prop"
-          }
-        }
-      },
-      "events.conversation-prop": {
-        "title": "Message Conversation Object",
-        "description": "This is a Message object model",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "ID",
-            "type": "string"
-          },
-          "contactId": {
-            "title": "contactId",
-            "type": "string"
-          }
-        }
-      },
-      "events.conversation-status-base": {
-        "type": "object",
-        "description": "Base structure for all conversation objects",
-        "properties": {
-          "id": {
-            "title": "ID",
-            "type": "string"
-          },
-          "contactId": {
-            "title": "contactId",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "status",
-          "statusTimestamp"
-        ]
-      },
-      "events.conversation-status-event": {
-        "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/events.base"
+            "$ref": "#/components/schemas/events.base-conversation-message"
           },
           {
             "type": "object",
             "properties": {
-              "type": {
-                "title": "Event type",
-                "type": "string",
-                "enum": [
-                  "CONVERSATION_CREATED",
-                  "CONVERSATION_QUEUED",
-                  "CONVERSATION_STARTED",
-                  "CONVERSATION_UNSNOOZED",
-                  "CONVERSATION_CLAIMED",
-                  "CONVERSATION_TRANSFERRED",
-                  "CONVERSATION_DISTRIBUTED_TO_USER",
-                  "CONVERSATION_SNOOZED",
-                  "CONVERSATION_CLOSED"
-                ],
-                "example": "CONVERSATION_CREATED"
+              "message": {
+                "$ref": "#/components/schemas/events.conversation-message.event-message-props"
               },
               "conversation": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/events.created"
-                  },
-                  {
-                    "$ref": "#/components/schemas/events.claimed"
-                  },
-                  {
-                    "$ref": "#/components/schemas/events.transferred"
-                  },
-                  {
-                    "$ref": "#/components/schemas/events.distributed"
-                  },
-                  {
-                    "$ref": "#/components/schemas/events.snoozed"
-                  },
-                  {
-                    "$ref": "#/components/schemas/events.closed"
-                  }
-                ]
+                "$ref": "#/components/schemas/events.conversation-message.event-conversation-props"
+              }
+            }
+          }
+        ]
+      },
+      "events.conversation-status-event": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base-conversation-status"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "conversation": {
+                "$ref": "#/components/schemas/events.conversation-status.event-conversation-props"
               }
             },
             "required": [
-              "type",
               "conversation"
             ]
           }
         ]
       },
       "events.conversation-status": {
-        "type": "object",
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/events.created"
-          },
-          {
-            "$ref": "#/components/schemas/events.claimed"
+            "$ref": "#/components/schemas/events.base-conversation-status"
           },
           {
-            "$ref": "#/components/schemas/events.transferred"
-          },
-          {
-            "$ref": "#/components/schemas/events.distributed"
-          },
-          {
-            "$ref": "#/components/schemas/events.snoozed"
-          },
-          {
-            "$ref": "#/components/schemas/events.closed"
-          }
-        ],
-        "required": [
-          "type"
-        ],
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "CONVERSATION_CREATED": "#/components/schemas/events.created",
-            "CONVERSATION_QUEUED": "#/components/schemas/events.created",
-            "CONVERSATION_STARTED": "#/components/schemas/events.created",
-            "CONVERSATION_UNSNOOZED": "#/components/schemas/events.created",
-            "CONVERSATION_CLAIMED": "#/components/schemas/events.claimed",
-            "CONVERSATION_TRANSFERRED": "#/components/schemas/events.transferred",
-            "CONVERSATION_DISTRIBUTED_TO_USER": "#/components/schemas/events.distributed",
-            "CONVERSATION_SNOOZED": "#/components/schemas/events.snoozed",
-            "CONVERSATION_CLOSED": "#/components/schemas/events.closed"
-          }
-        },
-        "additionalProperties": true
-      },
-      "events.created": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_CREATED",
-              "CONVERSATION_QUEUED",
-              "CONVERSATION_STARTED",
-              "CONVERSATION_UNSNOOZED"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
+            "type": "object",
+            "properties": {
+              "conversation": {
+                "$ref": "#/components/schemas/events.conversation-status.event-conversation-props"
               }
+            },
+            "required": [
+              "conversation"
             ]
           }
-        }
-      },
-      "events.distributed": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_DISTRIBUTED_TO_USER"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "groupId": {
-                    "type": "string"
-                  },
-                  "userId": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "statusTimestamp": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "userId",
-                  "id",
-                  "status",
-                  "statusTimestamp"
-                ]
-              }
-            ]
-          }
-        }
+        ]
       },
       "events.error-cause": {
         "type": "object",
@@ -10148,6 +9836,10 @@
                 ],
                 "example": "MESSAGE"
               },
+              "channel": {
+                "title": "Message Channel",
+                "type": "string"
+              },
               "direction": {
                 "title": "Message Direction",
                 "description": "Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)\n> **Note:** The **OUT** direction is under construction.",
@@ -10162,73 +9854,6 @@
               }
             }
           }
-        ]
-      },
-      "events.message-prop": {
-        "title": "Message Object",
-        "description": "This is a Message object model",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "ID",
-            "type": "string"
-          },
-          "from": {
-            "title": "from",
-            "type": "string"
-          },
-          "to": {
-            "title": "to",
-            "type": "string"
-          },
-          "direction": {
-            "title": "Message Direction",
-            "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT), or is internal (INTERNAL).\n                    > **Note:** The **OUT** direction is under construction.",
-            "type": "string",
-            "enum": [
-              "IN",
-              "OUT",
-              "INTERNAL"
-            ]
-          },
-          "channel": {
-            "title": "Channel",
-            "description": "Channel information including type and provider",
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "type",
-              "provider"
-            ]
-          },
-          "contents": {
-            "title": "Message contents",
-            "description": "An array of message content objects",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": true
-            }
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "id",
-          "to",
-          "direction",
-          "channel",
-          "timestamp"
         ]
       },
       "events.message-status-event": {
@@ -10248,6 +9873,10 @@
                   "MESSAGE_STATUS"
                 ],
                 "example": "MESSAGE_STATUS"
+              },
+              "channel": {
+                "title": "Message Channel",
+                "type": "string"
               },
               "messageId": {
                 "title": "Message ID",
@@ -10307,6 +9936,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "channel": {
+            "title": "Message Channel",
+            "type": "string"
+          },
           "code": {
             "title": "Status code",
             "description": "Code that indicates the message status",
@@ -10346,58 +9979,6 @@
           "code",
           "timestamp"
         ]
-      },
-      "events.snoozed": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_SNOOZED"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "snoozedUntil": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "statusTimestamp": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "snoozedUntil",
-                  "id",
-                  "status",
-                  "statusTimestamp"
-                ]
-              }
-            ]
-          }
-        }
       },
       "events.support-expert-agent-event": {
         "type": "object",
@@ -10440,108 +10021,50 @@
       },
       "events.support-expert-agent": {
         "type": "object",
-        "properties": {
-          "ticket": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
             "type": "object",
             "properties": {
-              "id": {
-                "title": "Ticket identifier",
+              "type": {
+                "title": "Event type",
                 "type": "string",
-                "example": "1846867"
-              }
-            }
-          },
-          "expertAgent": {
-            "title": "Details of the expert agent",
-            "type": "object",
-            "properties": {
-              "id": {
-                "title": "Expert agent identifier",
-                "type": "string",
-                "example": "18467"
+                "enum": [
+                  "SUPPORT_EXPERT_AGENT"
+                ],
+                "example": "SUPPORT_EXPERT_AGENT"
               },
-              "externalId": {
-                "title": "Expert agent external identifier",
-                "type": "string",
-                "example": "184234236867"
-              }
-            }
-          }
-        }
-      },
-      "events.transferred": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONVERSATION_TRANSFERRED"
-            ]
-          },
-          "subscriptionId": {
-            "type": "string"
-          },
-          "conversation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/events.conversation-status-base"
-              },
-              {
+              "ticket": {
                 "type": "object",
                 "properties": {
-                  "transferType": {
-                    "type": "string"
-                  },
-                  "transferredBy": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "newUserId": {
-                    "type": "string"
-                  },
-                  "newGroupId": {
-                    "type": "string"
-                  },
-                  "previousUserId": {
-                    "type": "string"
-                  },
-                  "previousGroupId": {
-                    "type": "string"
-                  },
                   "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "statusTimestamp": {
-                    "type": "string"
+                    "title": "Ticket identifier",
+                    "type": "string",
+                    "example": "1846867"
                   }
-                },
-                "required": [
-                  "transferType",
-                  "id",
-                  "status",
-                  "statusTimestamp"
-                ]
+                }
+              },
+              "expertAgent": {
+                "title": "Details of the expert agent",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Expert agent identifier",
+                    "type": "string",
+                    "example": "18467"
+                  },
+                  "externalId": {
+                    "title": "Expert agent external identifier",
+                    "type": "string",
+                    "example": "184234236867"
+                  }
+                }
               }
-            ]
+            }
           }
-        }
+        ]
       },
       "events.channel-data.email": {
         "type": "object",
@@ -10682,6 +10205,485 @@
             "$ref": "#/components/schemas/events.context.button"
           }
         }
+      },
+      "events.conversation-message.event-conversation-props": {
+        "title": "Message Conversation Object",
+        "description": "This is a Message object model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "string",
+            "description": "Unique identifier for the conversation"
+          },
+          "contactId": {
+            "title": "contactId",
+            "type": "string",
+            "description": "Identifier of the contact associated with the conversation"
+          }
+        },
+        "required": [
+          "id",
+          "contactId"
+        ]
+      },
+      "events.conversation-message.event-message-props": {
+        "title": "Message Object",
+        "description": "This is a Message object model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "string",
+            "description": "Unique identifier for the message"
+          },
+          "from": {
+            "title": "from",
+            "type": "string",
+            "description": "Identifier of the sender of the message"
+          },
+          "to": {
+            "title": "to",
+            "type": "string",
+            "description": "Identifier of the recipient of the message"
+          },
+          "direction": {
+            "title": "Message Direction",
+            "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT), or is internal (INTERNAL).\n                    > **Note:** The **OUT** direction is under construction.",
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT",
+              "INTERNAL"
+            ]
+          },
+          "channel": {
+            "title": "Channel",
+            "description": "Channel information including type and provider",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "provider"
+            ]
+          },
+          "contents": {
+            "title": "Message contents",
+            "description": "An array of message content objects",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "description": "Timestamp of the message was created or sent, in ISO 8601 format",
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "from",
+          "to",
+          "direction",
+          "channel",
+          "timestamp"
+        ]
+      },
+      "events.conversation-status.conversation-status-base": {
+        "title": "Conversation Object Base",
+        "description": "Common properties for all conversation status objects",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the conversation",
+            "example": "685c69b69a748946440259e8"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the conversation"
+          },
+          "statusTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the status was set",
+            "example": "2025-06-25T21:15:47.955Z"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel of the conversation",
+            "example": "whatsapp"
+          },
+          "from": {
+            "type": "string",
+            "description": "Sender identifier",
+            "example": "5521986727034"
+          },
+          "to": {
+            "type": "string",
+            "description": "Recipient identifier",
+            "example": "551151963226"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Identifier of the contact associated with the conversation",
+            "example": "876e9b09-4726-44c9-8202-a9b161b7a548"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Identifier of the group associated with the conversation",
+            "example": "65eb71c89b8c5f8fecd48d88"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the conversation was created",
+            "example": "2025-06-25T21:27:17.699Z"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "statusTimestamp",
+          "channel",
+          "from",
+          "to",
+          "contactId",
+          "groupId",
+          "createdAt"
+        ]
+      },
+      "events.conversation-status.event-conversation-props": {
+        "title": "Conversation Status Event Conversation Object",
+        "description": "Properties of the conversation object for status events",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.transferred"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.started"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.snoozed"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.queued"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.distributed"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.created"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.closed"
+          },
+          {
+            "$ref": "#/components/schemas/events.conversation-status.statuses.claimed"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "status",
+          "mapping": {
+            "CONVERSATION_TRANSFERRED": "#/components/schemas/events.conversation-status.statuses.transferred",
+            "CONVERSATION_STARTED": "#/components/schemas/events.conversation-status.statuses.started",
+            "CONVERSATION_SNOOZED": "#/components/schemas/events.conversation-status.statuses.snoozed",
+            "CONVERSATION_QUEUED": "#/components/schemas/events.conversation-status.statuses.queued",
+            "CONVERSATION_DISTRIBUTED_TO_USER": "#/components/schemas/events.conversation-status.statuses.distributed",
+            "CONVERSATION_CREATED": "#/components/schemas/events.conversation-status.statuses.created",
+            "CONVERSATION_CLOSED": "#/components/schemas/events.conversation-status.statuses.closed",
+            "CONVERSATION_CLAIMED": "#/components/schemas/events.conversation-status.statuses.claimed"
+          }
+        }
+      },
+      "events.conversation-status.statuses.claimed": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_CLAIMED"
+                ]
+              },
+              "userId": {
+                "type": "string",
+                "description": "ID of the user who claimed the conversation"
+              }
+            },
+            "required": [
+              "userId"
+            ]
+          }
+        ]
+      },
+      "events.conversation-status.statuses.closed": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_CLOSED"
+                ]
+              },
+              "closedBy": {
+                "type": "object",
+                "description": "Details of who closed the conversation",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID of the entity that closed the conversation",
+                    "example": "6786977532d02e8004b485c2"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "USER",
+                      "SYSTEM"
+                    ],
+                    "description": "Type of entity that closed the conversation",
+                    "example": "USER"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ]
+              },
+              "closeReason": {
+                "type": "object",
+                "description": "Reason for closing the conversation",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "Key representing the reason for closing",
+                    "example": "notInterested"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Human-readable name of the reason for closing",
+                    "example": "No Longer Interested"
+                  }
+                },
+                "required": [
+                  "key",
+                  "name"
+                ]
+              }
+            },
+            "required": [
+              "closedBy",
+              "closeReason"
+            ]
+          }
+        ]
+      },
+      "events.conversation-status.statuses.created": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_CREATED"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "events.conversation-status.statuses.distributed": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_DISTRIBUTED_TO_USER"
+                ]
+              },
+              "groupId": {
+                "type": "string",
+                "description": "Identifier of the group associated with the conversation",
+                "example": "65eb71c89b8c5f8fecd48d88"
+              },
+              "userId": {
+                "type": "string",
+                "description": "ID of the user to whom the conversation was distributed",
+                "example": "6786977532d02e8004b485c2"
+              }
+            },
+            "required": [
+              "groupId",
+              "userId"
+            ]
+          }
+        ]
+      },
+      "events.conversation-status.statuses.queued": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_QUEUED"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "events.conversation-status.statuses.snoozed": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_SNOOZED"
+                ]
+              },
+              "snoozedUntil": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp until the conversation is snoozed",
+                "example": "2025-06-23T17:43:00.396Z"
+              }
+            },
+            "required": [
+              "snoozedUntil"
+            ]
+          }
+        ]
+      },
+      "events.conversation-status.statuses.started": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_STARTED"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "events.conversation-status.statuses.transferred": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.conversation-status.conversation-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_TRANSFERRED"
+                ]
+              },
+              "transferType": {
+                "type": "string",
+                "enum": [
+                  "TRANSFER_TO_USER",
+                  "TRANSFER_TO_GROUP"
+                ],
+                "description": "Type of transfer: to a user or to a group",
+                "example": "TRANSFER_TO_USER"
+              },
+              "transferredBy": {
+                "type": "object",
+                "description": "Details of who initiated the transfer",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID of the entity that initiated the transfer",
+                    "example": "system"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "USER",
+                      "SYSTEM"
+                    ],
+                    "description": "Type of entity that initiated the transfer",
+                    "example": "SYSTEM"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ]
+              },
+              "newUserId": {
+                "type": "string",
+                "description": "ID of the new user to whom the conversation was transferred",
+                "example": "6786977532d02e8004b485c2"
+              },
+              "newGroupId": {
+                "type": "string",
+                "description": "ID of the new group to which the conversation was transferred",
+                "example": "682f96fdf93dac82cc325a20"
+              },
+              "previousUserId": {
+                "type": "string",
+                "description": "ID of the previous user who handled the conversation",
+                "example": "6786977532d02e8004b485c2"
+              },
+              "previousGroupId": {
+                "type": "string",
+                "description": "ID of the previous group that handled the conversation",
+                "example": "65eb71c89b8c5f8fecd48d88"
+              }
+            },
+            "required": [
+              "transferType",
+              "transferredBy"
+            ]
+          }
+        ]
       },
       "files.file": {
         "type": "object",
@@ -12158,7 +12160,11 @@
             "enum": [
               "MESSAGE",
               "MESSAGE_STATUS",
-              "SUPPORT_EXPERT_AGENT"
+              "CONVERSATION_MESSAGE",
+              "CONVERSATION_STATUS",
+              "SUPPORT_EXPERT_AGENT",
+              "CONVERSATION_MESSAGE",
+              "CONVERSATION_STATUS"
             ]
           },
           "webhook": {
@@ -12208,8 +12214,17 @@
         "type": "object",
         "allOf": [
           {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
             "type": "object",
             "properties": {
+              "eventType": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_MESSAGE"
+                ]
+              },
               "criteria": {
                 "type": "object",
                 "properties": {
@@ -12218,7 +12233,7 @@
                   },
                   "direction": {
                     "title": "Message direction",
-                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL",
+                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) or sent internally (INTERNAL)",
                     "type": "string",
                     "enum": [
                       "IN",
@@ -12228,10 +12243,15 @@
                   }
                 },
                 "required": [
-                  "channel"
+                  "channel",
+                  "direction"
                 ]
               }
-            }
+            },
+            "required": [
+              "eventType",
+              "criteria"
+            ]
           }
         ]
       },
@@ -12239,15 +12259,16 @@
         "type": "object",
         "allOf": [
           {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
             "type": "object",
             "properties": {
-              "id": {
-                "title": "ID",
-                "type": "string"
-              },
-              "contactId": {
-                "title": "contactId",
-                "type": "string"
+              "eventType": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_STATUS"
+                ]
               }
             }
           }
@@ -12341,37 +12362,6 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/subscription.base"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "ticket": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "title": "Ticket identifier",
-                    "type": "string",
-                    "example": "1846867"
-                  }
-                }
-              },
-              "expertAgent": {
-                "title": "Details of the expert agent",
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "title": "Expert agent identifier",
-                    "type": "string",
-                    "example": "18467"
-                  },
-                  "externalId": {
-                    "title": "Expert agent external identifier",
-                    "type": "string",
-                    "example": "184234236867"
-                  }
-                }
-              }
-            }
           }
         ]
       },
@@ -12499,8 +12489,17 @@
         "type": "object",
         "allOf": [
           {
+            "$ref": "#/components/schemas/subscription.partial-status.base"
+          },
+          {
             "type": "object",
             "properties": {
+              "eventType": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_MESSAGE"
+                ]
+              },
               "criteria": {
                 "type": "object",
                 "properties": {
@@ -12509,7 +12508,7 @@
                   },
                   "direction": {
                     "title": "Message direction",
-                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) and sent to a channel to INTERNAL",
+                    "description": "Indicates whether the message is received from a channel (IN), sent to a channel (OUT) or sent internally (INTERNAL)",
                     "type": "string",
                     "enum": [
                       "IN",
@@ -12519,10 +12518,14 @@
                   }
                 },
                 "required": [
-                  "channel"
+                  "channel",
+                  "direction"
                 ]
               }
-            }
+            },
+            "required": [
+              "criteria"
+            ]
           }
         ]
       },
@@ -12530,15 +12533,16 @@
         "type": "object",
         "allOf": [
           {
+            "$ref": "#/components/schemas/subscription.partial-status.base"
+          },
+          {
             "type": "object",
             "properties": {
-              "id": {
-                "title": "ID",
-                "type": "string"
-              },
-              "contactId": {
-                "title": "contactId",
-                "type": "string"
+              "eventType": {
+                "type": "string",
+                "enum": [
+                  "CONVERSATION_STATUS"
+                ]
               }
             }
           }
@@ -12620,37 +12624,6 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/subscription.partial-status.base"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "ticket": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "title": "Ticket identifier",
-                    "type": "string",
-                    "example": "1846867"
-                  }
-                }
-              },
-              "expertAgent": {
-                "title": "Details of the expert agent",
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "title": "Expert agent identifier",
-                    "type": "string",
-                    "example": "18467"
-                  },
-                  "externalId": {
-                    "title": "Expert agent external identifier",
-                    "type": "string",
-                    "example": "184234236867"
-                  }
-                }
-              }
-            }
           }
         ]
       },
