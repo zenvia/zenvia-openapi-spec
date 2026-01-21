@@ -19,7 +19,6 @@ const conversationBase: SchemaObject = {
       title: 'Event type',
       type: 'string',
       enum: [
-        'CONVERSATION_STATUS',
         'CONVERSATION_MESSAGE',
       ],
     },
