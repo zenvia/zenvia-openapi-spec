@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const eventBase: SchemaObject = {
+const conversationBase: SchemaObject = {
   type: 'object',
   properties: {
     id: {
@@ -20,19 +20,15 @@ const eventBase: SchemaObject = {
       type: 'string',
       enum: [
         'CONVERSATION_STATUS',
-        'CONVERSATION_MESSAGE',
       ],
     },
     subscriptionId: {
-      title: 'Subscription ID',
-      type: 'string',
-    },
-    subscriptionStatus: {
-      title: 'Subscription Status',
+      title: 'Webhook ID',
+      description: 'ID of the webhook that caused this event to be delivered',
       type: 'string',
     },
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default eventBase;
+export default conversationBase;

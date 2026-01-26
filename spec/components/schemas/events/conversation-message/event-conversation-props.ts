@@ -1,6 +1,5 @@
-// tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
-import { createComponentRef } from '../../../../utils/ref';
+import { createComponentRef } from '../../../../../utils/ref';
 
 const base: SchemaObject = {
   title: 'Message Conversation Object',
@@ -10,12 +9,16 @@ const base: SchemaObject = {
     id: {
       title: 'ID',
       type: 'string',
+      description: 'Unique identifier for the conversation',
     },
     contactId: {
       title: 'contactId',
       type: 'string',
+      description: 'Identifier of the contact associated with the conversation',
     },
   },
+    required: ['id', 'contactId'],
+
 };
 
 export const ref = createComponentRef(__filename);
