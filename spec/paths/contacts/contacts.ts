@@ -4,6 +4,8 @@ import { ref as contactRef } from '../../components/schemas/contacts-management/
 import { ref as listIdsRef } from '../../components/parameters/contacts-management/listIds';
 import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as sizeRef } from '../../components/parameters/size';
+import { ref as emailRef } from '../../components/parameters/contacts-management/email';
+import { ref as phoneRef } from '../../components/parameters/contacts-management/phone';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -53,6 +55,10 @@ const get: OperationObject = {
     $ref: pageRef,
   }, {
     $ref: sizeRef,
+  }, {
+    $ref: emailRef,
+  }, {
+    $ref: phoneRef,
   }],
   responses: {
     200: {
