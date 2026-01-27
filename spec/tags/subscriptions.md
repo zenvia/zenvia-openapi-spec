@@ -1,4 +1,12 @@
-Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
+Webhooks allow you to receive events in the configured URL. Note that the types of events below and their respective schemas define the payload of the events that will arrive on the registered webhook URL. They **do not** pertain to the creation and management of the webhooks themselves.
+
+The available type of events are:
+- [MESSAGE](#section/MESSAGE)
+- [MESSAGE_STATUS](#section/MESSAGE_STATUS)
+- [CONVERSATION_STATUS](#section/CONVERSATION_STATUS)
+- [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)
+- [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)
+- [CONTACT](#section/CONTACT)
 
 ## MESSAGE
 
@@ -67,8 +75,18 @@ If you are subscribed to this type of event, your webhook will receive a request
 The event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.
 
 Allowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.
+
 <SchemaDefinition schemaRef="#/components/schemas/events.support-expert-agent" />
 <br>
+
+## CONTACT
+
+The event type CONTACT allows ZCC users to create subscriptions for changes in contacts. If a contact is created, updated or deleted, you may subscribe to the event.
+
+If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+<SchemaDefinition schemaRef="#/components/schemas/events.contact" />
+
 
 ## Zenvia outbound IP addresses
 

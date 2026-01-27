@@ -20,6 +20,7 @@ const subscriptionBase: SchemaObject = {
         'CONVERSATION_STATUS',
         'CONVERSATION_MESSAGE',
         'SUPPORT_EXPERT_AGENT',
+        'CONTACT',
       ],
     },
     webhook: {
