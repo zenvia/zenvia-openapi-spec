@@ -1,12 +1,12 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as baseConversationRef } from './base-conversation-message';
+import { ref as baseEventRef } from './base';
 import { ref as contactRef } from '../contacts-management/contact';
 
 const contactEvent: SchemaObject = {
   type: 'object',
   allOf: [
-    { $ref: baseConversationRef },
+    { $ref: baseEventRef },
     {
       type: 'object',
       properties: {
