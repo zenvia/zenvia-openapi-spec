@@ -2219,6 +2219,9 @@ paths:
         - $ref: '#/components/parameters/contacts-management.listIds'
         - $ref: '#/components/parameters/page-legacy'
         - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/contacts-management.email'
+        - $ref: '#/components/parameters/contacts-management.mobile'
+        - $ref: '#/components/parameters/contacts-management.landline'
       responses:
         '200':
           description: Contacts available
@@ -11479,11 +11482,25 @@ components:
       description: The contact identifier
       schema:
         type: string
+    contacts-management.email:
+      name: channels.email
+      in: query
+      required: false
+      description: The email to filter contact
+      schema:
+        type: string
     contacts-management.fieldId:
       name: fieldId
       in: path
       required: true
       description: The data field identifier
+      schema:
+        type: string
+    contacts-management.landline:
+      name: channels.landline
+      in: query
+      required: false
+      description: The landline to filter contact
       schema:
         type: string
     contacts-management.listId:
@@ -11506,6 +11523,13 @@ components:
         - list-id-01
         - list-id-02
         - list-id-03
+    contacts-management.mobile:
+      name: channels.mobile
+      in: query
+      required: false
+      description: The mobile to filter contact
+      schema:
+        type: string
     files.endTimestamp:
       name: endTimestamp
       in: query
