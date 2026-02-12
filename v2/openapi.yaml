@@ -7033,6 +7033,7 @@ components:
         - $ref: '#/components/schemas/events.conversation-message-event'
         - $ref: '#/components/schemas/events.conversation-status-event'
         - $ref: '#/components/schemas/events.support-expert-agent-event'
+        - $ref: '#/components/schemas/events.contact-event'
       discriminator:
         propertyName: type
         mapping:
@@ -7041,6 +7042,7 @@ components:
           CONVERSATION_STATUS: '#/components/schemas/events.conversation-status-event'
           CONVERSATION_MESSAGE: '#/components/schemas/events.conversation-message-event'
           SUPPORT_EXPERT_AGENT: '#/components/schemas/events.support-expert-agent-event'
+          CONTACT: '#/components/schemas/events.contact-event'
     events.base-conversation-message:
       type: object
       properties:
@@ -7099,6 +7101,52 @@ components:
           title: Webhook ID
           description: ID of the webhook that caused this event to be delivered
           type: string
+    events.contact-event:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/events.base'
+        - type: object
+          properties:
+            type:
+              title: Event type
+              type: string
+              enum:
+                - CONTACT
+              example: CONTACT
+            action:
+              title: Contact event operation type
+              type: string
+              enum:
+                - CREATED
+                - DELETED
+                - UPDATED
+            contact:
+              $ref: '#/components/schemas/contacts-management.contact'
+          required:
+            - 'action, contact'
+    events.contact:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/events.base'
+        - type: object
+          properties:
+            type:
+              title: Event type
+              type: string
+              enum:
+                - CONTACT
+              example: CONTACT
+            action:
+              title: Contact event operation type
+              type: string
+              enum:
+                - CREATED
+                - DELETED
+                - UPDATED
+            contact:
+              $ref: '#/components/schemas/contacts-management.contact'
+          required:
+            - 'action, contact'
     events.conversation-message-event:
       type: object
       allOf:
@@ -8892,6 +8940,7 @@ components:
         - $ref: '#/components/schemas/subscription.conversation-status-subscription'
         - $ref: '#/components/schemas/subscription.conversation-message-subscription'
         - $ref: '#/components/schemas/subscription.support-expert-agent-subscription'
+        - $ref: '#/components/schemas/subscription.contact-subscription'
       discriminator:
         propertyName: eventType
         mapping:
@@ -8900,6 +8949,7 @@ components:
           CONVERSATION_MESSAGE: '#/components/schemas/subscription.conversation-message-subscription'
           CONVERSATION_STATUS: '#/components/schemas/subscription.conversation-status-subscription'
           SUPPORT_EXPERT_AGENT: '#/components/schemas/subscription.support-expert-agent-subscription'
+          CONTACT: '#/components/schemas/subscription.contact-subscription'
     subscription.base:
       type: object
       properties:
@@ -8918,6 +8968,7 @@ components:
             - SUPPORT_EXPERT_AGENT
             - CONVERSATION_MESSAGE
             - CONVERSATION_STATUS
+            - CONTACT
         webhook:
           allOf:
             - $ref: '#/components/schemas/subscription.webhook'
@@ -8946,6 +8997,30 @@ components:
       required:
         - eventType
         - webhook
+    subscription.contact-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.base'
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                action:
+                  title: Contact events to subscribe to
+                  description: Configure one or more contact-type events to subscribe to
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
+                    enum:
+                      - CREATED
+                      - DELETED
+                      - UPDATED
+              required:
+                - action
+          required:
+            - criteria
     subscription.conversation-message-subscription:
       type: object
       allOf:
@@ -9065,6 +9140,7 @@ components:
         - $ref: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
         - $ref: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
         - $ref: '#/components/schemas/subscription.partial-status.support-expert-agent-subscription'
+        - $ref: '#/components/schemas/subscription.partial-status.contact-subscription'
       discriminator:
         propertyName: eventType
         mapping:
@@ -9073,6 +9149,7 @@ components:
           CONVERSATION_STATUS: '#/components/schemas/subscription.partial-status.conversation-status-subscription'
           CONVERSATION_MESSAGE: '#/components/schemas/subscription.partial-status.conversation-message-subscription'
           SUPPORT_EXPERT_AGENT: '#/components/schemas/subscription.partial-status.support-expert-agent-subscription'
+          CONTACT: '#/components/schemas/subscription.partial-status.contact-subscription'
     subscription.partial-status.base:
       type: object
       properties:
@@ -9089,6 +9166,7 @@ components:
             - CONVERSATION_STATUS
             - CONVERSATION_MESSAGE
             - SUPPORT_EXPERT_AGENT
+            - CONTACT
         webhook:
           allOf:
             - $ref: '#/components/schemas/subscription.partial-status.webhook'
@@ -9117,6 +9195,30 @@ components:
       required:
         - eventType
         - webhook
+    subscription.partial-status.contact-subscription:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/subscription.partial-status.base'
+        - type: object
+          properties:
+            criteria:
+              type: object
+              properties:
+                action:
+                  title: Contact events to subscribe to
+                  description: Configure one or more contact-type events to subscribe to
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
+                    enum:
+                      - CREATED
+                      - DELETED
+                      - UPDATED
+              required:
+                - action
+          required:
+            - criteria
     subscription.partial-status.conversation-message-subscription:
       type: object
       allOf:
@@ -12376,7 +12478,15 @@ tags:
       2. Upon verification of said token we ensure that the generated one and the incoming one match, and only then we allow access to your system.
   - name: Webhooks
     description: |
-      Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.
+      Webhooks allow you to receive events in the configured URL. Note that the types of events below and their respective schemas define the payload of the events that will arrive on the registered webhook URL. They **do not** pertain to the creation and management of the webhooks themselves.
+
+      The available type of events are:
+      - [MESSAGE](#section/MESSAGE)
+      - [MESSAGE_STATUS](#section/MESSAGE_STATUS)
+      - [CONVERSATION_STATUS](#section/CONVERSATION_STATUS)
+      - [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)
+      - [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)
+      - [CONTACT](#section/CONTACT)
 
       ## MESSAGE
 
@@ -12445,8 +12555,18 @@ tags:
       The event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.
 
       Allowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.
+
       <SchemaDefinition schemaRef="#/components/schemas/events.support-expert-agent" />
       <br>
+
+      ## CONTACT
+
+      The event type CONTACT allows ZCC users to create subscriptions for changes in contacts. If a contact is created, updated or deleted, you may subscribe to the event.
+
+      If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+      <SchemaDefinition schemaRef="#/components/schemas/events.contact" />
+
 
       ## Zenvia outbound IP addresses
 

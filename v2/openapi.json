@@ -9643,6 +9643,9 @@
           },
           {
             "$ref": "#/components/schemas/events.support-expert-agent-event"
+          },
+          {
+            "$ref": "#/components/schemas/events.contact-event"
           }
         ],
         "discriminator": {
@@ -9652,7 +9655,8 @@
             "MESSAGE_STATUS": "#/components/schemas/events.message-status-event",
             "CONVERSATION_STATUS": "#/components/schemas/events.conversation-status-event",
             "CONVERSATION_MESSAGE": "#/components/schemas/events.conversation-message-event",
-            "SUPPORT_EXPERT_AGENT": "#/components/schemas/events.support-expert-agent-event"
+            "SUPPORT_EXPERT_AGENT": "#/components/schemas/events.support-expert-agent-event",
+            "CONTACT": "#/components/schemas/events.contact-event"
           }
         }
       },
@@ -9732,6 +9736,78 @@
             "type": "string"
           }
         }
+      },
+      "events.contact-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "CONTACT"
+                ],
+                "example": "CONTACT"
+              },
+              "action": {
+                "title": "Contact event operation type",
+                "type": "string",
+                "enum": [
+                  "CREATED",
+                  "DELETED",
+                  "UPDATED"
+                ]
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contacts-management.contact"
+              }
+            },
+            "required": [
+              "action, contact"
+            ]
+          }
+        ]
+      },
+      "events.contact": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "CONTACT"
+                ],
+                "example": "CONTACT"
+              },
+              "action": {
+                "title": "Contact event operation type",
+                "type": "string",
+                "enum": [
+                  "CREATED",
+                  "DELETED",
+                  "UPDATED"
+                ]
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contacts-management.contact"
+              }
+            },
+            "required": [
+              "action, contact"
+            ]
+          }
+        ]
       },
       "events.conversation-message-event": {
         "type": "object",
@@ -12142,6 +12218,9 @@
           },
           {
             "$ref": "#/components/schemas/subscription.support-expert-agent-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.contact-subscription"
           }
         ],
         "discriminator": {
@@ -12151,7 +12230,8 @@
             "MESSAGE_STATUS": "#/components/schemas/subscription.message-status-subscription",
             "CONVERSATION_MESSAGE": "#/components/schemas/subscription.conversation-message-subscription",
             "CONVERSATION_STATUS": "#/components/schemas/subscription.conversation-status-subscription",
-            "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.support-expert-agent-subscription"
+            "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.support-expert-agent-subscription",
+            "CONTACT": "#/components/schemas/subscription.contact-subscription"
           }
         }
       },
@@ -12173,7 +12253,8 @@
               "CONVERSATION_STATUS",
               "SUPPORT_EXPERT_AGENT",
               "CONVERSATION_MESSAGE",
-              "CONVERSATION_STATUS"
+              "CONVERSATION_STATUS",
+              "CONTACT"
             ]
           },
           "webhook": {
@@ -12217,6 +12298,44 @@
         "required": [
           "eventType",
           "webhook"
+        ]
+      },
+      "subscription.contact-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "title": "Contact events to subscribe to",
+                    "description": "Configure one or more contact-type events to subscribe to",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "CREATED",
+                        "DELETED",
+                        "UPDATED"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "action"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
+          }
         ]
       },
       "subscription.conversation-message-subscription": {
@@ -12419,6 +12538,9 @@
           },
           {
             "$ref": "#/components/schemas/subscription.partial-status.support-expert-agent-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.contact-subscription"
           }
         ],
         "discriminator": {
@@ -12428,7 +12550,8 @@
             "MESSAGE_STATUS": "#/components/schemas/subscription.partial-status.message-status-subscription",
             "CONVERSATION_STATUS": "#/components/schemas/subscription.partial-status.conversation-status-subscription",
             "CONVERSATION_MESSAGE": "#/components/schemas/subscription.partial-status.conversation-message-subscription",
-            "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.partial-status.support-expert-agent-subscription"
+            "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.partial-status.support-expert-agent-subscription",
+            "CONTACT": "#/components/schemas/subscription.partial-status.contact-subscription"
           }
         }
       },
@@ -12448,7 +12571,8 @@
               "MESSAGE_STATUS",
               "CONVERSATION_STATUS",
               "CONVERSATION_MESSAGE",
-              "SUPPORT_EXPERT_AGENT"
+              "SUPPORT_EXPERT_AGENT",
+              "CONTACT"
             ]
           },
           "webhook": {
@@ -12492,6 +12616,44 @@
         "required": [
           "eventType",
           "webhook"
+        ]
+      },
+      "subscription.partial-status.contact-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "title": "Contact events to subscribe to",
+                    "description": "Configure one or more contact-type events to subscribe to",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "CREATED",
+                        "DELETED",
+                        "UPDATED"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "action"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
+          }
         ]
       },
       "subscription.partial-status.conversation-message-subscription": {
@@ -16327,7 +16489,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. The available type of events are **MESSAGE** and **MESSAGE_STATUS**.\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## SUPPORT_EXPERT_AGENT\n\nThe event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.\n\nAllowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.\n<SchemaDefinition schemaRef=\"#/components/schemas/events.support-expert-agent\" />\n<br>\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [flow_response](#section/Flow-Response)          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
+      "description": "Webhooks allow you to receive events in the configured URL. Note that the types of events below and their respective schemas define the payload of the events that will arrive on the registered webhook URL. They **do not** pertain to the creation and management of the webhooks themselves.\n\nThe available type of events are:\n- [MESSAGE](#section/MESSAGE)\n- [MESSAGE_STATUS](#section/MESSAGE_STATUS)\n- [CONVERSATION_STATUS](#section/CONVERSATION_STATUS)\n- [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)\n- [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)\n- [CONTACT](#section/CONTACT)\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## SUPPORT_EXPERT_AGENT\n\nThe event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.\n\nAllowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.support-expert-agent\" />\n<br>\n\n## CONTACT\n\nThe event type CONTACT allows ZCC users to create subscriptions for changes in contacts. If a contact is created, updated or deleted, you may subscribe to the event.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.contact\" />\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [flow_response](#section/Flow-Response)          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
     },
     {
       "name": "Templates",
