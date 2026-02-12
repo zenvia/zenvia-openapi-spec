@@ -40,7 +40,7 @@
     "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "filewatcher": "^3.0.1",
     "glob": "^7.1.6",
     "js-yaml": "^3.14.0",
