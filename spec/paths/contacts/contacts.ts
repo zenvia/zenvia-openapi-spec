@@ -7,6 +7,10 @@ import { ref as sizeRef } from '../../components/parameters/size';
 import { ref as emailRef } from '../../components/parameters/contacts-management/email';
 import { ref as mobileRef } from '../../components/parameters/contacts-management/mobile';
 import { ref as landlineRef } from '../../components/parameters/contacts-management/landline';
+import { ref as facebookRef } from '../../components/parameters/contacts-management/facebook';
+import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
+import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
+import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -50,19 +54,18 @@ const get: OperationObject = {
   summary: 'List contacts',
   description: 'Lists all contacts available',
   tags: ['Contacts'],
-  parameters: [{
-    $ref: listIdsRef,
-  }, {
-    $ref: pageRef,
-  }, {
-    $ref: sizeRef,
-  }, {
-    $ref: emailRef,
-  }, {
-    $ref: mobileRef,
-  }, {
-    $ref: landlineRef,
-  }],
+  parameters: [
+    { $ref: listIdsRef },
+    { $ref: pageRef },
+    { $ref: sizeRef },
+    { $ref: emailRef },
+    { $ref: mobileRef },
+    { $ref: landlineRef },
+    { $ref: facebookRef },
+    { $ref: instagramRef },
+    { $ref: twitterRef },
+    { $ref: meliRef },
+  ],
   responses: {
     200: {
       description: 'Contacts available',
