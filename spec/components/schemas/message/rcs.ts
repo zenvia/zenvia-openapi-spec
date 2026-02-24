@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
-import { ref as allContentsRef } from '../content/rcs/all';
+import { ref as allContentsRef } from '../content/rcs/mo';
 import { createComponentRef } from '../../../../utils/ref';
 import {ref as conversationRef} from '../content/conversation';
 

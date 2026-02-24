@@ -3,7 +3,6 @@ import { ref as textRef } from '../text';
 import { ref as cardRef } from '../card';
 import { ref as carouselRef } from '../carousel';
 import { ref as fileRef } from '../file';
-import { ref as locationRef } from '../location';
 import { ref as quickRepliesRef } from '../replyable-text';
 import { createComponentRef } from '../../../../../utils/ref';
 import { ref as templateRef } from '../template';
@@ -22,8 +21,6 @@ const all: SchemaObject = {
     $ref: quickRepliesRef,
   }, {
     $ref: templateRef,
-  }, {
-    $ref: locationRef,
   }],
   discriminator: {
     propertyName: 'type',
@@ -34,7 +31,6 @@ const all: SchemaObject = {
       card: cardRef,
       carousel: carouselRef,
       replyable_text: quickRepliesRef,
-      location: locationRef,
     },
   },
 };
