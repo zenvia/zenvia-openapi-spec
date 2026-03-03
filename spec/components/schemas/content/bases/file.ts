@@ -44,6 +44,26 @@ const fileBase: SchemaObject = {
                     <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram), [Google Business Messages](#tag/Google-Business-Messages) and [E-mail](#tag/E-Mail) documents.*`,
       example: 'document.pdf',
     },
+    status: {
+      type: 'string',
+      description: `The completion state of the file upload.
+                    <br>*This property is read-only. It is only included in incoming webhooks that contain file content*`,
+      enum: [
+        'ACCEPTED',
+        'REJECTED',
+      ],
+    },
+    reason: {
+      type: 'string',
+      description: `A concise code for the failure reason.
+                    <br>*This property is read-only. It is only included in incoming webhooks that contain file content*`,
+      enum: [
+        'MIME_TYPE_NOT_SUPPORTED',
+        'INTERNAL_ERROR',
+        'SECURITY_CHECK',
+        'SIZE_LIMIT',
+      ],
+    },
   },
   required: ['fileUrl'],
 };
