@@ -16,7 +16,6 @@ const messageEvent: SchemaObject = {
         type: 'string',
         enum: [
           'MESSAGE',
-          'MESSAGE_STATUS',
         ],
         example: 'MESSAGE',
       },
