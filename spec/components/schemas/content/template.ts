@@ -173,6 +173,9 @@ const template: SchemaObject = {
             title: 'Product Sections',
             required: ['sections'],
             type: 'object',
+            properties: {
+              sections: { $ref: productSections },
+            },
             additionalProperties: {
               description: 'Value provided to fill the variable named after the property name.',
               oneOf: [{
@@ -185,9 +188,6 @@ const template: SchemaObject = {
                 type: 'boolean',
                 example: true,
               }],
-            },
-            properties: {
-              sections: { $ref: productSections },
             },
           },
         ],
