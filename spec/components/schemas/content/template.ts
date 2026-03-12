@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts';
 import { ref as baseRef } from './base';
 import { createComponentRef } from '../../../../utils/ref';
 import { ref as productSections } from './whatsapp/product-sections';
-import {ref as orderDetailsTemplate} from './whatsapp/order-details-template';
+import { ref as orderDetailsTemplate } from './whatsapp/order-details-template';
 
 const template: SchemaObject = {
   type: 'object',
@@ -32,8 +32,8 @@ const template: SchemaObject = {
         },
         oneOf: [
           {
-            title: 'Cards',
-            required: ['cards'],
+            title: 'Default',
+            type: 'object',
             additionalProperties: {
               description: 'Value provided to fill the variable named after the property name.',
               oneOf: [{
@@ -47,6 +47,11 @@ const template: SchemaObject = {
                 example: true,
               }],
             },
+          },
+          {
+            title: 'Cards',
+            type: 'object',
+            required: ['cards'],
             properties: {
               cards: {
                 type: 'array',
@@ -166,6 +171,11 @@ const template: SchemaObject = {
           },
           {
             title: 'Product Sections',
+            required: ['sections'],
+            type: 'object',
+            properties: {
+              sections: { $ref: productSections },
+            },
             additionalProperties: {
               description: 'Value provided to fill the variable named after the property name.',
               oneOf: [{
@@ -178,9 +188,6 @@ const template: SchemaObject = {
                 type: 'boolean',
                 example: true,
               }],
-            },
-            properties: {
-              sections: { $ref: productSections },
             },
           },
         ],

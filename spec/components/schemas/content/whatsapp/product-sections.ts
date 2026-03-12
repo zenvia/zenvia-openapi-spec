@@ -5,8 +5,10 @@ const productSections: SchemaObject = {
   type: 'array',
   title: 'Product Sections',
   description: 'The available fields to be used in a product list. Only applicable to [WhatsApp](#tag/WhatsApp) channel.',
+  minItems: 1,
   items: {
     type: 'object',
+    required: ['title', 'productItems'],
     properties: {
       title: {
         type: 'string',
@@ -17,6 +19,7 @@ const productSections: SchemaObject = {
         description: 'A list of products.',
         items: {
           type: 'object',
+          required: ['productId'],
           properties: {
             productId: {
               type: 'string',
