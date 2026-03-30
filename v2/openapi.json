@@ -2483,6 +2483,18 @@
           },
           {
             "$ref": "#/components/parameters/contacts-management.landline"
+          },
+          {
+            "$ref": "#/components/parameters/contacts-management.facebook"
+          },
+          {
+            "$ref": "#/components/parameters/contacts-management.instagram"
+          },
+          {
+            "$ref": "#/components/parameters/contacts-management.twitter"
+          },
+          {
+            "$ref": "#/components/parameters/contacts-management.meli"
           }
         ],
         "responses": {
@@ -6265,6 +6277,34 @@
                 "type": "string",
                 "pattern": "^[0-9]+$",
                 "example": "551044443333"
+              },
+              "facebook": {
+                "title": "Facebook",
+                "description": "Contact's Facebook ID.",
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9._@-]+$",
+                "example": "user.name.123"
+              },
+              "instagram": {
+                "title": "Instagram",
+                "description": "Contact's Instagram ID.",
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "example": "user_name"
+              },
+              "twitter": {
+                "title": "Twitter",
+                "description": "Contact's Twitter handle.",
+                "type": "string",
+                "pattern": "^@[a-zA-Z0-9_]{1,15}$",
+                "example": "@username"
+              },
+              "meli": {
+                "title": "Mercado Livre",
+                "description": "Contact's Mercado Livre ID.",
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "example": "meliUser_123"
               }
             }
           },
@@ -7237,10 +7277,8 @@
                 },
                 "oneOf": [
                   {
-                    "title": "Cards",
-                    "required": [
-                      "cards"
-                    ],
+                    "title": "Default",
+                    "type": "object",
                     "additionalProperties": {
                       "description": "Value provided to fill the variable named after the property name.",
                       "oneOf": [
@@ -7257,7 +7295,14 @@
                           "example": true
                         }
                       ]
-                    },
+                    }
+                  },
+                  {
+                    "title": "Cards",
+                    "type": "object",
+                    "required": [
+                      "cards"
+                    ],
                     "properties": {
                       "cards": {
                         "type": "array",
@@ -7400,6 +7445,15 @@
                   },
                   {
                     "title": "Product Sections",
+                    "required": [
+                      "sections"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "sections": {
+                        "$ref": "#/components/schemas/content.whatsapp.product-sections"
+                      }
+                    },
                     "additionalProperties": {
                       "description": "Value provided to fill the variable named after the property name.",
                       "oneOf": [
@@ -7416,11 +7470,6 @@
                           "example": true
                         }
                       ]
-                    },
-                    "properties": {
-                      "sections": {
-                        "$ref": "#/components/schemas/content.whatsapp.product-sections"
-                      }
                     }
                   }
                 ]
@@ -7633,6 +7682,24 @@
             "type": "string",
             "description": "The name of the file.\n                    <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram), [Google Business Messages](#tag/Google-Business-Messages) and [E-mail](#tag/E-Mail) documents.*",
             "example": "document.pdf"
+          },
+          "status": {
+            "type": "string",
+            "description": "The completion state of the file upload.\n                    <br>*This property is read-only. It is only included in incoming webhooks that contain file content*",
+            "enum": [
+              "ACCEPTED",
+              "REJECTED"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "A concise code for the failure reason.\n                    <br>*This property is read-only. It is only included in incoming webhooks that contain file content*",
+            "enum": [
+              "MIME_TYPE_NOT_SUPPORTED",
+              "INTERNAL_ERROR",
+              "SECURITY_CHECK",
+              "SIZE_LIMIT"
+            ]
           }
         },
         "required": [
@@ -8115,6 +8182,44 @@
         }
       },
       "content.rcs.all": {
+        "title": "RCS",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/content.text"
+          },
+          {
+            "$ref": "#/components/schemas/content.file"
+          },
+          {
+            "$ref": "#/components/schemas/content.card"
+          },
+          {
+            "$ref": "#/components/schemas/content.carousel"
+          },
+          {
+            "$ref": "#/components/schemas/content.replyable-text"
+          },
+          {
+            "$ref": "#/components/schemas/content.template"
+          },
+          {
+            "$ref": "#/components/schemas/content.location"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/content.text",
+            "template": "#/components/schemas/content.template",
+            "file": "#/components/schemas/content.file",
+            "card": "#/components/schemas/content.card",
+            "carousel": "#/components/schemas/content.carousel",
+            "replyable_text": "#/components/schemas/content.replyable-text",
+            "location": "#/components/schemas/content.location"
+          }
+        }
+      },
+      "content.rcs.mo": {
         "title": "RCS",
         "oneOf": [
           {
@@ -9221,8 +9326,13 @@
         "type": "array",
         "title": "Product Sections",
         "description": "The available fields to be used in a product list. Only applicable to [WhatsApp](#tag/WhatsApp) channel.",
+        "minItems": 1,
         "items": {
           "type": "object",
+          "required": [
+            "title",
+            "productItems"
+          ],
           "properties": {
             "title": {
               "type": "string",
@@ -9233,6 +9343,9 @@
               "description": "A list of products.",
               "items": {
                 "type": "object",
+                "required": [
+                  "productId"
+                ],
                 "properties": {
                   "productId": {
                     "type": "string",
@@ -9916,8 +10029,7 @@
                 "title": "Event type",
                 "type": "string",
                 "enum": [
-                  "MESSAGE",
-                  "MESSAGE_STATUS"
+                  "MESSAGE"
                 ],
                 "example": "MESSAGE"
               },
@@ -9954,7 +10066,6 @@
                 "title": "Event type",
                 "type": "string",
                 "enum": [
-                  "MESSAGE",
                   "MESSAGE_STATUS"
                 ],
                 "example": "MESSAGE_STATUS"
@@ -11616,7 +11727,7 @@
                 "description": "A list of content to be sent",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/content.rcs.all"
+                  "$ref": "#/components/schemas/content.rcs.mo"
                 },
                 "minItems": 1
               },
@@ -16019,11 +16130,29 @@
           "type": "string"
         }
       },
+      "contacts-management.facebook": {
+        "name": "channels.facebook",
+        "in": "query",
+        "required": false,
+        "description": "The Facebook ID to filter contact",
+        "schema": {
+          "type": "string"
+        }
+      },
       "contacts-management.fieldId": {
         "name": "fieldId",
         "in": "path",
         "required": true,
         "description": "The data field identifier",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "contacts-management.instagram": {
+        "name": "channels.instagram",
+        "in": "query",
+        "required": false,
+        "description": "The Instagram ID to filter contact",
         "schema": {
           "type": "string"
         }
@@ -16063,11 +16192,29 @@
           "list-id-03"
         ]
       },
+      "contacts-management.meli": {
+        "name": "channels.meli",
+        "in": "query",
+        "required": false,
+        "description": "The Mercado Livre ID to filter contact",
+        "schema": {
+          "type": "string"
+        }
+      },
       "contacts-management.mobile": {
         "name": "channels.mobile",
         "in": "query",
         "required": false,
         "description": "The mobile to filter contact",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "contacts-management.twitter": {
+        "name": "channels.twitter",
+        "in": "query",
+        "required": false,
+        "description": "The Twitter handle to filter contact",
         "schema": {
           "type": "string"
         }
@@ -16521,15 +16668,15 @@
     },
     {
       "name": "Product Batches",
-      "description": "Import batches of product-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation** and the **Product Catalog Database**, alongside other features that are used alongside other APIs like:\n\n- [Contact Batches API](#tag/Contact-Batches)\n- [Order Batches API](#tag/Order-Batches)\n- [Invoice Batches API](#tag/Invoice-Batches)\n\n## Building the CSV File\n\nTo use the Product Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- **`externalPlatform`**: ERP identifier\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n\n- **`externalId`**: Product ID on external platform\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`name`**: Product name\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`sku`**: SKU (Stock Keeping Unit) on product\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `255`\n\n- **`ean`**: EAN (European Article Number) on product\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`brand`**: Product brand\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`description`**: Detailed Product Description\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`measurementUnit`**: Product unit of measurement\n  - **Required**: `true`\n  - **Type**: `string`\n  - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n  - Accepts uppercase and lowercase\n\n- **`priceUnit`**: Unit price of the product\n  - **Required**: `true`\n  - **Type**: `string` || `number`\n  - **Max Size**: `30`\n  - **Format**:\n    - Must accept only positive numbers;\n    - Numbers should not have thousands separators;\n    - Must accept integers and decimals with `,` (comma) separator;\n    - Must not accept decimal separator of `.`;\n    - Accepts a maximum of two decimal places;\n    - **Example of valid formats**: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- **`currency`**: Currency\n  - **Required**: `true`\n  - **Type**: `string`\n  - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n- **`ncm`**: NCM (Mercosur Common Nomenclature)\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
+      "description": "Import batches of product-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation** and the **Product Catalog Database**, alongside other features that are used alongside other APIs like:\n\n- [Contact Batches API](#tag/Contact-Batches)\n- [Order Batches API](#tag/Order-Batches)\n- [Invoice Batches API](#tag/Invoice-Batches)\n\n## Building the CSV File\n\nTo use the Product Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- **`externalPlatform`**: ERP identifier\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n\n- **`externalId`**: Product ID on external platform\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`name`**: Product name\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`sku`**: SKU (Stock Keeping Unit) on product\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `255`\n\n- **`ean`**: EAN (European Article Number) on product\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`brand`**: Product brand\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`description`**: Detailed Product Description\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Min Size**: `1`\n  - **Max Size**: `500`\n\n- **`measurementUnit`**: Product unit of measurement\n  - **Required**: `true`\n  - **Type**: `string`\n  - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n  - Accepts uppercase and lowercase\n\n- **`priceUnit`**: Unit price of the product\n  - **Required**: `true`\n  - **Type**: `string` || `number`\n  - **Max Size**: `30`\n  - **Max Size**: `22` characters\n  - **Format**:\n    - Must only accept positive numbers;\n    - Numbers should not have a thousand separator;\n    - Must accept integers and decimals with `,` as a separator;\n    - Must not accept `.` as a decimal separator;\n    - Must accept up to 19 integer digits and a maximum of two decimal places;\n    - **Example of valid formats**: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- **`currency`**: Currency\n  - **Required**: `true`\n  - **Type**: `string`\n  - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n- **`ncm`**: NCM (Mercosur Common Nomenclature)\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
     },
     {
       "name": "Order Batches",
-      "description": "Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:\n\n- [Product Batches API](#tag/Product-Batches)\n- [Order Batches API](#tag/Order-Batches)\n- [Invoice Batches API](#tag/Invoice-Batches)\n\n## Building the CSV File\n\nTo use the Order Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- **`externalPlatform`**: ERP identifier\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n\n- **`externalId`**: Order ID on external platform\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`invoiceExternalId`**: External ID of the invoice\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`customerExternalId`**: Customer ID on external platform\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`orderNumber`**: Order number\n  - **Required**: `true`\n  - **Type**: `string`\n  = **Min Size**: `1`\n  - **Max Size**: `255`\n\n- **`orderTimestamp`**: Order creation timestamp\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Format**: `YYYY-MM-DD HH:MM:SS`\n\n- **`totalAmount`**: Total amount of the order\n  - **Required**: `true`\n  - **Type**: `string` || `number`\n  - **Max Size**: `30`\n  - **Format**:\n    - Must accept only positive numbers;\n    - Numbers should not have thousands separators;\n    - Must accept integers and decimals with `,` (comma) separator;\n    - Must not accept decimal separator of `.`;\n    - Example of valid formats: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- **`legalCode`**: Legal code (e.g., CNPJ, CPF)\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`legalName`**: Legal name of the customer\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`primaryPhone`** - Customer's main phone number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Format**: Phone numbers must be in E164 format.\n  - **Requirements**:\n    - Country Code - must be a valid country code.\n    - Region Code - must be valid in the current country.\n    - Must be a valid phone number.\n    - Must be in E164 format ex: `+528187654321`.\n    - Must have the `+` before the phone number.\n\n- **`email`**: Contact's email(s)\n  - **Required**: `true` if `mobile` is not provided\n  - **Type**: `list`\n  - **Format**: `[youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com]`\n  - **Requirements**:\n    - Existing domain;\n    - Spaces will be replaced by an empty string (→ change to data mapping);\n    - Uppercase characters will be replaced by lowercase (→ change to data mapping);\n    - Must start with at least one letter or number;\n    - No accents allowed;\n    - No special characters except for `_`, `.`, `@`, `-`;\n    - Must contain `@`;\n    - Example Regex: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\\.[A-Z|a-z]{2,})+')`\n\n- **`orderStatus`**: Order status\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `WAITING_PAYMENT`,\n  `PAYMENT_ANALYSIS`,\n  `PAYMENT_CONFIRMED`,\n  `ORDER_EXPEDITING`,\n  `ORDER_SHIPPED`,\n  `ORDER_CANCELED`,\n  `ORDER_FINISHED`,\n  `PAYMENT_DENIED`,\n  `ORDER_AVAILABLE`,\n  `ORDER_RETURNED`,\n  `ORDER_REVIEW`,\n  `INVOICE_ISSUED`,\n  `ORDER_PREPARING`,\n  `RECEIPT_ISSUED`,\n  `ON_ROUTE`,\n  `PICKUP_AVAILABLE`,\n  `DELIVERED`\n\n- **`items`**: Order items\n  - **Item**:\n    - The item is included within the order.\n    - **Multiple items per order**: Item fields can contain multiple values separated by commas to represent various products in a single order.\n    - **`productExternalId`**: Product ID on external platform\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - **`sku`**: SKU (Stock Keeping Unit)\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - **`ean`**: EAN (European Article Number)\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - **`name`**: Product name\n      - **Required**: `true`\n      - **Type**: `string`\n      - **Min Size**: `1`\n      - **Max Size**: `500`\n    - **`quantity`**: Item quantity\n      - **Required**: `true`\n      - **Type**: `string` || `number`\n      - **Format**: double\n      - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.\n      - **Max Size**: `30`\n    - **`measurementUnit`**: Item unit of measurement\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n      - Accepts uppercase and lowercase\n    - `priceUnit` - Unit price\n      - **Required**: `true`\n      - **Type**: `string or number`\n        - Maintain decimal precision, do not round\n      - **Max Size**: `30` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Accepts a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - **`currency`**: Currency\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n#### Working with multiple items\n\nTo include multiple products in a single order, use the comma-separated list format in each item-related field. For example:\n\n- `productExternalId`: `PROD001, PROD002, PROD003`\n- `name`: `Product A, Product B, Product C`\n- `quantity`: `2, 1, 5`\n\nIf it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.\n\nThe API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
+      "description": "Import batches of order-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:\n\n- [Product Batches API](#tag/Product-Batches)\n- [Order Batches API](#tag/Order-Batches)\n- [Invoice Batches API](#tag/Invoice-Batches)\n\n## Building the CSV File\n\nTo use the Order Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- **`externalPlatform`**: ERP identifier\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n\n- **`externalId`**: Order ID on external platform\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`invoiceExternalId`**: External ID of the invoice\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`customerExternalId`**: Customer ID on external platform\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n\n- **`orderNumber`**: Order number\n  - **Required**: `true`\n  - **Type**: `string`\n  = **Min Size**: `1`\n  - **Max Size**: `255`\n\n- **`orderTimestamp`**: Order creation timestamp\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Format**: `YYYY-MM-DD HH:MM:SS`\n\n- **`totalAmount`**: Total amount of the order\n  - **Required**: `true`\n  - **Type**: `string` || `number`\n  - **Max Size**: `22` characters\n  - **Format**:\n    - Must only accept positive numbers;\n    - Numbers should not have a thousand separator;\n    - Must accept integers and decimals with `,` as a separator;\n    - Must not accept `.` as a decimal separator;\n    - Must accept up to 19 integer digits and a maximum of two decimal places;\n    - **Example of valid formats**: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- **`legalCode`**: Legal code (e.g., CNPJ, CPF)\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`legalName`**: Legal name of the customer\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n\n- **`primaryPhone`** - Customer's main phone number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Format**: Phone numbers must be in E164 format.\n  - **Requirements**:\n    - Country Code - must be a valid country code.\n    - Region Code - must be valid in the current country.\n    - Must be a valid phone number.\n    - Must be in E164 format ex: `+528187654321`.\n    - Must have the `+` before the phone number.\n\n- **`email`**: Contact's email(s)\n  - **Required**: `true` if `mobile` is not provided\n  - **Type**: `list`\n  - **Format**: `[youremail1@domain.com, youremail2@domain.com, ..., youremailn@domain.com]`\n  - **Requirements**:\n    - Existing domain;\n    - Spaces will be replaced by an empty string (→ change to data mapping);\n    - Uppercase characters will be replaced by lowercase (→ change to data mapping);\n    - Must start with at least one letter or number;\n    - No accents allowed;\n    - No special characters except for `_`, `.`, `@`, `-`;\n    - Must contain `@`;\n    - Example Regex: `EMAIL_PATTERN = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\\.[A-Z|a-z]{2,})+')`\n\n- **`orderStatus`**: Order status\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Enum**: `WAITING_PAYMENT`,\n  `PAYMENT_ANALYSIS`,\n  `PAYMENT_CONFIRMED`,\n  `ORDER_EXPEDITING`,\n  `ORDER_SHIPPED`,\n  `ORDER_CANCELED`,\n  `ORDER_FINISHED`,\n  `PAYMENT_DENIED`,\n  `ORDER_AVAILABLE`,\n  `ORDER_RETURNED`,\n  `ORDER_REVIEW`,\n  `INVOICE_ISSUED`,\n  `ORDER_PREPARING`,\n  `RECEIPT_ISSUED`,\n  `ON_ROUTE`,\n  `PICKUP_AVAILABLE`,\n  `DELIVERED`\n\n- **`items`**: Order items\n  - **Item**:\n    - The item is included within the order.\n    - **Multiple items per order**: Item fields can contain multiple values separated by commas to represent various products in a single order.\n    - **`productExternalId`**: Product ID on external platform\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - **`sku`**: SKU (Stock Keeping Unit)\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - **`ean`**: EAN (European Article Number)\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - **`name`**: Product name\n      - **Required**: `true`\n      - **Type**: `string`\n      - **Min Size**: `1`\n      - **Max Size**: `500`\n    - **`quantity`**: Item quantity\n      - **Required**: `true`\n      - **Type**: `string` || `number`\n      - **Max Size**: `22` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Must accept up to 19 integer digits and a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - **`measurementUnit`**: Item unit of measurement\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n      - Accepts uppercase and lowercase\n    - `priceUnit` - Unit price\n      - **Required**: `true`\n      - **Type**: `string or number`\n        - Maintain decimal precision, do not round\n      - **Max Size**: `22` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Must accept up to 19 integer digits and a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - **`currency`**: Currency\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n#### Working with multiple items\n\nTo include multiple products in a single order, use the comma-separated list format in each item-related field. For example:\n\n- `productExternalId`: `PROD001, PROD002, PROD003`\n- `name`: `Product A, Product B, Product C`\n- `quantity`: `2, 1, 5`\n\nIf it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.\n\nThe API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
     },
     {
       "name": "Invoice Batches",
-      "description": "Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:\n\n- [Contact Batches API](#tag/Contact-Batches)\n- [Product Batches API](#tag/Product-Batches)\n- [Order Batches API](#tag/Order-Batches)\n\n## Building the CSV File\n\nTo use the Invoice Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- `externalPlatform` - Source ERP identification\n- **Required**: `true`\n  - **Type**: `string (uppercase and lowercase)`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n- `externalId` - Internal code from the source system\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n  - **Min Size**: `1`\n- `customerExternalId` - Internal contact code in the source system\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `issueTimestamp` - Date and time of the fiscal note issuance\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Format**: `YYYY-MM-DD HH:MM:SS`\n- `invoiceKey` - Fiscal note key\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `invoiceNumber` - Fiscal note number\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `500`\n  - **Min Size**: `1`\n- `invoiceSerie` - Fiscal note series\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `orderNumber` - Related order number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n- `orderExternalId` - Unique order ID\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `legalCode` - Issuing company's legal code\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `legalName` - Issuing company's legal name\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `primaryPhone` - Customer's main phone number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Format**: Phone numbers must be in E164 format.\n  - **Requirements**:\n    - Country Code - must be a valid country code.\n    - Region Code - must be valid in the current country.\n    - Must be a valid phone number.\n    - Must be in E164 format ex: `+528187654321`.\n    - Must have the `+` before the phone number.\n- **`email`**: Customer's email\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n  - **Format**:\n    - Must contain `@`;\n    - No special characters except for `_`, `.`, `@`, `-`;\n    - Example: `isaac.hermel@zenvia.com`\n- `totalAmount` - Total value of the fiscal note\n  - **Required**: `true`\n  - **Type**: `string or number`\n    - Maintain decimal precision, do not round\n  - **Max Size**: `30` characters\n  - **Format**:\n    - Must only accept positive numbers;\n    - Numbers should not have a thousand separator;\n    - Must accept integers and decimals with `,` as a separator;\n    - Must not accept `.` as a decimal separator;\n    - Accepts a maximum of two decimal places;\n    - **Example of valid formats**: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- `items`: Invoice items\n  - **Item**:\n    - The item is included within the invoice.\n    - **Multiple items per invoice**: Item fields can contain multiple values separated by commas to represent various products in a single invoice.\n    - `productExternalId` - Product's source code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `sku` - Product's SKU\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - `ean` - Product's EAN code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `name` - Product's name/description\n      - **Required**: `true`\n      - **Type**: `string`\n      - **Max Size**: `500`\n      - **Min Size**: `1`\n    - `quantity` - Item quantity\n      - **Required**: `true`\n      - **Type**: `string or number`\n      - **Max Size**: `30` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Accepts a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n    - **`measurementUnit`**: Item unit of measurement\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n      - Accepts uppercase and lowercase\n    - `priceUnit` - Unit price\n      - **Required**: `true`\n      - **Type**: `string or number`\n        - Maintain decimal precision, do not round\n      - **Max Size**: `30` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Accepts a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - `totalValue` - Total value of the item\n      - **Required**: `false`\n      - **Type**: `string | string[] / number | number[]`\n    - `fiscalOperationCode` - Fiscal operation code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `ncm` - Product's NCM code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - `currency` - Currency\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n#### Working with multiple items\n\nTo include multiple products in a single invoice, use the comma-separated list format in each item-related field. For example:\n\n- `productExternalId`: `PROD001, PROD002, PROD003`\n- `name`: `Product A, Product B, Product C`\n- `quantity`: `2, 1, 5`\n\nIf it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.\n\nThe API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
+      "description": "Import batches of invoice-related data from platforms and databases external to ZENVIA Customer Cloud. This imported data will help power features like **RFV Calculation**, alongside other features that are used alongside other APIs like:\n\n- [Contact Batches API](#tag/Contact-Batches)\n- [Product Batches API](#tag/Product-Batches)\n- [Order Batches API](#tag/Order-Batches)\n\n## Building the CSV File\n\nTo use the Invoice Batches API, you need to create a CSV file based on a predefined structure and in compliance with data types and their respective validations. You can read more about this standard below:\n\n### CSV File Structure\n\nThe CSV file must follow the structure below:\n\n- The first line must contain the table header.\n- The columns must be in the predefined order, listed below.\n- Columns must be separated by a semicolon (`;`).\n\nThe predefined order must be:\n\n- `externalPlatform` - Source ERP identification\n- **Required**: `true`\n  - **Type**: `string (uppercase and lowercase)`\n  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`\n- `externalId` - Internal code from the source system\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `255`\n  - **Min Size**: `1`\n- `customerExternalId` - Internal contact code in the source system\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `issueTimestamp` - Date and time of the fiscal note issuance\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Format**: `YYYY-MM-DD HH:MM:SS`\n- `invoiceKey` - Fiscal note key\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `invoiceNumber` - Fiscal note number\n  - **Required**: `true`\n  - **Type**: `string`\n  - **Max Size**: `500`\n  - **Min Size**: `1`\n- `invoiceSerie` - Fiscal note series\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `orderNumber` - Related order number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n- `orderExternalId` - Unique order ID\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `legalCode` - Issuing company's legal code\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `legalName` - Issuing company's legal name\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `500`\n- `primaryPhone` - Customer's main phone number\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Format**: Phone numbers must be in E164 format.\n  - **Requirements**:\n    - Country Code - must be a valid country code.\n    - Region Code - must be valid in the current country.\n    - Must be a valid phone number.\n    - Must be in E164 format ex: `+528187654321`.\n    - Must have the `+` before the phone number.\n- **`email`**: Customer's email\n  - **Required**: `false`\n  - **Type**: `string`\n  - **Max Size**: `255`\n  - **Format**:\n    - Must contain `@`;\n    - No special characters except for `_`, `.`, `@`, `-`;\n    - Example: `isaac.hermel@zenvia.com`\n- `totalAmount` - Total value of the fiscal note\n  - **Required**: `true`\n  - **Type**: `string or number`\n    - Maintain decimal precision, do not round\n    - **Max Size**: `22` characters\n    - **Format**:\n      - Must only accept positive numbers;\n      - Numbers should not have a thousand separator;\n      - Must accept integers and decimals with `,` as a separator;\n      - Must not accept `.` as a decimal separator;\n      - Must accept up to 19 integer digits and a maximum of two decimal places;\n    - **Example of valid formats**: `15236,15` | `458`\n  - **Precision**: `19,2` in case of number.\n\n- `items`: Invoice items\n  - **Item**:\n    - The item is included within the invoice.\n    - **Multiple items per invoice**: Item fields can contain multiple values separated by commas to represent various products in a single invoice.\n    - `productExternalId` - Product's source code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `sku` - Product's SKU\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - `ean` - Product's EAN code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `name` - Product's name/description\n      - **Required**: `true`\n      - **Type**: `string`\n      - **Max Size**: `500`\n      - **Min Size**: `1`\n    - `quantity` - Item quantity\n      - **Required**: `true`\n      - **Type**: `string or number`\n      - **Max Size**: `22` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Must accept up to 19 integer digits and a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n    - **`measurementUnit`**: Item unit of measurement\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept the following formats: [Tabela Unidades_de_Medida_Comercial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Q6Iyvm6qKsc=)\n      - Accepts uppercase and lowercase\n    - `priceUnit` - Unit price\n      - **Required**: `true`\n      - **Type**: `string or number`\n        - Maintain decimal precision, do not round\n      - **Max Size**: `22` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Must accept up to 19 integer digits and a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - `totalValue` - Total value of the item\n      - **Required**: `false`\n      - **Type**: `string | string[] / number | number[]`\n      - **Max Size**: `22` characters\n      - **Format**:\n        - Must only accept positive numbers;\n        - Numbers should not have a thousand separator;\n        - Must accept integers and decimals with `,` as a separator;\n        - Must not accept `.` as a decimal separator;\n        - Must accept up to 19 integer digits and a maximum of two decimal places;\n        - **Example of valid formats**: `15236,15` | `458`\n      - **Precision**: `19,2` in case of number.\n    - `fiscalOperationCode` - Fiscal operation code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `500`\n    - `ncm` - Product's NCM code\n      - **Required**: `false`\n      - **Type**: `string`\n      - **Max Size**: `255`\n    - `currency` - Currency\n      - **Required**: `true`\n      - **Type**: `string`\n      - Only accept standard [ISO Code](https://www.iban.com/currency-codes) values (accept uppercase and lowercase characters and transform them into uppercase)\n\n#### Working with multiple items\n\nTo include multiple products in a single invoice, use the comma-separated list format in each item-related field. For example:\n\n- `productExternalId`: `PROD001, PROD002, PROD003`\n- `name`: `Product A, Product B, Product C`\n- `quantity`: `2, 1, 5`\n\nIf it's a numeric field, you must make sure that there is space between the numbers, for example: `2, 1`. This happens because for numeric fields the separator is the space, not the usual comma.\n\nThe API will process these values as an ordered list, where the first value of each field corresponds to the first item, the second value to the second item, and so on.\n\n#### CSV Lifecycle\n\nAll CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.\n\nThis 10 days will start couting by the day of it's creation.\n\n#### The Feedback CSV\n\nAfter your contact batch is processed, a CSV file will be generated containing feedback on the processing of the batch data.\n\nYou can access and read this file. Simply retrieve its URL through one of the available GET routes in our API; the URL will be in the feedbackUrl property.\n\nThis feedback file is the same as the file you sent to us, but with a few changes:\n\nThree new fields are created in it:\n\n- `status`: Indicates whether that row was processed correctly or not. It can have the values `SUCCESS` or `FAILED`.\n- `id`: If the row was processed correctly, it will return the ID of the import created in the Contact Manager.\n- `errorMessages`: Will display the errors that prevented the row in question from being validated.\n\nThe fields will be updated as follows:\n\n- Any value that does not adhere to the field's validation rules will be transformed into a `''` value in the feedback file, regardless of whether it is a mandatory field or not.\n- If a value in a mandatory field does not adhere to the validation rules, the error message must be included in the `errorMessages` field, and the status will be `FAILED`.\n\n### Batch lifecycle\n\nThe contact batch will have the following lifecycle:\n\n1. The batch is imported and saved on our database\n2. The batch is processed in our infrastructure\n3. After this, the batch can have one of these two statuses:\n\n`SUCCESS` - The processment of the batch was successful. The data was send to the Contact Manager Database.\n\n`FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.\n\nOn both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.\n"
     }
   ],
   "x-tagGroups": [

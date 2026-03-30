@@ -2222,6 +2222,10 @@ paths:
         - $ref: '#/components/parameters/contacts-management.email'
         - $ref: '#/components/parameters/contacts-management.mobile'
         - $ref: '#/components/parameters/contacts-management.landline'
+        - $ref: '#/components/parameters/contacts-management.facebook'
+        - $ref: '#/components/parameters/contacts-management.instagram'
+        - $ref: '#/components/parameters/contacts-management.twitter'
+        - $ref: '#/components/parameters/contacts-management.meli'
       responses:
         '200':
           description: Contacts available
@@ -4715,6 +4719,30 @@ components:
               type: string
               pattern: '^[0-9]+$'
               example: '551044443333'
+            facebook:
+              title: Facebook
+              description: Contact's Facebook ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._@-]+$'
+              example: user.name.123
+            instagram:
+              title: Instagram
+              description: Contact's Instagram ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._-]+$'
+              example: user_name
+            twitter:
+              title: Twitter
+              description: Contact's Twitter handle.
+              type: string
+              pattern: '^@[a-zA-Z0-9_]{1,15}$'
+              example: '@username'
+            meli:
+              title: Mercado Livre
+              description: Contact's Mercado Livre ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._-]+$'
+              example: meliUser_123
         firstName:
           title: First Name
           description: Contact's name.
@@ -5384,9 +5412,8 @@ components:
                 user: John Smith
                 protocol: '34534252'
               oneOf:
-                - title: Cards
-                  required:
-                    - cards
+                - title: Default
+                  type: object
                   additionalProperties:
                     description: Value provided to fill the variable named after the property name.
                     oneOf:
@@ -5396,6 +5423,10 @@ components:
                         example: 1
                       - type: boolean
                         example: true
+                - title: Cards
+                  type: object
+                  required:
+                    - cards
                   properties:
                     cards:
                       type: array
@@ -5482,6 +5513,12 @@ components:
                                 - type: boolean
                                   example: true
                 - title: Product Sections
+                  required:
+                    - sections
+                  type: object
+                  properties:
+                    sections:
+                      $ref: '#/components/schemas/content.whatsapp.product-sections'
                   additionalProperties:
                     description: Value provided to fill the variable named after the property name.
                     oneOf:
@@ -5491,9 +5528,6 @@ components:
                         example: 1
                       - type: boolean
                         example: true
-                  properties:
-                    sections:
-                      $ref: '#/components/schemas/content.whatsapp.product-sections'
           required:
             - type
             - templateId
@@ -5676,6 +5710,24 @@ components:
             The name of the file.
                                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [Facebook](#tag/Facebook), [Telegram](#tag/Telegram), [Google Business Messages](#tag/Google-Business-Messages) and [E-mail](#tag/E-Mail) documents.*
           example: document.pdf
+        status:
+          type: string
+          description: |-
+            The completion state of the file upload.
+                                <br>*This property is read-only. It is only included in incoming webhooks that contain file content*
+          enum:
+            - ACCEPTED
+            - REJECTED
+        reason:
+          type: string
+          description: |-
+            A concise code for the failure reason.
+                                <br>*This property is read-only. It is only included in incoming webhooks that contain file content*
+          enum:
+            - MIME_TYPE_NOT_SUPPORTED
+            - INTERNAL_ERROR
+            - SECURITY_CHECK
+            - SIZE_LIMIT
       required:
         - fileUrl
     content.bases.quick-reply-list:
@@ -5972,6 +6024,26 @@ components:
           carousel: '#/components/schemas/content.carousel'
           optin_request: '#/components/schemas/content.optin_request'
     content.rcs.all:
+      title: RCS
+      oneOf:
+        - $ref: '#/components/schemas/content.text'
+        - $ref: '#/components/schemas/content.file'
+        - $ref: '#/components/schemas/content.card'
+        - $ref: '#/components/schemas/content.carousel'
+        - $ref: '#/components/schemas/content.replyable-text'
+        - $ref: '#/components/schemas/content.template'
+        - $ref: '#/components/schemas/content.location'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/content.text'
+          template: '#/components/schemas/content.template'
+          file: '#/components/schemas/content.file'
+          card: '#/components/schemas/content.card'
+          carousel: '#/components/schemas/content.carousel'
+          replyable_text: '#/components/schemas/content.replyable-text'
+          location: '#/components/schemas/content.location'
+    content.rcs.mo:
       title: RCS
       oneOf:
         - $ref: '#/components/schemas/content.text'
@@ -6743,8 +6815,12 @@ components:
       type: array
       title: Product Sections
       description: 'The available fields to be used in a product list. Only applicable to [WhatsApp](#tag/WhatsApp) channel.'
+      minItems: 1
       items:
         type: object
+        required:
+          - title
+          - productItems
         properties:
           title:
             type: string
@@ -6754,6 +6830,8 @@ components:
             description: A list of products.
             items:
               type: object
+              required:
+                - productId
               properties:
                 productId:
                   type: string
@@ -7211,7 +7289,6 @@ components:
               type: string
               enum:
                 - MESSAGE
-                - MESSAGE_STATUS
               example: MESSAGE
             channel:
               title: Message Channel
@@ -7237,7 +7314,6 @@ components:
               title: Event type
               type: string
               enum:
-                - MESSAGE
                 - MESSAGE_STATUS
               example: MESSAGE_STATUS
             channel:
@@ -8448,7 +8524,7 @@ components:
               description: A list of content to be sent
               type: array
               items:
-                $ref: '#/components/schemas/content.rcs.all'
+                $ref: '#/components/schemas/content.rcs.mo'
               minItems: 1
             conversation:
               $ref: '#/components/schemas/content.conversation'
@@ -11591,11 +11667,25 @@ components:
       description: The email to filter contact
       schema:
         type: string
+    contacts-management.facebook:
+      name: channels.facebook
+      in: query
+      required: false
+      description: The Facebook ID to filter contact
+      schema:
+        type: string
     contacts-management.fieldId:
       name: fieldId
       in: path
       required: true
       description: The data field identifier
+      schema:
+        type: string
+    contacts-management.instagram:
+      name: channels.instagram
+      in: query
+      required: false
+      description: The Instagram ID to filter contact
       schema:
         type: string
     contacts-management.landline:
@@ -11625,11 +11715,25 @@ components:
         - list-id-01
         - list-id-02
         - list-id-03
+    contacts-management.meli:
+      name: channels.meli
+      in: query
+      required: false
+      description: The Mercado Livre ID to filter contact
+      schema:
+        type: string
     contacts-management.mobile:
       name: channels.mobile
       in: query
       required: false
       description: The mobile to filter contact
+      schema:
+        type: string
+    contacts-management.twitter:
+      name: channels.twitter
+      in: query
+      required: false
+      description: The Twitter handle to filter contact
       schema:
         type: string
     files.endTimestamp:
@@ -12955,12 +13059,13 @@ tags:
         - **Required**: `true`
         - **Type**: `string` || `number`
         - **Max Size**: `30`
+        - **Max Size**: `22` characters
         - **Format**:
-          - Must accept only positive numbers;
-          - Numbers should not have thousands separators;
-          - Must accept integers and decimals with `,` (comma) separator;
-          - Must not accept decimal separator of `.`;
-          - Accepts a maximum of two decimal places;
+          - Must only accept positive numbers;
+          - Numbers should not have a thousand separator;
+          - Must accept integers and decimals with `,` as a separator;
+          - Must not accept `.` as a decimal separator;
+          - Must accept up to 19 integer digits and a maximum of two decimal places;
           - **Example of valid formats**: `15236,15` | `458`
         - **Precision**: `19,2` in case of number.
 
@@ -13068,13 +13173,14 @@ tags:
       - **`totalAmount`**: Total amount of the order
         - **Required**: `true`
         - **Type**: `string` || `number`
-        - **Max Size**: `30`
+        - **Max Size**: `22` characters
         - **Format**:
-          - Must accept only positive numbers;
-          - Numbers should not have thousands separators;
-          - Must accept integers and decimals with `,` (comma) separator;
-          - Must not accept decimal separator of `.`;
-          - Example of valid formats: `15236,15` | `458`
+          - Must only accept positive numbers;
+          - Numbers should not have a thousand separator;
+          - Must accept integers and decimals with `,` as a separator;
+          - Must not accept `.` as a decimal separator;
+          - Must accept up to 19 integer digits and a maximum of two decimal places;
+          - **Example of valid formats**: `15236,15` | `458`
         - **Precision**: `19,2` in case of number.
 
       - **`legalCode`**: Legal code (e.g., CNPJ, CPF)
@@ -13157,9 +13263,15 @@ tags:
           - **`quantity`**: Item quantity
             - **Required**: `true`
             - **Type**: `string` || `number`
-            - **Format**: double
-            - Must accept only integers or decimals, without thousands separators and with comma (`,`) as decimal separator.
-            - **Max Size**: `30`
+            - **Max Size**: `22` characters
+            - **Format**:
+              - Must only accept positive numbers;
+              - Numbers should not have a thousand separator;
+              - Must accept integers and decimals with `,` as a separator;
+              - Must not accept `.` as a decimal separator;
+              - Must accept up to 19 integer digits and a maximum of two decimal places;
+              - **Example of valid formats**: `15236,15` | `458`
+            - **Precision**: `19,2` in case of number.
           - **`measurementUnit`**: Item unit of measurement
             - **Required**: `true`
             - **Type**: `string`
@@ -13169,13 +13281,13 @@ tags:
             - **Required**: `true`
             - **Type**: `string or number`
               - Maintain decimal precision, do not round
-            - **Max Size**: `30` characters
+            - **Max Size**: `22` characters
             - **Format**:
               - Must only accept positive numbers;
               - Numbers should not have a thousand separator;
               - Must accept integers and decimals with `,` as a separator;
               - Must not accept `.` as a decimal separator;
-              - Accepts a maximum of two decimal places;
+              - Must accept up to 19 integer digits and a maximum of two decimal places;
               - **Example of valid formats**: `15236,15` | `458`
             - **Precision**: `19,2` in case of number.
           - **`currency`**: Currency
@@ -13323,13 +13435,13 @@ tags:
         - **Required**: `true`
         - **Type**: `string or number`
           - Maintain decimal precision, do not round
-        - **Max Size**: `30` characters
-        - **Format**:
-          - Must only accept positive numbers;
-          - Numbers should not have a thousand separator;
-          - Must accept integers and decimals with `,` as a separator;
-          - Must not accept `.` as a decimal separator;
-          - Accepts a maximum of two decimal places;
+          - **Max Size**: `22` characters
+          - **Format**:
+            - Must only accept positive numbers;
+            - Numbers should not have a thousand separator;
+            - Must accept integers and decimals with `,` as a separator;
+            - Must not accept `.` as a decimal separator;
+            - Must accept up to 19 integer digits and a maximum of two decimal places;
           - **Example of valid formats**: `15236,15` | `458`
         - **Precision**: `19,2` in case of number.
 
@@ -13357,13 +13469,13 @@ tags:
           - `quantity` - Item quantity
             - **Required**: `true`
             - **Type**: `string or number`
-            - **Max Size**: `30` characters
+            - **Max Size**: `22` characters
             - **Format**:
               - Must only accept positive numbers;
               - Numbers should not have a thousand separator;
               - Must accept integers and decimals with `,` as a separator;
               - Must not accept `.` as a decimal separator;
-              - Accepts a maximum of two decimal places;
+              - Must accept up to 19 integer digits and a maximum of two decimal places;
               - **Example of valid formats**: `15236,15` | `458`
           - **`measurementUnit`**: Item unit of measurement
             - **Required**: `true`
@@ -13374,18 +13486,27 @@ tags:
             - **Required**: `true`
             - **Type**: `string or number`
               - Maintain decimal precision, do not round
-            - **Max Size**: `30` characters
+            - **Max Size**: `22` characters
             - **Format**:
               - Must only accept positive numbers;
               - Numbers should not have a thousand separator;
               - Must accept integers and decimals with `,` as a separator;
               - Must not accept `.` as a decimal separator;
-              - Accepts a maximum of two decimal places;
+              - Must accept up to 19 integer digits and a maximum of two decimal places;
               - **Example of valid formats**: `15236,15` | `458`
             - **Precision**: `19,2` in case of number.
           - `totalValue` - Total value of the item
             - **Required**: `false`
             - **Type**: `string | string[] / number | number[]`
+            - **Max Size**: `22` characters
+            - **Format**:
+              - Must only accept positive numbers;
+              - Numbers should not have a thousand separator;
+              - Must accept integers and decimals with `,` as a separator;
+              - Must not accept `.` as a decimal separator;
+              - Must accept up to 19 integer digits and a maximum of two decimal places;
+              - **Example of valid formats**: `15236,15` | `458`
+            - **Precision**: `19,2` in case of number.
           - `fiscalOperationCode` - Fiscal operation code
             - **Required**: `false`
             - **Type**: `string`
