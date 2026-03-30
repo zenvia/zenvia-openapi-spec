@@ -68,12 +68,13 @@ The predefined order must be:
   - **Required**: `true`
   - **Type**: `string` || `number`
   - **Max Size**: `30`
+  - **Max Size**: `22` characters
   - **Format**:
-    - Must accept only positive numbers;
-    - Numbers should not have thousands separators;
-    - Must accept integers and decimals with `,` (comma) separator;
-    - Must not accept decimal separator of `.`;
-    - Accepts a maximum of two decimal places;
+    - Must only accept positive numbers;
+    - Numbers should not have a thousand separator;
+    - Must accept integers and decimals with `,` as a separator;
+    - Must not accept `.` as a decimal separator;
+    - Must accept up to 19 integer digits and a maximum of two decimal places;
     - **Example of valid formats**: `15236,15` | `458`
   - **Precision**: `19,2` in case of number.
 
