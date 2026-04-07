@@ -29,9 +29,7 @@ const messageEvent: SchemaObject = {
 
 * **IN**: Received messages.
 * **OUT**: Sent messages.
-* **ALL**: Filters messages from both directions.
-
-> **Note:** The **OUT** direction is under construction.`,
+* **ALL**: Filters messages from both directions.`,
         type: 'string',
         enum: [
           'IN',
