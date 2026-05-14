@@ -10039,11 +10039,12 @@
               },
               "direction": {
                 "title": "Message Direction",
-                "description": "Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)\n> **Note:** The **OUT** direction is under construction.",
+                "description": "Indicates whether the message is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.\n* **ALL**: Filters messages from both directions.",
                 "type": "string",
                 "enum": [
                   "IN",
-                  "OUT"
+                  "OUT",
+                  "ALL"
                 ]
               },
               "message": {
@@ -10051,6 +10052,58 @@
               }
             }
           }
+        ]
+      },
+      "events.message-status-base": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Status code",
+            "description": "Code that indicates the message status",
+            "type": "string"
+          },
+          "timestamp": {
+            "title": "Status timestamp",
+            "description": "Timestamp of the message status. Usually received from the provider of the channel.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "channel": {
+            "title": "Message Channel",
+            "type": "string"
+          },
+          "description": {
+            "title": "Status description",
+            "description": "A description of status",
+            "type": "string"
+          },
+          "direction": {
+            "title": "Message Status Direction",
+            "description": "Indicates whether the message status is received from a channel (**IN**) or sent to a channel (**OUT**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.",
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT"
+            ]
+          },
+          "causes": {
+            "title": "Status causes",
+            "description": "A list of errors or cause of status",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/events.error-cause"
+            }
+          },
+          "context": {
+            "$ref": "#/components/schemas/events.context.index"
+          },
+          "channelData": {
+            "$ref": "#/components/schemas/events.channel-data.index"
+          }
+        },
+        "required": [
+          "code",
+          "timestamp"
         ]
       },
       "events.message-status-event": {
@@ -10073,6 +10126,16 @@
               "channel": {
                 "title": "Message Channel",
                 "type": "string"
+              },
+              "direction": {
+                "title": "Message Status Direction",
+                "description": "Indicates whether the message status is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.\n* **ALL**: Filters messages from both directions.",
+                "type": "string",
+                "enum": [
+                  "IN",
+                  "OUT",
+                  "ALL"
+                ]
               },
               "messageId": {
                 "title": "Message ID",
@@ -10125,56 +10188,37 @@
       "events.message-status": {
         "type": "object",
         "title": "Message Status",
-        "properties": {
-          "timestamp": {
-            "title": "Status timestamp",
-            "description": "Timestamp of the message status. Usually received from the provider of the channel.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "channel": {
-            "title": "Message Channel",
-            "type": "string"
-          },
-          "code": {
-            "title": "Status code",
-            "description": "Code that indicates the message status",
-            "type": "string",
-            "enum": [
-              "REJECTED",
-              "SENT",
-              "DELIVERED",
-              "NOT_DELIVERED",
-              "READ",
-              "DELETED",
-              "CLICKED",
-              "VERIFIED"
-            ]
-          },
-          "description": {
-            "title": "Status description",
-            "description": "A description of status",
-            "type": "string"
-          },
-          "causes": {
-            "title": "Status causes",
-            "description": "A list of errors or cause of status",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/events.error-cause"
-            }
-          },
-          "context": {
-            "$ref": "#/components/schemas/events.context.index"
-          },
-          "channelData": {
-            "$ref": "#/components/schemas/events.channel-data.index"
-          }
-        },
         "required": [
-          "code",
-          "timestamp"
-        ]
+          "code"
+        ],
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/events.message-status-code.recorded"
+          },
+          {
+            "$ref": "#/components/schemas/events.message-status-base"
+          },
+          {
+            "$ref": "#/components/schemas/events.message-status-code.terminated"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "code",
+          "mapping": {
+            "SENT": "#/components/schemas/events.message-status-base",
+            "DELIVERED": "#/components/schemas/events.message-status-base",
+            "READ": "#/components/schemas/events.message-status-base",
+            "CLICKED": "#/components/schemas/events.message-status-base",
+            "VERIFIED": "#/components/schemas/events.message-status-base",
+            "REJECTED": "#/components/schemas/events.message-status-base",
+            "NOT_DELIVERED": "#/components/schemas/events.message-status-base",
+            "DELETED": "#/components/schemas/events.message-status-base",
+            "ACCEPTED": "#/components/schemas/events.message-status-base",
+            "HANG_UP": "#/components/schemas/events.message-status-base",
+            "TERMINATED": "#/components/schemas/events.message-status-code.terminated",
+            "RECORDED": "#/components/schemas/events.message-status-code.recorded"
+          }
+        }
       },
       "events.support-expert-agent-event": {
         "type": "object",
@@ -10877,6 +10921,91 @@
             "required": [
               "transferType",
               "transferredBy"
+            ]
+          }
+        ]
+      },
+      "events.message-status-code.recorded": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.message-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "RECORDED"
+              },
+              "details": {
+                "type": "object",
+                "description": "Details of the call record",
+                "properties": {
+                  "file": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "description": "URL of the call recording file"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the call recording file"
+                      },
+                      "sizeBytes": {
+                        "type": "number",
+                        "description": "Size of the call recording file in bytes"
+                      },
+                      "mimeType": {
+                        "type": "string",
+                        "description": "Type of the call recording file"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "code"
+            ]
+          }
+        ]
+      },
+      "events.message-status-code.terminated": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.message-status-base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "TERMINATED"
+              },
+              "details": {
+                "type": "object",
+                "description": "Details of the call termination",
+                "properties": {
+                  "startTime": {
+                    "type": "string",
+                    "description": "Start time of the call"
+                  },
+                  "endTime": {
+                    "type": "string",
+                    "description": "End time of the call"
+                  },
+                  "durationSeconds": {
+                    "type": "number",
+                    "description": "Duration of the call in seconds"
+                  }
+                }
+              }
+            },
+            "required": [
+              "code"
             ]
           }
         ]
@@ -12557,11 +12686,12 @@
                   },
                   "direction": {
                     "title": "Message direction",
-                    "description": "Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)",
+                    "description": "Indicates whether the message is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.\n* **ALL**: Filters messages from both directions.",
                     "type": "string",
                     "enum": [
                       "IN",
-                      "OUT"
+                      "OUT",
+                      "ALL"
                     ]
                   }
                 },
@@ -12844,6 +12974,16 @@
                 "properties": {
                   "channel": {
                     "$ref": "#/components/schemas/message.channel"
+                  },
+                  "direction": {
+                    "title": "Message direction",
+                    "description": "Indicates whether the message is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.\n* **ALL**: Filters messages from both directions.",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT",
+                      "ALL"
+                    ]
                   }
                 },
                 "required": [
@@ -12874,11 +13014,12 @@
                   },
                   "direction": {
                     "title": "Message direction",
-                    "description": "Indicates whether the message is received from a channel (IN) or sent to a channel (OUT)",
+                    "description": "Indicates whether the message is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).\n\n* **IN**: Received messages.\n* **OUT**: Sent messages.\n* **ALL**: Filters messages from both directions.",
                     "type": "string",
                     "enum": [
                       "IN",
-                      "OUT"
+                      "OUT",
+                      "ALL"
                     ]
                   }
                 },
