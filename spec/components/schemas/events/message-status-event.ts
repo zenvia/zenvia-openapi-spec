@@ -23,20 +23,6 @@ const messageEvent: SchemaObject = {
         title: 'Message Channel',
         type: 'string',
       },
-      direction: {
-        title: 'Message Status Direction',
-        description: `Indicates whether the message status is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).
-
-* **IN**: Received messages.
-* **OUT**: Sent messages.
-* **ALL**: Filters messages from both directions.`,
-        type: 'string',
-        enum: [
-          'IN',
-          'OUT',
-          'ALL',
-        ],
-      },
       messageId: {
         title: 'Message ID',
         description: 'ID of the message whose status is being delivered',
@@ -65,6 +51,18 @@ const messageEvent: SchemaObject = {
             title: 'Content Index',
             description: 'Index of content that is receiving the status update',
             type: 'number',
+          },
+          direction: {
+            title: 'Message Direction',
+            description: `Indicates whether the message is received from a channel (**IN**) or sent to a channel (**OUT**).
+
+  * **IN**: Received messages.
+  * **OUT**: Sent messages.`,
+            type: 'string',
+            enum: [
+              'IN',
+              'OUT',
+            ],
           },
           from: {
             type: 'string',

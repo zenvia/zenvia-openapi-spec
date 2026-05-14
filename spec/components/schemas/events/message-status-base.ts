@@ -31,8 +31,8 @@ const messageStatusBase: SchemaObject = {
         title: 'Message Status Direction',
         description: `Indicates whether the message status is received from a channel (**IN**) or sent to a channel (**OUT**).
 
-* **IN**: Received messages.
-* **OUT**: Sent messages.`,
+* **IN**: Received status.
+* **OUT**: Sent status.`,
         type: 'string',
         enum: [
           'IN',
