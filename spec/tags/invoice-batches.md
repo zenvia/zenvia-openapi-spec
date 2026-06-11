@@ -120,7 +120,7 @@ The predefined order must be:
     - `quantity` - Item quantity
       - **Required**: `true`
       - **Type**: `string or number`
-      - **Max Size**: `15` characters
+      - **Max Size**: `16` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
@@ -155,7 +155,7 @@ The predefined order must be:
         - Numbers should not have a thousand separator;
         - Must accept integers and decimals with `,` as a separator;
         - Must not accept `.` as a decimal separator;
-        - Must accept up to 19 integer digits and a maximum of two decimal places;
+        - Must accept up to 13 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
       - **Precision**: `13,2` in case of number.
     - `fiscalOperationCode` - Fiscal operation code
