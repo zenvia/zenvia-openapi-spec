@@ -86,15 +86,15 @@ The predefined order must be:
   - **Required**: `true`
   - **Type**: `string or number`
     - Maintain decimal precision, do not round
-    - **Max Size**: `22` characters
+    - **Max Size**: `16` characters
     - **Format**:
       - Must only accept positive numbers;
       - Numbers should not have a thousand separator;
       - Must accept integers and decimals with `,` as a separator;
       - Must not accept `.` as a decimal separator;
-      - Must accept up to 19 integer digits and a maximum of two decimal places;
+      - Must accept up to 13 integer digits and a maximum of two decimal places;
     - **Example of valid formats**: `15236,15` | `458`
-  - **Precision**: `19,2` in case of number.
+  - **Precision**: `13,2` in case of number.
 
 - `items`: Invoice items
   - **Item**:
@@ -120,13 +120,13 @@ The predefined order must be:
     - `quantity` - Item quantity
       - **Required**: `true`
       - **Type**: `string or number`
-      - **Max Size**: `22` characters
+      - **Max Size**: `15` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
         - Must accept integers and decimals with `,` as a separator;
         - Must not accept `.` as a decimal separator;
-        - Must accept up to 19 integer digits and a maximum of two decimal places;
+        - Must accept up to 13 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
     - **`measurementUnit`**: Item unit of measurement
       - **Required**: `true`
@@ -137,19 +137,19 @@ The predefined order must be:
       - **Required**: `true`
       - **Type**: `string or number`
         - Maintain decimal precision, do not round
-      - **Max Size**: `22` characters
+      - **Max Size**: `16` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
         - Must accept integers and decimals with `,` as a separator;
         - Must not accept `.` as a decimal separator;
-        - Must accept up to 19 integer digits and a maximum of two decimal places;
+        - Must accept up to 13 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-      - **Precision**: `19,2` in case of number.
+      - **Precision**: `13,2` in case of number.
     - `totalValue` - Total value of the item
       - **Required**: `false`
       - **Type**: `string | string[] / number | number[]`
-      - **Max Size**: `22` characters
+      - **Max Size**: `16` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
@@ -157,7 +157,7 @@ The predefined order must be:
         - Must not accept `.` as a decimal separator;
         - Must accept up to 19 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-      - **Precision**: `19,2` in case of number.
+      - **Precision**: `13,2` in case of number.
     - `fiscalOperationCode` - Fiscal operation code
       - **Required**: `false`
       - **Type**: `string`
