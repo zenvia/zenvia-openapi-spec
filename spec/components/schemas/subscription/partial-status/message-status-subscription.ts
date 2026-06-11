@@ -17,6 +17,20 @@ const subscription: SchemaObject = {
           channel: {
             $ref: channelRef,
           },
+          direction: {
+            title: 'Message direction',
+            description: `Indicates whether the message is received from a channel (**IN**), sent to a channel (**OUT**), or both (**ALL**).
+
+* **IN**: Received messages.
+* **OUT**: Sent messages.
+* **ALL**: Filters messages from both directions.`,
+            type: 'string',
+            enum: [
+              'IN',
+              'OUT',
+              'ALL',
+            ],
+          },
         },
         required: ['channel'],
       },

@@ -1,62 +1,37 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
-import { ref as errorCauseRef } from './error-cause';
-import { ref as contextRef } from './context';
-import { ref as channelDataRef } from './channel-data';
+import { ref as recordedRef } from './message-status-code/recorded';
+import { ref as terminatedRef } from './message-status-code/terminated';
+import { ref as baseRef } from './message-status-base';
 
 const webhook: SchemaObject = {
   type: 'object',
   title: 'Message Status',
-  properties: {
-    timestamp: {
-      title: 'Status timestamp',
-      description: 'Timestamp of the message status. Usually received from the provider of the channel.',
-      type: 'string',
-      format: 'date-time',
-    },
-    channel: {
-      title: 'Message Channel',
-      type: 'string',
-    },
-    code: {
-      title: 'Status code',
-      description: 'Code that indicates the message status',
-      type: 'string',
-      enum: [
-        'REJECTED',
-        'SENT',
-        'DELIVERED',
-        'NOT_DELIVERED',
-        'READ',
-        'DELETED',
-        'CLICKED',
-        'VERIFIED',
-      ],
-    },
-    description: {
-      title: 'Status description',
-      description: 'A description of status',
-      type: 'string',
-    },
-    causes: {
-      title: 'Status causes',
-      description: 'A list of errors or cause of status',
-      type: 'array',
-      items: {
-        $ref: errorCauseRef,
-      },
-    },
-    context: {
-      $ref: contextRef,
-    },
-    channelData: {
-      $ref: channelDataRef,
+  required: ['code'],
+  oneOf: [{
+    $ref: recordedRef,
+  }, {
+    $ref: baseRef,
+  }, {
+    $ref: terminatedRef,
+  }],
+  discriminator: {
+    propertyName: 'code',
+    mapping: {
+      SENT: baseRef,
+      DELIVERED: baseRef,
+      READ: baseRef,
+      CLICKED: baseRef,
+      VERIFIED: baseRef,
+      REJECTED: baseRef,
+      NOT_DELIVERED: baseRef,
+      DELETED: baseRef,
+      ACCEPTED: baseRef,
+      HANG_UP: baseRef,
+      TERMINATED: terminatedRef,
+      RECORDED: recordedRef,
     },
   },
-  required: [
-    'code',
-    'timestamp',
-  ],
 };
 
 export const ref = createComponentRef(__filename);
