@@ -7,6 +7,7 @@ import { ref as phoneNumberRef } from './button-item-phone-number';
 import { ref as mpmRef } from './button-item-mpm';
 import { ref as copyCodeRef } from './button-item-coupon';
 import { ref as orderDetailsRef } from './button-item-order-details';
+import { ref as requestContactInfoRef } from './button-item-request-contact-info';
 import { buttonsDescription } from '../../../../../../utils/buttons-description-generator';
 
 const buttons: SchemaObject = {
@@ -37,6 +38,9 @@ const buttons: SchemaObject = {
           {
             $ref: orderDetailsRef,
             'x-unpublished': true,
+          },
+          {
+            $ref: requestContactInfoRef,
           }],
           required: [
             'type',
@@ -49,6 +53,7 @@ const buttons: SchemaObject = {
               MPM: mpmRef,
               COPY_CODE: copyCodeRef,
               ORDER_DETAILS: orderDetailsRef,
+              REQUEST_CONTACT_INFO: requestContactInfoRef,
             },
           },
         },
