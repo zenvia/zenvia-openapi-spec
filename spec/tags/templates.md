@@ -28,7 +28,9 @@ There are three types of predefined buttons offered: actions, quick replies and 
 
 ### ACTIONS
 
-Allows your customer to visit a website, call a phone number or send a product catalog.
+Allows your customer to visit a website, call a phone number, send a product catalog, or request contact information.
+
+*Note: The `REQUEST_CONTACT_INFO` button is mutually exclusive. It cannot be combined with other button types, and templates using it must not contain `Header` or `Footer` components.*
 
 ### QUICK REPLIES
 
