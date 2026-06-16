@@ -52,15 +52,15 @@ The predefined order must be:
 - **`totalAmount`**: Total amount of the order
   - **Required**: `true`
   - **Type**: `string` || `number`
-  - **Max Size**: `22` characters
+  - **Max Size**: `16` characters
   - **Format**:
     - Must only accept positive numbers;
     - Numbers should not have a thousand separator;
     - Must accept integers and decimals with `,` as a separator;
     - Must not accept `.` as a decimal separator;
-    - Must accept up to 19 integer digits and a maximum of two decimal places;
+    - Must accept up to 13 integer digits and a maximum of two decimal places;
     - **Example of valid formats**: `15236,15` | `458`
-  - **Precision**: `19,2` in case of number.
+  - **Precision**: `13,2` in case of number.
 
 - **`legalCode`**: Legal code (e.g., CNPJ, CPF)
   - **Required**: `false`
@@ -142,15 +142,15 @@ The predefined order must be:
     - **`quantity`**: Item quantity
       - **Required**: `true`
       - **Type**: `string` || `number`
-      - **Max Size**: `22` characters
+      - **Max Size**: `16` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
         - Must accept integers and decimals with `,` as a separator;
         - Must not accept `.` as a decimal separator;
-        - Must accept up to 19 integer digits and a maximum of two decimal places;
+        - Must accept up to 13 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-      - **Precision**: `19,2` in case of number.
+      - **Precision**: `13,2` in case of number.
     - **`measurementUnit`**: Item unit of measurement
       - **Required**: `true`
       - **Type**: `string`
@@ -160,15 +160,15 @@ The predefined order must be:
       - **Required**: `true`
       - **Type**: `string or number`
         - Maintain decimal precision, do not round
-      - **Max Size**: `22` characters
+      - **Max Size**: `16` characters
       - **Format**:
         - Must only accept positive numbers;
         - Numbers should not have a thousand separator;
         - Must accept integers and decimals with `,` as a separator;
         - Must not accept `.` as a decimal separator;
-        - Must accept up to 19 integer digits and a maximum of two decimal places;
+        - Must accept up to 13 integer digits and a maximum of two decimal places;
         - **Example of valid formats**: `15236,15` | `458`
-      - **Precision**: `19,2` in case of number.
+      - **Precision**: `13,2` in case of number.
     - **`currency`**: Currency
       - **Required**: `true`
       - **Type**: `string`
