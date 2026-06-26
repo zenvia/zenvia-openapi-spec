@@ -5,7 +5,7 @@ const footer: SchemaObject = {
   title: 'Footer',
   description: `Template footer.
                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
-                <br>*Note: Footer component is not allowed for templates containing the CONTACT_REQUEST button.*`,
+                <br>*Note: Footer component is not allowed for templates containing the REQUEST_CONTACT_INFO button.*`,
   type: 'object',
   required: ['type', 'text'],
   properties: {
