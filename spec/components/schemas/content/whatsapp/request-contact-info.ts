@@ -11,7 +11,7 @@ const requestContactInfo: SchemaObject = {
     properties: {
       type: {
         type: 'string',
-        example: 'CONTACT_REQUEST',
+        example: 'contact_request',
       },
       body: {
         type: 'string',

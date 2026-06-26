@@ -60,7 +60,7 @@ const mtContent: SchemaObject = {
       order_details: orderDetailsRef,
       order_status: orderStatusRef,
       flow: flowRef,
-      CONTACT_REQUEST: requestContactInfoRef,
+      contact_request: requestContactInfoRef,
     },
   },
 };
