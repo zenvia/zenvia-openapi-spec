@@ -53,7 +53,7 @@ const buttons: SchemaObject = {
               MPM: mpmRef,
               COPY_CODE: copyCodeRef,
               ORDER_DETAILS: orderDetailsRef,
-              CONTACT_REQUEST: requestContactInfoRef,
+              REQUEST_CONTACT_INFO: requestContactInfoRef,
             },
           },
         },
