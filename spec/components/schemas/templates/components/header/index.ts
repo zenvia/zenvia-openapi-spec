@@ -5,7 +5,7 @@ export const header: SchemaObject = {
   title: 'Header',
   description: `Template header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.
                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
-                <br>*Note: Header component is not allowed for templates containing the CONTACT_REQUEST button.*`,
+                <br>*Note: Header component is not allowed for templates containing the REQUEST_CONTACT_INFO button.*`,
   type: 'object',
   required: ['type'],
   properties: {
