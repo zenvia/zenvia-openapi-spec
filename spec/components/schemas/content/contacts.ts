@@ -238,6 +238,11 @@ const contacts: SchemaObject = {
               },
               minItems: 0,
             },
+            role: {
+              description: 'Role of the contact in the context of the interaction.',
+              type: 'string',
+              example: 'Customer',
+            },
           },
           required: [
             'name',
