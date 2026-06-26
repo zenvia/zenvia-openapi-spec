@@ -8,7 +8,7 @@ export const buttons: SchemaObject = {
   title: 'Buttons',
   description: `Template buttons.
                 <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
-                <br>*Note: The QUICK_REPLIES collection is mutually exclusive with the use of the REQUEST_CONTACT_INFO button type, which is only supported within the ACTIONS block.*`,
+                <br>*Note: The QUICK_REPLIES collection is mutually exclusive with the use of the CONTACT_REQUEST button type, which is only supported within the ACTIONS block.*`,
   type: 'object',
   oneOf: [{
     $ref: actionsRef,
