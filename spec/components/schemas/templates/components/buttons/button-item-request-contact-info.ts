@@ -16,7 +16,6 @@ const requestContactInfoButton: SchemaObject = {
       },
       required: [
         'type',
-        'text',
       ],
     },
   ],
