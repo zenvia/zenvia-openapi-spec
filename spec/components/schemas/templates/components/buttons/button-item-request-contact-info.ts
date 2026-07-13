@@ -7,6 +7,12 @@ const requestContactInfoButton: SchemaObject = {
   allOf: [{
     $ref: baseRef,
   }],
+  properties: {
+    type: {
+      type: 'string',
+      enum: ['REQUEST_CONTACT_INFO'],
+    },
+  },
 };
 
 export const ref = createComponentRef(__filename);
