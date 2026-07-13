@@ -3,6 +3,7 @@ const buttons = [
   { name: 'PHONE_NUMBER', whatsappOnly: false, unpublished: false },
   { name: 'COPY_CODE', whatsappOnly: true, unpublished: false },
   { name: 'ORDER_DETAILS', whatsappOnly: true, unpublished: true },
+  { name: 'REQUEST_CONTACT_INFO', whatsappOnly: true, unpublished: true },
 ];
 
 function formatList(names: string[], lastSeparator: string): string {
