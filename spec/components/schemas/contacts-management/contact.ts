@@ -13,11 +13,51 @@ const base: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
+    channelList: {
+      title: 'Channel List',
+      description: 'List of normalized contact communication channels.',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          type: {
+            title: 'Type',
+            description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
+            type: 'string',
+            example: 'whatsapp',
+          },
+          id: {
+            title: 'ID',
+            description: 'Channel identifier (e.g., phone number, email address, external ID).',
+            type: 'string',
+            example: '5511999999999',
+          },
+          idType: {
+            title: 'ID Type',
+            description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
+            type: 'string',
+            example: 'bsuid',
+          },
+          username: {
+            title: 'Username',
+            description: 'Username associated with the channel.',
+            type: 'string',
+          },
+          senderId: {
+            title: 'Sender ID',
+            description: 'Sender identifier associated with the channel.',
+            type: 'string',
+          },
+        },
+        required: ['type', 'id'],
+      },
+    },
     channels: {
       title: 'Channels',
       description: 'Contact communication channels. At least one communication channel must be provided.',
       type: 'object',
       minProperties: 1,
+      deprecated: true,
       properties: {
         email: {
           title: 'E-mail',
