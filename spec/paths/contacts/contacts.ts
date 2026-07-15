@@ -11,7 +11,7 @@ import { ref as facebookRef } from '../../components/parameters/contacts-managem
 import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
 import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
 import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
-import { ref as validationErrorRef } from '../../components/schemas/contacts-management/validation-error/contact-validation-error'
+import { ref as validationErrorRef } from '../../components/schemas/contacts-management/validation-error/contact-validation-error';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -70,11 +70,11 @@ const post: OperationObject = {
                 code: 'MUTUALLY_EXCLUSIVE_FIELDS',
                 message: 'The fields "channels" and channelList cannot be used together.',
                 fields: ['channels', 'channelList'],
-              }
-            }
-          }
-        }
-      }
+              },
+            },
+          },
+        },
+      },
     },
     default: {
       $ref: errorResponseRef,

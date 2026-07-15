@@ -1,5 +1,5 @@
-import { SchemaObject } from "openapi3-ts";
-import { createComponentRef } from "../../../../../utils/ref";
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../../utils/ref';
 
 const validationErrorSchema: SchemaObject = {
   title: 'ValidationError',
@@ -20,10 +20,10 @@ const validationErrorSchema: SchemaObject = {
       description: 'Fields involved in the validation error.',
       items: {
         type: 'string',
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const ref = createComponentRef(__filename);
 export default validationErrorSchema;
