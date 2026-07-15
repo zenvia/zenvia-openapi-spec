@@ -11,6 +11,7 @@ import { ref as facebookRef } from '../../components/parameters/contacts-managem
 import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
 import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
 import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
+import { ref as validationErrorRef } from '../../components/schemas/contacts-management/validation-error/contact-validation-error'
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -28,12 +29,14 @@ const post: OperationObject = {
               type: 'object',
               oneOf: [
                 {
-                  required: ['channels'],
-                  not: { required: ['channelList'] },
-                },
-                {
+                  title: 'With channels (deprecated)',
                   required: ['channelList'],
                   not: { required: ['channels'] },
+                },
+                {
+                  title: 'With channelList (preferred)',
+                  required: ['channels'],
+                  not: { required: ['channelList'] },
                 },
               ],
             },
@@ -53,6 +56,26 @@ const post: OperationObject = {
         },
       },
     } as ResponseObject,
+    400: {
+      description: 'Validation error. Returned when the request body is invalid, including when "channels" and "channelList" are sent together.',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: validationErrorRef,
+          },
+          examples: {
+            mutuallyExclusiveFields: {
+              summary: 'channels and channelList sent together',
+              value: {
+                code: 'MUTUALLY_EXCLUSIVE_FIELDS',
+                message: 'The fields "channels" and channelList cannot be used together.',
+                fields: ['channels', 'channelList'],
+              }
+            }
+          }
+        }
+      }
+    },
     default: {
       $ref: errorResponseRef,
     },
