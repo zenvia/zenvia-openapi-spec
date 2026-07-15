@@ -26,7 +26,16 @@ const post: OperationObject = {
               $ref: contactRef,
             }, {
               type: 'object',
-              required: ['channels'],
+              oneOf: [
+                {
+                  required: ['channels'],
+                  not: { required: ['channelList'] },
+                },
+                {
+                  required: ['channelList'],
+                  not: { required: ['channels'] },
+                },
+              ],
             },
           ],
         },
