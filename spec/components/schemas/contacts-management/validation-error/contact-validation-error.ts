@@ -8,18 +8,28 @@ const validationErrorSchema: SchemaObject = {
   properties: {
     code: {
       type: 'string',
-      description: 'Machine-readable error code.',
-      enum: ['MUTUALLY_EXCLUSIVE_FIELDS'],
+      description: 'Type of error.',
     },
     message: {
       type: 'string',
-      description: 'Human-readable error description',
+      description: 'Error type message',
     },
-    fields: {
+    details: {
       type: 'array',
       description: 'Fields involved in the validation error.',
-      items: {
-        type: 'string',
+      properties: {
+        code: {
+          type: 'string',
+          description: 'Error code',
+        },
+        path: {
+          type: 'string',
+          description: 'The property path with error',
+        },
+        message: {
+          type: 'string',
+          description: 'Detailed error type message',
+        },
       },
     },
   },

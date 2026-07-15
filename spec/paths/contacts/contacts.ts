@@ -67,9 +67,15 @@ const post: OperationObject = {
             mutuallyExclusiveFields: {
               summary: 'channels and channelList sent together',
               value: {
-                code: 'MUTUALLY_EXCLUSIVE_FIELDS',
-                message: 'The fields "channels" and channelList cannot be used together.',
-                fields: ['channels', 'channelList'],
+                code: 'VALIDATION_ERROR',
+                message: 'Validation error',
+                'details': [
+                  {
+                    'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
+                    'path': 'channelList',
+                    'message': "Envie apenas 'channelList'. O campo 'channels' está depreciado e não pode ser usado junto com 'channelList'.",
+                  },
+                ],
               },
             },
           },
