@@ -1,5 +1,6 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as errorRef } from '../../components/schemas/error/base';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
 import { ref as listIdsRef } from '../../components/parameters/contacts-management/listIds';
 import { ref as pageRef } from '../../components/parameters/page-legacy';
@@ -11,7 +12,6 @@ import { ref as facebookRef } from '../../components/parameters/contacts-managem
 import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
 import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
 import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
-import { ref as validationErrorRef } from '../../components/schemas/contacts-management/validation-error/contact-validation-error';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -29,14 +29,16 @@ const post: OperationObject = {
               type: 'object',
               oneOf: [
                 {
-                  title: 'With channels (deprecated)',
+                  type: 'object',
+                  title: 'With channelList (preferred)',
                   required: ['channelList'],
-                  not: { required: ['channels'] },
+                  not: { type: 'object', required: ['channels'] },
                 },
                 {
-                  title: 'With channelList (preferred)',
+                  type: 'object',
+                  title: 'With channels (deprecated)',
                   required: ['channels'],
-                  not: { required: ['channelList'] },
+                  not: { type: 'object', required: ['channelList'] },
                 },
               ],
             },
@@ -57,11 +59,11 @@ const post: OperationObject = {
       },
     } as ResponseObject,
     400: {
-      description: 'Validation error. Returned when the request body is invalid, including when "channels" and "channelList" are sent together.',
+      description: 'Validation error. Returned when the request body is invalid',
       content: {
         'application/json': {
           schema: {
-            $ref: validationErrorRef,
+            $ref: errorRef,
           },
           examples: {
             mutuallyExclusiveFields: {
@@ -73,7 +75,7 @@ const post: OperationObject = {
                   {
                     'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
                     'path': 'channelList',
-                    'message': "Envie apenas 'channelList'. O campo 'channels' está depreciado e não pode ser usado junto com 'channelList'.",
+                    'message': "The 'channels' and 'channelList' fields are mutually exclusive. Please use only 'channelList', as 'channels' is deprecated",
                   },
                 ],
               },
@@ -81,7 +83,7 @@ const post: OperationObject = {
           },
         },
       },
-    },
+    } as ResponseObject,
     default: {
       $ref: errorResponseRef,
     },
