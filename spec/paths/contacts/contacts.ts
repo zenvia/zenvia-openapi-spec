@@ -12,6 +12,7 @@ import { ref as facebookRef } from '../../components/parameters/contacts-managem
 import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
 import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
 import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
+import { ref as channelListIdRef } from '../../components/parameters/contacts-management/channelList.id';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -98,6 +99,7 @@ const get: OperationObject = {
     { $ref: listIdsRef },
     { $ref: pageRef },
     { $ref: sizeRef },
+    { $ref: channelListIdRef },
     { $ref: emailRef },
     { $ref: mobileRef },
     { $ref: landlineRef },
