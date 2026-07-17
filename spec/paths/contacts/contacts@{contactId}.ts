@@ -2,6 +2,7 @@ import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
 import { ref as contactIdRef } from '../../components/parameters/contacts-management/contactId';
+import { ref as errorRef } from '../../components/schemas/error/base';
 
 const get: OperationObject = {
   summary: 'Retrieve one contact by id',
@@ -32,7 +33,27 @@ const patch: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: contactRef,
+          allOf: [
+            {
+              $ref: contactRef,
+            }, {
+              type: 'object',
+              oneOf: [
+                {
+                  type: 'object',
+                  title: 'With channelList (preferred)',
+                  required: ['channelList'],
+                  not: { type: 'object', required: ['channels'] },
+                },
+                {
+                  type: 'object',
+                  title: 'With channels (deprecated)',
+                  required: ['channels'],
+                  not: { type: 'object', required: ['channelList'] },
+                },
+              ],
+            },
+          ],
         },
       },
     },
@@ -48,6 +69,32 @@ const patch: OperationObject = {
         },
       },
     } as ResponseObject,
+    400: {
+          description: 'Validation error. Returned when the request body is invalid',
+          content: {
+            'application/json': {
+              schema: {
+                $ref: errorRef,
+              },
+              examples: {
+                mutuallyExclusiveFields: {
+                  summary: 'channels and channelList sent together',
+                  value: {
+                    code: 'VALIDATION_ERROR',
+                    message: 'Validation error',
+                    'details': [
+                      {
+                        'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
+                        'path': 'channelList',
+                        'message': "The 'channels' and 'channelList' fields are mutually exclusive. Please use only 'channelList', as 'channels' is deprecated",
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+          },
+        } as ResponseObject,
     default: {
       $ref: errorResponseRef,
     },
