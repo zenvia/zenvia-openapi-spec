@@ -86,7 +86,7 @@ const patch: OperationObject = {
                       {
                         'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
                         'path': 'channelList',
-                        'message': "The 'channels' and 'channelList' fields are mutually exclusive. Please use only 'channelList', as 'channels' is deprecated",
+                        'message': "The fields 'channels' and 'channelList' cannot be used together. Note: 'channels' is deprecated, please migrate to 'channelList'.",
                       },
                     ],
                   },
