@@ -15,7 +15,7 @@ const base: SchemaObject = {
     },
     channelList: {
       title: 'Channel List',
-      description: 'List of normalized contact communication channels.',
+      description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
       type: 'array',
       items: {
         type: 'object',
