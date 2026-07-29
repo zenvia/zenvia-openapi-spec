@@ -1,6 +1,8 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
+import { ref as contacChannelListRef } from '../../components/schemas/contacts-management/contact-channelList';
+import { ref as contacResponseRef } from '../../components/schemas/contacts-management/responses/contact-response';
 import { ref as contactIdRef } from '../../components/parameters/contacts-management/contactId';
 import { ref as errorRef } from '../../components/schemas/error/base';
 
@@ -14,7 +16,7 @@ const get: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: contactRef,
+            $ref: contacResponseRef,
           },
         },
       },
@@ -33,24 +35,17 @@ const patch: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          allOf: [
+          oneOf: [
             {
-              $ref: contactRef,
-            }, {
-              type: 'object',
-              oneOf: [
-                {
-                  type: 'object',
-                  title: 'With channelList (preferred)',
-                  required: ['channelList'],
-                  not: { type: 'object', required: ['channels'] },
-                },
-                {
-                  type: 'object',
-                  title: 'With channels (deprecated)',
-                  required: ['channels'],
-                  not: { type: 'object', required: ['channelList'] },
-                },
+              title: 'Contact with channelList',
+              allOf: [
+                { $ref: contacChannelListRef },
+              ],
+            },
+            {
+              title: 'Contact with channels',
+              allOf: [
+                { $ref: contactRef },
               ],
             },
           ],
@@ -64,7 +59,7 @@ const patch: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: contactRef,
+            $ref: contacResponseRef,
           },
         },
       },
