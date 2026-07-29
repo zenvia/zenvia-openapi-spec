@@ -1,0 +1,239 @@
+// tslint:disable:max-line-length
+import { SchemaObject } from 'openapi3-ts';
+import { createComponentRef } from '../../../../../utils/ref';
+
+const base: SchemaObject = {
+    title: 'Contact',
+    description: 'Contact information.',
+    type: 'object',
+    properties: {
+        id: {
+            title: 'ID',
+            description: 'ID of the contact.',
+            type: 'string',
+            readOnly: true,
+        },
+        channelList: {
+            title: 'Channel List',
+            description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        title: 'Type',
+                        description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
+                        type: 'string',
+                        example: 'whatsapp',
+                    },
+                    id: {
+                        title: 'ID',
+                        description: 'Channel identifier (e.g., phone number, email address, external ID).',
+                        type: 'string',
+                        example: '5511999999999',
+                    },
+                    idType: {
+                        title: 'ID Type',
+                        description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
+                        type: 'string',
+                        example: 'bsuid',
+                    },
+                    username: {
+                        title: 'Username',
+                        description: 'Username associated with the channel.',
+                        type: 'string',
+                    },
+                    senderId: {
+                        title: 'Sender ID',
+                        description: 'Sender identifier associated with the channel.',
+                        type: 'string',
+                    },
+                },
+                required: ['type', 'id'],
+            },
+        },
+        channels: {
+            title: 'Channels',
+            description: 'Deprecated: use channelList instead. Contact communication channels. At least one communication channel must be provided.',
+            type: 'object',
+            minProperties: 1,
+            deprecated: true,
+            properties: {
+                email: {
+                    title: 'E-mail',
+                    description: 'Contact\'s e-mail address.',
+                    type: 'string',
+                    example: 'contact@domain.example',
+                },
+                mobile: {
+                    title: 'Mobile',
+                    description: 'Contact\'s mobile phone number.',
+                    type: 'string',
+                    pattern: '^[0-9]+$',
+                    example: '5510888883333',
+                },
+                landline: {
+                    title: 'Landline',
+                    description: 'Contact\'s landline phone number.',
+                    type: 'string',
+                    pattern: '^[0-9]+$',
+                    example: '551044443333',
+                },
+                facebook: {
+                    title: 'Facebook',
+                    description: 'Contact\'s Facebook ID.',
+                    type: 'string',
+                    pattern: '^[a-zA-Z0-9._@-]+$',
+                    example: 'user.name.123',
+                },
+                instagram: {
+                    title: 'Instagram',
+                    description: 'Contact\'s Instagram ID.',
+                    type: 'string',
+                    pattern: '^[a-zA-Z0-9._-]+$',
+                    example: 'user_name',
+                },
+                twitter: {
+                    title: 'Twitter',
+                    description: 'Contact\'s Twitter handle.',
+                    type: 'string',
+                    pattern: '^@[a-zA-Z0-9_]{1,15}$',
+                    example: '@username',
+                },
+                meli: {
+                    title: 'Mercado Livre',
+                    description: 'Contact\'s Mercado Livre ID.',
+                    type: 'string',
+                    pattern: '^[a-zA-Z0-9._-]+$',
+                    example: 'meliUser_123',
+                },
+            },
+        },
+        firstName: {
+            title: 'First Name',
+            description: 'Contact\'s name.',
+            type: 'string',
+            example: 'Rafael',
+        },
+        lastName: {
+            title: 'Last Name',
+            description: 'Contact\'s surname.',
+            type: 'string',
+            example: 'Souza',
+        },
+        birthdate: {
+            title: 'Birthdate',
+            description: 'Contact\'s birthdate',
+            type: 'string',
+            example: '1970-06-13',
+        },
+        customData: {
+            title: 'Custom Data',
+            description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).',
+            type: 'object',
+            additionalProperties: {
+                title: 'Value',
+                description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.',
+                oneOf: [{
+                    type: 'string',
+                    title: 'String/Date',
+                    example: '2022-06-13',
+                }, {
+                    type: 'number',
+                    title: 'Number',
+                    example: 10,
+                }, {
+                    type: 'boolean',
+                    title: 'Boolean',
+                    example: true,
+                }],
+            },
+        },
+        addresses: {
+            title: 'Addresses',
+            description: 'Contact\'s addresses.',
+            type: 'array',
+            items: {
+                title: 'Address',
+                description: 'Address object.',
+                type: 'object',
+                properties: {
+                    country: {
+                        title: 'Country',
+                        description: 'Address country.',
+                        type: 'string',
+                        example: 'Brazil',
+                    },
+                    zipcode: {
+                        title: 'Zip Code',
+                        description: 'Address zip code.',
+                        type: 'string',
+                        example: '01310-300',
+                    },
+                    state: {
+                        title: 'State',
+                        description: 'Address state or region.',
+                        type: 'string',
+                        example: 'SP',
+                    },
+                    city: {
+                        title: 'City',
+                        description: 'Address city.',
+                        type: 'string',
+                        example: 'São Paulo',
+                    },
+                    address: {
+                        title: 'Address',
+                        description: 'Street address.',
+                        type: 'string',
+                        example: 'Av. Paulista',
+                    },
+                    streetNumber: {
+                        title: 'Street Number',
+                        description: 'Street number.',
+                        type: 'string',
+                        example: '2300',
+                    },
+                    /* unitNumber: {
+                      title: 'Unit number',
+                      description: 'Apartament, suite, unit number, etc... or address line 2.',
+                      type: 'string',
+                      example: 'Cj. 182',
+                    }, */
+                    neighborhood: {
+                        title: 'Neighborhood',
+                        description: 'Address neighborhood or address line 3.',
+                        type: 'string',
+                        example: 'Bela Vista',
+                    },
+                },
+            },
+        },
+        listIds: {
+            title: 'List IDs',
+            description: 'IDs of the lists the contact is included in.',
+            type: 'array',
+            items: {
+                type: 'string',
+            },
+            example: ['list-id-01', 'list-id-02', 'list-id-03'],
+        },
+        createdAt: {
+            title: 'Created At',
+            description: 'Timestamp of the contact creation.',
+            type: 'string',
+            example: '2022-05-23T19:37:59.000Z',
+            readOnly: true,
+        },
+        updatedAt: {
+            title: 'Updated At',
+            description: 'Timestamp of the contact update.',
+            type: 'string',
+            example: '2022-05-23T19:37:59.000Z',
+            readOnly: true,
+        },
+    },
+};
+
+export const ref = createComponentRef(__filename);
+export default base;
