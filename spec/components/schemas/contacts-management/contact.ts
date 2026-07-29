@@ -194,6 +194,7 @@ const base: SchemaObject = {
       readOnly: true,
     },
   },
+  required: ['channels'],
 };
 
 export const ref = createComponentRef(__filename);

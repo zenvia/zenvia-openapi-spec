@@ -46,15 +46,35 @@ const post: OperationObject = {
             value: {
               'channelList': [
                 {
-                  id: '5510888883333',
-                  type: 'mobile',
-                },
-                {
+                  'type': 'email',
+                  'id': 'contact@domain.example',
+                }, {
+                  'type': 'phone',
+                  'id': '5510888883333',
+                  'idType': 'mobile',
+                }, {
+                  'type': 'phone',
+                  'id': '551044443333',
+                  'idType': 'landline',
+                }, {
+                  'type': 'facebook',
+                  'id': '8484848448',
+                }, {
+                  'type': 'instagram',
+                  'id': '123123123123',
+                  'username': '@username',
+                }, {
+                  'type': 'twitter',
+                  'id': '@username',
+                }, {
+                  'type': 'meli',
+                  'id': 'meliUser_123',
+                }, {
                   'type': 'whatsapp',
-                  'id': 'US.839857923403480',
+                  'id': '181818181',
                   'idType': 'bsuid',
-                  'username': 'johndoe',
-                  'senderId': '557988754357',
+                  'username': '@username',
+                  'senderId': '123123123',
                 },
               ],
               'firstName': 'Rafael',
