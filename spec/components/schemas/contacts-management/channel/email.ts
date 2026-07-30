@@ -17,6 +17,7 @@ const base: SchemaObject = {
       title: 'ID',
       description: 'Contact\'s e-mail address.',
       type: 'string',
+      pattern: '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$',
       example: 'contact@domain.example',
     },
   },

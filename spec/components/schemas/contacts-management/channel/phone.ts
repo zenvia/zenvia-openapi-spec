@@ -22,9 +22,10 @@ const base: SchemaObject = {
     },
     idType: {
       title: 'ID Type',
-      description: 'Type of the phone number.',
+      description: 'Type of the phone number. Defaults to "mobile" when not provided.',
       type: 'string',
       enum: ['landline', 'mobile'],
+      default: 'mobile',
       example: 'mobile',
     },
   },

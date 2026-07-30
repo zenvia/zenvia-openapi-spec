@@ -37,7 +37,7 @@ const base: SchemaObject = {
       type: 'string',
     },
   },
-  required: ['type', 'id'],
+  required: ['type', 'id', 'idType'],
 };
 
 export const ref = createComponentRef(__filename);
