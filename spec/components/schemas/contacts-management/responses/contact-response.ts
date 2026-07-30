@@ -24,6 +24,7 @@ const base: SchemaObject = {
                         title: 'Type',
                         description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
                         type: 'string',
+                        enum: ['whatsapp', 'meli', 'phone', 'twitter', 'facebook', 'instagram', 'email'],
                         example: 'whatsapp',
                     },
                     id: {
@@ -34,9 +35,13 @@ const base: SchemaObject = {
                     },
                     idType: {
                         title: 'ID Type',
-                        description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
-                        type: 'string',
-                        example: 'bsuid',
+                        description: 'Type of the ID. For WhatsApp, it supports "bsuid" or "parent_bsuid". For phone, it supports "landline" or "mobile".',
+                        type: 'array',
+                        items: {
+                            type: 'string',
+                            enum: ['bsuid', 'parent_bsuid', 'landline', 'mobile'],
+                        },
+                        example: ['bsuid'],
                     },
                     username: {
                         title: 'Username',
