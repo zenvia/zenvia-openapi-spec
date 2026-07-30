@@ -18,38 +18,185 @@ const base: SchemaObject = {
       description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
       type: 'array',
       items: {
-        type: 'object',
-        properties: {
-          type: {
-            title: 'Type',
-            description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
-            type: 'string',
-            example: 'whatsapp',
+        title: 'Channel',
+        description: 'A single normalized contact communication channel. The array accepts multiple entries of any mix of types; each entry must match one of the channel shapes below.',
+        oneOf: [
+          {
+            title: 'WhatsApp',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['whatsapp'],
+                example: 'whatsapp',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s WhatsApp identifier (phone number or bsuid).',
+                type: 'string',
+                example: '5511999999999',
+              },
+              idType: {
+                title: 'ID Type',
+                description: 'Type of the WhatsApp ID.',
+                type: 'string',
+                enum: ['bsuid', 'parent_bsuid'],
+                example: 'bsuid',
+              },
+              username: {
+                title: 'Username',
+                description: 'Username associated with the channel.',
+                type: 'string',
+              },
+              senderId: {
+                title: 'Sender ID',
+                description: 'Sender identifier associated with the channel.',
+                type: 'string',
+              },
+            },
+            required: ['type', 'id'],
           },
-          id: {
-            title: 'ID',
-            description: 'Channel identifier (e.g., phone number, email address, external ID).',
-            type: 'string',
-            example: '5511999999999',
+          {
+            title: 'Phone',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['phone'],
+                example: 'phone',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s phone number.',
+                type: 'string',
+                pattern: '^[0-9]+$',
+                example: '5510888883333',
+              },
+              idType: {
+                title: 'ID Type',
+                description: 'Type of the phone number.',
+                type: 'string',
+                enum: ['landline', 'mobile'],
+                example: 'mobile',
+              },
+            },
+            required: ['type', 'id'],
           },
-          idType: {
-            title: 'ID Type',
-            description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
-            type: 'string',
-            example: 'bsuid',
+          {
+            title: 'E-mail',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['email'],
+                example: 'email',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s e-mail address.',
+                type: 'string',
+                example: 'contact@domain.example',
+              },
+            },
+            required: ['type', 'id'],
           },
-          username: {
-            title: 'Username',
-            description: 'Username associated with the channel.',
-            type: 'string',
+          {
+            title: 'Facebook',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['facebook'],
+                example: 'facebook',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s Facebook ID.',
+                type: 'string',
+                pattern: '^[a-zA-Z0-9._@-]+$',
+                example: 'user.name.123',
+              },
+            },
+            required: ['type', 'id'],
           },
-          senderId: {
-            title: 'Sender ID',
-            description: 'Sender identifier associated with the channel.',
-            type: 'string',
+          {
+            title: 'Instagram',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['instagram'],
+                example: 'instagram',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s Instagram ID.',
+                type: 'string',
+                pattern: '^[a-zA-Z0-9._-]+$',
+                example: 'user_name',
+              },
+              username: {
+                title: 'Username',
+                description: 'Username associated with the channel.',
+                type: 'string',
+                example: '@username',
+              },
+            },
+            required: ['type', 'id'],
           },
-        },
-        required: ['type', 'id'],
+          {
+            title: 'Twitter',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['twitter'],
+                example: 'twitter',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s Twitter handle.',
+                type: 'string',
+                pattern: '^@[a-zA-Z0-9_]{1,15}$',
+                example: '@username',
+              },
+            },
+            required: ['type', 'id'],
+          },
+          {
+            title: 'Mercado Livre',
+            type: 'object',
+            properties: {
+              type: {
+                title: 'Type',
+                description: 'Contact communication channel type.',
+                type: 'string',
+                enum: ['meli'],
+                example: 'meli',
+              },
+              id: {
+                title: 'ID',
+                description: 'Contact\'s Mercado Livre ID.',
+                type: 'string',
+                pattern: '^[a-zA-Z0-9._-]+$',
+                example: 'meliUser_123',
+              },
+            },
+            required: ['type', 'id'],
+          },
+        ],
       },
     },
     firstName: {
