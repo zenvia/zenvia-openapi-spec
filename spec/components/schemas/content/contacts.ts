@@ -241,7 +241,9 @@ const contacts: SchemaObject = {
             role: {
               description: 'Role of the contact in the context of the interaction.',
               type: 'string',
-              example: 'Customer',
+              enum: ['self', 'unknown'],
+              example: 'self',
+              readOnly: true,
             },
           },
           required: [
