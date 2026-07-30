@@ -1,7 +1,10 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
+import { ref as contacChannelListRef } from '../../components/schemas/contacts-management/contact-channelList';
+import { ref as contacResponseRef } from '../../components/schemas/contacts-management/responses/contact-response';
 import { ref as contactIdRef } from '../../components/parameters/contacts-management/contactId';
+import { ref as errorRef } from '../../components/schemas/error/base';
 
 const get: OperationObject = {
   summary: 'Retrieve one contact by id',
@@ -13,7 +16,7 @@ const get: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: contactRef,
+            $ref: contacResponseRef,
           },
         },
       },
@@ -32,7 +35,20 @@ const patch: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          $ref: contactRef,
+          oneOf: [
+            {
+              title: 'Contact with channelList',
+              allOf: [
+                { $ref: contacChannelListRef },
+              ],
+            },
+            {
+              title: 'Contact with channels',
+              allOf: [
+                { $ref: contactRef },
+              ],
+            },
+          ],
         },
       },
     },
@@ -43,11 +59,37 @@ const patch: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: contactRef,
+            $ref: contacResponseRef,
           },
         },
       },
     } as ResponseObject,
+    400: {
+          description: 'Validation error. Returned when the request body is invalid',
+          content: {
+            'application/json': {
+              schema: {
+                $ref: errorRef,
+              },
+              examples: {
+                mutuallyExclusiveFields: {
+                  summary: 'channels and channelList sent together',
+                  value: {
+                    code: 'VALIDATION_ERROR',
+                    message: 'Validation error',
+                    'details': [
+                      {
+                        'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
+                        'path': 'channelList',
+                        'message': "The fields 'channels' and 'channelList' cannot be used together. Note: 'channels' is deprecated, please migrate to 'channelList'.",
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+          },
+        } as ResponseObject,
     default: {
       $ref: errorResponseRef,
     },

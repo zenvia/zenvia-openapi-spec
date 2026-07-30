@@ -13,61 +13,43 @@ const base: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
-    channels: {
-      title: 'Channels',
-      description: 'Deprecated: use channelList instead. Contact communication channels. At least one communication channel must be provided.',
-      type: 'object',
-      minProperties: 1,
-      deprecated: true,
-      properties: {
-        email: {
-          title: 'E-mail',
-          description: 'Contact\'s e-mail address.',
-          type: 'string',
-          example: 'contact@domain.example',
+    channelList: {
+      title: 'Channel List',
+      description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          type: {
+            title: 'Type',
+            description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
+            type: 'string',
+            example: 'whatsapp',
+          },
+          id: {
+            title: 'ID',
+            description: 'Channel identifier (e.g., phone number, email address, external ID).',
+            type: 'string',
+            example: '5511999999999',
+          },
+          idType: {
+            title: 'ID Type',
+            description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
+            type: 'string',
+            example: 'bsuid',
+          },
+          username: {
+            title: 'Username',
+            description: 'Username associated with the channel.',
+            type: 'string',
+          },
+          senderId: {
+            title: 'Sender ID',
+            description: 'Sender identifier associated with the channel.',
+            type: 'string',
+          },
         },
-        mobile: {
-          title: 'Mobile',
-          description: 'Contact\'s mobile phone number.',
-          type: 'string',
-          pattern: '^[0-9]+$',
-          example: '5510888883333',
-        },
-        landline: {
-          title: 'Landline',
-          description: 'Contact\'s landline phone number.',
-          type: 'string',
-          pattern: '^[0-9]+$',
-          example: '551044443333',
-        },
-        facebook: {
-          title: 'Facebook',
-          description: 'Contact\'s Facebook ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._@-]+$',
-          example: 'user.name.123',
-        },
-        instagram: {
-          title: 'Instagram',
-          description: 'Contact\'s Instagram ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._-]+$',
-          example: 'user_name',
-        },
-        twitter: {
-          title: 'Twitter',
-          description: 'Contact\'s Twitter handle.',
-          type: 'string',
-          pattern: '^@[a-zA-Z0-9_]{1,15}$',
-          example: '@username',
-        },
-        meli: {
-          title: 'Mercado Livre',
-          description: 'Contact\'s Mercado Livre ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._-]+$',
-          example: 'meliUser_123',
-        },
+        required: ['type', 'id'],
       },
     },
     firstName: {
@@ -155,12 +137,6 @@ const base: SchemaObject = {
             type: 'string',
             example: '2300',
           },
-          /* unitNumber: {
-            title: 'Unit number',
-            description: 'Apartament, suite, unit number, etc... or address line 2.',
-            type: 'string',
-            example: 'Cj. 182',
-          }, */
           neighborhood: {
             title: 'Neighborhood',
             description: 'Address neighborhood or address line 3.',
@@ -194,7 +170,7 @@ const base: SchemaObject = {
       readOnly: true,
     },
   },
-  required: ['channels'],
+  required: ['channelList'],
 };
 
 export const ref = createComponentRef(__filename);
