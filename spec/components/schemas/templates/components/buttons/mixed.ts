@@ -9,6 +9,7 @@ import { ref as optOutRef } from './button-item-opt-out';
 import { ref as mpmRef } from './button-item-mpm';
 import { ref as copyCodeRef } from './button-item-coupon';
 import { ref as orderDetailsRef } from './button-item-order-details';
+import { ref as requestContactInfoRef } from './button-item-request-contact-info';
 
 const buttons: SchemaObject = {
   type: 'object',
@@ -49,6 +50,7 @@ const buttons: SchemaObject = {
               QUICK_REPLY: quickReplyRef,
               URL: urlRef,
               ORDER_DETAILS: orderDetailsRef,
+              REQUEST_CONTACT_INFO: requestContactInfoRef,
             },
           },
         },
