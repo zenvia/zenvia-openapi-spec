@@ -36,6 +36,7 @@ const buttons: SchemaObject = {
               $ref: orderDetailsRef,
               'x-unpublished': true,
             },
+            { $ref: requestContactInfoRef },
           ],
           required: [
             'type',
