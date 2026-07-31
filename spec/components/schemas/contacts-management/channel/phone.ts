@@ -22,9 +22,9 @@ const base: SchemaObject = {
     },
     idType: {
       title: 'ID Type',
-      description: 'Type of the phone number.',
+      description: 'Type of the phone number. Values are case-insensitive.',
       type: 'string',
-      enum: ['landline', 'mobile'],
+      enum: ['landline', 'mobile', 'LANDLINE', 'MOBILE'],
       example: 'mobile',
     },
   },
