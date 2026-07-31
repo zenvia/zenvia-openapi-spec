@@ -22,14 +22,13 @@ const base: SchemaObject = {
     },
     idType: {
       title: 'ID Type',
-      description: 'Type of the phone number. Defaults to "mobile" when not provided.',
+      description: 'Type of the phone number.',
       type: 'string',
       enum: ['landline', 'mobile'],
-      default: 'mobile',
       example: 'mobile',
     },
   },
-  required: ['type', 'id'],
+  required: ['type', 'id', 'idType'],
 };
 
 export const ref = createComponentRef(__filename);
