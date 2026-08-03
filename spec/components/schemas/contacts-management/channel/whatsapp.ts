@@ -15,9 +15,10 @@ const base: SchemaObject = {
     },
     id: {
       title: 'ID',
-      description: 'Contact\'s WhatsApp identifier (phone number or bsuid).',
+      description: 'Contact\'s WhatsApp identifier. Either a phone number (digits only) or a bsuid prefixed with the ISO 3166 alpha-2 two-letter country code and a period, followed by up to 128 alphanumeric characters (for example, US.13491208655302741918).',
       type: 'string',
-      example: '5511999999999',
+      pattern: '^([0-9]+|[A-Z]{2}\\.[A-Za-z0-9]{1,128})$',
+      example: 'US.13491208655302741918',
     },
     idType: {
       title: 'ID Type',
