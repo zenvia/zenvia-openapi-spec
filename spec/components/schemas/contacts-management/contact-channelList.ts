@@ -1,5 +1,6 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
+import { ref as channelRef } from './channel';
 import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
@@ -18,38 +19,7 @@ const base: SchemaObject = {
       description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
       type: 'array',
       items: {
-        type: 'object',
-        properties: {
-          type: {
-            title: 'Type',
-            description: 'Contact communication channel type (e.g., whatsapp, email, facebook).',
-            type: 'string',
-            example: 'whatsapp',
-          },
-          id: {
-            title: 'ID',
-            description: 'Channel identifier (e.g., phone number, email address, external ID).',
-            type: 'string',
-            example: '5511999999999',
-          },
-          idType: {
-            title: 'ID Type',
-            description: 'Type of the ID. For WhatsApp, it supports values like "bsuid" or "parent_bsuid".',
-            type: 'string',
-            example: 'bsuid',
-          },
-          username: {
-            title: 'Username',
-            description: 'Username associated with the channel.',
-            type: 'string',
-          },
-          senderId: {
-            title: 'Sender ID',
-            description: 'Sender identifier associated with the channel.',
-            type: 'string',
-          },
-        },
-        required: ['type', 'id'],
+        $ref: channelRef,
       },
     },
     firstName: {
