@@ -15,7 +15,7 @@ const base: SchemaObject = {
     },
     channels: {
       title: 'Channels',
-      description: 'Deprecated: use channelList instead. Contact communication channels. At least one communication channel must be provided.',
+      description: 'Contact communication channels. Status: Deprecated. This parameter is no longer recommended, but it remains fully functional. At least one communication channel must be provided. We highly encourage using the newer channelList parameter instead. Note: channels and channelList cannot be used together.',
       type: 'object',
       minProperties: 1,
       deprecated: true,
