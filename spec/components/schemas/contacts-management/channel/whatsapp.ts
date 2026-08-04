@@ -22,9 +22,9 @@ const base: SchemaObject = {
     },
     idType: {
       title: 'ID Type',
-      description: 'Type of the WhatsApp ID. Values are case-insensitive.',
+      description: 'Type of the WhatsApp ID.',
       type: 'string',
-      enum: ['bsuid', 'parent_bsuid', 'BSUID', 'PARENT_BSUID'],
+      enum: ['bsuid', 'parent_bsuid'],
       example: 'bsuid',
     },
     username: {

@@ -16,7 +16,7 @@ const base: SchemaObject = {
     },
     channelList: {
       title: 'Channel List',
-      description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together',
+      description: 'The recommended list to define contact communication channels. You can add any combination of supported channel types here (WhatsApp, Email, Phone, Facebook, Instagram, Twitter, Meli). channelList cannot be used together with channels.',
       type: 'array',
       items: {
         $ref: channelRef,
