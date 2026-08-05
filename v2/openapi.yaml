@@ -2196,18 +2196,110 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: '#/components/schemas/contacts-management.contact'
-                - type: object
-                  required:
-                    - channels
+              oneOf:
+                - title: Contact with channelList
+                  allOf:
+                    - $ref: '#/components/schemas/contacts-management.contact-channelList'
+                - title: Contact with channels
+                  allOf:
+                    - $ref: '#/components/schemas/contacts-management.contact'
+            examples:
+              preferred:
+                summary: Create contact with channelList (preferred)
+                value:
+                  channelList:
+                    - type: email
+                      id: contact@domain.example
+                    - type: phone
+                      id: '5510888883333'
+                      idType: mobile
+                    - type: phone
+                      id: '551044443333'
+                      idType: landline
+                    - type: facebook
+                      id: '8484848448'
+                    - type: instagram
+                      id: '123123123123'
+                      username: '@username'
+                    - type: twitter
+                      id: '@username'
+                    - type: meli
+                      id: meliUser_123
+                    - type: whatsapp
+                      id: '181818181'
+                      idType: bsuid
+                      username: '@username'
+                      senderId: '123123123'
+                  firstName: Rafael
+                  lastName: Souza
+                  birthdate: '1970-06-13'
+                  customData:
+                    property1: '2022-06-13'
+                    property2: '2022-06-13'
+                  addresses:
+                    - country: Brazil
+                      zipcode: 01310-300
+                      state: SP
+                      city: São Paulo
+                      address: Av. Paulista
+                      streetNumber: '2300'
+                      neighborhood: Bela Vista
+                  listIds:
+                    - list-id-01
+                    - list-id-02
+                    - list-id-03
+              deprecated:
+                summary: Create contact with channels (deprecated)
+                value:
+                  channels:
+                    email: contact@domain.example
+                    mobile: '5510888883333'
+                    landline: '551044443333'
+                    facebook: user.name.123
+                    instagram: user_name
+                    twitter: '@username'
+                    meli: meliUser_123
+                  firstName: Rafael
+                  lastName: Souza
+                  birthdate: '1970-06-13'
+                  customData:
+                    property1: '2022-06-13'
+                    property2: '2022-06-13'
+                  addresses:
+                    - country: Brazil
+                      zipcode: 01310-300
+                      state: SP
+                      city: São Paulo
+                      address: Av. Paulista
+                      streetNumber: '2300'
+                      neighborhood: Bela Vista
+                  listIds:
+                    - list-id-01
+                    - list-id-02
+                    - list-id-03
       responses:
         '200':
           description: Contact created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contacts-management.contact'
+                $ref: '#/components/schemas/contacts-management.responses.contact-response'
+        '400':
+          description: Validation error. Returned when the request body is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error.base'
+              examples:
+                mutuallyExclusiveFields:
+                  summary: channels and channelList sent together
+                  value:
+                    code: VALIDATION_ERROR
+                    message: Validation error
+                    details:
+                      - code: MUTUALLY_EXCLUSIVE_FIELDS
+                        path: channelList
+                        message: 'The fields ''channels'' and ''channelList'' cannot be used together. Note: ''channels'' is deprecated, please migrate to ''channelList''.'
         default:
           $ref: '#/components/responses/error'
     get:
@@ -2219,6 +2311,7 @@ paths:
         - $ref: '#/components/parameters/contacts-management.listIds'
         - $ref: '#/components/parameters/page-legacy'
         - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/contacts-management.channelList.id'
         - $ref: '#/components/parameters/contacts-management.email'
         - $ref: '#/components/parameters/contacts-management.mobile'
         - $ref: '#/components/parameters/contacts-management.landline'
@@ -2234,7 +2327,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/contacts-management.contact'
+                  $ref: '#/components/schemas/contacts-management.responses.contact-response'
           headers:
             x-total:
               schema:
@@ -2255,7 +2348,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contacts-management.contact'
+                $ref: '#/components/schemas/contacts-management.responses.contact-response'
         default:
           $ref: '#/components/responses/error'
     patch:
@@ -2267,14 +2360,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contacts-management.contact'
+              oneOf:
+                - title: Contact with channelList
+                  allOf:
+                    - $ref: '#/components/schemas/contacts-management.contact-channelList'
+                - title: Contact with channels
+                  allOf:
+                    - $ref: '#/components/schemas/contacts-management.contact'
       responses:
         '200':
           description: Updated contact
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contacts-management.contact'
+                $ref: '#/components/schemas/contacts-management.responses.contact-response'
+        '400':
+          description: Validation error. Returned when the request body is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error.base'
+              examples:
+                mutuallyExclusiveFields:
+                  summary: channels and channelList sent together
+                  value:
+                    code: VALIDATION_ERROR
+                    message: Validation error
+                    details:
+                      - code: MUTUALLY_EXCLUSIVE_FIELDS
+                        path: channelList
+                        message: 'The fields ''channels'' and ''channelList'' cannot be used together. Note: ''channels'' is deprecated, please migrate to ''channelList''.'
         default:
           $ref: '#/components/responses/error'
     delete:
@@ -4619,6 +4734,143 @@ components:
           description: 'Time in minutes that must pass since the user''s last interaction with the assistant for the message to be sent. Example: If the user is interacting or interacted with the assistant 1 minute ago and the inactivity time required for the message to be sent is 2 minutes `"inactivityTime": 2`, the message would not be sent. If the interaction had occurred 3 minutes ago, the message would be sent.'
           type: number
           example: 2
+    contacts-management.channel:
+      title: Channel
+      description: A single normalized contact communication channel. Select a channel type to see its fields. The channelList array accepts multiple entries of any mix of types.
+      oneOf:
+        - $ref: '#/components/schemas/contacts-management.channel.whatsapp'
+        - $ref: '#/components/schemas/contacts-management.channel.phone'
+        - $ref: '#/components/schemas/contacts-management.channel.email'
+        - $ref: '#/components/schemas/contacts-management.channel.facebook'
+        - $ref: '#/components/schemas/contacts-management.channel.instagram'
+        - $ref: '#/components/schemas/contacts-management.channel.twitter'
+        - $ref: '#/components/schemas/contacts-management.channel.meli'
+      discriminator:
+        propertyName: type
+        mapping:
+          whatsapp: '#/components/schemas/contacts-management.channel.whatsapp'
+          phone: '#/components/schemas/contacts-management.channel.phone'
+          email: '#/components/schemas/contacts-management.channel.email'
+          facebook: '#/components/schemas/contacts-management.channel.facebook'
+          instagram: '#/components/schemas/contacts-management.channel.instagram'
+          twitter: '#/components/schemas/contacts-management.channel.twitter'
+          meli: '#/components/schemas/contacts-management.channel.meli'
+    contacts-management.contact-channelList:
+      title: Contact
+      description: Contact information.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: ID of the contact.
+          type: string
+          readOnly: true
+        channelList:
+          title: Channel List
+          description: 'The recommended list to define contact communication channels. You can add any combination of supported channel types here (WhatsApp, Email, Phone, Facebook, Instagram, Twitter, Meli). channelList cannot be used together with channels.'
+          type: array
+          items:
+            $ref: '#/components/schemas/contacts-management.channel'
+        firstName:
+          title: First Name
+          description: Contact's name.
+          type: string
+          example: Rafael
+        lastName:
+          title: Last Name
+          description: Contact's surname.
+          type: string
+          example: Souza
+        birthdate:
+          title: Birthdate
+          description: Contact's birthdate
+          type: string
+          example: '1970-06-13'
+        customData:
+          title: Custom Data
+          description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).'
+          type: object
+          additionalProperties:
+            title: Value
+            description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.'
+            oneOf:
+              - type: string
+                title: String/Date
+                example: '2022-06-13'
+              - type: number
+                title: Number
+                example: 10
+              - type: boolean
+                title: Boolean
+                example: true
+        addresses:
+          title: Addresses
+          description: Contact's addresses.
+          type: array
+          items:
+            title: Address
+            description: Address object.
+            type: object
+            properties:
+              country:
+                title: Country
+                description: Address country.
+                type: string
+                example: Brazil
+              zipcode:
+                title: Zip Code
+                description: Address zip code.
+                type: string
+                example: 01310-300
+              state:
+                title: State
+                description: Address state or region.
+                type: string
+                example: SP
+              city:
+                title: City
+                description: Address city.
+                type: string
+                example: São Paulo
+              address:
+                title: Address
+                description: Street address.
+                type: string
+                example: Av. Paulista
+              streetNumber:
+                title: Street Number
+                description: Street number.
+                type: string
+                example: '2300'
+              neighborhood:
+                title: Neighborhood
+                description: Address neighborhood or address line 3.
+                type: string
+                example: Bela Vista
+        listIds:
+          title: List IDs
+          description: IDs of the lists the contact is included in.
+          type: array
+          items:
+            type: string
+          example:
+            - list-id-01
+            - list-id-02
+            - list-id-03
+        createdAt:
+          title: Created At
+          description: Timestamp of the contact creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+        updatedAt:
+          title: Updated At
+          description: Timestamp of the contact update.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+      required:
+        - channelList
     contacts-management.contact-custom-data-field:
       title: Contact Custom Data Field
       description: Definition of a field which can be provided on a contact data.
@@ -4698,9 +4950,347 @@ components:
           readOnly: true
         channels:
           title: Channels
-          description: Contact communication channels. At least one communication channel must be provided.
+          description: 'Contact communication channels. Status: Deprecated. This parameter is no longer recommended, but it remains fully functional. At least one communication channel must be provided. We highly encourage using the newer channelList parameter instead. Note: channels and channelList cannot be used together.'
           type: object
           minProperties: 1
+          deprecated: true
+          properties:
+            email:
+              title: E-mail
+              description: Contact's e-mail address.
+              type: string
+              example: contact@domain.example
+            mobile:
+              title: Mobile
+              description: Contact's mobile phone number.
+              type: string
+              pattern: '^[0-9]+$'
+              example: '5510888883333'
+            landline:
+              title: Landline
+              description: Contact's landline phone number.
+              type: string
+              pattern: '^[0-9]+$'
+              example: '551044443333'
+            facebook:
+              title: Facebook
+              description: Contact's Facebook ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._@-]+$'
+              example: user.name.123
+            instagram:
+              title: Instagram
+              description: Contact's Instagram ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._-]+$'
+              example: user_name
+            twitter:
+              title: Twitter
+              description: Contact's Twitter handle.
+              type: string
+              pattern: '^@[a-zA-Z0-9_]{1,15}$'
+              example: '@username'
+            meli:
+              title: Mercado Livre
+              description: Contact's Mercado Livre ID.
+              type: string
+              pattern: '^[a-zA-Z0-9._-]+$'
+              example: meliUser_123
+        firstName:
+          title: First Name
+          description: Contact's name.
+          type: string
+          example: Rafael
+        lastName:
+          title: Last Name
+          description: Contact's surname.
+          type: string
+          example: Souza
+        birthdate:
+          title: Birthdate
+          description: Contact's birthdate
+          type: string
+          example: '1970-06-13'
+        customData:
+          title: Custom Data
+          description: 'Set values for contact custom data fields created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).'
+          type: object
+          additionalProperties:
+            title: Value
+            description: 'Sets a value to a contact custom data field (the property name). Contact custom data fields are global across contacts and must be previously created on [contact data fields API](#tag/Contacts/paths/~1contacts-data-fields/post).<br>Remember that dates are serialized as `string`.'
+            oneOf:
+              - type: string
+                title: String/Date
+                example: '2022-06-13'
+              - type: number
+                title: Number
+                example: 10
+              - type: boolean
+                title: Boolean
+                example: true
+        addresses:
+          title: Addresses
+          description: Contact's addresses.
+          type: array
+          items:
+            title: Address
+            description: Address object.
+            type: object
+            properties:
+              country:
+                title: Country
+                description: Address country.
+                type: string
+                example: Brazil
+              zipcode:
+                title: Zip Code
+                description: Address zip code.
+                type: string
+                example: 01310-300
+              state:
+                title: State
+                description: Address state or region.
+                type: string
+                example: SP
+              city:
+                title: City
+                description: Address city.
+                type: string
+                example: São Paulo
+              address:
+                title: Address
+                description: Street address.
+                type: string
+                example: Av. Paulista
+              streetNumber:
+                title: Street Number
+                description: Street number.
+                type: string
+                example: '2300'
+              neighborhood:
+                title: Neighborhood
+                description: Address neighborhood or address line 3.
+                type: string
+                example: Bela Vista
+        listIds:
+          title: List IDs
+          description: IDs of the lists the contact is included in.
+          type: array
+          items:
+            type: string
+          example:
+            - list-id-01
+            - list-id-02
+            - list-id-03
+        createdAt:
+          title: Created At
+          description: Timestamp of the contact creation.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+        updatedAt:
+          title: Updated At
+          description: Timestamp of the contact update.
+          type: string
+          example: '2022-05-23T19:37:59.000Z'
+          readOnly: true
+      required:
+        - channels
+    contacts-management.channel.email:
+      title: E-mail
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - email
+          example: email
+        id:
+          title: ID
+          description: Contact's e-mail address.
+          type: string
+          pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+          example: contact@domain.example
+      required:
+        - type
+        - id
+    contacts-management.channel.facebook:
+      title: Facebook
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - facebook
+          example: facebook
+        id:
+          title: ID
+          description: Contact's Facebook ID.
+          type: string
+          pattern: '^[a-zA-Z0-9._@-]+$'
+          example: user.name.123
+      required:
+        - type
+        - id
+    contacts-management.channel.instagram:
+      title: Instagram
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - instagram
+          example: instagram
+        id:
+          title: ID
+          description: Contact's Instagram ID.
+          type: string
+          pattern: '^[a-zA-Z0-9._-]+$'
+          example: user_name
+        username:
+          title: Username
+          description: Username associated with the channel.
+          type: string
+          example: '@username'
+      required:
+        - type
+        - id
+    contacts-management.channel.meli:
+      title: Mercado Livre
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - meli
+          example: meli
+        id:
+          title: ID
+          description: Contact's Mercado Livre ID.
+          type: string
+          pattern: '^[a-zA-Z0-9._-]+$'
+          example: meliUser_123
+      required:
+        - type
+        - id
+    contacts-management.channel.phone:
+      title: Phone
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - phone
+          example: phone
+        id:
+          title: ID
+          description: Contact's phone number.
+          type: string
+          pattern: '^[0-9]+$'
+          example: '5510888883333'
+        idType:
+          title: ID Type
+          description: Type of the phone number. Values are case-insensitive.
+          type: string
+          enum:
+            - landline
+            - mobile
+            - LANDLINE
+            - MOBILE
+          example: mobile
+      required:
+        - type
+        - id
+        - idType
+    contacts-management.channel.twitter:
+      title: Twitter
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - twitter
+          example: twitter
+        id:
+          title: ID
+          description: Contact's Twitter handle.
+          type: string
+          pattern: '^@[a-zA-Z0-9_]{1,15}$'
+          example: '@username'
+      required:
+        - type
+        - id
+    contacts-management.channel.whatsapp:
+      title: WhatsApp
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Contact communication channel type.
+          type: string
+          enum:
+            - whatsapp
+          example: whatsapp
+        id:
+          title: ID
+          description: 'Contact''s WhatsApp identifier. Either a phone number (digits only) or a bsuid prefixed with the ISO 3166 alpha-2 two-letter country code and a period, followed by up to 128 alphanumeric characters (for example, US.13491208655302741918).'
+          type: string
+          pattern: '^([0-9]+|[A-Z]{2}\.[A-Za-z0-9]{1,128})$'
+          example: US.13491208655302741918
+        idType:
+          title: ID Type
+          description: Type of the WhatsApp ID.
+          type: string
+          enum:
+            - bsuid
+            - parent_bsuid
+          example: bsuid
+        username:
+          title: Username
+          description: Username associated with the channel.
+          type: string
+        senderId:
+          title: Sender ID
+          description: Sender identifier associated with the channel.
+          type: string
+      required:
+        - type
+        - id
+        - idType
+    contacts-management.responses.contact-response:
+      title: Contact
+      description: Contact information.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: ID of the contact.
+          type: string
+          readOnly: true
+        channelList:
+          title: Channel List
+          description: 'List of normalized contact communication channels. Note: preferably use channelList; channels and channelList cannot be used together'
+          type: array
+          items:
+            $ref: '#/components/schemas/contacts-management.channel'
+        channels:
+          title: Channels
+          description: 'Deprecated: use channelList instead. Contact communication channels. At least one communication channel must be provided.'
+          type: object
+          minProperties: 1
+          deprecated: true
           properties:
             email:
               title: E-mail
@@ -5153,6 +5743,14 @@ components:
                             - WORK
                           example: WORK
                     minItems: 0
+                  role:
+                    description: Role of the contact in the context of the interaction.
+                    type: string
+                    enum:
+                      - self
+                      - unknown
+                    example: self
+                    readOnly: true
                 required:
                   - name
               minItems: 1
@@ -6138,6 +6736,7 @@ components:
         - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
         - $ref: '#/components/schemas/content.whatsapp.flow'
+        - $ref: '#/components/schemas/content.whatsapp.request-contact-info'
         - $ref: '#/components/schemas/content.whatsapp.flow-response'
         - $ref: '#/components/schemas/content.whatsapp.product-list-order'
       discriminator:
@@ -6153,6 +6752,7 @@ components:
           product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
           flow: '#/components/schemas/content.whatsapp.flow'
+          contact_request: '#/components/schemas/content.whatsapp.request-contact-info'
           flow_response: '#/components/schemas/content.whatsapp.flow-response'
           product_list_order: '#/components/schemas/content.whatsapp.product-list-order'
     content.whatsapp.flow-response:
@@ -6351,6 +6951,7 @@ components:
         - $ref: '#/components/schemas/content.whatsapp.product'
         - $ref: '#/components/schemas/content.whatsapp.product-list'
         - $ref: '#/components/schemas/content.whatsapp.flow'
+        - $ref: '#/components/schemas/content.whatsapp.request-contact-info'
       discriminator:
         propertyName: type
         mapping:
@@ -6364,6 +6965,7 @@ components:
           product: '#/components/schemas/content.whatsapp.product'
           product_list: '#/components/schemas/content.whatsapp.product-list'
           flow: '#/components/schemas/content.whatsapp.flow'
+          contact_request: '#/components/schemas/content.whatsapp.request-contact-info'
     content.whatsapp.order-details-template:
       title: Order Details
       required:
@@ -6867,6 +7469,21 @@ components:
             - type
             - catalogId
             - productId
+    content.whatsapp.request-contact-info:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/content.base'
+        - type: object
+          properties:
+            type:
+              type: string
+              example: contact_request
+            body:
+              type: string
+              description: Text content to prompt the contact request.
+              example: Please share your contact info.
+          required:
+            - type
     content.whatsapp.unsupported:
       type: object
       allOf:
@@ -9152,6 +9769,7 @@ components:
             - v1
             - v2
           default: v2
+          example: v2
         createdAt:
           title: Creation timestamp
           description: Creation timestamp in ISO format
@@ -9356,6 +9974,7 @@ components:
             - v1
             - v2
           default: v2
+          example: v2
         createdAt:
           title: Creation timestamp
           description: Creation timestamp in ISO format
@@ -10700,6 +11319,7 @@ components:
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-mpm'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-coupon'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-request-contact-info'
                 required:
                   - type
                 discriminator:
@@ -10709,6 +11329,7 @@ components:
                     PHONE_NUMBER: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                     MPM: '#/components/schemas/templates.components.buttons.button-item-mpm'
                     COPY_CODE: '#/components/schemas/templates.components.buttons.button-item-coupon'
+                    REQUEST_CONTACT_INFO: '#/components/schemas/templates.components.buttons.button-item-request-contact-info'
           required:
             - items
     templates.components.buttons.base:
@@ -10736,6 +11357,7 @@ components:
             - SHARE_LOCATION
             - CALENDAR_EVENT
             - ORDER_DETAILS
+            - REQUEST_CONTACT_INFO
           type: string
       required:
         - type
@@ -10790,6 +11412,18 @@ components:
             - type
             - text
             - payload
+    templates.components.buttons.button-item-request-contact-info:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/templates.components.buttons.button-item-base'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - REQUEST_CONTACT_INFO
+          required:
+            - type
     templates.components.buttons.button-item-text:
       type: object
       properties:
@@ -10818,6 +11452,7 @@ components:
       description: |-
         Template buttons.
                         <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+                        <br>*Note: The QUICK_REPLIES collection is mutually exclusive with the use of the REQUEST_CONTACT_INFO button type, which is only supported within the ACTIONS block.*
       type: object
       oneOf:
         - $ref: '#/components/schemas/templates.components.buttons.actions'
@@ -10851,6 +11486,7 @@ components:
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
                   - $ref: '#/components/schemas/templates.components.buttons.button-item-url'
+                  - $ref: '#/components/schemas/templates.components.buttons.button-item-request-contact-info'
                 required:
                   - type
                 discriminator:
@@ -10862,6 +11498,7 @@ components:
                     PHONE_NUMBER: '#/components/schemas/templates.components.buttons.button-item-phone-number'
                     QUICK_REPLY: '#/components/schemas/templates.components.buttons.button-item-quick-reply'
                     URL: '#/components/schemas/templates.components.buttons.button-item-url'
+                    REQUEST_CONTACT_INFO: '#/components/schemas/templates.components.buttons.button-item-request-contact-info'
           required:
             - items
     templates.components.buttons.order-details:
@@ -11367,6 +12004,7 @@ components:
       description: |-
         Template footer.
                         <br>*Only applicable to [WhatsApp](#tag/WhatsApp) and [RCS](#tag/RCS) channels.*
+                        <br>*Note: Footer component is not allowed for templates containing the REQUEST_CONTACT_INFO button.*
       type: object
       required:
         - type
@@ -11386,6 +12024,7 @@ components:
       description: |-
         Template header. This will be used as subject in the [E-Mail](#tag/E-Mail) channel.
                         <br>*Only applicable to [WhatsApp](#tag/WhatsApp), [RCS](#tag/RCS) and [E-Mail](#tag/E-Mail) channels.*
+                        <br>*Note: Header component is not allowed for templates containing the REQUEST_CONTACT_INFO button.*
       type: object
       required:
         - type
@@ -11770,6 +12409,12 @@ components:
       description: The token identifier
       schema:
         type: string
+    contacts-management.channelList.id:
+      name: channelList.id
+      in: query
+      description: The contact identifier
+      schema:
+        type: string
     contacts-management.contactId:
       name: contactId
       in: path
@@ -12139,7 +12784,7 @@ security:
   - TOKEN: []
 tags:
   - name: Content types
-    description: |-
+    description: |
       ## Supported Channels
       For each content type covered in the next section, the following table reflects its support for each available channel:
 
@@ -12277,6 +12922,12 @@ tags:
       Flow message response. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
       <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.flow-response" showReadOnly={true} showWriteOnly{true} />
+
+      ## Request Contact Info
+      This content type is used to prompt the user to natively share their contact information within the channel.
+      <br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
+
+      <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.request-contact-info" showReadOnly={false} showWriteOnly={true} />
   - name: SMS
     description: |
       The SMS channel may be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials).
@@ -12898,7 +13549,9 @@ tags:
 
       ### ACTIONS
 
-      Allows your customer to visit a website, call a phone number or send a product catalog.
+      Allows your customer to visit a website, call a phone number, send a product catalog, or request contact information.
+
+      *Note: The `REQUEST_CONTACT_INFO` button is mutually exclusive. It cannot be combined with other button types, and templates using it must not contain `Header` or `Footer` components.*
 
       ### QUICK REPLIES
 
