@@ -1,6 +1,9 @@
 import { PathItemObject, OperationObject, ResponseObject, ResponsesObject } from 'openapi3-ts';
 import { ref as errorResponseRef } from '../../components/responses/error';
+import { ref as errorRef } from '../../components/schemas/error/base';
 import { ref as contactRef } from '../../components/schemas/contacts-management/contact';
+import { ref as contacChannelListRef } from '../../components/schemas/contacts-management/contact-channelList';
+import { ref as contacResponseRef } from '../../components/schemas/contacts-management/responses/contact-response';
 import { ref as listIdsRef } from '../../components/parameters/contacts-management/listIds';
 import { ref as pageRef } from '../../components/parameters/page-legacy';
 import { ref as sizeRef } from '../../components/parameters/size';
@@ -11,6 +14,7 @@ import { ref as facebookRef } from '../../components/parameters/contacts-managem
 import { ref as instagramRef } from '../../components/parameters/contacts-management/instagram';
 import { ref as twitterRef } from '../../components/parameters/contacts-management/twitter';
 import { ref as meliRef } from '../../components/parameters/contacts-management/meli';
+import { ref as channelListIdRef } from '../../components/parameters/contacts-management/channelList.id';
 
 const post: OperationObject = {
   summary: 'Create a new contact',
@@ -21,14 +25,120 @@ const post: OperationObject = {
     content: {
       'application/json': {
         schema: {
-          allOf: [
+          oneOf: [
             {
-              $ref: contactRef,
-            }, {
-              type: 'object',
-              required: ['channels'],
+              title: 'Contact with channelList',
+              allOf: [
+                { $ref: contacChannelListRef },
+              ],
+            },
+            {
+              title: 'Contact with channels',
+              allOf: [
+                { $ref: contactRef },
+              ],
             },
           ],
+        },
+        examples: {
+          preferred: {
+            summary: 'Create contact with channelList (preferred)',
+            value: {
+              'channelList': [
+                {
+                  'type': 'email',
+                  'id': 'contact@domain.example',
+                }, {
+                  'type': 'phone',
+                  'id': '5510888883333',
+                  'idType': 'mobile',
+                }, {
+                  'type': 'phone',
+                  'id': '551044443333',
+                  'idType': 'landline',
+                }, {
+                  'type': 'facebook',
+                  'id': '8484848448',
+                }, {
+                  'type': 'instagram',
+                  'id': '123123123123',
+                  'username': '@username',
+                }, {
+                  'type': 'twitter',
+                  'id': '@username',
+                }, {
+                  'type': 'meli',
+                  'id': 'meliUser_123',
+                }, {
+                  'type': 'whatsapp',
+                  'id': '181818181',
+                  'idType': 'bsuid',
+                  'username': '@username',
+                  'senderId': '123123123',
+                },
+              ],
+              'firstName': 'Rafael',
+              'lastName': 'Souza',
+              'birthdate': '1970-06-13',
+              'customData': {
+                'property1': '2022-06-13',
+                'property2': '2022-06-13',
+              },
+              'addresses': [
+                {
+                  'country': 'Brazil',
+                  'zipcode': '01310-300',
+                  'state': 'SP',
+                  'city': 'São Paulo',
+                  'address': 'Av. Paulista',
+                  'streetNumber': '2300',
+                  'neighborhood': 'Bela Vista',
+                },
+              ],
+              'listIds': [
+                'list-id-01',
+                'list-id-02',
+                'list-id-03',
+              ],
+            },
+          },
+          deprecated: {
+            summary: 'Create contact with channels (deprecated)',
+            value: {
+              'channels': {
+                'email': 'contact@domain.example',
+                'mobile': '5510888883333',
+                'landline': '551044443333',
+                'facebook': 'user.name.123',
+                'instagram': 'user_name',
+                'twitter': '@username',
+                'meli': 'meliUser_123',
+              },
+              'firstName': 'Rafael',
+              'lastName': 'Souza',
+              'birthdate': '1970-06-13',
+              'customData': {
+                'property1': '2022-06-13',
+                'property2': '2022-06-13',
+              },
+              'addresses': [
+                {
+                  'country': 'Brazil',
+                  'zipcode': '01310-300',
+                  'state': 'SP',
+                  'city': 'São Paulo',
+                  'address': 'Av. Paulista',
+                  'streetNumber': '2300',
+                  'neighborhood': 'Bela Vista',
+                },
+              ],
+              'listIds': [
+                'list-id-01',
+                'list-id-02',
+                'list-id-03',
+              ],
+            },
+          },
         },
       },
     },
@@ -39,7 +149,33 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: contactRef,
+            $ref: contacResponseRef,
+          },
+        },
+      },
+    } as ResponseObject,
+    400: {
+      description: 'Validation error. Returned when the request body is invalid',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: errorRef,
+          },
+          examples: {
+            mutuallyExclusiveFields: {
+              summary: 'channels and channelList sent together',
+              value: {
+                code: 'VALIDATION_ERROR',
+                message: 'Validation error',
+                'details': [
+                  {
+                    'code': 'MUTUALLY_EXCLUSIVE_FIELDS',
+                    'path': 'channelList',
+                    'message': "The fields 'channels' and 'channelList' cannot be used together. Note: 'channels' is deprecated, please migrate to 'channelList'.",
+                  },
+                ],
+              },
+            },
           },
         },
       },
@@ -58,6 +194,7 @@ const get: OperationObject = {
     { $ref: listIdsRef },
     { $ref: pageRef },
     { $ref: sizeRef },
+    { $ref: channelListIdRef },
     { $ref: emailRef },
     { $ref: mobileRef },
     { $ref: landlineRef },
@@ -74,7 +211,7 @@ const get: OperationObject = {
           schema: {
             type: 'array',
             items: {
-              $ref: contactRef,
+              $ref: contacResponseRef,
             },
           },
         },

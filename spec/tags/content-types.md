@@ -135,3 +135,9 @@ Flow message. This is a [WhatsApp](#tag/WhatsApp) channel content.
 Flow message response. This is supported only in the [webhook content](#section/Webhook-supported-channels).
 
 <SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.flow-response" showReadOnly={true} showWriteOnly{true} />
+
+## Request Contact Info
+This content type is used to prompt the user to natively share their contact information within the channel.
+<br>*Only applicable to [WhatsApp](#tag/WhatsApp) channel.*
+
+<SchemaDefinition schemaRef="#/components/schemas/content.whatsapp.request-contact-info" showReadOnly={false} showWriteOnly={true} />

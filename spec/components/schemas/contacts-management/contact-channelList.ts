@@ -1,5 +1,6 @@
 // tslint:disable:max-line-length
 import { SchemaObject } from 'openapi3-ts';
+import { ref as channelRef } from './channel';
 import { createComponentRef } from '../../../../utils/ref';
 
 const base: SchemaObject = {
@@ -13,61 +14,12 @@ const base: SchemaObject = {
       type: 'string',
       readOnly: true,
     },
-    channels: {
-      title: 'Channels',
-      description: 'Contact communication channels. Status: Deprecated. This parameter is no longer recommended, but it remains fully functional. At least one communication channel must be provided. We highly encourage using the newer channelList parameter instead. Note: channels and channelList cannot be used together.',
-      type: 'object',
-      minProperties: 1,
-      deprecated: true,
-      properties: {
-        email: {
-          title: 'E-mail',
-          description: 'Contact\'s e-mail address.',
-          type: 'string',
-          example: 'contact@domain.example',
-        },
-        mobile: {
-          title: 'Mobile',
-          description: 'Contact\'s mobile phone number.',
-          type: 'string',
-          pattern: '^[0-9]+$',
-          example: '5510888883333',
-        },
-        landline: {
-          title: 'Landline',
-          description: 'Contact\'s landline phone number.',
-          type: 'string',
-          pattern: '^[0-9]+$',
-          example: '551044443333',
-        },
-        facebook: {
-          title: 'Facebook',
-          description: 'Contact\'s Facebook ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._@-]+$',
-          example: 'user.name.123',
-        },
-        instagram: {
-          title: 'Instagram',
-          description: 'Contact\'s Instagram ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._-]+$',
-          example: 'user_name',
-        },
-        twitter: {
-          title: 'Twitter',
-          description: 'Contact\'s Twitter handle.',
-          type: 'string',
-          pattern: '^@[a-zA-Z0-9_]{1,15}$',
-          example: '@username',
-        },
-        meli: {
-          title: 'Mercado Livre',
-          description: 'Contact\'s Mercado Livre ID.',
-          type: 'string',
-          pattern: '^[a-zA-Z0-9._-]+$',
-          example: 'meliUser_123',
-        },
+    channelList: {
+      title: 'Channel List',
+      description: 'The recommended list to define contact communication channels. You can add any combination of supported channel types here (WhatsApp, Email, Phone, Facebook, Instagram, Twitter, Meli). channelList cannot be used together with channels.',
+      type: 'array',
+      items: {
+        $ref: channelRef,
       },
     },
     firstName: {
@@ -155,12 +107,6 @@ const base: SchemaObject = {
             type: 'string',
             example: '2300',
           },
-          /* unitNumber: {
-            title: 'Unit number',
-            description: 'Apartament, suite, unit number, etc... or address line 2.',
-            type: 'string',
-            example: 'Cj. 182',
-          }, */
           neighborhood: {
             title: 'Neighborhood',
             description: 'Address neighborhood or address line 3.',
@@ -194,7 +140,7 @@ const base: SchemaObject = {
       readOnly: true,
     },
   },
-  required: ['channels'],
+  required: ['channelList'],
 };
 
 export const ref = createComponentRef(__filename);
