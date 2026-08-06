@@ -122,6 +122,30 @@ The predefined order must be:
   - **Max Size**: `100`
   - **Requirements**: Will only be valid if a valid state exists.
 
+- **`identityDocument`**: Contact's personal identity document (CPF)
+  - **Required**: `false`
+  - **Type**: `string`
+  - **Format**: CPF, with or without formatting characters (e.g. `529.982.247-25` or `52998224725`)
+  - **Requirements**:
+    - Must have exactly 11 digits (after removing any non-digit characters).
+    - Must not be one of the 11 all-repeated-digit sequences (`00000000000`, `11111111111`, ..., `99999999999`).
+    - Must have valid check digits.
+  - This column is optional to include at all. Files with only the 15 columns above and files with this column added as the 16th are both accepted.
+
+### Custom Fields
+
+After the fixed columns above (and the optional `identityDocument` column, if included), you can append any number of additional columns to carry your organization's own custom contact fields, as defined in Contact Manager.
+
+- This API does not create custom fields. You can only use fields that already exist in Contact Manager for your organization. To see which fields are available, use the [Custom Data Fields API](https://zenvia.github.io/zenvia-openapi-spec/v2/#tag/Contact-Custom-Data-Fields/paths/~1contact-custom-data-fields/get).
+- The header (first line) of each custom column must contain the field's **key** or **name**, exactly as registered in Contact Manager.
+- Custom columns must come strictly after the fixed columns (and `identityDocument`, if present). A custom column placed among the fixed columns will cause the whole file to be rejected.
+- Any custom column whose header does not match an existing field will cause the whole file to be rejected.
+- Field type limits, enforced by Contact Manager:
+  - **Numeric fields**: integers only, up to 10 digits.
+  - **Date fields**: format `YYYY-MM-DD` only.
+  - **String fields**: up to 100 characters.
+- If a value does not match its field's type in Contact Manager, the contact is still created, but that specific field is left blank. The reason is reported in the row's `errorMessages` in the feedback file.
+
 #### CSV Lifecycle
 
 All CSV files stored in our infrastructure (imported CSVs and feedback CSVs) have and expiration date of 10 days.
