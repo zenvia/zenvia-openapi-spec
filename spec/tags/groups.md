@@ -1,0 +1,1 @@
+Groups are the teams agents are organized into for conversation distribution on NCA (Novo Conceito de Atendimento) accounts. Use these endpoints to list an organization's groups and to see which agents in a group are currently online.
