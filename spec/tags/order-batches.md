@@ -21,7 +21,7 @@ The predefined order must be:
 - **`externalPlatform`**: ERP identifier
   - **Required**: `true`
   - **Type**: `string`
-  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
 
 - **`externalId`**: Order ID on external platform
   - **Required**: `true`
