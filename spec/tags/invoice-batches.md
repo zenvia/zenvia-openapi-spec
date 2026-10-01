@@ -21,7 +21,7 @@ The predefined order must be:
 - `externalPlatform` - Source ERP identification
 - **Required**: `true`
   - **Type**: `string (uppercase and lowercase)`
-  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+  - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
 - `externalId` - Internal code from the source system
   - **Required**: `true`
   - **Type**: `string`
