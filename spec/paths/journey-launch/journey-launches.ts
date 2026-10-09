@@ -6,7 +6,7 @@ import { ref as journeyLaunchResponseRef } from '../../components/schemas/journe
 const post: OperationObject = {
   summary: 'Launch a journey',
   description: 'Launches a ZStudio journey for a contact/target.',
-  tags: ['Journey Launch'],
+  tags: ['Journey Launches'],
   requestBody: {
     required: true,
     content: {
