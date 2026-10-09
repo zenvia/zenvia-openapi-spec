@@ -67,7 +67,7 @@ const post: OperationObject = {
                 'orgId': '5c408dd6-a39a-4eb1-b3b0-bf6f2f34ea39',
                 'journeyId': 'journey-01',
                 'externalId': 'launch-01',
-                'target': {
+                'contact': {
                   'channelList': [
                     {
                       'type': 'phone',
