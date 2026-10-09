@@ -24,6 +24,7 @@ const tagDefinitions: {
   { name: 'Flow Report', file: 'flow-report' },
   { name: 'Files', file: 'files' },
   { name: 'Marketing Automations', file: 'marketing-automations' },
+  { name: 'Journey Launch', file: 'journey-launch' },
   { name: 'Status Groups', file: 'status-groups' },
   { name: 'Contact Batches', file: 'contact-batches' },
   { name: 'Product Batches', file: 'product-batches' },
