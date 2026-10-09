@@ -3,7 +3,7 @@ import { createComponentRef } from '../../../../utils/ref';
 
 const journeyLaunchResponse: SchemaObject = {
   title: 'Journey Launch Response',
-  description: 'The journey launch created for a contact/target.',
+  description: 'The journey launch created for a contact.',
   type: 'object',
   properties: {
     id: {
@@ -32,11 +32,10 @@ const journeyLaunchResponse: SchemaObject = {
       type: 'string',
       example: 'launch-01',
     },
-    target: {
-      title: 'Target',
-      description: 'The contact in ZStudio\'s internal target format, passed through as received by the backend.',
+    contact: {
+      title: 'Contact',
+      description: 'The contact the journey was launched for, as received in the request. See the [Contacts API](#tag/Contacts) for the available fields.',
       type: 'object',
-      additionalProperties: true,
     },
     context: {
       title: 'Context',
