@@ -16,12 +16,16 @@ const post: OperationObject = {
         },
         examples: {
           default: {
-            summary: 'Launch a journey with nested context',
+            summary: 'Launch a journey with context values of different types',
             value: {
               'journeyId': 'journey-01',
               'externalId': 'launch-01',
               'versionTag': 'v1',
               'context': {
+                'nome': 'Rafael',
+                'idade': 32,
+                'clienteVip': true,
+                'tags': ['novo', 'promocao'],
                 'cartao': {
                   'bandeira': 'elo',
                 },
@@ -75,6 +79,10 @@ const post: OperationObject = {
                   'lastName': 'Souza',
                 },
                 'context': {
+                  'nome': 'Rafael',
+                  'idade': 32,
+                  'clienteVip': true,
+                  'tags': ['novo', 'promocao'],
                   'cartao': {
                     'bandeira': 'elo',
                   },

@@ -27,12 +27,16 @@ const journeyLaunch: SchemaObject = {
     },
     context: {
       title: 'Context',
-      description: 'Context values referenced by the journey\'s steps. Accepts arbitrarily nested objects and arrays.',
+      description: 'Context values referenced by the journey\'s steps. Each value can be a string, a number, a boolean, an array or a nested object.',
       type: 'object',
       additionalProperties: {
         $ref: contextValueRef,
       },
       example: {
+        'nome': 'Rafael',
+        'idade': 32,
+        'clienteVip': true,
+        'tags': ['novo', 'promocao'],
         'cartao': {
           'bandeira': 'elo',
         },
