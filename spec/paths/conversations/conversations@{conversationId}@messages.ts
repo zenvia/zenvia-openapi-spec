@@ -1,5 +1,5 @@
 import { PathItemObject, OperationObject, ResponsesObject, ResponseObject } from 'openapi3-ts';
-import { ref as messageSchemaRef } from '../../components/schemas/conversations/message';
+import { ref as messageResponseSchemaRef } from '../../components/schemas/conversations/message-response';
 import { ref as sendMessageRequestRef } from '../../components/schemas/conversations/send-message-request';
 import { ref as conversationId } from '../../components/parameters/conversations/conversationId';
 import { ref as errorResponseRef } from '../../components/responses/error';
@@ -23,7 +23,7 @@ const post: OperationObject = {
       content: {
         'application/json': {
           schema: {
-            $ref: messageSchemaRef,
+            $ref: messageResponseSchemaRef,
           },
         },
       },
