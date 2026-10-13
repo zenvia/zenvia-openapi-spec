@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
+import { ref as messageContentRef } from './message-content';
 
 const message: SchemaObject = {
   title: 'Message',
@@ -47,20 +48,7 @@ const message: SchemaObject = {
       type: 'array',
       readOnly: true,
       items: {
-        type: 'object',
-        properties: {
-          type: {
-            title: 'Type',
-            type: 'string',
-            enum: ['text', 'template', 'file', 'location', 'note'],
-          },
-          payload: {
-            title: 'Payload',
-            description: 'The content payload, shaped according to type.',
-            type: 'object',
-          },
-        },
-        required: ['type'],
+        $ref: messageContentRef,
       },
     },
     timestamp: {

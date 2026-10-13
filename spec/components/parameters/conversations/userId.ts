@@ -1,15 +1,15 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const closeReason: ParameterObject = {
-  name: 'closeReason',
+const userId: ParameterObject = {
+  name: 'userId',
   in: 'query',
   required: false,
-  description: 'Filter closed conversations by their close reason key.',
+  description: 'Filter by the assigned agent identifier.',
   schema: {
     type: 'string',
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default closeReason;
+export default userId;
