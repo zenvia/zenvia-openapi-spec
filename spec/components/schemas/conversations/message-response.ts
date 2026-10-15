@@ -45,6 +45,7 @@ const messageResponse: SchemaObject = {
           type: 'string',
           enum: [
             'whatsapp', 'sms', 'facebook', 'rcs', 'telegram', 'voice', 'gbm', 'instagram', 'email', 'webchat',
+            'whatsapp_call', 'meli', 'claim', 'questions', 'support',
           ],
           readOnly: true,
         },
