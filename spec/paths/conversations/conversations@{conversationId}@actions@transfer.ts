@@ -21,6 +21,13 @@ const post: OperationObject = {
   responses: {
     200: {
       description: 'Conversation transferred to a user',
+      content: {
+        'application/json': {
+          schema: {
+            $ref: conversationSchemaRef,
+          },
+        },
+      },
     } as ResponseObject,
     202: {
       description: 'Conversation transferred to a group and queued for distribution',

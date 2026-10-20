@@ -1,11 +1,11 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const groupIds: ParameterObject = {
-  name: 'groupIds',
+const groupId: ParameterObject = {
+  name: 'groupId',
   in: 'query',
   required: false,
-  description: 'Filter by one or more group identifiers.',
+  description: 'Filter by one or more group identifiers (repeat the parameter for multiple values, e.g. groupId=a&groupId=b).',
   schema: {
     type: 'array',
     items: {
@@ -15,4 +15,4 @@ const groupIds: ParameterObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default groupIds;
+export default groupId;
