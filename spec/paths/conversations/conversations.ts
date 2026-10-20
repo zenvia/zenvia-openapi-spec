@@ -8,14 +8,13 @@ import {
 import { ref as conversationSchemaRef } from '../../components/schemas/conversations/conversation';
 import { ref as createRequestRef } from '../../components/schemas/conversations/create-request';
 import { ref as errorResponseRef } from '../../components/responses/error';
-import { ref as ids } from '../../components/parameters/conversations/ids';
+import { ref as id } from '../../components/parameters/conversations/id';
 import { ref as status } from '../../components/parameters/conversations/status';
-import { ref as groupIds } from '../../components/parameters/conversations/groupIds';
+import { ref as groupId } from '../../components/parameters/conversations/groupId';
 import { ref as contactId } from '../../components/parameters/conversations/contactId';
 import { ref as userId } from '../../components/parameters/conversations/userId';
 import { ref as search } from '../../components/parameters/conversations/search';
-import { ref as sortBy } from '../../components/parameters/conversations/sortBy';
-import { ref as direction } from '../../components/parameters/conversations/direction';
+import { ref as sort } from '../../components/parameters/conversations/sort';
 import { ref as cursor } from '../../components/parameters/conversations/cursor';
 import { ref as limit } from '../../components/parameters/conversations/limit';
 
@@ -23,14 +22,13 @@ const get: OperationObject = {
   description: 'List conversations for the organization, optionally filtered.',
   tags: ['Conversations'],
   parameters: [
-    { $ref: ids },
+    { $ref: id },
     { $ref: status },
-    { $ref: groupIds },
+    { $ref: groupId },
     { $ref: contactId },
     { $ref: userId },
     { $ref: search },
-    { $ref: sortBy },
-    { $ref: direction },
+    { $ref: sort },
     { $ref: cursor },
     { $ref: limit },
   ],

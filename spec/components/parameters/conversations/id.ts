@@ -1,11 +1,11 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const ids: ParameterObject = {
-  name: 'ids',
+const id: ParameterObject = {
+  name: 'id',
   in: 'query',
   required: false,
-  description: 'Filter by one or more conversation identifiers.',
+  description: 'Filter by one or more conversation identifiers (repeat the parameter for multiple values, e.g. id=a&id=b).',
   schema: {
     type: 'array',
     items: {
@@ -15,4 +15,4 @@ const ids: ParameterObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default ids;
+export default id;
