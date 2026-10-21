@@ -1,8 +1,8 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const limit: ParameterObject = {
-  name: 'limit',
+const size: ParameterObject = {
+  name: 'size',
   in: 'query',
   required: false,
   description: 'The maximum number of results per page.',
@@ -13,4 +13,4 @@ const limit: ParameterObject = {
 };
 
 export const ref = createComponentRef(__filename);
-export default limit;
+export default size;
