@@ -15,8 +15,8 @@ import { ref as contactId } from '../../components/parameters/conversations/cont
 import { ref as userId } from '../../components/parameters/conversations/userId';
 import { ref as search } from '../../components/parameters/conversations/search';
 import { ref as sort } from '../../components/parameters/conversations/sort';
-import { ref as cursor } from '../../components/parameters/conversations/cursor';
-import { ref as limit } from '../../components/parameters/conversations/limit';
+import { ref as page } from '../../components/parameters/conversations/page';
+import { ref as size } from '../../components/parameters/conversations/size';
 
 const get: OperationObject = {
   description: 'List conversations for the organization, optionally filtered.',
@@ -29,8 +29,8 @@ const get: OperationObject = {
     { $ref: userId },
     { $ref: search },
     { $ref: sort },
-    { $ref: cursor },
-    { $ref: limit },
+    { $ref: page },
+    { $ref: size },
   ],
   responses: {
     200: {
@@ -46,24 +46,25 @@ const get: OperationObject = {
         },
       },
       headers: {
-        'x-has-next': {
+        'x-page': {
           schema: {
-            description: 'Whether there is a next page.',
+            description: 'The page number that was applied.',
             type: 'string',
-            example: 'true',
+            example: '1',
           },
         },
-        'x-limit': {
+        'x-page-size': {
           schema: {
             description: 'The page size that was applied.',
             type: 'string',
             example: '20',
           },
         },
-        'x-next-cursor': {
+        'x-total': {
           schema: {
-            description: 'Opaque cursor for the next page, present only when x-has-next is true.',
+            description: 'The total number of conversations matching the filters.',
             type: 'string',
+            example: '134',
           },
         },
       },

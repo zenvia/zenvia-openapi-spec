@@ -1,15 +1,16 @@
 import { ParameterObject } from 'openapi3-ts';
 import { createComponentRef } from '../../../../utils/ref';
 
-const cursor: ParameterObject = {
-  name: 'cursor',
+const page: ParameterObject = {
+  name: 'page',
   in: 'query',
   required: false,
-  description: 'Opaque pagination cursor, as returned in the x-next-cursor response header of a previous call.',
+  description: 'The page number to retrieve (1-based). Defaults to 1.',
   schema: {
-    type: 'string',
+    type: 'integer',
+    minimum: 1,
   },
 };
 
 export const ref = createComponentRef(__filename);
-export default cursor;
+export default page;
