@@ -16,6 +16,16 @@ const base: SchemaObject = {
       type: 'string',
       description: 'Identifier of the contact associated with the conversation',
     },
+    groupId: {
+      title: 'groupId',
+      type: 'string',
+      description: 'Identifier of the group associated with the conversation. Absent when the conversation has not yet been routed to a group',
+    },
+    userId: {
+      title: 'userId',
+      type: 'string',
+      description: 'Identifier of the user (agent) associated with the conversation. Absent when the conversation does not yet have an agent assigned',
+    },
   },
     required: ['id', 'contactId'],
 
