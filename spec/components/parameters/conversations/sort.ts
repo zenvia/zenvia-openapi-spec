@@ -5,7 +5,7 @@ const sort: ParameterObject = {
   name: 'sort',
   in: 'query',
   required: false,
-  description: 'The field to sort by, optionally followed by ",asc" or ",desc" (e.g. sort=createdAt,desc). Defaults to ascending. Only a single field is supported.',
+  description: 'The field to sort by, optionally followed by ",asc" or ",desc" (lowercase only, e.g. sort=createdAt,desc). If omitted entirely, defaults to createdAt,desc; if a field is given with no direction, defaults to ascending. Only a single field is supported.',
   schema: {
     type: 'string',
   },
