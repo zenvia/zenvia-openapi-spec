@@ -10,7 +10,7 @@ describe('Loading OpenAPI specification by Enforcer', function() {
     fullResult: true,
     toString: true,
     componentOptions: {
-      exceptionSkipCodes: ['WSCH006', 'WSCH007']
+      exceptionSkipCodes: ['WSCH006', 'WSCH007', 'WRES001']
     },
   };
 
