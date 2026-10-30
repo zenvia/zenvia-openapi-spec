@@ -3,3 +3,5 @@ web_deploy
 .vscode
 /nbproject/
 /tmp/
+.serena
+.headroom*
