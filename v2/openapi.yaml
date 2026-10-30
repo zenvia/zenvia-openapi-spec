@@ -2404,6 +2404,157 @@ paths:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/contacts-management.contactId'
+  /conversations:
+    get:
+      description: 'List conversations for the organization, optionally filtered.'
+      tags:
+        - Conversations
+      parameters:
+        - $ref: '#/components/parameters/conversations.id'
+        - $ref: '#/components/parameters/conversations.status'
+        - $ref: '#/components/parameters/conversations.groupId'
+        - $ref: '#/components/parameters/conversations.contactId'
+        - $ref: '#/components/parameters/conversations.userId'
+        - $ref: '#/components/parameters/conversations.search'
+        - $ref: '#/components/parameters/conversations.sort'
+        - $ref: '#/components/parameters/conversations.page'
+        - $ref: '#/components/parameters/conversations.size'
+      responses:
+        '200':
+          description: Conversations available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/conversations.conversation'
+          headers:
+            x-page:
+              schema:
+                description: The page number that was applied.
+                type: string
+                example: '1'
+            x-page-size:
+              schema:
+                description: The page size that was applied.
+                type: string
+                example: '20'
+            x-total:
+              schema:
+                description: The total number of conversations matching the filters.
+                type: string
+                example: '134'
+        default:
+          $ref: '#/components/responses/error'
+    post:
+      description: 'Create a conversation for a contact, or resume an existing one for the same contact.'
+      tags:
+        - Conversations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversations.create-request'
+      responses:
+        '201':
+          description: Conversation created (or resumed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversations.conversation'
+        default:
+          $ref: '#/components/responses/error'
+  '/conversations/{conversationId}/actions/archive':
+    post:
+      description: Archive (close) the conversation with the given close reason.
+      tags:
+        - Conversations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversations.archive-request'
+      responses:
+        '200':
+          description: Conversation archived
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/conversations.conversationId'
+  '/conversations/{conversationId}/actions/transfer':
+    post:
+      description: Transfer the conversation to a user or a group. Transferring to a user is synchronous and answers 200; transferring to a group answers 202 and the conversation is queued for distribution.
+      tags:
+        - Conversations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversations.transfer-request'
+      responses:
+        '200':
+          description: Conversation transferred to a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversations.conversation'
+        '202':
+          description: Conversation transferred to a group and queued for distribution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversations.conversation'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/conversations.conversationId'
+  '/conversations/{conversationId}/messages':
+    post:
+      description: 'Send an outbound message on the conversation, as the acting agent. Fails with SESSION_REQUIRED when there is no active messaging session with the contact.'
+      tags:
+        - Conversations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversations.send-message-request'
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversations.message-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/conversations.conversationId'
+  '/conversations/{conversationId}/notes':
+    post:
+      description: 'Add an internal note to the conversation. A note is a message with direction INTERNAL, never delivered to the contact.'
+      tags:
+        - Conversations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversations.send-note-request'
+      responses:
+        '201':
+          description: Note added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversations.message-response'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/conversations.conversationId'
   /files:
     post:
       summary: Create a new file
@@ -2698,6 +2849,46 @@ paths:
           $ref: '#/components/responses/error'
     parameters:
       - $ref: '#/components/parameters/flowBatchId'
+  /groups:
+    get:
+      description: List the organization's enabled groups.
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: Groups available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/groups.group'
+          headers:
+            x-total:
+              schema:
+                description: The total number of groups.
+                type: string
+                example: '5'
+        default:
+          $ref: '#/components/responses/error'
+  '/groups/{groupId}/agents':
+    get:
+      description: 'List the agents belonging to a group, with their current availability.'
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: Agents available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/groups.agent'
+        default:
+          $ref: '#/components/responses/error'
+    parameters:
+      - $ref: '#/components/parameters/groups.groupId'
   /invoice-batches:
     post:
       summary: Import a batch of invoices
@@ -7671,6 +7862,358 @@ components:
         - merchantName
         - key
         - keyType
+    conversations.archive-request:
+      title: Archive conversation request
+      description: Archives (closes) the conversation with the given close reason.
+      type: object
+      properties:
+        reason:
+          title: Reason
+          description: 'The close reason key, as configured for the conversation''s group. Fails with CLOSE_REASON_UNRESOLVABLE if the key is not valid for the organization.'
+          type: string
+      required:
+        - reason
+    conversations.conversation:
+      title: Conversation
+      description: A conversation between an agent (or bot) and a contact on an NCA (Novo Conceito de Atendimento) account.
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The conversation identifier.
+          type: string
+          readOnly: true
+        status:
+          title: Status
+          description: The current status of the conversation.
+          type: string
+          enum:
+            - CONVERSATION_CREATED
+            - QUEUED
+            - STARTED
+            - CLAIMED
+            - DISTRIBUTED_TO_USER
+            - TRANSFERRED
+            - SNOOZED
+            - UNSNOOZED
+            - CLOSED
+          readOnly: true
+          example: STARTED
+        statusTimestamp:
+          title: Status timestamp
+          description: 'The date and time of the last status change, in ISO 8601 format.'
+          type: string
+          format: date-time
+          readOnly: true
+        channel:
+          title: Channel
+          description: The channel the conversation is happening on.
+          type: string
+          enum:
+            - whatsapp
+            - sms
+            - facebook
+            - rcs
+            - telegram
+            - voice
+            - gbm
+            - instagram
+            - email
+            - webchat
+            - whatsapp_call
+            - meli
+            - claim
+            - questions
+            - support
+          readOnly: true
+        to:
+          title: To
+          description: The contact's channel address.
+          type: string
+          readOnly: true
+        from:
+          title: From
+          description: The channel address the conversation is being served from.
+          type: string
+          readOnly: true
+        contactId:
+          title: Contact id
+          description: 'The identifier of the linked contact, when there is one. The webchat channel may open a conversation without a linked contact.'
+          type: string
+          readOnly: true
+        groupId:
+          title: Group id
+          description: The identifier of the group currently assigned to the conversation.
+          type: string
+          readOnly: true
+        userId:
+          title: User id
+          description: The identifier of the agent currently assigned to the conversation.
+          type: string
+          readOnly: true
+        createdAt:
+          title: Created at
+          description: 'The date and time the conversation was created, in ISO 8601 format.'
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - status
+        - statusTimestamp
+        - channel
+    conversations.create-request:
+      title: Create conversation request
+      description: 'Creates a new conversation for a contact identified by their channel address, or resumes an existing one for the same contact.'
+      type: object
+      properties:
+        groupId:
+          title: Group id
+          description: The group the conversation should be queued or assigned to.
+          type: string
+        agentId:
+          title: Agent id
+          description: Optional agent to directly assign the conversation to.
+          type: string
+        channelAddress:
+          title: Channel address
+          description: 'The contact''s channel address (a phone number or an e-mail address, depending on channelType).'
+          type: string
+          example: '5511999999999'
+        channelType:
+          title: Channel type
+          description: The type of channel address supplied.
+          type: string
+          enum:
+            - PHONE
+            - EMAIL
+        firstName:
+          title: First name
+          description: The contact's first name.
+          type: string
+        lastName:
+          title: Last name
+          description: The contact's last name.
+          type: string
+      required:
+        - groupId
+        - channelAddress
+        - channelType
+        - firstName
+    conversations.message-content:
+      title: Message content
+      description: A message content item.
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+          enum:
+            - text
+            - template
+            - file
+            - location
+            - note
+        payload:
+          title: Payload
+          description: 'The content payload, shaped according to type.'
+          type: object
+      required:
+        - type
+    conversations.message-response:
+      title: Message sent
+      description: 'A message exchanged on a conversation, with its content (type/payload) returned at the root level. A note is a message with direction INTERNAL, never delivered to the contact.'
+      allOf:
+        - $ref: '#/components/schemas/conversations.message-content'
+        - type: object
+          properties:
+            id:
+              title: Id
+              description: The message identifier.
+              type: string
+              readOnly: true
+            from:
+              title: From
+              description: The channel address the message was sent from.
+              type: string
+              readOnly: true
+            to:
+              title: To
+              description: The channel address the message was sent to.
+              type: string
+              readOnly: true
+            direction:
+              title: Direction
+              description: 'IN for a message received from the contact, OUT for a message sent to the contact, INTERNAL for a note visible only to agents.'
+              type: string
+              enum:
+                - IN
+                - OUT
+                - INTERNAL
+              readOnly: true
+              example: OUT
+            channel:
+              title: Channel
+              description: The channel the message was exchanged on.
+              type: string
+              enum:
+                - whatsapp
+                - sms
+                - facebook
+                - rcs
+                - telegram
+                - voice
+                - gbm
+                - instagram
+                - email
+                - webchat
+                - whatsapp_call
+                - meli
+                - claim
+                - questions
+                - support
+              readOnly: true
+            timestamp:
+              title: Timestamp
+              description: 'The date and time the message was created, in ISO 8601 format.'
+              type: string
+              format: date-time
+              readOnly: true
+          required:
+            - id
+            - direction
+            - channel
+            - timestamp
+    conversations.message:
+      title: Message
+      description: 'A message exchanged on a conversation. A note is a message with direction INTERNAL, never delivered to the contact.'
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The message identifier.
+          type: string
+          readOnly: true
+        from:
+          title: From
+          description: The channel address the message was sent from.
+          type: string
+          readOnly: true
+        to:
+          title: To
+          description: The channel address the message was sent to.
+          type: string
+          readOnly: true
+        direction:
+          title: Direction
+          description: 'IN for a message received from the contact, OUT for a message sent to the contact, INTERNAL for a note visible only to agents.'
+          type: string
+          enum:
+            - IN
+            - OUT
+            - INTERNAL
+          readOnly: true
+          example: OUT
+        channel:
+          title: Channel
+          description: The channel the message was exchanged on.
+          type: string
+          enum:
+            - whatsapp
+            - sms
+            - facebook
+            - rcs
+            - telegram
+            - voice
+            - gbm
+            - instagram
+            - email
+            - webchat
+            - whatsapp_call
+            - meli
+            - claim
+            - questions
+            - support
+          readOnly: true
+        contents:
+          title: Contents
+          description: The message content items.
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/conversations.message-content'
+        timestamp:
+          title: Timestamp
+          description: 'The date and time the message was created, in ISO 8601 format.'
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - direction
+        - channel
+        - contents
+        - timestamp
+    conversations.send-message-request:
+      title: Send message request
+      description: 'Sends an outbound message to the contact, as the acting agent. Fails with SESSION_REQUIRED if there is no active messaging session with the contact.'
+      type: object
+      properties:
+        type:
+          title: Type
+          description: The content type to send.
+          type: string
+          enum:
+            - text
+            - template
+            - file
+            - location
+          example: text
+        payload:
+          title: Payload
+          description: 'The content payload, shaped according to type (e.g. { "text": "..." } for type text, { "templateId": "..." } for type template).'
+          type: object
+        replyTo:
+          title: Reply to
+          description: Optional identifier of the message being replied to.
+          type: string
+      required:
+        - type
+        - payload
+    conversations.send-note-request:
+      title: Send note request
+      description: Adds an internal note to the conversation. A note is never delivered to the contact and does not require an active messaging session.
+      type: object
+      properties:
+        text:
+          title: Text
+          description: The note text. Must not be empty.
+          type: string
+      required:
+        - text
+    conversations.transfer-request:
+      title: Transfer conversation request
+      description: Transfers the conversation to another user or group. Transferring to a user answers 200 synchronously; transferring to a group answers 202 and the conversation is queued for distribution.
+      type: object
+      properties:
+        type:
+          title: Type
+          description: The transfer target type.
+          type: string
+          enum:
+            - USER
+            - GROUP
+        userId:
+          title: User id
+          description: The destination agent. Required when type is USER.
+          type: string
+        groupId:
+          title: Group id
+          description: 'The destination group. Always required: when type is USER, it is the group the destination agent is being transferred within.'
+          type: string
+      required:
+        - type
+        - groupId
     error.base:
       title: Error Object
       description: This is a Error object model
@@ -8230,6 +8773,14 @@ components:
           title: contactId
           type: string
           description: Identifier of the contact associated with the conversation
+        groupId:
+          title: groupId
+          type: string
+          description: Identifier of the group associated with the conversation. Absent when the conversation has not yet been routed to a group
+        userId:
+          title: userId
+          type: string
+          description: Identifier of the user (agent) associated with the conversation. Absent when the conversation does not yet have an agent assigned
       required:
         - id
         - contactId
@@ -8927,6 +9478,73 @@ components:
           type: string
           description: The schedule limit date.
           example: '2021-08-03T16:26:23.616Z'
+    groups.agent:
+      title: Agent
+      description: 'An agent belonging to a group, with their current availability.'
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The agent identifier.
+          type: string
+          readOnly: true
+        firstName:
+          title: First name
+          type: string
+          readOnly: true
+        lastName:
+          title: Last name
+          type: string
+          readOnly: true
+        available:
+          title: Available
+          description: Whether the agent is currently available to receive conversations.
+          type: boolean
+          readOnly: true
+        status:
+          title: Status
+          description: The agent's current status.
+          type: string
+          enum:
+            - AVAILABLE
+            - PRE_PAUSE
+            - PAUSE
+            - UNAVAILABLE
+          readOnly: true
+      required:
+        - id
+        - firstName
+        - available
+        - status
+    groups.group:
+      title: Group
+      description: A team agents are organized into for conversation distribution.
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The group identifier.
+          type: string
+          readOnly: true
+        name:
+          title: Name
+          description: The group name.
+          type: string
+          readOnly: true
+        displayName:
+          title: Display name
+          description: 'A human-friendly name for the group, when configured.'
+          type: string
+          readOnly: true
+        enabled:
+          title: Enabled
+          description: Whether the group is enabled. Disabled groups are never returned by the list endpoint.
+          type: boolean
+          readOnly: true
+      required:
+        - id
+        - name
+        - enabled
     marketing-automations.marketing-automation-response:
       title: Marketing Automation Response Object
       description: Response from an marketing automation run
@@ -12498,6 +13116,84 @@ components:
       description: The Twitter handle to filter contact
       schema:
         type: string
+    conversations.contactId:
+      name: contactId
+      in: query
+      required: false
+      description: Filter by the linked contact identifier.
+      schema:
+        type: string
+    conversations.conversationId:
+      name: conversationId
+      in: path
+      required: true
+      description: The conversation identifier.
+      schema:
+        type: string
+    conversations.groupId:
+      name: groupId
+      in: query
+      required: false
+      description: 'Filter by one or more group identifiers (repeat the parameter for multiple values, e.g. groupId=a&groupId=b).'
+      schema:
+        type: array
+        items:
+          type: string
+    conversations.id:
+      name: id
+      in: query
+      required: false
+      description: 'Filter by one or more conversation identifiers (repeat the parameter for multiple values, e.g. id=a&id=b).'
+      schema:
+        type: array
+        items:
+          type: string
+    conversations.page:
+      name: page
+      in: query
+      required: false
+      description: 'The page number to retrieve (1-based). Defaults to 1, max: 1000.'
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+    conversations.search:
+      name: search
+      in: query
+      required: false
+      description: Free-text search over the conversation and its contact.
+      schema:
+        type: string
+    conversations.size:
+      name: size
+      in: query
+      required: false
+      description: 'The maximum number of results per page (default: 10, max: 100).'
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    conversations.sort:
+      name: sort
+      in: query
+      required: false
+      description: 'The field to sort by, optionally followed by ",asc" or ",desc" (lowercase only, e.g. sort=createdAt,desc). If omitted entirely, defaults to createdAt,desc; if a field is given with no direction, defaults to ascending. Only a single field is supported.'
+      schema:
+        type: string
+    conversations.status:
+      name: status
+      in: query
+      required: false
+      description: Filter by conversation status.
+      schema:
+        type: string
+    conversations.userId:
+      name: userId
+      in: query
+      required: false
+      description: Filter by the assigned agent identifier.
+      schema:
+        type: string
     files.endTimestamp:
       name: endTimestamp
       in: query
@@ -12530,6 +13226,13 @@ components:
       schema:
         type: string
       example: '2022-02-21T10:30:25Z'
+    groups.groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The group identifier.
+      schema:
+        type: string
     reports.flow.dispatchId:
       name: dispatchId
       in: query
@@ -13618,7 +14321,7 @@ tags:
       - **`externalPlatform`**: ERP identifier
         - **Required**: `false`
         - **Type**: `string`
-        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
 
       - **`externalId`**: Contact's id
         - **Required**: `false`
@@ -13806,7 +14509,7 @@ tags:
       - **`externalPlatform`**: ERP identifier
         - **Required**: `true`
         - **Type**: `string`
-        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
 
       - **`externalId`**: Product ID on external platform
         - **Required**: `true`
@@ -13935,7 +14638,7 @@ tags:
       - **`externalPlatform`**: ERP identifier
         - **Required**: `true`
         - **Type**: `string`
-        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
 
       - **`externalId`**: Order ID on external platform
         - **Required**: `true`
@@ -14163,7 +14866,7 @@ tags:
       - `externalPlatform` - Source ERP identification
       - **Required**: `true`
         - **Type**: `string (uppercase and lowercase)`
-        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`
+        - **Enum**: `OMIE`, `BLING`, `TINY`, `MICROVIX`, `WBUY`, `OTHER`, `SENSEDATA`
       - `externalId` - Internal code from the source system
         - **Required**: `true`
         - **Type**: `string`
@@ -14363,6 +15066,26 @@ tags:
       `FAILED` - The processment of the batch was unsuccessful. The data was not send to the Contact Manager Database.
 
       On both cenarios, a feedback will be saved. You can check him using the GET requests to check it's URL.
+  - name: Conversations
+    description: |
+      Conversations lets external integrators manage NCA (Novo Conceito de Atendimento) sales conversations programmatically: creating conversations, listing them, sending outbound messages and internal notes, archiving and transferring them to another user or group.
+
+      This surface is exclusively for organizations running on NCA. Legado/ZCC accounts continue to be served by the Sales API (`sales.zenvia.com`).
+
+      ## Notes vs. messages
+
+      A note is not a distinct entity — it is a message sent with `direction: INTERNAL`, never delivered to the contact. Use `POST /conversations/{conversationId}/notes` as the ergonomic route for it; it is translated internally to the same message contract used by `POST /conversations/{conversationId}/messages`.
+
+      ## Sessions
+
+      Sending a message on a conversation without an active messaging session with the contact fails with a `SESSION_REQUIRED` error. The API does not silently reopen a session.
+
+      ## Actor authorization
+
+      Actions that depend on state or permission (sending a message, archiving, transferring) validate that the acting agent has access to the conversation (group membership or assignment). A caller without access is rejected with an authorization error.
+  - name: Groups
+    description: |
+      Groups are the teams agents are organized into for conversation distribution on NCA (Novo Conceito de Atendimento) accounts. Use these endpoints to list an organization's groups and to see which agents in a group are currently online.
 x-tagGroups:
   - name: Messaging
     tags:
@@ -14423,3 +15146,7 @@ x-tagGroups:
   - name: Status
     tags:
       - Status Groups
+  - name: Conversations
+    tags:
+      - Conversations
+      - Groups
