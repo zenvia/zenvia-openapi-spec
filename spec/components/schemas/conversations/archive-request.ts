@@ -8,7 +8,7 @@ const archiveRequest: SchemaObject = {
   properties: {
     reason: {
       title: 'Reason',
-      description: 'The close reason key, as configured for the conversation\'s group. Fails with CLOSE_REASON_UNRESOLVABLE if the key is not valid for the organization.',
+      description: 'The close reason key, as configured for the conversation\'s group (see `GET /groups/{groupId}/closing-reasons`). Fails with CLOSE_REASON_UNRESOLVABLE if the key is not valid for the organization.',
       type: 'string',
     },
   },
