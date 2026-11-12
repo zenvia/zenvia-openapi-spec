@@ -7,6 +7,7 @@ The available type of events are:
 - [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)
 - [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)
 - [CONTACT](#section/CONTACT)
+- [JOURNEY_CHANNEL_MESSAGE_STATUS](#section/JOURNEY_CHANNEL_MESSAGE_STATUS)
 
 ## MESSAGE
 
@@ -86,6 +87,20 @@ The event type CONTACT allows ZCC users to create subscriptions for changes in c
 If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
 
 <SchemaDefinition schemaRef="#/components/schemas/events.contact" />
+
+## JOURNEY_CHANNEL_MESSAGE_STATUS
+
+The event type JOURNEY_CHANNEL_MESSAGE_STATUS refers to a status update of a message sent by a journey, along with the journey context.
+
+The subscription criteria is the channel, which accepts <code>sms</code>, <code>email</code> and <code>whatsapp</code>. There is no direction criteria.
+
+The payload follows the MESSAGE_STATUS event, without the deprecated root fields <code>messageId</code> and <code>contentIndex</code>, and adds the <code>contact</code> and <code>journey</code> fields. The <code>code</code> and <code>description</code> fields assume the same values as in MESSAGE_STATUS. Depending on the status and the channel, <code>messageStatus</code> may also include <code>causes</code>, <code>context</code> and <code>channelData</code>.
+
+Executions of journey versions in homologation (<code>journey.versionTag</code> other than <code>published</code>) also generate events. Use <code>journey.versionTag</code> to tell them apart.
+
+If you are subscribed to this type of event, your webhook will receive a request with the schema as follows:
+
+<SchemaDefinition schemaRef="#/components/schemas/events.journey-channel-message-status-event" />
 
 
 ## Zenvia outbound IP addresses
