@@ -6,6 +6,7 @@ import { ref as conversationStatusSubscriptionRef } from './conversation-status-
 import { ref as conversationMessageSubscriptionRef } from './conversation-message-subscription';
 import { ref as supportExpertAgentSubscriptionRef } from './support-expert-agent-subscription';
 import { ref as contactSubscriptionRef } from './contact-subscription';
+import { ref as journeyChannelMessageStatusSubscriptionRef } from './journey-channel-message-status-subscription';
 
 const all: SchemaObject = {
   oneOf: [{
@@ -20,6 +21,8 @@ const all: SchemaObject = {
     $ref: supportExpertAgentSubscriptionRef,
   }, {
     $ref: contactSubscriptionRef,
+  }, {
+    $ref: journeyChannelMessageStatusSubscriptionRef,
   }],
   discriminator: {
     propertyName: 'eventType',
@@ -30,6 +33,7 @@ const all: SchemaObject = {
       CONVERSATION_MESSAGE: conversationMessageSubscriptionRef,
       SUPPORT_EXPERT_AGENT: supportExpertAgentSubscriptionRef,
       CONTACT: contactSubscriptionRef,
+      JOURNEY_CHANNEL_MESSAGE_STATUS: journeyChannelMessageStatusSubscriptionRef,
     },
   },
 };

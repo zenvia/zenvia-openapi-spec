@@ -23,6 +23,7 @@ const subscriptionBase: SchemaObject = {
         'CONVERSATION_MESSAGE',
         'CONVERSATION_STATUS',
         'CONTACT',
+        'JOURNEY_CHANNEL_MESSAGE_STATUS',
       ],
     },
     webhook: {
