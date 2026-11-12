@@ -1,0 +1,24 @@
+{
+  "name": "subscribe to JOURNEY_CHANNEL_MESSAGE_STATUS events with a channel outside the journey channels",
+  "request": {
+    "method": "POST",
+    "path": "/subscriptions",
+    "query": {},
+    "headers": {
+      "content-type": "application/json",
+      "x-api-token": "some-api-token"
+    },
+    "body": {
+      "eventType": "JOURNEY_CHANNEL_MESSAGE_STATUS",
+      "webhook": {
+        "url": "https://myhost.com/webhook/path"
+      },
+      "criteria": {
+        "channel": "rcs"
+      }
+    }
+  },
+  "expectedFail": {
+    "error": "Request has one or more errors => In body => For Content-Type application/json => Invalid value => at: JOURNEY_CHANNEL_MESSAGE_STATUS => Did not validate against all schemas => at: 1 > criteria > channel => Value \"rcs\" did not meet enum requirements"
+  }
+}
