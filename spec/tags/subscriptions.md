@@ -165,3 +165,139 @@ For the **OUT** direction, check the [messaging content type table](#section/Sup
 | [flow_response](#section/Flow-Response)          |<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="green">&#10004;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|<font color="red"  >&#10005;</font>|
 
 _*GBM stands for Google Business Messages_
+
+## Migrating from v1
+
+Subscriptions created on `https://api.zenvia.com/v1/subscriptions` keep delivering events in the v1 format until they are deleted. To receive events in the v2 format, create a new subscription on `https://api.zenvia.com/v2/subscriptions` with the same `eventType`, `criteria` and `webhook`, then delete the v1 subscription. The same API token works on both versions.
+
+While both subscriptions are active, each one delivers its own copy of every event, with a different event `id`.
+
+### Breaking changes
+
+|Field                                                         |v1                                                                                                           |v2                                                                          |
+|:-------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
+|Visitor in `message.contents` (MESSAGE)                       |Sent in `message.visitor` and also as a `json` content: `{"type": "json", "payload": {"visitor": {...}}}`     |Sent only in `message.visitor`. The `json` content is no longer sent        |
+|Unmapped contents in `message.contents` (MESSAGE)             |Sent as a `json` content with the raw payload                                                                |Not sent                                                                    |
+|`message.id` on SMS replies (MESSAGE)                         |ID of the original message being replied to                                                                  |ID of the message itself. The original message ID is sent in `message.idRef`|
+|`messageStatus.causes[].channelErrorCode` (MESSAGE_STATUS)    |Number or string, as sent by the provider                                                                    |Always a string                                                             |
+|`messageStatus.causes` without errors (MESSAGE_STATUS)        |`null`                                                                                                       |Not sent                                                                    |
+|Connection and response timeouts                              |8 seconds                                                                                                    |5 seconds                                                                   |
+|Timeouts on the fail counter                                  |1 timeout counts as 1 fail                                                                                   |1 timeout counts as 10 fails                                                |
+|Manual update on the [API console](https://app.zenvia.com/home/api)|Promotes *DEGRADED* and *INACTIVE* webhooks back to *ACTIVE*                                            |Promotes only *DEGRADED* webhooks back to *ACTIVE*                          |
+
+### New fields
+
+|Event          |Field                                                  |Description                                                                                             |
+|:--------------|:------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|
+|MESSAGE        |`message.timestamp`                                    |Message timestamp at the provider                                                                       |
+|MESSAGE        |`message.idRef`                                        |ID of the message being replied to                                                                      |
+|MESSAGE        |`message.referral`                                     |Ad or post the message originated from                                                                  |
+|MESSAGE        |`message.visitor.userName`, `picture`, `whatsapp`      |Additional visitor data                                                                                 |
+|MESSAGE_STATUS |`message`                                              |`id`, `externalId`, `contentIndex`, `from`, `to` and `direction` of the message the status refers to    |
+|MESSAGE_STATUS |`messageStatus.direction`                              |`IN` or `OUT`                                                                                           |
+|MESSAGE_STATUS |`messageStatus.context`, `channelData`, `details`      |Channel-specific data                                                                                   |
+|MESSAGE_STATUS |`messageStatus.code`                                   |New values: `DELETED`, `CLICKED`, `VERIFIED`, `ACCEPTED`, `HANG_UP`, `TERMINATED`, `RECORDED`           |
+
+On WhatsApp, contacts identified by BSUID are sent in `from` (IN) or `to` (OUT) with the `BSUID:` prefix instead of a phone number.
+
+### MESSAGE example
+
+v1:
+
+```json
+{
+  "id": "5e2f8a10-6d3b-4c1e-9a7f-2b8c4d6e8f01",
+  "timestamp": "2026-11-13T12:00:00.000Z",
+  "type": "MESSAGE",
+  "subscriptionId": "0f4e2a6c-1b3d-4e5f-8a9b-7c6d5e4f3a21",
+  "channel": "whatsapp",
+  "direction": "IN",
+  "message": {
+    "id": "a41c3b2d-8e7f-4a6b-9c5d-1e2f3a4b5c6d",
+    "from": "5511988887777",
+    "to": "5511999990000",
+    "direction": "IN",
+    "channel": "whatsapp",
+    "visitor": { "name": "Maria Silva", "firstName": "Maria", "lastName": "Silva" },
+    "contents": [
+      { "type": "text", "text": "Hi, I want to check my order" },
+      { "type": "json", "payload": { "visitor": { "name": "Maria Silva", "firstName": "Maria", "lastName": "Silva" } } }
+    ]
+  }
+}
+```
+
+v2:
+
+```json
+{
+  "id": "5e2f8a10-6d3b-4c1e-9a7f-2b8c4d6e8f01",
+  "timestamp": "2026-11-13T12:00:00.000Z",
+  "type": "MESSAGE",
+  "subscriptionId": "0f4e2a6c-1b3d-4e5f-8a9b-7c6d5e4f3a21",
+  "channel": "whatsapp",
+  "direction": "IN",
+  "message": {
+    "id": "a41c3b2d-8e7f-4a6b-9c5d-1e2f3a4b5c6d",
+    "from": "5511988887777",
+    "to": "5511999990000",
+    "direction": "IN",
+    "channel": "whatsapp",
+    "timestamp": "2026-11-13T11:59:58.000Z",
+    "visitor": { "name": "Maria Silva", "firstName": "Maria", "lastName": "Silva", "userName": "Maria" },
+    "contents": [
+      { "type": "text", "text": "Hi, I want to check my order" }
+    ]
+  }
+}
+```
+
+### MESSAGE_STATUS example
+
+v1:
+
+```json
+{
+  "id": "c7b3a1e0-2f4d-4b6a-8c9e-0d1f2a3b4c5d",
+  "timestamp": "2026-11-13T12:00:00.000Z",
+  "type": "MESSAGE_STATUS",
+  "subscriptionId": "0f4e2a6c-1b3d-4e5f-8a9b-7c6d5e4f3a21",
+  "channel": "whatsapp",
+  "messageId": "9b1d7e3f-5a2c-4d8b-a6e4-3f2c1b0a9d8e",
+  "contentIndex": 0,
+  "messageStatus": {
+    "timestamp": "2026-11-13T12:00:00.000Z",
+    "code": "DELIVERED",
+    "description": "The message has been delivered by the provider",
+    "causes": null
+  }
+}
+```
+
+v2:
+
+```json
+{
+  "id": "c7b3a1e0-2f4d-4b6a-8c9e-0d1f2a3b4c5d",
+  "timestamp": "2026-11-13T12:00:00.000Z",
+  "type": "MESSAGE_STATUS",
+  "subscriptionId": "0f4e2a6c-1b3d-4e5f-8a9b-7c6d5e4f3a21",
+  "channel": "whatsapp",
+  "messageId": "9b1d7e3f-5a2c-4d8b-a6e4-3f2c1b0a9d8e",
+  "contentIndex": 0,
+  "message": {
+    "id": "9b1d7e3f-5a2c-4d8b-a6e4-3f2c1b0a9d8e",
+    "externalId": "order-123",
+    "from": "5511999990000",
+    "to": "5511988887777",
+    "contentIndex": 0,
+    "direction": "OUT"
+  },
+  "messageStatus": {
+    "timestamp": "2026-11-13T12:00:00.000Z",
+    "code": "DELIVERED",
+    "description": "The message has been delivered by the provider",
+    "direction": "OUT"
+  }
+}
+```
