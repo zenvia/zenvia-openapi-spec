@@ -3513,6 +3513,46 @@
         }
       ]
     },
+    "/groups/{groupId}/closing-reasons": {
+      "get": {
+        "description": "List the closing reasons configured for a group.",
+        "tags": [
+          "Groups"
+        ],
+        "responses": {
+          "200": {
+            "description": "Closing reasons available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/groups.closing-reason"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-total": {
+                "schema": {
+                  "description": "The total number of closing reasons.",
+                  "type": "string",
+                  "example": "2"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/groups.groupId"
+        }
+      ]
+    },
     "/invoice-batches": {
       "post": {
         "summary": "Import a batch of invoices",
@@ -3665,6 +3705,126 @@
           "$ref": "#/components/parameters/batchId"
         }
       ]
+    },
+    "/journey-launches": {
+      "post": {
+        "summary": "Launch a journey",
+        "description": "Launches a ZStudio journey for a contact/target.",
+        "tags": [
+          "Journey Launches"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/journey-launch.journey-launch"
+              },
+              "examples": {
+                "default": {
+                  "summary": "Launch a journey with context values of different types",
+                  "value": {
+                    "journeyId": "journey-01",
+                    "externalId": "launch-01",
+                    "versionTag": "v1",
+                    "context": {
+                      "nome": "Rafael",
+                      "idade": 32,
+                      "clienteVip": true,
+                      "tags": [
+                        "novo",
+                        "promocao"
+                      ],
+                      "cartao": {
+                        "bandeira": "elo"
+                      },
+                      "pedido": {
+                        "valor": 189.9,
+                        "itens": [
+                          "camisa",
+                          "calca",
+                          "tenis"
+                        ]
+                      }
+                    },
+                    "contact": {
+                      "channelList": [
+                        {
+                          "type": "phone",
+                          "id": "5510888883333",
+                          "idType": "mobile"
+                        }
+                      ],
+                      "firstName": "Rafael",
+                      "lastName": "Souza"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Journey launch created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/journey-launch.journey-launch-response"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Created journey launch",
+                    "value": {
+                      "id": "7388c68e-675e-435b-b2ec-f72677798678",
+                      "orgId": "5c408dd6-a39a-4eb1-b3b0-bf6f2f34ea39",
+                      "journeyId": "journey-01",
+                      "externalId": "launch-01",
+                      "contact": {
+                        "channelList": [
+                          {
+                            "type": "phone",
+                            "id": "5510888883333",
+                            "idType": "mobile"
+                          }
+                        ],
+                        "firstName": "Rafael",
+                        "lastName": "Souza"
+                      },
+                      "context": {
+                        "nome": "Rafael",
+                        "idade": 32,
+                        "clienteVip": true,
+                        "tags": [
+                          "novo",
+                          "promocao"
+                        ],
+                        "cartao": {
+                          "bandeira": "elo"
+                        },
+                        "pedido": {
+                          "valor": 189.9,
+                          "itens": [
+                            "camisa",
+                            "calca",
+                            "tenis"
+                          ]
+                        }
+                      },
+                      "versionTag": "v1",
+                      "status": "published",
+                      "createdAt": "2022-05-23T19:37:59.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
     },
     "/marketing-automations/{automationId}/dispatches": {
       "post": {
@@ -10860,7 +11020,7 @@
         "properties": {
           "reason": {
             "title": "Reason",
-            "description": "The close reason key, as configured for the conversation's group. Fails with CLOSE_REASON_UNRESOLVABLE if the key is not valid for the organization.",
+            "description": "The close reason key, as configured for the conversation's group (see `GET /groups/{groupId}/closing-reasons`). Fails with CLOSE_REASON_UNRESOLVABLE if the key is not valid for the organization.",
             "type": "string"
           }
         },
@@ -11369,6 +11529,9 @@
           },
           {
             "$ref": "#/components/schemas/events.contact-event"
+          },
+          {
+            "$ref": "#/components/schemas/events.journey-channel-message-status-event"
           }
         ],
         "discriminator": {
@@ -11379,7 +11542,8 @@
             "CONVERSATION_STATUS": "#/components/schemas/events.conversation-status-event",
             "CONVERSATION_MESSAGE": "#/components/schemas/events.conversation-message-event",
             "SUPPORT_EXPERT_AGENT": "#/components/schemas/events.support-expert-agent-event",
-            "CONTACT": "#/components/schemas/events.contact-event"
+            "CONTACT": "#/components/schemas/events.contact-event",
+            "JOURNEY_CHANNEL_MESSAGE_STATUS": "#/components/schemas/events.journey-channel-message-status-event"
           }
         }
       },
@@ -11625,6 +11789,221 @@
             "type": "string"
           }
         }
+      },
+      "events.journey-channel-message-status-event": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/events.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Event type",
+                "type": "string",
+                "enum": [
+                  "JOURNEY_CHANNEL_MESSAGE_STATUS"
+                ],
+                "example": "JOURNEY_CHANNEL_MESSAGE_STATUS"
+              },
+              "channel": {
+                "title": "Message Channel",
+                "type": "string",
+                "example": "whatsapp"
+              },
+              "messageStatus": {
+                "title": "Message Status",
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "title": "Status timestamp",
+                    "description": "Timestamp of the message status. Usually received from the provider of the channel.",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2026-10-13T14:05:12.480Z"
+                  },
+                  "code": {
+                    "title": "Status code",
+                    "description": "Code that indicates the message status",
+                    "type": "string",
+                    "example": "DELIVERED"
+                  },
+                  "description": {
+                    "title": "Status description",
+                    "description": "A description of status",
+                    "type": "string",
+                    "example": "The message has been delivered by the provider"
+                  },
+                  "causes": {
+                    "title": "Status causes",
+                    "description": "A list of errors or cause of status",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/events.error-cause"
+                    }
+                  },
+                  "context": {
+                    "$ref": "#/components/schemas/events.context.index"
+                  },
+                  "channelData": {
+                    "$ref": "#/components/schemas/events.channel-data.index"
+                  },
+                  "direction": {
+                    "title": "Message Status Direction",
+                    "description": "Indicates whether the message status is received from a channel (**IN**) or sent to a channel (**OUT**).\n\n* **IN**: Received status.\n* **OUT**: Sent status.",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT"
+                    ]
+                  }
+                },
+                "required": [
+                  "code",
+                  "timestamp"
+                ]
+              },
+              "message": {
+                "title": "Message",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Message ID",
+                    "description": "ID of the message whose status is being delivered",
+                    "type": "string",
+                    "example": "0dceea1c-fd93-4cf3-a9ce-45e012c8a192"
+                  },
+                  "externalId": {
+                    "title": "Message External ID",
+                    "description": "A customizable identifier for dispatches, allowing users to customize and track their dispatches within the API. Present only when the message has one.",
+                    "type": "string"
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "Contact of origin",
+                    "example": "5511940001234"
+                  },
+                  "to": {
+                    "type": "string",
+                    "description": "Recipient contact",
+                    "example": "5511998887777"
+                  },
+                  "contentIndex": {
+                    "title": "Content Index",
+                    "description": "Index of content that is receiving the status update",
+                    "type": "number",
+                    "example": 0
+                  },
+                  "direction": {
+                    "title": "Message Direction",
+                    "description": "Indicates whether the message is received from a channel (**IN**) or sent to a channel (**OUT**).\n\n  * **IN**: Received messages.\n  * **OUT**: Sent messages.",
+                    "type": "string",
+                    "enum": [
+                      "IN",
+                      "OUT"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "contentIndex",
+                  "direction"
+                ]
+              },
+              "contact": {
+                "title": "Contact",
+                "description": "Contact of the journey execution. Present only when the execution has a contact.",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Contact ID",
+                    "type": "string",
+                    "example": "e7c1a9f2-3b5d-4f8e-a1c3-5d7f9b1e3a50"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "journey": {
+                "title": "Journey",
+                "description": "Journey that sent the message",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Journey ID",
+                    "type": "string",
+                    "example": "9f4d3e21-7a8b-4c5d-8e9f-0a1b2c3d4e5f"
+                  },
+                  "versionId": {
+                    "title": "Journey version ID",
+                    "type": "string",
+                    "example": "3b8e1f0a-6c2d-4e9b-a7f1-5d3c9e0b2a64"
+                  },
+                  "versionTag": {
+                    "title": "Journey version tag",
+                    "description": "Tag of the journey version. Executions of versions in homologation (any value other than `published`, such as `homol`) also generate events.",
+                    "type": "string",
+                    "example": "published"
+                  },
+                  "executionId": {
+                    "title": "Journey execution ID",
+                    "type": "string",
+                    "example": "c1d2e3f4-5a6b-4c7d-8e9f-0a1b2c3d4e5f"
+                  },
+                  "externalId": {
+                    "title": "Journey execution external ID",
+                    "description": "External identifier informed when the journey execution was started",
+                    "type": "string",
+                    "example": "pedido-48213"
+                  },
+                  "node": {
+                    "title": "Journey node",
+                    "description": "Node of the journey that sent the message",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "title": "Node ID",
+                        "type": "string",
+                        "example": "14d4632c-54bf-4cfd-a34f-e098a46ad6d7"
+                      },
+                      "title": {
+                        "title": "Node title",
+                        "description": "Present only when the node has a title",
+                        "type": "string",
+                        "example": "WhatsApp - Confirmação"
+                      },
+                      "type": {
+                        "title": "Node type",
+                        "type": "string",
+                        "example": "whatsapp"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "versionId",
+                  "versionTag",
+                  "executionId",
+                  "externalId"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "channel",
+              "messageStatus",
+              "message",
+              "journey"
+            ]
+          }
+        ]
       },
       "events.message-event": {
         "type": "object",
@@ -13113,6 +13492,35 @@
           "status"
         ]
       },
+      "groups.closing-reason": {
+        "title": "Closing reason",
+        "description": "A reason an agent can select when closing a conversation for a group.",
+        "type": "object",
+        "properties": {
+          "key": {
+            "title": "Key",
+            "description": "The closing reason identifier, used as the `reason` when archiving a conversation.",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Name",
+            "description": "The closing reason's display name.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "title": "Type",
+            "description": "Set when the closing reason counts as a sale (e.g. `PURCHASE`); absent otherwise.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "key",
+          "name"
+        ]
+      },
       "groups.group": {
         "title": "Group",
         "description": "A team agents are organized into for conversation distribution.",
@@ -13147,6 +13555,179 @@
           "id",
           "name",
           "enabled"
+        ]
+      },
+      "journey-launch.context-value": {
+        "title": "Context Value",
+        "description": "A context value referenced by the journey's steps. Accepts a primitive (string, number or boolean), an array of context values, or a nested object of context values.",
+        "oneOf": [
+          {
+            "type": "string",
+            "title": "String",
+            "example": "elo"
+          },
+          {
+            "type": "number",
+            "title": "Number",
+            "example": 11
+          },
+          {
+            "type": "boolean",
+            "title": "Boolean",
+            "example": true
+          },
+          {
+            "type": "array",
+            "title": "Array",
+            "items": {
+              "$ref": "#/components/schemas/journey-launch.context-value"
+            }
+          },
+          {
+            "type": "object",
+            "title": "Object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/journey-launch.context-value"
+            }
+          }
+        ]
+      },
+      "journey-launch.journey-launch-response": {
+        "title": "Journey Launch Response",
+        "description": "The journey launch created for a contact.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "description": "Unique identifier of the created journey launch.",
+            "type": "string",
+            "readOnly": true,
+            "example": "7388c68e-675e-435b-b2ec-f72677798678"
+          },
+          "orgId": {
+            "title": "Organization ID",
+            "description": "Identifier of the organization that owns this journey launch.",
+            "type": "string",
+            "readOnly": true,
+            "example": "5c408dd6-a39a-4eb1-b3b0-bf6f2f34ea39"
+          },
+          "journeyId": {
+            "title": "Journey ID",
+            "description": "Echoes the requested journey identifier.",
+            "type": "string",
+            "example": "journey-01"
+          },
+          "externalId": {
+            "title": "External ID",
+            "description": "Echoes the externalId received in the request.",
+            "type": "string",
+            "example": "launch-01"
+          },
+          "contact": {
+            "title": "Contact",
+            "description": "The contact the journey was launched for, as received in the request. See the [Contacts API](#tag/Contacts) for the available fields.",
+            "type": "object"
+          },
+          "context": {
+            "title": "Context",
+            "description": "The context values as received in the request, passed through.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "versionTag": {
+            "title": "Version Tag",
+            "description": "Echoes the requested version tag, when provided.",
+            "type": "string",
+            "example": "v1"
+          },
+          "status": {
+            "title": "Status",
+            "description": "The journey launch status.",
+            "type": "string",
+            "example": "published"
+          },
+          "createdAt": {
+            "title": "Created At",
+            "description": "Timestamp of the journey launch creation.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2022-05-23T19:37:59.000Z"
+          }
+        }
+      },
+      "journey-launch.journey-launch": {
+        "title": "Journey Launch",
+        "description": "Launches a ZStudio journey for a contact/target.",
+        "type": "object",
+        "properties": {
+          "journeyId": {
+            "title": "Journey ID",
+            "description": "The ZStudio journey identifier to launch.",
+            "type": "string",
+            "example": "journey-01"
+          },
+          "externalId": {
+            "title": "External ID",
+            "description": "A caller-supplied identifier for this launch request, used by the API caller for tracking. Distinct from any contact/target externalId.",
+            "type": "string",
+            "example": "launch-01"
+          },
+          "versionTag": {
+            "title": "Version Tag",
+            "description": "The journey version tag to launch.",
+            "type": "string",
+            "example": "v1"
+          },
+          "context": {
+            "title": "Context",
+            "description": "Context values referenced by the journey's steps. Each value can be a string, a number, a boolean, an array or a nested object.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/journey-launch.context-value"
+            },
+            "example": {
+              "nome": "Rafael",
+              "idade": 32,
+              "clienteVip": true,
+              "tags": [
+                "novo",
+                "promocao"
+              ],
+              "cartao": {
+                "bandeira": "elo"
+              },
+              "pedido": {
+                "valor": 189.9,
+                "itens": [
+                  "camisa",
+                  "calca",
+                  "tenis"
+                ]
+              }
+            }
+          },
+          "contact": {
+            "title": "Contact",
+            "description": "The contact/target the journey will be launched for. It accepts the same fields described in the [Contacts API](#tag/Contacts), either with `channelList` (recommended) or with `channels`.",
+            "type": "object",
+            "example": {
+              "channelList": [
+                {
+                  "type": "phone",
+                  "id": "5510888883333",
+                  "idType": "mobile"
+                }
+              ],
+              "firstName": "Rafael",
+              "lastName": "Souza"
+            }
+          }
+        },
+        "required": [
+          "journeyId",
+          "externalId",
+          "contact"
         ]
       },
       "marketing-automations.marketing-automation-response": {
@@ -14162,6 +14743,9 @@
           },
           {
             "$ref": "#/components/schemas/subscription.contact-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.journey-channel-message-status-subscription"
           }
         ],
         "discriminator": {
@@ -14172,7 +14756,8 @@
             "CONVERSATION_MESSAGE": "#/components/schemas/subscription.conversation-message-subscription",
             "CONVERSATION_STATUS": "#/components/schemas/subscription.conversation-status-subscription",
             "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.support-expert-agent-subscription",
-            "CONTACT": "#/components/schemas/subscription.contact-subscription"
+            "CONTACT": "#/components/schemas/subscription.contact-subscription",
+            "JOURNEY_CHANNEL_MESSAGE_STATUS": "#/components/schemas/subscription.journey-channel-message-status-subscription"
           }
         }
       },
@@ -14195,7 +14780,8 @@
               "SUPPORT_EXPERT_AGENT",
               "CONVERSATION_MESSAGE",
               "CONVERSATION_STATUS",
-              "CONTACT"
+              "CONTACT",
+              "JOURNEY_CHANNEL_MESSAGE_STATUS"
             ]
           },
           "webhook": {
@@ -14344,6 +14930,40 @@
           }
         ]
       },
+      "subscription.journey-channel-message-status-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "title": "Channel",
+                    "description": "Channel of the messages sent by the journeys",
+                    "type": "string",
+                    "enum": [
+                      "sms",
+                      "email",
+                      "whatsapp"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
+          }
+        ]
+      },
       "subscription.message-status-subscription": {
         "type": "object",
         "allOf": [
@@ -14484,6 +15104,9 @@
           },
           {
             "$ref": "#/components/schemas/subscription.partial-status.contact-subscription"
+          },
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.journey-channel-message-status-subscription"
           }
         ],
         "discriminator": {
@@ -14494,7 +15117,8 @@
             "CONVERSATION_STATUS": "#/components/schemas/subscription.partial-status.conversation-status-subscription",
             "CONVERSATION_MESSAGE": "#/components/schemas/subscription.partial-status.conversation-message-subscription",
             "SUPPORT_EXPERT_AGENT": "#/components/schemas/subscription.partial-status.support-expert-agent-subscription",
-            "CONTACT": "#/components/schemas/subscription.partial-status.contact-subscription"
+            "CONTACT": "#/components/schemas/subscription.partial-status.contact-subscription",
+            "JOURNEY_CHANNEL_MESSAGE_STATUS": "#/components/schemas/subscription.partial-status.journey-channel-message-status-subscription"
           }
         }
       },
@@ -14515,7 +15139,8 @@
               "CONVERSATION_STATUS",
               "CONVERSATION_MESSAGE",
               "SUPPORT_EXPERT_AGENT",
-              "CONTACT"
+              "CONTACT",
+              "JOURNEY_CHANNEL_MESSAGE_STATUS"
             ]
           },
           "webhook": {
@@ -14660,6 +15285,40 @@
                 ]
               }
             }
+          }
+        ]
+      },
+      "subscription.partial-status.journey-channel-message-status-subscription": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/subscription.partial-status.base"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "title": "Channel",
+                    "description": "Channel of the messages sent by the journeys",
+                    "type": "string",
+                    "enum": [
+                      "sms",
+                      "email",
+                      "whatsapp"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel"
+                ]
+              }
+            },
+            "required": [
+              "criteria"
+            ]
           }
         ]
       },
@@ -18604,7 +19263,7 @@
     },
     {
       "name": "Telegram",
-      "description": "The Telegram can be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n**To activate Telegram you a need a registered Bot account on Telegram Bot API and an account enabled on Zenvia platform.**\n\n\n## Telegram limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/* | 5&nbsp;MB |\n| video | video/* | 20&nbsp;MB |\n| audio | audio/* | 20&nbsp;MB |\n| document | Any other valid MIME type. | 20&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)\n* Sender: the conversation id (not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: the conversation id (not the phone number)\n* Sender: the Telegram bot username enabled on Zenvia platform://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
+      "description": "The Telegram can be used after its activation on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list).\n\n**To activate Telegram you a need a registered Bot account on Telegram Bot API and an account enabled on Zenvia platform.**\n\n\n## Telegram limitations\n\nTo be able to send messages to a contact, you first need to setup a webhook, which allows you to receive events in the configured URL. [Learn more here](#tag/Webhooks).\n\nSupported content types and sizes:\n\n| Media | Content Type | Size |\n|---|---|---|\n| image | image/* | 5&nbsp;MB |\n| video | video/* | 20&nbsp;MB |\n| audio | audio/* | 20&nbsp;MB |\n| document | Any other valid MIME type. | 20&nbsp;MB |\n\n\n## Telegram sender and recipient\n\nWhen you receive a message from a contact from Telegram channel:\n\n* Recipient: the Telegram bot username enabled on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n* Sender: the conversation id (not the phone number)\n\nWhen you send a message to a contact, the sender and recipient are inverted:\n\n* Recipient: the conversation id (not the phone number)\n* Sender: the Telegram bot username enabled on [Zenvia platform](https://app.zenvia.com/home/credentials/telegram/list)\n\nThe sender goes in the attribute `from` and the receiver goes in the attribute `to` of message object.\n"
     },
     {
       "name": "Voice",
@@ -18628,7 +19287,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "Webhooks allow you to receive events in the configured URL. Note that the types of events below and their respective schemas define the payload of the events that will arrive on the registered webhook URL. They **do not** pertain to the creation and management of the webhooks themselves.\n\nThe available type of events are:\n- [MESSAGE](#section/MESSAGE)\n- [MESSAGE_STATUS](#section/MESSAGE_STATUS)\n- [CONVERSATION_STATUS](#section/CONVERSATION_STATUS)\n- [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)\n- [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)\n- [CONTACT](#section/CONTACT)\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## SUPPORT_EXPERT_AGENT\n\nThe event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.\n\nAllowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.support-expert-agent\" />\n<br>\n\n## CONTACT\n\nThe event type CONTACT allows ZCC users to create subscriptions for changes in contacts. If a contact is created, updated or deleted, you may subscribe to the event.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.contact\" />\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [flow_response](#section/Flow-Response)          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
+      "description": "Webhooks allow you to receive events in the configured URL. Note that the types of events below and their respective schemas define the payload of the events that will arrive on the registered webhook URL. They **do not** pertain to the creation and management of the webhooks themselves.\n\nThe available type of events are:\n- [MESSAGE](#section/MESSAGE)\n- [MESSAGE_STATUS](#section/MESSAGE_STATUS)\n- [CONVERSATION_STATUS](#section/CONVERSATION_STATUS)\n- [CONVERSATION_MESSAGE](#section/CONVERSATION_MESSAGE)\n- [SUPPORT_EXPERT_AGENT](#section/SUPPORT_EXPERT_AGENT)\n- [CONTACT](#section/CONTACT)\n- [JOURNEY_CHANNEL_MESSAGE_STATUS](#section/JOURNEY_CHANNEL_MESSAGE_STATUS)\n\n## MESSAGE\n\nThe event type MESSAGE refers to messages dispatched and/or received in the desired channel.\n\nWhen you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-event\" />\n\n## MESSAGE_STATUS\n\nThe event type MESSAGE_STATUS refers to a status update related to a previously sent message.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.message-status-event\" />\n<br>\n\n### Code field\nThe <code>code</code> field may assume the following values:\n* **SENT**: the message sent by your business was received by the provider's server\n* **REJECTED**: the message sent by your business has failed to be sent to the provider's server\n* **DELIVERED**: the message sent by your business was delivered to the user's device\n* **NOT_DELIVERED**: the message sent by your business failed to be sent to the user's device. The reason for the failure will be included in the <code>causes</code> field.\n* **READ**: the message sent by your business was read by the user. This status might not be sent, since it depends on the channel and the user's device configuration.\n* **DELETED**: the message sent by the user was deleted by the user. Support varies according to the channel.\n* **CLICKED**: an action item (like a link or a dial action) in the message has been clicked by the user. The payload of item clicked will be included in the <code>causes</code> field. Support varies according to the channel.\n* **VERIFIED**: The message sent by your business was delivered, and the device app acknowledged the sender as verified. Support varies according to the channel.\n<br><br>\n\n### Description field\nThe <code>description</code> field is directly tied to the <code>code</code> field, and it may assume the following values:\n* *SENT: \"**The message has been forwarded to the provider**\".*\n* *DELIVERED: \"**The message has been delivered by the provider**\".*\n* *READ: \"**The message has been read by the recipient**\".*\n* *REJECTED: \"**The message was rejected by the provider**\".*\n* *NOT_DELIVERED: \"**The provider was unable to deliver the message**\".*\n* *DELETED: \"**The message has been deleted by the contact**\".*\n* *CLICKED: \"**An action item in the message has been clicked by the contact**\".*\n* *VERIFIED: \"**The message has been verified by the device app/provider**\".*\n\n## CONVERSATION_STATUS\n\nThe event type CONVERSATION_STATUS refers to the lifecycle progression of a conversation.\n\nA conversation has a finite lifecycle — it has a beginning, a middle, and an end.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-status\" />\n<br>\n\n## CONVERSATION_MESSAGE\n\nThe event type CONVERSATION_MESSAGE refers to individual messages exchanged within a conversation.\n\nIt includes both inbound (MO), outbound (MT), and internal messages, all associated with an existing conversation.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.conversation-message\" />\n<br>\n\n## SUPPORT_EXPERT_AGENT\n\nThe event type SUPPORT_EXPERT_AGENT allows ZCC users to create subscriptions for events generated exclusively by support agents.\n\nAllowing a Support Agent to trigger a previously configured webhook when the agent's conditions are met.\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.support-expert-agent\" />\n<br>\n\n## CONTACT\n\nThe event type CONTACT allows ZCC users to create subscriptions for changes in contacts. If a contact is created, updated or deleted, you may subscribe to the event.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.contact\" />\n\n## JOURNEY_CHANNEL_MESSAGE_STATUS\n\nThe event type JOURNEY_CHANNEL_MESSAGE_STATUS refers to a status update of a message sent by a journey, along with the journey context.\n\nThe subscription criteria is the channel, which accepts <code>sms</code>, <code>email</code> and <code>whatsapp</code>. There is no direction criteria.\n\nThe payload follows the MESSAGE_STATUS event, without the deprecated root fields <code>messageId</code> and <code>contentIndex</code>, and adds the <code>contact</code> and <code>journey</code> fields. The <code>code</code> and <code>description</code> fields assume the same values as in MESSAGE_STATUS. Depending on the status and the channel, <code>messageStatus</code> may also include <code>causes</code>, <code>context</code> and <code>channelData</code>.\n\nExecutions of journey versions in homologation (<code>journey.versionTag</code> other than <code>published</code>) also generate events. Use <code>journey.versionTag</code> to tell them apart.\n\nIf you are subscribed to this type of event, your webhook will receive a request with the schema as follows:\n\n<SchemaDefinition schemaRef=\"#/components/schemas/events.journey-channel-message-status-event\" />\n\n\n## Zenvia outbound IP addresses\n\nWebhook notifications sent from Zenvia come from any of the following ranges of IP addresses:\n\n* 45.233.20.0/24\n* 45.233.22.0/24\n* 45.233.23.0/24\n* 3.233.231.228/32\n\n## Subscription creation limit\n\nCurrently it is possible to create up to two subscriptions with the same criteria (Event Type and Channel).\n\n## Webhook request error handling\nAs described before, webhooks allow you to receive events in your application.\n\nHowever, if a webhook request fails, a retry procedure begins. This procedure abides by the following rules\n* There will be at least 30 seconds between each request attempt for the same event\n* There will be at most 30 request attempts for the same event\n\nThis means that a single event may be retried for around 15 minutes. Following this, the event will no longer be available.\n\nEvent retries are handled separately from the initial request. This ensures that webhooks without request fails are not penalized by webhooks with many requests fails.\n<br/><br/>\n\n### Webhook (quality) status handling\nMultiple errors on a single webhook may change its (quality) status. The possible webhook statuses are:\n* **ACTIVE**: the initial status for every webhook created\n* **DEGRADED**: once some criteria are met, an *ACTIVE* webhook will be demoted to *DEGRADED*.\n<br>Event requests for *DEGRADED* webhooks are handled separately from *ACTIVE* webhooks.\n<br>This ensures that high-quality webhooks are not penalized by the handling of low-quality webhooks.\n* **INACTIVE**: once some other criteria are, a *DEGRADED* webhook will be demoted to *INACTIVE*.\nEvents no longer will be posted on webhooks with an *INACTIVE* status.\n\nThe criteria which trigger status changes consist of the following:\n* 1 request timeout is equivalent to 10 regular request fails.\n* 10 consecutive regular request fails on an *ACTIVE* webhook will result in demotion to *DEGRADED*.\n* 500 consecutive regular request fails will result in demotion to *INACTIVE*.\n  * Responses slower than *1 second* also count as a fail and may result in status demotion\n    * Only slow responses on the initial request count as a fail\n    * Only slow responses on an *ACTIVE* webhook count as a fail.\n     <br>Therefore, slow responses should never result in demotion to *INACTIVE*.\n  * All connection timeouts count as fail and may result in status demotion.\n    <br>The connection timeout is *5 seconds*.\n  * All response (read) timeouts count as a fail and may result in status demotion.\n    <br>The response timeout is *5 seconds*.\n* 50 consecutive successful requests on a *DEGRADED* webhook are necessary for promotion back to *ACTIVE*\n  * Successful requests on retry attempts also count toward status promotion\n  * Responses slower than *1 second* do not count either as a success or as a fail\n* Any manual update done to the webhook URL on the [API console](https://app.zenvia.com/home/api) will automatically\npromote a *DEGRADED* webhook back to *ACTIVE*.\n\nBoth the success and fail counters automatically reset themselves *8 hours* after the first increment.\n<br/><br/>\n\n## Webhook Authentication\nInitially, webhooks only support authentication via [OAuth](https://www.oauth.com/), using the [client_credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant type exclusively. The required fields for authentication must be provided within the auth object, which is nested inside the webhook object. All fields within auth are used to perform the authentication request. <br>\nIt's important to ensure the authentication endpoint is always available, as failures or timeouts during this process will be treated the same as failures in the webhook's own requests and may result in equivalent penalties.\n<br/><br/>\n\n## Webhook supported channels\nThe following table shows the content types supported by each channel for the **IN** direction.\n\nFor the **OUT** direction, check the [messaging content type table](#section/Supported-Channels).\n\n|Content Type                                       |SMS                                |Facebook                           |WhatsApp                           |RCS                                |Voice                              |Telegram                           |GBM*                               |Instagram                          |E-Mail                             |\n|:--------------------------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|:----------------------------------|\n| [text](#section/Text)                             |<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [file](#section/File)                             |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [contacts](#section/Contacts)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [location](#section/Location)                     |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [email](#section/E-Mail)                          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|\n| [product_list_order](#section/Product-List-Order) |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n| [optin_response](#section/OptIn-Response)         |<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|\n| [flow_response](#section/Flow-Response)          |<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"green\">&#10004;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|<font color=\"red\"  >&#10005;</font>|\n\n_*GBM stands for Google Business Messages_\n"
     },
     {
       "name": "Templates",
@@ -18649,6 +19308,10 @@
     {
       "name": "Marketing Automations",
       "description": "The marketing-automations API makes it possible to trigger an automation for a contact that is outside of the contacts manager.\n\nTo perform these operations, you will need an automationId that you can find it <a href=\"https://app.zenvia.com/attraction/dispatches\" target=\"_blank\">here</a>.\n"
+    },
+    {
+      "name": "Journey Launches",
+      "description": "The journey-launch API makes it possible to launch a ZStudio journey for a contact.\n"
     },
     {
       "name": "Status Groups",
@@ -18676,7 +19339,7 @@
     },
     {
       "name": "Groups",
-      "description": "Groups are the teams agents are organized into for conversation distribution on NCA (Novo Conceito de Atendimento) accounts. Use these endpoints to list an organization's groups and to see which agents in a group are currently online.\n"
+      "description": "Groups are the teams agents are organized into for conversation distribution on NCA (Novo Conceito de Atendimento) accounts. Use these endpoints to list an organization's groups, to see which agents in a group are currently online, and to list the closing reasons configured for a group.\n"
     }
   ],
   "x-tagGroups": [
@@ -18765,6 +19428,12 @@
       "name": "Marketing Automations",
       "tags": [
         "Marketing Automations"
+      ]
+    },
+    {
+      "name": "Journeys",
+      "tags": [
+        "Journey Launches"
       ]
     },
     {
