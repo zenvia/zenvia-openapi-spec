@@ -4,7 +4,7 @@
   "description": "",
   "main": "spec/index.js",
   "engines": {
-    "node": ">= 16",
+    "node": ">= 24",
     "npm": ">= 8"
   },
   "scripts": {
