@@ -39,7 +39,7 @@ npm run build           # lint, then write openapi.json/yaml + index.html to web
 npm run build:public    # PUBLIC=true build; optional arg is the branch name (see below)
 ```
 
-Single mocha test: `npx mocha -g "<describe/it title substring>"`. CI (Node 16 and 18) runs `npm run lint`, `build`, `test`.
+Single mocha test: `npx mocha -g "<describe/it title substring>"`. CI (Node 24 and 26) runs `npm run lint`, `build`, `test`.
 
 ## Architecture
 
